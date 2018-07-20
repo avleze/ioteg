@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="Fibaro HC2 - Temperatura">
+	<block name="channel" value="&quot;id&quot;:8557,&quot;name&quot;:&quot;Fibaro HC2 - Temperatura&quot;,&quot;description&quot;:&quot;Generated event type Fibaro HC2 - Temperatura&quot;,&quot;latitude&quot;:&quot;0.0&quot;,&quot;longitude&quot;:&quot;0.0&quot;,&quot;created_at&quot;:&quot;2013-11-16T15:21:40Z&quot;,&quot;updated_at&quot;:&quot;2016-04-18T16:58:45Z&quot;,&quot;last_entry_id&quot;:124627">
+	</block>
+	<block name="feeds" repeat="500">
+		<field name="create_at" quotes="true" type="ComplexType">
+			<attribute type="Integer" value="2016"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" value="01"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" min="1" max="31"></attribute>
+			<attribute type="String" value="T"></attribute>
+			<attribute type="Time" mode="hh:mm:ss"></attribute>
+			<attribute type="String" value="Z"></attribute>
+			</type>
+		<field name="entry_id" quotes="false" type="Integer" min="100000" max="999999"></field>
+		<field name="field1" quotes="true" type="Float" min="3" max="10" long="2"></field>
+		<field name="field2" quotes="true" type="Float" min="20" max="21" long="1"></field>
+		<field name="field3" quotes="true" type="Float" min="20" max="23" long="2"></field>
+		<field name="field4" quotes="true" type="Float" min="20" max="23" long="2"></field>
+		<field name="field5" quotes="true" type="Float" min="20" max="23" long="2"></field>
+		<field name="field6" quotes="true" type="Float" value="23.2"></field>
+		<field name="field4" quotes="true" type="Integer" value="10"></field>
+		<field name="field4" quotes="true" type="Float" min="20" max="21" long="2"></field>
+	</block>
+</event_type>

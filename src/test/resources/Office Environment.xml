@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="Office Environment">
+	<block name="channel" value="&quot;id&quot;:11467,&quot;name&quot;:&quot;Office Environment&quot;,&quot;description&quot;:&quot;Generated event type Office Environment &quot;,&quot;latitude&quot;:&quot;30.02838&quot;,&quot;longitude&quot;:&quot;-95.61354&quot;,&quot;field1&quot;:&quot;Outside Temp&quot;,&quot;field2&quot;:&quot;Outside Humidity&quot;,&quot;field3&quot;:&quot;Outside Light&quot;,&quot;field4&quot;:&quot;Office Temp&quot;,&quot;field5&quot;:&quot;Office Humidity&quot;,&quot;field6&quot;:&quot;Office Light&quot;,&quot;created_at&quot;:&quot;2014-04-06T17:01:39Z&quot;,&quot;updated_at&quot;:&quot;2016-04-18T17:54:04Z&quot;,&quot;elevation&quot;:&quot;169 ft.&quot;,&quot;last_entry_id&quot;:942752">
+	</block>
+	<block name="feeds" repeat="100">
+		<field name="create_at" quotes="true" type="ComplexType">
+			<attribute type="Integer" value="2016"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" value="05"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" value="11"></attribute>
+			<attribute type="String" value="T"></attribute>
+			<attribute type="Time" mode="hh:mm:ss"></attribute>
+			<attribute type="String" value="Z"></attribute>
+		</field>
+		<field name="entry_id" quotes="false" type="Integer" min="100000" max="999999"></field>
+		<field name="field1" quotes="true" type="Float" min="67" max="69" long="2"></field>
+		<field name="field2" quotes="true" type="Float" value="99.90"></field>
+		<field name="field3" quotes="true" type="Float" min="84" max="90" long="2"></field>
+		<field name="field4" quotes="true" type="Float" min="74" max="76" long="2"></field>
+		<field name="field5" quotes="true" type="Float" min="51" max="59" long="2"></field>
+		<field name="field6" quotes="true" type="Float" min="1" max="10" long="2"></field>
+	</block>
+</event_type>

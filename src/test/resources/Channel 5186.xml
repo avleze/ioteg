@@ -1,0 +1,3517 @@
+<xml>
+<channel>
+<id type="Integer">5186</id>
+<name type="String">Channel 5186</name>
+<description type="String">Generated event type Channel 5186</description>
+<latitude type="Float">47.528936</latitude>
+<longitude type="Float">10.257247</longitude>
+<field1 type="String">Temperatur Pool</field1>
+<field2 type="String">Temperatur Luft</field2>
+<field2 type="String">Luftfeuchtigkeit</field2>
+<created_at type="String">2013-04-04T12:12:05Z</created_at>
+<updated_at type="String">2016-04-19T07:39:07Z</updated_at>
+<last_entry_id type="Integer">1201242</last_entry_id>
+</channel>
+<feeds>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:35:02Z</create_at>
+<entry_id type="Integer">609690</entry_id>
+<field1 type="Float">19.806263</field1>
+<field2 type="Float">9.782799</field2>
+<field3 type="Float">48.391403</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:10:51Z</create_at>
+<entry_id type="Integer">586537</entry_id>
+<field1 type="Float">20.497313</field1>
+<field2 type="Float">8.322892</field2>
+<field3 type="Float">43.912445</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:44:10Z</create_at>
+<entry_id type="Integer">552527</entry_id>
+<field1 type="Float">19.1519</field1>
+<field2 type="Float">10.535324</field2>
+<field3 type="Float">44.847145</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:14:35Z</create_at>
+<entry_id type="Integer">373917</entry_id>
+<field1 type="Float">19.25537</field1>
+<field2 type="Float">5.500654</field2>
+<field3 type="Float">43.40592</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:02:24Z</create_at>
+<entry_id type="Integer">210318</entry_id>
+<field1 type="Float">19.172005</field1>
+<field2 type="Float">9.560225</field2>
+<field3 type="Float">48.137386</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:55:36Z</create_at>
+<entry_id type="Integer">548457</entry_id>
+<field1 type="Float">19.210785</field1>
+<field2 type="Float">10.086025</field2>
+<field3 type="Float">43.135643</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:40:50Z</create_at>
+<entry_id type="Integer">528632</entry_id>
+<field1 type="Float">19.440714</field1>
+<field2 type="Float">9.173853</field2>
+<field3 type="Float">47.56562</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:45:04Z</create_at>
+<entry_id type="Integer">118767</entry_id>
+<field1 type="Float">20.583422</field1>
+<field2 type="Float">6.396351</field2>
+<field3 type="Float">46.75107</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:24:26Z</create_at>
+<entry_id type="Integer">532631</entry_id>
+<field1 type="Float">19.853872</field1>
+<field2 type="Float">5.5252533</field2>
+<field3 type="Float">44.90336</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:48:56Z</create_at>
+<entry_id type="Integer">393709</entry_id>
+<field1 type="Float">19.41905</field1>
+<field2 type="Float">7.964413</field2>
+<field3 type="Float">42.625854</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:01:10Z</create_at>
+<entry_id type="Integer">749748</entry_id>
+<field1 type="Float">19.346529</field1>
+<field2 type="Float">6.4794245</field2>
+<field3 type="Float">42.575214</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:35:55Z</create_at>
+<entry_id type="Integer">323075</entry_id>
+<field1 type="Float">19.229883</field1>
+<field2 type="Float">9.391929</field2>
+<field3 type="Float">43.711475</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:58:28Z</create_at>
+<entry_id type="Integer">206241</entry_id>
+<field1 type="Float">19.116451</field1>
+<field2 type="Float">5.8570633</field2>
+<field3 type="Float">45.191513</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:17:28Z</create_at>
+<entry_id type="Integer">938466</entry_id>
+<field1 type="Float">19.017994</field1>
+<field2 type="Float">6.6688075</field2>
+<field3 type="Float">41.326485</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:22:43Z</create_at>
+<entry_id type="Integer">213320</entry_id>
+<field1 type="Float">19.63413</field1>
+<field2 type="Float">8.559116</field2>
+<field3 type="Float">50.740128</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:16:02Z</create_at>
+<entry_id type="Integer">796489</entry_id>
+<field1 type="Float">20.936823</field1>
+<field2 type="Float">8.250944</field2>
+<field3 type="Float">43.834343</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:16:26Z</create_at>
+<entry_id type="Integer">803643</entry_id>
+<field1 type="Float">20.945835</field1>
+<field2 type="Float">10.384907</field2>
+<field3 type="Float">48.511074</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:55:36Z</create_at>
+<entry_id type="Integer">845243</entry_id>
+<field1 type="Float">19.73295</field1>
+<field2 type="Float">6.762611</field2>
+<field3 type="Float">46.356216</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:10:57Z</create_at>
+<entry_id type="Integer">996548</entry_id>
+<field1 type="Float">20.057116</field1>
+<field2 type="Float">5.835476</field2>
+<field3 type="Float">48.04182</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:41:23Z</create_at>
+<entry_id type="Integer">203820</entry_id>
+<field1 type="Float">20.943764</field1>
+<field2 type="Float">10.319832</field2>
+<field3 type="Float">45.8009</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:19:31Z</create_at>
+<entry_id type="Integer">215614</entry_id>
+<field1 type="Float">20.06083</field1>
+<field2 type="Float">8.299134</field2>
+<field3 type="Float">41.873867</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:17:28Z</create_at>
+<entry_id type="Integer">372202</entry_id>
+<field1 type="Float">20.725578</field1>
+<field2 type="Float">6.6877117</field2>
+<field3 type="Float">45.462414</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:34:26Z</create_at>
+<entry_id type="Integer">249213</entry_id>
+<field1 type="Float">19.468594</field1>
+<field2 type="Float">10.257658</field2>
+<field3 type="Float">44.082973</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:51:22Z</create_at>
+<entry_id type="Integer">436201</entry_id>
+<field1 type="Float">20.301697</field1>
+<field2 type="Float">10.160662</field2>
+<field3 type="Float">40.04757</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:04:14Z</create_at>
+<entry_id type="Integer">592023</entry_id>
+<field1 type="Float">19.520872</field1>
+<field2 type="Float">9.636545</field2>
+<field3 type="Float">43.065796</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:59:57Z</create_at>
+<entry_id type="Integer">936166</entry_id>
+<field1 type="Float">20.032385</field1>
+<field2 type="Float">8.906558</field2>
+<field3 type="Float">48.734894</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:17:06Z</create_at>
+<entry_id type="Integer">380270</entry_id>
+<field1 type="Float">19.47372</field1>
+<field2 type="Float">5.3524246</field2>
+<field3 type="Float">43.65995</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:18:28Z</create_at>
+<entry_id type="Integer">267763</entry_id>
+<field1 type="Float">20.731668</field1>
+<field2 type="Float">9.104675</field2>
+<field3 type="Float">49.637726</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:52:06Z</create_at>
+<entry_id type="Integer">397269</entry_id>
+<field1 type="Float">19.655357</field1>
+<field2 type="Float">9.280017</field2>
+<field3 type="Float">45.865078</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:03:33Z</create_at>
+<entry_id type="Integer">443664</entry_id>
+<field1 type="Float">19.333504</field1>
+<field2 type="Float">5.437022</field2>
+<field3 type="Float">41.925423</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:57:51Z</create_at>
+<entry_id type="Integer">679087</entry_id>
+<field1 type="Float">19.90046</field1>
+<field2 type="Float">9.158646</field2>
+<field3 type="Float">42.28884</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:45:26Z</create_at>
+<entry_id type="Integer">283293</entry_id>
+<field1 type="Float">20.617363</field1>
+<field2 type="Float">5.11154</field2>
+<field3 type="Float">47.845947</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:56:17Z</create_at>
+<entry_id type="Integer">757411</entry_id>
+<field1 type="Float">19.533144</field1>
+<field2 type="Float">9.866617</field2>
+<field3 type="Float">44.330048</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:28:23Z</create_at>
+<entry_id type="Integer">907308</entry_id>
+<field1 type="Float">19.247599</field1>
+<field2 type="Float">5.6952763</field2>
+<field3 type="Float">47.662537</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:39:38Z</create_at>
+<entry_id type="Integer">891586</entry_id>
+<field1 type="Float">19.890415</field1>
+<field2 type="Float">9.58698</field2>
+<field3 type="Float">49.44422</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:07:34Z</create_at>
+<entry_id type="Integer">489311</entry_id>
+<field1 type="Float">20.69963</field1>
+<field2 type="Float">5.5517044</field2>
+<field3 type="Float">48.158077</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:11:29Z</create_at>
+<entry_id type="Integer">831987</entry_id>
+<field1 type="Float">20.247732</field1>
+<field2 type="Float">10.840229</field2>
+<field3 type="Float">40.82538</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:07:36Z</create_at>
+<entry_id type="Integer">480953</entry_id>
+<field1 type="Float">19.108507</field1>
+<field2 type="Float">9.888075</field2>
+<field3 type="Float">42.139427</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:11:15Z</create_at>
+<entry_id type="Integer">729081</entry_id>
+<field1 type="Float">19.499458</field1>
+<field2 type="Float">9.431969</field2>
+<field3 type="Float">45.23752</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:12:31Z</create_at>
+<entry_id type="Integer">551252</entry_id>
+<field1 type="Float">20.081865</field1>
+<field2 type="Float">5.449133</field2>
+<field3 type="Float">47.47522</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:15:23Z</create_at>
+<entry_id type="Integer">527632</entry_id>
+<field1 type="Float">19.91267</field1>
+<field2 type="Float">8.914015</field2>
+<field3 type="Float">41.59512</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:30:27Z</create_at>
+<entry_id type="Integer">516276</entry_id>
+<field1 type="Float">19.001518</field1>
+<field2 type="Float">6.2095103</field2>
+<field3 type="Float">49.484467</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:17:57Z</create_at>
+<entry_id type="Integer">723238</entry_id>
+<field1 type="Float">19.348196</field1>
+<field2 type="Float">8.136842</field2>
+<field3 type="Float">43.323414</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:53:33Z</create_at>
+<entry_id type="Integer">432697</entry_id>
+<field1 type="Float">19.258755</field1>
+<field2 type="Float">5.329145</field2>
+<field3 type="Float">49.238586</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:24:46Z</create_at>
+<entry_id type="Integer">482778</entry_id>
+<field1 type="Float">19.443453</field1>
+<field2 type="Float">10.424828</field2>
+<field3 type="Float">41.424427</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:59:46Z</create_at>
+<entry_id type="Integer">865822</entry_id>
+<field1 type="Float">20.721954</field1>
+<field2 type="Float">9.798473</field2>
+<field3 type="Float">45.99951</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:27:10Z</create_at>
+<entry_id type="Integer">254368</entry_id>
+<field1 type="Float">20.075338</field1>
+<field2 type="Float">9.471836</field2>
+<field3 type="Float">42.97799</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:33:08Z</create_at>
+<entry_id type="Integer">349029</entry_id>
+<field1 type="Float">19.046818</field1>
+<field2 type="Float">6.1109886</field2>
+<field3 type="Float">42.964497</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:22:04Z</create_at>
+<entry_id type="Integer">493079</entry_id>
+<field1 type="Float">19.946259</field1>
+<field2 type="Float">8.465988</field2>
+<field3 type="Float">49.258938</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:03:47Z</create_at>
+<entry_id type="Integer">333025</entry_id>
+<field1 type="Float">20.265968</field1>
+<field2 type="Float">9.801742</field2>
+<field3 type="Float">46.770473</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:38:39Z</create_at>
+<entry_id type="Integer">172127</entry_id>
+<field1 type="Float">19.12229</field1>
+<field2 type="Float">10.534927</field2>
+<field3 type="Float">47.5413</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:11:36Z</create_at>
+<entry_id type="Integer">787455</entry_id>
+<field1 type="Float">20.523783</field1>
+<field2 type="Float">5.4672127</field2>
+<field3 type="Float">44.295166</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:45:38Z</create_at>
+<entry_id type="Integer">715646</entry_id>
+<field1 type="Float">20.840567</field1>
+<field2 type="Float">7.276636</field2>
+<field3 type="Float">45.571716</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:12:18Z</create_at>
+<entry_id type="Integer">998329</entry_id>
+<field1 type="Float">19.473253</field1>
+<field2 type="Float">5.9637566</field2>
+<field3 type="Float">46.81772</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:09:04Z</create_at>
+<entry_id type="Integer">697762</entry_id>
+<field1 type="Float">19.715265</field1>
+<field2 type="Float">9.919373</field2>
+<field3 type="Float">41.759903</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:22:10Z</create_at>
+<entry_id type="Integer">487992</entry_id>
+<field1 type="Float">19.374767</field1>
+<field2 type="Float">6.7418103</field2>
+<field3 type="Float">49.130726</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:04:06Z</create_at>
+<entry_id type="Integer">586764</entry_id>
+<field1 type="Float">20.711786</field1>
+<field2 type="Float">9.145161</field2>
+<field3 type="Float">49.782272</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:59:58Z</create_at>
+<entry_id type="Integer">832287</entry_id>
+<field1 type="Float">20.513622</field1>
+<field2 type="Float">5.9278708</field2>
+<field3 type="Float">42.960747</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:09:08Z</create_at>
+<entry_id type="Integer">545143</entry_id>
+<field1 type="Float">19.811605</field1>
+<field2 type="Float">5.5155535</field2>
+<field3 type="Float">45.001316</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:32:57Z</create_at>
+<entry_id type="Integer">725839</entry_id>
+<field1 type="Float">20.396828</field1>
+<field2 type="Float">9.876541</field2>
+<field3 type="Float">49.71177</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:04:41Z</create_at>
+<entry_id type="Integer">812469</entry_id>
+<field1 type="Float">20.321693</field1>
+<field2 type="Float">9.051025</field2>
+<field3 type="Float">46.140602</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:54:02Z</create_at>
+<entry_id type="Integer">741357</entry_id>
+<field1 type="Float">20.044167</field1>
+<field2 type="Float">10.884959</field2>
+<field3 type="Float">47.922066</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:08:16Z</create_at>
+<entry_id type="Integer">924122</entry_id>
+<field1 type="Float">19.239796</field1>
+<field2 type="Float">5.2251196</field2>
+<field3 type="Float">45.842762</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:48:34Z</create_at>
+<entry_id type="Integer">284454</entry_id>
+<field1 type="Float">20.329388</field1>
+<field2 type="Float">9.83975</field2>
+<field3 type="Float">43.669064</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:54:36Z</create_at>
+<entry_id type="Integer">844191</entry_id>
+<field1 type="Float">19.198645</field1>
+<field2 type="Float">7.423568</field2>
+<field3 type="Float">41.19132</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:09:40Z</create_at>
+<entry_id type="Integer">580122</entry_id>
+<field1 type="Float">20.060995</field1>
+<field2 type="Float">10.344019</field2>
+<field3 type="Float">45.889694</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:40:55Z</create_at>
+<entry_id type="Integer">994131</entry_id>
+<field1 type="Float">19.288195</field1>
+<field2 type="Float">6.8635025</field2>
+<field3 type="Float">41.160427</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:11:19Z</create_at>
+<entry_id type="Integer">760725</entry_id>
+<field1 type="Float">19.656616</field1>
+<field2 type="Float">7.784445</field2>
+<field3 type="Float">42.048393</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:14:33Z</create_at>
+<entry_id type="Integer">132642</entry_id>
+<field1 type="Float">19.786089</field1>
+<field2 type="Float">7.7381945</field2>
+<field3 type="Float">47.228878</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:28:26Z</create_at>
+<entry_id type="Integer">904760</entry_id>
+<field1 type="Float">19.729303</field1>
+<field2 type="Float">10.625507</field2>
+<field3 type="Float">41.79559</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:43:07Z</create_at>
+<entry_id type="Integer">618471</entry_id>
+<field1 type="Float">20.585255</field1>
+<field2 type="Float">10.712401</field2>
+<field3 type="Float">42.56338</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:23:07Z</create_at>
+<entry_id type="Integer">398811</entry_id>
+<field1 type="Float">20.568836</field1>
+<field2 type="Float">9.582266</field2>
+<field3 type="Float">42.153324</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:18:20Z</create_at>
+<entry_id type="Integer">362181</entry_id>
+<field1 type="Float">20.247147</field1>
+<field2 type="Float">9.199653</field2>
+<field3 type="Float">42.044514</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:26:23Z</create_at>
+<entry_id type="Integer">436848</entry_id>
+<field1 type="Float">20.797777</field1>
+<field2 type="Float">10.191874</field2>
+<field3 type="Float">42.94936</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:46:09Z</create_at>
+<entry_id type="Integer">230374</entry_id>
+<field1 type="Float">20.264494</field1>
+<field2 type="Float">7.5569105</field2>
+<field3 type="Float">50.82776</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:53:01Z</create_at>
+<entry_id type="Integer">307485</entry_id>
+<field1 type="Float">20.873528</field1>
+<field2 type="Float">5.4874816</field2>
+<field3 type="Float">50.72754</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:30:06Z</create_at>
+<entry_id type="Integer">205125</entry_id>
+<field1 type="Float">20.704592</field1>
+<field2 type="Float">9.478874</field2>
+<field3 type="Float">43.748882</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:27:29Z</create_at>
+<entry_id type="Integer">353908</entry_id>
+<field1 type="Float">20.588139</field1>
+<field2 type="Float">10.130881</field2>
+<field3 type="Float">48.392036</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:19:48Z</create_at>
+<entry_id type="Integer">760697</entry_id>
+<field1 type="Float">20.120312</field1>
+<field2 type="Float">10.60247</field2>
+<field3 type="Float">40.892036</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:16:35Z</create_at>
+<entry_id type="Integer">577298</entry_id>
+<field1 type="Float">20.31256</field1>
+<field2 type="Float">5.47998</field2>
+<field3 type="Float">49.520737</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:11:49Z</create_at>
+<entry_id type="Integer">900795</entry_id>
+<field1 type="Float">19.939718</field1>
+<field2 type="Float">10.374176</field2>
+<field3 type="Float">41.53166</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:09:11Z</create_at>
+<entry_id type="Integer">223643</entry_id>
+<field1 type="Float">20.99785</field1>
+<field2 type="Float">9.996025</field2>
+<field3 type="Float">50.404106</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:41:28Z</create_at>
+<entry_id type="Integer">393995</entry_id>
+<field1 type="Float">19.736181</field1>
+<field2 type="Float">7.414917</field2>
+<field3 type="Float">44.9734</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:30:27Z</create_at>
+<entry_id type="Integer">978373</entry_id>
+<field1 type="Float">20.470749</field1>
+<field2 type="Float">5.318721</field2>
+<field3 type="Float">47.648342</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:22:23Z</create_at>
+<entry_id type="Integer">257527</entry_id>
+<field1 type="Float">20.38027</field1>
+<field2 type="Float">6.359412</field2>
+<field3 type="Float">46.89009</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:22:03Z</create_at>
+<entry_id type="Integer">152388</entry_id>
+<field1 type="Float">19.463839</field1>
+<field2 type="Float">9.784481</field2>
+<field3 type="Float">48.015022</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:26:31Z</create_at>
+<entry_id type="Integer">814748</entry_id>
+<field1 type="Float">20.404573</field1>
+<field2 type="Float">7.962396</field2>
+<field3 type="Float">40.45779</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:27:10Z</create_at>
+<entry_id type="Integer">287372</entry_id>
+<field1 type="Float">20.25188</field1>
+<field2 type="Float">10.506981</field2>
+<field3 type="Float">40.365265</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:06:25Z</create_at>
+<entry_id type="Integer">197498</entry_id>
+<field1 type="Float">20.57668</field1>
+<field2 type="Float">10.260952</field2>
+<field3 type="Float">50.12326</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:19:13Z</create_at>
+<entry_id type="Integer">625044</entry_id>
+<field1 type="Float">20.407263</field1>
+<field2 type="Float">6.096729</field2>
+<field3 type="Float">46.118366</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:11:32Z</create_at>
+<entry_id type="Integer">678658</entry_id>
+<field1 type="Float">19.058458</field1>
+<field2 type="Float">10.961016</field2>
+<field3 type="Float">49.402885</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:55:55Z</create_at>
+<entry_id type="Integer">762921</entry_id>
+<field1 type="Float">19.75187</field1>
+<field2 type="Float">7.228182</field2>
+<field3 type="Float">45.927593</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:57:57Z</create_at>
+<entry_id type="Integer">613877</entry_id>
+<field1 type="Float">20.297552</field1>
+<field2 type="Float">7.7721615</field2>
+<field3 type="Float">42.7472</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:15:07Z</create_at>
+<entry_id type="Integer">173641</entry_id>
+<field1 type="Float">19.314226</field1>
+<field2 type="Float">8.473142</field2>
+<field3 type="Float">42.897263</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:58:33Z</create_at>
+<entry_id type="Integer">595194</entry_id>
+<field1 type="Float">20.397</field1>
+<field2 type="Float">5.0366054</field2>
+<field3 type="Float">41.773487</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:48:35Z</create_at>
+<entry_id type="Integer">562756</entry_id>
+<field1 type="Float">20.274673</field1>
+<field2 type="Float">6.8560004</field2>
+<field3 type="Float">46.113636</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:48:59Z</create_at>
+<entry_id type="Integer">787694</entry_id>
+<field1 type="Float">19.86945</field1>
+<field2 type="Float">5.168373</field2>
+<field3 type="Float">45.938072</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:40:05Z</create_at>
+<entry_id type="Integer">824650</entry_id>
+<field1 type="Float">20.304508</field1>
+<field2 type="Float">6.541523</field2>
+<field3 type="Float">48.70911</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:03:09Z</create_at>
+<entry_id type="Integer">936969</entry_id>
+<field1 type="Float">19.913567</field1>
+<field2 type="Float">7.713032</field2>
+<field3 type="Float">50.902786</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:49:03Z</create_at>
+<entry_id type="Integer">472872</entry_id>
+<field1 type="Float">19.215212</field1>
+<field2 type="Float">7.8748655</field2>
+<field3 type="Float">41.71687</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:02:34Z</create_at>
+<entry_id type="Integer">717719</entry_id>
+<field1 type="Float">20.442682</field1>
+<field2 type="Float">10.427111</field2>
+<field3 type="Float">49.156635</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:04:19Z</create_at>
+<entry_id type="Integer">841284</entry_id>
+<field1 type="Float">19.800198</field1>
+<field2 type="Float">9.935722</field2>
+<field3 type="Float">44.36672</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:07:16Z</create_at>
+<entry_id type="Integer">599055</entry_id>
+<field1 type="Float">20.621977</field1>
+<field2 type="Float">7.923044</field2>
+<field3 type="Float">46.14083</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:29:44Z</create_at>
+<entry_id type="Integer">199139</entry_id>
+<field1 type="Float">19.574427</field1>
+<field2 type="Float">7.966911</field2>
+<field3 type="Float">44.908375</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:25:51Z</create_at>
+<entry_id type="Integer">950788</entry_id>
+<field1 type="Float">19.483948</field1>
+<field2 type="Float">6.9876356</field2>
+<field3 type="Float">43.746796</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:41:25Z</create_at>
+<entry_id type="Integer">596264</entry_id>
+<field1 type="Float">19.728403</field1>
+<field2 type="Float">10.959156</field2>
+<field3 type="Float">47.88479</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:31:15Z</create_at>
+<entry_id type="Integer">616956</entry_id>
+<field1 type="Float">19.927355</field1>
+<field2 type="Float">8.610687</field2>
+<field3 type="Float">40.21292</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:01:50Z</create_at>
+<entry_id type="Integer">855160</entry_id>
+<field1 type="Float">20.975225</field1>
+<field2 type="Float">9.6288185</field2>
+<field3 type="Float">40.795006</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:15:29Z</create_at>
+<entry_id type="Integer">362166</entry_id>
+<field1 type="Float">19.978294</field1>
+<field2 type="Float">9.6006975</field2>
+<field3 type="Float">42.534443</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:13:06Z</create_at>
+<entry_id type="Integer">382892</entry_id>
+<field1 type="Float">19.576887</field1>
+<field2 type="Float">10.668219</field2>
+<field3 type="Float">49.236267</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:44:09Z</create_at>
+<entry_id type="Integer">215787</entry_id>
+<field1 type="Float">20.300825</field1>
+<field2 type="Float">7.054866</field2>
+<field3 type="Float">40.466072</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:33:21Z</create_at>
+<entry_id type="Integer">366559</entry_id>
+<field1 type="Float">20.21404</field1>
+<field2 type="Float">8.976968</field2>
+<field3 type="Float">45.772015</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:18:50Z</create_at>
+<entry_id type="Integer">325900</entry_id>
+<field1 type="Float">20.567047</field1>
+<field2 type="Float">7.1236267</field2>
+<field3 type="Float">43.279945</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:29:05Z</create_at>
+<entry_id type="Integer">497755</entry_id>
+<field1 type="Float">19.568874</field1>
+<field2 type="Float">10.439242</field2>
+<field3 type="Float">43.48245</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:29:43Z</create_at>
+<entry_id type="Integer">205029</entry_id>
+<field1 type="Float">20.192692</field1>
+<field2 type="Float">9.791662</field2>
+<field3 type="Float">50.93061</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:00:53Z</create_at>
+<entry_id type="Integer">501449</entry_id>
+<field1 type="Float">20.611233</field1>
+<field2 type="Float">5.3816714</field2>
+<field3 type="Float">40.385098</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:56:32Z</create_at>
+<entry_id type="Integer">333566</entry_id>
+<field1 type="Float">19.154934</field1>
+<field2 type="Float">5.7077527</field2>
+<field3 type="Float">46.258583</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:58:30Z</create_at>
+<entry_id type="Integer">707007</entry_id>
+<field1 type="Float">19.232906</field1>
+<field2 type="Float">9.158833</field2>
+<field3 type="Float">49.803703</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:24:59Z</create_at>
+<entry_id type="Integer">653315</entry_id>
+<field1 type="Float">19.956593</field1>
+<field2 type="Float">6.4486103</field2>
+<field3 type="Float">41.966732</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:06:03Z</create_at>
+<entry_id type="Integer">429488</entry_id>
+<field1 type="Float">20.714619</field1>
+<field2 type="Float">5.24125</field2>
+<field3 type="Float">46.37671</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:00:08Z</create_at>
+<entry_id type="Integer">766385</entry_id>
+<field1 type="Float">20.388857</field1>
+<field2 type="Float">5.6043954</field2>
+<field3 type="Float">45.257786</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:09:01Z</create_at>
+<entry_id type="Integer">339902</entry_id>
+<field1 type="Float">20.715986</field1>
+<field2 type="Float">8.941099</field2>
+<field3 type="Float">46.464756</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:44:41Z</create_at>
+<entry_id type="Integer">875806</entry_id>
+<field1 type="Float">19.457579</field1>
+<field2 type="Float">8.427114</field2>
+<field3 type="Float">45.2025</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:17:35Z</create_at>
+<entry_id type="Integer">407760</entry_id>
+<field1 type="Float">20.263876</field1>
+<field2 type="Float">8.564085</field2>
+<field3 type="Float">48.395294</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:12:29Z</create_at>
+<entry_id type="Integer">700409</entry_id>
+<field1 type="Float">19.842316</field1>
+<field2 type="Float">9.782484</field2>
+<field3 type="Float">47.888546</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:49:02Z</create_at>
+<entry_id type="Integer">138131</entry_id>
+<field1 type="Float">20.322979</field1>
+<field2 type="Float">5.726431</field2>
+<field3 type="Float">47.598705</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:31:35Z</create_at>
+<entry_id type="Integer">742996</entry_id>
+<field1 type="Float">19.499905</field1>
+<field2 type="Float">8.179794</field2>
+<field3 type="Float">49.499847</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:02:13Z</create_at>
+<entry_id type="Integer">390619</entry_id>
+<field1 type="Float">20.73963</field1>
+<field2 type="Float">8.071724</field2>
+<field3 type="Float">41.493484</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:54:42Z</create_at>
+<entry_id type="Integer">327290</entry_id>
+<field1 type="Float">20.733683</field1>
+<field2 type="Float">10.7051525</field2>
+<field3 type="Float">40.310383</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:39:27Z</create_at>
+<entry_id type="Integer">827482</entry_id>
+<field1 type="Float">20.96249</field1>
+<field2 type="Float">9.255193</field2>
+<field3 type="Float">40.888638</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:24:18Z</create_at>
+<entry_id type="Integer">974193</entry_id>
+<field1 type="Float">20.235718</field1>
+<field2 type="Float">10.827576</field2>
+<field3 type="Float">49.80936</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:44:16Z</create_at>
+<entry_id type="Integer">562686</entry_id>
+<field1 type="Float">19.299543</field1>
+<field2 type="Float">7.2685423</field2>
+<field3 type="Float">49.032547</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:42:18Z</create_at>
+<entry_id type="Integer">604119</entry_id>
+<field1 type="Float">20.563168</field1>
+<field2 type="Float">10.954468</field2>
+<field3 type="Float">42.265293</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:35:22Z</create_at>
+<entry_id type="Integer">969480</entry_id>
+<field1 type="Float">20.439249</field1>
+<field2 type="Float">5.7358365</field2>
+<field3 type="Float">43.763557</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:46:28Z</create_at>
+<entry_id type="Integer">111416</entry_id>
+<field1 type="Float">20.303736</field1>
+<field2 type="Float">10.046856</field2>
+<field3 type="Float">47.992226</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:30:26Z</create_at>
+<entry_id type="Integer">399391</entry_id>
+<field1 type="Float">20.44469</field1>
+<field2 type="Float">6.3433714</field2>
+<field3 type="Float">41.945316</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:57:35Z</create_at>
+<entry_id type="Integer">104893</entry_id>
+<field1 type="Float">19.172426</field1>
+<field2 type="Float">5.92273</field2>
+<field3 type="Float">43.705658</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:41:56Z</create_at>
+<entry_id type="Integer">894877</entry_id>
+<field1 type="Float">19.855238</field1>
+<field2 type="Float">10.040634</field2>
+<field3 type="Float">40.60725</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:43:11Z</create_at>
+<entry_id type="Integer">780119</entry_id>
+<field1 type="Float">20.5974</field1>
+<field2 type="Float">10.530186</field2>
+<field3 type="Float">46.999382</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:47:56Z</create_at>
+<entry_id type="Integer">267718</entry_id>
+<field1 type="Float">19.363108</field1>
+<field2 type="Float">10.875931</field2>
+<field3 type="Float">46.488583</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:59:15Z</create_at>
+<entry_id type="Integer">933377</entry_id>
+<field1 type="Float">20.412426</field1>
+<field2 type="Float">8.505575</field2>
+<field3 type="Float">49.28447</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:45:16Z</create_at>
+<entry_id type="Integer">618254</entry_id>
+<field1 type="Float">20.766624</field1>
+<field2 type="Float">10.46339</field2>
+<field3 type="Float">47.70433</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:30:35Z</create_at>
+<entry_id type="Integer">131906</entry_id>
+<field1 type="Float">20.274853</field1>
+<field2 type="Float">9.884396</field2>
+<field3 type="Float">50.203125</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:35:57Z</create_at>
+<entry_id type="Integer">591254</entry_id>
+<field1 type="Float">20.563324</field1>
+<field2 type="Float">10.115829</field2>
+<field3 type="Float">44.638298</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:13:21Z</create_at>
+<entry_id type="Integer">672465</entry_id>
+<field1 type="Float">20.849302</field1>
+<field2 type="Float">8.63645</field2>
+<field3 type="Float">42.5535</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:48:16Z</create_at>
+<entry_id type="Integer">583453</entry_id>
+<field1 type="Float">19.190771</field1>
+<field2 type="Float">7.962165</field2>
+<field3 type="Float">47.217007</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:23:20Z</create_at>
+<entry_id type="Integer">231300</entry_id>
+<field1 type="Float">19.898497</field1>
+<field2 type="Float">5.578172</field2>
+<field3 type="Float">40.175392</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:42:58Z</create_at>
+<entry_id type="Integer">618203</entry_id>
+<field1 type="Float">19.139278</field1>
+<field2 type="Float">5.084333</field2>
+<field3 type="Float">46.14731</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:15:04Z</create_at>
+<entry_id type="Integer">688603</entry_id>
+<field1 type="Float">20.744635</field1>
+<field2 type="Float">8.593756</field2>
+<field3 type="Float">45.885838</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:09:33Z</create_at>
+<entry_id type="Integer">193198</entry_id>
+<field1 type="Float">19.067421</field1>
+<field2 type="Float">5.386219</field2>
+<field3 type="Float">49.39919</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:05:33Z</create_at>
+<entry_id type="Integer">493658</entry_id>
+<field1 type="Float">19.4298</field1>
+<field2 type="Float">5.4866414</field2>
+<field3 type="Float">41.799892</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:11:24Z</create_at>
+<entry_id type="Integer">248685</entry_id>
+<field1 type="Float">19.798992</field1>
+<field2 type="Float">7.9189606</field2>
+<field3 type="Float">50.995075</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:07:57Z</create_at>
+<entry_id type="Integer">181395</entry_id>
+<field1 type="Float">20.915617</field1>
+<field2 type="Float">10.291323</field2>
+<field3 type="Float">43.903824</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:27:16Z</create_at>
+<entry_id type="Integer">632988</entry_id>
+<field1 type="Float">19.350357</field1>
+<field2 type="Float">6.4500623</field2>
+<field3 type="Float">48.511406</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:36:16Z</create_at>
+<entry_id type="Integer">604439</entry_id>
+<field1 type="Float">19.205368</field1>
+<field2 type="Float">5.7035336</field2>
+<field3 type="Float">46.291508</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:32:46Z</create_at>
+<entry_id type="Integer">598438</entry_id>
+<field1 type="Float">20.64289</field1>
+<field2 type="Float">10.738493</field2>
+<field3 type="Float">44.51283</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:02:38Z</create_at>
+<entry_id type="Integer">568261</entry_id>
+<field1 type="Float">20.012342</field1>
+<field2 type="Float">7.229637</field2>
+<field3 type="Float">40.552</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:39:50Z</create_at>
+<entry_id type="Integer">609209</entry_id>
+<field1 type="Float">19.540648</field1>
+<field2 type="Float">5.1686425</field2>
+<field3 type="Float">46.500626</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:32:03Z</create_at>
+<entry_id type="Integer">251351</entry_id>
+<field1 type="Float">19.983204</field1>
+<field2 type="Float">10.602085</field2>
+<field3 type="Float">50.476982</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:18:28Z</create_at>
+<entry_id type="Integer">899995</entry_id>
+<field1 type="Float">20.593716</field1>
+<field2 type="Float">6.8508</field2>
+<field3 type="Float">46.864765</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:48:45Z</create_at>
+<entry_id type="Integer">121814</entry_id>
+<field1 type="Float">20.24348</field1>
+<field2 type="Float">9.439529</field2>
+<field3 type="Float">40.90659</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:58:02Z</create_at>
+<entry_id type="Integer">984407</entry_id>
+<field1 type="Float">20.169846</field1>
+<field2 type="Float">10.106415</field2>
+<field3 type="Float">45.453312</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:00:59Z</create_at>
+<entry_id type="Integer">680240</entry_id>
+<field1 type="Float">19.673512</field1>
+<field2 type="Float">5.623861</field2>
+<field3 type="Float">44.564636</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:13:12Z</create_at>
+<entry_id type="Integer">969422</entry_id>
+<field1 type="Float">19.358429</field1>
+<field2 type="Float">5.3583684</field2>
+<field3 type="Float">46.807358</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:30:08Z</create_at>
+<entry_id type="Integer">533593</entry_id>
+<field1 type="Float">19.638313</field1>
+<field2 type="Float">6.591876</field2>
+<field3 type="Float">48.3592</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:39:01Z</create_at>
+<entry_id type="Integer">708767</entry_id>
+<field1 type="Float">19.501242</field1>
+<field2 type="Float">6.1191673</field2>
+<field3 type="Float">44.11826</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:08:01Z</create_at>
+<entry_id type="Integer">743158</entry_id>
+<field1 type="Float">19.45621</field1>
+<field2 type="Float">6.9602213</field2>
+<field3 type="Float">45.598835</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:05:17Z</create_at>
+<entry_id type="Integer">196910</entry_id>
+<field1 type="Float">20.843586</field1>
+<field2 type="Float">8.136333</field2>
+<field3 type="Float">46.733643</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:42:10Z</create_at>
+<entry_id type="Integer">661870</entry_id>
+<field1 type="Float">19.552223</field1>
+<field2 type="Float">8.47611</field2>
+<field3 type="Float">46.95175</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:50:19Z</create_at>
+<entry_id type="Integer">616094</entry_id>
+<field1 type="Float">19.539612</field1>
+<field2 type="Float">9.281189</field2>
+<field3 type="Float">43.42747</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:34:54Z</create_at>
+<entry_id type="Integer">642640</entry_id>
+<field1 type="Float">20.637768</field1>
+<field2 type="Float">10.164231</field2>
+<field3 type="Float">45.85636</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:12:38Z</create_at>
+<entry_id type="Integer">652785</entry_id>
+<field1 type="Float">19.049114</field1>
+<field2 type="Float">7.765216</field2>
+<field3 type="Float">45.93818</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:20:17Z</create_at>
+<entry_id type="Integer">833458</entry_id>
+<field1 type="Float">19.304356</field1>
+<field2 type="Float">5.267175</field2>
+<field3 type="Float">46.373398</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:50:28Z</create_at>
+<entry_id type="Integer">374943</entry_id>
+<field1 type="Float">19.324556</field1>
+<field2 type="Float">10.391495</field2>
+<field3 type="Float">46.91899</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:26:29Z</create_at>
+<entry_id type="Integer">790041</entry_id>
+<field1 type="Float">19.812891</field1>
+<field2 type="Float">5.791326</field2>
+<field3 type="Float">48.597115</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:05:40Z</create_at>
+<entry_id type="Integer">536967</entry_id>
+<field1 type="Float">19.631496</field1>
+<field2 type="Float">6.295508</field2>
+<field3 type="Float">43.810715</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:13:38Z</create_at>
+<entry_id type="Integer">109778</entry_id>
+<field1 type="Float">19.580347</field1>
+<field2 type="Float">8.404816</field2>
+<field3 type="Float">42.457077</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:09:01Z</create_at>
+<entry_id type="Integer">461044</entry_id>
+<field1 type="Float">19.429918</field1>
+<field2 type="Float">8.84154</field2>
+<field3 type="Float">45.284958</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:29:35Z</create_at>
+<entry_id type="Integer">187633</entry_id>
+<field1 type="Float">19.671865</field1>
+<field2 type="Float">6.4151106</field2>
+<field3 type="Float">42.830635</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:27:09Z</create_at>
+<entry_id type="Integer">239402</entry_id>
+<field1 type="Float">20.555851</field1>
+<field2 type="Float">9.703658</field2>
+<field3 type="Float">42.28293</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:51:52Z</create_at>
+<entry_id type="Integer">895892</entry_id>
+<field1 type="Float">20.539606</field1>
+<field2 type="Float">6.500937</field2>
+<field3 type="Float">46.93436</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:50:19Z</create_at>
+<entry_id type="Integer">145764</entry_id>
+<field1 type="Float">20.601423</field1>
+<field2 type="Float">5.7029886</field2>
+<field3 type="Float">43.931164</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:47:26Z</create_at>
+<entry_id type="Integer">914211</entry_id>
+<field1 type="Float">20.132414</field1>
+<field2 type="Float">9.800221</field2>
+<field3 type="Float">45.102703</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:03:48Z</create_at>
+<entry_id type="Integer">821732</entry_id>
+<field1 type="Float">19.547398</field1>
+<field2 type="Float">5.568948</field2>
+<field3 type="Float">40.312485</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:22:39Z</create_at>
+<entry_id type="Integer">667806</entry_id>
+<field1 type="Float">19.435831</field1>
+<field2 type="Float">7.4700313</field2>
+<field3 type="Float">44.721855</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:48:51Z</create_at>
+<entry_id type="Integer">577123</entry_id>
+<field1 type="Float">19.53701</field1>
+<field2 type="Float">6.657795</field2>
+<field3 type="Float">42.441277</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:33:54Z</create_at>
+<entry_id type="Integer">942090</entry_id>
+<field1 type="Float">19.375156</field1>
+<field2 type="Float">7.6372056</field2>
+<field3 type="Float">43.742725</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:36:09Z</create_at>
+<entry_id type="Integer">476212</entry_id>
+<field1 type="Float">20.40637</field1>
+<field2 type="Float">9.858149</field2>
+<field3 type="Float">43.49239</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:16:37Z</create_at>
+<entry_id type="Integer">618043</entry_id>
+<field1 type="Float">19.991043</field1>
+<field2 type="Float">6.0444646</field2>
+<field3 type="Float">44.120907</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:14:14Z</create_at>
+<entry_id type="Integer">764683</entry_id>
+<field1 type="Float">19.949097</field1>
+<field2 type="Float">7.8440313</field2>
+<field3 type="Float">44.18952</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:56:05Z</create_at>
+<entry_id type="Integer">239650</entry_id>
+<field1 type="Float">20.824783</field1>
+<field2 type="Float">10.05495</field2>
+<field3 type="Float">40.54302</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:48:18Z</create_at>
+<entry_id type="Integer">266847</entry_id>
+<field1 type="Float">20.666384</field1>
+<field2 type="Float">6.749791</field2>
+<field3 type="Float">49.02109</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:59:05Z</create_at>
+<entry_id type="Integer">372318</entry_id>
+<field1 type="Float">19.757576</field1>
+<field2 type="Float">10.9907465</field2>
+<field3 type="Float">41.014374</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:50:03Z</create_at>
+<entry_id type="Integer">967698</entry_id>
+<field1 type="Float">19.245232</field1>
+<field2 type="Float">8.829544</field2>
+<field3 type="Float">47.039818</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:07:30Z</create_at>
+<entry_id type="Integer">117964</entry_id>
+<field1 type="Float">20.144335</field1>
+<field2 type="Float">7.1242013</field2>
+<field3 type="Float">43.46498</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:15:57Z</create_at>
+<entry_id type="Integer">909757</entry_id>
+<field1 type="Float">19.554844</field1>
+<field2 type="Float">5.162291</field2>
+<field3 type="Float">41.260002</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:57:51Z</create_at>
+<entry_id type="Integer">711115</entry_id>
+<field1 type="Float">20.259087</field1>
+<field2 type="Float">6.6846614</field2>
+<field3 type="Float">42.440205</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:19:39Z</create_at>
+<entry_id type="Integer">926936</entry_id>
+<field1 type="Float">20.423403</field1>
+<field2 type="Float">10.7517185</field2>
+<field3 type="Float">48.107613</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:03:05Z</create_at>
+<entry_id type="Integer">562595</entry_id>
+<field1 type="Float">19.897976</field1>
+<field2 type="Float">9.751308</field2>
+<field3 type="Float">42.685043</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:51:24Z</create_at>
+<entry_id type="Integer">204943</entry_id>
+<field1 type="Float">19.754936</field1>
+<field2 type="Float">9.070095</field2>
+<field3 type="Float">47.940014</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:23:55Z</create_at>
+<entry_id type="Integer">839027</entry_id>
+<field1 type="Float">19.820835</field1>
+<field2 type="Float">7.2324705</field2>
+<field3 type="Float">44.81126</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:43:07Z</create_at>
+<entry_id type="Integer">374908</entry_id>
+<field1 type="Float">19.100523</field1>
+<field2 type="Float">8.17529</field2>
+<field3 type="Float">45.942394</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:17:53Z</create_at>
+<entry_id type="Integer">352260</entry_id>
+<field1 type="Float">20.687943</field1>
+<field2 type="Float">5.734322</field2>
+<field3 type="Float">41.104748</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:59:20Z</create_at>
+<entry_id type="Integer">489962</entry_id>
+<field1 type="Float">19.072325</field1>
+<field2 type="Float">5.79944</field2>
+<field3 type="Float">41.757362</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:43:00Z</create_at>
+<entry_id type="Integer">781960</entry_id>
+<field1 type="Float">20.681055</field1>
+<field2 type="Float">6.042164</field2>
+<field3 type="Float">49.534073</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:37:56Z</create_at>
+<entry_id type="Integer">706540</entry_id>
+<field1 type="Float">20.977375</field1>
+<field2 type="Float">8.421314</field2>
+<field3 type="Float">40.21441</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:42:27Z</create_at>
+<entry_id type="Integer">804849</entry_id>
+<field1 type="Float">20.284292</field1>
+<field2 type="Float">8.314172</field2>
+<field3 type="Float">43.35455</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:32:37Z</create_at>
+<entry_id type="Integer">847406</entry_id>
+<field1 type="Float">20.775623</field1>
+<field2 type="Float">7.2902393</field2>
+<field3 type="Float">48.621635</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:27:48Z</create_at>
+<entry_id type="Integer">357592</entry_id>
+<field1 type="Float">20.219427</field1>
+<field2 type="Float">9.653061</field2>
+<field3 type="Float">42.856533</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:38:36Z</create_at>
+<entry_id type="Integer">192838</entry_id>
+<field1 type="Float">19.490555</field1>
+<field2 type="Float">10.009079</field2>
+<field3 type="Float">46.058624</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:42:57Z</create_at>
+<entry_id type="Integer">608174</entry_id>
+<field1 type="Float">20.541496</field1>
+<field2 type="Float">8.301654</field2>
+<field3 type="Float">40.320045</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:08:24Z</create_at>
+<entry_id type="Integer">362654</entry_id>
+<field1 type="Float">20.108292</field1>
+<field2 type="Float">9.793022</field2>
+<field3 type="Float">42.18487</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:03:55Z</create_at>
+<entry_id type="Integer">357973</entry_id>
+<field1 type="Float">20.945318</field1>
+<field2 type="Float">7.7238417</field2>
+<field3 type="Float">49.445297</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:23:43Z</create_at>
+<entry_id type="Integer">373712</entry_id>
+<field1 type="Float">20.911743</field1>
+<field2 type="Float">8.428919</field2>
+<field3 type="Float">47.64183</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:19:58Z</create_at>
+<entry_id type="Integer">387841</entry_id>
+<field1 type="Float">19.733704</field1>
+<field2 type="Float">6.7965446</field2>
+<field3 type="Float">41.31203</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:13:23Z</create_at>
+<entry_id type="Integer">996038</entry_id>
+<field1 type="Float">19.260572</field1>
+<field2 type="Float">7.639781</field2>
+<field3 type="Float">45.490795</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:14:20Z</create_at>
+<entry_id type="Integer">604710</entry_id>
+<field1 type="Float">19.257523</field1>
+<field2 type="Float">9.358387</field2>
+<field3 type="Float">43.458405</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:02:26Z</create_at>
+<entry_id type="Integer">172856</entry_id>
+<field1 type="Float">20.726866</field1>
+<field2 type="Float">10.727557</field2>
+<field3 type="Float">42.275795</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:12:35Z</create_at>
+<entry_id type="Integer">737788</entry_id>
+<field1 type="Float">19.341036</field1>
+<field2 type="Float">5.6381626</field2>
+<field3 type="Float">48.188354</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:37:16Z</create_at>
+<entry_id type="Integer">304360</entry_id>
+<field1 type="Float">19.94363</field1>
+<field2 type="Float">6.585019</field2>
+<field3 type="Float">46.63677</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:22:10Z</create_at>
+<entry_id type="Integer">186905</entry_id>
+<field1 type="Float">20.918959</field1>
+<field2 type="Float">5.4156117</field2>
+<field3 type="Float">41.736927</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:42:43Z</create_at>
+<entry_id type="Integer">737447</entry_id>
+<field1 type="Float">20.762526</field1>
+<field2 type="Float">6.3387756</field2>
+<field3 type="Float">47.499905</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:43:56Z</create_at>
+<entry_id type="Integer">590299</entry_id>
+<field1 type="Float">19.282043</field1>
+<field2 type="Float">7.037286</field2>
+<field3 type="Float">41.01577</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:07:11Z</create_at>
+<entry_id type="Integer">820619</entry_id>
+<field1 type="Float">19.624044</field1>
+<field2 type="Float">9.758171</field2>
+<field3 type="Float">45.238636</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:09:12Z</create_at>
+<entry_id type="Integer">569824</entry_id>
+<field1 type="Float">19.68387</field1>
+<field2 type="Float">7.1037683</field2>
+<field3 type="Float">43.191784</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:50:53Z</create_at>
+<entry_id type="Integer">718398</entry_id>
+<field1 type="Float">19.224266</field1>
+<field2 type="Float">10.23089</field2>
+<field3 type="Float">50.00099</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:16:43Z</create_at>
+<entry_id type="Integer">331699</entry_id>
+<field1 type="Float">20.112906</field1>
+<field2 type="Float">8.337352</field2>
+<field3 type="Float">47.23407</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:11:44Z</create_at>
+<entry_id type="Integer">277882</entry_id>
+<field1 type="Float">20.45536</field1>
+<field2 type="Float">8.501045</field2>
+<field3 type="Float">41.229813</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:04:29Z</create_at>
+<entry_id type="Integer">468262</entry_id>
+<field1 type="Float">20.57173</field1>
+<field2 type="Float">5.001487</field2>
+<field3 type="Float">47.507473</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:13:21Z</create_at>
+<entry_id type="Integer">573059</entry_id>
+<field1 type="Float">19.57109</field1>
+<field2 type="Float">5.7686615</field2>
+<field3 type="Float">48.0263</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:13:15Z</create_at>
+<entry_id type="Integer">377445</entry_id>
+<field1 type="Float">20.80184</field1>
+<field2 type="Float">8.53843</field2>
+<field3 type="Float">41.752502</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:06:20Z</create_at>
+<entry_id type="Integer">843370</entry_id>
+<field1 type="Float">20.98438</field1>
+<field2 type="Float">5.283802</field2>
+<field3 type="Float">48.11088</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:45:04Z</create_at>
+<entry_id type="Integer">112615</entry_id>
+<field1 type="Float">20.901209</field1>
+<field2 type="Float">7.6771297</field2>
+<field3 type="Float">50.924454</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:40:52Z</create_at>
+<entry_id type="Integer">691437</entry_id>
+<field1 type="Float">20.972858</field1>
+<field2 type="Float">8.700982</field2>
+<field3 type="Float">50.077183</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:37:26Z</create_at>
+<entry_id type="Integer">605998</entry_id>
+<field1 type="Float">20.337574</field1>
+<field2 type="Float">8.09049</field2>
+<field3 type="Float">49.970024</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:18:21Z</create_at>
+<entry_id type="Integer">812169</entry_id>
+<field1 type="Float">19.81341</field1>
+<field2 type="Float">8.500461</field2>
+<field3 type="Float">49.19475</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:36:46Z</create_at>
+<entry_id type="Integer">997915</entry_id>
+<field1 type="Float">20.379156</field1>
+<field2 type="Float">7.2948184</field2>
+<field3 type="Float">41.095028</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:49:56Z</create_at>
+<entry_id type="Integer">419417</entry_id>
+<field1 type="Float">20.981962</field1>
+<field2 type="Float">8.386795</field2>
+<field3 type="Float">44.14689</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:53:54Z</create_at>
+<entry_id type="Integer">514593</entry_id>
+<field1 type="Float">20.643595</field1>
+<field2 type="Float">8.523055</field2>
+<field3 type="Float">45.3662</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:42:13Z</create_at>
+<entry_id type="Integer">396367</entry_id>
+<field1 type="Float">19.565691</field1>
+<field2 type="Float">9.239796</field2>
+<field3 type="Float">42.66482</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:13:21Z</create_at>
+<entry_id type="Integer">696386</entry_id>
+<field1 type="Float">20.283747</field1>
+<field2 type="Float">10.999807</field2>
+<field3 type="Float">46.834877</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:17:26Z</create_at>
+<entry_id type="Integer">577933</entry_id>
+<field1 type="Float">19.997974</field1>
+<field2 type="Float">5.760434</field2>
+<field3 type="Float">48.584984</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:51:02Z</create_at>
+<entry_id type="Integer">301962</entry_id>
+<field1 type="Float">19.04534</field1>
+<field2 type="Float">7.726351</field2>
+<field3 type="Float">40.05861</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:31:44Z</create_at>
+<entry_id type="Integer">635007</entry_id>
+<field1 type="Float">20.729767</field1>
+<field2 type="Float">10.109954</field2>
+<field3 type="Float">48.379856</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:01:23Z</create_at>
+<entry_id type="Integer">332556</entry_id>
+<field1 type="Float">19.087557</field1>
+<field2 type="Float">7.467651</field2>
+<field3 type="Float">44.01328</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:01:11Z</create_at>
+<entry_id type="Integer">655658</entry_id>
+<field1 type="Float">19.1137</field1>
+<field2 type="Float">7.613699</field2>
+<field3 type="Float">45.834152</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:41:49Z</create_at>
+<entry_id type="Integer">303041</entry_id>
+<field1 type="Float">20.875334</field1>
+<field2 type="Float">6.134631</field2>
+<field3 type="Float">47.565365</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:37:53Z</create_at>
+<entry_id type="Integer">842883</entry_id>
+<field1 type="Float">20.249544</field1>
+<field2 type="Float">9.864994</field2>
+<field3 type="Float">45.319206</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:11:14Z</create_at>
+<entry_id type="Integer">966515</entry_id>
+<field1 type="Float">19.735449</field1>
+<field2 type="Float">5.78094</field2>
+<field3 type="Float">42.839615</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:04:26Z</create_at>
+<entry_id type="Integer">384506</entry_id>
+<field1 type="Float">20.003328</field1>
+<field2 type="Float">9.535673</field2>
+<field3 type="Float">49.79185</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:22:18Z</create_at>
+<entry_id type="Integer">198870</entry_id>
+<field1 type="Float">20.701683</field1>
+<field2 type="Float">10.6854</field2>
+<field3 type="Float">46.947895</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:29:15Z</create_at>
+<entry_id type="Integer">112034</entry_id>
+<field1 type="Float">19.080307</field1>
+<field2 type="Float">6.939038</field2>
+<field3 type="Float">42.365738</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:49:04Z</create_at>
+<entry_id type="Integer">305664</entry_id>
+<field1 type="Float">20.223839</field1>
+<field2 type="Float">8.764138</field2>
+<field3 type="Float">48.41231</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:20:08Z</create_at>
+<entry_id type="Integer">892140</entry_id>
+<field1 type="Float">19.648174</field1>
+<field2 type="Float">9.302462</field2>
+<field3 type="Float">50.40004</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:15:37Z</create_at>
+<entry_id type="Integer">301153</entry_id>
+<field1 type="Float">20.128237</field1>
+<field2 type="Float">7.238781</field2>
+<field3 type="Float">46.53938</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:38:16Z</create_at>
+<entry_id type="Integer">178706</entry_id>
+<field1 type="Float">20.347006</field1>
+<field2 type="Float">6.038566</field2>
+<field3 type="Float">42.77128</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:54:34Z</create_at>
+<entry_id type="Integer">368079</entry_id>
+<field1 type="Float">20.122015</field1>
+<field2 type="Float">9.061394</field2>
+<field3 type="Float">50.598312</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:19:52Z</create_at>
+<entry_id type="Integer">763607</entry_id>
+<field1 type="Float">19.892723</field1>
+<field2 type="Float">10.647697</field2>
+<field3 type="Float">40.260326</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:42:28Z</create_at>
+<entry_id type="Integer">465325</entry_id>
+<field1 type="Float">19.140112</field1>
+<field2 type="Float">6.13937</field2>
+<field3 type="Float">42.588303</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:31:17Z</create_at>
+<entry_id type="Integer">370602</entry_id>
+<field1 type="Float">19.219606</field1>
+<field2 type="Float">6.675888</field2>
+<field3 type="Float">40.140625</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:10:55Z</create_at>
+<entry_id type="Integer">851597</entry_id>
+<field1 type="Float">19.23284</field1>
+<field2 type="Float">7.583955</field2>
+<field3 type="Float">45.107277</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:36:13Z</create_at>
+<entry_id type="Integer">735403</entry_id>
+<field1 type="Float">20.083513</field1>
+<field2 type="Float">8.170824</field2>
+<field3 type="Float">41.610115</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:12:36Z</create_at>
+<entry_id type="Integer">318521</entry_id>
+<field1 type="Float">20.556156</field1>
+<field2 type="Float">9.788401</field2>
+<field3 type="Float">50.364326</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:21:14Z</create_at>
+<entry_id type="Integer">954424</entry_id>
+<field1 type="Float">19.161324</field1>
+<field2 type="Float">8.946686</field2>
+<field3 type="Float">50.105103</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:08:34Z</create_at>
+<entry_id type="Integer">821827</entry_id>
+<field1 type="Float">20.709305</field1>
+<field2 type="Float">10.483145</field2>
+<field3 type="Float">41.014236</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:05:22Z</create_at>
+<entry_id type="Integer">789455</entry_id>
+<field1 type="Float">20.365593</field1>
+<field2 type="Float">9.653867</field2>
+<field3 type="Float">40.877193</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:24:09Z</create_at>
+<entry_id type="Integer">499467</entry_id>
+<field1 type="Float">19.300322</field1>
+<field2 type="Float">5.467158</field2>
+<field3 type="Float">44.58521</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:04:58Z</create_at>
+<entry_id type="Integer">811999</entry_id>
+<field1 type="Float">20.809084</field1>
+<field2 type="Float">9.961967</field2>
+<field3 type="Float">43.03535</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:04:19Z</create_at>
+<entry_id type="Integer">919460</entry_id>
+<field1 type="Float">19.625042</field1>
+<field2 type="Float">10.521635</field2>
+<field3 type="Float">48.96781</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:21:44Z</create_at>
+<entry_id type="Integer">411897</entry_id>
+<field1 type="Float">19.596092</field1>
+<field2 type="Float">6.2585335</field2>
+<field3 type="Float">46.255596</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:07:26Z</create_at>
+<entry_id type="Integer">196083</entry_id>
+<field1 type="Float">19.916842</field1>
+<field2 type="Float">5.213068</field2>
+<field3 type="Float">45.428776</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:32:30Z</create_at>
+<entry_id type="Integer">584715</entry_id>
+<field1 type="Float">19.411575</field1>
+<field2 type="Float">6.1397142</field2>
+<field3 type="Float">49.16553</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:25:33Z</create_at>
+<entry_id type="Integer">302615</entry_id>
+<field1 type="Float">19.241049</field1>
+<field2 type="Float">5.6200595</field2>
+<field3 type="Float">47.89835</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:46:18Z</create_at>
+<entry_id type="Integer">432002</entry_id>
+<field1 type="Float">19.281734</field1>
+<field2 type="Float">7.9641886</field2>
+<field3 type="Float">44.315155</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:44:12Z</create_at>
+<entry_id type="Integer">333487</entry_id>
+<field1 type="Float">19.029432</field1>
+<field2 type="Float">7.2979803</field2>
+<field3 type="Float">42.89301</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:15:01Z</create_at>
+<entry_id type="Integer">640550</entry_id>
+<field1 type="Float">20.478735</field1>
+<field2 type="Float">6.043872</field2>
+<field3 type="Float">41.36729</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:30:20Z</create_at>
+<entry_id type="Integer">783399</entry_id>
+<field1 type="Float">19.017496</field1>
+<field2 type="Float">7.447791</field2>
+<field3 type="Float">50.21118</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:37:45Z</create_at>
+<entry_id type="Integer">860244</entry_id>
+<field1 type="Float">19.45681</field1>
+<field2 type="Float">5.183414</field2>
+<field3 type="Float">50.570084</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:08:03Z</create_at>
+<entry_id type="Integer">310116</entry_id>
+<field1 type="Float">20.282686</field1>
+<field2 type="Float">8.793682</field2>
+<field3 type="Float">44.85999</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:14:28Z</create_at>
+<entry_id type="Integer">835633</entry_id>
+<field1 type="Float">19.087585</field1>
+<field2 type="Float">7.6283216</field2>
+<field3 type="Float">47.521885</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:17:08Z</create_at>
+<entry_id type="Integer">289452</entry_id>
+<field1 type="Float">20.788671</field1>
+<field2 type="Float">10.20603</field2>
+<field3 type="Float">43.214798</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:58:43Z</create_at>
+<entry_id type="Integer">701189</entry_id>
+<field1 type="Float">19.99049</field1>
+<field2 type="Float">5.7555194</field2>
+<field3 type="Float">43.188774</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:24:46Z</create_at>
+<entry_id type="Integer">202806</entry_id>
+<field1 type="Float">19.704185</field1>
+<field2 type="Float">9.832731</field2>
+<field3 type="Float">40.906105</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:38:45Z</create_at>
+<entry_id type="Integer">363104</entry_id>
+<field1 type="Float">20.142805</field1>
+<field2 type="Float">6.600836</field2>
+<field3 type="Float">47.992397</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:45:41Z</create_at>
+<entry_id type="Integer">380940</entry_id>
+<field1 type="Float">20.450722</field1>
+<field2 type="Float">6.218129</field2>
+<field3 type="Float">42.892212</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:50:12Z</create_at>
+<entry_id type="Integer">426809</entry_id>
+<field1 type="Float">19.447025</field1>
+<field2 type="Float">7.469569</field2>
+<field3 type="Float">43.627693</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:56:08Z</create_at>
+<entry_id type="Integer">762965</entry_id>
+<field1 type="Float">19.388784</field1>
+<field2 type="Float">7.4832697</field2>
+<field3 type="Float">41.681038</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:05:10Z</create_at>
+<entry_id type="Integer">605931</entry_id>
+<field1 type="Float">20.806442</field1>
+<field2 type="Float">7.1669827</field2>
+<field3 type="Float">50.09568</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:06:55Z</create_at>
+<entry_id type="Integer">681308</entry_id>
+<field1 type="Float">20.005993</field1>
+<field2 type="Float">8.596368</field2>
+<field3 type="Float">50.07594</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:33:07Z</create_at>
+<entry_id type="Integer">958765</entry_id>
+<field1 type="Float">19.31974</field1>
+<field2 type="Float">9.907133</field2>
+<field3 type="Float">48.916435</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:53:51Z</create_at>
+<entry_id type="Integer">505337</entry_id>
+<field1 type="Float">20.931845</field1>
+<field2 type="Float">10.654472</field2>
+<field3 type="Float">42.552254</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:23:32Z</create_at>
+<entry_id type="Integer">337435</entry_id>
+<field1 type="Float">20.289722</field1>
+<field2 type="Float">8.646334</field2>
+<field3 type="Float">44.71463</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:52:30Z</create_at>
+<entry_id type="Integer">236043</entry_id>
+<field1 type="Float">20.86444</field1>
+<field2 type="Float">8.096219</field2>
+<field3 type="Float">42.632824</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:44:04Z</create_at>
+<entry_id type="Integer">824337</entry_id>
+<field1 type="Float">20.21942</field1>
+<field2 type="Float">9.7211685</field2>
+<field3 type="Float">50.609245</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:45:43Z</create_at>
+<entry_id type="Integer">248421</entry_id>
+<field1 type="Float">19.12616</field1>
+<field2 type="Float">9.134899</field2>
+<field3 type="Float">46.179268</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:30:49Z</create_at>
+<entry_id type="Integer">243412</entry_id>
+<field1 type="Float">20.240894</field1>
+<field2 type="Float">5.3732915</field2>
+<field3 type="Float">46.276554</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:44:44Z</create_at>
+<entry_id type="Integer">997808</entry_id>
+<field1 type="Float">19.921679</field1>
+<field2 type="Float">7.2984166</field2>
+<field3 type="Float">49.40471</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:38:17Z</create_at>
+<entry_id type="Integer">319930</entry_id>
+<field1 type="Float">20.419987</field1>
+<field2 type="Float">8.48109</field2>
+<field3 type="Float">48.049995</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:04:13Z</create_at>
+<entry_id type="Integer">101194</entry_id>
+<field1 type="Float">19.087667</field1>
+<field2 type="Float">7.739</field2>
+<field3 type="Float">50.743767</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:25:56Z</create_at>
+<entry_id type="Integer">873061</entry_id>
+<field1 type="Float">19.066559</field1>
+<field2 type="Float">6.902217</field2>
+<field3 type="Float">50.251953</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:33:58Z</create_at>
+<entry_id type="Integer">948476</entry_id>
+<field1 type="Float">19.114923</field1>
+<field2 type="Float">8.475939</field2>
+<field3 type="Float">41.384266</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:15:18Z</create_at>
+<entry_id type="Integer">138414</entry_id>
+<field1 type="Float">20.049137</field1>
+<field2 type="Float">7.9152613</field2>
+<field3 type="Float">43.57332</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:47:29Z</create_at>
+<entry_id type="Integer">304621</entry_id>
+<field1 type="Float">20.187918</field1>
+<field2 type="Float">6.597628</field2>
+<field3 type="Float">48.716606</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:17:07Z</create_at>
+<entry_id type="Integer">862350</entry_id>
+<field1 type="Float">19.689981</field1>
+<field2 type="Float">8.831532</field2>
+<field3 type="Float">41.10063</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:16:47Z</create_at>
+<entry_id type="Integer">808962</entry_id>
+<field1 type="Float">20.902197</field1>
+<field2 type="Float">5.9073257</field2>
+<field3 type="Float">41.932438</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:53:16Z</create_at>
+<entry_id type="Integer">392073</entry_id>
+<field1 type="Float">20.158855</field1>
+<field2 type="Float">7.7708406</field2>
+<field3 type="Float">43.583885</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:19:38Z</create_at>
+<entry_id type="Integer">128264</entry_id>
+<field1 type="Float">19.94672</field1>
+<field2 type="Float">10.876415</field2>
+<field3 type="Float">46.292053</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:31:41Z</create_at>
+<entry_id type="Integer">513004</entry_id>
+<field1 type="Float">20.478378</field1>
+<field2 type="Float">9.543819</field2>
+<field3 type="Float">48.208138</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:27:23Z</create_at>
+<entry_id type="Integer">156185</entry_id>
+<field1 type="Float">20.416782</field1>
+<field2 type="Float">6.9895453</field2>
+<field3 type="Float">47.764977</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:43:06Z</create_at>
+<entry_id type="Integer">391543</entry_id>
+<field1 type="Float">20.920485</field1>
+<field2 type="Float">6.5870295</field2>
+<field3 type="Float">49.11883</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:31:09Z</create_at>
+<entry_id type="Integer">192380</entry_id>
+<field1 type="Float">20.376184</field1>
+<field2 type="Float">7.6414404</field2>
+<field3 type="Float">48.96217</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:44:49Z</create_at>
+<entry_id type="Integer">352968</entry_id>
+<field1 type="Float">19.36217</field1>
+<field2 type="Float">10.828931</field2>
+<field3 type="Float">40.81557</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:13:05Z</create_at>
+<entry_id type="Integer">663077</entry_id>
+<field1 type="Float">19.918139</field1>
+<field2 type="Float">5.282901</field2>
+<field3 type="Float">46.94998</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:08:04Z</create_at>
+<entry_id type="Integer">522857</entry_id>
+<field1 type="Float">19.261332</field1>
+<field2 type="Float">7.4415064</field2>
+<field3 type="Float">45.505356</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:39:37Z</create_at>
+<entry_id type="Integer">934008</entry_id>
+<field1 type="Float">20.16788</field1>
+<field2 type="Float">8.214657</field2>
+<field3 type="Float">40.140903</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:08:10Z</create_at>
+<entry_id type="Integer">150005</entry_id>
+<field1 type="Float">19.522758</field1>
+<field2 type="Float">6.7144766</field2>
+<field3 type="Float">44.249557</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:09:27Z</create_at>
+<entry_id type="Integer">502277</entry_id>
+<field1 type="Float">20.592007</field1>
+<field2 type="Float">6.5873013</field2>
+<field3 type="Float">45.267006</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:37:54Z</create_at>
+<entry_id type="Integer">699568</entry_id>
+<field1 type="Float">19.394512</field1>
+<field2 type="Float">7.180951</field2>
+<field3 type="Float">49.07586</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:34:25Z</create_at>
+<entry_id type="Integer">261821</entry_id>
+<field1 type="Float">20.577614</field1>
+<field2 type="Float">7.1720943</field2>
+<field3 type="Float">42.27764</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:20:43Z</create_at>
+<entry_id type="Integer">599016</entry_id>
+<field1 type="Float">19.441336</field1>
+<field2 type="Float">8.873047</field2>
+<field3 type="Float">48.90644</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:30:55Z</create_at>
+<entry_id type="Integer">506969</entry_id>
+<field1 type="Float">20.746689</field1>
+<field2 type="Float">6.3034844</field2>
+<field3 type="Float">41.980198</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:46:24Z</create_at>
+<entry_id type="Integer">354936</entry_id>
+<field1 type="Float">19.891024</field1>
+<field2 type="Float">6.7852707</field2>
+<field3 type="Float">42.597572</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:27:24Z</create_at>
+<entry_id type="Integer">648911</entry_id>
+<field1 type="Float">20.887812</field1>
+<field2 type="Float">8.1359005</field2>
+<field3 type="Float">41.52407</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:56:41Z</create_at>
+<entry_id type="Integer">155708</entry_id>
+<field1 type="Float">20.57981</field1>
+<field2 type="Float">10.707888</field2>
+<field3 type="Float">40.436264</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:48:07Z</create_at>
+<entry_id type="Integer">963263</entry_id>
+<field1 type="Float">20.00907</field1>
+<field2 type="Float">6.674594</field2>
+<field3 type="Float">44.374027</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:46:53Z</create_at>
+<entry_id type="Integer">380241</entry_id>
+<field1 type="Float">20.202805</field1>
+<field2 type="Float">6.3412857</field2>
+<field3 type="Float">43.111465</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:30:33Z</create_at>
+<entry_id type="Integer">395220</entry_id>
+<field1 type="Float">20.9153</field1>
+<field2 type="Float">7.696824</field2>
+<field3 type="Float">43.735897</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:37:50Z</create_at>
+<entry_id type="Integer">144440</entry_id>
+<field1 type="Float">20.505898</field1>
+<field2 type="Float">7.638718</field2>
+<field3 type="Float">43.40675</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:32:45Z</create_at>
+<entry_id type="Integer">917650</entry_id>
+<field1 type="Float">20.243067</field1>
+<field2 type="Float">8.0328045</field2>
+<field3 type="Float">48.289715</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:47:08Z</create_at>
+<entry_id type="Integer">409559</entry_id>
+<field1 type="Float">19.867792</field1>
+<field2 type="Float">10.615323</field2>
+<field3 type="Float">45.257328</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:58:03Z</create_at>
+<entry_id type="Integer">551933</entry_id>
+<field1 type="Float">19.18275</field1>
+<field2 type="Float">8.176801</field2>
+<field3 type="Float">40.402565</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:53:08Z</create_at>
+<entry_id type="Integer">426329</entry_id>
+<field1 type="Float">19.877996</field1>
+<field2 type="Float">6.2167635</field2>
+<field3 type="Float">47.40648</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:47:50Z</create_at>
+<entry_id type="Integer">820205</entry_id>
+<field1 type="Float">19.594913</field1>
+<field2 type="Float">8.89249</field2>
+<field3 type="Float">44.383858</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:38:57Z</create_at>
+<entry_id type="Integer">598677</entry_id>
+<field1 type="Float">19.012764</field1>
+<field2 type="Float">6.415329</field2>
+<field3 type="Float">50.887215</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:29:46Z</create_at>
+<entry_id type="Integer">138941</entry_id>
+<field1 type="Float">20.084873</field1>
+<field2 type="Float">9.501841</field2>
+<field3 type="Float">46.003326</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:58:41Z</create_at>
+<entry_id type="Integer">775182</entry_id>
+<field1 type="Float">20.371408</field1>
+<field2 type="Float">5.493021</field2>
+<field3 type="Float">41.06873</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:36:10Z</create_at>
+<entry_id type="Integer">989599</entry_id>
+<field1 type="Float">20.313744</field1>
+<field2 type="Float">9.635719</field2>
+<field3 type="Float">41.907974</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:43:11Z</create_at>
+<entry_id type="Integer">646319</entry_id>
+<field1 type="Float">19.217028</field1>
+<field2 type="Float">10.821784</field2>
+<field3 type="Float">49.839046</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:50:10Z</create_at>
+<entry_id type="Integer">103394</entry_id>
+<field1 type="Float">19.655884</field1>
+<field2 type="Float">8.203477</field2>
+<field3 type="Float">50.28711</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:19:31Z</create_at>
+<entry_id type="Integer">873326</entry_id>
+<field1 type="Float">19.356075</field1>
+<field2 type="Float">10.546196</field2>
+<field3 type="Float">48.863758</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:56:54Z</create_at>
+<entry_id type="Integer">779404</entry_id>
+<field1 type="Float">19.80261</field1>
+<field2 type="Float">7.6276617</field2>
+<field3 type="Float">42.47849</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:35:49Z</create_at>
+<entry_id type="Integer">559473</entry_id>
+<field1 type="Float">19.30973</field1>
+<field2 type="Float">5.942876</field2>
+<field3 type="Float">43.15508</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:55:39Z</create_at>
+<entry_id type="Integer">162344</entry_id>
+<field1 type="Float">19.38263</field1>
+<field2 type="Float">7.502553</field2>
+<field3 type="Float">41.066326</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:39:24Z</create_at>
+<entry_id type="Integer">907101</entry_id>
+<field1 type="Float">19.92692</field1>
+<field2 type="Float">6.2466583</field2>
+<field3 type="Float">48.71721</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:42:21Z</create_at>
+<entry_id type="Integer">446774</entry_id>
+<field1 type="Float">19.724264</field1>
+<field2 type="Float">9.878801</field2>
+<field3 type="Float">43.571465</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:10:05Z</create_at>
+<entry_id type="Integer">771333</entry_id>
+<field1 type="Float">19.24593</field1>
+<field2 type="Float">5.1130633</field2>
+<field3 type="Float">41.786804</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:04:37Z</create_at>
+<entry_id type="Integer">745650</entry_id>
+<field1 type="Float">20.908169</field1>
+<field2 type="Float">6.5522113</field2>
+<field3 type="Float">40.30132</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:14:44Z</create_at>
+<entry_id type="Integer">112588</entry_id>
+<field1 type="Float">19.74147</field1>
+<field2 type="Float">7.1901894</field2>
+<field3 type="Float">44.566093</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:51:10Z</create_at>
+<entry_id type="Integer">374277</entry_id>
+<field1 type="Float">19.917536</field1>
+<field2 type="Float">10.837614</field2>
+<field3 type="Float">43.33457</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:02:12Z</create_at>
+<entry_id type="Integer">680256</entry_id>
+<field1 type="Float">20.841219</field1>
+<field2 type="Float">5.4053254</field2>
+<field3 type="Float">46.928528</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:37:43Z</create_at>
+<entry_id type="Integer">406584</entry_id>
+<field1 type="Float">19.433481</field1>
+<field2 type="Float">9.227462</field2>
+<field3 type="Float">40.532475</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:03:39Z</create_at>
+<entry_id type="Integer">196054</entry_id>
+<field1 type="Float">19.035435</field1>
+<field2 type="Float">9.280236</field2>
+<field3 type="Float">45.8612</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:29:16Z</create_at>
+<entry_id type="Integer">273506</entry_id>
+<field1 type="Float">20.374474</field1>
+<field2 type="Float">5.5517035</field2>
+<field3 type="Float">50.76121</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:23:05Z</create_at>
+<entry_id type="Integer">891098</entry_id>
+<field1 type="Float">20.84205</field1>
+<field2 type="Float">7.966074</field2>
+<field3 type="Float">47.566105</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:20:05Z</create_at>
+<entry_id type="Integer">896966</entry_id>
+<field1 type="Float">20.15038</field1>
+<field2 type="Float">9.346771</field2>
+<field3 type="Float">50.090946</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:39:47Z</create_at>
+<entry_id type="Integer">230657</entry_id>
+<field1 type="Float">19.165382</field1>
+<field2 type="Float">9.669778</field2>
+<field3 type="Float">47.76606</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:42:59Z</create_at>
+<entry_id type="Integer">905042</entry_id>
+<field1 type="Float">19.58485</field1>
+<field2 type="Float">6.2771635</field2>
+<field3 type="Float">47.317345</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:11:24Z</create_at>
+<entry_id type="Integer">206420</entry_id>
+<field1 type="Float">19.568619</field1>
+<field2 type="Float">5.007868</field2>
+<field3 type="Float">45.61543</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:05:33Z</create_at>
+<entry_id type="Integer">411165</entry_id>
+<field1 type="Float">20.12656</field1>
+<field2 type="Float">5.896657</field2>
+<field3 type="Float">42.986782</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:47:02Z</create_at>
+<entry_id type="Integer">411136</entry_id>
+<field1 type="Float">20.068764</field1>
+<field2 type="Float">10.69385</field2>
+<field3 type="Float">46.387463</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:24:25Z</create_at>
+<entry_id type="Integer">883406</entry_id>
+<field1 type="Float">19.173956</field1>
+<field2 type="Float">9.64523</field2>
+<field3 type="Float">49.751404</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:37:45Z</create_at>
+<entry_id type="Integer">434299</entry_id>
+<field1 type="Float">19.189459</field1>
+<field2 type="Float">10.30875</field2>
+<field3 type="Float">50.15713</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:28:38Z</create_at>
+<entry_id type="Integer">788980</entry_id>
+<field1 type="Float">19.714197</field1>
+<field2 type="Float">6.7033143</field2>
+<field3 type="Float">46.934772</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:21:23Z</create_at>
+<entry_id type="Integer">531491</entry_id>
+<field1 type="Float">20.13496</field1>
+<field2 type="Float">10.031195</field2>
+<field3 type="Float">47.80135</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:48:31Z</create_at>
+<entry_id type="Integer">897888</entry_id>
+<field1 type="Float">20.941107</field1>
+<field2 type="Float">5.7121</field2>
+<field3 type="Float">42.050976</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:20:50Z</create_at>
+<entry_id type="Integer">351821</entry_id>
+<field1 type="Float">19.571648</field1>
+<field2 type="Float">8.768189</field2>
+<field3 type="Float">45.749527</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:49:14Z</create_at>
+<entry_id type="Integer">331147</entry_id>
+<field1 type="Float">20.766253</field1>
+<field2 type="Float">10.055857</field2>
+<field3 type="Float">42.633537</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:22:36Z</create_at>
+<entry_id type="Integer">437106</entry_id>
+<field1 type="Float">19.147093</field1>
+<field2 type="Float">7.6284237</field2>
+<field3 type="Float">47.910267</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:29:15Z</create_at>
+<entry_id type="Integer">670432</entry_id>
+<field1 type="Float">19.150518</field1>
+<field2 type="Float">9.622069</field2>
+<field3 type="Float">40.33715</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:48:02Z</create_at>
+<entry_id type="Integer">688841</entry_id>
+<field1 type="Float">20.597813</field1>
+<field2 type="Float">7.958297</field2>
+<field3 type="Float">47.62113</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:00:14Z</create_at>
+<entry_id type="Integer">923135</entry_id>
+<field1 type="Float">19.720175</field1>
+<field2 type="Float">9.033796</field2>
+<field3 type="Float">44.162533</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:23:10Z</create_at>
+<entry_id type="Integer">292302</entry_id>
+<field1 type="Float">20.182846</field1>
+<field2 type="Float">5.902496</field2>
+<field3 type="Float">50.28482</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:13:38Z</create_at>
+<entry_id type="Integer">990230</entry_id>
+<field1 type="Float">20.232803</field1>
+<field2 type="Float">7.205962</field2>
+<field3 type="Float">46.908245</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:41:30Z</create_at>
+<entry_id type="Integer">875203</entry_id>
+<field1 type="Float">19.850863</field1>
+<field2 type="Float">8.685133</field2>
+<field3 type="Float">46.70723</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:15:44Z</create_at>
+<entry_id type="Integer">482909</entry_id>
+<field1 type="Float">19.946522</field1>
+<field2 type="Float">10.726925</field2>
+<field3 type="Float">44.204216</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:48:03Z</create_at>
+<entry_id type="Integer">597003</entry_id>
+<field1 type="Float">19.653563</field1>
+<field2 type="Float">5.407244</field2>
+<field3 type="Float">43.10156</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:53:28Z</create_at>
+<entry_id type="Integer">711263</entry_id>
+<field1 type="Float">19.924503</field1>
+<field2 type="Float">9.616102</field2>
+<field3 type="Float">41.659374</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:47:46Z</create_at>
+<entry_id type="Integer">326347</entry_id>
+<field1 type="Float">19.639656</field1>
+<field2 type="Float">10.338623</field2>
+<field3 type="Float">42.001766</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:18:56Z</create_at>
+<entry_id type="Integer">646481</entry_id>
+<field1 type="Float">19.660357</field1>
+<field2 type="Float">10.158833</field2>
+<field3 type="Float">45.73541</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:12:30Z</create_at>
+<entry_id type="Integer">181964</entry_id>
+<field1 type="Float">20.01438</field1>
+<field2 type="Float">7.5071044</field2>
+<field3 type="Float">46.093323</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:32:06Z</create_at>
+<entry_id type="Integer">273724</entry_id>
+<field1 type="Float">20.304678</field1>
+<field2 type="Float">5.0658774</field2>
+<field3 type="Float">42.712616</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:51:54Z</create_at>
+<entry_id type="Integer">727100</entry_id>
+<field1 type="Float">19.473577</field1>
+<field2 type="Float">8.260754</field2>
+<field3 type="Float">48.546402</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:32:32Z</create_at>
+<entry_id type="Integer">181339</entry_id>
+<field1 type="Float">19.156303</field1>
+<field2 type="Float">10.535807</field2>
+<field3 type="Float">40.861893</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:26:02Z</create_at>
+<entry_id type="Integer">210982</entry_id>
+<field1 type="Float">19.094202</field1>
+<field2 type="Float">10.646116</field2>
+<field3 type="Float">50.075745</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:00:41Z</create_at>
+<entry_id type="Integer">913105</entry_id>
+<field1 type="Float">20.181776</field1>
+<field2 type="Float">7.8962536</field2>
+<field3 type="Float">50.29477</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:04:39Z</create_at>
+<entry_id type="Integer">511421</entry_id>
+<field1 type="Float">19.291264</field1>
+<field2 type="Float">8.5003805</field2>
+<field3 type="Float">45.573025</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:59:35Z</create_at>
+<entry_id type="Integer">872237</entry_id>
+<field1 type="Float">20.153389</field1>
+<field2 type="Float">9.440945</field2>
+<field3 type="Float">44.59451</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:29:55Z</create_at>
+<entry_id type="Integer">320519</entry_id>
+<field1 type="Float">19.472822</field1>
+<field2 type="Float">5.5326953</field2>
+<field3 type="Float">49.104515</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:58:05Z</create_at>
+<entry_id type="Integer">551662</entry_id>
+<field1 type="Float">19.840569</field1>
+<field2 type="Float">10.53339</field2>
+<field3 type="Float">50.69556</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:00:28Z</create_at>
+<entry_id type="Integer">127012</entry_id>
+<field1 type="Float">19.008465</field1>
+<field2 type="Float">8.149202</field2>
+<field3 type="Float">48.853863</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:14:57Z</create_at>
+<entry_id type="Integer">456359</entry_id>
+<field1 type="Float">20.62379</field1>
+<field2 type="Float">10.77882</field2>
+<field3 type="Float">46.58267</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:36:11Z</create_at>
+<entry_id type="Integer">432370</entry_id>
+<field1 type="Float">20.873505</field1>
+<field2 type="Float">6.98059</field2>
+<field3 type="Float">44.65334</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:44:21Z</create_at>
+<entry_id type="Integer">126085</entry_id>
+<field1 type="Float">19.278166</field1>
+<field2 type="Float">8.43079</field2>
+<field3 type="Float">45.52877</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:58:58Z</create_at>
+<entry_id type="Integer">417911</entry_id>
+<field1 type="Float">19.272335</field1>
+<field2 type="Float">8.96705</field2>
+<field3 type="Float">40.195503</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:55:48Z</create_at>
+<entry_id type="Integer">795495</entry_id>
+<field1 type="Float">20.629948</field1>
+<field2 type="Float">10.649126</field2>
+<field3 type="Float">41.132812</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:40:45Z</create_at>
+<entry_id type="Integer">383295</entry_id>
+<field1 type="Float">20.142874</field1>
+<field2 type="Float">8.253868</field2>
+<field3 type="Float">48.380875</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:32:17Z</create_at>
+<entry_id type="Integer">992389</entry_id>
+<field1 type="Float">19.739656</field1>
+<field2 type="Float">5.806233</field2>
+<field3 type="Float">44.502213</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:35:44Z</create_at>
+<entry_id type="Integer">755579</entry_id>
+<field1 type="Float">20.694159</field1>
+<field2 type="Float">10.205884</field2>
+<field3 type="Float">48.238354</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:30:42Z</create_at>
+<entry_id type="Integer">161660</entry_id>
+<field1 type="Float">20.407423</field1>
+<field2 type="Float">9.888233</field2>
+<field3 type="Float">46.244522</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:15:53Z</create_at>
+<entry_id type="Integer">326970</entry_id>
+<field1 type="Float">19.055964</field1>
+<field2 type="Float">7.5586863</field2>
+<field3 type="Float">43.07766</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:22:01Z</create_at>
+<entry_id type="Integer">364361</entry_id>
+<field1 type="Float">19.6082</field1>
+<field2 type="Float">10.888033</field2>
+<field3 type="Float">40.4796</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:58:50Z</create_at>
+<entry_id type="Integer">199454</entry_id>
+<field1 type="Float">20.279842</field1>
+<field2 type="Float">7.4305243</field2>
+<field3 type="Float">48.29274</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:10:42Z</create_at>
+<entry_id type="Integer">279464</entry_id>
+<field1 type="Float">19.206244</field1>
+<field2 type="Float">6.7656736</field2>
+<field3 type="Float">50.896088</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:18:57Z</create_at>
+<entry_id type="Integer">178150</entry_id>
+<field1 type="Float">19.9128</field1>
+<field2 type="Float">5.8070374</field2>
+<field3 type="Float">42.250134</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:01:29Z</create_at>
+<entry_id type="Integer">985397</entry_id>
+<field1 type="Float">19.510885</field1>
+<field2 type="Float">7.476954</field2>
+<field3 type="Float">41.78825</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:24:11Z</create_at>
+<entry_id type="Integer">971566</entry_id>
+<field1 type="Float">20.287199</field1>
+<field2 type="Float">7.7103148</field2>
+<field3 type="Float">42.855667</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:15:03Z</create_at>
+<entry_id type="Integer">413557</entry_id>
+<field1 type="Float">20.241392</field1>
+<field2 type="Float">10.258083</field2>
+<field3 type="Float">48.404118</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:29:45Z</create_at>
+<entry_id type="Integer">486626</entry_id>
+<field1 type="Float">20.683884</field1>
+<field2 type="Float">9.947565</field2>
+<field3 type="Float">47.5088</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:25:30Z</create_at>
+<entry_id type="Integer">205097</entry_id>
+<field1 type="Float">19.870934</field1>
+<field2 type="Float">8.909405</field2>
+<field3 type="Float">48.491234</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:35:42Z</create_at>
+<entry_id type="Integer">786570</entry_id>
+<field1 type="Float">20.311384</field1>
+<field2 type="Float">5.819609</field2>
+<field3 type="Float">47.709305</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:44:40Z</create_at>
+<entry_id type="Integer">912648</entry_id>
+<field1 type="Float">19.503471</field1>
+<field2 type="Float">9.446217</field2>
+<field3 type="Float">40.368195</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:46:59Z</create_at>
+<entry_id type="Integer">249354</entry_id>
+<field1 type="Float">19.315504</field1>
+<field2 type="Float">9.015989</field2>
+<field3 type="Float">49.481377</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:02:08Z</create_at>
+<entry_id type="Integer">431721</entry_id>
+<field1 type="Float">19.068396</field1>
+<field2 type="Float">8.974365</field2>
+<field3 type="Float">42.70097</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:42:44Z</create_at>
+<entry_id type="Integer">288375</entry_id>
+<field1 type="Float">20.034584</field1>
+<field2 type="Float">9.036125</field2>
+<field3 type="Float">40.102657</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:37:03Z</create_at>
+<entry_id type="Integer">122828</entry_id>
+<field1 type="Float">20.14348</field1>
+<field2 type="Float">5.891149</field2>
+<field3 type="Float">43.492004</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:54:26Z</create_at>
+<entry_id type="Integer">793055</entry_id>
+<field1 type="Float">20.721777</field1>
+<field2 type="Float">10.602572</field2>
+<field3 type="Float">42.36914</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:16:20Z</create_at>
+<entry_id type="Integer">459444</entry_id>
+<field1 type="Float">19.86567</field1>
+<field2 type="Float">9.990747</field2>
+<field3 type="Float">45.963364</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:43:31Z</create_at>
+<entry_id type="Integer">907561</entry_id>
+<field1 type="Float">19.77329</field1>
+<field2 type="Float">9.764887</field2>
+<field3 type="Float">48.46241</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:00:42Z</create_at>
+<entry_id type="Integer">762338</entry_id>
+<field1 type="Float">19.671</field1>
+<field2 type="Float">9.343877</field2>
+<field3 type="Float">40.44627</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:05:10Z</create_at>
+<entry_id type="Integer">486637</entry_id>
+<field1 type="Float">19.96884</field1>
+<field2 type="Float">5.666523</field2>
+<field3 type="Float">50.50597</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:46:25Z</create_at>
+<entry_id type="Integer">425283</entry_id>
+<field1 type="Float">19.810762</field1>
+<field2 type="Float">5.093727</field2>
+<field3 type="Float">46.287598</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:06:29Z</create_at>
+<entry_id type="Integer">569897</entry_id>
+<field1 type="Float">20.716303</field1>
+<field2 type="Float">5.5416503</field2>
+<field3 type="Float">48.36685</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:20:23Z</create_at>
+<entry_id type="Integer">707459</entry_id>
+<field1 type="Float">20.293036</field1>
+<field2 type="Float">8.828033</field2>
+<field3 type="Float">46.906654</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:38:13Z</create_at>
+<entry_id type="Integer">772978</entry_id>
+<field1 type="Float">19.197668</field1>
+<field2 type="Float">9.547098</field2>
+<field3 type="Float">45.364517</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:37:40Z</create_at>
+<entry_id type="Integer">434665</entry_id>
+<field1 type="Float">19.950422</field1>
+<field2 type="Float">7.8078637</field2>
+<field3 type="Float">48.53624</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:13:19Z</create_at>
+<entry_id type="Integer">955484</entry_id>
+<field1 type="Float">20.568869</field1>
+<field2 type="Float">10.983382</field2>
+<field3 type="Float">47.14872</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:25:21Z</create_at>
+<entry_id type="Integer">574812</entry_id>
+<field1 type="Float">19.37108</field1>
+<field2 type="Float">7.008507</field2>
+<field3 type="Float">40.96129</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:15:14Z</create_at>
+<entry_id type="Integer">342896</entry_id>
+<field1 type="Float">19.935467</field1>
+<field2 type="Float">8.628642</field2>
+<field3 type="Float">45.382587</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:17:41Z</create_at>
+<entry_id type="Integer">306827</entry_id>
+<field1 type="Float">19.366858</field1>
+<field2 type="Float">9.20162</field2>
+<field3 type="Float">48.62371</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:36:37Z</create_at>
+<entry_id type="Integer">630433</entry_id>
+<field1 type="Float">19.203087</field1>
+<field2 type="Float">5.9545255</field2>
+<field3 type="Float">49.468384</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:55:24Z</create_at>
+<entry_id type="Integer">499157</entry_id>
+<field1 type="Float">19.186905</field1>
+<field2 type="Float">5.8192916</field2>
+<field3 type="Float">46.23788</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:31:21Z</create_at>
+<entry_id type="Integer">410552</entry_id>
+<field1 type="Float">20.611603</field1>
+<field2 type="Float">9.411693</field2>
+<field3 type="Float">43.7554</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:11:26Z</create_at>
+<entry_id type="Integer">231533</entry_id>
+<field1 type="Float">20.7959</field1>
+<field2 type="Float">7.3222046</field2>
+<field3 type="Float">46.298447</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:38:20Z</create_at>
+<entry_id type="Integer">148470</entry_id>
+<field1 type="Float">20.862034</field1>
+<field2 type="Float">8.606462</field2>
+<field3 type="Float">50.518074</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:42:56Z</create_at>
+<entry_id type="Integer">697646</entry_id>
+<field1 type="Float">20.982954</field1>
+<field2 type="Float">9.5719385</field2>
+<field3 type="Float">42.349396</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:14:59Z</create_at>
+<entry_id type="Integer">889110</entry_id>
+<field1 type="Float">19.3226</field1>
+<field2 type="Float">5.7247024</field2>
+<field3 type="Float">43.955524</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:02:00Z</create_at>
+<entry_id type="Integer">797085</entry_id>
+<field1 type="Float">20.891167</field1>
+<field2 type="Float">5.201435</field2>
+<field3 type="Float">50.204796</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:23:06Z</create_at>
+<entry_id type="Integer">948468</entry_id>
+<field1 type="Float">20.474768</field1>
+<field2 type="Float">9.023752</field2>
+<field3 type="Float">42.180977</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:15:24Z</create_at>
+<entry_id type="Integer">981541</entry_id>
+<field1 type="Float">19.581131</field1>
+<field2 type="Float">8.201535</field2>
+<field3 type="Float">48.600002</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:12:27Z</create_at>
+<entry_id type="Integer">408122</entry_id>
+<field1 type="Float">20.181679</field1>
+<field2 type="Float">8.480871</field2>
+<field3 type="Float">45.202183</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:30:47Z</create_at>
+<entry_id type="Integer">446172</entry_id>
+<field1 type="Float">19.56783</field1>
+<field2 type="Float">6.5026445</field2>
+<field3 type="Float">41.435493</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:27:49Z</create_at>
+<entry_id type="Integer">655648</entry_id>
+<field1 type="Float">19.71169</field1>
+<field2 type="Float">10.974414</field2>
+<field3 type="Float">43.4759</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:02:02Z</create_at>
+<entry_id type="Integer">624506</entry_id>
+<field1 type="Float">19.784103</field1>
+<field2 type="Float">9.930178</field2>
+<field3 type="Float">49.329582</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:19:58Z</create_at>
+<entry_id type="Integer">159937</entry_id>
+<field1 type="Float">19.9419</field1>
+<field2 type="Float">6.7419786</field2>
+<field3 type="Float">48.40555</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:00:52Z</create_at>
+<entry_id type="Integer">640810</entry_id>
+<field1 type="Float">20.291332</field1>
+<field2 type="Float">5.8454194</field2>
+<field3 type="Float">47.893894</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:56:08Z</create_at>
+<entry_id type="Integer">329060</entry_id>
+<field1 type="Float">19.54449</field1>
+<field2 type="Float">9.712648</field2>
+<field3 type="Float">49.968674</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:39:43Z</create_at>
+<entry_id type="Integer">422894</entry_id>
+<field1 type="Float">20.22623</field1>
+<field2 type="Float">5.438451</field2>
+<field3 type="Float">41.805336</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:01:50Z</create_at>
+<entry_id type="Integer">211316</entry_id>
+<field1 type="Float">19.997917</field1>
+<field2 type="Float">6.8960457</field2>
+<field3 type="Float">46.258842</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:45:27Z</create_at>
+<entry_id type="Integer">770451</entry_id>
+<field1 type="Float">19.170444</field1>
+<field2 type="Float">7.9992847</field2>
+<field3 type="Float">49.48725</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:25:34Z</create_at>
+<entry_id type="Integer">185936</entry_id>
+<field1 type="Float">20.272133</field1>
+<field2 type="Float">8.921135</field2>
+<field3 type="Float">43.52596</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:59:09Z</create_at>
+<entry_id type="Integer">687826</entry_id>
+<field1 type="Float">20.366499</field1>
+<field2 type="Float">8.633484</field2>
+<field3 type="Float">47.193058</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:36:09Z</create_at>
+<entry_id type="Integer">468552</entry_id>
+<field1 type="Float">19.349909</field1>
+<field2 type="Float">6.4880733</field2>
+<field3 type="Float">47.14246</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T12:02:30Z</create_at>
+<entry_id type="Integer">518321</entry_id>
+<field1 type="Float">19.27078</field1>
+<field2 type="Float">6.4792223</field2>
+<field3 type="Float">44.46833</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:04:16Z</create_at>
+<entry_id type="Integer">774611</entry_id>
+<field1 type="Float">19.234156</field1>
+<field2 type="Float">9.706135</field2>
+<field3 type="Float">43.82505</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:41:39Z</create_at>
+<entry_id type="Integer">191364</entry_id>
+<field1 type="Float">19.90386</field1>
+<field2 type="Float">6.2876782</field2>
+<field3 type="Float">48.858383</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:43:29Z</create_at>
+<entry_id type="Integer">439488</entry_id>
+<field1 type="Float">20.654287</field1>
+<field2 type="Float">10.663021</field2>
+<field3 type="Float">43.339237</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:49:57Z</create_at>
+<entry_id type="Integer">110086</entry_id>
+<field1 type="Float">19.683947</field1>
+<field2 type="Float">9.605223</field2>
+<field3 type="Float">49.132187</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:54:01Z</create_at>
+<entry_id type="Integer">661980</entry_id>
+<field1 type="Float">20.754814</field1>
+<field2 type="Float">9.072371</field2>
+<field3 type="Float">45.415207</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:55:36Z</create_at>
+<entry_id type="Integer">249761</entry_id>
+<field1 type="Float">19.045643</field1>
+<field2 type="Float">8.195278</field2>
+<field3 type="Float">48.0599</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:41:03Z</create_at>
+<entry_id type="Integer">694208</entry_id>
+<field1 type="Float">20.089235</field1>
+<field2 type="Float">8.287615</field2>
+<field3 type="Float">41.738636</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:38:51Z</create_at>
+<entry_id type="Integer">306202</entry_id>
+<field1 type="Float">20.56922</field1>
+<field2 type="Float">8.804869</field2>
+<field3 type="Float">45.55843</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:13:49Z</create_at>
+<entry_id type="Integer">148777</entry_id>
+<field1 type="Float">20.246326</field1>
+<field2 type="Float">10.505783</field2>
+<field3 type="Float">41.851624</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:07:10Z</create_at>
+<entry_id type="Integer">665508</entry_id>
+<field1 type="Float">20.772696</field1>
+<field2 type="Float">5.0544767</field2>
+<field3 type="Float">40.001247</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:11:51Z</create_at>
+<entry_id type="Integer">387531</entry_id>
+<field1 type="Float">20.42919</field1>
+<field2 type="Float">7.612499</field2>
+<field3 type="Float">48.730194</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:26:02Z</create_at>
+<entry_id type="Integer">164594</entry_id>
+<field1 type="Float">19.628735</field1>
+<field2 type="Float">7.8422203</field2>
+<field3 type="Float">44.16635</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:52:12Z</create_at>
+<entry_id type="Integer">526488</entry_id>
+<field1 type="Float">20.846779</field1>
+<field2 type="Float">7.1809406</field2>
+<field3 type="Float">47.492424</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:59:17Z</create_at>
+<entry_id type="Integer">466801</entry_id>
+<field1 type="Float">20.520231</field1>
+<field2 type="Float">7.0308075</field2>
+<field3 type="Float">44.208347</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:30:29Z</create_at>
+<entry_id type="Integer">771048</entry_id>
+<field1 type="Float">19.450905</field1>
+<field2 type="Float">7.8186674</field2>
+<field3 type="Float">43.352707</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:13:28Z</create_at>
+<entry_id type="Integer">293792</entry_id>
+<field1 type="Float">20.283813</field1>
+<field2 type="Float">8.748108</field2>
+<field3 type="Float">49.521275</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:24:54Z</create_at>
+<entry_id type="Integer">143300</entry_id>
+<field1 type="Float">20.478008</field1>
+<field2 type="Float">10.88608</field2>
+<field3 type="Float">44.962193</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:03:43Z</create_at>
+<entry_id type="Integer">778080</entry_id>
+<field1 type="Float">20.531313</field1>
+<field2 type="Float">5.8931246</field2>
+<field3 type="Float">41.29072</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:17:52Z</create_at>
+<entry_id type="Integer">390072</entry_id>
+<field1 type="Float">20.58471</field1>
+<field2 type="Float">10.962017</field2>
+<field3 type="Float">43.9756</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:59:27Z</create_at>
+<entry_id type="Integer">238230</entry_id>
+<field1 type="Float">19.189243</field1>
+<field2 type="Float">8.5062065</field2>
+<field3 type="Float">41.095097</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:48:58Z</create_at>
+<entry_id type="Integer">553238</entry_id>
+<field1 type="Float">19.781057</field1>
+<field2 type="Float">5.022387</field2>
+<field3 type="Float">46.042423</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:17:50Z</create_at>
+<entry_id type="Integer">128436</entry_id>
+<field1 type="Float">19.54022</field1>
+<field2 type="Float">9.736506</field2>
+<field3 type="Float">49.332306</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:06:33Z</create_at>
+<entry_id type="Integer">831694</entry_id>
+<field1 type="Float">19.578115</field1>
+<field2 type="Float">6.6873136</field2>
+<field3 type="Float">43.84267</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:05:59Z</create_at>
+<entry_id type="Integer">987105</entry_id>
+<field1 type="Float">20.653881</field1>
+<field2 type="Float">6.0160627</field2>
+<field3 type="Float">49.54238</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:10:22Z</create_at>
+<entry_id type="Integer">582505</entry_id>
+<field1 type="Float">19.021513</field1>
+<field2 type="Float">7.985327</field2>
+<field3 type="Float">42.849777</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:14:37Z</create_at>
+<entry_id type="Integer">155926</entry_id>
+<field1 type="Float">19.405912</field1>
+<field2 type="Float">5.6169806</field2>
+<field3 type="Float">44.437542</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:50:39Z</create_at>
+<entry_id type="Integer">164072</entry_id>
+<field1 type="Float">19.854961</field1>
+<field2 type="Float">9.627766</field2>
+<field3 type="Float">47.705814</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:35:39Z</create_at>
+<entry_id type="Integer">976054</entry_id>
+<field1 type="Float">20.03019</field1>
+<field2 type="Float">9.508568</field2>
+<field3 type="Float">45.505516</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:13:38Z</create_at>
+<entry_id type="Integer">160017</entry_id>
+<field1 type="Float">20.754374</field1>
+<field2 type="Float">7.8744926</field2>
+<field3 type="Float">40.60744</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:55:30Z</create_at>
+<entry_id type="Integer">295273</entry_id>
+<field1 type="Float">20.841145</field1>
+<field2 type="Float">5.9209986</field2>
+<field3 type="Float">48.332443</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:45:38Z</create_at>
+<entry_id type="Integer">184105</entry_id>
+<field1 type="Float">20.231739</field1>
+<field2 type="Float">6.6388216</field2>
+<field3 type="Float">46.517597</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:15:25Z</create_at>
+<entry_id type="Integer">856827</entry_id>
+<field1 type="Float">19.191881</field1>
+<field2 type="Float">10.431132</field2>
+<field3 type="Float">48.00837</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:59:18Z</create_at>
+<entry_id type="Integer">825251</entry_id>
+<field1 type="Float">20.797804</field1>
+<field2 type="Float">8.804623</field2>
+<field3 type="Float">41.102936</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:56:33Z</create_at>
+<entry_id type="Integer">343908</entry_id>
+<field1 type="Float">20.470682</field1>
+<field2 type="Float">10.978155</field2>
+<field3 type="Float">40.388206</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T10:44:53Z</create_at>
+<entry_id type="Integer">670837</entry_id>
+<field1 type="Float">19.693838</field1>
+<field2 type="Float">7.9347305</field2>
+<field3 type="Float">48.736473</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T01:54:35Z</create_at>
+<entry_id type="Integer">744264</entry_id>
+<field1 type="Float">20.838017</field1>
+<field2 type="Float">6.849143</field2>
+<field3 type="Float">40.137516</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T08:41:42Z</create_at>
+<entry_id type="Integer">145763</entry_id>
+<field1 type="Float">20.887434</field1>
+<field2 type="Float">7.1040897</field2>
+<field3 type="Float">41.05754</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:54:12Z</create_at>
+<entry_id type="Integer">386981</entry_id>
+<field1 type="Float">19.102484</field1>
+<field2 type="Float">9.298668</field2>
+<field3 type="Float">41.99639</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T04:22:58Z</create_at>
+<entry_id type="Integer">625244</entry_id>
+<field1 type="Float">19.037888</field1>
+<field2 type="Float">8.803852</field2>
+<field3 type="Float">46.227142</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T03:06:07Z</create_at>
+<entry_id type="Integer">612027</entry_id>
+<field1 type="Float">20.543545</field1>
+<field2 type="Float">9.627069</field2>
+<field3 type="Float">41.943474</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T02:00:03Z</create_at>
+<entry_id type="Integer">449079</entry_id>
+<field1 type="Float">20.26759</field1>
+<field2 type="Float">6.3883667</field2>
+<field3 type="Float">41.108162</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T09:18:43Z</create_at>
+<entry_id type="Integer">925727</entry_id>
+<field1 type="Float">20.3086</field1>
+<field2 type="Float">5.877719</field2>
+<field3 type="Float">50.879948</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:31:03Z</create_at>
+<entry_id type="Integer">163457</entry_id>
+<field1 type="Float">20.352457</field1>
+<field2 type="Float">8.8735695</field2>
+<field3 type="Float">42.01104</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T07:05:05Z</create_at>
+<entry_id type="Integer">998945</entry_id>
+<field1 type="Float">20.220402</field1>
+<field2 type="Float">10.056871</field2>
+<field3 type="Float">42.32157</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T06:14:27Z</create_at>
+<entry_id type="Integer">999174</entry_id>
+<field1 type="Float">20.423151</field1>
+<field2 type="Float">7.884612</field2>
+<field3 type="Float">47.92168</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T05:23:41Z</create_at>
+<entry_id type="Integer">995467</entry_id>
+<field1 type="Float">19.187872</field1>
+<field2 type="Float">10.256745</field2>
+<field3 type="Float">45.673542</field3>
+</feed>
+<feed>
+<create_at type="ComplexType">2016-05-14T11:08:15Z</create_at>
+<entry_id type="Integer">820053</entry_id>
+<field1 type="Float">20.537836</field1>
+<field2 type="Float">7.878139</field2>
+<field3 type="Float">49.23815</field3>
+</feed>
+</feeds>
+</xml>
