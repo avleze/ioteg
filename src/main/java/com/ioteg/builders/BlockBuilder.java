@@ -1,25 +1,29 @@
 package com.ioteg.builders;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.jdom2.Document;
 import org.jdom2.Element;
 
 import com.ioteg.model.Block;
 import com.ioteg.model.Field;
 import com.ioteg.model.OptionalFields;
 
+/**
+ * This class is a builder which allows to build an Block from its definition in a XML Element.
+ * @author Antonio Vélez Estévez
+ */
 public class BlockBuilder {
 
 
-	public BlockBuilder() {
-	}
-
+	/**
+	 * @param element The block element obtained with JDOM.
+	 * @return A block.
+	 */
 	public Block build(Element element) {
 		Block block = new Block();
-		FieldBuilder fieldBuilder = new FieldBuilder();
-		OptionalFieldsBuilder optionalFieldBuilder = new OptionalFieldsBuilder();
 		
+		/* The block parameters are obtained and setted */
 		String name = element.getAttributeValue("name");
 		String value = element.getAttributeValue("value");
 		Integer repetition = Integer.valueOf(element.getAttributeValue("repeat"));
@@ -28,22 +32,40 @@ public class BlockBuilder {
 		block.setValue(value);
 		block.setRepetition(repetition);
 
+		/* Subfields and subOptionalFields are looked for */
+		buildSubFields(element, block);
+		buildSubOptionalsField(element, block);
+		
+		return block;
+	}
+
+	private void buildSubFields(Element element, Block block) {
+		FieldBuilder fieldBuilder = new FieldBuilder();
 		List<Element> fields = element.getChildren("field");
+		List<Field> fieldsOfTheBlock = new ArrayList<>();
 		
 		for(Element fieldElement : fields)
 		{
 			Field field = fieldBuilder.build(fieldElement);
-			block.getFields().add(field);
+			fieldsOfTheBlock.add(field);
 		}
 		
+		block.setFields(fieldsOfTheBlock);
+	}
+	
+	private void buildSubOptionalsField(Element element, Block block) {
+		OptionalFieldsBuilder optionalFieldsBuilder = new OptionalFieldsBuilder();
 		List<Element> optionalFields = element.getChildren("optionalfields");
+		List<OptionalFields> optionalFieldsOfTheBlock = new ArrayList<>();
 
 		for(Element optionalFieldElement : optionalFields)
 		{
-			OptionalFields optionalField = optionalFieldBuilder.build(optionalFieldElement);
-			block.getOptionalFields().add(optionalField);
+			OptionalFields optionalField = optionalFieldsBuilder.build(optionalFieldElement);
+			optionalFieldsOfTheBlock.add(optionalField);
 		}
 		
-		return block;
+		block.setOptionalFields(optionalFieldsOfTheBlock);
 	}
+
+
 }

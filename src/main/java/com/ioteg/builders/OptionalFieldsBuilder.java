@@ -7,6 +7,10 @@ import org.jdom2.Element;
 import com.ioteg.model.Field;
 import com.ioteg.model.OptionalFields;
 
+/**
+ * This class is a builder which allows to build a OptionalFields from its definition in a XML Element.
+ * @author Antonio Vélez Estévez
+ */
 public class OptionalFieldsBuilder {
 
 	public OptionalFields build(Element optionalFieldsElement) {
