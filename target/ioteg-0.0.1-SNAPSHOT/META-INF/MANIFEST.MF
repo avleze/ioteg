@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Archiver-Version: Plexus Archiver
-Built-By: wolidays
-Class-Path: jdom2-2.0.6.jar
-Created-By: Apache Maven 3.5.2
-Build-Jdk: 1.8.0_162
-Main-Class: com.ioteg.EventGenerator
-

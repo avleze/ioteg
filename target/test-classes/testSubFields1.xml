@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<event_type name="test1">
-	<block name="test1" repeat="500">
-		<field name="test1" quotes="false" type="ComplexType">
-			<field name="subfield" type="String" length="4"></field>
-		</field>
-	</block>
-</event_type>
