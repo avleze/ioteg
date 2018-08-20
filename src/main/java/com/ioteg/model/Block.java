@@ -12,10 +12,6 @@ public class Block {
 	private Integer repetition;
 	private List<Field> fields;
 	private List<OptionalFields> optionalFields;
-	
-	public Block() {
-		
-	}
 
 	/**
 	 * @return the name

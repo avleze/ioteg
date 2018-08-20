@@ -1,0 +1,6 @@
+projectKey=com:ioteg
+serverUrl=http://10.0.2.5:9000
+serverVersion=7.2.1.14109
+dashboardUrl=http://10.0.2.5:9000/dashboard?id=com%3Aioteg
+ceTaskId=AWVXrFTf1Gi5sZIF3VPP
+ceTaskUrl=http://10.0.2.5:9000/api/ce/task?id=AWVXrFTf1Gi5sZIF3VPP

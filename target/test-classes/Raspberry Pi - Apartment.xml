@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="Raspberry Pi - Apartment">
+	<block name="channel" value="&quot;id&quot;:1417,&quot;name&quot;:&quot;Raspberry Pi - Apartment&quot;,&quot;description&quot;:&quot;Generated event type Raspberry Pi - Apartment&quot;,&quot;latitude&quot;:&quot;41.979843&quot;,&quot;longitude&quot;:&quot;-87.667957&quot;,&quot;field1&quot;:&quot;Temperature&quot;,&quot;field2&quot;:&quot;Humidity&quot;,&quot;field3&quot;:&quot;Light&quot;,&quot;field4&quot;:&quot;Temp F&quot;,&quot;created_at&quot;:&quot;2011-12-01T03:30:04Z&quot;,&quot;updated_at&quot;:&quot;2016-04-18T15:45:01Z&quot;,&quot;last_entry_id&quot;:70177">
+	</block>
+	<block name="feeds" repeat="100">
+		<field name="create_at" quotes="true" type="ComplexType">
+			<attribute type="Integer" value="2016"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" value="01"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" min="1" max="31"></attribute>
+			<attribute type="String" value="T"></attribute>
+			<attribute type="Time" mode="hh:mm:ss"></attribute>
+			<attribute type="String" value="Z"></attribute>
+		</field>
+		<field name="entry_id" quotes="false" type="Integer" min="100000" max="999999"></field>
+		<field name="field1" quotes="true" type="Float" min="20" max="21" long="2"></field>
+		<field name="field2" quotes="true" type="Float" min="45" max="47" long="10"></field>
+		<field name="field3" quotes="true" type="Float" min="16" max="17" long="3"></field>
+		<field name="field4" quotes="true" type="Float" min="69" max="70" long="3"></field>
+	</block>
+</event_type>

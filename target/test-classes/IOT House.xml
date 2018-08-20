@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="IOT House - Basement">
+	<block name="channel">
+ 		<field name="id" quotes="false" type="Integer" value="41393"></field>
+		<field name="name" quotes="false" type="String" value="IOT House - Basement"></field>
+		<field name="description" quotes="false" type="String" value="Generated event type IOT House - Basement"></field>
+		<field name="latitude" quotes="false" type="Float" value="0.0"></field>
+		<field name="longitude" quotes="false" type="Float" value="0.0"></field>
+		<field name="field1" quotes="false" type="String" value="Temperature"></field>
+		<field name="field2" quotes="false" type="String" value="Humidity"></field>
+		<field name="created_at" quotes="false" type="String" value="2015-06-08T03:07:11Z"></field>
+		<field name="updated_at" quotes="false" type="String" value="2016-04-19T06:57:18Z"></field>
+		<field name="last_entry_id" quotes="false" type="Integer" value="185548"></field>
+	</block>
+	<block name="feeds" repeat="100">
+		<field name="create_at" quotes="false" type="ComplexType">
+			<attribute type="Integer" value="2016"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" value="05"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" value="14"></attribute>
+			<attribute type="String" value="T"></attribute>
+			<attribute type="Time" mode="hh:mm:ss"></attribute>
+			<attribute type="String" value="Z"></attribute>
+		</field>
+		<field name="entry_id" quotes="false" type="Integer" min="100000" max="999999"></field>
+		<field name="field1" quotes="false" type="Float" min="18" max="23" long="3"></field>
+		<field name="field2" quotes="false" type="Float" min="43" max="50" long="3"></field>
+	</block>
+</event_type>

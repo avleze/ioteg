@@ -8,10 +8,6 @@ import java.util.List;
  */
 public class EventType {
 	private List<Block> blocks;
-	
-	public EventType() {
-		
-	}
 
 	/**
 	 * @return the blocks

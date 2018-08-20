@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="Channel 5186">
+	<block name="channel">
+ 		<field name="id" quotes="false" type="Integer" value="5186"></field>
+		<field name="name" quotes="false" type="String" value="Channel 5186"></field>
+		<field name="description" quotes="false" type="String" value="Generated event type Channel 5186"></field>
+		<field name="latitude" quotes="false" type="Float" value="47.528936"></field>
+		<field name="longitude" quotes="false" type="Float" value="10.257247"></field>
+		<field name="field1" type="Boolean" isnumeric="true"></field>
+		<field name="field2" quotes="false" type="Alphanumeric" endcharacter="F"></field>
+		<field name="field3" quotes="false" type="Date" format="yyyy-MM-DD"></field>
+		<field name="created_at" quotes="false" type="String" value="2013-04-04T12:12:05Z"></field>
+		<field name="updated_at" quotes="false" type="String" value="2016-04-19T07:39:07Z"></field>
+		<field name="last_entry_id" quotes="false" type="Integer" value="1201242"></field>
+	</block>
+	<block name="feeds" repeat="500">
+		<field name="create_at" quotes="false" type="ComplexType">
+			<attribute type="Integer" value="2016"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" value="05"></attribute>
+			<attribute type="String" value="-"></attribute>
+			<attribute type="Integer" value="14"></attribute>
+			<attribute type="String" value="T"></attribute>
+			<attribute type="Time" format="hh:mm:ss"></attribute>
+			<attribute type="String" value="Z"></attribute>
+		</field>
+		<field name="entry_id" quotes="false" type="Integer" min="100000" max="999999"></field>
+		<field name="field1" quotes="false" type="Float" min="19" max="20" precision="2"></field>
+		<field name="field2" quotes="false" type="Float" min="5" max="10" precision="2"></field>
+		<field name="field3" quotes="false" type="Float" min="40" max="50" precision="2"></field>
+		<optionalfields mandatory="false">
+			<field name="optionalField1" quotes="false" type="Float" min="19" max="20" precision="2"></field>
+		</optionalfields>	
+	</block>
+</event_type>
