@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="Raspberry Pi - Apartment">
+	<block name="cabecera" value="Hola"></block>
+	<block name="feeds" repeat="100">
+	</block>
+</event_type>
+	

@@ -10,7 +10,7 @@
 			<attribute type="String" value="-"></attribute>
 			<attribute type="Integer" value="31"></attribute>
 			<attribute type="String" value="T"></attribute>
-			<attribute type="Time" mode="hh:mm:ss"></attribute>
+			<attribute type="Time" format="hh:mm:ss"></attribute>
 			<attribute type="String" value="Z"></attribute>
 		</field>
 		<field name="entry_id" quotes="false" type="Integer" min="100000" max="999999"></field>
