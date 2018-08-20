@@ -26,7 +26,11 @@ public class BlockBuilder {
 		/* The block parameters are obtained and setted */
 		String name = element.getAttributeValue("name");
 		String value = element.getAttributeValue("value");
-		Integer repetition = Integer.valueOf(element.getAttributeValue("repeat"));
+		String repetitionStr = element.getAttributeValue("repeat");
+		Integer repetition = null;
+
+		if(repetitionStr != null)
+			repetition = Integer.valueOf(repetitionStr);
 		
 		block.setName(name);
 		block.setValue(value);

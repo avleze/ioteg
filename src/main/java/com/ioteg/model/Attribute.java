@@ -7,14 +7,14 @@ package com.ioteg.model;
 public class Attribute {
 	private String type;
 	private String value;
-	private String min;
-	private String max;
-	private String precision;
-	private String length;
+	private Double min;
+	private Double max;
+	private Integer precision;
+	private Integer length;
 	private String case_;
 	private String endcharacter;
 	private String format;
-	private String isNumeric;
+	private Boolean isNumeric;
 	/**
 	 * @return the type
 	 */
@@ -42,49 +42,49 @@ public class Attribute {
 	/**
 	 * @return the min
 	 */
-	public String getMin() {
+	public Double getMin() {
 		return min;
 	}
 	/**
 	 * @param min the min to set
 	 */
-	public void setMin(String min) {
+	public void setMin(Double min) {
 		this.min = min;
 	}
 	/**
 	 * @return the max
 	 */
-	public String getMax() {
+	public Double getMax() {
 		return max;
 	}
 	/**
 	 * @param max the max to set
 	 */
-	public void setMax(String max) {
+	public void setMax(Double max) {
 		this.max = max;
 	}
 	/**
 	 * @return the precision
 	 */
-	public String getPrecision() {
+	public Integer getPrecision() {
 		return precision;
 	}
 	/**
 	 * @param precision the precision to set
 	 */
-	public void setPrecision(String precision) {
+	public void setPrecision(Integer precision) {
 		this.precision = precision;
 	}
 	/**
 	 * @return the length
 	 */
-	public String getLength() {
+	public Integer getLength() {
 		return length;
 	}
 	/**
 	 * @param length the length to set
 	 */
-	public void setLength(String length) {
+	public void setLength(Integer length) {
 		this.length = length;
 	}
 	/**
@@ -126,13 +126,13 @@ public class Attribute {
 	/**
 	 * @return the isNumeric
 	 */
-	public String getIsNumeric() {
+	public Boolean getIsNumeric() {
 		return isNumeric;
 	}
 	/**
 	 * @param isNumeric the isNumeric to set
 	 */
-	public void setIsNumeric(String isNumeric) {
+	public void setIsNumeric(Boolean isNumeric) {
 		this.isNumeric = isNumeric;
 	}
 	

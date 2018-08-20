@@ -10,18 +10,18 @@ import java.util.List;
  */
 public class Field {
 	private String name;
-	private String quotes;
+	private Boolean quotes;
 	private String type;
 	private String value;
-	private String min;
-	private String max;
-	private String precision;
-	private String length;
+	private Double min;
+	private Double max;
+	private Integer precision;
+	private Integer length;
 	private String case_;
 	private String endcharacter;
 	private String format;
-	private String isNumeric;
-	private String chooseone;
+	private Boolean isNumeric;
+	private Boolean chooseone;
 	private String dependence;
 	
 	private List<Field> fields;
@@ -42,13 +42,13 @@ public class Field {
 	/**
 	 * @return the quotes
 	 */
-	public String getQuotes() {
+	public Boolean getQuotes() {
 		return quotes;
 	}
 	/**
 	 * @param quotes the quotes to set
 	 */
-	public void setQuotes(String quotes) {
+	public void setQuotes(Boolean quotes) {
 		this.quotes = quotes;
 	}
 	/**
@@ -78,49 +78,49 @@ public class Field {
 	/**
 	 * @return the min
 	 */
-	public String getMin() {
+	public Double getMin() {
 		return min;
 	}
 	/**
 	 * @param min the min to set
 	 */
-	public void setMin(String min) {
+	public void setMin(Double min) {
 		this.min = min;
 	}
 	/**
 	 * @return the max
 	 */
-	public String getMax() {
+	public Double getMax() {
 		return max;
 	}
 	/**
 	 * @param max the max to set
 	 */
-	public void setMax(String max) {
+	public void setMax(Double max) {
 		this.max = max;
 	}
 	/**
 	 * @return the precision
 	 */
-	public String getPrecision() {
+	public Integer getPrecision() {
 		return precision;
 	}
 	/**
 	 * @param precision the precision to set
 	 */
-	public void setPrecision(String precision) {
+	public void setPrecision(Integer precision) {
 		this.precision = precision;
 	}
 	/**
 	 * @return the length
 	 */
-	public String getLength() {
+	public Integer getLength() {
 		return length;
 	}
 	/**
 	 * @param length the length to set
 	 */
-	public void setLength(String length) {
+	public void setLength(Integer length) {
 		this.length = length;
 	}
 	/**
@@ -162,25 +162,25 @@ public class Field {
 	/**
 	 * @return the isNumeric
 	 */
-	public String getIsNumeric() {
+	public Boolean getIsNumeric() {
 		return isNumeric;
 	}
 	/**
 	 * @param isNumeric the isNumeric to set
 	 */
-	public void setIsNumeric(String isNumeric) {
+	public void setIsNumeric(Boolean isNumeric) {
 		this.isNumeric = isNumeric;
 	}
 	/**
 	 * @return the chooseone
 	 */
-	public String getChooseone() {
+	public Boolean getChooseone() {
 		return chooseone;
 	}
 	/**
 	 * @param chooseone the chooseone to set
 	 */
-	public void setChooseone(String chooseone) {
+	public void setChooseone(Boolean chooseone) {
 		this.chooseone = chooseone;
 	}
 	/**

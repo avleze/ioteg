@@ -24,18 +24,31 @@ public class AttributeBuilder {
 		String format = attributeElement.getAttributeValue("format");
 		String isNumeric = attributeElement.getAttributeValue("isnumeric");
 		
+		if(hasDefaultLength(type, length))
+			length = "10";
+		
 		attribute.setType(type);
 		attribute.setValue(value);
-		attribute.setMin(min);
-		attribute.setMax(max);
-		attribute.setPrecision(precision);
-		attribute.setLength(length);
+		if(min != null)
+			attribute.setMin(Double.valueOf(min));
+		if(max != null)
+			attribute.setMax(Double.valueOf(max));
+		if(precision != null)
+			attribute.setPrecision(Integer.valueOf(precision));
+		
+		if(length != null)
+			attribute.setLength(Integer.valueOf(length));
+		
 		attribute.setCase(case_);
 		attribute.setEndcharacter(endcharacter);
 		attribute.setFormat(format);
-		attribute.setIsNumeric(isNumeric);
+		attribute.setIsNumeric(Boolean.valueOf(isNumeric));
 		
 		return attribute;
+	}
+
+	private boolean hasDefaultLength(String type, String length) {
+		return length == null && (type.equals("String") || type.equals("Alphanumeric"));
 	}
 	
 }

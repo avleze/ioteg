@@ -32,20 +32,30 @@ public class FieldBuilder {
 		String isNumeric = fieldElement.getAttributeValue("isnumeric");
 		String chooseone = fieldElement.getAttributeValue("chooseone");
 		String dependence = fieldElement.getAttributeValue("dependence");
+	
+		if(dependence == null)
+			dependence = "false";
+		if(hasDefaultLength(type, length))
+			length = "10";
 		
 		field.setName(name);
-		field.setQuotes(quotes);
+		field.setQuotes(Boolean.valueOf(quotes));
 		field.setType(type);
 		field.setValue(value);
-		field.setMin(min);
-		field.setMax(max);
-		field.setPrecision(precision);
-		field.setLength(length);
+		
+		if(min != null)
+			field.setMin(Double.valueOf(min));
+		if(max != null)
+			field.setMax(Double.valueOf(max));
+		if(precision != null)
+			field.setPrecision(Integer.valueOf(precision));
+		if(length != null)
+			field.setLength(Integer.valueOf(length));
 		field.setCase(case_);
 		field.setEndcharacter(endcharacter);
 		field.setFormat(format);
-		field.setIsNumeric(isNumeric);
-		field.setChooseone(chooseone);
+		field.setIsNumeric(Boolean.valueOf(isNumeric));
+		field.setChooseone(Boolean.valueOf(chooseone));
 		field.setDependence(dependence);
 		
 		buildSubFields(fieldElement, field);
@@ -88,4 +98,8 @@ public class FieldBuilder {
 		field.setFields(fieldsOfTheField);
 	}
 
+	
+	private boolean hasDefaultLength(String type, String length) {
+		return length == null && (type.equals("String") || type.equals("Alphanumeric"));
+	}
 }
