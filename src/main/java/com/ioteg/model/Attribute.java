@@ -5,16 +5,16 @@ package com.ioteg.model;
  * @author Antonio Vélez Estévez
  */
 public class Attribute {
-	private String type;
-	private String value;
-	private Double min;
-	private Double max;
-	private Integer precision;
-	private Integer length;
-	private String case_;
-	private String endcharacter;
-	private String format;
-	private Boolean isNumeric;
+	protected String type;
+	protected String value;
+	protected Double min;
+	protected Double max;
+	protected Integer precision;
+	protected Integer length;
+	protected String strCase;
+	protected String endcharacter;
+	protected String format;
+	protected Boolean isNumeric;
 	/**
 	 * @return the type
 	 */
@@ -91,13 +91,13 @@ public class Attribute {
 	 * @return the case
 	 */
 	public String getCase() {
-		return case_;
+		return strCase;
 	}
 	/**
 	 * @param case_ the case to set
 	 */
-	public void setCase(String case_) {
-		this.case_ = case_;
+	public void setCase(String strCase) {
+		this.strCase = strCase;
 	}
 	/**
 	 * @return the endcharacter

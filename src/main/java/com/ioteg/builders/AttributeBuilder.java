@@ -19,7 +19,7 @@ public class AttributeBuilder {
 		String max = attributeElement.getAttributeValue("max");
 		String precision = attributeElement.getAttributeValue("precision");
 		String length = attributeElement.getAttributeValue("length");
-		String case_ = attributeElement.getAttributeValue("case"); 
+		String strCase = attributeElement.getAttributeValue("case"); 
 		String endcharacter = attributeElement.getAttributeValue("endcharacter");
 		String format = attributeElement.getAttributeValue("format");
 		String isNumeric = attributeElement.getAttributeValue("isnumeric");
@@ -39,7 +39,7 @@ public class AttributeBuilder {
 		if(length != null)
 			attribute.setLength(Integer.valueOf(length));
 		
-		attribute.setCase(case_);
+		attribute.setCase(strCase);
 		attribute.setEndcharacter(endcharacter);
 		attribute.setFormat(format);
 		attribute.setIsNumeric(Boolean.valueOf(isNumeric));

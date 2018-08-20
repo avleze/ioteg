@@ -26,7 +26,7 @@ public class FieldBuilder {
 		String max = fieldElement.getAttributeValue("max");
 		String precision = fieldElement.getAttributeValue("precision");
 		String length = fieldElement.getAttributeValue("length");
-		String case_ = fieldElement.getAttributeValue("case"); 
+		String strCase = fieldElement.getAttributeValue("case"); 
 		String endcharacter = fieldElement.getAttributeValue("endcharacter");
 		String format = fieldElement.getAttributeValue("format");
 		String isNumeric = fieldElement.getAttributeValue("isnumeric");
@@ -51,7 +51,7 @@ public class FieldBuilder {
 			field.setPrecision(Integer.valueOf(precision));
 		if(length != null)
 			field.setLength(Integer.valueOf(length));
-		field.setCase(case_);
+		field.setCase(strCase);
 		field.setEndcharacter(endcharacter);
 		field.setFormat(format);
 		field.setIsNumeric(Boolean.valueOf(isNumeric));
