@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="randomIntegerGenerator">
+	<block name="randomIntegerGenerator" repeat="100">
+		<field name="test" type="Boolean" isnumeric="true"></field>
+		<field name="test" type="Boolean" isnumeric="false"></field>
+		<field name="test" type="Boolean" value="true"></field>
+	</block>
+</event_type>
+	

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="randomStringGenerator">
+	<block name="randomStringGenerator" repeat="100">
+		<field name="test" type="String"></field>
+		<field name="test" type="String" length="24"></field>
+		<field name="test" type="String" case="low" length="24"></field>
+		<field name="test" type="String" case="low"></field>
+		<field name="test" type="String" case="low" endcharacter="G"></field>
+		<field name="test" type="String" case="low" endcharacter="G" length="24"></field>
+		<field name="test" type="String" value="ABC"></field>
+	</block>
+</event_type>
+	

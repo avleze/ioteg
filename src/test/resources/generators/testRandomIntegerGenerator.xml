@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="randomIntegerGenerator">
+	<block name="randomIntegerGenerator" repeat="100">
+		<field name="test" quotes="false" type="Integer" min="100000" max="999999"></field>
+		<field name="testDefaultRange" quotes="true" type="Integer"></field>
+		<field name="testDefaultValue" quotes="false" type="Integer" value="104"></field>
+	</block>
+</event_type>
+	
