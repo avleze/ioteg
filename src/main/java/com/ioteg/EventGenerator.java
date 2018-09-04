@@ -50,7 +50,7 @@ public class EventGenerator {
 	    	ValidationUtil.ValidStandard(xmlFile);
 	    	
 	    	//To build a document from the xml
-	        Document document = builder.build(xmlFile);
+	        Document document = (Document) builder.build(xmlFile);
 	 
 	        // To get the root
 	        Element rootNode = document.getRootElement();

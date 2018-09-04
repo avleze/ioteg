@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jdom2.Attribute;
 import org.jdom2.DataConversionException;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -64,7 +65,7 @@ public class CustomiseGeneration {
         		} else {
         			valuevalue = Float.toString(Float.parseFloat(item.getAttribute("value").toString()));
         		}        		
-        	}
+        	}        	
         	
         	if (item.getAttribute("min") != null && (item.getAttributeValue("max") != null)) {
         		
@@ -76,7 +77,8 @@ public class CustomiseGeneration {
     					minvalue = Float.toString(Float.parseFloat(value));
     				}
         		} else {
-        			minvalue = Float.toString(Float.parseFloat(item.getAttribute("min").toString()));
+        			float value = Float.parseFloat(item.getAttributeValue("min").toString());
+        			minvalue = Float.toString(value);
         		}
         		
         		if(item.getAttributeValue("max").contains("$")) {
@@ -87,12 +89,13 @@ public class CustomiseGeneration {
     					maxvalue = Float.toString(Float.parseFloat(value));
     				}
         		} else {
-        			maxvalue = Float.toString(Float.parseFloat(item.getAttribute("max").toString()));
+        			float value = Float.parseFloat(item.getAttributeValue("max").toString());
+        			maxvalue = Float.toString(value);
         		}
         	}
         	
         	if (item.getAttribute("sequence") != null) {
-        		sequencevalue = item.getAttribute("sequence").toString();
+        		sequencevalue = item.getAttributeValue("sequence").toString();
         	}
         	
         	Rule<Object,Object,Object,Object,Object> rule = new Rule<Object,Object,Object,Object,Object>(weightvalue, valuevalue, minvalue, maxvalue, sequencevalue);
@@ -223,7 +226,6 @@ public class CustomiseGeneration {
 		return result;
 	}
 	
-	//TODO Contemplar que haya dos variables con operaciones 
 	private static float ObtainOperationValue(String operation) {
 		
 		String[] opdiv = null;
@@ -231,84 +233,84 @@ public class CustomiseGeneration {
 		
 		if (operation.contains("+")) {
 			opdiv = operation.split("\\+");
-			if (opdiv[0].contains("$")) {
+			if (opdiv[0].contains("$") && result == 0.0) {
 				if (CheckOperation(opdiv[1])) {
 					result = ObtainOperationValue(opdiv[1]) + Float.parseFloat(ObtainVariableValue(opdiv[0]));
 				} else {
 					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) + Float.parseFloat(opdiv[1]);
 				}
 			}
-			if (opdiv[1].contains("$")) {
+			if (opdiv[1].contains("$") && result == 0.0) {
 				if (CheckOperation(opdiv[0])) {
-					result = ObtainOperationValue(opdiv[0]) + Float.parseFloat(ObtainVariableValue(opdiv[1])) ;
+					result = ObtainOperationValue(opdiv[0]) + Float.parseFloat(ObtainVariableValue(opdiv[1]));
 				} else {
 					result = Float.parseFloat(ObtainVariableValue(opdiv[1])) + Float.parseFloat(opdiv[0]);
 				}
 			}
-			if (!opdiv[0].contains("$") && !opdiv[1].contains("$")){
+			if (!opdiv[0].contains("$") && !opdiv[1].contains("$") && result == 0.0){
 				result = Float.parseFloat(opdiv[0]) + Float.parseFloat(opdiv[1]);
 			}
 		}
 		
 		if (operation.contains("-")) {
 			opdiv = operation.split("-");
-			if (opdiv[0].contains("$")) {
+			if (opdiv[0].contains("$") && result == 0.0) {
 				if (CheckOperation(opdiv[1])) {
 					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) - ObtainOperationValue(opdiv[1]);
 				} else {
 					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) - Float.parseFloat(opdiv[1]);
 				}
 			} 
-			if (opdiv[1].contains("$")) {
+			if (opdiv[1].contains("$") && result == 0.0) {
 				if (CheckOperation(opdiv[0])) {
 					result = ObtainOperationValue(opdiv[0]) - Float.parseFloat(ObtainVariableValue(opdiv[1]));
 				} else {
 					result = Float.parseFloat(ObtainVariableValue(opdiv[1])) - Float.parseFloat(opdiv[0]);
 				}
 			}
-			if (!opdiv[0].contains("$") && !opdiv[1].contains("$")){
+			if (!opdiv[0].contains("$") && !opdiv[1].contains("$") && result == 0.0){
 				result = Float.parseFloat(opdiv[0]) - Float.parseFloat(opdiv[1]);
 			}
 		}
 		
 		if (operation.contains("*")) {
-			opdiv = operation.split("*");
-			if (opdiv[0].contains("$")) {
+			opdiv = operation.split("\\*");
+			if (opdiv[0].contains("$") && result == 0.0) {
 				if (CheckOperation(opdiv[1])) {
 					result = Float.parseFloat(opdiv[0]) * ObtainOperationValue(opdiv[1]);
 				} else {
 					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) * Float.parseFloat(opdiv[1]);
 				}				
 			} 
-			if (opdiv[1].contains("$")) {
+			if (opdiv[1].contains("$") && result == 0.0) {
 				if (CheckOperation(opdiv[0])) {
 					result = Float.parseFloat(opdiv[1]) * ObtainOperationValue(opdiv[0]);
 				} else {
 					result = Float.parseFloat(ObtainVariableValue(opdiv[1])) * Float.parseFloat(opdiv[0]);
 				}
 			}
-			if (!opdiv[0].contains("$") && !opdiv[1].contains("$")){
+			if (!opdiv[0].contains("$") && !opdiv[1].contains("$") && result == 0.0){
 				result = Float.parseFloat(opdiv[0]) * Float.parseFloat(opdiv[1]);
 			}
 		}
 		
 		if (operation.contains("/")) {
 			opdiv = operation.split("/");
-			if (opdiv[0].contains("$")) {
+			if (opdiv[0].contains("$") && result == 0.0) {
 				if (CheckOperation(opdiv[1])) {
 					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) / ObtainOperationValue(opdiv[1]);
 				} else {
 					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) / Float.parseFloat(opdiv[1]);
 				}
 			} 
-			if (opdiv[1].contains("$")) {
+			if (opdiv[1].contains("$") && result == 0.0) {
 				if (CheckOperation(opdiv[0])) {
 					result = ObtainOperationValue(opdiv[0]) / Float.parseFloat(ObtainVariableValue(opdiv[1]));
 				} else {
 					result = Float.parseFloat(opdiv[0]) / Float.parseFloat(ObtainVariableValue(opdiv[1]));
 				}
 			}
-			if (!opdiv[0].contains("$") && !opdiv[1].contains("$")){
+			if (!opdiv[0].contains("$") && !opdiv[1].contains("$") && result == 0.0){
 				result = Float.parseFloat(opdiv[0]) / Float.parseFloat(opdiv[1]);
 			}
 		}
@@ -403,9 +405,9 @@ public class CustomiseGeneration {
 			if ((r.getSequence() == null)) {
 				float min = Float.parseFloat(r.getMin().toString());
 				float max = Float.parseFloat(r.getMax().toString());
-				generatedvalue = min + (float)(Math.random() * ((max - min) + 1.0));
+				generatedvalue = min + (float)(Math.random() * ((max - min)));
 			} else {
-				if (r.getSequence().equals("dec")) {
+				if (String.valueOf(r.getSequence()).equals("dec")) {
 					float min = Float.parseFloat(r.getMin().toString());
 					float max;
 					if (generatedvalue == 0) {
@@ -413,8 +415,9 @@ public class CustomiseGeneration {
 					} else {
 						max = generatedvalue;
 					}
-					generatedvalue = min + (float)(Math.random() * ((max - min) + 1.0));
-				} else {
+					generatedvalue = min + (float)(Math.random() * ((max - min)));
+				}
+				if (String.valueOf(r.getSequence()).equals("inc")) {
 					float min;
 					float max = Float.parseFloat(r.getMax().toString());
 					if (generatedvalue == 0) {
@@ -422,7 +425,7 @@ public class CustomiseGeneration {
 					} else {
 						min = generatedvalue;
 					}
-					generatedvalue = min + (float)(Math.random() * ((max - min) + 1.0));
+					generatedvalue = min + (float)(Math.random() * ((max - min)));
 				}
 			}				
 		}
