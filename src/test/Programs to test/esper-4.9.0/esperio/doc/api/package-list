@@ -1,0 +1,16 @@
+com.espertech.esperio
+com.espertech.esperio.amqp
+com.espertech.esperio.csv
+com.espertech.esperio.dataflow
+com.espertech.esperio.db
+com.espertech.esperio.db.config
+com.espertech.esperio.db.core
+com.espertech.esperio.ext
+com.espertech.esperio.http
+com.espertech.esperio.http.config
+com.espertech.esperio.http.core
+com.espertech.esperio.jms
+com.espertech.esperio.representation.axiom
+com.espertech.esperio.socket
+com.espertech.esperio.socket.config
+com.espertech.esperio.socket.core

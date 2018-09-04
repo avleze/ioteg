@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 7. The Relational Database Adapter</title><link rel="stylesheet" href="css/espertech.css" type="text/css"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL-NS Stylesheets V1.74.0"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="home" href="index.html" title="EsperIO Reference"/><link rel="up" href="index.html" title="EsperIO Reference"/><link rel="prev" href="adapter_socket.html" title="Chapter 6. The Socket Adapter"/><link rel="next" href="adapter_xmljson.html" title="Chapter 8. XML and JSON Output"/></head><body><p xmlns:d="http://docbook.org/ns/docbook" id="title"><a href="http://www.espertech.com" class="site_href"><strong>esper.codehaus.org and espertech.com</strong></a><a href="http://esper.codehaus.org/esper/documentation/documentation.html" class="doc_href"><strong>Documentation</strong></a></p><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_socket.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="adapter_xmljson.html"><strong>Next</strong></a></li></ul><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_db"/>Chapter 7. The Relational Database Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="adapter_db.html#adapterdb-intro">7.1. Adapter Overview</a></span></dt><dt><span class="sect1"><a href="adapter_db.html#adapterdb-gettingstarted">7.2. Getting Started</a></span></dt><dd><dl><dt><span class="sect2"><a href="adapter_db.html#adapterdb-gettingstarted-pluginloader">7.2.1. Plugin Loader Configuration</a></span></dt><dt><span class="sect2"><a href="adapter_db.html#adapterdb-gettingstarted-API">7.2.2. Configuration and Starting via API</a></span></dt></dl></dd><dt><span class="sect1"><a href="adapter_db.html#adapterdb-jdbconnections">7.3. JDBC Connections</a></span></dt><dt><span class="sect1"><a href="adapter_db.html#adapterdb-dml">7.4. Triggered DML Statement Execution</a></span></dt><dt><span class="sect1"><a href="adapter_db.html#adapterdb-upsert">7.5. Triggered Update-Insert Execution</a></span></dt><dt><span class="sect1"><a href="adapter_db.html#adapterdb-settings">7.6. Executor Configuration</a></span></dt><dt><span class="sect1"><a href="adapter_db.html#adapterdb-reading">7.7. Reading and Polling Database Tables</a></span></dt><dd><dl><dt><span class="sect2"><a href="adapter_db.html#adapterdb-reading-polling">7.7.1. Polling and Startup SQL Queries</a></span></dt></dl></dd></dl></div><p>
+        This chapter discusses the EsperIO adapter for relational databases.
+    </p><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-intro"/>7.1. Adapter Overview</h2></div></div></div><p>
+			The EsperIO relational database adapter can write events to a database table. 
+		</p><p>
+			If your application only reads from tables, the Esper jar file and Esper configuration suffices and there is no additional EsperIO DB adapter configuration or jar file required. Please see below tips for reading or polling tables.
+		</p><p>
+			The EsperIO DB adapter supports two means to write to a database table:
+		</p><div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+                    Execute a SQL DML (Data Manipulation, i.e. Update, Insert, Delete or stored procedure call) statement as a response to a triggering event.
+                </p></li><li><p>
+                    Execute an Update-Insert: The adapter attempts an Update of a row by key and if unsuccessful (update returns zero rows updated) the adapter performs an Insert.
+                </p></li></ol></div><p>
+			The adapter also provides infrastructure for queuing database write requests for execution by a thread pool.
+		</p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-gettingstarted"/>7.2. Getting Started</h2></div></div></div><p>
+			You may configure the EsperIO DB adapter either as part of your Esper configuration file in the plugin loader section or via the adapter API.	Add the <code class="literal">esperio-db-version.jar</code> file to your classpath as well as the JDBC driver. There are not other dependent jar files required by the adapter.
+		</p><p>
+			A sample adapter configuration file is provided in <code class="literal">esperio-db-sample-config.xml</code> in the <code class="literal">etc</code> folder of the distribution. A configuration file must be valid according to schema <code class="literal">esperio-db-configuration-4-0.xsd</code>.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterdb-gettingstarted-pluginloader"/>7.2.1. Plugin Loader Configuration</h3></div></div></div><p>
+				You may place the configuration XML directly into your Esper configuration file as the example below shows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIODBAdapter" 
+      class-name="com.espertech.esperio.db.EsperIODBAdapterPlugin"&gt;
+    &lt;config-xml&gt;	
+      &lt;esperio-db-configuration&gt;
+        .....as outlined below or contents of esperio-db-sample-config.xml here...
+      &lt;/esperio-db-configuration&gt;
+    &lt;/config-xml&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre><p>
+				Alternatively you can provide a URL in the Esper configuration file to point to your adapter configuration file:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIODBAdapter" 
+      class-name="com.espertech.esperio.db.EsperIODBAdapterPlugin"&gt;
+      &lt;init-arg name="esperio.db.configuration.file" 
+          value="file:/path/esperio-db-sample-config.xml" /&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterdb-gettingstarted-API"/>7.2.2. Configuration and Starting via API</h3></div></div></div><p>
+				If using Spring or if your application requires API access, the following code snippet configures and starts the adapter via API.
+			</p><p>
+				The class for configuring an EsperIO DB adapter is <code class="literal">com.espertech.esperio.db.config.ConfigurationDBAdapter</code>. The adapter class itself is
+				<code class="literal">EsperIODBAdapter</code>.
+			</p><p>
+				The code snippet below is a sample that configures using driver manager and starts the adapter via API:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">ConfigurationDBAdapter adapterConfig = new ConfigurationDBAdapter();
+ConfigurationDBRef configDB = new ConfigurationDBRef();
+configDB.setDriverManagerConnection("DRIVER", "URL", new Properties());
+adapterConfig.getJdbcConnections().put("db1", configDB);
+
+// add additional configuration such as DML and Upsert 
+
+// start adapter
+EsperIODBAdapter dbAdapter = new EsperIODBAdapter(adapterConfig, "engineURI");
+dbAdapter.start();</pre></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-jdbconnections"/>7.3. JDBC Connections</h2></div></div></div><p>
+			The configuration for the source of JDBC connections follows the Esper configuration. Please consult the Esper documentation or sample adapter configuration file for details.
+		</p><p>
+			Your configuration should set <code class="literal">auto-commit</code> to true thereby each change to database tables is automatically committed.
+		</p><p>
+			The adapter obtains a new connection for each operation and closes the connection after each operation. For optimum performance consider configuring a connection pool.
+		</p><p>
+		 A sample JDBC connection configuration is shown in below XML. The API class is <code class="literal">ConfigurationDBRef</code> (an Esper core engine class). You may also configure a <code class="literal">DataSource</code> or <code class="literal">DataSource</code> factory as outlined in the Esper docs.
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-db-configuration&gt;
+  &lt;jdbc-connection name="db1"&gt;
+    &lt;drivermanager-connection class-name="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/test" 
+        user="root" password="password"&gt;
+    &lt;connection-settings auto-commit="true" catalog="TEST"/&gt;
+  &lt;/jdbc-connection&gt;
+  &lt;!-- Add DML and Upsert configurations here, as below. --&gt;
+&lt;/esperio-db-configuration&gt;</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-dml"/>7.4. Triggered DML Statement Execution</h2></div></div></div><p>
+			This facility allows running a SQL DML (Data Manipulation) query, i.e. an Update, Insert, Delete query or a stored procedure when an event in a triggering stream occurs.
+		</p><p>
+			Define a <code class="literal">dml</code> element in the adapter configuration file (or use the <code class="literal">DMLQuery</code> class) for every query to execute. 
+		</p><p>
+			The synopsis is as follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;dml connection="[connection]" stream="[stream]"  
+    [name="name"] [executor-name="executor"] [retry="count"] [retry-interval-sec="sec"]&gt;
+  &lt;sql&gt;[sql]&lt;/sql&gt;
+  &lt;bindings&gt;
+    &lt;parameter pos="[position]" property="[property_name]"/&gt;
+    [...parameters]
+  &lt;/bindings&gt;
+&lt;/dml&gt;</pre><p>
+		  The <span class="emphasis"><em>connection</em></span> attribute value is required and provides the name of the configured JDBC connection.
+		</p><p>
+		  A value for the <span class="emphasis"><em>stream</em></span> attribute is required and provides the name of the stream that triggers the DML. The adapter expects a stream by this name to exist at adapter start time.
+		</p><p>
+		  The <span class="emphasis"><em>name</em></span> attribute is optional and is only used for logging errors.
+		</p><p>
+		  The <span class="emphasis"><em>executor-name</em></span> attribute is optional. If specified, it must be the name of an executor configuration. If specified, the adapter will use the executor service (queue and thread pool) for
+		  performing all DML work. If not specified, the adapter performs the DML work in the same thread.
+		</p><p>
+		  The <span class="emphasis"><em>retry</em></span> attribute is optional. If specified, the adapter will retry a given number of times in case an error is encountered. If <span class="emphasis"><em>retry-interval-sec</em></span> is specified, the adapter waits the given number of seconds between retries.
+		</p><p>
+		  The <span class="emphasis"><em>sql</em></span> element is required and provides the SQL DML or stored procedure call to execute, with parameters as question mark (?).
+		</p><p>
+		  The <span class="emphasis"><em>bindings</em></span> element is required and provides the bindings for expression parameters.
+		</p><p>
+		  The <span class="emphasis"><em>parameter</em></span> element should occur as often as there are parameters in the SQL query. The <span class="emphasis"><em>position</em></span> attribute starts at 1 and counts up for each parameter. The <span class="emphasis"><em>property</em></span> parameter provide the name of the event property of the stream to use as the parameter value.
+		</p><p>
+		 A sample DML configuration follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;dml connection="db1" stream="InsertToDBStream" 
+      name="MyInsertQuery" executor-name="queue1" retry="count"&gt;
+  &lt;sql&gt;insert into MyEventStore(key1, value1, value2) values (?, ?, ?)&lt;/sql&gt;
+  &lt;bindings&gt;
+    &lt;parameter pos="1" property="eventProperty1"/&gt;
+    &lt;parameter pos="2" property="eventProperty2"/&gt;
+    &lt;parameter pos="3" property="eventProperty3"/&gt;
+  &lt;/bindings&gt;
+&lt;/dml&gt;</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-upsert"/>7.5. Triggered Update-Insert Execution</h2></div></div></div><p>
+			This facility allows running an SQL Update that is followed by an Insert if the Update did not update any rows.
+		</p><p>
+			Define an <code class="literal">upsert</code> element in the adapter configuration file (or use the <code class="literal">UpsertQuery</code> class) for every update-insert to execute. 
+		</p><p>
+			The synopsis is as follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;upsert connection="[connection]" stream="[stream]" table-name="[table]"
+      [name="name"] [executor-name="executor"] [retry="count"] [retry-interval-sec="sec"]&gt;
+  &lt;keys&gt;
+    &lt;column property="[property_name]" column="[column_name]" type="[sql_type]"/&gt;
+    [...column]
+  &lt;/keys&gt;
+  &lt;values&gt;
+    &lt;column property="[property_name]" column="[column_name]" type="[sql_type]"/&gt;
+    [...column]
+  &lt;/values&gt;
+&lt;/upsert&gt;</pre><p>
+		  The <span class="emphasis"><em>connection</em></span> attribute value is required and provides the name of the configured JDBC connection.
+		</p><p>
+		  A value for the <span class="emphasis"><em>stream</em></span> attribute is required and provides the name of the stream that triggers the Update-Insert. The adapter expects a stream by this name to exist at adapter start time.
+		</p><p>
+		  The <span class="emphasis"><em>table</em></span> attribute value is required and provides the database table name.
+		</p><p>
+		  The <span class="emphasis"><em>name</em></span> attribute is optional and is only used for logging errors.
+		</p><p>
+		  The <span class="emphasis"><em>executor-name</em></span> attribute is optional. If specified, it must be the name of an executor configuration. If specified, the adapter will use the executor service (queue and thread pool) for
+		  performing all work. If not specified, the adapter performs the work in the same thread.
+		</p><p>
+		  The <span class="emphasis"><em>retry</em></span> attribute is optional. If specified, the adapter will retry a given number of times in case an error is encountered. If <span class="emphasis"><em>retry-interval-sec</em></span> is specified, the adapter waits the given number of seconds between retries.
+		</p><p>
+		  The <span class="emphasis"><em>keys</em></span> element is required and provides the key columns of the table and the <span class="emphasis"><em>values</em></span> element provides the list of value columns of the table.
+		</p><p>
+		  The <span class="emphasis"><em>column</em></span> element should occur as many as there are key and value columns in the table. The <span class="emphasis"><em>property</em></span> attribute provides the name of the event property, the <span class="emphasis"><em>column</em></span> attribute provides the database table column name and the <span class="emphasis"><em>type</em></span> is any of the <code class="literal">java.sql.Types</code> names (case ignored).
+		</p><p>
+		 A sample Update-Insert configuration follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;upsert connection="db1" stream="UpdateInsertDBTableTrigger" name="UpdateInsertSample" 
+    table-name="MyKeyedTable" executor-name="queue1" retry="3"&gt;
+  &lt;keys&gt;
+    &lt;column property="eventProperty1" column="keyColumn1" type="varchar"/&gt;
+    &lt;column property="eventProperty2" column="keyColumn2" type="varchar"/&gt;
+  &lt;/keys&gt;
+  &lt;values&gt;
+    &lt;column property="eventProperty3" column="valueColumn1" type="varchar"/&gt;
+    &lt;column property="eventProperty4" column="valueColumn2" type="integer"/&gt;
+  &lt;/values&gt;
+&lt;/upsert&gt;</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-settings"/>7.6. Executor Configuration</h2></div></div></div><p>
+			Executors are named thread pools and queues that may be assigned to perform DML or update-insert work.
+		</p><p>
+			Define a <code class="literal">executor</code> element in the adapter configuration file (or use the <code class="literal">Executor</code> class) for every thread pool and queue to declare. 
+		</p><p>
+			Upon adapter start, for each executor the adapter starts the given number of threads and an unbound queue. 
+		</p><p>
+			The synopsis is as follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;executors&gt;
+  &lt;executor name="[name]" threads="[count]"/&gt;
+&lt;/executors&gt;</pre><p>
+		  The <span class="emphasis"><em>name</em></span> attribute value is required and provides the name of the executor, while the <span class="emphasis"><em>count</em></span> attribute specifies the number of threads for the thread pool.
+		</p><p>
+			An example executor configuration::
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;executors&gt;
+  &lt;executor name="threadPool1" threads="2"/&gt;
+&lt;/executors&gt;</pre><p>
+			An application can obtain a handle to all thread pools and queues via the Esper engine context:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">ExecutorServices execs = (ExecutorServices) 
+    provider.getContext().lookup("EsperIODBAdapter/ExecutorServices");</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-reading"/>7.7. Reading and Polling Database Tables</h2></div></div></div><p>
+			Herein we provide sample statements and documentation pointers to use Esper EPL for reading from database tables. If only reading and not writing to a database, no configuration or EsperIO jar is file required.
+		</p><p>
+			Please consult the Esper SQL access documentation for more information.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterdb-reading-polling"/>7.7.1. Polling and Startup SQL Queries</h3></div></div></div><p>
+				To execute an SQL query repeatedly, Esper provides the opportunity to join a pattern to an SQL statement. The pattern may provide a single interval or crontab schedule or may also contain multiple schedules or combinations thereof via the pattern <code class="literal">or</code> operator.
+			</p><p>
+				The sample query below simply executes every 10 seconds retrieving all rows from table <code class="literal">MyTable</code>:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">select * from pattern[every timer:interval(10)], sql:db1 ['select * from MyTable']</pre><p>
+				To perform an incremental query, consider utilizing a variable to parameterize your SQL statement so that only new rows are returned.
+			</p><p>
+				The next EPL statements create a variable and pass the variable value to the query to poll for new rows only. It assumes the <code class="literal">timestamp</code> column in the <code class="literal">MyTable</code> table holds long-type millisecond values:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">// Create a variable to hold the last poll timestamp
+create variable long VarLastTimestamp = 0
+
+// Poll every 15 seconds between 8am and 4pm based on variable value
+insert into PollStream
+select * from pattern[every timer:crontab(*, 8-16, *, *, *, */15)], 
+  sql:db1 ['select * from MyTable where timestamp &gt; ${VarLastTimestamp}']
+  
+// Assign last value to variable
+on PollStream set VarLastTimestamp = timestamp</pre><p>
+				A sample statement to read a table at startup time is below:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">select * from pattern[timer:interval(0)], sql:db1 ['select * from MyTable']</pre></div></div></div><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_socket.html"><strong>Prev</strong>Chapter 6. The Socket Adapter</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="adapter_xmljson.html"><strong>Next</strong>Chapter 8. XML and JSON Output</a></li></ul></body></html>

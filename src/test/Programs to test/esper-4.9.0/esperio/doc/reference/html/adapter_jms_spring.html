@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 3. The Spring JMS Input and Output Adapter</title><link rel="stylesheet" href="css/espertech.css" type="text/css"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL-NS Stylesheets V1.74.0"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="home" href="index.html" title="EsperIO Reference"/><link rel="up" href="index.html" title="EsperIO Reference"/><link rel="prev" href="adapter_file.html" title="Chapter 2. The File and CSV Input and Output Adapter"/><link rel="next" href="adapter_amqp.html" title="Chapter 4. The AMQP Input and Output Adapter"/></head><body><p xmlns:d="http://docbook.org/ns/docbook" id="title"><a href="http://www.espertech.com" class="site_href"><strong>esper.codehaus.org and espertech.com</strong></a><a href="http://esper.codehaus.org/esper/documentation/documentation.html" class="doc_href"><strong>Documentation</strong></a></p><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_file.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="adapter_amqp.html"><strong>Next</strong></a></li></ul><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_jms_spring"/>Chapter 3. The Spring JMS Input and Output Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="adapter_jms_spring.html#jms-spring-intro">3.1. Introduction</a></span></dt><dt><span class="sect1"><a href="adapter_jms_spring.html#jms-spring-engine-config">3.2. Engine Configuration</a></span></dt><dt><span class="sect1"><a href="adapter_jms_spring.html#jms-spring-input-config">3.3. Input Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="adapter_jms_spring.html#jms-spring-input-config-file">3.3.1. Spring Configuration</a></span></dt><dt><span class="sect2"><a href="adapter_jms_spring.html#jms-spring-input-unmarshal">3.3.2. JMS Message Unmarshalling</a></span></dt></dl></dd><dt><span class="sect1"><a href="adapter_jms_spring.html#jms-spring-output-config">3.4. Output Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="adapter_jms_spring.html#jms-spring-output-config-file">3.4.1. Spring Configuration</a></span></dt><dt><span class="sect2"><a href="adapter_jms_spring.html#jms-spring-output-marshal">3.4.2. JMS Message Marshalling</a></span></dt></dl></dd></dl></div><p>
+        This chapter discusses the input and output adapters for JMS based on the Spring JmsTemplate technology. 
+        For more information on Spring, and the latest version of Spring, please visit <a class="link" href="http://www.springframework.org" target="">http://www.springframework.org</a>.
+    </p><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="jms-spring-intro"/>3.1. Introduction</h2></div></div></div><p>
+			Here are the steps to use the adapters:
+		</p><div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+					Configure an Esper engine instance to use a <code class="literal">SpringContextLoader</code> for loading input and output adapters, and point it to a Spring JmsTemplate configuration file.
+				</p></li><li><p>
+					Create a Spring JmsTemplate configuration file for your JMS provider and add all your input and output adapter entries in the same file.
+				</p></li><li><p>
+					For receiving events from a JMS destination into an engine (input adapter):
+				</p><div class="orderedlist"><ol><li><p>
+							List the destination and un-marshalling class in the Spring configuration. 
+						</p></li><li><p>
+							Create EPL statements using the event type name matching the event objects or the Map-event type names received.
+						</p></li></ol></div></li><li><p>
+					For sending events to a JMS destination (output adapter):
+				</p><div class="orderedlist"><ol><li><p>
+							Use the <code class="literal">insert-into</code> syntax naming the stream to insert-into using the same name as listed in the Spring configuration file
+						</p></li><li><p>
+							Configure the Map event type of the stream in the engine configuration
+						</p></li></ol></div></li></ol></div><p>
+            In summary the Spring JMS input adapter performs the following functions:
+        </p><div class="itemizedlist"><ul compact="compact"><li><p>
+					Initialize from a given Spring configuration file in classpath or from a filename. The Spring configuration file sets all JMS parameters such as JMS connection factory, destination and listener pools.
+				</p></li><li><p>
+					Attach to a JMS destination and listen to messages using the Spring class <code class="literal">org.springframework.jms.core.JmsTemplate</code>
+				</p></li><li><p>
+					Unmarshal a JMS message and send into the configured engine instance
+				</p></li></ul></div><p>
+            The Spring JMS output adapter can:
+        </p><div class="itemizedlist"><ul compact="compact"><li><p>
+					Initialize from a given Spring configuration file in classpath or from a filename, and attach to a JMS destination
+				</p></li><li><p>
+					Act as a listener to one or more named streams populated via <code class="literal">insert-into</code> syntax by EPL statements
+				</p></li><li><p>
+					Marshal events generated by a stream into a JMS message, and send to the given destination
+				</p></li></ul></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="jms-spring-engine-config"/>3.2. Engine Configuration</h2></div></div></div><p>
+            The Spring JMS input and output adapters are configured as part of the Esper engine configuration. EsperIO supplies a <code class="literal">SpringContextLoader</code> class that loads a Spring
+            configuration file which in turn configures the JMS input and output adapters. List the <code class="literal">SpringContextLoader</code> class as an adapter loader in the Esper configuration file as the below example shows. The configuration API can alternatively be used to configure one or more adapter loaders.
+        </p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+
+  &lt;!-- Sample configuration for an input/output adapter loader --&gt;
+  &lt;plugin-loader name="MyLoader" class-name="com.espertech.esperio.SpringContextLoader"&gt;
+    &lt;!-- SpringApplicationContext translates into Spring ClassPathXmlApplicationContext 
+           or FileSystemXmlApplicationContext. Only one app-context of a sort can be used. 
+           When both attributes are used classpath and file, classpath prevails --&gt;
+    &lt;init-arg name="classpath-app-context" value="spring\jms-spring.xml" /&gt;
+    &lt;init-arg name="file-app-context" value="spring\jms-spring.xml" /&gt;
+  &lt;/plugin-loader&gt;
+
+&lt;/esper-configuration&gt;</pre><p>
+            The loader loads the Spring configuration file from classpath via the <code class="literal">classpath-app-context</code> configuration, or from a file via <code class="literal">file-app-context</code>.
+        </p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="jms-spring-input-config"/>3.3. Input Adapter</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="jms-spring-input-config-file"/>3.3.1. Spring Configuration</h3></div></div></div><p>
+				The Spring configuration file must list input and output adapters to be initialized by <code class="literal">SpringContextLoader</code> upon engine initialization.
+				Please refer to your JMS provider documentation, and the Spring framework documentation on help to configure your specific JMS provider via Spring.
+			</p><p>
+				The next XML snippet shows a complete sample configuration for an input adapter. The sample includes the JMS configuration for an Apache ActiveMQ JMS provider.
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;!-- Spring Application Context --&gt;
+&lt;beans default-destroy-method="destroy"&gt;
+
+  &lt;!-- JMS ActiveMQ Connection Factory --&gt;
+  &lt;bean id="jmsActiveMQFactory" class="org.apache.activemq.pool.PooledConnectionFactory"&gt;
+    &lt;property name="connectionFactory"&gt;
+      &lt;bean class="org.apache.activemq.ActiveMQConnectionFactory"&gt;
+        &lt;property name="brokerURL" value="tcp://localhost:61616"/&gt;
+      &lt;/bean&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  ActiveMQ destination to use  by default --&gt;
+  &lt;bean id="defaultDestination"
+        class="org.apache.activemq.command.ActiveMQQueue"&gt;
+    &lt;constructor-arg value="ESPER.QUEUE"/&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  Spring JMS Template for ActiveMQ --&gt;
+  &lt;bean id="jmsActiveMQTemplate" class="org.springframework.jms.core.JmsTemplate"&gt;
+    &lt;property name="connectionFactory"&gt;
+      &lt;ref bean="jmsActiveMQFactory"/&gt;
+    &lt;/property&gt;
+    &lt;property name="defaultDestination"&gt;
+      &lt;ref bean="defaultDestination"/&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;!-- Provides listener threads --&gt;
+  &lt;bean id="listenerContainer" 
+              class="org.springframework.jms.listener.SimpleMessageListenerContainer"&gt;
+    &lt;property name="connectionFactory" ref="jmsActiveMQFactory"/&gt;
+    &lt;property name="destination" ref="defaultDestination"/&gt;
+    &lt;property name="messageListener" ref="jmsInputAdapter"/&gt;
+  &lt;/bean&gt;
+
+  &lt;!-- Default unmarshaller --&gt;
+  &lt;bean id="jmsMessageUnmarshaller" 
+              class="com.espertech.esperio.jms.JMSDefaultAnyMessageUnmarshaller"/&gt;
+
+  &lt;!-- Input adapter --&gt;
+  &lt;bean id="jmsInputAdapter" class="com.espertech.esperio.jms.SpringJMSTemplateInputAdapter"&gt;
+    &lt;property name="jmsTemplate"&gt;
+      &lt;ref bean="jmsActiveMQTemplate"/&gt;
+    &lt;/property&gt;
+    &lt;property name="jmsMessageUnmarshaller"&gt;
+      &lt;ref bean="jmsMessageUnmarshaller"/&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+&lt;/beans&gt;</pre><p>
+				This input adapter attaches to the JMS destination <code class="literal">ESPER.QUEUE</code> at an Apache MQ broker available at port <code class="literal">tcp://localhost:61616</code>. It configures an un-marshalling class as discussed next.
+			</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="jms-spring-input-unmarshal"/>3.3.2. JMS Message Unmarshalling</h3></div></div></div><p>
+				EsperIO provides a class for unmarshaling JMS message instances into events for processing by an engine in the class <code class="literal">JMSDefaultAnyMessageUnmarshaller</code>. The class unmarshals as follows:
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						If the received Message is of type <code class="literal">javax.xml.MapMessage</code>, extract the event type name out of the message and send to the engine via <code class="literal">sendEvent(name, Map)</code> 
+					</p></li><li><p>
+						If the received Message is of type <code class="literal">javax.xml.ObjectMessage</code>, extract the <code class="literal">Serializable</code> out of the message and send to the engine via <code class="literal">sendEvent(Object)</code>
+					</p></li><li><p>
+						Else the un-marshaller outputs a warning and ignores the message
+					</p></li></ul></div><p>
+				The unmarshaller must be made aware of the event type of events within <code class="literal">MapMessage</code> messages. This is achieved by the client application setting a well-defined property on the message: <code class="literal">InputAdapter.ESPERIO_MAP_EVENT_TYPE</code>.  An example code snippet is:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">MapMessage mapMessage = jmsSession.createMapMessage();
+mapMessage.setObject(InputAdapter.ESPERIO_MAP_EVENT_TYPE, "MyInputEvent");</pre></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="jms-spring-output-config"/>3.4. Output Adapter</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="jms-spring-output-config-file"/>3.4.1. Spring Configuration</h3></div></div></div><p>
+				The Spring configuration file lists all input and output adapters in one file. The <code class="literal">SpringContextLoader</code> upon engine initialization starts all input and output adapters.
+			</p><p>
+				The next XML snippet shows a complete sample configuration of an output adapter. Please check with your JMS provider for the appropriate Spring class names and settings. Note that the input and output adapter Spring configurations can be in the same file.
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">
+&lt;!-- Application Context --&gt;
+&lt;beans default-destroy-method="destroy"&gt;
+
+  &lt;!-- JMS ActiveMQ Connection Factory --&gt;
+  &lt;bean id="jmsActiveMQFactory" class="org.apache.activemq.pool.PooledConnectionFactory"&gt;
+    &lt;property name="connectionFactory"&gt;
+      &lt;bean class="org.apache.activemq.ActiveMQConnectionFactory"&gt;
+        &lt;property name="brokerURL" value="tcp://localhost:61616"/&gt;
+      &lt;/bean&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  ActiveMQ destination to use  by default --&gt;
+  &lt;bean id="defaultDestination"
+        class="org.apache.activemq.command.ActiveMQQueue"&gt;
+    &lt;constructor-arg value="ESPER.QUEUE"/&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  Spring JMS Template for ActiveMQ --&gt;
+  &lt;bean id="jmsActiveMQTemplate" class="org.springframework.jms.core.JmsTemplate"&gt;
+    &lt;property name="connectionFactory"&gt;
+      &lt;ref bean="jmsActiveMQFactory"/&gt;
+    &lt;/property&gt;
+    &lt;property name="defaultDestination"&gt;
+      &lt;ref bean="defaultDestination"/&gt;
+    &lt;/property&gt;
+    &lt;property name="receiveTimeout"&gt;
+      &lt;value&gt;30000&lt;/value&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  Marshaller marshals events into map messages --&gt;
+  &lt;bean id="jmsMessageMarshaller" class="com.espertech.esperio.jms.JMSDefaultMapMessageMarshaller"/&gt;
+  &lt;bean id="myCustomMarshaller" class="com.espertech.esperio.jms.JMSDefaultMapMessageMarshaller"/&gt;
+
+  &lt;!--  Output adapter puts it all together --&gt;
+  &lt;bean id="jmsOutputAdapter" class="com.espertech.esperio.jms.SpringJMSTemplateOutputAdapter"&gt;
+    &lt;property name="jmsTemplate"&gt;
+      &lt;ref bean="jmsActiveMQTemplate"/&gt;
+    &lt;/property&gt;
+    &lt;property name="subscriptionMap"&gt;
+      &lt;map&gt;
+        &lt;entry&gt;
+          &lt;key&gt;&lt;idref local="subscriptionOne"/&gt;&lt;/key&gt;
+          &lt;ref bean="subscriptionOne"/&gt;
+        &lt;/entry&gt;
+        &lt;entry&gt;
+          &lt;key&gt;&lt;idref local="subscriptionTwo"/&gt;&lt;/key&gt;
+          &lt;ref bean="subscriptionTwo"/&gt;
+        &lt;/entry&gt;
+      &lt;/map&gt;
+    &lt;/property&gt;
+    &lt;property name="jmsMessageMarshaller"&gt;
+      &lt;ref bean="jmsMessageMarshaller"/&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="subscriptionOne" class="com.espertech.esperio.jms.JMSSubscription"&gt;
+    &lt;property name="eventTypeName" value="MyOutputStream"/&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="subscriptionTwo" class="com.espertech.esperio.jms.JMSSubscription"&gt;
+    &lt;property name="eventTypeName" value="MyOtherOutputStream"/&gt;
+    &lt;property name="jmsMessageMarshaller"&gt;
+      &lt;ref bean="myCustomMarshaller"/&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+&lt;/beans&gt;</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="jms-spring-output-marshal"/>3.4.2. JMS Message Marshalling</h3></div></div></div><p>
+				EsperIO provides a marshal implementation in the class <code class="literal">JMSDefaultMapMessageMarshaller</code>. This marshaller constructs a JMS <code class="literal">MapMessage</code> from any event received by copying 
+				event properties into the name-value pairs of the message. The configuration file makes it easy to configure a custom marshaller that adheres to the <code class="literal">com.espertech.esperio.jms.JMSMessageMarshaller</code> interface.
+			</p><p>
+                Note that this marshaller uses <code class="literal">javax.jms.MapMessage</code> name-value pairs and not general <code class="literal">javax.jms.Message</code> properties.
+                This means when you'll read the event properties back from the JMS MapMessage, you will have to use the <code class="literal">javax.jms.MapMessage.getObject(...)</code> method.
+            </p><p>
+				The <code class="literal">SpringJMSTemplateOutputAdapter</code> is configured with a list of subscription instances of type <code class="literal">JMSSubscription</code> as the sample configuration shows. Each subscription defines 
+				an event type name that must be configured and used in the <code class="literal">insert-into</code> syntax of a statement.
+			</p><p>
+				To connect the Spring JMS output adapter and the EPL statements producing events, use the <code class="literal">insert-into</code> syntax to direct events for output.  Here is a sample statement that sends events into <code class="literal">MyOutputStream</code>:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">insert into MyOutputStream select assetId, zone from RFIDEvent</pre><p>
+				The type <code class="literal">MyOutputStream</code> must be known to an engine instance. The output adapter requires the name to be configured with the Engine instance, e.g.:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;event-type name="MyOutputStream"&gt;
+    &lt;java-util-map&gt;
+      &lt;map-property name="assetId" class="String"/&gt;
+      &lt;map-property name="zone" class="int"/&gt;
+    &lt;/java-util-map&gt;
+  &lt;/event-type&gt;
+&lt;/esper-configuration&gt;</pre></div></div></div><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_file.html"><strong>Prev</strong>Chapter 2. The File and CSV Input and Output Adap...</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="adapter_amqp.html"><strong>Next</strong>Chapter 4. The AMQP Input and Output Adapter</a></li></ul></body></html>

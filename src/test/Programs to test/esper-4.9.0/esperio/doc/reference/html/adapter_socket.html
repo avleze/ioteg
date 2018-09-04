@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 6. The Socket Adapter</title><link rel="stylesheet" href="css/espertech.css" type="text/css"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL-NS Stylesheets V1.74.0"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="home" href="index.html" title="EsperIO Reference"/><link rel="up" href="index.html" title="EsperIO Reference"/><link rel="prev" href="adapter_http.html" title="Chapter 5. The HTTP Adapter"/><link rel="next" href="adapter_db.html" title="Chapter 7. The Relational Database Adapter"/></head><body><p xmlns:d="http://docbook.org/ns/docbook" id="title"><a href="http://www.espertech.com" class="site_href"><strong>esper.codehaus.org and espertech.com</strong></a><a href="http://esper.codehaus.org/esper/documentation/documentation.html" class="doc_href"><strong>Documentation</strong></a></p><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_http.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="adapter_db.html"><strong>Next</strong></a></li></ul><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_socket"/>Chapter 6. The Socket Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="adapter_socket.html#adaptersocket-gettingstarted">6.1. Getting Started</a></span></dt><dd><dl><dt><span class="sect2"><a href="adapter_socket.html#adaptersocket-gettingstarted-pluginloader">6.1.1. Plugin Loader Configuration</a></span></dt><dt><span class="sect2"><a href="adapter_socket.html#adaptersocket-gettingstarted-API">6.1.2. Configuration and Starting via API</a></span></dt></dl></dd><dt><span class="sect1"><a href="adapter_socket.html#adaptersocket-input">6.2. Socket Service</a></span></dt><dd><dl><dt><span class="sect2"><a href="adapter_socket.html#adaptersocket-input-object">6.2.1. Object Data Format</a></span></dt><dt><span class="sect2"><a href="adapter_socket.html#adaptersocket-input-csv">6.2.2. String CSV Data Format</a></span></dt></dl></dd></dl></div><p>
+        This chapter discusses the EsperIO Socket adapter.
+    </p><p>
+		The EsperIO Socket input adapter can be used to send events into an Esper engine instance via socket client, either as Java objects or as CSV name-value pair strings.
+	</p><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adaptersocket-gettingstarted"/>6.1. Getting Started</h2></div></div></div><p>
+			You may configure the EsperIO Socket adapter either as part of your Esper configuration file in the plugin loader section or via the adapter API. Add the <code class="literal">esperio-socket-version.jar</code> file to your classpath. There are no other dependent jar files required.
+		</p><p>
+			A sample adapter configuration file is provided in <code class="literal">esperio-socket-sample-config.xml</code> in the <code class="literal">etc</code> folder of the distribution. A configuration file must be valid according to schema <code class="literal">esperio-socket-configuration-4-0.xsd</code>.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adaptersocket-gettingstarted-pluginloader"/>6.1.1. Plugin Loader Configuration</h3></div></div></div><p>
+				You may place the configuration XML directly into your Esper configuration file as the example below shows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIOSocketAdapter" 
+      class-name="com.espertech.esperio.socket.EsperIOSocketAdapterPlugin"&gt;
+    &lt;config-xml&gt;	
+      &lt;esperio-socket-configuration&gt;
+	    &lt;socket name="mysocketOne" port="7101" data="object"/&gt;
+	    &lt;socket name="mysocketTwo" port="7102" data="csv"/&gt;
+      &lt;/esperio-socket-configuration&gt;
+    &lt;/config-xml&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre><p>
+				Alternatively you can provide a URL in the Esper configuration file to point to your adapter configuration file:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIOSocketAdapter" 
+      class-name="com.espertech.esperio.socket.EsperIOSocketAdapterPlugin"&gt;
+      &lt;init-arg name="esperio.socket.configuration.file" 
+          value="file:/path/esperio-socket-sample-config.xml" /&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adaptersocket-gettingstarted-API"/>6.1.2. Configuration and Starting via API</h3></div></div></div><p>
+				If using Spring or if your application requires API access, the following code snippet configures and starts the adapter via API.
+			</p><p>
+				The class for configuring an EsperIO Socket adapter is <code class="literal">com.espertech.esperio.socket.config.ConfigurationSocketAdapter</code>. The adapter class itself is
+				<code class="literal">EsperIOSocketAdapter</code>.
+			</p><p>
+				The code snippet below is a sample that configures using driver manager and starts the adapter via API:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">ConfigurationSocketAdapter adapterConfig = new ConfigurationSocketAdapter();
+
+SocketConfig socket = new SocketConfig();
+socket.setDataType(DataType.CSV);
+socket.setPort(port);
+adapterConfig.getSockets().put("SocketService", socket);
+
+// start adapter
+EsperIOSocketAdapter socketAdapter = new EsperIOSocketAdapter(adapterConfig, "engineURI");
+socketAdapter.start();
+
+// destroy the adapter when done
+socketAdapter.destroy();</pre></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adaptersocket-input"/>6.2. Socket Service</h2></div></div></div><p>
+			Add a socket configuration for each unique port that you want to expose a socket receive service for use by socket client connections.
+		</p><p>
+			The synopsis is as follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-socket-configuration&gt;
+  &lt;socket name="[name]" port="[port]" data="[csv|object]"/&gt;
+&lt;/esperio-socket-configuration&gt;</pre><p>
+		  The required <span class="emphasis"><em>name</em></span> attribute provides the name of the socket service for use in logging.
+		</p><p>
+		  The required <span class="emphasis"><em>port</em></span> attribute provides the port that the socket service accepts client connections.
+		</p><p>
+		  The required <span class="emphasis"><em>data</em></span> attribute specifies whether the data arriving through the socket is formatted as a Java binary object stream or as CSV string values.
+		</p><p>
+		  If configuring via the adapter API or Spring, use the <code class="literal">com.espertech.esperio.socket.config.SocketConfig</code> class.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adaptersocket-input-object"/>6.2.1. Object Data Format</h3></div></div></div><p>
+				When sending events as Java objects, configure the <code class="literal">data</code> attribute value to <code class="literal">object</code> and use <code class="literal">ObjectOutputStream</code> to write events to the client socket. When sending a <code class="literal">java.util.Map</code> event, 
+				your Map must contain a String value for the key <code class="literal">stream</code> which must denote a configured Map event type.
+			</p><p>
+				This example XML configures a socket accepting client connections that provide Java objects:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-socket-configuration&gt;
+  &lt;socket name="objectStreamSocket" port="8079" data="object"/&gt;
+&lt;/esperio-socket-configuration&gt;</pre><p>
+				When <code class="literal">object</code> data type is configured, clients connections are expected to send <code class="literal">java.io.Serializable</code> or <code class="literal">java.io.Externalizable</code> objects using <code class="literal">ObjectOutputStream</code>.
+			</p><p>
+				Below is a block of sample code that for use in clients to the adapter. It assumes the <code class="literal">MyEvent</code> class implements either of the above interfaces:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">// connect first
+Socket requestSocket = new Socket("localhost", port);
+ObjectOutputStream out = new ObjectOutputStream(requestSocket.getOutputStream());
+
+// send a few events, here we send only one
+out.writeObject(new MyEvent("Hello World"));
+out.flush();
+
+// Consider resetting the output stream from time-to-time, after sending a number of objects.
+// This is because the stream may cache strings etc. . The reset is:
+// out.reset();
+
+// close when done
+out.close();
+requestSocket.close();</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adaptersocket-input-csv"/>6.2.2. String CSV Data Format</h3></div></div></div><p>
+				When sending events as CSV strings, the format of the string should be:
+			</p><pre class="synopsis">stream=[type],[name]=[value] [,...] (newline)</pre><p>
+				The CSV string must end with a newline character: Each event is one line. Each CSV element must be in the <code class="literal">[name]=[value]</code> format. Your CSV must contain a value for <code class="literal">stream</code> which must denote a configured event type.
+				The adapter parses each string value and populates an instance of the target type.
+			</p><p>
+				This next example XML configures a socket accepting client connections that provide events as CSV-formatted strings with name-value pairs :
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-socket-configuration&gt;
+  &lt;socket name="csvStreamSocket" port="8079" data="csv"/&gt;
+&lt;/esperio-socket-configuration&gt;</pre><p>
+				A piece of client code that sends an event of type <code class="literal">MyEvent</code> may look as follows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">// connect first
+String newline = System.getProperty("line.separator");
+Socket requestSocket = new Socket("localhost", port);
+BufferedWriter wr = new BufferedWriter(
+    new OutputStreamWriter(socket.getOutputStream()));
+
+// send a few events
+wr.write("stream=MyEvent,price=20.d,upcCode=A0001");
+wr.write(newline);
+wr.flush();
+
+// close when done
+wr.close();
+requestSocket.close();</pre><p>
+				Note that if your target type is a Java object event, your event class must provide setter-methods according to JavaBean conventions. The event class should also provide a default constructor taking no parameters. If your event class does not have a default constructor, your application may configure a factory method via <code class="literal">ConfigurationEventTypeLegacy</code>.
+			</p></div></div></div><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_http.html"><strong>Prev</strong>Chapter 5. The HTTP Adapter</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="adapter_db.html"><strong>Next</strong>Chapter 7. The Relational Database Adapter</a></li></ul></body></html>

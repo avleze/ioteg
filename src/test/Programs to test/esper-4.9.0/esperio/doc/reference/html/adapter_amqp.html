@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 4. The AMQP Input and Output Adapter</title><link rel="stylesheet" href="css/espertech.css" type="text/css"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL-NS Stylesheets V1.74.0"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="home" href="index.html" title="EsperIO Reference"/><link rel="up" href="index.html" title="EsperIO Reference"/><link rel="prev" href="adapter_jms_spring.html" title="Chapter 3. The Spring JMS Input and Output Adapter"/><link rel="next" href="adapter_http.html" title="Chapter 5. The HTTP Adapter"/></head><body><p xmlns:d="http://docbook.org/ns/docbook" id="title"><a href="http://www.espertech.com" class="site_href"><strong>esper.codehaus.org and espertech.com</strong></a><a href="http://esper.codehaus.org/esper/documentation/documentation.html" class="doc_href"><strong>Documentation</strong></a></p><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_jms_spring.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="adapter_http.html"><strong>Next</strong></a></li></ul><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_amqp"/>Chapter 4. The AMQP Input and Output Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="adapter_amqp.html#amqp-intro">4.1. Introduction</a></span></dt><dt><span class="sect1"><a href="adapter_amqp.html#amqp-sink">4.2. AMQPSink Operator</a></span></dt><dt><span class="sect1"><a href="adapter_amqp.html#amqp-source">4.3. AMQPSource Operator</a></span></dt></dl></div><p>
+        This chapter discusses the input and output adapters for AMQP. 
+        AMQP input and output utilizes data flow operators.
+    </p><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="amqp-intro"/>4.1. Introduction</h2></div></div></div><p>
+			In order to use the AMQP data flow operators, add <code class="literal">esperio-amqp-</code><span class="emphasis"><em>version</em></span><code class="literal">.jar</code> to your classpath and import the operator package or class using the static or runtime configuration.
+		</p><p>
+			The following code snippet uses the runtime configuration API to import the AMQP adapter classes:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">epService.getEPAdministrator().getConfiguration()
+  .addImport(AMQPSource.class.getPackage().getName() + ".*");</pre><p>
+			The AMQP input and output adapter provides the following data flow operators:
+		</p><div class="table"><a id="adapter_amqp_operators"/><p class="title"><b>Table 4.1. AMQP Operators</b></p><div class="table-contents"><table summary="AMQP Operators" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Operator</th><th>Description</th></tr></thead><tbody><tr><td>AMQPSink</td><td>
+							<p>
+								Send messages to an AMQP broker. See <a class="xref" href="adapter_amqp.html#amqp-sink" title="4.2. AMQPSink Operator">Section 4.2, “AMQPSink Operator”</a>.
+							</p>
+						</td></tr><tr><td>AMQPSource</td><td>
+							<p>
+								Receive messages from an AMQP broker. See <a class="xref" href="adapter_amqp.html#amqp-source" title="4.3. AMQPSource Operator">Section 4.3, “AMQPSource Operator”</a>.
+							</p>
+						</td></tr></tbody></table></div></div><br class="table-break"/></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="amqp-sink"/>4.2. AMQPSink Operator</h2></div></div></div><p>
+		  The AMQPSink operator receives input stream events, transforms events to AMQP messages and sends messages into an AMQP queue.
+		</p><p>
+		  The AMQPSink operator must have a single input stream.
+		</p><p>
+		  The AMQPSink operator cannot declare any output streams.
+		</p><p>
+		  Parameters for the AMQPSink operator are:
+		</p><div class="table"><a id="amqpsink_params"/><p class="title"><b>Table 4.2. AMQPSink Parameters</b></p><div class="table-contents"><table summary="AMQPSink Parameters" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>host (required)</td><td>Host name string</td></tr><tr><td>queueName</td><td>Queue name string</td></tr><tr><td>collector (required)</td><td>Transformation class or instance for events to AMQP message</td></tr><tr><td>port</td><td>Port number integer</td></tr><tr><td>username</td><td>User name string</td></tr><tr><td>password</td><td>Password string (also see systemProperties or data flow instantiation options)</td></tr><tr><td>vhost</td><td>Vhost string</td></tr><tr><td>exchange</td><td>Exchange name string</td></tr><tr><td>routingKey</td><td>Routing key string</td></tr><tr><td>logMessage</td><td>Boolean indicator whether to log a text for each message</td></tr><tr><td>waitMSecNextMsg</td><td>Number of milliseconds wait between messages, a long-typed value</td></tr><tr><td>declareDurable</td><td>Boolean indicator whether durable, false by default</td></tr><tr><td>declareExclusive</td><td>Boolean indicator whether exclusive, false by default</td></tr><tr><td>declareAutoDelete</td><td>Boolean indicator whether auto-delete, true by default</td></tr><tr><td>declareAdditionalArgs</td><td>Map of additional arguments passed to AMQP of type Map&lt;String, Object&gt;</td></tr></tbody></table></div></div><br class="table-break"/><p>
+		  Either the <code class="literal">queueName</code> or the combination of <code class="literal">exchange</code> and <code class="literal">routingKey</code> are required parameters.
+		</p><p>
+		  The collector is required and must be specified to transform events to AMQP messages. The collector instance must implement the interface <code class="literal">ObjectToAMQPCollector</code>. The adapter provides a default implementation <code class="literal">ObjectToAMQPCollectorSerializable</code> that 
+		  employs default serialization.
+		</p><p>
+			The following example declares a data flow that is triggered by <code class="literal">MyMapEventType</code> events from the event bus (type not declared here) that sends serialized messages to an AMQP queue:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">create dataflow AMQPOutgoingDataFlow
+   EventBusSource -&gt; outstream&lt;MyMapEventType&gt; {}
+   AMQPSink(outstream) {
+     host: 'localhost',
+     queueName: 'myqueue',
+     collector: {class: 'ObjectToAMQPCollectorSerializable'}
+   }</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="amqp-source"/>4.3. AMQPSource Operator</h2></div></div></div><p>
+		  The AMQPSource operator receives AMQP messages from a queue, transforms messages and populates a data flow instance with events.
+		</p><p>
+		  The AMQPSource operator cannot declare any input streams.
+		</p><p>
+		  The AMQPSource operator must have a single output stream.
+		</p><p>
+		  Parameters for the AMQPSource operator are listed below, with the required parameters listed first:
+		</p><div class="table"><a id="amqpsource_params"/><p class="title"><b>Table 4.3. AMQPSource Parameters</b></p><div class="table-contents"><table summary="AMQPSource Parameters" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>host (required)</td><td>Host name string</td></tr><tr><td>queueName (required)</td><td>Queue name string</td></tr><tr><td>collector (required)</td><td>Transformation class or instance for AMQP message to underlying event transformation</td></tr><tr><td>port</td><td>Port number integer</td></tr><tr><td>username</td><td>User name string</td></tr><tr><td>password</td><td>Password string (also see systemProperties or data flow instantiation options)</td></tr><tr><td>vhost</td><td>Vhost string</td></tr><tr><td>exchange</td><td>Exchange name string</td></tr><tr><td>routingKey</td><td>Routing key string</td></tr><tr><td>logMessage</td><td>Boolean indiator whether to log a text for each message</td></tr><tr><td>waitMSecNextMsg</td><td>Number of milliseconds wait between messages, a long-typed value</td></tr><tr><td>declareDurable</td><td>Boolean indicator whether durable, false by default</td></tr><tr><td>declareExclusive</td><td>Boolean indicator whether exclusive, false by default</td></tr><tr><td>declareAutoDelete</td><td>Boolean indicator whether auto-delete, true by default</td></tr><tr><td>declareAdditionalArgs</td><td>Map of additional arguments passed to AMQP of type Map&lt;String, Object&gt;</td></tr><tr><td>prefetchCount</td><td>Prefetch count integer, defaults to 100</td></tr><tr><td>consumeAutoAck</td><td>Boolean indicator whether to auto-ack, true by default</td></tr></tbody></table></div></div><br class="table-break"/><p>
+		  The collector is required and must be specified to transform AMQP messages to events. The collector instance must implement the interface <code class="literal">AMQPToObjectCollector</code>. The adapter provides a default implementation <code class="literal">AMQPToObjectCollectorSerializable</code> that 
+		  employs default serialization.
+		</p><p>
+			The following example declares a data flow that is receives AMQP messages from a queue, transforms each message and sends each message of type <code class="literal">MyMapEventType</code> into the event bus:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">create dataflow AMQPIncomingDataFlow
+  AMQPSource -&gt; outstream&lt;MyMapEventType&gt; {
+    host: 'localhost',
+    queueName: 'myqueue',
+    collector: {class: 'AMQPToObjectCollectorSerializable'},
+    logMessages: true
+  }
+  EventBusSink(outstream){}</pre></div></div><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_jms_spring.html"><strong>Prev</strong>Chapter 3. The Spring JMS Input and Output Adapter</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="adapter_http.html"><strong>Next</strong>Chapter 5. The HTTP Adapter</a></li></ul></body></html>

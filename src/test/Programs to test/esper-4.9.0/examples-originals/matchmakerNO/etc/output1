@@ -1,0 +1,5 @@
+11:24:11,951 INFO  [MatchMakerMain] Setting up EPL
+11:24:13,158 INFO  [MatchMakerMain] Sending user information
+11:24:13,161 INFO  [MatchMakerMain] Sending some near locations
+11:24:13,162 INFO  [MatchMakerMain] Sending 100k of random locations
+11:24:13,347 INFO  [MatchMakerMain] Done.

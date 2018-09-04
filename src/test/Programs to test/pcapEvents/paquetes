@@ -1,0 +1,5 @@
+Los siguientes paquetes se ELIMINARÁN:
+  gnome-nettool libpcap-dev libpcap0.8 libpcap0.8-dev network-manager-pptp
+  network-manager-pptp-gnome nmap ppp pppconfig pppoeconf pptp-linux tcpdump
+  tcpick wireshark wireshark-common
+

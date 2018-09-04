@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 1. Adapter Overview</title><link rel="stylesheet" href="css/espertech.css" type="text/css"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL-NS Stylesheets V1.74.0"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="home" href="index.html" title="EsperIO Reference"/><link rel="up" href="index.html" title="EsperIO Reference"/><link rel="prev" href="preface.html" title="Preface"/><link rel="next" href="adapter_file.html" title="Chapter 2. The File and CSV Input and Output Adapter"/></head><body><p xmlns:d="http://docbook.org/ns/docbook" id="title"><a href="http://www.espertech.com" class="site_href"><strong>esper.codehaus.org and espertech.com</strong></a><a href="http://esper.codehaus.org/esper/documentation/documentation.html" class="doc_href"><strong>Documentation</strong></a></p><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="preface.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="adapter_file.html"><strong>Next</strong></a></li></ul><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_overview"/>Chapter 1. Adapter Overview</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="adapter_overview.html#adapter-shared">1.1. Adapter Library Classes</a></span></dt><dd><dl><dt><span class="sect2"><a href="adapter_overview.html#adapter-inputadapter">1.1.1. The Adapter Interface</a></span></dt><dt><span class="sect2"><a href="adapter_overview.html#adapter-inputsource">1.1.2. Using AdapterInputSource</a></span></dt></dl></dd></dl></div><p>
+        Input and output adapters to Esper provide the means of accepting events from various sources, and for making available events to destinations.
+    </p><p>
+        Most adapters present their own configuration as well as API. Some adapters also provide operators for use in data flows.
+    </p><p>
+        The following input and output adapters exist:
+    </p><div class="table"><a id="adapter-available"/><p class="title"><b>Table 1.1. Input and Output Adapters</b></p><div class="table-contents"><table summary="Input and Output Adapters" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Adapter</th><th>Description</th></tr></thead><tbody><tr><td>File Input and Output Adapter</td><td>
+						<p>
+							The file input and output adapter can read and wirte files, transform the textual values into events, play the events into the engine and write events into a file. The adapter also makes it possible to run complete simulations of events arriving in time-order from different input streams.
+						</p>
+					</td></tr><tr><td>Spring JMS Input and Output Adapter</td><td>
+						<p>
+							JMS adapters based on the JmsTemplate offered by Spring 2. Provides unmarshalling of JMS <code class="literal">javax.jms.Message</code> messages for sending into an engine instance, and marshaling of <code class="literal">com.espertech.esper.client.EventBean</code> events into JMS messages.
+						</p>
+					</td></tr><tr><td>Opentick Input Adapter</td><td>
+						<p>
+							The opentick input adapter receives real-time stock market data from opentick corporation's API. Please see <code class="literal">http://www.opentick.com</code> for more information. Opentick license, copyright and trademark are properties of opentick corporation.
+						</p>
+					</td></tr></tbody></table></div></div><br class="table-break"/><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter-shared"/>1.1. Adapter Library Classes</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapter-inputadapter"/>1.1.1. The Adapter Interface</h3></div></div></div><p>
+					The <code class="literal">Adapter</code> interface allows client applications to control the state of an input and output adapter. It provides state transition methods that each
+					input and output adapter implements. 
+			</p><p>
+					An input or output adapter is always in one of the following states:
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						Opened - The begin state; The adapter is not generating or accepting events in this state
+					</p></li><li><p>
+						Started - When the adapter is active, generating and accepting events
+					</p></li><li><p>
+						Paused - When operation of the adapter is suspended
+					</p></li><li><p>
+						Destroyed
+					</p></li></ul></div><p>
+					The state transition table below outlines adapter states and, for each state, the valid state transitions:
+			</p><div class="table"><a id="adapter-states"/><p class="title"><b>Table 1.2. Adapter State Transitions</b></p><div class="table-contents"><table summary="Adapter State Transitions" border="1"><colgroup><col/><col/><col/></colgroup><thead><tr><th>Start State</th><th>Method</th><th>Next State</th></tr></thead><tbody><tr><td>Opened</td><td>start()</td><td>Started</td></tr><tr><td>Opened</td><td>destroy()</td><td>Destroyed</td></tr><tr><td>Started</td><td>stop()</td><td>Opened</td></tr><tr><td>Started</td><td>pause()</td><td>Paused</td></tr><tr><td>Started</td><td>destroy()</td><td>Destroyed</td></tr><tr><td>Paused</td><td>resume()</td><td>Started</td></tr><tr><td>Paused</td><td>stop()</td><td>Opened</td></tr><tr><td>Paused</td><td>destroy()</td><td>Destroyed</td></tr></tbody></table></div></div><br class="table-break"/></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapter-inputsource"/>1.1.2. Using AdapterInputSource</h3></div></div></div><p>
+					The <code class="literal">com.espertech.esperio.AdapterInputSource</code> encapsulates information about an input source. Input adapters use the <code class="literal">AdapterInputSource</code> to determine how to read input. The class provides constructors for use with different input sources:
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						<code class="literal">java.io.Reader</code> to read character streams
+					</p></li><li><p>
+						<code class="literal">java.io.InputStream</code> to read byte streams
+					</p></li><li><p>
+						<code class="literal">java.net.URL</code>
+					</p></li><li><p>
+						Classpath resource by name
+					</p></li><li><p>
+						<code class="literal">java.io.File</code>
+					</p></li></ul></div><p>
+					Adapters resolve Classpath resources in the following order:
+			</p><div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+						Current thread classloader via <code class="literal">Thread.currentThread().getContextClassLoader().getResourceAsStream</code>
+					</p></li><li><p>
+						If the resource is not found: <code class="literal">AdapterInputSource.class.getResourceAsStream</code>
+					</p></li><li><p>
+						If the resource is not found: <code class="literal">AdapterInputSource.class.getClassLoader().getResourceAsStream</code>
+					</p></li></ol></div></div></div></div><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="preface.html"><strong>Prev</strong>Preface</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li><li class="next"><a accesskey="n" href="adapter_file.html"><strong>Next</strong>Chapter 2. The File and CSV Input and Output Adap...</a></li></ul></body></html>

@@ -1,0 +1,1 @@
+select * from OperationMeasurement.class.getName().std:groupwin(customerId).std:groupwin(operationName).win:length(100).stat:uni(latency)

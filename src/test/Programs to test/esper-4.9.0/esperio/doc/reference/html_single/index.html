@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">EsperIO Reference</title><link rel="stylesheet" href="css/espertech.css" type="text/css"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL-NS Stylesheets V1.74.0"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head><body><div class="book" lang="en-US"><div class="titlepage"><div><p xmlns:d="http://docbook.org/ns/docbook" id="title"><a href="http://www.espertech.com" class="site_href"><strong>esper.codehaus.org and espertech.com</strong></a><a href="http://esper.codehaus.org/esper/documentation/documentation.html" class="doc_href"><strong>Documentation</strong></a></p><div><h1 class="title"><a id="d0e1"/>EsperIO Reference</h1></div><div><div xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="authorgroup"><div class="authors">by <span xmlns="http://www.w3.org/1999/xhtml" class="orgname"><a class="link" href="http://esper.codehaus.org" target="">Esper Team and EsperTech Inc.</a></span></div><div class="editors"/><div class="others"/></div></div><div><p class="releaseinfo">Version 4.9.0</p></div><div><p class="copyright">Copyright © 2012 EsperTech Inc.</p></div></div><hr/></div><div class="toc"><dl><dt><span class="preface"><a href="#preface">Preface</a></span></dt><dt><span class="chapter"><a href="#adapter_overview">1. Adapter Overview</a></span></dt><dd><dl><dt><span class="sect1"><a href="#adapter-shared">1.1. Adapter Library Classes</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapter-inputadapter">1.1.1. The Adapter Interface</a></span></dt><dt><span class="sect2"><a href="#adapter-inputsource">1.1.2. Using AdapterInputSource</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#adapter_file">2. The File and CSV Input and Output Adapter</a></span></dt><dd><dl><dt><span class="sect1"><a href="#adapter_file_dataflow">2.1. Data Flow Operators</a></span></dt><dd><dl><dt><span class="sect2"><a href="#file-intro">2.1.1. Introduction</a></span></dt><dt><span class="sect2"><a href="#file-sink">2.1.2. FileSink Operator</a></span></dt><dt><span class="sect2"><a href="#file-source">2.1.3. FileSource Operator</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adapter_file_csv">2.2. CSV Input Adapter API</a></span></dt><dd><dl><dt><span class="sect2"><a href="#csv-intro">2.2.1. Introduction</a></span></dt><dt><span class="sect2"><a href="#csv-step-1">2.2.2. Playback of CSV-formatted Events</a></span></dt><dt><span class="sect2"><a href="#csv-step-2">2.2.3. CSV Playback Options</a></span></dt><dt><span class="sect2"><a href="#csv-step-3">2.2.4. Simulating Multiple Event Streams</a></span></dt><dt><span class="sect2"><a href="#csv-step-4">2.2.5. Pausing and Resuming Operation</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#adapter_jms_spring">3. The Spring JMS Input and Output Adapter</a></span></dt><dd><dl><dt><span class="sect1"><a href="#jms-spring-intro">3.1. Introduction</a></span></dt><dt><span class="sect1"><a href="#jms-spring-engine-config">3.2. Engine Configuration</a></span></dt><dt><span class="sect1"><a href="#jms-spring-input-config">3.3. Input Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="#jms-spring-input-config-file">3.3.1. Spring Configuration</a></span></dt><dt><span class="sect2"><a href="#jms-spring-input-unmarshal">3.3.2. JMS Message Unmarshalling</a></span></dt></dl></dd><dt><span class="sect1"><a href="#jms-spring-output-config">3.4. Output Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="#jms-spring-output-config-file">3.4.1. Spring Configuration</a></span></dt><dt><span class="sect2"><a href="#jms-spring-output-marshal">3.4.2. JMS Message Marshalling</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#adapter_amqp">4. The AMQP Input and Output Adapter</a></span></dt><dd><dl><dt><span class="sect1"><a href="#amqp-intro">4.1. Introduction</a></span></dt><dt><span class="sect1"><a href="#amqp-sink">4.2. AMQPSink Operator</a></span></dt><dt><span class="sect1"><a href="#amqp-source">4.3. AMQPSource Operator</a></span></dt></dl></dd><dt><span class="chapter"><a href="#adapter_http">5. The HTTP Adapter</a></span></dt><dd><dl><dt><span class="sect1"><a href="#adapterhttp-intro">5.1. Adapter Overview</a></span></dt><dt><span class="sect1"><a href="#adapterhttp-gettingstarted">5.2. Getting Started</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterhttp-gettingstarted-pluginloader">5.2.1. Plugin Loader Configuration</a></span></dt><dt><span class="sect2"><a href="#adapterhttp-gettingstarted-API">5.2.2. Configuration and Starting via API</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adapterhttp-input">5.3. HTTP Input Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterhttp-input-service">5.3.1. HTTP Service</a></span></dt><dt><span class="sect2"><a href="#adapterhttp-input-get">5.3.2. Get Handlers</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adapterhttp-output">5.4. HTTP Output Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterhttp-output-request">5.4.1. Triggered HTTP Get</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#adapter_socket">6. The Socket Adapter</a></span></dt><dd><dl><dt><span class="sect1"><a href="#adaptersocket-gettingstarted">6.1. Getting Started</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adaptersocket-gettingstarted-pluginloader">6.1.1. Plugin Loader Configuration</a></span></dt><dt><span class="sect2"><a href="#adaptersocket-gettingstarted-API">6.1.2. Configuration and Starting via API</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adaptersocket-input">6.2. Socket Service</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adaptersocket-input-object">6.2.1. Object Data Format</a></span></dt><dt><span class="sect2"><a href="#adaptersocket-input-csv">6.2.2. String CSV Data Format</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#adapter_db">7. The Relational Database Adapter</a></span></dt><dd><dl><dt><span class="sect1"><a href="#adapterdb-intro">7.1. Adapter Overview</a></span></dt><dt><span class="sect1"><a href="#adapterdb-gettingstarted">7.2. Getting Started</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterdb-gettingstarted-pluginloader">7.2.1. Plugin Loader Configuration</a></span></dt><dt><span class="sect2"><a href="#adapterdb-gettingstarted-API">7.2.2. Configuration and Starting via API</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adapterdb-jdbconnections">7.3. JDBC Connections</a></span></dt><dt><span class="sect1"><a href="#adapterdb-dml">7.4. Triggered DML Statement Execution</a></span></dt><dt><span class="sect1"><a href="#adapterdb-upsert">7.5. Triggered Update-Insert Execution</a></span></dt><dt><span class="sect1"><a href="#adapterdb-settings">7.6. Executor Configuration</a></span></dt><dt><span class="sect1"><a href="#adapterdb-reading">7.7. Reading and Polling Database Tables</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterdb-reading-polling">7.7.1. Polling and Startup SQL Queries</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#adapter_xmljson">8. XML and JSON Output</a></span></dt><dt><span class="chapter"><a href="#adapter_event_representations">9. Additional Event Representations</a></span></dt><dd><dl><dt><span class="sect1"><a href="#eventrep-axiom">9.1. Apache Axiom Events</a></span></dt></dl></dd></dl></div><div class="preface" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="preface"/>Preface</h2></div></div></div><p>
+			This document describes input and output adapters for the Esper Java event stream and complex event processor.
+        </p><p>
+			If you are new to Esper, the Esper reference manual should be your first stop.
+		</p><p>
+			If you are looking for information on a specific adapter, you are at the right spot.
+		</p></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_overview"/>Chapter 1. Adapter Overview</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="#adapter-shared">1.1. Adapter Library Classes</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapter-inputadapter">1.1.1. The Adapter Interface</a></span></dt><dt><span class="sect2"><a href="#adapter-inputsource">1.1.2. Using AdapterInputSource</a></span></dt></dl></dd></dl></div><p>
+        Input and output adapters to Esper provide the means of accepting events from various sources, and for making available events to destinations.
+    </p><p>
+        Most adapters present their own configuration as well as API. Some adapters also provide operators for use in data flows.
+    </p><p>
+        The following input and output adapters exist:
+    </p><div class="table"><a id="adapter-available"/><p class="title"><b>Table 1.1. Input and Output Adapters</b></p><div class="table-contents"><table summary="Input and Output Adapters" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Adapter</th><th>Description</th></tr></thead><tbody><tr><td>File Input and Output Adapter</td><td>
+						<p>
+							The file input and output adapter can read and wirte files, transform the textual values into events, play the events into the engine and write events into a file. The adapter also makes it possible to run complete simulations of events arriving in time-order from different input streams.
+						</p>
+					</td></tr><tr><td>Spring JMS Input and Output Adapter</td><td>
+						<p>
+							JMS adapters based on the JmsTemplate offered by Spring 2. Provides unmarshalling of JMS <code class="literal">javax.jms.Message</code> messages for sending into an engine instance, and marshaling of <code class="literal">com.espertech.esper.client.EventBean</code> events into JMS messages.
+						</p>
+					</td></tr><tr><td>Opentick Input Adapter</td><td>
+						<p>
+							The opentick input adapter receives real-time stock market data from opentick corporation's API. Please see <code class="literal">http://www.opentick.com</code> for more information. Opentick license, copyright and trademark are properties of opentick corporation.
+						</p>
+					</td></tr></tbody></table></div></div><br class="table-break"/><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter-shared"/>1.1. Adapter Library Classes</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapter-inputadapter"/>1.1.1. The Adapter Interface</h3></div></div></div><p>
+					The <code class="literal">Adapter</code> interface allows client applications to control the state of an input and output adapter. It provides state transition methods that each
+					input and output adapter implements. 
+			</p><p>
+					An input or output adapter is always in one of the following states:
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						Opened - The begin state; The adapter is not generating or accepting events in this state
+					</p></li><li><p>
+						Started - When the adapter is active, generating and accepting events
+					</p></li><li><p>
+						Paused - When operation of the adapter is suspended
+					</p></li><li><p>
+						Destroyed
+					</p></li></ul></div><p>
+					The state transition table below outlines adapter states and, for each state, the valid state transitions:
+			</p><div class="table"><a id="adapter-states"/><p class="title"><b>Table 1.2. Adapter State Transitions</b></p><div class="table-contents"><table summary="Adapter State Transitions" border="1"><colgroup><col/><col/><col/></colgroup><thead><tr><th>Start State</th><th>Method</th><th>Next State</th></tr></thead><tbody><tr><td>Opened</td><td>start()</td><td>Started</td></tr><tr><td>Opened</td><td>destroy()</td><td>Destroyed</td></tr><tr><td>Started</td><td>stop()</td><td>Opened</td></tr><tr><td>Started</td><td>pause()</td><td>Paused</td></tr><tr><td>Started</td><td>destroy()</td><td>Destroyed</td></tr><tr><td>Paused</td><td>resume()</td><td>Started</td></tr><tr><td>Paused</td><td>stop()</td><td>Opened</td></tr><tr><td>Paused</td><td>destroy()</td><td>Destroyed</td></tr></tbody></table></div></div><br class="table-break"/></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapter-inputsource"/>1.1.2. Using AdapterInputSource</h3></div></div></div><p>
+					The <code class="literal">com.espertech.esperio.AdapterInputSource</code> encapsulates information about an input source. Input adapters use the <code class="literal">AdapterInputSource</code> to determine how to read input. The class provides constructors for use with different input sources:
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						<code class="literal">java.io.Reader</code> to read character streams
+					</p></li><li><p>
+						<code class="literal">java.io.InputStream</code> to read byte streams
+					</p></li><li><p>
+						<code class="literal">java.net.URL</code>
+					</p></li><li><p>
+						Classpath resource by name
+					</p></li><li><p>
+						<code class="literal">java.io.File</code>
+					</p></li></ul></div><p>
+					Adapters resolve Classpath resources in the following order:
+			</p><div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+						Current thread classloader via <code class="literal">Thread.currentThread().getContextClassLoader().getResourceAsStream</code>
+					</p></li><li><p>
+						If the resource is not found: <code class="literal">AdapterInputSource.class.getResourceAsStream</code>
+					</p></li><li><p>
+						If the resource is not found: <code class="literal">AdapterInputSource.class.getClassLoader().getResourceAsStream</code>
+					</p></li></ol></div></div></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_file"/>Chapter 2. The File and CSV Input and Output Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="#adapter_file_dataflow">2.1. Data Flow Operators</a></span></dt><dd><dl><dt><span class="sect2"><a href="#file-intro">2.1.1. Introduction</a></span></dt><dt><span class="sect2"><a href="#file-sink">2.1.2. FileSink Operator</a></span></dt><dt><span class="sect2"><a href="#file-source">2.1.3. FileSource Operator</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adapter_file_csv">2.2. CSV Input Adapter API</a></span></dt><dd><dl><dt><span class="sect2"><a href="#csv-intro">2.2.1. Introduction</a></span></dt><dt><span class="sect2"><a href="#csv-step-1">2.2.2. Playback of CSV-formatted Events</a></span></dt><dt><span class="sect2"><a href="#csv-step-2">2.2.3. CSV Playback Options</a></span></dt><dt><span class="sect2"><a href="#csv-step-3">2.2.4. Simulating Multiple Event Streams</a></span></dt><dt><span class="sect2"><a href="#csv-step-4">2.2.5. Pausing and Resuming Operation</a></span></dt></dl></dd></dl></div><p>
+		The file input and output adapter consists of:
+    </p><div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+				File (including CSV) input and output utilizing data flow operators.
+			</p></li><li><p>
+				The CSV input adapter API. 
+			</p></li></ol></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_file_dataflow"/>2.1. Data Flow Operators</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="file-intro"/>2.1.1. Introduction</h3></div></div></div><p>
+				In order to use the File source and sink data flow operators, add <code class="literal">esperio-csv-</code><span class="emphasis"><em>version</em></span><code class="literal">.jar</code> to your classpath and import the operator package or class using the static or runtime configuration.
+			</p><p>
+				The following code snippet uses the runtime configuration API to import the File adapter classes:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">epService.getEPAdministrator().getConfiguration()
+	  .addImport(FileSource.class.getPackage().getName() + ".*");</pre><p>
+				The File input and output adapter provides the following data flow operators:
+			</p><div class="table"><a id="adapter_file_operators"/><p class="title"><b>Table 2.1. File Operators</b></p><div class="table-contents"><table summary="File Operators" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Operator</th><th>Description</th></tr></thead><tbody><tr><td>FileSink</td><td>
+								<p>
+									Write events to a file. See <a class="xref" href="#file-sink" title="2.1.2. FileSink Operator">Section 2.1.2, “FileSink Operator”</a>.
+								</p>
+							</td></tr><tr><td>FileSource</td><td>
+								<p>
+									Read events from a file. See <a class="xref" href="#file-source" title="2.1.3. FileSource Operator">Section 2.1.3, “FileSource Operator”</a>.
+								</p>
+							</td></tr></tbody></table></div></div><br class="table-break"/></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="file-sink"/>2.1.2. FileSink Operator</h3></div></div></div><p>
+			  The FileSink operator receives input stream events, transforms events to comma-separated format and writes to a file.
+			</p><p>
+			  The FileSink operator must have a single input stream.
+			</p><p>
+			  The FileSink operator cannot declare any output streams.
+			</p><p>
+			  Parameters for the FileSink operator are (required parameters are listed first):
+			</p><div class="table"><a id="filesink_params"/><p class="title"><b>Table 2.2. FileSink Parameters</b></p><div class="table-contents"><table summary="FileSink Parameters" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>file (required)</td><td>File name string. An absolute or relative file name.</td></tr><tr><td>classpathFile</td><td>Boolean indicator whether the file name is found in a classpath directory, false by default.</td></tr><tr><td>append</td><td>Boolean indicator whether to append or overwrite the file when it exists. false by default causes the existing file, if any, to be overwritten.</td></tr></tbody></table></div></div><br class="table-break"/><p>
+			The following example declares a data flow that is triggered by <code class="literal">MyMapEventType</code> events from the event bus (type not declared here) and that writes to the file <code class="literal">output.csv</code> the CSV-formatted events:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">create dataflow FileSinkSampleFlow
+   EventBusSource -&gt; outstream&lt;MyMapEventType&gt; {}
+   FileSink(outstream) {
+     file: 'output.csv',
+     append: true
+   }</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="file-source"/>2.1.3. FileSource Operator</h3></div></div></div><p>
+			  The FileSource operator reads from files, transforms file data and populates a data flow instance with events.
+			</p><p>
+			  The FileSource operator cannot declare any input streams.
+			</p><p>
+			  The FileSource operator must have at least one output stream. You can declare additional output streams to hold beginning-of-file and end-of-file indication.
+			</p><p>
+			  Parameters for the FileSource operator are listed below, with the required parameters listed first:
+			</p><div class="table"><a id="filesource_params"/><p class="title"><b>Table 2.3. FileSource Parameters</b></p><div class="table-contents"><table summary="FileSource Parameters" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>file (required, or provide <code class="literal">adapterInputSource</code>)</td><td>File name string</td></tr><tr><td>adapterInputSource (required, or provide <code class="literal">file</code>)</td><td>An instance of <code class="literal">AdapterInputSource</code> if a file name cannot be provided.</td></tr><tr><td>hasTitleLine</td><td>For use with the <code class="literal">csv</code> format, boolean indicator whether a title line exists that the operator should read and parse to obtain event property names.</td></tr><tr><td>hasHeaderLine</td><td>For use with the <code class="literal">csv</code> format, boolean indicator whether a header line exists that the operator should skip.</td></tr><tr><td>classpathFile</td><td>Boolean indicator whether the file is found in a classpath directory, false by default.</td></tr><tr><td>numLoops</td><td>For use with the <code class="literal">csv</code> format, number of loops, an integer value that instructs the engine to restart reading the file upon encountering EOF, defaults to zero.</td></tr><tr><td>propertyNames</td><td>For use with the <code class="literal">csv</code> format, string array with a list of property names in the same order they appear in the file.</td></tr><tr><td>format</td><td>Specify <code class="literal">csv</code> (the default) for comma-separate value or <code class="literal">line</code> for single-line.</td></tr><tr><td>propertyNameLine</td><td>For use with the <code class="literal">line</code> format, specifies the property name of the output event type that receives the line text of type string.</td></tr><tr><td>propertyNameFile</td><td>For use with the <code class="literal">line</code> format, specifies the property name of the output event type(s) that receive the file name of type string.</td></tr></tbody></table></div></div><br class="table-break"/><p>
+			  The first output stream holds per-line output events. For use with the <code class="literal">line</code> format and if declaring two output streams, the second stream holds end-of-file indication. If declaring three output streams, the second stream holds beginning-of-file indication and the third stream holds end-of-file indication.
+			</p><p>
+			The <code class="literal">line</code> format requires that the output stream's event type is an object-array event type that features a single string-type property that the operator populates with each line of the file.
+			</p><p>
+			  The file name (or <code class="literal">adapterInputSource</code>) may point to a zip file. If the file name ends with the literal <code class="literal">zip</code> the operator opens the zip file and uses the first packaged file.
+			  All other parameters including the format parameter for CSV or line-formatting then apply to the zipped file.
+			</p><p>
+				This example defines a data flow that consists of two operators that work together to read a file and send the resulting events into the engine:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">create dataflow SensorCSVFlow
+  FileSource -&gt; sensorstream&lt;TemperatureEventStream&gt; {
+    file: 'sensor_events.csv', 
+    propertyNames: ['sensor','temp','updtime'], 
+    numLoops: 3
+  }
+  EventBusSource(sensorstream){}</pre><p>
+				The data flow above configures the <code class="literal">FileSource</code> operator to read the file <code class="literal">sensor_events.csv</code>, populate the <code class="literal">sensor</code>, <code class="literal">temp</code> and <code class="literal">updtime</code> properties of the <code class="literal">TemperatureEventStream</code> event type (type definition not shown here) and make the output events available within the data flow under the name <code class="literal">sensorstream</code>.
+			</p><p>
+				The data flow above configures the <code class="literal">EventBusSource</code> operator to send the <code class="literal">sensorstream</code> events into the engine for processing.
+			</p><div class="sect3" lang="en-US"><div class="titlepage"><div><div><h4 class="title"><a id="file-source-sample"/>2.1.3.1. FileSource Operator Detailed Example</h4></div></div></div><p>
+				  This example shows the EPL and code to read and count lines in text files. 
+				</p><p>
+					Below EPL defines an event type to each hold the file line text as well as to indictate the beginning and end of a file (remove the semicolon if creating EPL individually and not as a module):
+				</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">// for beginning-of-file events
+create objectarray schema MyBOF (filename string); 
+// for end of file events
+create objectarray schema MyEOF (filename string); 
+// for line text events
+create objectarray schema MyLine (filename string, line string);  </pre><p>
+				  The next EPL statements count lines per file outputting the final line count only when the end-of-file is reached.
+				</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">// Initiate a context partition for each file, terminate upon end-of-file
+create context FileContext 
+  initiated by MyBOF as mybof 
+  terminated by MyEOF(filename=mybof.filename);
+  
+// For each file, count lines 
+context FileContext 
+  select context.mybof.filename as filename, count(*) as cnt
+  from MyLine(filename=context.mybof.filename)
+  output snapshot when terminated;</pre><p>
+				    The below EPL defines a data flow that reads text files line-by-line and that send events into the engine for processing.
+				  </p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">create dataflow MyEOFEventFileReader
+  FileSource -&gt; mylines&lt;MyLine&gt;, mybof&lt;MyBOF&gt;, myeof&lt;MyEOF&gt; { 
+    format: 'line', 
+    propertyNameLine: 'line',      // store the text in the event property 'line' 
+    propertyNameFile: 'filename'   // store the file name in 'filename'
+  }
+  EventBusSink(mylines, mybof, myeof) {}  // send events into engine</pre><p>
+				    The next sample code instantiates and runs data flows passing a file name:
+				  </p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">EPDataFlowInstantiationOptions options = new EPDataFlowInstantiationOptions();
+options.addParameterURI("FileSource/file", "myfile.txt");
+EPDataFlowInstance instance = epService.getEPRuntime().getDataFlowRuntime()
+    .instantiate("MyEOFEventFileReader",options);
+instance.run();</pre></div></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_file_csv"/>2.2. CSV Input Adapter API</h2></div></div></div><p>
+			This chapter discusses the CSV input adapter API. CSV is an abbreviation for comma-separated values. CSV files are simple text files in which each line
+			is a comma-separated list of values. CSV-formatted text can be read from many different input sources via <code class="literal">com.espertech.esperio.AdapterInputSource</code>.
+			Please consult the JavaDoc for additional information on <code class="literal">AdapterInputSource</code> and the CSV adapter.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="csv-intro"/>2.2.1. Introduction</h3></div></div></div><p>
+				In summary the CSV input adapter API performs the following functions:
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						Read events from an input source providing CSV-formatted text and send the events to an Esper engine instance
+					</p><div class="itemizedlist"><ul compact="compact"><li><p>
+								Read from different types of input sources
+							</p></li><li><p>
+								Use a timestamp column to schedule events being sent into the engine							
+							</p></li><li><p>
+								Playback with options such as file looping, events per second and other options
+							</p></li><li><p>
+								Use the Esper engine timer thread to read the CSV file
+							</p></li></ul></div></li><li><p>
+						Read multiple CSV files using a timestamp column to simulate events coming from different streams
+					</p></li></ul></div><p>
+				The following formatting rules and restrictions apply to CSV-formatted text:
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						Comment lines are prefixed with a single hash or pound <code class="literal">#</code> character
+					</p></li><li><p>
+						Strings are placed in double quotes, e.g. <code class="literal">"value"</code>
+					</p></li><li><p>
+						Escape rules follow common spreadsheet conventions, i.e. double quotes can be escaped via double quote
+					</p></li><li><p>
+						A column header is required unless a property order is defined explicitly
+					</p></li><li><p>
+						If a column header is used, properties are assumed to be of type String unless otherwise configured
+					</p></li><li><p>
+						The value of the timestamp column, if one is given, must be in ascending order
+					</p></li></ul></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="csv-step-1"/>2.2.2. Playback of CSV-formatted Events</h3></div></div></div><p>
+					The adapter reads events from a CSV input source and sends events to an engine using the class <code class="literal">com.espertech.esperio.csv.CSVInputAdapter</code>.
+			</p><p>
+					The below code snippet reads the CSV-formatted text file "simulation.csv" expecting the file in the classpath. The <code class="literal">AdapterInputSource</code> class can take other input sources.
+			</p><pre class="synopsis">AdapterInputSource source = new AdapterInputSource("simulation.csv");
+(new CSVInputAdapter(epServiceProvider, source, "PriceEvent")).start();</pre><p>
+					To use the CSVInputAdapter without any options, the event type <code class="literal">PriceEvent</code> and its property names and value types must be known to the engine. The next section elaborates on adapter options.
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						Configure the engine instance for a Map-based event type
+					</p></li><li><p>
+						Place a header record in your CSV file that names each column as specified in the event type
+					</p></li></ul></div><p>
+					The sample application code below shows all the steps to configure, via API, a Map-based event type and play the CSV file without setting any of the available options.
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">Map&lt;String, Class&gt; eventProperties = new HashMap&lt;String, Class&gt;();
+eventProperties.put("symbol", String.class);
+eventProperties.put("price", double.class);
+eventProperties.put("volume", Integer.class);
+
+Configuration configuration = new Configuration();
+configuration.addEventType("PriceEvent", eventProperties);
+
+epService = EPServiceProviderManager.getDefaultProvider(configuration);
+
+EPStatement stmt = epService.getEPAdministrator().createEPL(
+   "select symbol, price, volume from PriceEvent.win:length(100)");
+
+(new CSVInputAdapter(epService, new AdapterInputSource(filename), "PriceEvent")).start();</pre><p>
+					The contents of a sample CSV file is shown next.
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">symbol,price,volume
+IBM,55.5,1000</pre><p>
+					The next code snippet outlines using a <code class="literal">java.io.Reader</code> as an alternative input source :
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">String myCSV = "symbol, price, volume" + NEW_LINE + "IBM, 10.2, 10000";
+StringReader reader = new StringReader(myCSV);
+(new CSVInputAdapter(epService, new AdapterInputSource(reader), "PriceEvent")).start();</pre><p>
+				In the previous code samples, the <code class="literal">PriceEvent</code> properties were defined programmatically with their correct types. It is possible to
+				skip this step and use only a column header record. In such a case you must define property types in the header otherwise a type of String is assumed.
+			</p><p>Consider the following:</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">symbol,double price, int volume
+IBM,55.5,1000
+
+symbol,price,volume
+IBM,55.5,1000</pre><p>
+				The first CSV file defines explicit types in the column header while the second file does not. With the second file a statement like
+				<code class="literal">select sum(volume) from PriceEvent.win:time(1 min)</code> will be rejected as in the second file <code class="literal">volume</code> is defaulted
+				to type String - unless otherwise programmatically configured.
+			</p><div class="sect3" lang="en-US"><div class="titlepage"><div><div><h4 class="title"><a id="csv-beans"/>2.2.2.1. Using JavaBean POJO Events</h4></div></div></div><p>
+					The previous section used an event type based on <code class="literal">java.util.Map</code>. The adapter can also populate the CSV data into JavaBean events directly, as long as your event class provides setter-methods that follow JavaBean conventions. Note that esperio will ignore read-only properties i.e. if you have a read-only property priceByVolume it will not expect a corresponding column in the input file.
+				</p><p>
+					To use Java objects as events instead of Map-based event types, simply register the event type name for the Java class and provide the same name to the CSV adapter. 
+				</p><p>
+					The below code snipped assumes that a PriceEvent class exists that exposes setter-methods for the three properties. The setter-methods are, for example, <code class="literal">setSymbol(String s)</code>, <code class="literal">setPrice(double p)</code> and <code class="literal">setVolume(long v)</code>.
+				</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">Configuration configuration = new Configuration();
+configuration.addEventType("PriceEvent", PriceEvent.class);
+
+epService = EPServiceProviderManager.getDefaultProvider(configuration);
+
+EPStatement stmt = epService.getEPAdministrator().createEPL(
+   "select symbol, price, volume from PriceEvent.win:length(100)");
+
+(new CSVInputAdapter(epService, new AdapterInputSource(filename), "PriceEvent")).start();</pre><p>
+					When using JavaBean POJO Events, the event properties types are known from the underlying event type configuration.
+					The CSV file row header does not need to define column type explicitly.
+				</p></div><div class="sect3" lang="en-US"><div class="titlepage"><div><div><h4 class="title"><a id="nested"/>2.2.2.2. Dealing with event with nested properties</h4></div></div></div><p>
+					Wether you use JavaBean POJO or Map-based event types, EsperIO provides support for nested event properties up to one level of nesting.
+					The row header must then refer to the properties using a <code class="literal">propertyName.nestedPropertyName</code> syntax.
+					There is no support for mapped or indexed properties. 
+				</p><p>
+					For example consider the following:
+					</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">
+					public class Point {
+						int x;
+						int y;
+					
+						// with getters &amp; setters
+					}
+					public class Figure {
+						String name;
+						Point point; // point.x and point.y are nested properties 
+					
+						//with getters &amp; setters
+					}
+					</pre><p>
+					Or the equivalent representation with nested maps,
+					assuming "Figure" is the declared event type name,
+					the CSV file can contain the following row header:
+					</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">
+					name, point.x, point.y
+					
+					</pre><p>
+				</p></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="csv-step-2"/>2.2.3. CSV Playback Options</h3></div></div></div><p>
+					Use the <code class="literal">CSVInputAdapterSpec</code> class to set playback options. The following options are available:
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						Loop - Reads the CSV input source in a loop; When the end is reached, the input adapter rewinds to the beginning
+					</p></li><li><p>
+						Events per second - Controls the number of events per second that the adapter sends to the engine
+					</p></li><li><p>
+						Property order - Controls the order of event property values in the CSV input source, for use when the CSV input source does not have a header column
+					</p></li><li><p>
+						Property types - Defines a new Map-based event type given a map of event property names and types. No engine configuration for the event type is required as long as the input adapter is created before statements against the event type are created.
+					</p></li><li><p>
+						Engine thread - Instructs the adapter to use the engine timer thread to read the CSV input source and send events to the engine
+					</p></li><li><p>
+						External timer - Instructs the adapter to use the esper's external timer rather than the internal timer. See "Sending timer events" below
+					</p></li><li><p>
+						Timestamp column name - Defines the name of the timestamp column in the CSV input source; The timestamp column must carry long-typed timestamp values relative to the current time; Use zero for the current time
+					</p></li></ul></div><p>
+					The next code snippet shows the use of <code class="literal">CSVInputAdapterSpec</code> to set playback options.
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">CSVInputAdapterSpec spec = new CSVInputAdapterSpec(new AdapterInputSource(myURL), "PriceEvent");
+spec.setEventsPerSec(1000);
+spec.setLooping(true);
+  
+InputAdapter inputAdapter = new CSVInputAdapter(epService, spec);
+inputAdapter.start();	// method blocks unless engine thread option is set</pre><div class="sect3" lang="en-US"><div class="titlepage"><div><div><h4 class="title"><a id="csv-timer"/>2.2.3.1. Sending timer events</h4></div></div></div><p>
+				The adapter can be instructed to use either esper's internal timer, or to drive timing itself
+				by sending external timer events. If the internal timer is used, esperio will send all events in "real time". For example, if an input file contains the following data:
+				</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">symbol,price,volume,timestamp
+IBM,55.5,1000,2
+GOOG,9.5,1000,3
+MSFT,8.5,1000,3
+JAVA,7.5,1000,1004</pre><p>
+				then esperio will sleep for 1001 milliseconds between sending the MSFT and JAVA events to the engine.
+				</p><p>
+				If external timing is enabled then esperio will run through the input file at full speed 
+				without pausing. The algorithm used sends a time event after all events for a particular time
+				have been received. For the above example file a time event for 2 will be sent after IBM, for 3 after MSFT and 1004 after JAVA. 
+				For many of use cases this gives a performance improvement.
+				</p></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="csv-step-3"/>2.2.4. Simulating Multiple Event Streams</h3></div></div></div><p>
+					The CSV input adapter can run simulations of events arriving in time-order from different input streams. Use the <code class="literal">AdapterCoordinator</code> as a specialized input adapter for coordinating multiple CSV input sources by timestamp.
+			</p><p>
+					The sample application code listed below simulates price and trade events arriving in timestamp order. Via the adapter the application reads two CSV-formatted files from a URL that each contain a timestamp column as well as price or trade events. The <code class="literal">AdapterCoordinator</code> uses the timestamp column to send events to the engine in the exact ordering prescribed by the timestamp values.
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">AdapterInputSource sourceOne = new AdapterInputSource(new URL("FILE://prices.csv"));
+CSVInputAdapterSpec inputOne = new CSVInputAdapterSpec(sourceOne, "PriceEvent");
+inputOne.setTimestampColumn("timestamp");
+
+AdapterInputSource sourceTwo = new AdapterInputSource(new URL("FILE://trades.csv"));
+CSVInputAdapterSpec inputTwo = new CSVInputAdapterSpec(sourceTwo, "TradeEvent");
+inputTwo.setTimestampColumn("timestamp");
+
+AdapterCoordinator coordinator = new AdapterCoordinatorImpl(epService, true);
+coordinator.coordinate(new CSVInputAdapter(inputOne));
+coordinator.coordinate(new CSVInputAdapter(inputTwo));
+coordinator.start();</pre><p>
+					The <code class="literal">AdapterCoordinatorImpl</code> is provided with two parameters: the engine instance, and a boolean value 
+					that instructs the adapter to use the engine timer thread if set to true, and the adapter can use the application thread if the flag passed is false.
+			</p><p>
+				You may not set an event rate per second when using a timestamp column and time-order.
+			</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="csv-step-4"/>2.2.5. Pausing and Resuming Operation</h3></div></div></div><p>
+					The CSV adapter can employ the engine timer thread of an Esper engine instance to read and send events. This can be controlled via the <code class="literal">setUsingEngineThread</code> method on <code class="literal">CSVInputAdapterSpec</code>. We use that feature in the sample code below to pause and resume a running CSV input adapter.
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">CSVInputAdapterSpec spec = new CSVInputAdapterSpec(new AdapterInputSource(myURL), "PriceEvent");
+spec.setEventsPerSec(100);
+spec.setUsingEngineThread(true);
+  
+InputAdapter inputAdapter = new CSVInputAdapter(epService, spec);
+inputAdapter.start();	// method starts adapter and returns, non-blocking
+Thread.sleep(5000);	// sleep 5 seconds
+inputAdapter.pause();
+Thread.sleep(5000);	// sleep 5 seconds
+inputAdapter.resume();
+Thread.sleep(5000);	// sleep 5 seconds
+inputAdapter.stop();</pre></div></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_jms_spring"/>Chapter 3. The Spring JMS Input and Output Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="#jms-spring-intro">3.1. Introduction</a></span></dt><dt><span class="sect1"><a href="#jms-spring-engine-config">3.2. Engine Configuration</a></span></dt><dt><span class="sect1"><a href="#jms-spring-input-config">3.3. Input Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="#jms-spring-input-config-file">3.3.1. Spring Configuration</a></span></dt><dt><span class="sect2"><a href="#jms-spring-input-unmarshal">3.3.2. JMS Message Unmarshalling</a></span></dt></dl></dd><dt><span class="sect1"><a href="#jms-spring-output-config">3.4. Output Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="#jms-spring-output-config-file">3.4.1. Spring Configuration</a></span></dt><dt><span class="sect2"><a href="#jms-spring-output-marshal">3.4.2. JMS Message Marshalling</a></span></dt></dl></dd></dl></div><p>
+        This chapter discusses the input and output adapters for JMS based on the Spring JmsTemplate technology. 
+        For more information on Spring, and the latest version of Spring, please visit <a class="link" href="http://www.springframework.org" target="">http://www.springframework.org</a>.
+    </p><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="jms-spring-intro"/>3.1. Introduction</h2></div></div></div><p>
+			Here are the steps to use the adapters:
+		</p><div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+					Configure an Esper engine instance to use a <code class="literal">SpringContextLoader</code> for loading input and output adapters, and point it to a Spring JmsTemplate configuration file.
+				</p></li><li><p>
+					Create a Spring JmsTemplate configuration file for your JMS provider and add all your input and output adapter entries in the same file.
+				</p></li><li><p>
+					For receiving events from a JMS destination into an engine (input adapter):
+				</p><div class="orderedlist"><ol><li><p>
+							List the destination and un-marshalling class in the Spring configuration. 
+						</p></li><li><p>
+							Create EPL statements using the event type name matching the event objects or the Map-event type names received.
+						</p></li></ol></div></li><li><p>
+					For sending events to a JMS destination (output adapter):
+				</p><div class="orderedlist"><ol><li><p>
+							Use the <code class="literal">insert-into</code> syntax naming the stream to insert-into using the same name as listed in the Spring configuration file
+						</p></li><li><p>
+							Configure the Map event type of the stream in the engine configuration
+						</p></li></ol></div></li></ol></div><p>
+            In summary the Spring JMS input adapter performs the following functions:
+        </p><div class="itemizedlist"><ul compact="compact"><li><p>
+					Initialize from a given Spring configuration file in classpath or from a filename. The Spring configuration file sets all JMS parameters such as JMS connection factory, destination and listener pools.
+				</p></li><li><p>
+					Attach to a JMS destination and listen to messages using the Spring class <code class="literal">org.springframework.jms.core.JmsTemplate</code>
+				</p></li><li><p>
+					Unmarshal a JMS message and send into the configured engine instance
+				</p></li></ul></div><p>
+            The Spring JMS output adapter can:
+        </p><div class="itemizedlist"><ul compact="compact"><li><p>
+					Initialize from a given Spring configuration file in classpath or from a filename, and attach to a JMS destination
+				</p></li><li><p>
+					Act as a listener to one or more named streams populated via <code class="literal">insert-into</code> syntax by EPL statements
+				</p></li><li><p>
+					Marshal events generated by a stream into a JMS message, and send to the given destination
+				</p></li></ul></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="jms-spring-engine-config"/>3.2. Engine Configuration</h2></div></div></div><p>
+            The Spring JMS input and output adapters are configured as part of the Esper engine configuration. EsperIO supplies a <code class="literal">SpringContextLoader</code> class that loads a Spring
+            configuration file which in turn configures the JMS input and output adapters. List the <code class="literal">SpringContextLoader</code> class as an adapter loader in the Esper configuration file as the below example shows. The configuration API can alternatively be used to configure one or more adapter loaders.
+        </p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+
+  &lt;!-- Sample configuration for an input/output adapter loader --&gt;
+  &lt;plugin-loader name="MyLoader" class-name="com.espertech.esperio.SpringContextLoader"&gt;
+    &lt;!-- SpringApplicationContext translates into Spring ClassPathXmlApplicationContext 
+           or FileSystemXmlApplicationContext. Only one app-context of a sort can be used. 
+           When both attributes are used classpath and file, classpath prevails --&gt;
+    &lt;init-arg name="classpath-app-context" value="spring\jms-spring.xml" /&gt;
+    &lt;init-arg name="file-app-context" value="spring\jms-spring.xml" /&gt;
+  &lt;/plugin-loader&gt;
+
+&lt;/esper-configuration&gt;</pre><p>
+            The loader loads the Spring configuration file from classpath via the <code class="literal">classpath-app-context</code> configuration, or from a file via <code class="literal">file-app-context</code>.
+        </p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="jms-spring-input-config"/>3.3. Input Adapter</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="jms-spring-input-config-file"/>3.3.1. Spring Configuration</h3></div></div></div><p>
+				The Spring configuration file must list input and output adapters to be initialized by <code class="literal">SpringContextLoader</code> upon engine initialization.
+				Please refer to your JMS provider documentation, and the Spring framework documentation on help to configure your specific JMS provider via Spring.
+			</p><p>
+				The next XML snippet shows a complete sample configuration for an input adapter. The sample includes the JMS configuration for an Apache ActiveMQ JMS provider.
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;!-- Spring Application Context --&gt;
+&lt;beans default-destroy-method="destroy"&gt;
+
+  &lt;!-- JMS ActiveMQ Connection Factory --&gt;
+  &lt;bean id="jmsActiveMQFactory" class="org.apache.activemq.pool.PooledConnectionFactory"&gt;
+    &lt;property name="connectionFactory"&gt;
+      &lt;bean class="org.apache.activemq.ActiveMQConnectionFactory"&gt;
+        &lt;property name="brokerURL" value="tcp://localhost:61616"/&gt;
+      &lt;/bean&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  ActiveMQ destination to use  by default --&gt;
+  &lt;bean id="defaultDestination"
+        class="org.apache.activemq.command.ActiveMQQueue"&gt;
+    &lt;constructor-arg value="ESPER.QUEUE"/&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  Spring JMS Template for ActiveMQ --&gt;
+  &lt;bean id="jmsActiveMQTemplate" class="org.springframework.jms.core.JmsTemplate"&gt;
+    &lt;property name="connectionFactory"&gt;
+      &lt;ref bean="jmsActiveMQFactory"/&gt;
+    &lt;/property&gt;
+    &lt;property name="defaultDestination"&gt;
+      &lt;ref bean="defaultDestination"/&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;!-- Provides listener threads --&gt;
+  &lt;bean id="listenerContainer" 
+              class="org.springframework.jms.listener.SimpleMessageListenerContainer"&gt;
+    &lt;property name="connectionFactory" ref="jmsActiveMQFactory"/&gt;
+    &lt;property name="destination" ref="defaultDestination"/&gt;
+    &lt;property name="messageListener" ref="jmsInputAdapter"/&gt;
+  &lt;/bean&gt;
+
+  &lt;!-- Default unmarshaller --&gt;
+  &lt;bean id="jmsMessageUnmarshaller" 
+              class="com.espertech.esperio.jms.JMSDefaultAnyMessageUnmarshaller"/&gt;
+
+  &lt;!-- Input adapter --&gt;
+  &lt;bean id="jmsInputAdapter" class="com.espertech.esperio.jms.SpringJMSTemplateInputAdapter"&gt;
+    &lt;property name="jmsTemplate"&gt;
+      &lt;ref bean="jmsActiveMQTemplate"/&gt;
+    &lt;/property&gt;
+    &lt;property name="jmsMessageUnmarshaller"&gt;
+      &lt;ref bean="jmsMessageUnmarshaller"/&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+&lt;/beans&gt;</pre><p>
+				This input adapter attaches to the JMS destination <code class="literal">ESPER.QUEUE</code> at an Apache MQ broker available at port <code class="literal">tcp://localhost:61616</code>. It configures an un-marshalling class as discussed next.
+			</p></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="jms-spring-input-unmarshal"/>3.3.2. JMS Message Unmarshalling</h3></div></div></div><p>
+				EsperIO provides a class for unmarshaling JMS message instances into events for processing by an engine in the class <code class="literal">JMSDefaultAnyMessageUnmarshaller</code>. The class unmarshals as follows:
+			</p><div class="itemizedlist"><ul compact="compact"><li><p>
+						If the received Message is of type <code class="literal">javax.xml.MapMessage</code>, extract the event type name out of the message and send to the engine via <code class="literal">sendEvent(name, Map)</code> 
+					</p></li><li><p>
+						If the received Message is of type <code class="literal">javax.xml.ObjectMessage</code>, extract the <code class="literal">Serializable</code> out of the message and send to the engine via <code class="literal">sendEvent(Object)</code>
+					</p></li><li><p>
+						Else the un-marshaller outputs a warning and ignores the message
+					</p></li></ul></div><p>
+				The unmarshaller must be made aware of the event type of events within <code class="literal">MapMessage</code> messages. This is achieved by the client application setting a well-defined property on the message: <code class="literal">InputAdapter.ESPERIO_MAP_EVENT_TYPE</code>.  An example code snippet is:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">MapMessage mapMessage = jmsSession.createMapMessage();
+mapMessage.setObject(InputAdapter.ESPERIO_MAP_EVENT_TYPE, "MyInputEvent");</pre></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="jms-spring-output-config"/>3.4. Output Adapter</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="jms-spring-output-config-file"/>3.4.1. Spring Configuration</h3></div></div></div><p>
+				The Spring configuration file lists all input and output adapters in one file. The <code class="literal">SpringContextLoader</code> upon engine initialization starts all input and output adapters.
+			</p><p>
+				The next XML snippet shows a complete sample configuration of an output adapter. Please check with your JMS provider for the appropriate Spring class names and settings. Note that the input and output adapter Spring configurations can be in the same file.
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">
+&lt;!-- Application Context --&gt;
+&lt;beans default-destroy-method="destroy"&gt;
+
+  &lt;!-- JMS ActiveMQ Connection Factory --&gt;
+  &lt;bean id="jmsActiveMQFactory" class="org.apache.activemq.pool.PooledConnectionFactory"&gt;
+    &lt;property name="connectionFactory"&gt;
+      &lt;bean class="org.apache.activemq.ActiveMQConnectionFactory"&gt;
+        &lt;property name="brokerURL" value="tcp://localhost:61616"/&gt;
+      &lt;/bean&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  ActiveMQ destination to use  by default --&gt;
+  &lt;bean id="defaultDestination"
+        class="org.apache.activemq.command.ActiveMQQueue"&gt;
+    &lt;constructor-arg value="ESPER.QUEUE"/&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  Spring JMS Template for ActiveMQ --&gt;
+  &lt;bean id="jmsActiveMQTemplate" class="org.springframework.jms.core.JmsTemplate"&gt;
+    &lt;property name="connectionFactory"&gt;
+      &lt;ref bean="jmsActiveMQFactory"/&gt;
+    &lt;/property&gt;
+    &lt;property name="defaultDestination"&gt;
+      &lt;ref bean="defaultDestination"/&gt;
+    &lt;/property&gt;
+    &lt;property name="receiveTimeout"&gt;
+      &lt;value&gt;30000&lt;/value&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;!--  Marshaller marshals events into map messages --&gt;
+  &lt;bean id="jmsMessageMarshaller" class="com.espertech.esperio.jms.JMSDefaultMapMessageMarshaller"/&gt;
+  &lt;bean id="myCustomMarshaller" class="com.espertech.esperio.jms.JMSDefaultMapMessageMarshaller"/&gt;
+
+  &lt;!--  Output adapter puts it all together --&gt;
+  &lt;bean id="jmsOutputAdapter" class="com.espertech.esperio.jms.SpringJMSTemplateOutputAdapter"&gt;
+    &lt;property name="jmsTemplate"&gt;
+      &lt;ref bean="jmsActiveMQTemplate"/&gt;
+    &lt;/property&gt;
+    &lt;property name="subscriptionMap"&gt;
+      &lt;map&gt;
+        &lt;entry&gt;
+          &lt;key&gt;&lt;idref local="subscriptionOne"/&gt;&lt;/key&gt;
+          &lt;ref bean="subscriptionOne"/&gt;
+        &lt;/entry&gt;
+        &lt;entry&gt;
+          &lt;key&gt;&lt;idref local="subscriptionTwo"/&gt;&lt;/key&gt;
+          &lt;ref bean="subscriptionTwo"/&gt;
+        &lt;/entry&gt;
+      &lt;/map&gt;
+    &lt;/property&gt;
+    &lt;property name="jmsMessageMarshaller"&gt;
+      &lt;ref bean="jmsMessageMarshaller"/&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="subscriptionOne" class="com.espertech.esperio.jms.JMSSubscription"&gt;
+    &lt;property name="eventTypeName" value="MyOutputStream"/&gt;
+  &lt;/bean&gt;
+
+  &lt;bean id="subscriptionTwo" class="com.espertech.esperio.jms.JMSSubscription"&gt;
+    &lt;property name="eventTypeName" value="MyOtherOutputStream"/&gt;
+    &lt;property name="jmsMessageMarshaller"&gt;
+      &lt;ref bean="myCustomMarshaller"/&gt;
+    &lt;/property&gt;
+  &lt;/bean&gt;
+
+&lt;/beans&gt;</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="jms-spring-output-marshal"/>3.4.2. JMS Message Marshalling</h3></div></div></div><p>
+				EsperIO provides a marshal implementation in the class <code class="literal">JMSDefaultMapMessageMarshaller</code>. This marshaller constructs a JMS <code class="literal">MapMessage</code> from any event received by copying 
+				event properties into the name-value pairs of the message. The configuration file makes it easy to configure a custom marshaller that adheres to the <code class="literal">com.espertech.esperio.jms.JMSMessageMarshaller</code> interface.
+			</p><p>
+                Note that this marshaller uses <code class="literal">javax.jms.MapMessage</code> name-value pairs and not general <code class="literal">javax.jms.Message</code> properties.
+                This means when you'll read the event properties back from the JMS MapMessage, you will have to use the <code class="literal">javax.jms.MapMessage.getObject(...)</code> method.
+            </p><p>
+				The <code class="literal">SpringJMSTemplateOutputAdapter</code> is configured with a list of subscription instances of type <code class="literal">JMSSubscription</code> as the sample configuration shows. Each subscription defines 
+				an event type name that must be configured and used in the <code class="literal">insert-into</code> syntax of a statement.
+			</p><p>
+				To connect the Spring JMS output adapter and the EPL statements producing events, use the <code class="literal">insert-into</code> syntax to direct events for output.  Here is a sample statement that sends events into <code class="literal">MyOutputStream</code>:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">insert into MyOutputStream select assetId, zone from RFIDEvent</pre><p>
+				The type <code class="literal">MyOutputStream</code> must be known to an engine instance. The output adapter requires the name to be configured with the Engine instance, e.g.:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;event-type name="MyOutputStream"&gt;
+    &lt;java-util-map&gt;
+      &lt;map-property name="assetId" class="String"/&gt;
+      &lt;map-property name="zone" class="int"/&gt;
+    &lt;/java-util-map&gt;
+  &lt;/event-type&gt;
+&lt;/esper-configuration&gt;</pre></div></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_amqp"/>Chapter 4. The AMQP Input and Output Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="#amqp-intro">4.1. Introduction</a></span></dt><dt><span class="sect1"><a href="#amqp-sink">4.2. AMQPSink Operator</a></span></dt><dt><span class="sect1"><a href="#amqp-source">4.3. AMQPSource Operator</a></span></dt></dl></div><p>
+        This chapter discusses the input and output adapters for AMQP. 
+        AMQP input and output utilizes data flow operators.
+    </p><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="amqp-intro"/>4.1. Introduction</h2></div></div></div><p>
+			In order to use the AMQP data flow operators, add <code class="literal">esperio-amqp-</code><span class="emphasis"><em>version</em></span><code class="literal">.jar</code> to your classpath and import the operator package or class using the static or runtime configuration.
+		</p><p>
+			The following code snippet uses the runtime configuration API to import the AMQP adapter classes:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">epService.getEPAdministrator().getConfiguration()
+  .addImport(AMQPSource.class.getPackage().getName() + ".*");</pre><p>
+			The AMQP input and output adapter provides the following data flow operators:
+		</p><div class="table"><a id="adapter_amqp_operators"/><p class="title"><b>Table 4.1. AMQP Operators</b></p><div class="table-contents"><table summary="AMQP Operators" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Operator</th><th>Description</th></tr></thead><tbody><tr><td>AMQPSink</td><td>
+							<p>
+								Send messages to an AMQP broker. See <a class="xref" href="#amqp-sink" title="4.2. AMQPSink Operator">Section 4.2, “AMQPSink Operator”</a>.
+							</p>
+						</td></tr><tr><td>AMQPSource</td><td>
+							<p>
+								Receive messages from an AMQP broker. See <a class="xref" href="#amqp-source" title="4.3. AMQPSource Operator">Section 4.3, “AMQPSource Operator”</a>.
+							</p>
+						</td></tr></tbody></table></div></div><br class="table-break"/></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="amqp-sink"/>4.2. AMQPSink Operator</h2></div></div></div><p>
+		  The AMQPSink operator receives input stream events, transforms events to AMQP messages and sends messages into an AMQP queue.
+		</p><p>
+		  The AMQPSink operator must have a single input stream.
+		</p><p>
+		  The AMQPSink operator cannot declare any output streams.
+		</p><p>
+		  Parameters for the AMQPSink operator are:
+		</p><div class="table"><a id="amqpsink_params"/><p class="title"><b>Table 4.2. AMQPSink Parameters</b></p><div class="table-contents"><table summary="AMQPSink Parameters" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>host (required)</td><td>Host name string</td></tr><tr><td>queueName</td><td>Queue name string</td></tr><tr><td>collector (required)</td><td>Transformation class or instance for events to AMQP message</td></tr><tr><td>port</td><td>Port number integer</td></tr><tr><td>username</td><td>User name string</td></tr><tr><td>password</td><td>Password string (also see systemProperties or data flow instantiation options)</td></tr><tr><td>vhost</td><td>Vhost string</td></tr><tr><td>exchange</td><td>Exchange name string</td></tr><tr><td>routingKey</td><td>Routing key string</td></tr><tr><td>logMessage</td><td>Boolean indicator whether to log a text for each message</td></tr><tr><td>waitMSecNextMsg</td><td>Number of milliseconds wait between messages, a long-typed value</td></tr><tr><td>declareDurable</td><td>Boolean indicator whether durable, false by default</td></tr><tr><td>declareExclusive</td><td>Boolean indicator whether exclusive, false by default</td></tr><tr><td>declareAutoDelete</td><td>Boolean indicator whether auto-delete, true by default</td></tr><tr><td>declareAdditionalArgs</td><td>Map of additional arguments passed to AMQP of type Map&lt;String, Object&gt;</td></tr></tbody></table></div></div><br class="table-break"/><p>
+		  Either the <code class="literal">queueName</code> or the combination of <code class="literal">exchange</code> and <code class="literal">routingKey</code> are required parameters.
+		</p><p>
+		  The collector is required and must be specified to transform events to AMQP messages. The collector instance must implement the interface <code class="literal">ObjectToAMQPCollector</code>. The adapter provides a default implementation <code class="literal">ObjectToAMQPCollectorSerializable</code> that 
+		  employs default serialization.
+		</p><p>
+			The following example declares a data flow that is triggered by <code class="literal">MyMapEventType</code> events from the event bus (type not declared here) that sends serialized messages to an AMQP queue:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">create dataflow AMQPOutgoingDataFlow
+   EventBusSource -&gt; outstream&lt;MyMapEventType&gt; {}
+   AMQPSink(outstream) {
+     host: 'localhost',
+     queueName: 'myqueue',
+     collector: {class: 'ObjectToAMQPCollectorSerializable'}
+   }</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="amqp-source"/>4.3. AMQPSource Operator</h2></div></div></div><p>
+		  The AMQPSource operator receives AMQP messages from a queue, transforms messages and populates a data flow instance with events.
+		</p><p>
+		  The AMQPSource operator cannot declare any input streams.
+		</p><p>
+		  The AMQPSource operator must have a single output stream.
+		</p><p>
+		  Parameters for the AMQPSource operator are listed below, with the required parameters listed first:
+		</p><div class="table"><a id="amqpsource_params"/><p class="title"><b>Table 4.3. AMQPSource Parameters</b></p><div class="table-contents"><table summary="AMQPSource Parameters" border="1"><colgroup><col/><col/></colgroup><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>host (required)</td><td>Host name string</td></tr><tr><td>queueName (required)</td><td>Queue name string</td></tr><tr><td>collector (required)</td><td>Transformation class or instance for AMQP message to underlying event transformation</td></tr><tr><td>port</td><td>Port number integer</td></tr><tr><td>username</td><td>User name string</td></tr><tr><td>password</td><td>Password string (also see systemProperties or data flow instantiation options)</td></tr><tr><td>vhost</td><td>Vhost string</td></tr><tr><td>exchange</td><td>Exchange name string</td></tr><tr><td>routingKey</td><td>Routing key string</td></tr><tr><td>logMessage</td><td>Boolean indiator whether to log a text for each message</td></tr><tr><td>waitMSecNextMsg</td><td>Number of milliseconds wait between messages, a long-typed value</td></tr><tr><td>declareDurable</td><td>Boolean indicator whether durable, false by default</td></tr><tr><td>declareExclusive</td><td>Boolean indicator whether exclusive, false by default</td></tr><tr><td>declareAutoDelete</td><td>Boolean indicator whether auto-delete, true by default</td></tr><tr><td>declareAdditionalArgs</td><td>Map of additional arguments passed to AMQP of type Map&lt;String, Object&gt;</td></tr><tr><td>prefetchCount</td><td>Prefetch count integer, defaults to 100</td></tr><tr><td>consumeAutoAck</td><td>Boolean indicator whether to auto-ack, true by default</td></tr></tbody></table></div></div><br class="table-break"/><p>
+		  The collector is required and must be specified to transform AMQP messages to events. The collector instance must implement the interface <code class="literal">AMQPToObjectCollector</code>. The adapter provides a default implementation <code class="literal">AMQPToObjectCollectorSerializable</code> that 
+		  employs default serialization.
+		</p><p>
+			The following example declares a data flow that is receives AMQP messages from a queue, transforms each message and sends each message of type <code class="literal">MyMapEventType</code> into the event bus:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">create dataflow AMQPIncomingDataFlow
+  AMQPSource -&gt; outstream&lt;MyMapEventType&gt; {
+    host: 'localhost',
+    queueName: 'myqueue',
+    collector: {class: 'AMQPToObjectCollectorSerializable'},
+    logMessages: true
+  }
+  EventBusSink(outstream){}</pre></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_http"/>Chapter 5. The HTTP Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="#adapterhttp-intro">5.1. Adapter Overview</a></span></dt><dt><span class="sect1"><a href="#adapterhttp-gettingstarted">5.2. Getting Started</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterhttp-gettingstarted-pluginloader">5.2.1. Plugin Loader Configuration</a></span></dt><dt><span class="sect2"><a href="#adapterhttp-gettingstarted-API">5.2.2. Configuration and Starting via API</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adapterhttp-input">5.3. HTTP Input Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterhttp-input-service">5.3.1. HTTP Service</a></span></dt><dt><span class="sect2"><a href="#adapterhttp-input-get">5.3.2. Get Handlers</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adapterhttp-output">5.4. HTTP Output Adapter</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterhttp-output-request">5.4.1. Triggered HTTP Get</a></span></dt></dl></dd></dl></div><p>
+        This chapter discusses the EsperIO HTTP adapter.
+    </p><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterhttp-intro"/>5.1. Adapter Overview</h2></div></div></div><p>
+			The EsperIO HTTP input and output adapter can be used to send events into an Esper engine instance as well as perform HTTP requests triggered by output events generated by an Esper engine instance.
+		</p><p>
+			To send events into an Esper engine instance for processing you declare an HTTP service, which causes the adapter to expose an HTTP protocol server on the configured port to handle incoming requests.
+			Your configuration then attaches Get handlers that receive Get requests that post events into the engine with data from each request.		
+		</p><p>
+			Output events generated by an Esper engine instance can trigger an HTTP Get operation to a URI of your choice. For this purpose define a triggering event stream and the desired target URI and parameters.
+		</p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterhttp-gettingstarted"/>5.2. Getting Started</h2></div></div></div><p>
+			You may configure the EsperIO HTTP adapter either as part of your Esper configuration file in the plugin loader section or via the adapter API.	Add the <code class="literal">esperio-http-version.jar</code> file to your classpath.
+		</p><p>
+			For input adapter operation, add the <code class="literal">httpcore-</code><span class="emphasis"><em>version</em></span><code class="literal">.jar</code> to your classpath. If using Java NIO add the <code class="literal">httpcore-nio-</code><span class="emphasis"><em>version</em></span><code class="literal">.jar</code> to your classpath in addition.
+		</p><p>
+			For output adapter operation, add the <code class="literal">httpclient-</code><span class="emphasis"><em>version</em></span><code class="literal">.jar</code> to your classpath.
+		</p><p>
+			A sample adapter configuration file is provided in <code class="literal">esperio-http-sample-config.xml</code> in the <code class="literal">etc</code> folder of the distribution. A configuration file must be valid according to schema <code class="literal">esperio-http-configuration-4-0.xsd</code>.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterhttp-gettingstarted-pluginloader"/>5.2.1. Plugin Loader Configuration</h3></div></div></div><p>
+				You may place the configuration XML directly into your Esper configuration file as the example below shows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIOHTTPAdapter" 
+      class-name="com.espertech.esperio.http.EsperIOHTTPAdapterPlugin"&gt;
+    &lt;config-xml&gt;	
+      &lt;esperio-http-configuration&gt;
+        .....as outlined below or contents of esperio-http-sample-config.xml here...
+      &lt;/esperio-http-configuration&gt;
+    &lt;/config-xml&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre><p>
+				Alternatively you can provide a URL in the Esper configuration file to point to your adapter configuration file:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIOHTTPAdapter" 
+      class-name="com.espertech.esperio.http.EsperIOHTTPAdapterPlugin"&gt;
+      &lt;init-arg name="esperio.http.configuration.file" 
+          value="file:/path/esperio-http-sample-config.xml" /&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterhttp-gettingstarted-API"/>5.2.2. Configuration and Starting via API</h3></div></div></div><p>
+				If using Spring or if your application requires API access, the following code snippet configures and starts the adapter via API.
+			</p><p>
+				The class for configuring an EsperIO HTTP adapter is <code class="literal">com.espertech.esperio.http.config.ConfigurationHTTPAdapter</code>. The adapter class itself is
+				<code class="literal">EsperIOHTTPAdapter</code>.
+			</p><p>
+				The code snippet below is a sample that configures using driver manager and starts the adapter via API:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">ConfigurationHTTPAdapter adapterConfig = new ConfigurationHTTPAdapter();
+
+// add additional configuration
+Request request = new Request();
+request.setStream("TriggerEvent");
+request.setUri("http://localhost:8077/root");
+adapterConfig.getRequests().add(request);
+
+// start adapter
+EsperIOHTTPAdapter httpAdapter = new EsperIOHTTPAdapter(adapterConfig, "engineURI");
+httpAdapter.start();
+
+// destroy the adapter when done
+httpAdapter.destroy();</pre></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterhttp-input"/>5.3. HTTP Input Adapter</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterhttp-input-service"/>5.3.1. HTTP Service</h3></div></div></div><p>
+				A service is required for the adapter to receive events via a HTTP client connection.
+			</p><p>
+				The synopsis is as follows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-http-configuration&gt;
+  &lt;service name="[name]" port="[port]" [nio="true|false"]/&gt;
+  &lt;!-- add additional configuration here --&gt;
+&lt;/esperio-http-configuration&gt;</pre><p>
+			  The <span class="emphasis"><em>name</em></span> attribute value is required and provides the name of the HTTP service for use in logging and for get-handlers as described below.
+			</p><p>
+			  The <span class="emphasis"><em>nio</em></span> attribute is optional and can be used to enable Java NIO (disabled by default).
+			</p><p>
+			  If configuring via the adapter API or Spring, use the <code class="literal">com.espertech.esperio.http.config.Service</code> class.
+			</p><p>
+				An example XML to configure a service and single get-handler is:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-http-configuration&gt;
+  &lt;service name="myservice" port="8079" nio="false"/&gt;
+  &lt;get service="myservice" pattern="*"/&gt;
+&lt;/esperio-http-configuration&gt;</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterhttp-input-get"/>5.3.2. Get Handlers</h3></div></div></div><p>
+				One or more handlers for HTTP Get operations can be installed for a service and are used to receive events.
+			</p><p>
+				Define a <code class="literal">get</code> element in the adapter configuration file (or use the <code class="literal">GetRequest</code> class) for every handler to register for a service. 
+			</p><p>
+				The synopsis is as follows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;get service="[service]" pattern="[pattern]"/&gt;</pre><p>
+			  The <span class="emphasis"><em>service</em></span> attribute value is required and provides the name of the HTTP service to register the Get operation handler for.
+			</p><p>
+			  A value for the <span class="emphasis"><em>pattern</em></span> attribute is required and may be either <code class="literal">*</code> for all URIs, <code class="literal">*[uri]</code> for all URIs ending with the given URI or <code class="literal">[uri]*</code> for all URI starting with the given URI.
+			</p><p>
+			 A sample Get-handler configuration follows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;get service="myservice" pattern="*"/&gt;</pre><p>
+				When posting events to the engine, the Get request URI must contain a <code class="literal">stream</code> parameter that carries the name of the stream (event type) to insert into. Each event property to be populated in the input event must be part of the Get request parameter values.
+			</p><p>
+			  For example, the URI <code class="literal">http://localhost:8079/sendevent?stream=MyFirewallEvent&amp;name=Joe&amp;changed=true</code> entered into a browser sends an input event of type <code class="literal">MyFirewallEvent</code> setting the <code class="literal">name</code> property of the event to "Joe" and the <code class="literal">changed</code> property of the event to true.
+			</p><p>
+				Note that if your target type is a Java object event, your event class must provide setter-methods according to JavaBean conventions. The event class should also provide a default constructor taking no parameters. If your event class does not have a default constructor, your application may configure a factory method via <code class="literal">ConfigurationEventTypeLegacy</code>.
+			</p></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterhttp-output"/>5.4. HTTP Output Adapter</h2></div></div></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterhttp-output-request"/>5.4.1. Triggered HTTP Get</h3></div></div></div><p>
+				This facility instructs the adapter to perform an HTTP Get request when a triggering event occurs, passing event properties as URI parameters.
+			</p><p>
+				Define a <code class="literal">request</code> element in the adapter configuration file (or use the <code class="literal">Request</code> class) for every HTTP Get  to execute. 
+			</p><p>
+				The synopsis is as follows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;request stream="[stream]" uri="[uri_with_placeholders]"/&gt;</pre><p>
+			  A value for the <span class="emphasis"><em>stream</em></span> attribute is required and provides the name of the stream that triggers the HTTP Get. The adapter expects a stream by this name to exist at adapter start time.
+			</p><p>
+			  The <span class="emphasis"><em>uri_with_placeholders</em></span> attribute value is required. You may place event property placeholders inside the URI to format the URI as needed. Placeholders are of the format <code class="literal">${</code><span class="emphasis"><em>property_name</em></span><code class="literal">}</code>.
+			</p><p>
+			   A sample request configuration follows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;request stream="TriggerFirewallStream" uri="http://myremotehost:80/root/event"/&gt;</pre><p>
+			  Assuming the <code class="literal">HttpTriggerStream</code> has event properties <code class="literal">name</code> and <code class="literal">ipaddress</code> then a sample Get request URI is as follows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">http://myremotehost:80/root/event?stream=TriggerFirewallStream&amp;name=Joe&amp;ipaddress=120.1.0.0</pre><p>
+			   You may parameterize the URI via placeholders by placing <code class="literal">${</code><span class="emphasis"><em>property_name</em></span><code class="literal">}</code> and the special placeholder <code class="literal">${stream}</code> into the URI string.
+			</p><p>
+			   The next example configuration defines URI parameters via placeholder:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;request stream="TriggerFirewallStream" uri="http://myremotehost:80/root/${stream}?violation&amp;amp;name=${name};violationip=${ipaddress}"/&gt;</pre><p>
+			   The URI generated by the adapter:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">http://myremotehost:80/root/TriggerFirewallStream?violation&amp;name=Joe&amp;violationip=120.1.0.0</pre></div></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_socket"/>Chapter 6. The Socket Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="#adaptersocket-gettingstarted">6.1. Getting Started</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adaptersocket-gettingstarted-pluginloader">6.1.1. Plugin Loader Configuration</a></span></dt><dt><span class="sect2"><a href="#adaptersocket-gettingstarted-API">6.1.2. Configuration and Starting via API</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adaptersocket-input">6.2. Socket Service</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adaptersocket-input-object">6.2.1. Object Data Format</a></span></dt><dt><span class="sect2"><a href="#adaptersocket-input-csv">6.2.2. String CSV Data Format</a></span></dt></dl></dd></dl></div><p>
+        This chapter discusses the EsperIO Socket adapter.
+    </p><p>
+		The EsperIO Socket input adapter can be used to send events into an Esper engine instance via socket client, either as Java objects or as CSV name-value pair strings.
+	</p><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adaptersocket-gettingstarted"/>6.1. Getting Started</h2></div></div></div><p>
+			You may configure the EsperIO Socket adapter either as part of your Esper configuration file in the plugin loader section or via the adapter API. Add the <code class="literal">esperio-socket-version.jar</code> file to your classpath. There are no other dependent jar files required.
+		</p><p>
+			A sample adapter configuration file is provided in <code class="literal">esperio-socket-sample-config.xml</code> in the <code class="literal">etc</code> folder of the distribution. A configuration file must be valid according to schema <code class="literal">esperio-socket-configuration-4-0.xsd</code>.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adaptersocket-gettingstarted-pluginloader"/>6.1.1. Plugin Loader Configuration</h3></div></div></div><p>
+				You may place the configuration XML directly into your Esper configuration file as the example below shows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIOSocketAdapter" 
+      class-name="com.espertech.esperio.socket.EsperIOSocketAdapterPlugin"&gt;
+    &lt;config-xml&gt;	
+      &lt;esperio-socket-configuration&gt;
+	    &lt;socket name="mysocketOne" port="7101" data="object"/&gt;
+	    &lt;socket name="mysocketTwo" port="7102" data="csv"/&gt;
+      &lt;/esperio-socket-configuration&gt;
+    &lt;/config-xml&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre><p>
+				Alternatively you can provide a URL in the Esper configuration file to point to your adapter configuration file:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIOSocketAdapter" 
+      class-name="com.espertech.esperio.socket.EsperIOSocketAdapterPlugin"&gt;
+      &lt;init-arg name="esperio.socket.configuration.file" 
+          value="file:/path/esperio-socket-sample-config.xml" /&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adaptersocket-gettingstarted-API"/>6.1.2. Configuration and Starting via API</h3></div></div></div><p>
+				If using Spring or if your application requires API access, the following code snippet configures and starts the adapter via API.
+			</p><p>
+				The class for configuring an EsperIO Socket adapter is <code class="literal">com.espertech.esperio.socket.config.ConfigurationSocketAdapter</code>. The adapter class itself is
+				<code class="literal">EsperIOSocketAdapter</code>.
+			</p><p>
+				The code snippet below is a sample that configures using driver manager and starts the adapter via API:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">ConfigurationSocketAdapter adapterConfig = new ConfigurationSocketAdapter();
+
+SocketConfig socket = new SocketConfig();
+socket.setDataType(DataType.CSV);
+socket.setPort(port);
+adapterConfig.getSockets().put("SocketService", socket);
+
+// start adapter
+EsperIOSocketAdapter socketAdapter = new EsperIOSocketAdapter(adapterConfig, "engineURI");
+socketAdapter.start();
+
+// destroy the adapter when done
+socketAdapter.destroy();</pre></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adaptersocket-input"/>6.2. Socket Service</h2></div></div></div><p>
+			Add a socket configuration for each unique port that you want to expose a socket receive service for use by socket client connections.
+		</p><p>
+			The synopsis is as follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-socket-configuration&gt;
+  &lt;socket name="[name]" port="[port]" data="[csv|object]"/&gt;
+&lt;/esperio-socket-configuration&gt;</pre><p>
+		  The required <span class="emphasis"><em>name</em></span> attribute provides the name of the socket service for use in logging.
+		</p><p>
+		  The required <span class="emphasis"><em>port</em></span> attribute provides the port that the socket service accepts client connections.
+		</p><p>
+		  The required <span class="emphasis"><em>data</em></span> attribute specifies whether the data arriving through the socket is formatted as a Java binary object stream or as CSV string values.
+		</p><p>
+		  If configuring via the adapter API or Spring, use the <code class="literal">com.espertech.esperio.socket.config.SocketConfig</code> class.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adaptersocket-input-object"/>6.2.1. Object Data Format</h3></div></div></div><p>
+				When sending events as Java objects, configure the <code class="literal">data</code> attribute value to <code class="literal">object</code> and use <code class="literal">ObjectOutputStream</code> to write events to the client socket. When sending a <code class="literal">java.util.Map</code> event, 
+				your Map must contain a String value for the key <code class="literal">stream</code> which must denote a configured Map event type.
+			</p><p>
+				This example XML configures a socket accepting client connections that provide Java objects:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-socket-configuration&gt;
+  &lt;socket name="objectStreamSocket" port="8079" data="object"/&gt;
+&lt;/esperio-socket-configuration&gt;</pre><p>
+				When <code class="literal">object</code> data type is configured, clients connections are expected to send <code class="literal">java.io.Serializable</code> or <code class="literal">java.io.Externalizable</code> objects using <code class="literal">ObjectOutputStream</code>.
+			</p><p>
+				Below is a block of sample code that for use in clients to the adapter. It assumes the <code class="literal">MyEvent</code> class implements either of the above interfaces:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">// connect first
+Socket requestSocket = new Socket("localhost", port);
+ObjectOutputStream out = new ObjectOutputStream(requestSocket.getOutputStream());
+
+// send a few events, here we send only one
+out.writeObject(new MyEvent("Hello World"));
+out.flush();
+
+// Consider resetting the output stream from time-to-time, after sending a number of objects.
+// This is because the stream may cache strings etc. . The reset is:
+// out.reset();
+
+// close when done
+out.close();
+requestSocket.close();</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adaptersocket-input-csv"/>6.2.2. String CSV Data Format</h3></div></div></div><p>
+				When sending events as CSV strings, the format of the string should be:
+			</p><pre class="synopsis">stream=[type],[name]=[value] [,...] (newline)</pre><p>
+				The CSV string must end with a newline character: Each event is one line. Each CSV element must be in the <code class="literal">[name]=[value]</code> format. Your CSV must contain a value for <code class="literal">stream</code> which must denote a configured event type.
+				The adapter parses each string value and populates an instance of the target type.
+			</p><p>
+				This next example XML configures a socket accepting client connections that provide events as CSV-formatted strings with name-value pairs :
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-socket-configuration&gt;
+  &lt;socket name="csvStreamSocket" port="8079" data="csv"/&gt;
+&lt;/esperio-socket-configuration&gt;</pre><p>
+				A piece of client code that sends an event of type <code class="literal">MyEvent</code> may look as follows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">// connect first
+String newline = System.getProperty("line.separator");
+Socket requestSocket = new Socket("localhost", port);
+BufferedWriter wr = new BufferedWriter(
+    new OutputStreamWriter(socket.getOutputStream()));
+
+// send a few events
+wr.write("stream=MyEvent,price=20.d,upcCode=A0001");
+wr.write(newline);
+wr.flush();
+
+// close when done
+wr.close();
+requestSocket.close();</pre><p>
+				Note that if your target type is a Java object event, your event class must provide setter-methods according to JavaBean conventions. The event class should also provide a default constructor taking no parameters. If your event class does not have a default constructor, your application may configure a factory method via <code class="literal">ConfigurationEventTypeLegacy</code>.
+			</p></div></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_db"/>Chapter 7. The Relational Database Adapter</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="#adapterdb-intro">7.1. Adapter Overview</a></span></dt><dt><span class="sect1"><a href="#adapterdb-gettingstarted">7.2. Getting Started</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterdb-gettingstarted-pluginloader">7.2.1. Plugin Loader Configuration</a></span></dt><dt><span class="sect2"><a href="#adapterdb-gettingstarted-API">7.2.2. Configuration and Starting via API</a></span></dt></dl></dd><dt><span class="sect1"><a href="#adapterdb-jdbconnections">7.3. JDBC Connections</a></span></dt><dt><span class="sect1"><a href="#adapterdb-dml">7.4. Triggered DML Statement Execution</a></span></dt><dt><span class="sect1"><a href="#adapterdb-upsert">7.5. Triggered Update-Insert Execution</a></span></dt><dt><span class="sect1"><a href="#adapterdb-settings">7.6. Executor Configuration</a></span></dt><dt><span class="sect1"><a href="#adapterdb-reading">7.7. Reading and Polling Database Tables</a></span></dt><dd><dl><dt><span class="sect2"><a href="#adapterdb-reading-polling">7.7.1. Polling and Startup SQL Queries</a></span></dt></dl></dd></dl></div><p>
+        This chapter discusses the EsperIO adapter for relational databases.
+    </p><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-intro"/>7.1. Adapter Overview</h2></div></div></div><p>
+			The EsperIO relational database adapter can write events to a database table. 
+		</p><p>
+			If your application only reads from tables, the Esper jar file and Esper configuration suffices and there is no additional EsperIO DB adapter configuration or jar file required. Please see below tips for reading or polling tables.
+		</p><p>
+			The EsperIO DB adapter supports two means to write to a database table:
+		</p><div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+                    Execute a SQL DML (Data Manipulation, i.e. Update, Insert, Delete or stored procedure call) statement as a response to a triggering event.
+                </p></li><li><p>
+                    Execute an Update-Insert: The adapter attempts an Update of a row by key and if unsuccessful (update returns zero rows updated) the adapter performs an Insert.
+                </p></li></ol></div><p>
+			The adapter also provides infrastructure for queuing database write requests for execution by a thread pool.
+		</p></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-gettingstarted"/>7.2. Getting Started</h2></div></div></div><p>
+			You may configure the EsperIO DB adapter either as part of your Esper configuration file in the plugin loader section or via the adapter API.	Add the <code class="literal">esperio-db-version.jar</code> file to your classpath as well as the JDBC driver. There are not other dependent jar files required by the adapter.
+		</p><p>
+			A sample adapter configuration file is provided in <code class="literal">esperio-db-sample-config.xml</code> in the <code class="literal">etc</code> folder of the distribution. A configuration file must be valid according to schema <code class="literal">esperio-db-configuration-4-0.xsd</code>.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterdb-gettingstarted-pluginloader"/>7.2.1. Plugin Loader Configuration</h3></div></div></div><p>
+				You may place the configuration XML directly into your Esper configuration file as the example below shows:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIODBAdapter" 
+      class-name="com.espertech.esperio.db.EsperIODBAdapterPlugin"&gt;
+    &lt;config-xml&gt;	
+      &lt;esperio-db-configuration&gt;
+        .....as outlined below or contents of esperio-db-sample-config.xml here...
+      &lt;/esperio-db-configuration&gt;
+    &lt;/config-xml&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre><p>
+				Alternatively you can provide a URL in the Esper configuration file to point to your adapter configuration file:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esper-configuration&gt;
+  &lt;plugin-loader name="EsperIODBAdapter" 
+      class-name="com.espertech.esperio.db.EsperIODBAdapterPlugin"&gt;
+      &lt;init-arg name="esperio.db.configuration.file" 
+          value="file:/path/esperio-db-sample-config.xml" /&gt;
+  &lt;/plugin-loader&gt;
+&lt;/esper-configuration&gt;</pre></div><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterdb-gettingstarted-API"/>7.2.2. Configuration and Starting via API</h3></div></div></div><p>
+				If using Spring or if your application requires API access, the following code snippet configures and starts the adapter via API.
+			</p><p>
+				The class for configuring an EsperIO DB adapter is <code class="literal">com.espertech.esperio.db.config.ConfigurationDBAdapter</code>. The adapter class itself is
+				<code class="literal">EsperIODBAdapter</code>.
+			</p><p>
+				The code snippet below is a sample that configures using driver manager and starts the adapter via API:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">ConfigurationDBAdapter adapterConfig = new ConfigurationDBAdapter();
+ConfigurationDBRef configDB = new ConfigurationDBRef();
+configDB.setDriverManagerConnection("DRIVER", "URL", new Properties());
+adapterConfig.getJdbcConnections().put("db1", configDB);
+
+// add additional configuration such as DML and Upsert 
+
+// start adapter
+EsperIODBAdapter dbAdapter = new EsperIODBAdapter(adapterConfig, "engineURI");
+dbAdapter.start();</pre></div></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-jdbconnections"/>7.3. JDBC Connections</h2></div></div></div><p>
+			The configuration for the source of JDBC connections follows the Esper configuration. Please consult the Esper documentation or sample adapter configuration file for details.
+		</p><p>
+			Your configuration should set <code class="literal">auto-commit</code> to true thereby each change to database tables is automatically committed.
+		</p><p>
+			The adapter obtains a new connection for each operation and closes the connection after each operation. For optimum performance consider configuring a connection pool.
+		</p><p>
+		 A sample JDBC connection configuration is shown in below XML. The API class is <code class="literal">ConfigurationDBRef</code> (an Esper core engine class). You may also configure a <code class="literal">DataSource</code> or <code class="literal">DataSource</code> factory as outlined in the Esper docs.
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;esperio-db-configuration&gt;
+  &lt;jdbc-connection name="db1"&gt;
+    &lt;drivermanager-connection class-name="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/test" 
+        user="root" password="password"&gt;
+    &lt;connection-settings auto-commit="true" catalog="TEST"/&gt;
+  &lt;/jdbc-connection&gt;
+  &lt;!-- Add DML and Upsert configurations here, as below. --&gt;
+&lt;/esperio-db-configuration&gt;</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-dml"/>7.4. Triggered DML Statement Execution</h2></div></div></div><p>
+			This facility allows running a SQL DML (Data Manipulation) query, i.e. an Update, Insert, Delete query or a stored procedure when an event in a triggering stream occurs.
+		</p><p>
+			Define a <code class="literal">dml</code> element in the adapter configuration file (or use the <code class="literal">DMLQuery</code> class) for every query to execute. 
+		</p><p>
+			The synopsis is as follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;dml connection="[connection]" stream="[stream]"  
+    [name="name"] [executor-name="executor"] [retry="count"] [retry-interval-sec="sec"]&gt;
+  &lt;sql&gt;[sql]&lt;/sql&gt;
+  &lt;bindings&gt;
+    &lt;parameter pos="[position]" property="[property_name]"/&gt;
+    [...parameters]
+  &lt;/bindings&gt;
+&lt;/dml&gt;</pre><p>
+		  The <span class="emphasis"><em>connection</em></span> attribute value is required and provides the name of the configured JDBC connection.
+		</p><p>
+		  A value for the <span class="emphasis"><em>stream</em></span> attribute is required and provides the name of the stream that triggers the DML. The adapter expects a stream by this name to exist at adapter start time.
+		</p><p>
+		  The <span class="emphasis"><em>name</em></span> attribute is optional and is only used for logging errors.
+		</p><p>
+		  The <span class="emphasis"><em>executor-name</em></span> attribute is optional. If specified, it must be the name of an executor configuration. If specified, the adapter will use the executor service (queue and thread pool) for
+		  performing all DML work. If not specified, the adapter performs the DML work in the same thread.
+		</p><p>
+		  The <span class="emphasis"><em>retry</em></span> attribute is optional. If specified, the adapter will retry a given number of times in case an error is encountered. If <span class="emphasis"><em>retry-interval-sec</em></span> is specified, the adapter waits the given number of seconds between retries.
+		</p><p>
+		  The <span class="emphasis"><em>sql</em></span> element is required and provides the SQL DML or stored procedure call to execute, with parameters as question mark (?).
+		</p><p>
+		  The <span class="emphasis"><em>bindings</em></span> element is required and provides the bindings for expression parameters.
+		</p><p>
+		  The <span class="emphasis"><em>parameter</em></span> element should occur as often as there are parameters in the SQL query. The <span class="emphasis"><em>position</em></span> attribute starts at 1 and counts up for each parameter. The <span class="emphasis"><em>property</em></span> parameter provide the name of the event property of the stream to use as the parameter value.
+		</p><p>
+		 A sample DML configuration follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;dml connection="db1" stream="InsertToDBStream" 
+      name="MyInsertQuery" executor-name="queue1" retry="count"&gt;
+  &lt;sql&gt;insert into MyEventStore(key1, value1, value2) values (?, ?, ?)&lt;/sql&gt;
+  &lt;bindings&gt;
+    &lt;parameter pos="1" property="eventProperty1"/&gt;
+    &lt;parameter pos="2" property="eventProperty2"/&gt;
+    &lt;parameter pos="3" property="eventProperty3"/&gt;
+  &lt;/bindings&gt;
+&lt;/dml&gt;</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-upsert"/>7.5. Triggered Update-Insert Execution</h2></div></div></div><p>
+			This facility allows running an SQL Update that is followed by an Insert if the Update did not update any rows.
+		</p><p>
+			Define an <code class="literal">upsert</code> element in the adapter configuration file (or use the <code class="literal">UpsertQuery</code> class) for every update-insert to execute. 
+		</p><p>
+			The synopsis is as follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;upsert connection="[connection]" stream="[stream]" table-name="[table]"
+      [name="name"] [executor-name="executor"] [retry="count"] [retry-interval-sec="sec"]&gt;
+  &lt;keys&gt;
+    &lt;column property="[property_name]" column="[column_name]" type="[sql_type]"/&gt;
+    [...column]
+  &lt;/keys&gt;
+  &lt;values&gt;
+    &lt;column property="[property_name]" column="[column_name]" type="[sql_type]"/&gt;
+    [...column]
+  &lt;/values&gt;
+&lt;/upsert&gt;</pre><p>
+		  The <span class="emphasis"><em>connection</em></span> attribute value is required and provides the name of the configured JDBC connection.
+		</p><p>
+		  A value for the <span class="emphasis"><em>stream</em></span> attribute is required and provides the name of the stream that triggers the Update-Insert. The adapter expects a stream by this name to exist at adapter start time.
+		</p><p>
+		  The <span class="emphasis"><em>table</em></span> attribute value is required and provides the database table name.
+		</p><p>
+		  The <span class="emphasis"><em>name</em></span> attribute is optional and is only used for logging errors.
+		</p><p>
+		  The <span class="emphasis"><em>executor-name</em></span> attribute is optional. If specified, it must be the name of an executor configuration. If specified, the adapter will use the executor service (queue and thread pool) for
+		  performing all work. If not specified, the adapter performs the work in the same thread.
+		</p><p>
+		  The <span class="emphasis"><em>retry</em></span> attribute is optional. If specified, the adapter will retry a given number of times in case an error is encountered. If <span class="emphasis"><em>retry-interval-sec</em></span> is specified, the adapter waits the given number of seconds between retries.
+		</p><p>
+		  The <span class="emphasis"><em>keys</em></span> element is required and provides the key columns of the table and the <span class="emphasis"><em>values</em></span> element provides the list of value columns of the table.
+		</p><p>
+		  The <span class="emphasis"><em>column</em></span> element should occur as many as there are key and value columns in the table. The <span class="emphasis"><em>property</em></span> attribute provides the name of the event property, the <span class="emphasis"><em>column</em></span> attribute provides the database table column name and the <span class="emphasis"><em>type</em></span> is any of the <code class="literal">java.sql.Types</code> names (case ignored).
+		</p><p>
+		 A sample Update-Insert configuration follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;upsert connection="db1" stream="UpdateInsertDBTableTrigger" name="UpdateInsertSample" 
+    table-name="MyKeyedTable" executor-name="queue1" retry="3"&gt;
+  &lt;keys&gt;
+    &lt;column property="eventProperty1" column="keyColumn1" type="varchar"/&gt;
+    &lt;column property="eventProperty2" column="keyColumn2" type="varchar"/&gt;
+  &lt;/keys&gt;
+  &lt;values&gt;
+    &lt;column property="eventProperty3" column="valueColumn1" type="varchar"/&gt;
+    &lt;column property="eventProperty4" column="valueColumn2" type="integer"/&gt;
+  &lt;/values&gt;
+&lt;/upsert&gt;</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-settings"/>7.6. Executor Configuration</h2></div></div></div><p>
+			Executors are named thread pools and queues that may be assigned to perform DML or update-insert work.
+		</p><p>
+			Define a <code class="literal">executor</code> element in the adapter configuration file (or use the <code class="literal">Executor</code> class) for every thread pool and queue to declare. 
+		</p><p>
+			Upon adapter start, for each executor the adapter starts the given number of threads and an unbound queue. 
+		</p><p>
+			The synopsis is as follows:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;executors&gt;
+  &lt;executor name="[name]" threads="[count]"/&gt;
+&lt;/executors&gt;</pre><p>
+		  The <span class="emphasis"><em>name</em></span> attribute value is required and provides the name of the executor, while the <span class="emphasis"><em>count</em></span> attribute specifies the number of threads for the thread pool.
+		</p><p>
+			An example executor configuration::
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">&lt;executors&gt;
+  &lt;executor name="threadPool1" threads="2"/&gt;
+&lt;/executors&gt;</pre><p>
+			An application can obtain a handle to all thread pools and queues via the Esper engine context:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">ExecutorServices execs = (ExecutorServices) 
+    provider.getContext().lookup("EsperIODBAdapter/ExecutorServices");</pre></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapterdb-reading"/>7.7. Reading and Polling Database Tables</h2></div></div></div><p>
+			Herein we provide sample statements and documentation pointers to use Esper EPL for reading from database tables. If only reading and not writing to a database, no configuration or EsperIO jar is file required.
+		</p><p>
+			Please consult the Esper SQL access documentation for more information.
+		</p><div class="sect2" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="adapterdb-reading-polling"/>7.7.1. Polling and Startup SQL Queries</h3></div></div></div><p>
+				To execute an SQL query repeatedly, Esper provides the opportunity to join a pattern to an SQL statement. The pattern may provide a single interval or crontab schedule or may also contain multiple schedules or combinations thereof via the pattern <code class="literal">or</code> operator.
+			</p><p>
+				The sample query below simply executes every 10 seconds retrieving all rows from table <code class="literal">MyTable</code>:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">select * from pattern[every timer:interval(10)], sql:db1 ['select * from MyTable']</pre><p>
+				To perform an incremental query, consider utilizing a variable to parameterize your SQL statement so that only new rows are returned.
+			</p><p>
+				The next EPL statements create a variable and pass the variable value to the query to poll for new rows only. It assumes the <code class="literal">timestamp</code> column in the <code class="literal">MyTable</code> table holds long-type millisecond values:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">// Create a variable to hold the last poll timestamp
+create variable long VarLastTimestamp = 0
+
+// Poll every 15 seconds between 8am and 4pm based on variable value
+insert into PollStream
+select * from pattern[every timer:crontab(*, 8-16, *, *, *, */15)], 
+  sql:db1 ['select * from MyTable where timestamp &gt; ${VarLastTimestamp}']
+  
+// Assign last value to variable
+on PollStream set VarLastTimestamp = timestamp</pre><p>
+				A sample statement to read a table at startup time is below:
+			</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">select * from pattern[timer:interval(0)], sql:db1 ['select * from MyTable']</pre></div></div></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_xmljson"/>Chapter 8. XML and JSON Output</h2></div></div></div><p>
+        Esper supports output event rendering to JSON and XML directly in its output API, please see the Esper documentation set for more information.
+    </p></div><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_event_representations"/>Chapter 9. Additional Event Representations</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="#eventrep-axiom">9.1. Apache Axiom Events</a></span></dt></dl></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="eventrep-axiom"/>9.1. Apache Axiom Events</h2></div></div></div><p>
+			The plug-in event representation based on Apache Axiom can process XML documents by means of the Streaming API for XML (StAX) and the concept of "pull parsing", which can gain performance improvements extracting data from XML documents.
+		</p><p>
+			The instructions below have been tested with Apache Axiom version 1.2.5. Please visit <code class="literal">http://ws.apache.org/commons/axiom/</code> for more information.
+			Apache Axiom requires additional jar files that are not part of the EsperIO distribution and must be downloaded separately.
+		</p><p>
+			There are 3 steps to follow:
+		</p><div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+					Enable Apache Axiom by adding the Axiom even representation to the engine configuration.
+				</p></li><li><p>
+					Register your application event type names.
+				</p></li><li><p>
+					Process <code class="literal">org.apache.axiom.om.OMDocument</code> or <code class="literal">OMElement</code> event objects.
+				</p></li></ol></div><p>
+			To enable Apache Axiom event processing, use the code snippet shown next, or configure via confiugration XML:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">Configuration config = new Configuration();
+config.addPlugInEventRepresentation(new URI("type://xml/apacheaxiom/OMNode"),
+    AxiomEventRepresentation.class.getName(), null);</pre><p>
+			Your application may register Axiom event types in advance. Here is sample code for adding event types based on Axiom:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">ConfigurationEventTypeAxiom desc = new ConfigurationEventTypeAxiom();
+desc.setRootElementName("measurement");
+desc.addXPathProperty("measurement", "/sensor/measurement", XPathConstants.NUMBER);
+URI[] resolveURIs = new URI[] {new URI("type://xml/apacheaxiom/OMNode/SensorEvent")};
+configuration.addPlugInEventType("SensorEvent", resolveURIs, desc);</pre><p>
+			The operation above is available at configuration time and also at runtime via <code class="literal">ConfigurationOperations</code>. After registering an event type name as above, your application can create EPL statements.
+		</p><p>
+			To send Axiom <code class="literal">OMDocument</code>  or <code class="literal">OMElement</code> events into the engine, your application code must obtain an <code class="literal">EventSender</code> to process Axiom <code class="literal">OMElement</code> events:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">URI[] resolveURIs = new URI[] {new URI("type://xml/apacheaxiom/OMNode/SensorEvent")};
+EventSender sender = epService.getEPRuntime().getEventSender(resolveURIs);
+
+String xml = "&lt;measurement&gt;&lt;temperature&gt;98.6&lt;/temperature&gt;&lt;/measurement&gt;";
+InputStream s = new ByteArrayInputStream(xml.getBytes());
+OMElement omElement = new StAXOMBuilder(s).getDocumentElement();
+
+sender.sendEvent(omElement);</pre><p>
+			Configuring an Axiom event type via XML is easy. An Esper configuration XML can be found in the file <code class="literal">esper-axiom-sample-configuration.xml</code> in the <code class="literal">etc</code>  folder of the EsperIO distribution.
+		</p><p>
+			The configuration XML for the <code class="literal">ConfigurationEventTypeAxiom</code> class adheres to the schema <code class="literal">esperio-axiom-configuration-4-0.xsd</code> also in the <code class="literal">etc</code> folder of the EsperIO distribution.
+		</p></div></div></div></body></html>

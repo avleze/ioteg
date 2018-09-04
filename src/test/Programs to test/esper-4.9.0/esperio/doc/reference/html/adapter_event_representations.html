@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Chapter 9. Additional Event Representations</title><link rel="stylesheet" href="css/espertech.css" type="text/css"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL-NS Stylesheets V1.74.0"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" http-equiv="Content-Type" content="text/html; charset=UTF-8"/><link rel="home" href="index.html" title="EsperIO Reference"/><link rel="up" href="index.html" title="EsperIO Reference"/><link rel="prev" href="adapter_xmljson.html" title="Chapter 8. XML and JSON Output"/></head><body><p xmlns:d="http://docbook.org/ns/docbook" id="title"><a href="http://www.espertech.com" class="site_href"><strong>esper.codehaus.org and espertech.com</strong></a><a href="http://esper.codehaus.org/esper/documentation/documentation.html" class="doc_href"><strong>Documentation</strong></a></p><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_xmljson.html"><strong>Prev</strong></a></li><li class="next"/></ul><div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="adapter_event_representations"/>Chapter 9. Additional Event Representations</h2></div></div></div><div class="toc"><dl><dt><span class="sect1"><a href="adapter_event_representations.html#eventrep-axiom">9.1. Apache Axiom Events</a></span></dt></dl></div><div class="sect1" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="eventrep-axiom"/>9.1. Apache Axiom Events</h2></div></div></div><p>
+			The plug-in event representation based on Apache Axiom can process XML documents by means of the Streaming API for XML (StAX) and the concept of "pull parsing", which can gain performance improvements extracting data from XML documents.
+		</p><p>
+			The instructions below have been tested with Apache Axiom version 1.2.5. Please visit <code class="literal">http://ws.apache.org/commons/axiom/</code> for more information.
+			Apache Axiom requires additional jar files that are not part of the EsperIO distribution and must be downloaded separately.
+		</p><p>
+			There are 3 steps to follow:
+		</p><div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li><p>
+					Enable Apache Axiom by adding the Axiom even representation to the engine configuration.
+				</p></li><li><p>
+					Register your application event type names.
+				</p></li><li><p>
+					Process <code class="literal">org.apache.axiom.om.OMDocument</code> or <code class="literal">OMElement</code> event objects.
+				</p></li></ol></div><p>
+			To enable Apache Axiom event processing, use the code snippet shown next, or configure via confiugration XML:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">Configuration config = new Configuration();
+config.addPlugInEventRepresentation(new URI("type://xml/apacheaxiom/OMNode"),
+    AxiomEventRepresentation.class.getName(), null);</pre><p>
+			Your application may register Axiom event types in advance. Here is sample code for adding event types based on Axiom:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">ConfigurationEventTypeAxiom desc = new ConfigurationEventTypeAxiom();
+desc.setRootElementName("measurement");
+desc.addXPathProperty("measurement", "/sensor/measurement", XPathConstants.NUMBER);
+URI[] resolveURIs = new URI[] {new URI("type://xml/apacheaxiom/OMNode/SensorEvent")};
+configuration.addPlugInEventType("SensorEvent", resolveURIs, desc);</pre><p>
+			The operation above is available at configuration time and also at runtime via <code class="literal">ConfigurationOperations</code>. After registering an event type name as above, your application can create EPL statements.
+		</p><p>
+			To send Axiom <code class="literal">OMDocument</code>  or <code class="literal">OMElement</code> events into the engine, your application code must obtain an <code class="literal">EventSender</code> to process Axiom <code class="literal">OMElement</code> events:
+		</p><pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="">URI[] resolveURIs = new URI[] {new URI("type://xml/apacheaxiom/OMNode/SensorEvent")};
+EventSender sender = epService.getEPRuntime().getEventSender(resolveURIs);
+
+String xml = "&lt;measurement&gt;&lt;temperature&gt;98.6&lt;/temperature&gt;&lt;/measurement&gt;";
+InputStream s = new ByteArrayInputStream(xml.getBytes());
+OMElement omElement = new StAXOMBuilder(s).getDocumentElement();
+
+sender.sendEvent(omElement);</pre><p>
+			Configuring an Axiom event type via XML is easy. An Esper configuration XML can be found in the file <code class="literal">esper-axiom-sample-configuration.xml</code> in the <code class="literal">etc</code>  folder of the EsperIO distribution.
+		</p><p>
+			The configuration XML for the <code class="literal">ConfigurationEventTypeAxiom</code> class adheres to the schema <code class="literal">esperio-axiom-configuration-4-0.xsd</code> also in the <code class="literal">etc</code> folder of the EsperIO distribution.
+		</p></div></div><ul xmlns:d="http://docbook.org/ns/docbook" class="docnav"><li class="previous"><a accesskey="p" href="adapter_xmljson.html"><strong>Prev</strong>Chapter 8. XML and JSON Output</a></li><li class="up"><a accesskey="u" href="#"><strong>Top of page</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Front page</strong></a></li></ul></body></html>
