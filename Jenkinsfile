@@ -35,9 +35,11 @@ pipeline {
 		stage ('SonarQube'){
 			steps {
 			    sh '''
-					mvn sonar:sonar \
-					  -Dsonar.host.url=http://10.0.2.5:9000 \
-					  -Dsonar.login=b3f2d2bd019e4c39bc31bfe8515b9cad'''
+					mvn sonar:sonar\
+					-Dsonar.host.url=http://10.0.2.5:9000\
+					-Dsonar.login=5a42243c1313bb8a6929268708a97bcb4aebf883\
+					-Dsonar.junit.reportPaths=target/surefire-reports\
+					-Dsonar.jacoco.reportPaths=target/jacoco.exec'''
 		
 			}
 
