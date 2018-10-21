@@ -1046,24 +1046,21 @@ public class EventGenerator {
 				result = field.getAttributeValue("value");
 			} else {
 				// Returns a pseudo-random number between min and max, inclusive
+				
 				if ((field.getAttributeValue("max") != null) && (field.getAttributeValue("min") != null)){
 					float max = Float.parseFloat(field.getAttributeValue("max"));
 					float min = Float.parseFloat(field.getAttributeValue("min"));
-					result = Float.toString(min + (float)(Math.random() * ((max - min) + 1.0)));
+					result = Float.toString(min + (float)(Math.random() * (max - min)));
 				} else {
 					// Default values
 					float max = (float) 9.0;
 					float min = (float) 0.0;
 					result = Float.toString(min + (float)(Math.random() * ((max - min) + 1.0)));
 				}
-				if (field.getAttributeValue("precision") != null){
-					if (result == ""){
-						float max = (float) 9.9;
-						float min = (float) 0.0;
-						result = Float.toString(min + (float)(Math.random() * ((max - min) + 1.0)));
-					}
+				
+				
+				if (field.getAttributeValue("precision") != null)
 					result = round(result, Integer.parseInt(field.getAttributeValue("precision")));
-				}
 			}
 		}		
 		

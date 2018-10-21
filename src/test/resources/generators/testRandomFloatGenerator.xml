@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="randomFloatGenerator">
+	<block name="randomFloatGenerator" repeat="100">
+		<field name="test" quotes="false" precision="2" type="Float"></field>
+		<field name="test" quotes="false" type="Float" min="23.54" max="32.58"></field>
+		<field name="test" quotes="false" type="Float" value="104.567"></field>
+	</block>
+</event_type>
+	

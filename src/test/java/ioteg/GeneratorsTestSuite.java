@@ -8,6 +8,9 @@ import org.junit.runners.Suite;
   IntegerGeneratorTestCase.class,
   StringGeneratorTestCase.class,
   BooleanGeneratorTestCase.class,
+  FloatGeneratorTestCase.class,
+  BuildersTestCase.class,
+  AlphanumericGeneratorTestCase.class,
 })
 public class GeneratorsTestSuite {
 

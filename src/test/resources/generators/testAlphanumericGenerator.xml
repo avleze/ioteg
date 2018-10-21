@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="alphanumericGenerator">
+	<block name="alphanumericGenerator" repeat="100">
+		<field name="cod_hex" quotes="true" type="Alphanumeric" length="14" endcharacter="F"></field>
+		<field name="cod_hex" quotes="true" type="Alphanumeric" length="10" case="low"></field>
+		<field name="cod_hex" quotes="true" type="Alphanumeric" value="abc"></field>
+		<field name="cod_hex" quotes="true" type="Alphanumeric"></field>
+		<field name="cod_hex" quotes="true" type="Alphanumeric" endcharacter="F"></field>
+		<field name="cod_hex" quotes="true" type="Alphanumeric" case="low"></field>
+	</block>
+</event_type>
+	

@@ -15,6 +15,19 @@ public class Field extends Attribute {
 	private String dependence;
 	private List<Field> fields;
 	private List<Attribute> attributes;
+
+	public Field(Attribute attr) {
+		this.type = attr.getType();
+		this.value = attr.getValue();
+		this.min = attr.getMin();
+		this.max = attr.getMax();
+		this.precision = attr.getPrecision();
+		this.length = attr.getLength();
+		this.strCase = attr.getCase();
+		this.endcharacter = attr.getEndcharacter();
+		this.format = attr.getFormat();
+		this.isNumeric = attr.getIsNumeric();
+	}
 	
 	/**
 	 * @return the name
