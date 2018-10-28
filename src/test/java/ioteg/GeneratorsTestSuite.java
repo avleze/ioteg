@@ -11,6 +11,8 @@ import org.junit.runners.Suite;
   FloatGeneratorTestCase.class,
   BuildersTestCase.class,
   AlphanumericGeneratorTestCase.class,
+  TimeGeneratorTestCase.class,
+  DateGeneratorTestCase.class,
 })
 public class GeneratorsTestSuite {
 
