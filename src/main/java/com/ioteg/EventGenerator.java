@@ -1038,6 +1038,7 @@ public class EventGenerator {
 			} else { //No debería de llegar ya que previamente se habrá vaciado la lista de reglas...
 				controlcustombehaviour = 0;
 				CustomiseGeneration.rules.clear();
+				CustomiseGeneration.generatedvalue = 0.0f;
 				result = GenerateFloat(field);
 			}
 			

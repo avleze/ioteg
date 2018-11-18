@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jdom2.Attribute;
 import org.jdom2.DataConversionException;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -63,7 +62,7 @@ public class CustomiseGeneration {
     					valuevalue = Float.toString(Float.parseFloat(value));
     				}
         		} else {
-        			valuevalue = Float.toString(Float.parseFloat(item.getAttribute("value").toString()));
+        			valuevalue = Float.toString(Float.parseFloat(item.getAttributeValue("value")));
         		}        		
         	}        	
         	
@@ -97,7 +96,7 @@ public class CustomiseGeneration {
         	if (item.getAttribute("sequence") != null) {
         		sequencevalue = item.getAttributeValue("sequence").toString();
         	}
-        	
+
         	Rule<Object,Object,Object,Object,Object> rule = new Rule<Object,Object,Object,Object,Object>(weightvalue, valuevalue, minvalue, maxvalue, sequencevalue);
         	
         	rules.add(rule);
@@ -125,59 +124,24 @@ public class CustomiseGeneration {
         	Element item = (Element) variableitem.get(i);
         	switch(type){
 			case "Integer":
-				variables.put(item.getAttributeValue("name"), ObtainIntegerValue(item));
 				break;
 			case "Float":
 				variables.put(item.getAttributeValue("name"), ObtainFloatValue(item));
 				break;
 			case "Long":
-				variables.put(item.getAttributeValue("name"), ObtainLongValue(item));
 				break;
 			case "String":
-				variables.put(item.getAttributeValue("name"), ObtainStringValue(item));
 				break;
 			case "Boolean":
-				variables.put(item.getAttributeValue("name"), ObtainBoolValue(item));
 				break;
 			case "Date":
-				variables.put(item.getAttributeValue("name"), ObtainDateValue(item));
 				break;
 			case "Time":
-				variables.put(item.getAttributeValue("name"), ObtainTimeValue(item));
 				break;
 			}
         }
 	}
 
-	private static Object ObtainTimeValue(Element item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static Object ObtainDateValue(Element item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static Object ObtainBoolValue(Element item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static Object ObtainStringValue(Element item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static Object ObtainLongValue(Element item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	private static Object ObtainIntegerValue(Element item) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	private static Object ObtainFloatValue(Element item) throws DataConversionException {
 		
@@ -202,11 +166,14 @@ public class CustomiseGeneration {
 				if (CheckOperation(item.getAttributeValue("max"))) {
 					max = ObtainOperationValue(item.getAttributeValue("max"));
 				}
+				else {
+					max = Float.parseFloat(value);
+				}
 			} else {
 				max = Float.parseFloat(item.getAttributeValue("max"));
 			}
 			
-			result = min + (float)(Math.random() * ((max - min) + 1.0));
+			result = min + (float)(Math.random() * ((max - min)));
 		}
 		
 		if (item.getAttribute("value") != null) {
@@ -265,7 +232,7 @@ public class CustomiseGeneration {
 				if (CheckOperation(opdiv[0])) {
 					result = ObtainOperationValue(opdiv[0]) - Float.parseFloat(ObtainVariableValue(opdiv[1]));
 				} else {
-					result = Float.parseFloat(ObtainVariableValue(opdiv[1])) - Float.parseFloat(opdiv[0]);
+					result = Float.parseFloat(opdiv[0]) - Float.parseFloat(ObtainVariableValue(opdiv[1]));
 				}
 			}
 			if (!opdiv[0].contains("$") && !opdiv[1].contains("$") && result == 0.0){

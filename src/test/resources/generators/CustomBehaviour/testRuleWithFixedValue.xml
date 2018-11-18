@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom_conditions simulations="5">
+<variables>
+</variables>
+<rules>
+ <rule weight="0" value="50.0"/>
+</rules>
+</custom_conditions>

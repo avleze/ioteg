@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="randomFloatGenerator">
+	<block name="randomFloatGenerator" repeat="100">
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testIncreasingValue.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testDecreasingValue.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testRuleWithFixedVariable.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testMinWithVariable.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testMaxWithVariable.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testObtainVariableValueWithSum.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testObtainVariableValueWithSubstraction.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testObtainVariableValueWithDivision.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testObtainVariableValueWithProduct.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testRuleWithFixedValue.xml"></field>
+		<field name="test" quotes="false" type="Float" custom_behaviour="./src/test/resources/generators/CustomBehaviour/testRuleWithOperation.xml"></field>
+
+	</block>
+</event_type>
+	

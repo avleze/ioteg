@@ -1,27 +1,27 @@
 package ioteg;
 
+
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 
 public class TimeGeneratorTestCase {
 	private static List<Element> fields;
 
-	@BeforeClass
+	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 		ClassLoader classLoader = StringGeneratorTestCase.class.getClassLoader();
@@ -39,8 +39,9 @@ public class TimeGeneratorTestCase {
 		for (int i = 0; i < 1000; ++i) {
 			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
 			SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
-			Date date = sdf.parse(strResult);
+			sdf.parse(strResult);
 		}
+		
 	}
 
 	@Test

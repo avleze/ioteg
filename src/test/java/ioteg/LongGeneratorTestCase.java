@@ -17,15 +17,14 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 
-public class IntegerGeneratorTestCase {
-
+public class LongGeneratorTestCase {
 	private static List<Element> fields;
-
+	
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 		ClassLoader classLoader = IntegerGeneratorTestCase.class.getClassLoader();
-		File xmlFile = new File(classLoader.getResource("./generators/testRandomIntegerGenerator.xml").getFile());
+		File xmlFile = new File(classLoader.getResource("./generators/testLongGenerator.xml").getFile());
 		Document document = builder.build(xmlFile);
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
@@ -38,10 +37,9 @@ public class IntegerGeneratorTestCase {
 		/** Test within a specified range **/
 		Element field = fields.get(0);
 		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-		Integer result = Integer.parseInt(strResult);
-
-		assertTrue(100000 < result);
-		assertTrue(result < 999999);
+		Long result = Long.parseLong(strResult);
+		assertTrue(Long.valueOf("-10000000") < result);
+		assertTrue(result <= 0);
 	}
 
 	@Test
@@ -52,11 +50,10 @@ public class IntegerGeneratorTestCase {
 
 		for (int i = 0; i < 100; ++i) {
 			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-			Integer result = Integer.parseInt(strResult);
+			Long result = Long.parseLong(strResult);
 			assertTrue(0 <= result);
 			assertTrue(result <= 9);
 		}
-
 	}
 
 	@Test
@@ -65,8 +62,7 @@ public class IntegerGeneratorTestCase {
 		/** Test of specified value **/
 		Element field = fields.get(2);
 		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-		Integer result = Integer.parseInt(strResult);
-		assertEquals(Integer.valueOf(104), result);
+		Long result = Long.parseLong(strResult);
+		assertEquals(Long.valueOf("9223372036854775807"), result);
 	}
-
 }

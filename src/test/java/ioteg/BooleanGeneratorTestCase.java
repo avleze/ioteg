@@ -1,7 +1,9 @@
 package ioteg;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +13,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 
@@ -20,7 +22,7 @@ public class BooleanGeneratorTestCase {
 	
 	private static List<Element> fields;
 	
-	@BeforeClass
+	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 		ClassLoader classLoader = BooleanGeneratorTestCase.class.getClassLoader();

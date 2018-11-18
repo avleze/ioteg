@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom_conditions simulations="10">
+<variables>
+ <variable name="var1" value="156.96"/>
+</variables>
+<rules>
+ <rule weight="0" min="$(var1)" max="300" sequence="inc"/>
+</rules>
+</custom_conditions>

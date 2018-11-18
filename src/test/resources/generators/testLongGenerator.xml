@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="randomLongGenerator">
+	<block name="randomLongGenerator" repeat="100">
+		<field name="test" quotes="false" type="Long" min="-10000000" max="0"></field>
+		<field name="testDefaultRange" quotes="true" type="Long"></field>
+		<field name="testDefaultValue" quotes="false" type="Long" value="9223372036854775807"></field>
+	</block>
+</event_type>
+	

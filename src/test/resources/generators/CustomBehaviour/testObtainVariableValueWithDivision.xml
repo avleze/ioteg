@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom_conditions simulations="1">
+	<variables>
+		<variable name="var1" value="100.0" />
+		<variable name="varDependentOfVar1" value="$(var1)/2" />
+		<variable name="var2DependentOfVar1" value="2/$(var1)" />
+
+	</variables>
+	<rules>
+		<rule weight="0.5" value="$(varDependentOfVar1)" />
+		<rule weight="0" value="$(var2DependentOfVar1)" />
+	</rules>
+</custom_conditions>
