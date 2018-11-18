@@ -47,7 +47,8 @@ public class EventGenerator {
 	    	Calendar cal2 = Calendar.getInstance();
 	    	System.out.println("Start time: "+cal2.get(Calendar.MINUTE)+":"+cal2.get(Calendar.SECOND)+":"+cal2.get(Calendar.MILLISECOND));
 	    	
-	    	ValidationUtil.ValidStandard(xmlFile);
+	    	if(!ValidationUtil.ValidStandard(xmlFile))
+	    		System.exit(1);
 	    	
 	    	//To build a document from the xml
 	        Document document = (Document) builder.build(xmlFile);
