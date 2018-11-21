@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidComplexTypeWithAttributes">
+	<block name="testValidComplexTypeWithAttributes" repeat="100">
+		<field name="TwoNumbers" quotes="false" type="ComplexType">
+			<attribute type="Float" precision="2"></attribute>
+			<attribute type="Float" precision="2"></attribute>
+		</field>
+	</block>
+</event_type>
+	

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidateIntegerFieldWithMinOnly">
+	<block name="testValidateIntegerFieldWithMinOnly" repeat="100">
+		<field type="Integer" min="200"></field>
+	</block>
+</event_type>
+	

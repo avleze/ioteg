@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidateStringField">
+	<block name="testValidateStringField" repeat="100">
+		<field type="String"></field>
+	</block>
+</event_type>
+	

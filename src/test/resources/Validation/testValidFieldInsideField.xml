@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidFieldInsideField">
+	<block name="testValidFieldInsideField" repeat="100">
+		<field name="validField" quotes="false" type="ComplexType">
+			<field name="integer" quotes="false" type="Integer"></field>
+		</field>
+	</block>
+</event_type>
+	

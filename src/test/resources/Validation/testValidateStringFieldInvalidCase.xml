@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidateStringFieldInvalidCase">
+	<block name="testValidateStringFieldInvalidCase" repeat="100">
+		<field type="String" case="invalidCase"></field>
+	</block>
+</event_type>
+	

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testInvalidAttributeType">
+	<block name="testInvalidAttributeType" repeat="100">
+		<field name="testInvalidAttributeType" quotes="false" type="ComplexType">
+			<attribute></attribute>
+		</field>
+	</block>
+</event_type>
+	

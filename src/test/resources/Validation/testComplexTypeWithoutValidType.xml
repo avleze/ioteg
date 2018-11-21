@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testComplexTypeWithoutType">
+	<block name="testComplexTypeWithoutType" repeat="100">
+		<field name="invalidComplexType" quotes="false" type="complex">
+			<field name="real" type="Float"></field>
+			<field name="imaginary" type="Float"></field>
+		</field>
+	</block>
+</event_type>
+	

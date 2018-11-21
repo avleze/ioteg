@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidateFloatFieldWithMinOnly">
+	<block name="testValidateFloatFieldWithMinOnly" repeat="100">
+		<field type="Float" min="200"></field>
+	</block>
+</event_type>
+	

@@ -23,9 +23,9 @@ public class ValidationUtil extends EventGenerator{
         
         List<Element> list = rootNode.getChildren();
         
-        Boolean valid = true;
+        Boolean valid = BlockElements(list);
         
-        if (BlockElements(list)){
+        if (valid){
         	for (int i = 0; i < list.size() && valid; i++){
         		Element block = (Element) list.get(i);
         		List<Element> fieldslist = block.getChildren();
@@ -78,7 +78,7 @@ public class ValidationUtil extends EventGenerator{
 				for (int i = 0; i < optionalf.size(); i++){
 					Element op = (Element) optionalf.get(i);
 					if (op.getName().equals("field")){
-						valid = FieldElements(op);
+						valid = (FieldElements(op) && valid);
 					} else {
 						System.err.println("The children of the \"optionalfields\" must be \"field\"");
 						valid = false;
@@ -100,9 +100,9 @@ public class ValidationUtil extends EventGenerator{
 					String type = field.getAttributeValue("type");
 					
 					if (!ExistType(type)){
-						valid = ComplexType(field, type);							
+						valid = (ComplexType(field, type) && valid);							
 					} else {
-						valid = SimpleType(field, type);							
+						valid = (SimpleType(field, type) && valid);							
 					}
 				}
 			}

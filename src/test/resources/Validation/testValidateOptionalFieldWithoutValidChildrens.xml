@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidateOptionalFieldWithoutValidChildrens">
+	<block name="testValidateOptionalFieldWithoutValidChildrens" repeat="100">
+		<optionalfields>
+			<block></block>
+		</optionalfields>
+	</block>
+</event_type>
+	

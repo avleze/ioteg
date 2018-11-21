@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidateEventWithBlockWithoutName">
+	<block repeat="100">
+	
+	</block>
+</event_type>
+	

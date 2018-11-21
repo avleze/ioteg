@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidateBooleanField">
+	<block name="testValidateBooleanField" repeat="100">
+		<field type="Boolean"></field>
+	</block>
+</event_type>
+	

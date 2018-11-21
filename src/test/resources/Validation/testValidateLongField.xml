@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testValidateLongField">
+	<block name="testValidateLongField" repeat="100">
+		<field type="Long"></field>
+	</block>
+</event_type>
+	
