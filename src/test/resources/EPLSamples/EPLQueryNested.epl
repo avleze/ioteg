@@ -1,0 +1,3 @@
+ where field1 < 3 AND field2 >= 50
+ where field3 != 'A'
+ where field4 = 'B' OR field4 = 'D'

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testEplQuery">
+	<block name="testEplQuery" repeat="100">
+		<field name="field1" quotes="false" type="Integer"></field>
+		<field name="field2" quotes="false" type="Integer"></field>
+		<field name="field3" quotes="false" type="String"></field>
+		<field name="field4" quotes="false" type="String"></field>
+		<field name="field5" quotes="false" type="Integer"></field>
+		<field name="field6" quotes="false" type="Integer"></field>
+	</block>
+</event_type>
+	

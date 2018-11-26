@@ -1,0 +1,8 @@
+ where field1 < 3
+ where field1 > 4
+ where field1 = 5
+ where field1 <= 6
+ where field1 >= 7
+ where field1 != 8
+ 
+ 
