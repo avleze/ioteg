@@ -1,11 +1,11 @@
 package ioteg;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.Trio;
 
 public class AlphanumericGeneratorTestCase {
 
@@ -30,6 +31,8 @@ public class AlphanumericGeneratorTestCase {
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
+		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+
 	}
 
 	@Test
@@ -61,7 +64,7 @@ public class AlphanumericGeneratorTestCase {
 		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
 		assertEquals(String.valueOf("abc"), strResult);
 	}
-	
+
 	@Test
 	public void testRandomWithDefaultLength() throws JDOMException, IOException {
 		Element field = fields.get(3);
@@ -71,7 +74,7 @@ public class AlphanumericGeneratorTestCase {
 			assertTrue(strResult.matches("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
 		}
 	}
-	
+
 	@Test
 	public void testRandomWithDefaultLengthAndEndcharacter() throws JDOMException, IOException {
 		Element field = fields.get(4);
@@ -81,7 +84,7 @@ public class AlphanumericGeneratorTestCase {
 			assertTrue(strResult.matches("[0123456789ABCDEF]*"));
 		}
 	}
-	
+
 	@Test
 	public void testRandomWithDefaultLengthAndLow() throws JDOMException, IOException {
 		Element field = fields.get(5);

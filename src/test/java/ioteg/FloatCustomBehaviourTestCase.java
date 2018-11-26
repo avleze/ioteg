@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -26,6 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.CustomiseGeneration;
 import com.ioteg.EventGenerator;
+import com.ioteg.Trio;
 
 public class FloatCustomBehaviourTestCase {
 	private static List<Element> fields;
@@ -39,6 +41,8 @@ public class FloatCustomBehaviourTestCase {
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
+		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+
 	}
 
 	@Test
@@ -228,7 +232,7 @@ public class FloatCustomBehaviourTestCase {
 		}
 
 	}
-	
+
 	@Test
 	public void testRuleWithFixedValue() throws JDOMException, IOException {
 

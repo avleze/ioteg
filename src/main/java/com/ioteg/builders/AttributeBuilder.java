@@ -31,7 +31,7 @@ public class AttributeBuilder {
 
 		attribute.setType(type);
 		attribute.setValue(value);
-		
+
 		if (hasDefaultRangeFloat(type, min, max)) {
 			min = "0";
 			max = "10";
@@ -39,12 +39,12 @@ public class AttributeBuilder {
 			min = "0";
 			max = "9";
 		}
-		
+
 		if (min != null)
 			attribute.setMin(Double.valueOf(min));
 		if (max != null)
 			attribute.setMax(Double.valueOf(max));
-		
+
 		if (precision != null)
 			attribute.setPrecision(Integer.valueOf(precision));
 

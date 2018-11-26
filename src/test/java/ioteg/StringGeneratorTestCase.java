@@ -1,11 +1,11 @@
 package ioteg;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.Trio;
 
 public class StringGeneratorTestCase {
 
@@ -30,6 +31,8 @@ public class StringGeneratorTestCase {
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
+		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+
 	}
 
 	@Test
@@ -73,7 +76,7 @@ public class StringGeneratorTestCase {
 	public void testRandomWithDefaultLengthAndEndCharacter() throws JDOMException, IOException {
 		Element field = fields.get(4);
 		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-		
+
 		assertTrue(strResult.matches("[abcdefg]*"));
 		assertEquals(10, strResult.length());
 	}

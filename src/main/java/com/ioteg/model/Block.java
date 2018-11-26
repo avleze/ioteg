@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * This class represents a block inside an event type in the data model.
+ * 
  * @author Antonio Vélez Estévez
  */
 public class Block {
@@ -82,5 +83,5 @@ public class Block {
 	public void setOptionalFields(List<OptionalFields> optionalFields) {
 		this.optionalFields = optionalFields;
 	}
-	
+
 }

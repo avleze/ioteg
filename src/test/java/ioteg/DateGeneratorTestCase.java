@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.Trio;
 
 public class DateGeneratorTestCase {
 	private static List<Element> fields;
@@ -30,8 +32,10 @@ public class DateGeneratorTestCase {
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
+		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+
 	}
-	
+
 	@Test
 	public void testRandom() throws JDOMException, IOException, ParseException {
 		Element field = fields.get(0);

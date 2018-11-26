@@ -1,11 +1,11 @@
 package ioteg;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -16,10 +16,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.Trio;
 
 public class LongGeneratorTestCase {
 	private static List<Element> fields;
-	
+
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
@@ -29,6 +30,8 @@ public class LongGeneratorTestCase {
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
+		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+
 	}
 
 	@Test

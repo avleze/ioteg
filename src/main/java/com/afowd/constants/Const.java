@@ -18,19 +18,19 @@ public class Const {
 	public static final int THREE = 3;
 	public static final int FOUR = 4;
 	public static final int FIVE = 5;
-	public static final int NO_SORT= -1;
+	public static final int NO_SORT = -1;
 	public static final int SORT_ASC = 0;
 	public static final int SORT_DESC = 1;
-	
+
 	public static final int MAX_EIGHT_DIGITS_BIG_TYPE = 25;
 	public static final int PRECISION_TWO = 25;
 	public static final int PRECISION_THREE = 25;
 	public static final int PRECISION_FIVE = 5;
 	public static final int MINUS_ONE = -1;
-	
-	public static final int COMPARE_LESSER= -1;
-	public static final int COMPARE_GREATHER= -1;
-	public static final int COMPARE_EQUALS= -1;
+
+	public static final int COMPARE_LESSER = -1;
+	public static final int COMPARE_GREATHER = -1;
+	public static final int COMPARE_EQUALS = -1;
 	public static final String STRING_GET = "get";
 	public static final String STRING_EMPTY = "";
 	public static final String STRING_SET = "set";
@@ -48,7 +48,7 @@ public class Const {
 	public static final BigInteger MAX_VALUE_BIGINTEGER = new BigInteger("99999999999");
 	public static final BigDecimal MIN_VALUE_BIGDECIMAL = new BigDecimal("-99999999999");
 	public static final BigDecimal MAX_VALUE_BIGDECIMAL = new BigDecimal("99999999999");
-	
+
 	public static final Integer ZERO_INTEGER = 0;
 	public static final Integer ONE_INTEGER = 1;
 	public static final Long ZERO_LONG = new Long("0");
@@ -56,20 +56,20 @@ public class Const {
 	public static final byte ZERO_BYTE = 0;
 	public static final Double ZERO_DOUBLE = new Double("0.00");
 	public static final Float ZERO_FLOAT = new Float("0");
-	
+
 	public static final int MIN_YEAR = 1900;
 	public static final int MAX_YEAR = 2100;
-	public static final double MAX_SOLARY= 20000.00;
-	public static final float MAX_HOUR_PRICE= 120;
+	public static final double MAX_SOLARY = 20000.00;
+	public static final float MAX_HOUR_PRICE = 120;
 	public static final Long MIN_EXPIRENCE_LONG = new Long(0);
 	public static final Long MAX_EXPIRENCE_LONG = new Long(60);
 	public static final Long MIN_AGE_LONG = new Long(0);
 	public static final Long MAX_AGE_LONG = new Long(60);
-	
+
 	public static final int MAX_CHAR = 256;
 	public static final int CHAR_A = 65;
 	public static final int CHAR_Z = 90;
-	
+
 	public static final String NULL = "(Null)";
 	public static final String THERE_IS_NO_CLASS_WITH_THE_NAME = "THERE_IS_NO_CLASS_WITH_THE_NAME";
 	public static final String THERE_IS_NO_FIELD_WITH_THE_NAME = "THERE_IS_NO_FIELD_WITH_THE_NAME";

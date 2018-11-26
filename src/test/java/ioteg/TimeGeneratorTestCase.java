@@ -1,12 +1,12 @@
 package ioteg;
 
-
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -17,6 +17,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.Trio;
 
 public class TimeGeneratorTestCase {
 	private static List<Element> fields;
@@ -30,6 +31,8 @@ public class TimeGeneratorTestCase {
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
+		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+
 	}
 
 	@Test
@@ -41,7 +44,7 @@ public class TimeGeneratorTestCase {
 			SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 			sdf.parse(strResult);
 		}
-		
+
 	}
 
 	@Test

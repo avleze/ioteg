@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * This class represents an event type.
+ * 
  * @author Antonio Vélez Estévez
  */
 public class EventType {
