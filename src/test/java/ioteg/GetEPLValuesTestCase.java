@@ -54,7 +54,7 @@ public class GetEPLValuesTestCase {
 		trioToTest = EventGenerator.fieldvalues.get(0).get(3);
 		assertEquals("field1", trioToTest.first);
 		assertEquals("<=", trioToTest.second);
-		assertEquals("6", trioToTest.third);
+		assertEquals("-6", trioToTest.third);
 
 		trioToTest = EventGenerator.fieldvalues.get(0).get(4);
 		assertEquals("field1", trioToTest.first);
@@ -114,12 +114,6 @@ public class GetEPLValuesTestCase {
 		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/EPLQueryNested.epl").getPath(),
 				document.getRootElement());
 
-		for (List<Trio<String, String, String>> el : EventGenerator.fieldvalues) {
-			System.out.println();
-			for (Trio<String, String, String> elIn : el) {
-				System.out.print(", [" + elIn.first + ", " + elIn.second + ", " + elIn.third + "]");
-			}
-		}
-
+		
 	}
 }
