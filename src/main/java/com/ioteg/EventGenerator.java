@@ -153,7 +153,7 @@ public class EventGenerator {
 
 					copyquery = copyquery.trim();
 					Pattern word = Pattern.compile("\'[\\w]+\'[$]?");
-					Pattern number = Pattern.compile("(?<!\\w)[0-9]+[$]?");
+					Pattern number = Pattern.compile("(?<!\\w)-?[0-9]+[$]?");
 					Matcher valuechar = word.matcher(copyquery);
 					Matcher valuenum = number.matcher(copyquery);
 
@@ -1237,6 +1237,7 @@ public class EventGenerator {
 				max = Integer.parseInt(field.getAttributeValue("max"));
 			}
 			min = Integer.parseInt(value) + 1; // It must be >
+			max = Integer.MAX_VALUE;
 			result = Integer.toString(min + (int) (Math.random() * ((max - min) + 1)));
 		}
 		if (operator.equals(">=")) {
@@ -1244,6 +1245,7 @@ public class EventGenerator {
 				max = Integer.parseInt(field.getAttributeValue("max"));
 			}
 			min = Integer.parseInt(value);
+			max = Integer.MAX_VALUE;
 			result = Integer.toString(min + (int) (Math.random() * ((max - min) + 1)));
 		}
 		if (operator.equals("<")) {
