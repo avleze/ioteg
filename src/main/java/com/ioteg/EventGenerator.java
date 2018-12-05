@@ -1211,7 +1211,8 @@ public class EventGenerator {
 		String operator = "";
 		String value = "";
 		int max, min;
-
+		Random r = new Random();
+		
 		for (int i = 0; i < values.size(); i++) {
 			if (fieldname.equals(values.get(i).first)) {
 				operator = values.get(i).second;
@@ -1233,41 +1234,46 @@ public class EventGenerator {
 		}
 
 		if (operator.equals(">")) {
+			max = Integer.MAX_VALUE;
+
 			if (field.getAttributeValue("max") != null) {
 				max = Integer.parseInt(field.getAttributeValue("max"));
 			}
 			min = Integer.parseInt(value) + 1; // It must be >
-			max = Integer.MAX_VALUE;
-			result = Integer.toString(min + (int) (Math.random() * ((max - min) + 1)));
+			result = Integer.toString(r.ints(min, max).findFirst().getAsInt());
 		}
 		if (operator.equals(">=")) {
+			max = Integer.MAX_VALUE;
+
 			if (field.getAttributeValue("max") != null) {
 				max = Integer.parseInt(field.getAttributeValue("max"));
 			}
 			min = Integer.parseInt(value);
-			max = Integer.MAX_VALUE;
-			result = Integer.toString(min + (int) (Math.random() * ((max - min) + 1)));
+			result = Integer.toString(r.ints(min, max).findFirst().getAsInt());
 		}
 		if (operator.equals("<")) {
+			min = Integer.MIN_VALUE;
+			
 			if (field.getAttributeValue("min") != null) {
 				min = Integer.parseInt(field.getAttributeValue("min"));
 			}
 			max = Integer.parseInt(value) - 1; // It must be <
-			result = Integer.toString(min + (int) (Math.random() * ((max - min) + 1)));
+			result = Integer.toString(r.ints(min, max).findFirst().getAsInt());
 		}
 		if (operator.equals("<=")) {
+			min = Integer.MIN_VALUE;
 			if (field.getAttributeValue("min") != null) {
 				min = Integer.parseInt(field.getAttributeValue("min"));
 			}
 			max = Integer.parseInt(value);
-			result = Integer.toString(min + (int) (Math.random() * ((max - min) + 1)));
+			result = Integer.toString(r.ints(min, max).findFirst().getAsInt());
 		}
 		if (operator.equals("!=")) {
 			if ((field.getAttributeValue("max") != null) && (field.getAttributeValue("min") != null)) {
 				max = Integer.parseInt(field.getAttributeValue("max"));
 				min = Integer.parseInt(field.getAttributeValue("min"));
 			}
-			int randomvalue = min + (int) (Math.random() * ((max - min) + 1));
+			int randomvalue = r.ints(min, max).findFirst().getAsInt();
 			if (randomvalue == Integer.parseInt(value)) {
 				result = Integer.toString(min);
 			} else {
