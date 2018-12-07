@@ -7,6 +7,9 @@
 		<field name="field4" quotes="false" type="String"></field>
 		<field name="field5" quotes="false" type="Integer"></field>
 		<field name="field6" quotes="false" type="Integer"></field>
+		<field name="field7" quotes="false" type="Integer" max="200"></field>
+		<field name="field8" quotes="false" type="Integer" min="-20"></field>
+		<field name="field9" quotes="false" type="Integer" min="-100" max="100"></field>
 	</block>
 </event_type>
 	
