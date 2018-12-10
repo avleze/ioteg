@@ -1,0 +1,5 @@
+ where field10 != true
+ where field11 != false
+ where field12 != 1
+ where field13 != 0
+ 

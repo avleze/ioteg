@@ -154,9 +154,11 @@ public class EventGenerator {
 					copyquery = copyquery.trim();
 					Pattern word = Pattern.compile("\'[\\w]+\'[$]?");
 					Pattern number = Pattern.compile("(?<!\\w)-?[0-9]+[$]?");
+					Pattern booleanPattern = Pattern.compile("true|false[$]?");
+
 					Matcher valuechar = word.matcher(copyquery);
 					Matcher valuenum = number.matcher(copyquery);
-
+					Matcher valueboolean = booleanPattern.matcher(copyquery);
 					String finalvalue = "";
 
 					if (valuechar.find()) {
@@ -165,6 +167,8 @@ public class EventGenerator {
 					if (valuenum.find()) {
 						finalvalue = valuenum.group(0);
 					}
+					if (valueboolean.find())
+						finalvalue = valueboolean.group(0);
 
 					copyquery = copyquery.substring(copyquery.indexOf(finalvalue) + finalvalue.length());
 					copyquery.trim();
