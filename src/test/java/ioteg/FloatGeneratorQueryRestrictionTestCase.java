@@ -226,14 +226,8 @@ public class FloatGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(13);
-		for (List<Trio<String, String, String>> el : EventGenerator.fieldvalues) {
-			System.out.println();
-			for (Trio<String, String, String> elIn : el) {
-				System.out.print(", [" + elIn.first + ", " + elIn.second + ", " + elIn.third + "]");
-			}
-		}
 		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
-		System.out.println(result);
+
 
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(-24f)));
 	}
@@ -248,11 +242,9 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		Element field = fields.get(17);
 	
 		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
-		System.out.println(result);
 
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(-24f)));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-100.134234f)));
 		assertThat(result.toString(), matchesPattern("-?\\d+\\.\\d{3}"));
-
 	}
 }
