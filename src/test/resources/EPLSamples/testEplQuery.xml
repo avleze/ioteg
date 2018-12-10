@@ -10,6 +10,10 @@
 		<field name="field7" quotes="false" type="Integer" max="200"></field>
 		<field name="field8" quotes="false" type="Integer" min="-20"></field>
 		<field name="field9" quotes="false" type="Integer" min="-100" max="100"></field>
+		<field name="field10" quotes="false" type="Boolean" isnumeric="false"></field>
+		<field name="field11" quotes="false" type="Boolean" isnumeric="false"></field>
+		<field name="field12" quotes="false" type="Boolean" isnumeric="true"></field>
+		<field name="field13" quotes="false" type="Boolean" isnumeric="true"></field>
 	</block>
 </event_type>
 	

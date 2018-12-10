@@ -65,6 +65,11 @@ public class GetEPLValuesTestCase {
 		assertEquals("field1", trioToTest.first);
 		assertEquals("!=", trioToTest.second);
 		assertEquals("8", trioToTest.third);
+		
+		trioToTest = EventGenerator.fieldvalues.get(0).get(6);
+		assertEquals("field10", trioToTest.first);
+		assertEquals("!=", trioToTest.second);
+		assertEquals("true", trioToTest.third);
 
 	}
 

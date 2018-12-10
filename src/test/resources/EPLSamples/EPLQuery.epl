@@ -4,5 +4,6 @@
  where field1 <= -6
  where field1 >= 7
  where field1 != 8
+ where field10 != true
  
  
