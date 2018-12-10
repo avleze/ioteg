@@ -27,6 +27,7 @@ public class GetEPLValuesTestCase {
 
 		classLoader = StringGeneratorTestCase.class.getClassLoader();
 		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
+		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
 	}
 
 	@Test
