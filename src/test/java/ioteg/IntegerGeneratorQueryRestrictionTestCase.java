@@ -153,7 +153,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 		Element field = fields.get(8);
 
 		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
-		assertThat(result, not(Integer.valueOf(24)));
+		assertThat(result, not(Integer.valueOf(20)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-100)));
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(100)));
 
