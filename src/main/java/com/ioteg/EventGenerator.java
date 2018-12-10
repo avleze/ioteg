@@ -1109,6 +1109,7 @@ public class EventGenerator {
 		List<Trio<String, String, String>> values = fieldvalues.get(0);
 		String operator = "";
 		String value = "";
+		Random r = new Random();
 
 		for (int i = 0; i < values.size(); i++) {
 			if (fieldname.equals(values.get(i).first)) {
@@ -1117,33 +1118,35 @@ public class EventGenerator {
 			}
 		}
 
+		float max = Float.MAX_VALUE;
+		if(field.getAttributeValue("max") != null)
+				max = Float.parseFloat(field.getAttributeValue("max"));
+		
+		float min = -Float.MAX_VALUE;
+		if(field.getAttributeValue("min") != null)
+				min = Float.parseFloat(field.getAttributeValue("min"));
+		
 		if (operator.equals("=")) {
 			result = value;
 		}
 		if (operator.equals(">")) {
-			float max = Float.parseFloat(field.getAttributeValue("max"));
-			float min = Float.parseFloat(value); // It must be >
-			result = Float.toString((float) (min + 1.0 + (float) (Math.random() * ((max - min + 1.0) + 1.0))));
-		}
+			min = Float.parseFloat(value) + 1f; // It must be >
+			result = Double.toString(r.doubles(min, max).findFirst().getAsDouble());
+ 		}
 		if (operator.equals(">=")) {
-			float max = Float.parseFloat(field.getAttributeValue("max"));
-			float min = Float.parseFloat(value);
-			result = Float.toString(min + (float) (Math.random() * ((max - min) + 1.0)));
+			min = Float.parseFloat(value);
+			result = Double.toString(r.doubles(min, max).findFirst().getAsDouble());
 		}
 		if (operator.equals("<")) {
-			float min = Float.parseFloat(field.getAttributeValue("min"));
-			float max = Float.parseFloat(value); // It must be >
-			result = Float.toString((float) (min + 1.0 + (float) (Math.random() * ((max - min + 1.0) + 1.0))));
+			max = Float.parseFloat(value) - 1f; // It must be <
+			result = Double.toString(r.doubles(min, max).findFirst().getAsDouble());
 		}
 		if (operator.equals("<=")) {
-			float min = Float.parseFloat(field.getAttributeValue("min"));
-			float max = Float.parseFloat(value);
-			result = Float.toString(min + (float) (Math.random() * ((max - min) + 1.0)));
+			max = Float.parseFloat(value);
+			result = Double.toString(r.doubles(min, max).findFirst().getAsDouble());
 		}
 		if (operator.equals("!=")) {
-			float max = Float.parseFloat(field.getAttributeValue("max"));
-			float min = Float.parseFloat(field.getAttributeValue("min"));
-			float randomvalue = min + (float) (Math.random() * ((max - min) + 1.0));
+			float randomvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
 			if (randomvalue == Float.parseFloat(value)) {
 				result = Float.toString(min);
 			} else {
