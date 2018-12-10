@@ -14,6 +14,12 @@
 		<field name="field11" quotes="false" type="Boolean" isnumeric="false"></field>
 		<field name="field12" quotes="false" type="Boolean" isnumeric="true"></field>
 		<field name="field13" quotes="false" type="Boolean" isnumeric="true"></field>
+		<field name="field14" quotes="false" type="Float"></field>
+		<field name="field15" quotes="false" type="Float" max="200.34"></field>
+		<field name="field16" quotes="false" type="Float" min="-20.58"></field>
+		<field name="field17" quotes="false" type="Float" min="-100.134" max="134.100"></field>
+		<field name="field18" quotes="false" type="Float" min="-100.134234" max="134.10034" precision="3"></field>
+		
 	</block>
 </event_type>
 	
