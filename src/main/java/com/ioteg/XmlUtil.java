@@ -31,7 +31,7 @@ public class XmlUtil extends EventGenerator {
 		EventGenerator.iteration = 0;
 
 		for (int i = 0; i < list.size(); i++) {
-			Element blck = (Element) list.get(i);
+			Element blck = list.get(i);
 			String nameblck = blck.getAttributeValue("name");
 			bw.write("<" + nameblck + ">\n");
 
@@ -44,7 +44,7 @@ public class XmlUtil extends EventGenerator {
 			if (blck.getChildren().size() != 0 && blck.getAttributeValue("repeat") == null) {
 				List<Element> fields = blck.getChildren();
 				for (int e = 0; e < fields.size(); e++) {
-					Element field = (Element) fields.get(e);
+					Element field = fields.get(e);
 					sb.append(NormalFieldsXml(field));
 					if ((e == fields.size() - 1)) {
 						int lng = sb.length();
@@ -64,7 +64,7 @@ public class XmlUtil extends EventGenerator {
 					sb.append("<feed>\n"); // The beginning of a field
 
 					for (int e = 0; e < fields.size(); e++) {
-						Element field = (Element) fields.get(e);
+						Element field = fields.get(e);
 
 						if (field.getName().equals("optionalfields")) {
 							sb.append(OptionalFieldsXml(field));
@@ -150,7 +150,7 @@ public class XmlUtil extends EventGenerator {
 
 		int chosen = rand.nextInt(((size - 0) + 1) + 0);
 		if (chosen != size) {
-			Element elementop = (Element) optional.get(chosen);
+			Element elementop = optional.get(chosen);
 			sb.append("<" + elementop.getAttributeValue("name"));
 			String quotes = elementop.getAttributeValue("quotes");
 			String type = elementop.getAttributeValue("type");

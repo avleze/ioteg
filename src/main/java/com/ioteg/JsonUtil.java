@@ -30,7 +30,7 @@ public class JsonUtil extends EventGenerator {
 		EventGenerator.iteration = 0;
 
 		for (int i = 0; i < list.size(); i++) {
-			Element blck = (Element) list.get(i);
+			Element blck = list.get(i);
 			String nameblck = blck.getAttributeValue("name");
 			bw.write("\"" + nameblck + "\":");
 
@@ -43,7 +43,7 @@ public class JsonUtil extends EventGenerator {
 				List<Element> fields = blck.getChildren();
 				sb.append("{"); // The beginning of a field
 				for (int e = 0; e < fields.size(); e++) {
-					Element field = (Element) fields.get(e);
+					Element field = fields.get(e);
 					sb.append(NormalFieldJson(field));
 					if ((e < fields.size() - 1)) {
 						sb.append(",");
@@ -63,7 +63,7 @@ public class JsonUtil extends EventGenerator {
 					sb.append("{"); // The beginning of a field
 
 					for (int e = 0; e < fields.size(); e++) {
-						Element field = (Element) fields.get(e);
+						Element field = fields.get(e);
 
 						if (field.getName().equals("optionalfields")) {
 							StringBuilder aux = OptionalFieldsJson(field);
@@ -163,7 +163,7 @@ public class JsonUtil extends EventGenerator {
 		int chosen = rand.nextInt(((size - 0) + 1) + 0);
 
 		if (chosen != size) {
-			Element elementop = (Element) optional.get(chosen);
+			Element elementop = optional.get(chosen);
 			sb.append("\"" + elementop.getAttributeValue("name") + "\":");
 			String quotes = elementop.getAttributeValue("quotes");
 			String type = elementop.getAttributeValue("type");

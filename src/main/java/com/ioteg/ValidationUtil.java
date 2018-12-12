@@ -16,7 +16,7 @@ public class ValidationUtil extends EventGenerator {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
-		Document document = (Document) builder.build(xmlFile);
+		Document document = builder.build(xmlFile);
 
 		// To get the root
 		Element rootNode = document.getRootElement();
@@ -27,10 +27,10 @@ public class ValidationUtil extends EventGenerator {
 
 		if (valid) {
 			for (int i = 0; i < list.size() && valid; i++) {
-				Element block = (Element) list.get(i);
+				Element block = list.get(i);
 				List<Element> fieldslist = block.getChildren();
 				for (int j = 0; j < fieldslist.size() && valid; j++) {
-					Element field = (Element) fieldslist.get(j);
+					Element field = fieldslist.get(j);
 					valid = FieldElements(field);
 				}
 			}
@@ -44,7 +44,7 @@ public class ValidationUtil extends EventGenerator {
 		int repeat = 0;
 
 		for (int i = 0; i < list.size() && valid; i++) {
-			Element elem = (Element) list.get(i);
+			Element elem = list.get(i);
 			if (elem.getName().equals("block")) {
 				if (elem.getAttributeValue("name") == null) {
 					System.err.println("The \"name\" attribute of the block tag is needed");
@@ -75,7 +75,7 @@ public class ValidationUtil extends EventGenerator {
 			if (field.getName().equals("optionalfields")) {
 				List<Element> optionalf = field.getChildren();
 				for (int i = 0; i < optionalf.size(); i++) {
-					Element op = (Element) optionalf.get(i);
+					Element op = optionalf.get(i);
 					if (op.getName().equals("field")) {
 						valid = (FieldElements(op) && valid);
 					} else {
@@ -122,7 +122,7 @@ public class ValidationUtil extends EventGenerator {
 		} else {
 			List<Element> complelems = field.getChildren();
 			for (int i = 0; i < complelems.size() && valid; i++) {
-				Element element = (Element) complelems.get(i);
+				Element element = complelems.get(i);
 				if (element.getName().equals("field")) {
 					valid = FieldElements(element);
 				}

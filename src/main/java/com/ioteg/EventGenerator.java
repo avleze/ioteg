@@ -50,7 +50,7 @@ public class EventGenerator {
 				System.exit(1);
 
 			// To build a document from the xml
-			Document document = (Document) builder.build(xmlFile);
+			Document document = builder.build(xmlFile);
 
 			// To get the root
 			Element rootNode = document.getRootElement();
@@ -99,7 +99,7 @@ public class EventGenerator {
 		List<Element> fieldchilds = new ArrayList<Element>();
 
 		for (int i = 0; i < blockchilds.size(); i++) {
-			Element blck = (Element) blockchilds.get(i);
+			Element blck = blockchilds.get(i);
 
 			if (blck.getAttributeValue("repeat") != null) {
 				fieldchilds = blck.getChildren("field");
@@ -108,7 +108,7 @@ public class EventGenerator {
 		}
 
 		for (int i = 0; i < fieldchilds.size(); i++) {
-			Element field = (Element) fieldchilds.get(i);
+			Element field = fieldchilds.get(i);
 			fieldnames.add(field.getAttributeValue("name"));
 		}
 
@@ -230,7 +230,7 @@ public class EventGenerator {
 		List<Element> fieldchilds = new ArrayList<Element>();
 
 		for (int i = 0; i < blockchilds.size(); i++) {
-			Element blck = (Element) blockchilds.get(i);
+			Element blck = blockchilds.get(i);
 
 			if (blck.getAttributeValue("repeat") != null) {
 				fieldchilds = blck.getChildren("field");
@@ -240,7 +240,7 @@ public class EventGenerator {
 		Boolean simple = false;
 
 		for (int i = 0; i < fieldchilds.size(); i++) {
-			Element field = (Element) fieldchilds.get(i);
+			Element field = fieldchilds.get(i);
 			for (int j = 0; j < fieldvalues.size(); j++) {
 				for (int k = 0; k < fieldvalues.get(j).size(); k++) {
 					if (fieldvalues.get(j).get(k).first.equals(field.getAttributeValue("name"))) {
@@ -424,7 +424,7 @@ public class EventGenerator {
 			Random rand = new Random();
 			int max = simpletype.size() - 1;
 			int chosen = rand.nextInt(((max - 0) + 1) + 0);
-			Element simple = (Element) simpletype.get(chosen);
+			Element simple = simpletype.get(chosen);
 
 			if (simple.getName().equals("field")) {
 				if (type.equals("json")) {
@@ -454,7 +454,7 @@ public class EventGenerator {
 				int max = simpletype.size() - 1;
 				chosen = rand.nextInt(((max - 1) + 1) + 1);
 			}
-			Element simple = (Element) simpletype.get(chosen);
+			Element simple = simpletype.get(chosen);
 
 			if (type.equals("xml")) {
 				result.append(" type=\"" + simple.getAttributeValue("type") + "\">");
@@ -468,7 +468,7 @@ public class EventGenerator {
 				if (type.equals("json")) {
 					result.append("{");
 					for (int s = 0; s < simpletype.size(); s++) {
-						Element simple = (Element) simpletype.get(s);
+						Element simple = simpletype.get(s);
 						result.append(JsonUtil.NormalFieldJson(simple));
 						if (s < simpletype.size() - 1) {
 							result.append(",");
@@ -479,7 +479,7 @@ public class EventGenerator {
 				if (type.equals("xml")) {
 					result.append(">\n");
 					for (int s = 0; s < simpletype.size(); s++) {
-						Element simple = (Element) simpletype.get(s);
+						Element simple = simpletype.get(s);
 						result.append(XmlUtil.NormalFieldsXml(simple));
 						if (s < simpletype.size() - 1) {
 							;
@@ -488,7 +488,7 @@ public class EventGenerator {
 				}
 				if (type.equals("csv")) {
 					for (int s = 0; s < simpletype.size(); s++) {
-						Element simple = (Element) simpletype.get(s);
+						Element simple = simpletype.get(s);
 						result.append(CsvUtil.NormalFieldCsv(simple));
 						if (s < simpletype.size() - 1) {
 							result.append(",");
@@ -501,7 +501,7 @@ public class EventGenerator {
 				}
 
 				for (int s = 0; s < simpletype.size(); s++) {
-					Element simple = (Element) simpletype.get(s);
+					Element simple = simpletype.get(s);
 					String stype = simple.getAttributeValue("type");
 					value = GenerateValueSimpleType(stype, simple);
 					finalvalue = finalvalue + value;
@@ -1310,8 +1310,8 @@ public class EventGenerator {
 				result = Long.toString(min + (long) (Math.random() * ((max - min) + 1)));
 			} else {
 				// Default values
-				long max = (long) 9;
-				long min = (long) 0;
+				long max = 9;
+				long min = 0;
 				result = Long.toString(min + (long) (Math.random() * ((max - min) + 1)));
 			}
 		}

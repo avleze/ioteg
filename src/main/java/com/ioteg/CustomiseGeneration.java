@@ -34,7 +34,7 @@ public class CustomiseGeneration {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
-		Document document = (Document) builder.build(xmlFile);
+		Document document = builder.build(xmlFile);
 
 		// To get the root
 		Element rootNode = document.getRootElement();
@@ -43,12 +43,12 @@ public class CustomiseGeneration {
 		List<Element> ruleitem = new ArrayList<Element>();
 
 		for (int i = 0; i < rulesitem.size(); i++) {
-			Element item = (Element) rulesitem.get(i);
+			Element item = rulesitem.get(i);
 			ruleitem = item.getChildren("rule");
 		}
 
 		for (int i = 0; i < ruleitem.size(); i++) {
-			Element item = (Element) ruleitem.get(i);
+			Element item = ruleitem.get(i);
 			float weightvalue = Float.parseFloat(item.getAttributeValue("weight").toString());
 			String valuevalue = null, minvalue = null, maxvalue = null;
 			String sequencevalue = null;
@@ -108,7 +108,7 @@ public class CustomiseGeneration {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
-		Document document = (Document) builder.build(xmlFile);
+		Document document = builder.build(xmlFile);
 
 		// To get the root
 		Element rootNode = document.getRootElement();
@@ -117,12 +117,12 @@ public class CustomiseGeneration {
 		List<Element> variableitem = new ArrayList<Element>();
 
 		for (int i = 0; i < variablesitem.size(); i++) {
-			Element item = (Element) variablesitem.get(i);
+			Element item = variablesitem.get(i);
 			variableitem = item.getChildren("variable");
 		}
 
 		for (int i = 0; i < variableitem.size(); i++) {
-			Element item = (Element) variableitem.get(i);
+			Element item = variableitem.get(i);
 			switch (type) {
 			case "Integer":
 				break;
@@ -322,7 +322,7 @@ public class CustomiseGeneration {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
-		Document document = (Document) builder.build(xmlFile);
+		Document document = builder.build(xmlFile);
 
 		// To get the root
 		Element rootNode = document.getRootElement();
