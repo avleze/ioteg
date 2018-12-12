@@ -19,7 +19,10 @@
 		<field name="field16" quotes="false" type="Float" min="-20.58"></field>
 		<field name="field17" quotes="false" type="Float" min="-100.134" max="134.100"></field>
 		<field name="field18" quotes="false" type="Float" min="-100.134234" max="134.10034" precision="3"></field>
-		
+		<field name="field19" quotes="false" type="Long"></field>
+		<field name="field20" quotes="false" type="Long" max="200"></field>
+		<field name="field21" quotes="false" type="Long" min="-20"></field>
+		<field name="field22" quotes="false" type="Long" min="-100" max="100"></field>
 	</block>
 </event_type>
 	
