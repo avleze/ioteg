@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1166,7 +1164,8 @@ public class EventGenerator {
 		}
 		if (field.getAttributeValue("precision") != null) {
 			Integer paddingSize = Integer.parseInt(field.getAttributeValue("precision"));
-			result = String.format(Locale.US, "%." + paddingSize + "f", Float.valueOf(result));	
+			String format = "%.%d" + paddingSize + "f";
+			result = String.format(Locale.US, format, Float.valueOf(result));	
 		}
 
 		return result;
