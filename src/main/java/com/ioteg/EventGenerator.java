@@ -1165,10 +1165,8 @@ public class EventGenerator {
 			}
 		}
 		if (field.getAttributeValue("precision") != null) {
-			DecimalFormat df = new DecimalFormat();
-			df.setMaximumFractionDigits(Integer.parseInt(field.getAttributeValue("precision")));
-			df.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
-			result = df.format(Float.valueOf(result));
+			Integer paddingSize = Integer.parseInt(field.getAttributeValue("precision"));
+			result = String.format(Locale.US, "%." + paddingSize + "f", Float.valueOf(result));	
 		}
 
 		return result;
