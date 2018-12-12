@@ -133,12 +133,12 @@ public class GetEPLValuesTestCase {
 		trioToTest = EventGenerator.fieldvalues.get(0).get(2);
 		assertThat("field3", equalTo(trioToTest.first));
 		assertEquals("!=", trioToTest.second);
-		assertEquals("'A'", trioToTest.third);
+		assertEquals("A", trioToTest.third);
 		
 		trioToTest = EventGenerator.fieldvalues.get(0).get(3);
 		assertThat("field4", equalTo(trioToTest.first));
 		assertEquals("=", trioToTest.second);
-		assertEquals("'B'", trioToTest.third);
+		assertEquals("B", trioToTest.third);
 		
 		trioToTest = EventGenerator.fieldvalues.get(1).get(0);
 		assertThat("field1", equalTo(trioToTest.first));
@@ -153,11 +153,11 @@ public class GetEPLValuesTestCase {
 		trioToTest = EventGenerator.fieldvalues.get(1).get(2);
 		assertThat("field3", equalTo(trioToTest.first));
 		assertEquals("!=", trioToTest.second);
-		assertEquals("'A'", trioToTest.third);
+		assertEquals("A", trioToTest.third);
 		
 		trioToTest = EventGenerator.fieldvalues.get(1).get(3);
 		assertThat("field4", equalTo(trioToTest.first));
 		assertEquals("=", trioToTest.second);
-		assertEquals("'D'", trioToTest.third);
+		assertEquals("D", trioToTest.third);
 	}
 }

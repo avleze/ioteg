@@ -6,10 +6,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -151,7 +154,8 @@ public class EventGenerator {
 					copyquery = copyquery.substring(matcher.end() + 1);
 
 					copyquery = copyquery.trim();
-					Pattern word = Pattern.compile("\'[\\w]+\'[$]?");
+
+					Pattern word = Pattern.compile("(['\"])(.*?)(['\"][$]?)");
 					Pattern number = Pattern.compile("(?<!\\w)-?[0-9]+[$]?");
 					Pattern booleanPattern = Pattern.compile("true|false[$]?");
 
@@ -159,17 +163,25 @@ public class EventGenerator {
 					Matcher valuenum = number.matcher(copyquery);
 					Matcher valueboolean = booleanPattern.matcher(copyquery);
 					String finalvalue = "";
-
+					String allmatch = "";
+					
 					if (valuechar.find()) {
-						finalvalue = valuechar.group(0);
+						finalvalue = valuechar.group(2);
+						allmatch = valuechar.group();
 					}
+					
 					if (valuenum.find()) {
 						finalvalue = valuenum.group(0);
+						allmatch = finalvalue;
 					}
-					if (valueboolean.find())
+					
+					if (valueboolean.find()){
 						finalvalue = valueboolean.group(0);
+						allmatch = finalvalue;
+					}
+						
 
-					copyquery = copyquery.substring(copyquery.indexOf(finalvalue) + finalvalue.length());
+					copyquery = copyquery.substring(copyquery.indexOf(allmatch) + allmatch.length());
 					copyquery.trim();
 					Trio<String, String, String> value = new Trio<String, String, String>(field, operator, finalvalue);
 
@@ -1153,7 +1165,10 @@ public class EventGenerator {
 			}
 		}
 		if (field.getAttributeValue("precision") != null) {
-			result = round(result, Integer.parseInt(field.getAttributeValue("precision")));
+			DecimalFormat df = new DecimalFormat();
+			df.setMaximumFractionDigits(Integer.parseInt(field.getAttributeValue("precision")));
+			df.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
+			result = df.format(Float.valueOf(result));
 		}
 
 		return result;
