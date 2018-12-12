@@ -1332,6 +1332,7 @@ public class EventGenerator {
 		List<Trio<String, String, String>> values = fieldvalues.get(0);
 		String operator = "";
 		String value = "";
+		Random r = new Random();
 
 		for (int i = 0; i < values.size(); i++) {
 			if (fieldname.equals(values.get(i).first)) {
@@ -1340,33 +1341,35 @@ public class EventGenerator {
 			}
 		}
 
+		long max = Long.MAX_VALUE;
+		if(field.getAttributeValue("max") != null)
+				max = Long.parseLong(field.getAttributeValue("max"));
+		
+		long min = Long.MIN_VALUE;
+		if(field.getAttributeValue("min") != null)
+				min = Long.parseLong(field.getAttributeValue("min"));
+		
 		if (operator.equals("=")) {
 			result = value;
 		}
 		if (operator.equals(">")) {
-			long max = Long.parseLong(field.getAttributeValue("max"));
-			long min = Long.parseLong(value) + 1; // It must be >
-			result = Long.toString(min + (long) (Math.random() * ((max - min) + 1)));
-		}
+			min = Long.parseLong(value) + 1L; // It must be >
+			result = Long.toString(r.longs(min, max).findFirst().getAsLong());
+ 		}
 		if (operator.equals(">=")) {
-			long max = Long.parseLong(field.getAttributeValue("max"));
-			long min = Long.parseLong(value);
-			result = Long.toString(min + (long) (Math.random() * ((max - min) + 1)));
+			min = Long.parseLong(value);
+			result = Long.toString(r.longs(min, max).findFirst().getAsLong());
 		}
 		if (operator.equals("<")) {
-			long min = Long.parseLong(field.getAttributeValue("min"));
-			long max = Long.parseLong(value) - 1; // It must be <
-			result = Long.toString(min + (long) (Math.random() * ((max - min) + 1)));
+			max = Long.parseLong(value) - 1L; // It must be <
+			result = Long.toString(r.longs(min, max).findFirst().getAsLong());
 		}
 		if (operator.equals("<=")) {
-			long min = Long.parseLong(field.getAttributeValue("min"));
-			long max = Long.parseLong(value);
-			result = Long.toString(min + (long) (Math.random() * ((max - min) + 1)));
+			max = Long.parseLong(value);
+			result = Long.toString(r.longs(min, max).findFirst().getAsLong());
 		}
 		if (operator.equals("!=")) {
-			long max = Long.parseLong(field.getAttributeValue("max"));
-			long min = Long.parseLong(field.getAttributeValue("min"));
-			long randomvalue = min + (long) (Math.random() * ((max - min) + 1));
+			long randomvalue = (long) r.longs(min, max).findFirst().getAsLong();
 			if (randomvalue == Long.parseLong(value)) {
 				result = Long.toString(min);
 			} else {
