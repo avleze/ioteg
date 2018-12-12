@@ -23,6 +23,12 @@
 		<field name="field20" quotes="false" type="Long" max="200"></field>
 		<field name="field21" quotes="false" type="Long" min="-20"></field>
 		<field name="field22" quotes="false" type="Long" min="-100" max="100"></field>
+		<field name="field23" quotes="false" type="String"></field>
+		<field name="field24" quotes="false" type="String" endcharacter="F"></field>
+		<field name="field25" quotes="false" type="String" length="12"></field>
+		<field name="field26" quotes="false" type="String" length="12" endcharacter="F"></field>
+		<field name="field27" quotes="false" type="String" length="12" case="low"></field>
+		<field name="field28" quotes="false" type="String" endcharacter="F" case="low"></field>
 	</block>
 </event_type>
 	
