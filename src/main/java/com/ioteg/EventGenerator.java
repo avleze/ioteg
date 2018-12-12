@@ -1164,7 +1164,7 @@ public class EventGenerator {
 		}
 		if (field.getAttributeValue("precision") != null) {
 			Integer paddingSize = Integer.parseInt(field.getAttributeValue("precision"));
-			String format = "%.%d" + paddingSize + "f";
+			String format = "%." + paddingSize + "f";
 			result = String.format(Locale.US, format, Float.valueOf(result));	
 		}
 
