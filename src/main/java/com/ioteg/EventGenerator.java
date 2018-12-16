@@ -166,14 +166,10 @@ public class EventGenerator {
 					if (valuechar.find()) {
 						finalvalue = valuechar.group(2);
 						allmatch = valuechar.group();
-					}
-					
-					if (valuenum.find()) {
+					} else if (valuenum.find()) {
 						finalvalue = valuenum.group(0);
 						allmatch = finalvalue;
-					}
-					
-					if (valueboolean.find()){
+					} else if (valueboolean.find()){
 						finalvalue = valueboolean.group(0);
 						allmatch = finalvalue;
 					}
