@@ -1170,19 +1170,6 @@ public class EventGenerator {
 		return result;
 	}
 
-	/**
-	 * Round a float number
-	 * 
-	 * @param result       contains the float number
-	 * @param decimalPlace determines the length
-	 * @return the float number rounded according to the decimalPlace value
-	 */
-	private static String round(String result, int decimalPlace) {
-		float d = Float.parseFloat(result);
-		BigDecimal bd = new BigDecimal(Float.toString(d));
-		bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-		return bd.toString();
-	}
 
 	/**
 	 * Generate a value of Integer type
