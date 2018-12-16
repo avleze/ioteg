@@ -1093,8 +1093,11 @@ public class EventGenerator {
 					result = Float.toString(min + (float) (Math.random() * ((max - min) + 1.0)));
 				}
 
-				if (field.getAttributeValue("precision") != null)
-					result = round(result, Integer.parseInt(field.getAttributeValue("precision")));
+				if (field.getAttributeValue("precision") != null) {
+					Integer paddingSize = Integer.parseInt(field.getAttributeValue("precision"));
+					String format = "%." + paddingSize + "f";
+					result = String.format(Locale.US, format, Float.valueOf(result));	
+				}
 			}
 		}
 
@@ -1160,7 +1163,7 @@ public class EventGenerator {
 		}
 		if (field.getAttributeValue("precision") != null) {
 			Integer paddingSize = Integer.parseInt(field.getAttributeValue("precision"));
-			String format = "%.0" + paddingSize + "f";
+			String format = "%." + paddingSize + "f";
 			result = String.format(Locale.US, format, Float.valueOf(result));	
 		}
 
