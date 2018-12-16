@@ -4,7 +4,6 @@ import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.jdom2.Document;
@@ -13,7 +12,6 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.InputSource;
 
 import com.ioteg.EventGenerator;
 import com.ioteg.Trio;
@@ -21,7 +19,6 @@ import com.ioteg.Trio;
 import static org.hamcrest.Matchers.matchesPattern;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
 
 
 
