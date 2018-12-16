@@ -10,6 +10,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
@@ -226,7 +227,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(-24f)));
 	}
 	
-	@Test
+	@RepeatedTest(10)
 	public void testFloatQueryRestrictionWithPrecision() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
@@ -235,10 +236,10 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(17);
 	
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
 
-		assertThat(result, lessThanOrEqualTo(Float.valueOf(-24f)));
-		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-100.134234f)));
-		assertThat(result.toString(), matchesPattern("-?\\d+\\.\\d{3}"));
+		assertThat(Float.valueOf(result), lessThanOrEqualTo(Float.valueOf(-24f)));
+		assertThat(Float.valueOf(result), greaterThanOrEqualTo(Float.valueOf(-100.134234f)));
+		assertThat(result, matchesPattern("-?\\d+\\.\\d{3}"));
 	}
 }
