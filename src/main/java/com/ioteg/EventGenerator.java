@@ -162,18 +162,17 @@ public class EventGenerator {
 					Matcher valueboolean = booleanPattern.matcher(copyquery);
 					String finalvalue = "";
 					String allmatch = "";
-					
+
 					if (valuechar.find()) {
 						finalvalue = valuechar.group(2);
 						allmatch = valuechar.group();
 					} else if (valuenum.find()) {
 						finalvalue = valuenum.group(0);
 						allmatch = finalvalue;
-					} else if (valueboolean.find()){
+					} else if (valueboolean.find()) {
 						finalvalue = valueboolean.group(0);
 						allmatch = finalvalue;
 					}
-						
 
 					copyquery = copyquery.substring(copyquery.indexOf(allmatch) + allmatch.length());
 					copyquery.trim();
@@ -590,15 +589,15 @@ public class EventGenerator {
 			result = value;
 		}
 		if (operator.equals("!=")) {
-			if (field.getAttributeValue("format") != null) {
-				java.util.Date randomDate = RandomUtil.getRandomDate(new java.util.Date(RandomUtil.getMinimumDate()),
-						new java.util.Date(RandomUtil.getMaximumDate()), false);
-				SimpleDateFormat sdf = new SimpleDateFormat(field.getAttributeValue("format"));
-				result = sdf.format(randomDate);
-			}
-			if (result.equals(value)) {
-				result = GenerateTimeQueryRestriction(field);
-			}
+			do {
+				if (field.getAttributeValue("format") != null) {
+					java.util.Date randomDate = RandomUtil.getRandomDate(
+							new java.util.Date(RandomUtil.getMinimumDate()),
+							new java.util.Date(RandomUtil.getMaximumDate()), false);
+					SimpleDateFormat sdf = new SimpleDateFormat(field.getAttributeValue("format"));
+					result = sdf.format(randomDate);
+				}
+			} while (result.equals(value));
 		}
 
 		return result;
@@ -658,20 +657,21 @@ public class EventGenerator {
 			result = value;
 		}
 		if (operator.equals("!=")) {
-			if (field.getAttributeValue("format") != null) {
-				java.util.Date dateFromDB = new java.util.Date(System.currentTimeMillis());
-				Calendar calendarFromDB = Calendar.getInstance();
 
-				calendarFromDB.setTime(dateFromDB);
+			do {
+				if (field.getAttributeValue("format") != null) {
+					java.util.Date dateFromDB = new java.util.Date(System.currentTimeMillis());
+					Calendar calendarFromDB = Calendar.getInstance();
 
-				java.util.Date randomDate = RandomUtil.getRandomDate(new java.util.Date(RandomUtil.getMinimumDate()),
-						new java.util.Date(RandomUtil.getMaximumDate()), false);
-				SimpleDateFormat sdf = new SimpleDateFormat(field.getAttributeValue("format"));
-				result = sdf.format(randomDate);
-			}
-			if (result.equals(value)) {
-				result = GenerateDateQueryRestriction(field);
-			}
+					calendarFromDB.setTime(dateFromDB);
+
+					java.util.Date randomDate = RandomUtil.getRandomDate(
+							new java.util.Date(RandomUtil.getMinimumDate()),
+							new java.util.Date(RandomUtil.getMaximumDate()), false);
+					SimpleDateFormat sdf = new SimpleDateFormat(field.getAttributeValue("format"));
+					result = sdf.format(randomDate);
+				}
+			} while (result.equals(value));
 		}
 		return result;
 	}
@@ -822,36 +822,36 @@ public class EventGenerator {
 		}
 
 		if (operator.equals("!=")) {
-			if (field.getAttributeValue("length") != null) {
+			do {
+				if (field.getAttributeValue("length") != null) {
 
-				if (field.getAttributeValue("endcharacter") != null) {
-					result = getRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
-							field.getAttributeValue("endcharacter"));
+					if (field.getAttributeValue("endcharacter") != null) {
+						result = getRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
+								field.getAttributeValue("endcharacter"));
+					} else {
+						result = getRandString(Integer.parseInt(field.getAttributeValue("length")));
+					}
+
+					if (field.getAttributeValue("case") != null) {
+						if (field.getAttributeValue("case").equals("low")) {
+							result = result.toLowerCase();
+						}
+					}
 				} else {
-					result = getRandString(Integer.parseInt(field.getAttributeValue("length")));
-				}
+					if (field.getAttributeValue("endcharacter") != null) {
+						result = getRandStringRange(10, field.getAttributeValue("endcharacter"));
+					} else {
+						result = getRandString(10); // Default length
+					}
 
-				if (field.getAttributeValue("case") != null) {
-					if (field.getAttributeValue("case").equals("low")) {
-						result = result.toLowerCase();
+					if (field.getAttributeValue("case") != null) {
+						if (field.getAttributeValue("case").equals("low")) {
+							result = result.toLowerCase();
+						}
 					}
 				}
-			} else {
-				if (field.getAttributeValue("endcharacter") != null) {
-					result = getRandStringRange(10, field.getAttributeValue("endcharacter"));
-				} else {
-					result = getRandString(10); // Default length
-				}
 
-				if (field.getAttributeValue("case") != null) {
-					if (field.getAttributeValue("case").equals("low")) {
-						result = result.toLowerCase();
-					}
-				}
-			}
-			if (result == value) {
-				result = GenerateStringQueryRestriction(field);
-			}
+			} while (result == value);
 		}
 
 		return result;
@@ -968,36 +968,37 @@ public class EventGenerator {
 		}
 
 		if (operator.equals("!=")) {
-			if (field.getAttributeValue("length") != null) {
+			do {
 
-				if (field.getAttributeValue("endcharacter") != null) {
-					result = getAlphaNumRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
-							field.getAttributeValue("endcharacter"));
+				if (field.getAttributeValue("length") != null) {
+
+					if (field.getAttributeValue("endcharacter") != null) {
+						result = getAlphaNumRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
+								field.getAttributeValue("endcharacter"));
+					} else {
+						result = getAlphaNumRandString(Integer.parseInt(field.getAttributeValue("length")));
+					}
+
+					if (field.getAttributeValue("case") != null) {
+						if (field.getAttributeValue("case").equals("low")) {
+							result = result.toLowerCase();
+						}
+					}
 				} else {
-					result = getAlphaNumRandString(Integer.parseInt(field.getAttributeValue("length")));
-				}
+					if (field.getAttributeValue("endcharacter") != null) {
+						result = getAlphaNumRandStringRange(10, field.getAttributeValue("endcharacter"));
+					} else {
+						result = getAlphaNumRandString(10); // Default length
+					}
 
-				if (field.getAttributeValue("case") != null) {
-					if (field.getAttributeValue("case").equals("low")) {
-						result = result.toLowerCase();
+					if (field.getAttributeValue("case") != null) {
+						if (field.getAttributeValue("case").equals("low")) {
+							result = result.toLowerCase();
+						}
 					}
 				}
-			} else {
-				if (field.getAttributeValue("endcharacter") != null) {
-					result = getAlphaNumRandStringRange(10, field.getAttributeValue("endcharacter"));
-				} else {
-					result = getAlphaNumRandString(10); // Default length
-				}
 
-				if (field.getAttributeValue("case") != null) {
-					if (field.getAttributeValue("case").equals("low")) {
-						result = result.toLowerCase();
-					}
-				}
-			}
-			if (result == value) {
-				result = GenerateAlphanumericQueryRestriction(field);
-			}
+			} while (result == value);
 		}
 
 		return result;
@@ -1096,7 +1097,7 @@ public class EventGenerator {
 				if (field.getAttributeValue("precision") != null) {
 					Integer paddingSize = Integer.parseInt(field.getAttributeValue("precision"));
 					String format = "%." + paddingSize + "f";
-					result = String.format(Locale.US, format, Float.valueOf(result));	
+					result = String.format(Locale.US, format, Float.valueOf(result));
 				}
 			}
 		}
@@ -1127,20 +1128,20 @@ public class EventGenerator {
 		}
 
 		float max = Float.MAX_VALUE;
-		if(field.getAttributeValue("max") != null)
-				max = Float.parseFloat(field.getAttributeValue("max"));
-		
+		if (field.getAttributeValue("max") != null)
+			max = Float.parseFloat(field.getAttributeValue("max"));
+
 		float min = -Float.MAX_VALUE;
-		if(field.getAttributeValue("min") != null)
-				min = Float.parseFloat(field.getAttributeValue("min"));
-		
+		if (field.getAttributeValue("min") != null)
+			min = Float.parseFloat(field.getAttributeValue("min"));
+
 		if (operator.equals("=")) {
 			result = value;
 		}
 		if (operator.equals(">")) {
 			min = Float.parseFloat(value) + 1f; // It must be >
 			result = Double.toString(r.doubles(min, max).findFirst().getAsDouble());
- 		}
+		}
 		if (operator.equals(">=")) {
 			min = Float.parseFloat(value);
 			result = Double.toString(r.doubles(min, max).findFirst().getAsDouble());
@@ -1154,22 +1155,21 @@ public class EventGenerator {
 			result = Double.toString(r.doubles(min, max).findFirst().getAsDouble());
 		}
 		if (operator.equals("!=")) {
-			float randomvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
-			if (randomvalue == Float.parseFloat(value)) {
-				result = Float.toString(min);
-			} else {
-				result = Float.toString(randomvalue);
-			}
+			float randomvalue = 0f;
+			do {
+				randomvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
+			} while (randomvalue == Float.parseFloat(value));
+
+			result = Float.toString(randomvalue);
 		}
 		if (field.getAttributeValue("precision") != null) {
 			Integer paddingSize = Integer.parseInt(field.getAttributeValue("precision"));
 			String format = "%." + paddingSize + "f";
-			result = String.format(Locale.US, format, Float.valueOf(result));	
+			result = String.format(Locale.US, format, Float.valueOf(result));
 		}
 
 		return result;
 	}
-
 
 	/**
 	 * Generate a value of Integer type
@@ -1216,7 +1216,7 @@ public class EventGenerator {
 		String value = "";
 		int max, min;
 		Random r = new Random();
-		
+
 		for (int i = 0; i < values.size(); i++) {
 			if (fieldname.equals(values.get(i).first)) {
 				operator = values.get(i).second;
@@ -1257,7 +1257,7 @@ public class EventGenerator {
 		}
 		if (operator.equals("<")) {
 			min = Integer.MIN_VALUE;
-			
+
 			if (field.getAttributeValue("min") != null) {
 				min = Integer.parseInt(field.getAttributeValue("min"));
 			}
@@ -1277,12 +1277,13 @@ public class EventGenerator {
 				max = Integer.parseInt(field.getAttributeValue("max"));
 				min = Integer.parseInt(field.getAttributeValue("min"));
 			}
-			int randomvalue = r.ints(min, max).findFirst().getAsInt();
-			if (randomvalue == Integer.parseInt(value)) {
-				result = Integer.toString(min);
-			} else {
-				result = Integer.toString(randomvalue);
-			}
+
+			int randomvalue = 0;
+			do {
+				randomvalue = r.ints(min, max).findFirst().getAsInt();
+			} while (randomvalue == Integer.parseInt(value));
+			result = Integer.toString(randomvalue);
+
 		}
 
 		return result;
@@ -1340,20 +1341,20 @@ public class EventGenerator {
 		}
 
 		long max = Long.MAX_VALUE;
-		if(field.getAttributeValue("max") != null)
-				max = Long.parseLong(field.getAttributeValue("max"));
-		
+		if (field.getAttributeValue("max") != null)
+			max = Long.parseLong(field.getAttributeValue("max"));
+
 		long min = Long.MIN_VALUE;
-		if(field.getAttributeValue("min") != null)
-				min = Long.parseLong(field.getAttributeValue("min"));
-		
+		if (field.getAttributeValue("min") != null)
+			min = Long.parseLong(field.getAttributeValue("min"));
+
 		if (operator.equals("=")) {
 			result = value;
 		}
 		if (operator.equals(">")) {
 			min = Long.parseLong(value) + 1L; // It must be >
 			result = Long.toString(r.longs(min, max).findFirst().getAsLong());
- 		}
+		}
 		if (operator.equals(">=")) {
 			min = Long.parseLong(value);
 			result = Long.toString(r.longs(min, max).findFirst().getAsLong());
@@ -1367,12 +1368,13 @@ public class EventGenerator {
 			result = Long.toString(r.longs(min, max).findFirst().getAsLong());
 		}
 		if (operator.equals("!=")) {
-			long randomvalue = r.longs(min, max).findFirst().getAsLong();
-			if (randomvalue == Long.parseLong(value)) {
-				result = Long.toString(min);
-			} else {
-				result = Long.toString(randomvalue);
-			}
+			long randomvalue = 0L;
+
+			do {
+				randomvalue = r.longs(min, max).findFirst().getAsLong();
+			} while (randomvalue == Long.parseLong(value));
+
+			result = Long.toString(randomvalue);
 		}
 
 		return result;
