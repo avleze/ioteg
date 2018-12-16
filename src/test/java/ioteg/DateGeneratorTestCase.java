@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.jdom2.Document;
@@ -43,7 +42,7 @@ public class DateGeneratorTestCase {
 		for (int i = 0; i < 1000; ++i) {
 			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
 			SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-DD");
-			Date date = sdf.parse(strResult);
+			sdf.parse(strResult);
 		}
 	}
 

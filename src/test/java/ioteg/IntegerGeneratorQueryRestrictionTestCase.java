@@ -220,15 +220,14 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(0);
-		for (List<Trio<String, String, String>> el : EventGenerator.fieldvalues) {
+		/*for (List<Trio<String, String, String>> el : EventGenerator.fieldvalues) {
 			System.out.println();
 			for (Trio<String, String, String> elIn : el) {
 				System.out.print(", [" + elIn.first + ", " + elIn.second + ", " + elIn.third + "]");
 			}
-		}
+		}*/
 		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
-		System.out.println(result);
-
+		
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(-24)));
 	}
 }

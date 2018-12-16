@@ -230,7 +230,7 @@ public class EventGenerator {
 
 	}
 
-	private static void RemovingComplexType(Element rootNode) {
+	public static void RemovingComplexType(Element rootNode) {
 
 		List<Element> blockchilds = rootNode.getChildren("block");
 		List<Element> fieldchilds = new ArrayList<Element>();
@@ -1160,7 +1160,7 @@ public class EventGenerator {
 		}
 		if (field.getAttributeValue("precision") != null) {
 			Integer paddingSize = Integer.parseInt(field.getAttributeValue("precision"));
-			String format = "%." + paddingSize + "f";
+			String format = "%.0" + paddingSize + "f";
 			result = String.format(Locale.US, format, Float.valueOf(result));	
 		}
 
@@ -1377,7 +1377,7 @@ public class EventGenerator {
 			result = Long.toString(r.longs(min, max).findFirst().getAsLong());
 		}
 		if (operator.equals("!=")) {
-			long randomvalue = (long) r.longs(min, max).findFirst().getAsLong();
+			long randomvalue = r.longs(min, max).findFirst().getAsLong();
 			if (randomvalue == Long.parseLong(value)) {
 				result = Long.toString(min);
 			} else {

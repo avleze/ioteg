@@ -220,14 +220,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(18);
-		for (List<Trio<String, String, String>> el : EventGenerator.fieldvalues) {
-			System.out.println();
-			for (Trio<String, String, String> elIn : el) {
-				System.out.print(", [" + elIn.first + ", " + elIn.second + ", " + elIn.third + "]");
-			}
-		}
+	
 		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
-		System.out.println(result);
 
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(-24)));
 	}
