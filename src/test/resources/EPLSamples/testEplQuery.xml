@@ -37,6 +37,12 @@
 		<field name="field34" quotes="false" type="Alphanumeric" endcharacter="F" case="low"></field>
 		<field name="field35" quotes="false" type="Date" format="yy-MM-DD"></field>
 		<field name="field36" quotes="false" type="Time" format="HH:mm"></field>
+		
+		<field name="lugar" quotes="false" type="ComplexType">
+			<field name="nombre" quotes="true" type="String" length="4"></field>
+			<field name="latitud" quotes="false" type="Float" precision="2"></field>
+			<field name="longitud" quotes="false" type="Float" precision="2"></field>
+		</field>
 	</block>
 </event_type>
 	

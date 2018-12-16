@@ -11,19 +11,21 @@ import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 import com.ioteg.Trio;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.not;
 
 public class GetEPLValuesTestCase {
 	private static File xmlFile;
 	private static ClassLoader classLoader;
 
-	@BeforeAll
-	public static void loadSchema() throws JDOMException, IOException {
+	@BeforeEach
+	public void loadSchema() throws JDOMException, IOException {
 
 		classLoader = StringGeneratorTestCase.class.getClassLoader();
 		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
@@ -159,5 +161,21 @@ public class GetEPLValuesTestCase {
 		assertThat("field4", equalTo(trioToTest.first));
 		assertEquals("=", trioToTest.second);
 		assertEquals("D", trioToTest.third);
+	}
+	
+	@Test
+	public void testEPLRemoveComplexType() throws JDOMException, IOException, ParseException {
+		SAXBuilder builder = new SAXBuilder();
+		Document document = builder.build(xmlFile);
+		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/ComplexFieldExamples/EPLComplexFieldQuery.epl").getPath(),
+				document.getRootElement());
+
+		assertThat(EventGenerator.fieldvalues, not(empty()));
+		
+		
+		EventGenerator.RemovingComplexType(document.getRootElement());
+		
+		assertThat(EventGenerator.fieldvalues, empty());
 	}
 }
