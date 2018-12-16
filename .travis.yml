@@ -1,3 +1,6 @@
+git:
+  depth: false
+
 addons:
   sonarcloud:
     organization: "avleze-github"
