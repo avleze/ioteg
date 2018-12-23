@@ -25,7 +25,7 @@ public class AlphanumericGeneratorTestCase {
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = StringGeneratorTestCase.class.getClassLoader();
+		ClassLoader classLoader = AlphanumericGeneratorTestCase.class.getClassLoader();
 		File xmlFile = new File(classLoader.getResource("./generators/testAlphanumericGenerator.xml").getFile());
 		Document document = builder.build(xmlFile);
 

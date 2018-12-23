@@ -19,7 +19,7 @@ public class ValidationUtilTestCase {
 
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
-		classLoader = StringGeneratorTestCase.class.getClassLoader();
+		classLoader = ValidationUtilTestCase.class.getClassLoader();
 	}
 
 	@Test

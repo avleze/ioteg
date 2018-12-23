@@ -35,7 +35,7 @@ public class FloatCustomBehaviourTestCase {
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = BooleanGeneratorTestCase.class.getClassLoader();
+		ClassLoader classLoader = FloatCustomBehaviourTestCase.class.getClassLoader();
 		File xmlFile = new File(classLoader.getResource("./generators/testFloatCustomBehaviour.xml").getFile());
 		Document document = builder.build(xmlFile);
 

@@ -27,7 +27,7 @@ public class GetEPLValuesTestCase {
 	@BeforeEach
 	public void loadSchema() throws JDOMException, IOException {
 
-		classLoader = StringGeneratorTestCase.class.getClassLoader();
+		classLoader = GetEPLValuesTestCase.class.getClassLoader();
 		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
 		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
 	}

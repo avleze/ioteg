@@ -25,7 +25,7 @@ public class DateGeneratorTestCase {
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = StringGeneratorTestCase.class.getClassLoader();
+		ClassLoader classLoader = DateGeneratorTestCase.class.getClassLoader();
 		File xmlFile = new File(classLoader.getResource("./generators/testDateGenerator.xml").getFile());
 		Document document = builder.build(xmlFile);
 

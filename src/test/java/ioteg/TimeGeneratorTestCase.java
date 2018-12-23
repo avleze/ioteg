@@ -25,7 +25,7 @@ public class TimeGeneratorTestCase {
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = StringGeneratorTestCase.class.getClassLoader();
+		ClassLoader classLoader = TimeGeneratorTestCase.class.getClassLoader();
 		File xmlFile = new File(classLoader.getResource("./generators/testTimeGenerator.xml").getFile());
 		Document document = builder.build(xmlFile);
 

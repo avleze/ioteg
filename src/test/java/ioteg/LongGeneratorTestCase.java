@@ -24,7 +24,7 @@ public class LongGeneratorTestCase {
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = IntegerGeneratorTestCase.class.getClassLoader();
+		ClassLoader classLoader = LongGeneratorTestCase.class.getClassLoader();
 		File xmlFile = new File(classLoader.getResource("./generators/testLongGenerator.xml").getFile());
 		Document document = builder.build(xmlFile);
 

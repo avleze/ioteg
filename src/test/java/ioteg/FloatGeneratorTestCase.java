@@ -24,7 +24,7 @@ public class FloatGeneratorTestCase {
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = BooleanGeneratorTestCase.class.getClassLoader();
+		ClassLoader classLoader = FloatGeneratorTestCase.class.getClassLoader();
 		File xmlFile = new File(classLoader.getResource("./generators/testRandomFloatGenerator.xml").getFile());
 		Document document = builder.build(xmlFile);
 
