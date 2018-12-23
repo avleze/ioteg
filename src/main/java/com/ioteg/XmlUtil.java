@@ -59,7 +59,7 @@ public class XmlUtil extends EventGenerator {
 			if (blck.getAttributeValue("repeat") != null) {
 				List<Element> fields = blck.getChildren(); // field or optionalfield
 				EventGenerator.totalnumevents = Integer.parseInt(blck.getAttributeValue("repeat"));
-
+				bw.write("<feeds>\n");
 				for (int r = 0; r < EventGenerator.totalnumevents; r++) { // Number of values to repeat
 					sb.append("<feed>\n"); // The beginning of a field
 
