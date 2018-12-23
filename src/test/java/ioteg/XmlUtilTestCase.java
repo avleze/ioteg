@@ -14,6 +14,7 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,25 +24,31 @@ import com.ioteg.XmlUtil;
 
 public class XmlUtilTestCase {
 
-	private static Document doc;
 	private static File tempFile;
 	private FileWriter values;
+	private static SAXBuilder builder;
+	private static ClassLoader classLoader;
+	
+	@BeforeAll
+	public static void setup() {
+		builder = new SAXBuilder();
+		classLoader = XmlUtilTestCase.class.getClassLoader();
+	}
 	
 	@BeforeEach
 	public void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = JsonUtilTestCase.class.getClassLoader();
-		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
-		doc = builder.build(xmlFile);
+
 		tempFile = File.createTempFile("temp", "file");
 		values = new FileWriter(tempFile);
-
 		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
 	}
-
+	
 	@Test
 	public void testXmlComplexField() throws IOException, JDOMException {
-
+		
+		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
+		Document doc = builder.build(xmlFile);
+		
 		XmlUtil.XmlFormatValues(values, doc);
 
 		values.close();
@@ -62,6 +69,32 @@ public class XmlUtilTestCase {
 		assertThat(resultSplitted[9], matchesPattern("</feed>"));
 		assertThat(resultSplitted[10], matchesPattern("</feeds>"));
 		assertThat(resultSplitted[11], matchesPattern("</xml>"));
+
+	}
+	
+	@Test
+	public void testXmlComplexFieldNotRepeatTag() throws IOException, JDOMException {
+		
+		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
+		Document doc = builder.build(xmlFile);
+		
+		XmlUtil.XmlFormatValues(values, doc);
+
+		values.close();
+		
+		String xmlResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+		System.out.println(xmlResult);
+		String[] resultSplitted = xmlResult.toString().split("\n");
+		
+		assertThat(resultSplitted[0], matchesPattern("<xml>"));
+		assertThat(resultSplitted[1], matchesPattern("<testFormatValues>"));
+		assertThat(resultSplitted[2], matchesPattern("<lugar>"));
+		assertThat(resultSplitted[3], matchesPattern("<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"));
+		assertThat(resultSplitted[4], matchesPattern("<latitud type=\"Float\">\"-?\\d+\\.\\d{5}\"</latitud>"));
+		assertThat(resultSplitted[5], matchesPattern("<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud>"));
+		assertThat(resultSplitted[6], matchesPattern("</lugar>"));
+		assertThat(resultSplitted[7], matchesPattern("</testFormatValues>"));
+		assertThat(resultSplitted[8], matchesPattern("</xml>"));
 
 	}
 	

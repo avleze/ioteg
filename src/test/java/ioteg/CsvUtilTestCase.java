@@ -11,37 +11,70 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.ioteg.CsvUtil;
 import com.ioteg.EventGenerator;
 import com.ioteg.Trio;
-import com.ioteg.CsvUtil;
 
 public class CsvUtilTestCase {
 
-	private static Document doc;
 	private static File tempFile;
 	private FileWriter values;
+	private static SAXBuilder builder;
+	private static ClassLoader classLoader;
+
+	@BeforeAll
+	public static void setup() {
+		builder = new SAXBuilder();
+		classLoader = CsvUtilTestCase.class.getClassLoader();
+	}
 
 	@BeforeEach
 	public void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = JsonUtilTestCase.class.getClassLoader();
-		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
-		doc = builder.build(xmlFile);
+
 		tempFile = File.createTempFile("temp", "file");
 		values = new FileWriter(tempFile);
-
 		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
 	}
 
 	@Test
 	public void testCsvComplexField() throws IOException, JDOMException {
+		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
+		Document doc = builder.build(xmlFile);
+
+		CsvUtil.CsvFormatValues(values, doc);
+
+		values.close();
+
+		String csvResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+
+		String[] lines = csvResult.split("\n");
+
+		String[] headings = lines[0].split(",");
+		String[] result = lines[1].split(",");
+
+		assertThat(headings[0], equalTo("lugar.nombre"));
+		assertThat(headings[1], equalTo("lugar.latitud"));
+		assertThat(headings[2], equalTo("lugar.longitud"));
+
+		assertThat(result[0].length(), equalTo(4));
+		assertThat(result[1], matchesPattern("\"-?\\d+\\.\\d{5}\""));
+		assertThat(result[2], matchesPattern("-?\\d+\\.\\d{5}"));
+	}
+
+	@Test
+	public void testCsvComplexFieldNotRepeatTag() throws IOException, JDOMException {
+		File xmlFile = new File(
+				classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
+		Document doc = builder.build(xmlFile);
 
 		CsvUtil.CsvFormatValues(values, doc);
 
