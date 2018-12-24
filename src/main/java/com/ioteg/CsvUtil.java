@@ -32,60 +32,61 @@ public class CsvUtil extends EventGenerator {
 
 		for (int i = 0; i < list.size(); i++) {
 			Element blck = list.get(i);
+			Integer repetitions = 1;
 
+			EventGenerator.totalnumevents = repetitions;
 			if (blck.getAttributeValue("repeat") != null) {
-				List<Element> fields = blck.getChildren(); // field or optionalfield
+				EventGenerator.totalnumevents = Integer.valueOf(blck.getAttributeValue("repeat"));
+			}
+			List<Element> fields = blck.getChildren(); // field or optionalfield
 
-				// To print the head of the file
+			// To print the head of the file
 
-				for (int f = 0; f < fields.size(); f++) {
-					if (fields.get(f).getName().equals("optionalfields")) {
-						List<Element> optionals = fields.get(f).getChildren();
-						for (int o = 0; o < optionals.size(); o++) {
-							sb.append(optionals.get(o).getAttributeValue("name"));
+			for (int f = 0; f < fields.size(); f++) {
+				if (fields.get(f).getName().equals("optionalfields")) {
+					List<Element> optionals = fields.get(f).getChildren();
+					for (int o = 0; o < optionals.size(); o++) {
+						sb.append(optionals.get(o).getAttributeValue("name"));
 
-							if (o != optionals.size() - 1) {
-								sb.append(",");
-							}
+						if (o != optionals.size() - 1) {
+							sb.append(",");
+						}
+					}
+				} else {
+					sb.append(NormalFieldCsvHead(fields.get(f)));
+
+					if (f != fields.size() - 1) {
+						sb.append(",");
+					}
+				}
+			}
+			bw.write(sb.toString() + "\n");
+			sb.setLength(0);
+
+			for (int r = 0; r < EventGenerator.totalnumevents; r++) { // Number of values to repeat
+
+				for (int e = 0; e < fields.size(); e++) {
+					Element field = fields.get(e);
+
+					if (field.getName().equals("optionalfields")) {
+						StringBuilder aux = OptionalFieldCsv(field);
+						if (aux.length() == 0) {
+							int length = sb.length();
+							sb.deleteCharAt(length - 1);
+						} else {
+							sb.append(aux);
 						}
 					} else {
-						sb.append(NormalFieldCsvHead(fields.get(f)));
-
-						if (f != fields.size() - 1) {
-							sb.append(",");
-						}
+						sb.append(NormalFieldCsv(field));
+					}
+					if ((e < fields.size() - 1)) {
+						sb.append(",");
 					}
 				}
-				bw.write(sb.toString() + "\n");
+				bw.write(sb.toString());
 				sb.setLength(0);
-
-				EventGenerator.totalnumevents = Integer.parseInt(blck.getAttributeValue("repeat"));
-
-				for (int r = 0; r < EventGenerator.totalnumevents; r++) { // Number of values to repeat
-
-					for (int e = 0; e < fields.size(); e++) {
-						Element field = fields.get(e);
-
-						if (field.getName().equals("optionalfields")) {
-							StringBuilder aux = OptionalFieldCsv(field);
-							if (aux.length() == 0) {
-								int length = sb.length();
-								sb.deleteCharAt(length - 1);
-							} else {
-								sb.append(aux);
-							}
-						} else {
-							sb.append(NormalFieldCsv(field));
-						}
-						if ((e < fields.size() - 1)) {
-							sb.append(",");
-						}
-					}
-					bw.write(sb.toString());
-					sb.setLength(0);
-					bw.write("\n"); // The end of a field
-					EventGenerator.iteration += 1;
-				}
+				bw.write("\n"); // The end of a field
+				EventGenerator.iteration += 1;
 			}
 		}
 		bw.close();

@@ -68,7 +68,7 @@ public class JsonUtilTestCase {
 		JsonUtil.JsonFormatValues(values, doc);
 
 		String jsonResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
-		System.out.println(jsonResult);
+
 		String resultRegex = "\\{\"testFormatValues\":" + "\\{\"lugar\":\\{"
 				+ "\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}," + "\"latitud\":\"-?\\d+\\.\\d{5}\","
 				+ "\"longitud\":-?\\d+\\.\\d{5}\\}\\}\\}";

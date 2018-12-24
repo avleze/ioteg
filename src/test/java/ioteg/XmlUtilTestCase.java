@@ -83,7 +83,6 @@ public class XmlUtilTestCase {
 		values.close();
 		
 		String xmlResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
-		System.out.println(xmlResult);
 		String[] resultSplitted = xmlResult.toString().split("\n");
 		
 		assertThat(resultSplitted[0], matchesPattern("<xml>"));

@@ -81,7 +81,7 @@ public class CsvUtilTestCase {
 		values.close();
 
 		String csvResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
-
+		System.out.println(csvResult);
 		String[] lines = csvResult.split("\n");
 
 		String[] headings = lines[0].split(",");
