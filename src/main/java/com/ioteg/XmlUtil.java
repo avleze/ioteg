@@ -144,11 +144,7 @@ public class XmlUtil extends EventGenerator {
 			size--;
 		}
 
-		if (size == 1) {
-			size++;
-		}
-
-		int chosen = rand.nextInt(((size - 0) + 1) + 0);
+		int chosen = rand.nextInt(size);
 		if (chosen != size) {
 			Element elementop = optional.get(chosen);
 			sb.append("<" + elementop.getAttributeValue("name"));

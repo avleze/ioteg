@@ -65,7 +65,7 @@ public class CsvUtilTestCase {
 		assertThat(headings[1], equalTo("lugar.latitud"));
 		assertThat(headings[2], equalTo("lugar.longitud"));
 
-		assertThat(result[0].length(), equalTo(4));
+		assertThat(result[0], matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 		assertThat(result[1], matchesPattern("\"-?\\d+\\.\\d{5}\""));
 		assertThat(result[2], matchesPattern("-?\\d+\\.\\d{5}"));
 	}
@@ -74,6 +74,31 @@ public class CsvUtilTestCase {
 	public void testCsvComplexFieldNotRepeatTag() throws IOException, JDOMException {
 		File xmlFile = new File(
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
+		Document doc = builder.build(xmlFile);
+
+		CsvUtil.CsvFormatValues(values, doc);
+
+		values.close();
+
+		String csvResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+		String[] lines = csvResult.split("\n");
+
+		String[] headings = lines[0].split(",");
+		String[] result = lines[1].split(",");
+
+		assertThat(headings[0], equalTo("lugar.nombre"));
+		assertThat(headings[1], equalTo("lugar.latitud"));
+		assertThat(headings[2], equalTo("lugar.longitud"));
+
+		assertThat(result[0], matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
+		assertThat(result[1], matchesPattern("\"-?\\d+\\.\\d{5}\""));
+		assertThat(result[2], matchesPattern("-?\\d+\\.\\d{5}"));
+	}
+
+	@Test
+	public void testCsvWithOptionalFields() throws IOException, JDOMException {
+		File xmlFile = new File(
+				classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
 		CsvUtil.CsvFormatValues(values, doc);
@@ -90,12 +115,15 @@ public class CsvUtilTestCase {
 		assertThat(headings[0], equalTo("lugar.nombre"));
 		assertThat(headings[1], equalTo("lugar.latitud"));
 		assertThat(headings[2], equalTo("lugar.longitud"));
+		assertThat(headings[3], equalTo("nombreOpcional"));
 
-		assertThat(result[0].length(), equalTo(4));
+		assertThat(result[0], matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 		assertThat(result[1], matchesPattern("\"-?\\d+\\.\\d{5}\""));
 		assertThat(result[2], matchesPattern("-?\\d+\\.\\d{5}"));
+		if(result.length == 4)
+			assertThat(result[3], matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 	}
-
+	
 	@AfterEach
 	public void teardown() throws IOException {
 		tempFile.delete();

@@ -177,12 +177,7 @@ public class CsvUtil extends EventGenerator {
 			size--;
 		}
 
-		// TODO Revisar cuando el número de fields dentro de optionalfield son 2
-		if (size == 1) {
-			size++;
-		}
-
-		int chosen = rand.nextInt(((size - 0) + 1) + 0);
+		int chosen = rand.nextInt(size);
 		if (chosen != size) {
 			Element elementop = optional.get(chosen);
 			String quotes = elementop.getAttributeValue("quotes");

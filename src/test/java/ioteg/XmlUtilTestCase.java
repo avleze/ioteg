@@ -97,6 +97,36 @@ public class XmlUtilTestCase {
 
 	}
 	
+	@Test
+	public void testXmlWithOptionalFields() throws IOException, JDOMException {
+		
+		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
+		Document doc = builder.build(xmlFile);
+		
+		XmlUtil.XmlFormatValues(values, doc);
+
+		values.close();
+		
+		String xmlResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+		System.out.println(xmlResult);
+		String[] resultSplitted = xmlResult.toString().split("\n");
+		
+		assertThat(resultSplitted[0], matchesPattern("<xml>"));
+		assertThat(resultSplitted[1], matchesPattern("<testFormatValues>"));
+		assertThat(resultSplitted[2], matchesPattern("<feeds>"));
+		assertThat(resultSplitted[3], matchesPattern("<feed>"));
+		assertThat(resultSplitted[4], matchesPattern("<lugar>"));
+		assertThat(resultSplitted[5], matchesPattern("<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"));
+		assertThat(resultSplitted[6], matchesPattern("<latitud type=\"Float\">\"-?\\d+\\.\\d{5}\"</latitud>"));
+		assertThat(resultSplitted[7], matchesPattern("<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud>"));
+		assertThat(resultSplitted[8], matchesPattern("</lugar>"));
+		assertThat(resultSplitted[9], matchesPattern("<nombreOpcional type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombreOpcional>"));
+		assertThat(resultSplitted[10], matchesPattern("</feed>"));
+		assertThat(resultSplitted[11], matchesPattern("</feeds>"));
+		assertThat(resultSplitted[12], matchesPattern("</xml>"));
+
+	}
+	
 	@AfterEach
 	public void teardown() throws IOException {
 		tempFile.delete();

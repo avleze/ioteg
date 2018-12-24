@@ -76,6 +76,24 @@ public class JsonUtilTestCase {
 		assertThat(jsonResult, matchesPattern(resultRegex));
 
 	}
+	
+	@Test
+	public void testJsonComplexFieldWithOptionalFields() throws IOException, JDOMException {
+		File xmlFile = new File(
+				classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
+		Document doc = builder.build(xmlFile);
+
+		JsonUtil.JsonFormatValues(values, doc);
+
+		String jsonResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+		System.out.println(jsonResult);
+		String resultRegex = "\\{\"testFormatValues\":\\[" + "\\{\"lugar\":\\{"
+				+ "\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}," + "\"latitud\":\"-?\\d+\\.\\d{5}\","
+				+ "\"longitud\":-?\\d+\\.\\d{5}\\}(,\"nombreOpcional\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4})?\\}\\]\\}";
+
+		assertThat(jsonResult, matchesPattern(resultRegex));
+
+	}
 
 	@AfterEach
 	public void teardown() throws IOException {

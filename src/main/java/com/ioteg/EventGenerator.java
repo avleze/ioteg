@@ -419,6 +419,9 @@ public class EventGenerator {
 	public static StringBuilder GenerateValueComplexType(Element field, String type) throws JDOMException, IOException {
 
 		String quotes = field.getAttributeValue("quotes");
+		if(quotes == null)
+			quotes = "false";
+		
 		String value = "";
 		String finalvalue = "";
 		StringBuilder result = new StringBuilder();
@@ -532,11 +535,12 @@ public class EventGenerator {
 	public static boolean ExistType(String type) {
 		boolean exist = false;
 
-		for (int i = 0; i < types.length; i++) {
-			if (type.equals(types[i])) {
-				exist = true;
-			}
-		}
+		if(type != null) {
+			for (int i = 0; i < types.length; i++) {
+				if (type.equals(types[i])) {
+					exist = true;
+				}
+			}}
 		return exist;
 	}
 

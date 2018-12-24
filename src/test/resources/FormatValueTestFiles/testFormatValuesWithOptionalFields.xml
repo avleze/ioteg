@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event_type name="testFormatValues">
+	<block name="testFormatValues" repeat="1">
+		<field name="lugar" quotes="false" type="ComplexType">
+			<field name="nombre" quotes="false" type="String" length="4"></field>
+			<field name="latitud" quotes="true" type="Float" precision="5"></field>
+			<field name="longitud" quotes="false" type="Float" precision="5"></field>
+		</field>
+		<optionalfields mandatory="false">
+				<field name="nombreOpcional" quotes="false" type="String" length="4"></field>
+		</optionalfields>
+	</block>
+</event_type>
+	
