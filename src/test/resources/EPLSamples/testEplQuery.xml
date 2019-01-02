@@ -43,6 +43,26 @@
 			<field name="latitud" quotes="false" type="Float" precision="5"></field>
 			<field name="longitud" quotes="false" type="Float" precision="5"></field>
 		</field>
+		<field name="lugarchooseone" quotes="false" type="ComplexType">
+			<field name="nombre" quotes="false" type="String" length="4"></field>
+			<field name="latitud" quotes="false" type="Float" precision="5"></field>
+			<field name="longitud" quotes="false" type="Float" precision="5"></field>
+			<field name="color" quotes="true" type="ComplexType" chooseone="true">
+				<attribute type="String" value="red"></attribute>
+				<attribute type="String" value="blue"></attribute>
+				<attribute type="String" value="green"></attribute>
+			</field>
+		</field>
+		<field name="lugarchooseone" quotes="false" type="ComplexType">
+			<field name="nombre" quotes="false" type="String" length="4"></field>
+			<field name="latitud" quotes="false" type="Float" precision="5"></field>
+			<field name="longitud" quotes="false" type="Float" precision="5"></field>
+			<field name="fields" type="ComplexType" chooseone="true">
+				<field name="f1" quotes="false" type="Float" precision="5"></field>
+				<field name="f2" quotes="false" type="Float" precision="5"></field>
+			</field>
+		</field>
+		
 	</block>
 </event_type>
 	
