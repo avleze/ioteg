@@ -47,6 +47,7 @@ public class CsvUtil extends EventGenerator {
 					List<Element> optionals = fields.get(f).getChildren();
 					for (int o = 0; o < optionals.size(); o++) {
 						sb.append(optionals.get(o).getAttributeValue("name"));
+						sb.append(",");
 
 						if (o != optionals.size() - 1) {
 							sb.append(",");

@@ -106,7 +106,6 @@ public class CsvUtilTestCase {
 		values.close();
 
 		String csvResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
-		System.out.println(csvResult);
 		String[] lines = csvResult.split("\n");
 
 		String[] headings = lines[0].split(",");
@@ -116,12 +115,14 @@ public class CsvUtilTestCase {
 		assertThat(headings[1], equalTo("lugar.latitud"));
 		assertThat(headings[2], equalTo("lugar.longitud"));
 		assertThat(headings[3], equalTo("nombreOpcional"));
+		assertThat(headings[4], equalTo("cadenaOpcional"));
 
 		assertThat(result[0], matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 		assertThat(result[1], matchesPattern("\"-?\\d+\\.\\d{5}\""));
 		assertThat(result[2], matchesPattern("-?\\d+\\.\\d{5}"));
-		if(result.length == 4)
-			assertThat(result[3], matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
+		assertThat(result[3], matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
+		assertThat(result[4], matchesPattern("\"[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}\""));
+
 	}
 	
 	@AfterEach

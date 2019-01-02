@@ -9,6 +9,9 @@
 		<optionalfields mandatory="false">
 				<field name="nombreOpcional" quotes="false" type="String" length="4"></field>
 		</optionalfields>
+		<optionalfields mandatory="false">
+				<field name="cadenaOpcional" quotes="true" type="String" length="4"></field>
+		</optionalfields>
 	</block>
 </event_type>
 	

@@ -156,10 +156,6 @@ public class JsonUtil extends EventGenerator {
 			size--;
 		}
 
-	/*	if (size == 1) {
-			size++;
-		}*/
-
 		int chosen = rand.nextInt(size);
 
 		if (chosen != size) {

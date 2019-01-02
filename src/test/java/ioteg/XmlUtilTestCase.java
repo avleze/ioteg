@@ -108,7 +108,6 @@ public class XmlUtilTestCase {
 		values.close();
 		
 		String xmlResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
-		System.out.println(xmlResult);
 		String[] resultSplitted = xmlResult.toString().split("\n");
 		
 		assertThat(resultSplitted[0], matchesPattern("<xml>"));
@@ -121,9 +120,10 @@ public class XmlUtilTestCase {
 		assertThat(resultSplitted[7], matchesPattern("<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud>"));
 		assertThat(resultSplitted[8], matchesPattern("</lugar>"));
 		assertThat(resultSplitted[9], matchesPattern("<nombreOpcional type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombreOpcional>"));
-		assertThat(resultSplitted[10], matchesPattern("</feed>"));
-		assertThat(resultSplitted[11], matchesPattern("</feeds>"));
-		assertThat(resultSplitted[12], matchesPattern("</xml>"));
+		assertThat(resultSplitted[10], matchesPattern("<cadenaOpcional type=\"String\">\"[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}\"</cadenaOpcional>"));
+		assertThat(resultSplitted[11], matchesPattern("</feed>"));
+		assertThat(resultSplitted[12], matchesPattern("</feeds>"));
+		assertThat(resultSplitted[13], matchesPattern("</xml>"));
 
 	}
 	
