@@ -20,8 +20,8 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 import com.ioteg.builders.FieldBuilder;
+import com.ioteg.generators.Generator;
 import com.ioteg.generators.GeneratorsFactory;
-import com.ioteg.generators.integer.IntegerGenerator;
 import com.ioteg.model.Field;
 
 public class EventGenerator {
@@ -1086,28 +1086,20 @@ public class EventGenerator {
 			}
 
 		} else {
-			if (field.getAttributeValue("value") != null) {
-				result = field.getAttributeValue("value");
-			} else {
-				// Returns a pseudo-random number between min and max, inclusive
+			FieldBuilder theBuilder = new FieldBuilder();
+			Field floatField = theBuilder.build(field);
+			Generator<Float> floatGenerator = GeneratorsFactory.makeFloatGenerator(floatField);
+			if(floatGenerator != null)
+			{
+				result = floatGenerator.generate(floatField, 1).get(0);
 
-				if ((field.getAttributeValue("max") != null) && (field.getAttributeValue("min") != null)) {
-					float max = Float.parseFloat(field.getAttributeValue("max"));
-					float min = Float.parseFloat(field.getAttributeValue("min"));
-					result = Float.toString(min + (float) (Math.random() * (max - min)));
-				} else {
-					// Default values
-					float max = (float) 9.0;
-					float min = (float) 0.0;
-					result = Float.toString(min + (float) (Math.random() * ((max - min) + 1.0)));
-				}
-
-				if (field.getAttributeValue("precision") != null) {
-					Integer paddingSize = Integer.parseInt(field.getAttributeValue("precision"));
+				if (floatField.getPrecision() != null) {
+					Integer paddingSize = floatField.getPrecision();
 					String format = "%." + paddingSize + "f";
 					result = String.format(Locale.US, format, Float.valueOf(result));
 				}
 			}
+			
 		}
 
 		return result;
@@ -1190,7 +1182,7 @@ public class EventGenerator {
 		String result = "";
 		FieldBuilder theBuilder = new FieldBuilder();
 		Field integer = theBuilder.build(field);
-		IntegerGenerator integerGenerator = GeneratorsFactory.makeIntegerGenerator(integer);
+		Generator<Integer> integerGenerator = GeneratorsFactory.makeIntegerGenerator(integer);
 		if(integerGenerator != null)
 			result = integerGenerator.generate(integer, 1).get(0);
 		return result;
@@ -1294,23 +1286,11 @@ public class EventGenerator {
 	 */
 	private static String GenerateLong(Element field) {
 		String result = "";
-
-		if (field.getAttributeValue("value") != null) {
-			result = field.getAttributeValue("value");
-		} else {
-			// Returns a pseudo-random number between min and max, inclusive
-			if ((field.getAttributeValue("max") != null) && (field.getAttributeValue("min") != null)) {
-				long max = Long.parseLong(field.getAttributeValue("max"));
-				long min = Long.parseLong(field.getAttributeValue("min"));
-				result = Long.toString(min + (long) (Math.random() * ((max - min) + 1)));
-			} else {
-				// Default values
-				long max = 9;
-				long min = 0;
-				result = Long.toString(min + (long) (Math.random() * ((max - min) + 1)));
-			}
-		}
-
+		FieldBuilder theBuilder = new FieldBuilder();
+		Field longField = theBuilder.build(field);
+		Generator<Long> integerGenerator = GeneratorsFactory.makeLongGenerator(longField);
+		if(integerGenerator != null)
+			result = integerGenerator.generate(longField, 1).get(0);
 		return result;
 	}
 
