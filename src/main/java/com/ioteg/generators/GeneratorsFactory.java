@@ -8,7 +8,7 @@ import com.ioteg.model.Field;
 public class GeneratorsFactory {
 
 	private GeneratorsFactory() {
-		    throw new IllegalStateException("Utility class");
+		    throw new IllegalStateException("This is an utility class and can't be instantiated.");
 		  }
 
 	public static IntegerGenerator makeIntegerGenerator(Field integer) {
