@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +18,11 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+
+import com.ioteg.builders.FieldBuilder;
+import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.integer.IntegerGenerator;
+import com.ioteg.model.Field;
 
 public class EventGenerator {
 
@@ -1184,23 +1188,11 @@ public class EventGenerator {
 	 */
 	private static String GenerateInteger(Element field) {
 		String result = "";
-
-		if (field.getAttributeValue("value") != null) {
-			result = field.getAttributeValue("value");
-		} else {
-			// Returns a pseudo-random number between min and max, inclusive
-			if ((field.getAttributeValue("max") != null) && (field.getAttributeValue("min") != null)) {
-				int max = Integer.parseInt(field.getAttributeValue("max"));
-				int min = Integer.parseInt(field.getAttributeValue("min"));
-				result = Integer.toString(min + (int) (Math.random() * ((max - min) + 1)));
-			} else {
-				// Default values
-				int max = 9;
-				int min = 0;
-				result = Integer.toString(min + (int) (Math.random() * ((max - min) + 1)));
-			}
-		}
-
+		FieldBuilder theBuilder = new FieldBuilder();
+		Field integer = theBuilder.build(field);
+		IntegerGenerator integerGenerator = GeneratorsFactory.makeIntegerGenerator(integer);
+		if(integerGenerator != null)
+			result = integerGenerator.generate(integer, 1).get(0);
 		return result;
 	}
 
