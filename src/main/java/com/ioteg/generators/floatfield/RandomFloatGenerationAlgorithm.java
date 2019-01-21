@@ -20,7 +20,7 @@ public class RandomFloatGenerationAlgorithm extends GenerationAlgorithm<Float> {
 		
 		try {
 			Random r = SecureRandom.getInstanceStrong();
-			result = Double.valueOf(r.doubles(min, max).findFirst().getAsDouble()).floatValue();
+			result = (float) r.doubles(min, max).findFirst().getAsDouble();
 		} catch (NoSuchAlgorithmException e) {
 			logger.error(e);
 		}  
