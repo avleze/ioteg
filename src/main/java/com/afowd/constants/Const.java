@@ -44,10 +44,10 @@ public class Const {
 	public static final int MIDDLE_NAME = 3;
 	public static final String MIN_VALUE = "MIN_VALUE";
 	public static final String MAX_VALUE = "MAX_VALUE";
-	public static final BigInteger MIN_VALUE_BIGINTEGER = new BigInteger("-99999999999");
-	public static final BigInteger MAX_VALUE_BIGINTEGER = new BigInteger("99999999999");
-	public static final BigDecimal MIN_VALUE_BIGDECIMAL = new BigDecimal("-99999999999");
-	public static final BigDecimal MAX_VALUE_BIGDECIMAL = new BigDecimal("99999999999");
+	public static final BigInteger MIN_VALUE_BIGINTEGER = BigInteger.valueOf(-99999999999L);
+	public static final BigInteger MAX_VALUE_BIGINTEGER = BigInteger.valueOf(99999999999L);
+	public static final BigDecimal MIN_VALUE_BIGDECIMAL = BigDecimal.valueOf(-99999999999L);
+	public static final BigDecimal MAX_VALUE_BIGDECIMAL = BigDecimal.valueOf(99999999999L);
 
 	public static final Integer ZERO_INTEGER = 0;
 	public static final Integer ONE_INTEGER = 1;
