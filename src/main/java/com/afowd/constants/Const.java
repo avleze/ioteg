@@ -51,20 +51,20 @@ public class Const {
 
 	public static final Integer ZERO_INTEGER = 0;
 	public static final Integer ONE_INTEGER = 1;
-	public static final Long ZERO_LONG = new Long("0");
-	public static final Short ZERO_SHORT = new Short("0");
+	public static final Long ZERO_LONG = Long.valueOf("0");
+	public static final Short ZERO_SHORT = Short.valueOf("0");
 	public static final byte ZERO_BYTE = 0;
-	public static final Double ZERO_DOUBLE = new Double("0.00");
-	public static final Float ZERO_FLOAT = new Float("0");
+	public static final Double ZERO_DOUBLE = Double.valueOf("0.00"); 
+	public static final Float ZERO_FLOAT = Float.valueOf("0");
 
 	public static final int MIN_YEAR = 1900;
 	public static final int MAX_YEAR = 2100;
 	public static final double MAX_SOLARY = 20000.00;
 	public static final float MAX_HOUR_PRICE = 120;
-	public static final Long MIN_EXPIRENCE_LONG = new Long(0);
-	public static final Long MAX_EXPIRENCE_LONG = new Long(60);
-	public static final Long MIN_AGE_LONG = new Long(0);
-	public static final Long MAX_AGE_LONG = new Long(60);
+	public static final Long MIN_EXPIRENCE_LONG = Long.valueOf("0");
+	public static final Long MAX_EXPIRENCE_LONG = Long.valueOf("60");
+	public static final Long MIN_AGE_LONG = Long.valueOf("0");
+	public static final Long MAX_AGE_LONG = Long.valueOf("60");
 
 	public static final int MAX_CHAR = 256;
 	public static final int CHAR_A = 65;
