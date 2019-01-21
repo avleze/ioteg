@@ -1,13 +1,14 @@
-package com.ioteg.generators.integer;
+package com.ioteg.generators.integerfield;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
 
+import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.model.Field;
 
-public class RandomIntegerGenerator implements IntegerGenerable {
+public class RandomIntegerGenerationAlgorithm extends GenerationAlgorithm<Integer> {
 	
 	private Logger logger = Logger.getRootLogger();
 	

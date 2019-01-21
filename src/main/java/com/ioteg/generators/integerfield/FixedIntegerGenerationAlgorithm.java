@@ -1,8 +1,9 @@
-package com.ioteg.generators.integer;
+package com.ioteg.generators.integerfield;
 
+import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.model.Field;
 
-public class FixedIntegerGenerator implements IntegerGenerable {
+public class FixedIntegerGenerationAlgorithm extends GenerationAlgorithm<Integer> {
 
 	@Override
 	public Integer generate(Field integer) {
