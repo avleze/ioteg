@@ -18,9 +18,9 @@ public class GeneratorsFactory {
 		Generator<Integer> integerGenerator = null;
 
 		if (integer.getValue() != null)
-			integerGenerator = new Generator<Integer>(new FixedIntegerGenerationAlgorithm());
+			integerGenerator = new Generator<>(new FixedIntegerGenerationAlgorithm());
 		else if (integer.getMin() != null && integer.getMax() != null)
-			integerGenerator = new Generator<Integer>(new RandomIntegerGenerationAlgorithm());
+			integerGenerator = new Generator<>(new RandomIntegerGenerationAlgorithm());
 
 		return integerGenerator;
 	}
@@ -29,9 +29,9 @@ public class GeneratorsFactory {
 		Generator<Long> longGenerator = null;
 
 		if (longField.getValue() != null)
-			longGenerator = new Generator<Long>(new FixedLongGenerationAlgorithm());
+			longGenerator = new Generator<>(new FixedLongGenerationAlgorithm());
 		else if (longField.getMin() != null && longField.getMax() != null)
-			longGenerator = new Generator<Long>(new RandomLongGenerationAlgorithm());
+			longGenerator = new Generator<>(new RandomLongGenerationAlgorithm());
 
 		return longGenerator;
 	}
@@ -40,9 +40,9 @@ public class GeneratorsFactory {
 		Generator<Float> floatGenerator = null;
 
 		if (floatField.getValue() != null)
-			floatGenerator = new Generator<Float>(new FixedFloatGenerationAlgorithm());
+			floatGenerator = new Generator<>(new FixedFloatGenerationAlgorithm());
 		else if (floatField.getMin() != null && floatField.getMax() != null)
-			floatGenerator = new Generator<Float>(new RandomFloatGenerationAlgorithm());
+			floatGenerator = new Generator<>(new RandomFloatGenerationAlgorithm());
 
 		return floatGenerator;
 	}
