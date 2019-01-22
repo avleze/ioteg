@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.model.Field;
 
-public class RandomLongGenerationAlgorithm extends GenerationAlgorithm<Long> {
+public class RandomLongGenerationAlgorithm implements GenerationAlgorithm<Long> {
 	
 	private Logger logger = Logger.getRootLogger();
 	
