@@ -31,7 +31,7 @@ public class FloatGenerator extends Generator<Float> {
 	}
 
 	private String numberToSpecifiedPrecision(Float floatNumber, Integer precision) {
-		return String.format(Locale.US, "%." + precision + "f", Float.valueOf(floatNumber));
+		return String.format(Locale.US, "%." + precision + "f", floatNumber);
 	}
 
 }
