@@ -6,7 +6,7 @@ import com.ioteg.model.Field;
 
 public class Generator<T> {
 	
-	private GenerationAlgorithm<T> generationAlgorithm;
+	protected GenerationAlgorithm<T> generationAlgorithm;
 
 	
 	public Generator(GenerationAlgorithm<T> generationAlgorithm) {

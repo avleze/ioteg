@@ -693,25 +693,11 @@ public class EventGenerator {
 	 */
 	private static String GenerateBoolean(Element field) {
 		String result = "";
-		Random rand = new Random();
-		boolean value;
-
-		if (field.getAttributeValue("value") != null) {
-			result = field.getAttributeValue("value");
-		} else {
-			if (field.getAttributeValue("isnumeric").equals("true")) {
-				value = rand.nextBoolean();
-				if (value) {
-					result = "1";
-				} else {
-					result = "0";
-				}
-			} else {
-				value = rand.nextBoolean();
-				result = Boolean.toString(value);
-			}
-		}
-
+		FieldBuilder theBuilder = new FieldBuilder();
+		Field booleanField = theBuilder.build(field);
+		Generator<Boolean> booleanGenerator = GeneratorsFactory.makeBooleanGenerator(booleanField);
+		if(booleanGenerator != null)
+			result = booleanGenerator.generate(booleanField, 1).get(0);
 		return result;
 	}
 

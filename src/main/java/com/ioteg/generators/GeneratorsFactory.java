@@ -1,5 +1,8 @@
 package com.ioteg.generators;
 
+import com.ioteg.generators.booleanfield.BooleanGenerator;
+import com.ioteg.generators.booleanfield.FixedBooleanGenerationAlgorithm;
+import com.ioteg.generators.booleanfield.RandomBooleanGenerationAlgorithm;
 import com.ioteg.generators.floatfield.FixedFloatGenerationAlgorithm;
 import com.ioteg.generators.floatfield.RandomFloatGenerationAlgorithm;
 import com.ioteg.generators.integerfield.FixedIntegerGenerationAlgorithm;
@@ -45,5 +48,16 @@ public class GeneratorsFactory {
 			floatGenerator = new Generator<>(new RandomFloatGenerationAlgorithm());
 
 		return floatGenerator;
+	}
+	
+	public static Generator<Boolean> makeBooleanGenerator(Field booleanField) {
+		Generator<Boolean> booleanGenerator = null;
+
+		if (booleanField.getValue() != null)
+			booleanGenerator = new BooleanGenerator(new FixedBooleanGenerationAlgorithm());
+		else
+			booleanGenerator = new BooleanGenerator(new RandomBooleanGenerationAlgorithm());
+
+		return booleanGenerator;
 	}
 }
