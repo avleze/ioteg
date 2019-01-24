@@ -1076,15 +1076,9 @@ public class EventGenerator {
 			Field floatField = theBuilder.build(field);
 			Generator<Float> floatGenerator = GeneratorsFactory.makeFloatGenerator(floatField);
 			if(floatGenerator != null)
-			{
 				result = floatGenerator.generate(floatField, 1).get(0);
 
-				if (floatField.getPrecision() != null) {
-					Integer paddingSize = floatField.getPrecision();
-					String format = "%." + paddingSize + "f";
-					result = String.format(Locale.US, format, Float.valueOf(result));
-				}
-			}
+			
 			
 		}
 

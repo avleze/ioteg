@@ -4,6 +4,7 @@ import com.ioteg.generators.booleanfield.BooleanGenerator;
 import com.ioteg.generators.booleanfield.FixedBooleanGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.RandomBooleanGenerationAlgorithm;
 import com.ioteg.generators.floatfield.FixedFloatGenerationAlgorithm;
+import com.ioteg.generators.floatfield.FloatGenerator;
 import com.ioteg.generators.floatfield.RandomFloatGenerationAlgorithm;
 import com.ioteg.generators.integerfield.FixedIntegerGenerationAlgorithm;
 import com.ioteg.generators.integerfield.RandomIntegerGenerationAlgorithm;
@@ -43,9 +44,9 @@ public class GeneratorsFactory {
 		Generator<Float> floatGenerator = null;
 
 		if (floatField.getValue() != null)
-			floatGenerator = new Generator<>(new FixedFloatGenerationAlgorithm());
+			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm());
 		else if (floatField.getMin() != null && floatField.getMax() != null)
-			floatGenerator = new Generator<>(new RandomFloatGenerationAlgorithm());
+			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm());
 
 		return floatGenerator;
 	}
@@ -60,4 +61,5 @@ public class GeneratorsFactory {
 
 		return booleanGenerator;
 	}
+
 }
