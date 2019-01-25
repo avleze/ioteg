@@ -558,18 +558,11 @@ public class EventGenerator {
 	 */
 	private static String GenerateTime(Element field) {
 		String result = "";
-
-		if (field.getAttributeValue("value") != null) {
-			result = field.getAttributeValue("value");
-		} else {
-			if (field.getAttributeValue("format") != null) {
-				java.util.Date randomDate = RandomUtil.getRandomDate(new java.util.Date(RandomUtil.getMinimumDate()),
-						new java.util.Date(RandomUtil.getMaximumDate()), false);
-				SimpleDateFormat sdf = new SimpleDateFormat(field.getAttributeValue("format"));
-				result = sdf.format(randomDate);
-			}
-		}
-
+		FieldBuilder theBuilder = new FieldBuilder();
+		Field time = theBuilder.build(field);
+		Generator<Date> timeGenerator = GeneratorsFactory.makeTimeGenerator(time);
+		if(timeGenerator != null)
+			result = timeGenerator.generate(time, 1).get(0);
 		return result;
 	}
 

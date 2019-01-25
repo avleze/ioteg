@@ -77,5 +77,8 @@ public class GeneratorsFactory {
 
 		return dateGenerator;
 	}
-
+	
+	public static Generator<Date> makeTimeGenerator(Field timeField) {
+		return makeDateGenerator(timeField);
+	}
 }

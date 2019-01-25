@@ -51,7 +51,6 @@ public class TimeGeneratorTestCase {
 	public void testFixedValue() throws JDOMException, IOException {
 		Element field = fields.get(1);
 		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-
 		assertTrue(strResult.equals("14:24"));
 	}
 
