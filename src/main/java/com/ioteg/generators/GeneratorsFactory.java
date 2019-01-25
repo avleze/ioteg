@@ -22,7 +22,27 @@ public class GeneratorsFactory {
 	private GeneratorsFactory() {
 		    throw new IllegalStateException("This is an utility class and can't be instantiated.");
 		  }
-
+	
+	public static Generable makeGenerator(Field field)
+	{
+		Generable generable = null;
+		
+		if(field.getType().equals("Integer"))
+			generable = makeIntegerGenerator(field);
+		else if(field.getType().equals("Long"))
+			generable = makeLongGenerator(field);
+		else if(field.getType().equals("Float"))
+			generable = makeFloatGenerator(field);
+		else if(field.getType().equals("Boolean"))
+			generable = makeBooleanGenerator(field);
+		else if(field.getType().equals("Date"))
+			generable = makeDateGenerator(field);
+		else if(field.getType().equals("Time"))
+			generable = makeDateGenerator(field);
+		
+		return generable;
+	}
+	
 	public static Generator<Integer> makeIntegerGenerator(Field integer) {
 		Generator<Integer> integerGenerator = null;
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.ioteg.model.Field;
 
-public class Generator<T> {
+public class Generator<T> implements Generable{
 	
 	protected GenerationAlgorithm<T> generationAlgorithm;
 
