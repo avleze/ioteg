@@ -25,55 +25,26 @@ public class RandomStringGenerationAlgorithm implements GenerationAlgorithm<Stri
 
 	@Override
 	public String generate(Field stringField) {
-		
-		String result = null;
-		if (stringField.getEndcharacter() != null) {
-			result = getRandStringRange(stringField.getLength(),
-					stringField.getEndcharacter());
-		} else {
-			result = getRandString(stringField.getLength());
-		}
-
-		return result;
-	}
-	
-	/**
-	 * Generate a random String
-	 * 
-	 * @param longt determines the length of the String
-	 * @return a random String with a long length
-	 */
-	private static String getRandString(int longt) {
-		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder salt = new StringBuilder();
-		
-		while (salt.length() < longt) {
-			int index = (int) (r.nextFloat() * SALTCHARS.length());
-			salt.append(SALTCHARS.charAt(index));
-		}
-		String saltStr = salt.toString();
-		return saltStr;
-
+		return getRandStringRange(stringField.getLength(), stringField.getEndcharacter());
 	}
 
 	/**
 	 * Generate a random String
 	 * 
-	 * @param longt determines the length of the String and
-	 * @param end   determines the last character for the range
+	 * @param length determines the length of the String and
+	 * @param endcharacter   determines the last character for the range
 	 * @return a random String with a long length
 	 */
-	private static String getRandStringRange(int longt, String end) {
-		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder salt = new StringBuilder();
-		int newlength = SALTCHARS.indexOf(end);
-		while (salt.length() < longt) {
-			int index = (int) (r.nextFloat() * newlength + 1);
-			salt.append(SALTCHARS.charAt(index));
+	private static String getRandStringRange(int length, String endcharacter) {
+		final String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		StringBuilder result = new StringBuilder();
+		int lastPossibleIndex =  endcharacter == null ? SALTCHARS.length() : SALTCHARS.indexOf(endcharacter);
+		while (result.length() < length) {
+			int index = r.nextInt(lastPossibleIndex);
+			result.append(SALTCHARS.charAt(index));
 		}
-		String saltStr = salt.toString();
-		return saltStr;
-
+		
+		return result.toString();
 	}
 
 }

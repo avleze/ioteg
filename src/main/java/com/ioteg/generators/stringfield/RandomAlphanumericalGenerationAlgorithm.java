@@ -25,54 +25,26 @@ public class RandomAlphanumericalGenerationAlgorithm implements GenerationAlgori
 
 	@Override
 	public String generate(Field stringField) {
-		
-		String result = null;
-		if (stringField.getEndcharacter() != null) {
-			result = getAlphaNumRandStringRange(stringField.getLength(),
-					stringField.getEndcharacter());
-		} else {
-			result = getAlphaNumRandString(stringField.getLength());
-		}
-
-		return result;
+		return getAlphaNumRandStringRange(stringField.getLength(), stringField.getEndcharacter());
 	}
 	
 	/**
 	 * Generate a random Alphanumeric String
 	 * 
-	 * @param longt determines the length of the String
-	 * @return a random String with a long length
+	 * @param length determines the length of the String and
+	 * @param endcharacter   determines the last character for the range
+	 * @return a random Alphanumeric String with a long length
 	 */
-	private static String getAlphaNumRandString(int longt) {
-		String SALTCHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder salt = new StringBuilder();
-		while (salt.length() < longt) {
-			int index = (int) (r.nextFloat() * SALTCHARS.length());
-			salt.append(SALTCHARS.charAt(index));
+	private static String getAlphaNumRandStringRange(int length, String endcharacter) {
+		final String SALTCHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		StringBuilder result = new StringBuilder();
+		int lastPossibleIndex =  endcharacter == null ? SALTCHARS.length() : SALTCHARS.indexOf(endcharacter);
+		while (result.length() < length) {
+			int index = r.nextInt(lastPossibleIndex);
+			result.append(SALTCHARS.charAt(index));
 		}
-		String saltStr = salt.toString();
-		return saltStr;
-
-	}
-
-	/**
-	 * Generate a random Alphanumeric String
-	 * 
-	 * @param longt determines the length of the String and
-	 * @param end   determines the last character for the range
-	 * @return a random String with a longt length
-	 */
-	private static String getAlphaNumRandStringRange(int longt, String end) {
-		String SALTCHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder salt = new StringBuilder();
-		int newlength = SALTCHARS.indexOf(end);
-		while (salt.length() < longt) {
-			int index = (int) (r.nextFloat() * newlength + 1);
-			salt.append(SALTCHARS.charAt(index));
-		}
-		String saltStr = salt.toString();
-		return saltStr;
-
+		
+		return result.toString();
 	}
 
 }

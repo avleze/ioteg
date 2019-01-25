@@ -33,6 +33,10 @@ public class GeneratorsFactory {
 		
 		if(field.getType().equals("Integer"))
 			generable = makeIntegerGenerator(field);
+		else if(field.getType().equals("String"))
+			generable = makeStringGenerator(field);
+		else if(field.getType().equals("Alphanumeric"))
+			generable = makeAlphanumericGenerator(field);
 		else if(field.getType().equals("Long"))
 			generable = makeLongGenerator(field);
 		else if(field.getType().equals("Float"))
