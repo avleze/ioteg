@@ -736,39 +736,11 @@ public class EventGenerator {
 	 */
 	private static String GenerateString(Element field) {
 		String result = "";
-
-		if (field.getAttributeValue("value") != null) {
-			result = field.getAttributeValue("value");
-		} else {
-			if (field.getAttributeValue("length") != null) {
-
-				if (field.getAttributeValue("endcharacter") != null) {
-					result = getRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
-							field.getAttributeValue("endcharacter"));
-				} else {
-					result = getRandString(Integer.parseInt(field.getAttributeValue("length")));
-				}
-
-				if (field.getAttributeValue("case") != null) {
-					if (field.getAttributeValue("case").equals("low")) {
-						result = result.toLowerCase();
-					}
-				}
-			} else {
-				if (field.getAttributeValue("endcharacter") != null) {
-					result = getRandStringRange(10, field.getAttributeValue("endcharacter"));
-				} else {
-					result = getRandString(10); // Default length
-				}
-
-				if (field.getAttributeValue("case") != null) {
-					if (field.getAttributeValue("case").equals("low")) {
-						result = result.toLowerCase();
-					}
-				}
-			}
-		}
-
+		FieldBuilder theBuilder = new FieldBuilder();
+		Field stringField = theBuilder.build(field);
+		Generator<String> stringGenerator = GeneratorsFactory.makeStringGenerator(stringField);
+		if(stringGenerator != null)
+			result = stringGenerator.generate(stringField, 1).get(0);
 		return result;
 	}
 
@@ -882,39 +854,11 @@ public class EventGenerator {
 	 */
 	private static String GenerateAlphanumeric(Element field) {
 		String result = "";
-
-		if (field.getAttributeValue("value") != null) {
-			result = field.getAttributeValue("value");
-		} else {
-			if (field.getAttributeValue("length") != null) {
-
-				if (field.getAttributeValue("endcharacter") != null) {
-					result = getAlphaNumRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
-							field.getAttributeValue("endcharacter"));
-				} else {
-					result = getAlphaNumRandString(Integer.parseInt(field.getAttributeValue("length")));
-				}
-
-				if (field.getAttributeValue("case") != null) {
-					if (field.getAttributeValue("case").equals("low")) {
-						result = result.toLowerCase();
-					}
-				}
-			} else {
-				if (field.getAttributeValue("endcharacter") != null) {
-					result = getAlphaNumRandStringRange(10, field.getAttributeValue("endcharacter"));
-				} else {
-					result = getAlphaNumRandString(10); // Default length
-				}
-
-				if (field.getAttributeValue("case") != null) {
-					if (field.getAttributeValue("case").equals("low")) {
-						result = result.toLowerCase();
-					}
-				}
-			}
-		}
-
+		FieldBuilder theBuilder = new FieldBuilder();
+		Field alphanumericField = theBuilder.build(field);
+		Generator<String> alphanumericGenerator = GeneratorsFactory.makeAlphanumericGenerator(alphanumericField);
+		if(alphanumericGenerator != null)
+			result = alphanumericGenerator.generate(alphanumericField, 1).get(0);
 		return result;
 	}
 

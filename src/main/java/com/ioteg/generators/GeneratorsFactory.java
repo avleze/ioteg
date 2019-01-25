@@ -15,6 +15,10 @@ import com.ioteg.generators.integerfield.FixedIntegerGenerationAlgorithm;
 import com.ioteg.generators.integerfield.RandomIntegerGenerationAlgorithm;
 import com.ioteg.generators.longfield.FixedLongGenerationAlgorithm;
 import com.ioteg.generators.longfield.RandomLongGenerationAlgorithm;
+import com.ioteg.generators.stringfield.FixedStringGenerationAlgorithm;
+import com.ioteg.generators.stringfield.RandomAlphanumericalGenerationAlgorithm;
+import com.ioteg.generators.stringfield.RandomStringGenerationAlgorithm;
+import com.ioteg.generators.stringfield.StringGenerator;
 import com.ioteg.model.Field;
 
 public class GeneratorsFactory {
@@ -100,5 +104,27 @@ public class GeneratorsFactory {
 	
 	public static Generator<Date> makeTimeGenerator(Field timeField) {
 		return makeDateGenerator(timeField);
+	}
+	
+	public static Generator<String> makeStringGenerator(Field stringField) {
+		Generator<String> stringGenerator = null;
+
+		if (stringField.getValue() != null)
+			stringGenerator = new StringGenerator(new FixedStringGenerationAlgorithm());
+		else
+			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm());
+
+		return stringGenerator;
+	}
+	
+	public static Generator<String> makeAlphanumericGenerator(Field alphanumericField) {
+		Generator<String> alphanumericGenerator = null;
+
+		if (alphanumericField.getValue() != null)
+			alphanumericGenerator = new StringGenerator(new FixedStringGenerationAlgorithm());
+		else
+			alphanumericGenerator = new StringGenerator(new RandomAlphanumericalGenerationAlgorithm());
+
+		return alphanumericGenerator;
 	}
 }
