@@ -2,7 +2,7 @@
 <event_type name="timeGenerator">
 	<block name="timeGenerator" repeat="100">
 			<field name="time" quotes="true" type="Time" format="hh:mm"></field>
-			<field name="time" quotes="true" type="Time" value="14:24"></field>
+			<field name="time" quotes="true" type="Time" value="14:24" format="HH:mm"></field>
 	</block>
 </event_type>
 	
