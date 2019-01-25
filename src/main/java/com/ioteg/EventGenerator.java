@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -620,23 +621,11 @@ public class EventGenerator {
 	 */
 	private static String GenerateDate(Element field) {
 		String result = "";
-
-		if (field.getAttributeValue("value") != null) {
-			result = field.getAttributeValue("value");
-		} else {
-			if (field.getAttributeValue("format") != null) {
-				java.util.Date dateFromDB = new java.util.Date(System.currentTimeMillis());
-				Calendar calendarFromDB = Calendar.getInstance();
-
-				calendarFromDB.setTime(dateFromDB);
-
-				java.util.Date randomDate = RandomUtil.getRandomDate(new java.util.Date(RandomUtil.getMinimumDate()),
-						new java.util.Date(RandomUtil.getMaximumDate()), false);
-				SimpleDateFormat sdf = new SimpleDateFormat(field.getAttributeValue("format"));
-				result = sdf.format(randomDate);
-			}
-		}
-
+		FieldBuilder theBuilder = new FieldBuilder();
+		Field date = theBuilder.build(field);
+		Generator<Date> dateGenerator = GeneratorsFactory.makeDateGenerator(date);
+		if(dateGenerator != null)
+			result = dateGenerator.generate(date, 1).get(0);
 		return result;
 	}
 

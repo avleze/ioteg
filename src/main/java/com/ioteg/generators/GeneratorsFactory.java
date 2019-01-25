@@ -1,8 +1,13 @@
 package com.ioteg.generators;
 
+import java.util.Date;
+
 import com.ioteg.generators.booleanfield.BooleanGenerator;
 import com.ioteg.generators.booleanfield.FixedBooleanGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.RandomBooleanGenerationAlgorithm;
+import com.ioteg.generators.datefield.DateGenerator;
+import com.ioteg.generators.datefield.FixedDateGenerationAlgorithm;
+import com.ioteg.generators.datefield.RandomDateGenerationAlgorithm;
 import com.ioteg.generators.floatfield.FixedFloatGenerationAlgorithm;
 import com.ioteg.generators.floatfield.FloatGenerator;
 import com.ioteg.generators.floatfield.RandomFloatGenerationAlgorithm;
@@ -60,6 +65,17 @@ public class GeneratorsFactory {
 			booleanGenerator = new BooleanGenerator(new RandomBooleanGenerationAlgorithm());
 
 		return booleanGenerator;
+	}
+	
+	public static Generator<Date> makeDateGenerator(Field dateField) {
+		Generator<Date> dateGenerator = null;
+
+		if (dateField.getValue() != null)
+			dateGenerator = new DateGenerator(new FixedDateGenerationAlgorithm());
+		else
+			dateGenerator = new DateGenerator(new RandomDateGenerationAlgorithm());
+
+		return dateGenerator;
 	}
 
 }

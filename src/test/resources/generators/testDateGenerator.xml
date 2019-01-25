@@ -2,7 +2,7 @@
 <event_type name="dateGenerator">
 	<block name="dateGenerator" repeat="100">
 		<field name="date" quotes="true" type="Date" format="yy-MM-DD"></field>			
-		<field name="date" quotes="true" type="Date" value="08-05-01"></field>
+		<field name="date" quotes="true" type="Date" value="08-05-01" format="yy-mm-dd"></field>
 	</block>
 </event_type>
 	
