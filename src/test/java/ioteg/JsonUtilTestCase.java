@@ -39,7 +39,7 @@ public class JsonUtilTestCase {
 	public void loadSchema() throws JDOMException, IOException {
 		tempFile = File.createTempFile("temp", "file");
 		values = new FileWriter(tempFile);
-		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+		EventGenerator.fieldvalues = new ArrayList<>();
 	}
 
 	@Test

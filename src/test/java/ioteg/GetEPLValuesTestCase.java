@@ -29,7 +29,7 @@ public class GetEPLValuesTestCase {
 
 		classLoader = GetEPLValuesTestCase.class.getClassLoader();
 		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
-		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+		EventGenerator.fieldvalues = new ArrayList<>();
 	}
 
 	@Test
@@ -39,37 +39,37 @@ public class GetEPLValuesTestCase {
 		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/EPLQuery.epl").getPath(),
 				document.getRootElement());
 
-		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get(0);
+		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
 		assertEquals("field1", trioToTest.first);
 		assertEquals("<", trioToTest.second);
 		assertEquals("3", trioToTest.third);
 
-		trioToTest = EventGenerator.fieldvalues.get(0).get(1);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(1);
 		assertEquals("field1", trioToTest.first);
 		assertEquals(">", trioToTest.second);
 		assertEquals("4", trioToTest.third);
 
-		trioToTest = EventGenerator.fieldvalues.get(0).get(2);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(2);
 		assertEquals("field1", trioToTest.first);
 		assertEquals("=", trioToTest.second);
 		assertEquals("5", trioToTest.third);
 
-		trioToTest = EventGenerator.fieldvalues.get(0).get(3);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(3);
 		assertEquals("field1", trioToTest.first);
 		assertEquals("<=", trioToTest.second);
 		assertEquals("-6", trioToTest.third);
 
-		trioToTest = EventGenerator.fieldvalues.get(0).get(4);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(4);
 		assertEquals("field1", trioToTest.first);
 		assertEquals(">=", trioToTest.second);
 		assertEquals("7", trioToTest.third);
 
-		trioToTest = EventGenerator.fieldvalues.get(0).get(5);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(5);
 		assertEquals("field1", trioToTest.first);
 		assertEquals("!=", trioToTest.second);
 		assertEquals("8", trioToTest.third);
 		
-		trioToTest = EventGenerator.fieldvalues.get(0).get(6);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field10").get(0);
 		assertEquals("field10", trioToTest.first);
 		assertEquals("!=", trioToTest.second);
 		assertEquals("true", trioToTest.third);
@@ -80,16 +80,15 @@ public class GetEPLValuesTestCase {
 	public void testEPLOrOperator() throws JDOMException, IOException, ParseException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
 		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/EPLQueryOrOperator.epl").getPath(),
 				document.getRootElement());
 
-		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get(0);
+		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
 		assertEquals("field1", trioToTest.first);
 		assertEquals("<", trioToTest.second);
 		assertEquals("3", trioToTest.third);
 
-		trioToTest = EventGenerator.fieldvalues.get(1).get(0);
+		trioToTest = EventGenerator.fieldvalues.get(1).get("field1").get(0);
 		assertEquals("field1", trioToTest.first);
 		assertEquals(">", trioToTest.second);
 		assertEquals("4", trioToTest.third);
@@ -99,16 +98,15 @@ public class GetEPLValuesTestCase {
 	public void testEPLAndOperator() throws JDOMException, IOException, ParseException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
 		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/EPLQueryAndOperator.epl").getPath(),
 				document.getRootElement());
 
-		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get(0);
+		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
 		assertEquals("field1", trioToTest.first);
 		assertEquals("<", trioToTest.second);
 		assertEquals("3", trioToTest.third);
 
-		trioToTest = EventGenerator.fieldvalues.get(0).get(1);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(1);
 		assertEquals("field1", trioToTest.first);
 		assertEquals(">", trioToTest.second);
 		assertEquals("4", trioToTest.third);
@@ -118,46 +116,45 @@ public class GetEPLValuesTestCase {
 	public void testEPLNested() throws JDOMException, IOException, ParseException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
 		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/EPLQueryNested.epl").getPath(),
 				document.getRootElement());
 
-		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get(0);
+		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
 		assertThat("field1", equalTo(trioToTest.first));
 		assertEquals("<", trioToTest.second);
 		assertEquals("3", trioToTest.third);
 
-		trioToTest = EventGenerator.fieldvalues.get(0).get(1);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field2").get(0);
 		assertThat("field2", equalTo(trioToTest.first));
 		assertEquals(">=", trioToTest.second);
 		assertEquals("50", trioToTest.third);
 		
-		trioToTest = EventGenerator.fieldvalues.get(0).get(2);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field3").get(0);
 		assertThat("field3", equalTo(trioToTest.first));
 		assertEquals("!=", trioToTest.second);
 		assertEquals("A", trioToTest.third);
 		
-		trioToTest = EventGenerator.fieldvalues.get(0).get(3);
+		trioToTest = EventGenerator.fieldvalues.get(0).get("field4").get(0);
 		assertThat("field4", equalTo(trioToTest.first));
 		assertEquals("=", trioToTest.second);
 		assertEquals("B", trioToTest.third);
 		
-		trioToTest = EventGenerator.fieldvalues.get(1).get(0);
+		trioToTest = EventGenerator.fieldvalues.get(1).get("field1").get(0);
 		assertThat("field1", equalTo(trioToTest.first));
 		assertEquals("<", trioToTest.second);
 		assertEquals("3", trioToTest.third);
 
-		trioToTest = EventGenerator.fieldvalues.get(1).get(1);
+		trioToTest = EventGenerator.fieldvalues.get(1).get("field2").get(0);
 		assertThat("field2", equalTo(trioToTest.first));
 		assertEquals(">=", trioToTest.second);
 		assertEquals("50", trioToTest.third);
 		
-		trioToTest = EventGenerator.fieldvalues.get(1).get(2);
+		trioToTest = EventGenerator.fieldvalues.get(1).get("field3").get(0);
 		assertThat("field3", equalTo(trioToTest.first));
 		assertEquals("!=", trioToTest.second);
 		assertEquals("A", trioToTest.third);
 		
-		trioToTest = EventGenerator.fieldvalues.get(1).get(3);
+		trioToTest = EventGenerator.fieldvalues.get(1).get("field4").get(0);
 		assertThat("field4", equalTo(trioToTest.first));
 		assertEquals("=", trioToTest.second);
 		assertEquals("D", trioToTest.third);
@@ -167,7 +164,6 @@ public class GetEPLValuesTestCase {
 	public void testEPLRemoveComplexType() throws JDOMException, IOException, ParseException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
 		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/ComplexFieldExamples/EPLComplexFieldQuery.epl").getPath(),
 				document.getRootElement());
 

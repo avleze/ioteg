@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +23,7 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
 import com.ioteg.builders.FieldBuilder;
+import com.ioteg.generators.Generable;
 import com.ioteg.generators.Generator;
 import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.model.Field;
@@ -29,12 +32,12 @@ public class EventGenerator {
 
 	public static final String[] types = { "Integer", "Float", "Long", "Boolean", "String", "Date", "Time" };
 	public static int chosen;
-	public static List<List<Trio<String, String, String>>> fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+	public static List<Map<String, List<Trio<String, String, String>>>> fieldvalues = new ArrayList<>();
 	public static int totalnumevents;
 	public static int iteration;
 	public static int eventscustombehaviour;
 	public static int controlcustombehaviour;
-	public static final List<Integer> iterationvalues = new ArrayList<Integer>();
+	public static final List<Integer> iterationvalues = new ArrayList<>();
 
 	public static void main(String args[]) throws Exception {
 
@@ -100,9 +103,9 @@ public class EventGenerator {
 	 * @throws IOException if the file causes problems
 	 */
 	public static void GetEPLValues(String EPLfile, Element rootNode) throws IOException {
-		List<String> fieldnames = new ArrayList<String>();
+		List<String> fieldnames = new ArrayList<>();
 		List<Element> blockchilds = rootNode.getChildren("block");
-		List<Element> fieldchilds = new ArrayList<Element>();
+		List<Element> fieldchilds = new ArrayList<>();
 
 		for (int i = 0; i < blockchilds.size(); i++) {
 			Element blck = blockchilds.get(i);
@@ -137,7 +140,7 @@ public class EventGenerator {
 
 				Pattern logicalop = Pattern.compile(" or | and | OR | AND ");
 				Matcher logicalmatcher = logicalop.matcher(copyquery);
-				List<String> logicaloplist = new ArrayList<String>();
+				List<String> logicaloplist = new ArrayList<>();
 
 				while (logicalmatcher.find()) {
 					logicaloplist.add(logicalmatcher.group().toLowerCase().trim());
@@ -147,7 +150,7 @@ public class EventGenerator {
 
 				Pattern pattern = Pattern.compile("<=|>=|<|>|=|!=");
 				Matcher matcher = pattern.matcher(copyquery);
-
+				Trio<String, String, String> lastFieldPut = null;
 				// Check all occurrences
 				int i = 0; // to control the loop
 				while (matcher.find()) {
@@ -181,8 +184,7 @@ public class EventGenerator {
 
 					copyquery = copyquery.substring(copyquery.indexOf(allmatch) + allmatch.length());
 					copyquery.trim();
-					Trio<String, String, String> value = new Trio<String, String, String>(field, operator, finalvalue);
-
+					Trio<String, String, String> value = new Trio<>(field, operator, finalvalue);
 					if (!copyquery.isEmpty()) {
 						if (!logicaloplist.isEmpty()) {
 							if (logicaloplist.get(0).equals("or")) {
@@ -198,33 +200,55 @@ public class EventGenerator {
 							if (logicaloplist.get(0).equals("or")) {
 								int originalsize = fieldvalues.size();
 								for (int j = 0; j < originalsize; j++) {
-									List<Trio<String, String, String>> values = new ArrayList<Trio<String, String, String>>();
-									values.addAll(fieldvalues.get(j));
-									values.remove(values.size() - 1);
-									values.add(value);
+									Map<String, List<Trio<String, String, String>>> values = new HashMap<>();
+									
+									for(Entry<String, List<Trio<String, String, String>>> entry : fieldvalues.get(j).entrySet())
+									{
+										List<Trio<String, String, String>> list = new ArrayList<>();
+										list.addAll(entry.getValue());
+										values.put(entry.getKey(), list);
+									}
+
+									values.get(lastFieldPut.first).remove(lastFieldPut);
+									values.get(value.first).add(value);
 									fieldvalues.add(values);
 								}
 								logicaloplist.remove(0);
 							} else if (logicaloplist.get(0).equals("and")) {
-								for (List<Trio<String, String, String>> values : fieldvalues) {
-									values.add(value);
-								}
+								for (Map<String, List<Trio<String, String, String>>> values : fieldvalues) 
+									if(values.get(value.first) != null)
+										values.get(value.first).add(value);
+									else {
+										List<Trio<String, String, String>> list = new ArrayList<>();
+										list.add(value);
+										values.put(value.first, list);
+									}
 								logicaloplist.remove(0);
 							}
 						}
 					} else {
 						if (fieldvalues.isEmpty()) {
-							List<Trio<String, String, String>> values = new ArrayList<Trio<String, String, String>>();
-							values.add(value);
+							Map<String, List<Trio<String, String, String>>> values = new HashMap<>();
+							List<Trio<String, String, String>> list = new ArrayList<>();
+							list.add(value);
+							values.put(value.first, list);
 							fieldvalues.add(values);
 						} else {
-							for (List<Trio<String, String, String>> values : fieldvalues)
-								values.add(value);
+							for (Map<String, List<Trio<String, String, String>>> values : fieldvalues)
+								if(values.get(value.first) != null)
+									values.get(value.first).add(value);
+								else {
+									List<Trio<String, String, String>> list = new ArrayList<>();
+									list.add(value);
+									values.put(value.first, list);
+								}
 						}
 					}
 					matcher.reset();
 					matcher = pattern.matcher(copyquery);
 					i++;
+					
+					lastFieldPut = value;
 				}
 			}
 		}
@@ -237,7 +261,7 @@ public class EventGenerator {
 	public static void RemovingComplexType(Element rootNode) {
 
 		List<Element> blockchilds = rootNode.getChildren("block");
-		List<Element> fieldchilds = new ArrayList<Element>();
+		List<Element> fieldchilds = new ArrayList<>();
 
 		for (int i = 0; i < blockchilds.size(); i++) {
 			Element blck = blockchilds.get(i);
@@ -253,7 +277,7 @@ public class EventGenerator {
 			Element field = fieldchilds.get(i);
 			for (int j = 0; j < fieldvalues.size(); j++) {
 				for (int k = 0; k < fieldvalues.get(j).size(); k++) {
-					if (fieldvalues.get(j).get(k).first.equals(field.getAttributeValue("name"))) {
+					if (fieldvalues.get(j).get(field.getAttributeValue("name")) != null) {
 
 						for (int t = 0; t < types.length; t++) {
 							if (types[t].equals(field.getAttributeValue("type"))) {
@@ -263,12 +287,15 @@ public class EventGenerator {
 						}
 
 						if (!simple) {
-							fieldvalues.get(j).remove(k);
-							if (fieldvalues.get(j).isEmpty()) {
-								fieldvalues.remove(j);
-								j = 0;
-								k = -1;
-								break;
+							fieldvalues.get(j).get(field.getAttributeValue("name")).remove(k);
+							if (fieldvalues.get(j).get(field.getAttributeValue("name")).isEmpty()) {
+								fieldvalues.get(j).remove(field.getAttributeValue("name"));
+								if (fieldvalues.get(j).isEmpty()) {
+									fieldvalues.remove(j);
+									j = 0;
+									k = -1;
+									break;
+								}
 							}
 						}
 						simple = false;
@@ -308,12 +335,15 @@ public class EventGenerator {
 
 		String value = "";
 		String fieldname = field.getAttributeValue("name");
-
+		
+		FieldBuilder theBuilder = new FieldBuilder();
+		Field f = theBuilder.build(field);
+		Generable generator = GeneratorsFactory.makeGenerator(f);
+		
 		if (!fieldvalues.isEmpty()) {
-			List<Trio<String, String, String>> values = fieldvalues.get(0);
+			Map<String,List<Trio<String, String, String>>> values = fieldvalues.get(0);
 
-			for (int i = 0; i < values.size(); i++) {
-				if (values.get(i).first.equals(fieldname)) {
+				if (values.get(fieldname) != null) {
 					switch (type) {
 					case "Integer":
 						value = GenerateIntegerQueryRestriction(field);
@@ -340,37 +370,13 @@ public class EventGenerator {
 						value = GenerateTimeQueryRestriction(field);
 						break;
 					}
-				} else {
-					if (value == "") {
-						switch (type) {
-						case "Integer":
-							value = GenerateInteger(field);
-							break;
-						case "Float":
-							value = GenerateFloat(field);
-							break;
-						case "Long":
-							value = GenerateLong(field);
-							break;
-						case "String":
-							value = GenerateString(field);
-							break;
-						case "Alphanumeric":
-							value = GenerateAlphanumeric(field);
-							break;
-						case "Boolean":
-							value = GenerateBoolean(field);
-							break;
-						case "Date":
-							value = GenerateDate(field);
-							break;
-						case "Time":
-							value = GenerateTime(field);
-							break;
-						}
-					}
+				} else if(generator != null){
+					if(field.getAttributeValue("custom_behaviour") == null)
+						value = generator.generate(f, 1).get(0);
+					else
+						value = GenerateFloat(field);
 				}
-			}
+			
 
 			if (!iterationvalues.isEmpty()) {
 				if (iterationvalues.get(0).equals(iteration)) {
@@ -378,34 +384,11 @@ public class EventGenerator {
 					fieldvalues.remove(0);
 				}
 			}
-		} else {
-
-			switch (type) {
-			case "Integer":
-				value = GenerateInteger(field);
-				break;
-			case "Float":
+		} else if(generator != null){
+			if(field.getAttributeValue("custom_behaviour") == null)
+				value = generator.generate(f, 1).get(0);
+			else
 				value = GenerateFloat(field);
-				break;
-			case "Long":
-				value = GenerateLong(field);
-				break;
-			case "String":
-				value = GenerateString(field);
-				break;
-			case "Alphanumeric":
-				value = GenerateAlphanumeric(field);
-				break;
-			case "Boolean":
-				value = GenerateBoolean(field);
-				break;
-			case "Date":
-				value = GenerateDate(field);
-				break;
-			case "Time":
-				value = GenerateTime(field);
-				break;
-			}
 		}
 
 		return value;
@@ -549,23 +532,7 @@ public class EventGenerator {
 		return exist;
 	}
 
-	/**
-	 * Generate a value of Time type
-	 * 
-	 * @param field is the Element in which the value will be assigned
-	 * @return a value of the Time type according to the declared restriction and
-	 *         attributes of the Element field
-	 */
-	private static String GenerateTime(Element field) {
-		String result = "";
-		FieldBuilder theBuilder = new FieldBuilder();
-		Field time = theBuilder.build(field);
-		Generator<Date> timeGenerator = GeneratorsFactory.makeTimeGenerator(time);
-		if(timeGenerator != null)
-			result = timeGenerator.generate(time, 1).get(0);
-		return result;
-	}
-
+	
 	/**
 	 * Generate a value of Time type according to the query/ies value/s
 	 * 
@@ -576,15 +543,14 @@ public class EventGenerator {
 	private static String GenerateTimeQueryRestriction(Element field) {
 		String result = "";
 		String fieldname = field.getAttributeValue("name");
-		List<Trio<String, String, String>> values = fieldvalues.get(0);
+		List<Trio<String, String, String>> values = fieldvalues.get(0).get(fieldname);
 		String operator = "";
 		String value = "";
 
-		for (int i = 0; i < values.size(); i++) {
-			if (fieldname.equals(values.get(i).first)) {
-				operator = values.get(i).second;
-				value = values.get(i).third;
-			}
+		
+		if (values != null) {
+			operator = values.get(0).second;
+			value = values.get(0).third;
 		}
 
 		if (operator.equals("=")) {
@@ -605,22 +571,6 @@ public class EventGenerator {
 		return result;
 	}
 
-	/**
-	 * Generate a value of Date type
-	 * 
-	 * @param field is the Element in which the value will be assigned
-	 * @return a value of the Date type according to the declared restriction and
-	 *         attributes of the Element field
-	 */
-	private static String GenerateDate(Element field) {
-		String result = "";
-		FieldBuilder theBuilder = new FieldBuilder();
-		Field date = theBuilder.build(field);
-		Generator<Date> dateGenerator = GeneratorsFactory.makeDateGenerator(date);
-		if(dateGenerator != null)
-			result = dateGenerator.generate(date, 1).get(0);
-		return result;
-	}
 
 	/**
 	 * Generate a value of Date type according to the query/ies value/s
@@ -632,15 +582,14 @@ public class EventGenerator {
 	private static String GenerateDateQueryRestriction(Element field) {
 		String result = "";
 		String fieldname = field.getAttributeValue("name");
-		List<Trio<String, String, String>> values = fieldvalues.get(0);
+		List<Trio<String, String, String>> values = fieldvalues.get(0).get(fieldname);
 		String operator = "";
 		String value = "";
 
-		for (int i = 0; i < values.size(); i++) {
-			if (fieldname.equals(values.get(i).first)) {
-				operator = values.get(i).second;
-				value = values.get(i).third;
-			}
+		
+		if (values != null) {
+			operator = values.get(0).second;
+			value = values.get(0).third;
 		}
 
 		if (operator.equals("=")) {
@@ -667,23 +616,6 @@ public class EventGenerator {
 	}
 
 	/**
-	 * Generate a value of Boolean type
-	 * 
-	 * @param field is the Element in which the value will be assigned
-	 * @return a value of the Boolean type according to the declared restriction and
-	 *         attributes of the Element field
-	 */
-	private static String GenerateBoolean(Element field) {
-		String result = "";
-		FieldBuilder theBuilder = new FieldBuilder();
-		Field booleanField = theBuilder.build(field);
-		Generator<Boolean> booleanGenerator = GeneratorsFactory.makeBooleanGenerator(booleanField);
-		if(booleanGenerator != null)
-			result = booleanGenerator.generate(booleanField, 1).get(0);
-		return result;
-	}
-
-	/**
 	 * Generate a value of Boolean type according to the query/ies value/s
 	 * 
 	 * @param field is the Element in which the value will be assigned
@@ -693,16 +625,16 @@ public class EventGenerator {
 	private static String GenerateBooleanQueryRestriction(Element field) {
 		String result = "";
 		String fieldname = field.getAttributeValue("name");
-		List<Trio<String, String, String>> values = fieldvalues.get(0);
+		List<Trio<String, String, String>> values = fieldvalues.get(0).get(fieldname);
 		String operator = "";
 		String value = "";
 
-		for (int i = 0; i < values.size(); i++) {
-			if (fieldname.equals(values.get(i).first)) {
-				operator = values.get(i).second;
-				value = values.get(i).third;
-			}
+		
+		if (values != null) {
+			operator = values.get(0).second;
+			value = values.get(0).third;
 		}
+		
 
 		if (operator.equals("=")) {
 			result = value;
@@ -728,23 +660,6 @@ public class EventGenerator {
 	}
 
 	/**
-	 * Generate a value of String type
-	 * 
-	 * @param field is the Element in which the value will be assigned
-	 * @return a value of the String type according to the declared restriction and
-	 *         attributes of the Element field
-	 */
-	private static String GenerateString(Element field) {
-		String result = "";
-		FieldBuilder theBuilder = new FieldBuilder();
-		Field stringField = theBuilder.build(field);
-		Generator<String> stringGenerator = GeneratorsFactory.makeStringGenerator(stringField);
-		if(stringGenerator != null)
-			result = stringGenerator.generate(stringField, 1).get(0);
-		return result;
-	}
-
-	/**
 	 * Generate a value of String type according to the query/ies value/s
 	 * 
 	 * @param field is the Element in which the value will be assigned
@@ -754,15 +669,14 @@ public class EventGenerator {
 	private static String GenerateStringQueryRestriction(Element field) {
 		String result = "";
 		String fieldname = field.getAttributeValue("name");
-		List<Trio<String, String, String>> values = fieldvalues.get(0);
+		List<Trio<String, String, String>> values = fieldvalues.get(0).get(fieldname);
 		String operator = "";
 		String value = "";
 
-		for (int i = 0; i < values.size(); i++) {
-			if (fieldname.equals(values.get(i).first)) {
-				operator = values.get(i).second;
-				value = values.get(i).third;
-			}
+		
+		if (values != null) {
+			operator = values.get(0).second;
+			value = values.get(0).third;
 		}
 
 		if (operator.equals("=")) {
@@ -846,23 +760,6 @@ public class EventGenerator {
 	}
 
 	/**
-	 * Generate a value of Alphanumeric type
-	 * 
-	 * @param field is the Element in which the value will be assigned
-	 * @return a value of the Alphanumeric type according to the declared
-	 *         restriction and attributes of the Element field
-	 */
-	private static String GenerateAlphanumeric(Element field) {
-		String result = "";
-		FieldBuilder theBuilder = new FieldBuilder();
-		Field alphanumericField = theBuilder.build(field);
-		Generator<String> alphanumericGenerator = GeneratorsFactory.makeAlphanumericGenerator(alphanumericField);
-		if(alphanumericGenerator != null)
-			result = alphanumericGenerator.generate(alphanumericField, 1).get(0);
-		return result;
-	}
-
-	/**
 	 * Generate a value of Alphanumeric type according to the query/ies value/s
 	 * 
 	 * @param field is the Element in which the value will be assigned
@@ -872,15 +769,14 @@ public class EventGenerator {
 	private static String GenerateAlphanumericQueryRestriction(Element field) {
 		String result = "";
 		String fieldname = field.getAttributeValue("name");
-		List<Trio<String, String, String>> values = fieldvalues.get(0);
+		List<Trio<String, String, String>> values = fieldvalues.get(0).get(fieldname);
 		String operator = "";
 		String value = "";
 
-		for (int i = 0; i < values.size(); i++) {
-			if (fieldname.equals(values.get(i).first)) {
-				operator = values.get(i).second;
-				value = values.get(i).third;
-			}
+		
+		if (values != null) {
+			operator = values.get(0).second;
+			value = values.get(0).third;
 		}
 
 		if (operator.equals("=")) {
@@ -1021,17 +917,17 @@ public class EventGenerator {
 	private static String GenerateFloatQueryRestriction(Element field) {
 		String result = "";
 		String fieldname = field.getAttributeValue("name");
-		List<Trio<String, String, String>> values = fieldvalues.get(0);
+		List<Trio<String, String, String>> values = fieldvalues.get(0).get(fieldname);
 		String operator = "";
 		String value = "";
-		Random r = new Random();
 
-		for (int i = 0; i < values.size(); i++) {
-			if (fieldname.equals(values.get(i).first)) {
-				operator = values.get(i).second;
-				value = values.get(i).third;
-			}
+		
+		if (values != null) {
+			operator = values.get(0).second;
+			value = values.get(0).third;
 		}
+		
+		Random r = new Random();
 
 		float max = Float.MAX_VALUE;
 		if (field.getAttributeValue("max") != null)
@@ -1078,23 +974,6 @@ public class EventGenerator {
 	}
 
 	/**
-	 * Generate a value of Integer type
-	 * 
-	 * @param field is the Element in which the value will be assigned
-	 * @return a value of the Integer type according to the declared restriction and
-	 *         attributes of the Element field
-	 */
-	private static String GenerateInteger(Element field) {
-		String result = "";
-		FieldBuilder theBuilder = new FieldBuilder();
-		Field integer = theBuilder.build(field);
-		Generator<Integer> integerGenerator = GeneratorsFactory.makeIntegerGenerator(integer);
-		if(integerGenerator != null)
-			result = integerGenerator.generate(integer, 1).get(0);
-		return result;
-	}
-
-	/**
 	 * Generate a value of Integer type according to the query/ies value/s
 	 * 
 	 * @param field is the Element in which the value will be assigned
@@ -1105,18 +984,17 @@ public class EventGenerator {
 
 		String result = "";
 		String fieldname = field.getAttributeValue("name");
-		List<Trio<String, String, String>> values = fieldvalues.get(0);
+		List<Trio<String, String, String>> values = fieldvalues.get(0).get(fieldname);
 		String operator = "";
 		String value = "";
+		
+		if (values != null) {
+			operator = values.get(0).second;
+			value = values.get(0).third;
+		}
+		
 		int max, min;
 		Random r = new Random();
-
-		for (int i = 0; i < values.size(); i++) {
-			if (fieldname.equals(values.get(i).first)) {
-				operator = values.get(i).second;
-				value = values.get(i).third;
-			}
-		}
 
 		if (operator.equals("=")) {
 			result = value;
@@ -1184,23 +1062,6 @@ public class EventGenerator {
 	}
 
 	/**
-	 * Generate a value of Long type
-	 * 
-	 * @param field is the Element in which the value will be assigned
-	 * @return a value of the Long type according to the declared restriction and
-	 *         attributes of the Element field
-	 */
-	private static String GenerateLong(Element field) {
-		String result = "";
-		FieldBuilder theBuilder = new FieldBuilder();
-		Field longField = theBuilder.build(field);
-		Generator<Long> integerGenerator = GeneratorsFactory.makeLongGenerator(longField);
-		if(integerGenerator != null)
-			result = integerGenerator.generate(longField, 1).get(0);
-		return result;
-	}
-
-	/**
 	 * Generate a value of Long type according to the query/ies value/s
 	 * 
 	 * @param field is the Element in which the value will be assigned
@@ -1208,19 +1069,21 @@ public class EventGenerator {
 	 *         restriction but also to the declared restriction
 	 */
 	private static String GenerateLongQueryRestriction(Element field) {
+
 		String result = "";
 		String fieldname = field.getAttributeValue("name");
-		List<Trio<String, String, String>> values = fieldvalues.get(0);
+		List<Trio<String, String, String>> values = fieldvalues.get(0).get(fieldname);
 		String operator = "";
 		String value = "";
+
+		
+		if (values != null) {
+			operator = values.get(0).second;
+			value = values.get(0).third;
+		}
+		
 		Random r = new Random();
 
-		for (int i = 0; i < values.size(); i++) {
-			if (fieldname.equals(values.get(i).first)) {
-				operator = values.get(i).second;
-				value = values.get(i).third;
-			}
-		}
 
 		long max = Long.MAX_VALUE;
 		if (field.getAttributeValue("max") != null)

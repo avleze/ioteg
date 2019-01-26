@@ -41,7 +41,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+		EventGenerator.fieldvalues = new ArrayList<>();
 	}
 
 	@Test

@@ -42,7 +42,7 @@ public class CsvUtilTestCase {
 
 		tempFile = File.createTempFile("temp", "file");
 		values = new FileWriter(tempFile);
-		EventGenerator.fieldvalues = new ArrayList<List<Trio<String, String, String>>>();
+		EventGenerator.fieldvalues = new ArrayList<>();
 	}
 
 	@Test
