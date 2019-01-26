@@ -5,14 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
-
 import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.model.Field;
 
-public class FixedDateGenerationAlgorithm implements GenerationAlgorithm<Date> {
-
-	private Logger logger = Logger.getRootLogger();
+public class FixedDateGenerationAlgorithm extends GenerationAlgorithm<Date> {
 	
 	@Override
 	public Date generate(Field dateField) {

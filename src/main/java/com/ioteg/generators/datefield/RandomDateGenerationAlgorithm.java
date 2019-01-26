@@ -6,8 +6,7 @@ import com.ioteg.RandomUtil;
 import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.model.Field;
 
-public class RandomDateGenerationAlgorithm implements GenerationAlgorithm<Date> {
-	
+public class RandomDateGenerationAlgorithm extends GenerationAlgorithm<Date> {
 	
 	@Override
 	public Date generate(Field dateField) {

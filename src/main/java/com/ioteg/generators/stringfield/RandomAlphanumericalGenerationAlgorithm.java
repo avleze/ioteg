@@ -1,27 +1,9 @@
 package com.ioteg.generators.stringfield;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Random;
-
-import org.apache.log4j.Logger;
-
 import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.model.Field;
 
-public class RandomAlphanumericalGenerationAlgorithm implements GenerationAlgorithm<String> {
-	
-	private static Logger logger;
-	private static Random r;
-
-	static {
-		logger = Logger.getRootLogger();
-		try {
-			r = SecureRandom.getInstanceStrong();
-		} catch (NoSuchAlgorithmException e) {
-			logger.error(e);
-		}
-	}
+public class RandomAlphanumericalGenerationAlgorithm extends GenerationAlgorithm<String> {
 
 	@Override
 	public String generate(Field stringField) {
