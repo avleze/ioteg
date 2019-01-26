@@ -27,7 +27,6 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.CustomiseGeneration;
 import com.ioteg.EventGenerator;
-import com.ioteg.Trio;
 
 public class FloatCustomBehaviourTestCase {
 	private static List<Element> fields;
@@ -95,7 +94,7 @@ public class FloatCustomBehaviourTestCase {
 		EventGenerator.totalnumevents = 100;
 		String strResult = null;
 		Double result = null;
-		CustomiseGeneration.variables = new HashMap<String, Object>();
+		CustomiseGeneration.variables = new HashMap<>();
 		for (int events = 0; events < 100; ++events) {
 			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
 			Double previous = Double.parseDouble(strResult);

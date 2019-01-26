@@ -17,7 +17,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
-import com.ioteg.Trio;
 
 public class TimeGeneratorTestCase {
 	private static List<Element> fields;

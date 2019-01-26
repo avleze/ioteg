@@ -15,8 +15,8 @@ import org.jdom2.input.SAXBuilder;
 
 public class CustomiseGeneration {
 
-	public static Map<String, Object> variables = new HashMap<String, Object>();
-	public static List<Rule<Object, Object, Object, Object, Object>> rules = new ArrayList<Rule<Object, Object, Object, Object, Object>>();
+	public static Map<String, Object> variables = new HashMap<>();
+	public static List<Rule<Object, Object, Object, Object, Object>> rules = new ArrayList<>();
 	public static float generatedvalue;
 	public static int controlpercentage;
 
@@ -40,7 +40,7 @@ public class CustomiseGeneration {
 		Element rootNode = document.getRootElement();
 
 		List<Element> rulesitem = rootNode.getChildren("rules");
-		List<Element> ruleitem = new ArrayList<Element>();
+		List<Element> ruleitem = new ArrayList<>();
 
 		for (int i = 0; i < rulesitem.size(); i++) {
 			Element item = rulesitem.get(i);
@@ -97,7 +97,7 @@ public class CustomiseGeneration {
 				sequencevalue = item.getAttributeValue("sequence").toString();
 			}
 
-			Rule<Object, Object, Object, Object, Object> rule = new Rule<Object, Object, Object, Object, Object>(
+			Rule<Object, Object, Object, Object, Object> rule = new Rule<>(
 					weightvalue, valuevalue, minvalue, maxvalue, sequencevalue);
 
 			rules.add(rule);
@@ -114,7 +114,7 @@ public class CustomiseGeneration {
 		Element rootNode = document.getRootElement();
 
 		List<Element> variablesitem = rootNode.getChildren("variables");
-		List<Element> variableitem = new ArrayList<Element>();
+		List<Element> variableitem = new ArrayList<>();
 
 		for (int i = 0; i < variablesitem.size(); i++) {
 			Element item = variablesitem.get(i);

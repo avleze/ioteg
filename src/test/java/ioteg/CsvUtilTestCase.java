@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
@@ -22,7 +21,6 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.CsvUtil;
 import com.ioteg.EventGenerator;
-import com.ioteg.Trio;
 
 public class CsvUtilTestCase {
 
