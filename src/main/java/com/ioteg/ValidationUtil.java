@@ -150,13 +150,9 @@ public class ValidationUtil extends EventGenerator {
 
 		switch (type) {
 		case "Integer":
-			valid = ValidInteger(field);
-			break;
-		case "Float":
-			valid = ValidFloat(field);
-			break;
 		case "Long":
-			valid = ValidLong(field);
+		case "Float":
+			valid = ValidNumericField(field);
 			break;
 		case "String":
 			valid = ValidString(field);
@@ -227,61 +223,19 @@ public class ValidationUtil extends EventGenerator {
 		return valid;
 	}
 
-	private static Boolean ValidLong(Element field) {
+	private static Boolean ValidNumericField(Element field) {
 		Boolean valid = true;
 
 		if (field.getAttributeValue("value") == null) {
 			if (field.getAttributeValue("max") != null) {
 				if (field.getAttributeValue("min") == null) {
-					logger.error("It is needed a \"min\" attribute for the \"Long\" type");
+					logger.error(String.format("It is needed a \"min\" attribute for the \"{1}\" type", field.getAttributeValue("type")));
 					valid = false;
 				}
 			}
 			if (field.getAttributeValue("min") != null) {
 				if (field.getAttributeValue("max") == null) {
-					logger.error("It is needed a \"max\" attribute for the \"Long\" type");
-					valid = false;
-				}
-			}
-		}
-
-		return valid;
-	}
-
-	private static Boolean ValidFloat(Element field) {
-		Boolean valid = true;
-
-		if (field.getAttributeValue("value") == null) {
-			if (field.getAttributeValue("max") != null) {
-				if (field.getAttributeValue("min") == null) {
-					logger.error("It is needed a \"min\" attribute for the \"Float\" type");
-					valid = false;
-				}
-			}
-			if (field.getAttributeValue("min") != null) {
-				if (field.getAttributeValue("max") == null) {
-					logger.error("It is needed a \"max\" attribute for the \"Float\" type");
-					valid = false;
-				}
-			}
-		}
-
-		return valid;
-	}
-
-	private static Boolean ValidInteger(Element field) {
-		Boolean valid = true;
-
-		if (field.getAttributeValue("value") == null) {
-			if (field.getAttributeValue("max") != null) {
-				if (field.getAttributeValue("min") == null) {
-					logger.error("It is needed a \"min\" attribute for the \"Integer\" type");
-					valid = false;
-				}
-			}
-			if (field.getAttributeValue("min") != null) {
-				if (field.getAttributeValue("max") == null) {
-					logger.error("It is needed a \"max\" attribute for the \"Integer\" type");
+					logger.error(String.format("It is needed a \"max\" attribute for the \"{1}\" type", field.getAttributeValue("type")));
 					valid = false;
 				}
 			}
