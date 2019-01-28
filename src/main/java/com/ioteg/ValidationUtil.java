@@ -12,9 +12,20 @@ import org.jdom2.input.SAXBuilder;
 
 public class ValidationUtil extends EventGenerator {
 
+	private static final String CASE_ATTR = "case";
+	private static final String ISNUMERIC_ATTR = "isnumeric";
+	private static final String MIN_ATTR = "min";
+	private static final String MAX_ATTR = "max";
+	private static final String FORMAT_ATTR = "format";
+	private static final String VALUE_ATTR = "value";
+	private static final String TYPE_ATTR = "type";
+	private static final String QUOTES_ATTR = "quotes";
+	private static final String NAME_TAG = "name";
+	private static final String FIELD_TAG = "field";
+	private static final String OPTIONALFIELDS_TAG = "optionalfields";
 	private static Logger logger = Logger.getRootLogger();
-	
-	public static Boolean ValidStandard(File xmlFile) throws JDOMException, IOException {
+
+	public static Boolean validStandart(File xmlFile) throws JDOMException, IOException {
 
 		SAXBuilder builder = new SAXBuilder();
 
@@ -26,7 +37,7 @@ public class ValidationUtil extends EventGenerator {
 
 		List<Element> list = rootNode.getChildren();
 
-		Boolean valid = BlockElements(list);
+		Boolean valid = validateBlockElements(list);
 
 		if (valid) {
 			for (int i = 0; i < list.size() && valid; i++) {
@@ -34,7 +45,7 @@ public class ValidationUtil extends EventGenerator {
 				List<Element> fieldslist = block.getChildren();
 				for (int j = 0; j < fieldslist.size() && valid; j++) {
 					Element field = fieldslist.get(j);
-					valid = FieldElements(field);
+					valid = validateFieldElements(field);
 				}
 			}
 		}
@@ -42,14 +53,14 @@ public class ValidationUtil extends EventGenerator {
 		return valid;
 	}
 
-	private static Boolean BlockElements(List<Element> list) {
+	private static Boolean validateBlockElements(List<Element> list) {
 		Boolean valid = true;
 		int repeat = 0;
 
 		for (int i = 0; i < list.size() && valid; i++) {
 			Element elem = list.get(i);
 			if (elem.getName().equals("block")) {
-				if (elem.getAttributeValue("name") == null) {
+				if (elem.getAttributeValue(NAME_TAG) == null) {
 					logger.error("The \"name\" attribute of the block tag is needed");
 					valid = false;
 				}
@@ -70,41 +81,41 @@ public class ValidationUtil extends EventGenerator {
 		return valid;
 	}
 
-	private static Boolean FieldElements(Element field) {
+	private static Boolean validateFieldElements(Element field) {
 
 		Boolean valid = true;
 
-		if ((field.getName().equals("optionalfields")) || (field.getName().equals("field"))) {
-			if (field.getName().equals("optionalfields")) {
+		if ((field.getName().equals(OPTIONALFIELDS_TAG)) || (field.getName().equals(FIELD_TAG))) {
+			if (field.getName().equals(OPTIONALFIELDS_TAG)) {
 				List<Element> optionalf = field.getChildren();
 				for (int i = 0; i < optionalf.size(); i++) {
 					Element op = optionalf.get(i);
-					if (op.getName().equals("field")) {
-						valid = (FieldElements(op) && valid);
+					if (op.getName().equals(FIELD_TAG)) {
+						valid = (validateFieldElements(op) && valid);
 					} else {
 						logger.error("The children of the \"optionalfields\" must be \"field\"");
 						valid = false;
 					}
 				}
 			} else {
-				if (field.getAttributeValue("name") == null) {
+				if (field.getAttributeValue(NAME_TAG) == null) {
 					logger.error("The \"field\" tag must have \"name\" attribute");
 					valid = false;
 				}
-				if (field.getAttributeValue("quotes") == null) {
+				if (field.getAttributeValue(QUOTES_ATTR) == null) {
 					logger.error("The \"field\" tag must have \"quotes\" attribute");
 					valid = false;
 				}
-				if (field.getAttributeValue("type") == null) {
+				if (field.getAttributeValue(TYPE_ATTR) == null) {
 					logger.error("The \"field\" tag must have \"type\" attribute");
 					valid = false;
 				} else {
-					String type = field.getAttributeValue("type");
+					String type = field.getAttributeValue(TYPE_ATTR);
 
 					if (!ExistType(type)) {
-						valid = (ComplexType(field, type) && valid);
+						valid = validateComplexType(field, type) && valid;
 					} else {
-						valid = (SimpleType(field, type) && valid);
+						valid = validateSimpleType(field, type) && valid;
 					}
 				}
 			}
@@ -115,7 +126,7 @@ public class ValidationUtil extends EventGenerator {
 		return valid;
 	}
 
-	private static Boolean ComplexType(Element field, String type) {
+	private static Boolean validateComplexType(Element field, String type) {
 
 		Boolean valid = true;
 
@@ -126,13 +137,13 @@ public class ValidationUtil extends EventGenerator {
 			List<Element> complelems = field.getChildren();
 			for (int i = 0; i < complelems.size() && valid; i++) {
 				Element element = complelems.get(i);
-				if (element.getName().equals("field")) {
-					valid = FieldElements(element);
+				if (element.getName().equals(FIELD_TAG)) {
+					valid = validateFieldElements(element);
 				}
 				if (element.getName().equals("attribute")) {
-					if (element.getAttributeValue("type") != null) {
-						String attype = element.getAttributeValue("type");
-						valid = SimpleType(element, attype);
+					if (element.getAttributeValue(TYPE_ATTR) != null) {
+						String attype = element.getAttributeValue(TYPE_ATTR);
+						valid = validateSimpleType(element, attype);
 					} else {
 						logger.error("It is needed the \"type\" attribute of an attribute");
 						valid = false;
@@ -144,7 +155,7 @@ public class ValidationUtil extends EventGenerator {
 		return valid;
 	}
 
-	private static Boolean SimpleType(Element field, String type) {
+	private static Boolean validateSimpleType(Element field, String type) {
 
 		Boolean valid = true;
 
@@ -158,13 +169,13 @@ public class ValidationUtil extends EventGenerator {
 			valid = ValidString(field);
 			break;
 		case "Boolean":
-			valid = ValidBoolean(field);
+			valid = validateBoolean(field);
 			break;
 		case "Date":
-			valid = ValidDate(field);
+			valid = validateDate(field);
 			break;
 		case "Time":
-			valid = ValidTime(field);
+			valid = validateTime(field);
 			break;
 		}
 
@@ -172,10 +183,10 @@ public class ValidationUtil extends EventGenerator {
 
 	}
 
-	private static Boolean ValidTime(Element field) {
+	private static Boolean validateTime(Element field) {
 		Boolean valid = true;
 
-		if ((field.getAttributeValue("value") == null) && (field.getAttributeValue("format") == null)) {
+		if (hasNoValueOrFormatAttribute(field)) {
 			logger.error("The \"Time\" type must have a \"value\" or \"format\" attribute");
 			valid = false;
 		}
@@ -183,10 +194,10 @@ public class ValidationUtil extends EventGenerator {
 		return valid;
 	}
 
-	private static Boolean ValidDate(Element field) {
+	private static Boolean validateDate(Element field) {
 		Boolean valid = true;
 
-		if ((field.getAttributeValue("value") == null) && (field.getAttributeValue("format") == null)) {
+		if (hasNoValueOrFormatAttribute(field)) {
 			logger.error("The \"Date\" type must have a \"value\" or \"mode\" attribute");
 			valid = false;
 		}
@@ -194,12 +205,11 @@ public class ValidationUtil extends EventGenerator {
 		return valid;
 	}
 
-	private static Boolean ValidBoolean(Element field) {
+	private static Boolean validateBoolean(Element field) {
 		Boolean valid = true;
 
-		if (field.getAttributeValue("value") == null) {
-			if ((field.getAttributeValue("isnumeric") != null)
-					&& (!field.getAttributeValue("isnumeric").equals("true"))) {
+		if (field.getAttributeValue(VALUE_ATTR) == null) {
+			if (hasBadIsNumericValue(field)) {
 				logger.error(
 						"The default value of the isnumeric attribute works with characters (\"true\" or \"false\"), if you want numbers asign \"true\" to isnumeric");
 				valid = false;
@@ -212,8 +222,8 @@ public class ValidationUtil extends EventGenerator {
 	private static Boolean ValidString(Element field) {
 		Boolean valid = true;
 
-		if (field.getAttributeValue("value") == null) {
-			if ((field.getAttributeValue("case") != null) && (!field.getAttributeValue("case").equals("low"))) {
+		if (field.getAttributeValue(VALUE_ATTR) == null) {
+			if (hasBadCaseValue(field)) {
 				logger.error(
 						"The default value of the case attribute works with capital letters, if you want lowercase asign \"low\" to case");
 				valid = false;
@@ -226,21 +236,39 @@ public class ValidationUtil extends EventGenerator {
 	private static Boolean ValidNumericField(Element field) {
 		Boolean valid = true;
 
-		if (field.getAttributeValue("value") == null) {
-			if (field.getAttributeValue("max") != null) {
-				if (field.getAttributeValue("min") == null) {
-					logger.error(String.format("It is needed a \"min\" attribute for the \"%s\" type", field.getAttributeValue("type")));
-					valid = false;
-				}
+		if (field.getAttributeValue(VALUE_ATTR) == null) {
+			if (hasMaxAttributeButNoMinAttribute(field)) {
+				logger.error(String.format("It is needed a \"min\" attribute for the \"%s\" type",
+						field.getAttributeValue(TYPE_ATTR)));
+				valid = false;
 			}
-			if (field.getAttributeValue("min") != null) {
-				if (field.getAttributeValue("max") == null) {
-					logger.error(String.format("It is needed a \"max\" attribute for the \"%s\" type", field.getAttributeValue("type")));
-					valid = false;
-				}
+			if (hasMinAttributeButNoMaxAttribute(field)) {
+				logger.error(String.format("It is needed a \"max\" attribute for the \"%s\" type",
+						field.getAttributeValue(TYPE_ATTR)));
+				valid = false;
 			}
 		}
 
 		return valid;
+	}
+
+	private static boolean hasNoValueOrFormatAttribute(Element field) {
+		return (field.getAttributeValue(VALUE_ATTR) == null) && (field.getAttributeValue(FORMAT_ATTR) == null);
+	}
+
+	private static boolean hasBadIsNumericValue(Element field) {
+		return (field.getAttributeValue(ISNUMERIC_ATTR) != null) && (!field.getAttributeValue(ISNUMERIC_ATTR).equals("true"));
+	}
+
+	private static boolean hasMinAttributeButNoMaxAttribute(Element field) {
+		return field.getAttributeValue(MIN_ATTR) != null && field.getAttributeValue(MAX_ATTR) == null;
+	}
+
+	private static boolean hasMaxAttributeButNoMinAttribute(Element field) {
+		return field.getAttributeValue(MAX_ATTR) != null && field.getAttributeValue(MIN_ATTR) == null;
+	}
+	
+	private static boolean hasBadCaseValue(Element field) {
+		return (field.getAttributeValue(CASE_ATTR) != null) && (!field.getAttributeValue(CASE_ATTR).equals("low"));
 	}
 }
