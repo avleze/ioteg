@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -136,7 +135,6 @@ public class XmlUtil extends EventGenerator {
 
 		List<Element> optional = field.getChildren();
 		int size = optional.size();
-		Random rand = new Random();
 		String value = "";
 		StringBuilder sb = new StringBuilder();
 
@@ -144,7 +142,7 @@ public class XmlUtil extends EventGenerator {
 			size--;
 		}
 
-		int chosen = rand.nextInt(size);
+		int chosen = r.nextInt(size);
 		if (chosen != size) {
 			Element elementop = optional.get(chosen);
 			sb.append("<" + elementop.getAttributeValue("name"));

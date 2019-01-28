@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +19,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -38,7 +41,20 @@ public class EventGenerator {
 	public static int eventscustombehaviour;
 	public static int controlcustombehaviour;
 	public static final List<Integer> iterationvalues = new ArrayList<>();
+	protected static Random r;
+	protected static Logger logger;
 
+	static {
+		logger = Logger.getRootLogger();
+		try {
+			r = SecureRandom.getInstanceStrong();
+		} catch (NoSuchAlgorithmException e) {
+			logger.error(e);
+		}
+	}
+	
+	
+	
 	public static void main(String args[]) throws Exception {
 
 		String input = args[0];
@@ -370,12 +386,7 @@ public class EventGenerator {
 						value = GenerateTimeQueryRestriction(field);
 						break;
 					}
-				} else if(generator != null){
-					if(field.getAttributeValue("custom_behaviour") == null)
-						value = generator.generate(f, 1).get(0);
-					else
-						value = GenerateFloat(field);
-				}
+
 			
 
 			if (!iterationvalues.isEmpty()) {
@@ -384,6 +395,7 @@ public class EventGenerator {
 					fieldvalues.remove(0);
 				}
 			}
+		}
 		} else if(generator != null){
 			if(field.getAttributeValue("custom_behaviour") == null)
 				value = generator.generate(f, 1).get(0);
@@ -417,9 +429,8 @@ public class EventGenerator {
 		List<Element> simpletype = field.getChildren();
 
 		if (field.getAttributeValue("chooseone") != null) { // Default: get attribute doesn't exist
-			Random rand = new Random();
 			int max = simpletype.size() - 1;
-			int chosen = rand.nextInt(((max - 0) + 1) + 0);
+			int chosen = r.nextInt(((max - 0) + 1) + 0);
 			Element simple = simpletype.get(chosen);
 
 			if (simple.getName().equals("field")) {
@@ -446,9 +457,8 @@ public class EventGenerator {
 		}
 		if (field.getAttributeValue("dependence") != null) {
 			if (field.getAttributeValue("dependence").equals("true")) {
-				Random rand = new Random();
 				int max = simpletype.size() - 1;
-				chosen = rand.nextInt(((max - 1) + 1) + 1);
+				chosen = r.nextInt(((max - 1) + 1) + 1);
 			}
 			Element simple = simpletype.get(chosen);
 
@@ -728,9 +738,8 @@ public class EventGenerator {
 	private static String getRandString(int longt) {
 		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		StringBuilder salt = new StringBuilder();
-		Random rnd = new Random();
 		while (salt.length() < longt) {
-			int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+			int index = (int) (r.nextFloat() * SALTCHARS.length());
 			salt.append(SALTCHARS.charAt(index));
 		}
 		String saltStr = salt.toString();
@@ -748,10 +757,9 @@ public class EventGenerator {
 	private static String getRandStringRange(int longt, String end) {
 		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		StringBuilder salt = new StringBuilder();
-		Random rnd = new Random();
 		int newlength = SALTCHARS.indexOf(end);
 		while (salt.length() < longt) {
-			int index = (int) (rnd.nextFloat() * newlength + 1);
+			int index = (int) (r.nextFloat() * newlength + 1);
 			salt.append(SALTCHARS.charAt(index));
 		}
 		String saltStr = salt.toString();
@@ -829,9 +837,8 @@ public class EventGenerator {
 	private static String getAlphaNumRandString(int longt) {
 		String SALTCHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		StringBuilder salt = new StringBuilder();
-		Random rnd = new Random();
 		while (salt.length() < longt) {
-			int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+			int index = (int) (r.nextFloat() * SALTCHARS.length());
 			salt.append(SALTCHARS.charAt(index));
 		}
 		String saltStr = salt.toString();
@@ -849,10 +856,9 @@ public class EventGenerator {
 	private static String getAlphaNumRandStringRange(int longt, String end) {
 		String SALTCHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		StringBuilder salt = new StringBuilder();
-		Random rnd = new Random();
 		int newlength = SALTCHARS.indexOf(end);
 		while (salt.length() < longt) {
-			int index = (int) (rnd.nextFloat() * newlength + 1);
+			int index = (int) (r.nextFloat() * newlength + 1);
 			salt.append(SALTCHARS.charAt(index));
 		}
 		String saltStr = salt.toString();
@@ -927,8 +933,6 @@ public class EventGenerator {
 			value = values.get(0).third;
 		}
 		
-		Random r = new Random();
-
 		float max = Float.MAX_VALUE;
 		if (field.getAttributeValue("max") != null)
 			max = Float.parseFloat(field.getAttributeValue("max"));
@@ -994,7 +998,6 @@ public class EventGenerator {
 		}
 		
 		int max, min;
-		Random r = new Random();
 
 		if (operator.equals("=")) {
 			result = value;
@@ -1081,9 +1084,6 @@ public class EventGenerator {
 			operator = values.get(0).second;
 			value = values.get(0).third;
 		}
-		
-		Random r = new Random();
-
 
 		long max = Long.MAX_VALUE;
 		if (field.getAttributeValue("max") != null)
