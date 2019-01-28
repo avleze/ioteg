@@ -698,10 +698,10 @@ public class EventGenerator {
 				if (field.getAttributeValue("length") != null) {
 
 					if (field.getAttributeValue("endcharacter") != null) {
-						result = getRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
+						result = RandomUtil.getRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
 								field.getAttributeValue("endcharacter"));
 					} else {
-						result = getRandString(Integer.parseInt(field.getAttributeValue("length")));
+						result = RandomUtil.getRandStringRange(Integer.parseInt(field.getAttributeValue("length")), null);
 					}
 
 					if (field.getAttributeValue("case") != null) {
@@ -711,9 +711,9 @@ public class EventGenerator {
 					}
 				} else {
 					if (field.getAttributeValue("endcharacter") != null) {
-						result = getRandStringRange(10, field.getAttributeValue("endcharacter"));
+						result = RandomUtil.getRandStringRange(10, field.getAttributeValue("endcharacter"));
 					} else {
-						result = getRandString(10); // Default length
+						result = RandomUtil.getRandStringRange(10, null); // Default length
 					}
 
 					if (field.getAttributeValue("case") != null) {
@@ -723,48 +723,10 @@ public class EventGenerator {
 					}
 				}
 
-			} while (result == value);
+			} while (result.equals(value));
 		}
 
 		return result;
-	}
-
-	/**
-	 * Generate a random String
-	 * 
-	 * @param longt determines the length of the String
-	 * @return a random String with a long length
-	 */
-	private static String getRandString(int longt) {
-		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder salt = new StringBuilder();
-		while (salt.length() < longt) {
-			int index = (int) (r.nextFloat() * SALTCHARS.length());
-			salt.append(SALTCHARS.charAt(index));
-		}
-		String saltStr = salt.toString();
-		return saltStr;
-
-	}
-
-	/**
-	 * Generate a random String
-	 * 
-	 * @param longt determines the length of the String and
-	 * @param end   determines the last character for the range
-	 * @return a random String with a long length
-	 */
-	private static String getRandStringRange(int longt, String end) {
-		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder salt = new StringBuilder();
-		int newlength = SALTCHARS.indexOf(end);
-		while (salt.length() < longt) {
-			int index = (int) (r.nextFloat() * newlength + 1);
-			salt.append(SALTCHARS.charAt(index));
-		}
-		String saltStr = salt.toString();
-		return saltStr;
-
 	}
 
 	/**
@@ -797,10 +759,10 @@ public class EventGenerator {
 				if (field.getAttributeValue("length") != null) {
 
 					if (field.getAttributeValue("endcharacter") != null) {
-						result = getAlphaNumRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
+						result = RandomUtil.getAlphaNumRandStringRange(Integer.parseInt(field.getAttributeValue("length")),
 								field.getAttributeValue("endcharacter"));
 					} else {
-						result = getAlphaNumRandString(Integer.parseInt(field.getAttributeValue("length")));
+						result = RandomUtil.getAlphaNumRandStringRange(Integer.parseInt(field.getAttributeValue("length")), null);
 					}
 
 					if (field.getAttributeValue("case") != null) {
@@ -810,9 +772,9 @@ public class EventGenerator {
 					}
 				} else {
 					if (field.getAttributeValue("endcharacter") != null) {
-						result = getAlphaNumRandStringRange(10, field.getAttributeValue("endcharacter"));
+						result = RandomUtil.getAlphaNumRandStringRange(10, field.getAttributeValue("endcharacter"));
 					} else {
-						result = getAlphaNumRandString(10); // Default length
+						result = RandomUtil.getAlphaNumRandStringRange(10, null); // Default length
 					}
 
 					if (field.getAttributeValue("case") != null) {
@@ -822,48 +784,10 @@ public class EventGenerator {
 					}
 				}
 
-			} while (result == value);
+			} while (result.equals(value));
 		}
 
 		return result;
-	}
-
-	/**
-	 * Generate a random Alphanumeric String
-	 * 
-	 * @param longt determines the length of the String
-	 * @return a random String with a long length
-	 */
-	private static String getAlphaNumRandString(int longt) {
-		String SALTCHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder salt = new StringBuilder();
-		while (salt.length() < longt) {
-			int index = (int) (r.nextFloat() * SALTCHARS.length());
-			salt.append(SALTCHARS.charAt(index));
-		}
-		String saltStr = salt.toString();
-		return saltStr;
-
-	}
-
-	/**
-	 * Generate a random Alphanumeric String
-	 * 
-	 * @param longt determines the length of the String and
-	 * @param end   determines the last character for the range
-	 * @return a random String with a longt length
-	 */
-	private static String getAlphaNumRandStringRange(int longt, String end) {
-		String SALTCHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder salt = new StringBuilder();
-		int newlength = SALTCHARS.indexOf(end);
-		while (salt.length() < longt) {
-			int index = (int) (r.nextFloat() * newlength + 1);
-			salt.append(SALTCHARS.charAt(index));
-		}
-		String saltStr = salt.toString();
-		return saltStr;
-
 	}
 
 	/**

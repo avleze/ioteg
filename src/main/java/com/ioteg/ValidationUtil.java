@@ -229,13 +229,13 @@ public class ValidationUtil extends EventGenerator {
 		if (field.getAttributeValue("value") == null) {
 			if (field.getAttributeValue("max") != null) {
 				if (field.getAttributeValue("min") == null) {
-					logger.error(String.format("It is needed a \"min\" attribute for the \"{1}\" type", field.getAttributeValue("type")));
+					logger.error(String.format("It is needed a \"min\" attribute for the \"%s\" type", field.getAttributeValue("type")));
 					valid = false;
 				}
 			}
 			if (field.getAttributeValue("min") != null) {
 				if (field.getAttributeValue("max") == null) {
-					logger.error(String.format("It is needed a \"max\" attribute for the \"{1}\" type", field.getAttributeValue("type")));
+					logger.error(String.format("It is needed a \"max\" attribute for the \"%s\" type", field.getAttributeValue("type")));
 					valid = false;
 				}
 			}
