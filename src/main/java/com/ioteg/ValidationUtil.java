@@ -163,10 +163,10 @@ public class ValidationUtil extends EventGenerator {
 		case "Integer":
 		case "Long":
 		case "Float":
-			valid = ValidNumericField(field);
+			valid = validateNumericField(field);
 			break;
 		case "String":
-			valid = ValidString(field);
+			valid = validateString(field);
 			break;
 		case "Boolean":
 			valid = validateBoolean(field);
@@ -219,21 +219,19 @@ public class ValidationUtil extends EventGenerator {
 		return valid;
 	}
 
-	private static Boolean ValidString(Element field) {
+	private static Boolean validateString(Element field) {
 		Boolean valid = true;
 
-		if (field.getAttributeValue(VALUE_ATTR) == null) {
-			if (hasBadCaseValue(field)) {
-				logger.error(
-						"The default value of the case attribute works with capital letters, if you want lowercase asign \"low\" to case");
-				valid = false;
-			}
+		if (field.getAttributeValue(VALUE_ATTR) == null && hasBadCaseValue(field)) {
+			logger.error(
+					"The default value of the case attribute works with capital letters, if you want lowercase asign \"low\" to case");
+			valid = false;
 		}
 
 		return valid;
 	}
 
-	private static Boolean ValidNumericField(Element field) {
+	private static Boolean validateNumericField(Element field) {
 		Boolean valid = true;
 
 		if (field.getAttributeValue(VALUE_ATTR) == null) {
@@ -257,7 +255,8 @@ public class ValidationUtil extends EventGenerator {
 	}
 
 	private static boolean hasBadIsNumericValue(Element field) {
-		return (field.getAttributeValue(ISNUMERIC_ATTR) != null) && (!field.getAttributeValue(ISNUMERIC_ATTR).equals("true"));
+		return (field.getAttributeValue(ISNUMERIC_ATTR) != null)
+				&& (!field.getAttributeValue(ISNUMERIC_ATTR).equals("true"));
 	}
 
 	private static boolean hasMinAttributeButNoMaxAttribute(Element field) {
@@ -267,7 +266,7 @@ public class ValidationUtil extends EventGenerator {
 	private static boolean hasMaxAttributeButNoMinAttribute(Element field) {
 		return field.getAttributeValue(MAX_ATTR) != null && field.getAttributeValue(MIN_ATTR) == null;
 	}
-	
+
 	private static boolean hasBadCaseValue(Element field) {
 		return (field.getAttributeValue(CASE_ATTR) != null) && (!field.getAttributeValue(CASE_ATTR).equals("low"));
 	}
