@@ -197,6 +197,6 @@ public class GeneratorsFactory {
 	}
 	
 	public static Generator<Date> makeQueryRestrictionTimeGenerator(List<Trio<String, String, String>> restrictions) {
-		return makeQueryRestrictionDateGenerator(timeField, restrictions);
+		return makeQueryRestrictionDateGenerator(restrictions);
 	}
 }
