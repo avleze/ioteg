@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <event_type name="testEplQuery">
 	<block name="testEplQuery" repeat="100">
-		<field name="field1" quotes="false" type="Integer"></field>
+		<field name="field1" quotes="false" type="Integer" min="-50" max="50"></field>
 		<field name="field2" quotes="false" type="Integer"></field>
 		<field name="field3" quotes="false" type="String"></field>
 		<field name="field4" quotes="false" type="String"></field>
@@ -14,12 +14,12 @@
 		<field name="field11" quotes="false" type="Boolean" isnumeric="false"></field>
 		<field name="field12" quotes="false" type="Boolean" isnumeric="true"></field>
 		<field name="field13" quotes="false" type="Boolean" isnumeric="true"></field>
-		<field name="field14" quotes="false" type="Float"></field>
+		<field name="field14" quotes="false" type="Float" min="-50" max="50"></field>
 		<field name="field15" quotes="false" type="Float" max="200.34"></field>
 		<field name="field16" quotes="false" type="Float" min="-20.58"></field>
 		<field name="field17" quotes="false" type="Float" min="-100.134" max="134.100"></field>
 		<field name="field18" quotes="false" type="Float" min="-100.134234" max="134.10034" precision="3"></field>
-		<field name="field19" quotes="false" type="Long"></field>
+		<field name="field19" quotes="false" type="Long" min="-50" max="50"></field>
 		<field name="field20" quotes="false" type="Long" max="200"></field>
 		<field name="field21" quotes="false" type="Long" min="-20"></field>
 		<field name="field22" quotes="false" type="Long" min="-100" max="100"></field>
@@ -35,7 +35,7 @@
 		<field name="field32" quotes="false" type="Alphanumeric" length="12" endcharacter="F"></field>
 		<field name="field33" quotes="false" type="Alphanumeric" length="12" case="low"></field>
 		<field name="field34" quotes="false" type="Alphanumeric" endcharacter="F" case="low"></field>
-		<field name="field35" quotes="false" type="Date" format="yy-MM-DD"></field>
+		<field name="field35" quotes="false" type="Date" format="yy-MM-dd"></field>
 		<field name="field36" quotes="false" type="Time" format="HH:mm"></field>
 		
 		<field name="lugar" quotes="false" type="ComplexType">

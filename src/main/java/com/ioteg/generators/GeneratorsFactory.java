@@ -1,24 +1,33 @@
 package com.ioteg.generators;
 
 import java.util.Date;
+import java.util.List;
 
+import com.ioteg.Trio;
 import com.ioteg.generators.booleanfield.BooleanGenerator;
+import com.ioteg.generators.booleanfield.BooleanQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.FixedBooleanGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.RandomBooleanGenerationAlgorithm;
 import com.ioteg.generators.datefield.DateGenerator;
+import com.ioteg.generators.datefield.DateQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.datefield.FixedDateGenerationAlgorithm;
 import com.ioteg.generators.datefield.RandomDateGenerationAlgorithm;
 import com.ioteg.generators.floatfield.FixedFloatGenerationAlgorithm;
 import com.ioteg.generators.floatfield.FloatGenerator;
+import com.ioteg.generators.floatfield.FloatQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.floatfield.RandomFloatGenerationAlgorithm;
 import com.ioteg.generators.integerfield.FixedIntegerGenerationAlgorithm;
+import com.ioteg.generators.integerfield.IntegerQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.integerfield.RandomIntegerGenerationAlgorithm;
 import com.ioteg.generators.longfield.FixedLongGenerationAlgorithm;
+import com.ioteg.generators.longfield.LongQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.longfield.RandomLongGenerationAlgorithm;
+import com.ioteg.generators.stringfield.AlphanumericQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.stringfield.FixedStringGenerationAlgorithm;
 import com.ioteg.generators.stringfield.RandomAlphanumericalGenerationAlgorithm;
 import com.ioteg.generators.stringfield.RandomStringGenerationAlgorithm;
 import com.ioteg.generators.stringfield.StringGenerator;
+import com.ioteg.generators.stringfield.StringQueryRestrictionGenerationAlgorithm;
 import com.ioteg.model.Field;
 
 public class GeneratorsFactory {
@@ -61,6 +70,8 @@ public class GeneratorsFactory {
 
 		return integerGenerator;
 	}
+	
+
 	
 	public static Generator<Long> makeLongGenerator(Field longField) {
 		Generator<Long> longGenerator = null;
@@ -130,5 +141,62 @@ public class GeneratorsFactory {
 			alphanumericGenerator = new StringGenerator(new RandomAlphanumericalGenerationAlgorithm());
 
 		return alphanumericGenerator;
+	}
+	
+	
+	public static Generable makeQueryRestrictionGenerator(Field field, List<Trio<String, String, String>> restrictions)
+	{
+		Generable generable = null;
+		
+		if(field.getType().equals("Integer"))
+			generable = makeQueryRestrictionIntegerGenerator(field, restrictions);
+		else if(field.getType().equals("String"))
+			generable = makeQueryRestrictionStringGenerator(field, restrictions);
+		else if(field.getType().equals("Alphanumeric"))
+			generable = makeQueryRestrictionAlphanumericGenerator(field, restrictions);
+		else if(field.getType().equals("Long"))
+			generable = makeQueryRestrictionLongGenerator(field, restrictions);
+		else if(field.getType().equals("Float"))
+			generable = makeQueryRestrictionFloatGenerator(field, restrictions);
+		else if(field.getType().equals("Boolean"))
+			generable = makeQueryRestrictionBooleanGenerator(field, restrictions);
+		else if(field.getType().equals("Date"))
+			generable = makeQueryRestrictionDateGenerator(field, restrictions);
+		else if(field.getType().equals("Time"))
+			generable = makeQueryRestrictionTimeGenerator(field, restrictions);
+		
+		return generable;
+	}
+	
+	public static Generator<Integer> makeQueryRestrictionIntegerGenerator(Field integerField, List<Trio<String, String, String>> restrictions) {
+		return new Generator<>(new IntegerQueryRestrictionGenerationAlgorithm(restrictions));
+	}
+	
+	public static Generator<String> makeQueryRestrictionStringGenerator(Field stringField, List<Trio<String, String, String>> restrictions) {
+		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(restrictions));
+	}
+	
+	public static Generator<String> makeQueryRestrictionAlphanumericGenerator(Field alphanumericField, List<Trio<String, String, String>> restrictions) {
+		return new StringGenerator(new AlphanumericQueryRestrictionGenerationAlgorithm(restrictions));
+	}
+	
+	public static Generator<Long> makeQueryRestrictionLongGenerator(Field longField, List<Trio<String, String, String>> restrictions) {
+		return new Generator<>(new LongQueryRestrictionGenerationAlgorithm(restrictions));
+	}
+	
+	public static Generator<Float> makeQueryRestrictionFloatGenerator(Field floatField, List<Trio<String, String, String>> restrictions) {
+		return new FloatGenerator(new FloatQueryRestrictionGenerationAlgorithm(restrictions));
+	}
+	
+	public static Generator<Boolean> makeQueryRestrictionBooleanGenerator(Field booleanField, List<Trio<String, String, String>> restrictions) {
+		return new BooleanGenerator(new BooleanQueryRestrictionGenerationAlgorithm(restrictions));
+	}
+	
+	public static Generator<Date> makeQueryRestrictionDateGenerator(Field dateField, List<Trio<String, String, String>> restrictions) {
+		return new DateGenerator(new DateQueryRestrictionGenerationAlgorithm(restrictions));
+	}
+	
+	public static Generator<Date> makeQueryRestrictionTimeGenerator(Field timeField, List<Trio<String, String, String>> restrictions) {
+		return makeQueryRestrictionDateGenerator(timeField, restrictions);
 	}
 }

@@ -54,7 +54,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		Element field = fields.get(13);
 
 		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
-		assertThat(result, lessThan(Float.valueOf(-24)));
+		assertThat(result, lessThan(Float.valueOf(24)));
 	}
 	
 	@Test
