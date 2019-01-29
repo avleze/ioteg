@@ -24,7 +24,7 @@ public class BooleanQueryRestrictionGenerationAlgorithm extends QueryRestriction
 		if (operator.equals("=")) 
 			result = value;
 		else if (operator.equals("!="))
-			result = value ? false : true;
+			result = !value;
 		else
 			result = null;
 
