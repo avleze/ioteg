@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
 
 import com.ioteg.exprlang.ast.BinaryExpressionAST;
 import com.ioteg.exprlang.ast.CallExpressionAST;
@@ -14,9 +17,11 @@ import com.ioteg.exprlang.ast.VariableExpressionAST;
 
 public class Parser {
 	private Lexer lexer;
-	public static final EnumMap<Token, Integer> tokenPrecedence;
-
+	protected static final Map<Token, Integer> tokenPrecedence;
+	protected static Logger logger;
+	
 	static {
+		logger = Logger.getRootLogger();
 		tokenPrecedence = new EnumMap<>(Token.class);
 		tokenPrecedence.put(Token.TOK_OP_SUM, 20);
 		tokenPrecedence.put(Token.TOK_OP_SUB, 20);
@@ -98,7 +103,7 @@ public class Parser {
 			exp = parseUnaryExpression();
 			break;
 		default:
-			System.err.println("Expected a expression.");
+			logger.error("Expected a expression.");
 			break;
 		}
 
@@ -121,7 +126,7 @@ public class Parser {
 		String idName = lexer.getCurrentMatch();
 
 		if (lexer.getNextToken() != Token.TOK_OPEN_PAREN) {
-			System.err.println("The function " + idName + " needs a list of zero or more arguments. Expected (.");
+			logger.error("The function " + idName + " needs a list of zero or more arguments. Expected (.");
 			return null;
 		}
 		lexer.getNextToken();
@@ -139,7 +144,7 @@ public class Parser {
 				if (lexer.getCurrentToken() == Token.TOK_CLOSED_PAREN)
 					break;
 				if (lexer.getCurrentToken() != Token.TOK_COMMA)
-					System.err.println("Unexpected input in the arguments list of the function " + idName + ".");
+					logger.error("Unexpected input in the arguments list of the function " + idName + ".");
 
 				lexer.getNextToken();
 			}
@@ -150,29 +155,29 @@ public class Parser {
 		return new CallExpressionAST(idName, args);
 	}
 
-	private ExpressionAST parseVariableExpression() throws IOException {
+	private ExpressionAST parseVariableExpression() {
 
 		if (lexer.getNextToken() != Token.TOK_OPEN_PAREN) {
-			System.err.println("Expected (.");
+			logger.error("Expected (.");
 			return null;
 		}
 
 		if (lexer.getNextToken() != Token.TOK_ID) {
-			System.err.println("Expected IDENTIFIER.");
+			logger.error("Expected IDENTIFIER.");
 			return null;
 		}
 
 		String idName = lexer.getCurrentMatch();
 
 		if (lexer.getNextToken() != Token.TOK_CLOSED_PAREN)
-			System.err.println("Expected ).");
+			logger.error("Expected ).");
 		else
 			lexer.getNextToken();
 
 		return new VariableExpressionAST(idName);
 	}
 
-	private ExpressionAST parseNumberExpression() throws IOException {
+	private ExpressionAST parseNumberExpression() {
 
 		ExpressionAST exp = new NumberExpressionAST(Double.valueOf(lexer.getCurrentMatch()));
 		lexer.getNextToken();
@@ -188,7 +193,7 @@ public class Parser {
 			return null;
 
 		if (lexer.getCurrentToken() != Token.TOK_CLOSED_PAREN)
-			System.err.println("Expected ). But found " + lexer.getCurrentToken());
+			logger.error("Expected ). But found " + lexer.getCurrentToken());
 		lexer.getNextToken();
 		return exp;
 	}

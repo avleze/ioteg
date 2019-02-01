@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.ioteg.exprlang.Token;
 
-public class BinaryExpressionAST extends ExpressionAST {
+public class BinaryExpressionAST implements ExpressionAST {
 	private Token operator;
 	private ExpressionAST lhs;
 	private ExpressionAST rhs;

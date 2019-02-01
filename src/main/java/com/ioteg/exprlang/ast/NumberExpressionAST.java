@@ -2,7 +2,7 @@ package com.ioteg.exprlang.ast;
 
 import java.util.Map;
 
-public class NumberExpressionAST extends ExpressionAST{
+public class NumberExpressionAST implements ExpressionAST{
 	private Double value;
 	
 	public NumberExpressionAST(Double value) {

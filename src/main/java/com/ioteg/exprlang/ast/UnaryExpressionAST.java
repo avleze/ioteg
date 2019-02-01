@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.ioteg.exprlang.Token;
 
-public class UnaryExpressionAST extends ExpressionAST {
+public class UnaryExpressionAST implements ExpressionAST {
 	private ExpressionAST expression;
 	private Token unaryOp;
 	
@@ -18,13 +18,8 @@ public class UnaryExpressionAST extends ExpressionAST {
 	public Double evaluate(Map<String, Double> symbols) {
 		Double result = null;
 
-		switch (unaryOp) {
-		case TOK_OP_SUB:
+		if(unaryOp == Token.TOK_OP_SUB)
 			result = -expression.evaluate(symbols);
-			break;
-		default:
-			break;
-		}
 		
 		return result;
 	}

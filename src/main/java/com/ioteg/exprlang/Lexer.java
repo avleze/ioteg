@@ -11,7 +11,7 @@ public class Lexer {
 	private StringBuilder currentMatch;
 	private Token currentToken;
 	
-	public static final Map<String, Token> singleCharacterTokens;
+	protected static final Map<String, Token> singleCharacterTokens;
 
 	static {
 		singleCharacterTokens = new HashMap<>();

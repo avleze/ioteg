@@ -3,7 +3,7 @@ package com.ioteg.exprlang.ast;
 import java.util.List;
 import java.util.Map;
 
-public class CallExpressionAST extends ExpressionAST{
+public class CallExpressionAST implements ExpressionAST{
 	private String fnName;
 	private List<ExpressionAST> args;
 	

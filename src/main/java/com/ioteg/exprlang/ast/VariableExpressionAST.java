@@ -2,7 +2,7 @@ package com.ioteg.exprlang.ast;
 
 import java.util.Map;
 
-public class VariableExpressionAST extends ExpressionAST{
+public class VariableExpressionAST implements ExpressionAST{
 	private String name;
 	
 	public VariableExpressionAST(String name) {
