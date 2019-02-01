@@ -29,11 +29,8 @@ public class Parser {
 		tokenPrecedence.put(Token.TOK_OP_DIV, 40);
 	}
 
-	public Parser(String str) {
+	public ExpressionAST parse(String str) throws IOException {
 		this.lexer = new Lexer(str);
-	}
-
-	public ExpressionAST parse() throws IOException {
 		lexer.getNextToken();
 		return parseExpression();
 	}

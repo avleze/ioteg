@@ -22,8 +22,8 @@ import static org.hamcrest.Matchers.instanceOf;
 public class ParserTest {
 	@Test
 	public void testBinaryExpressions() throws IOException {
-		Parser parser = new Parser("2+4");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("2+4");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
 		
@@ -36,8 +36,7 @@ public class ParserTest {
 		nExp = (NumberExpressionAST) bExp.getRhs();
 		assertThat(nExp.getValue(), equalTo(4.0));
 		
-		parser = new Parser("24.5*12.7");
-		exp = parser.parse();
+		exp = parser.parse("24.5*12.7");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		bExp = (BinaryExpressionAST) exp;
 		
@@ -50,8 +49,7 @@ public class ParserTest {
 		nExp = (NumberExpressionAST) bExp.getRhs();
 		assertThat(nExp.getValue(), equalTo(12.7));
 		
-		parser = new Parser("24.5/12");
-		exp = parser.parse();
+		exp = parser.parse("24.5/12");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		bExp = (BinaryExpressionAST) exp;
 		
@@ -64,8 +62,7 @@ public class ParserTest {
 		nExp = (NumberExpressionAST) bExp.getRhs();
 		assertThat(nExp.getValue(), equalTo(12.0));
 		
-		parser = new Parser("24.5-5");
-		exp = parser.parse();
+		exp = parser.parse("24.5-5");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		bExp = (BinaryExpressionAST) exp;
 		
@@ -78,8 +75,7 @@ public class ParserTest {
 		nExp = (NumberExpressionAST) bExp.getRhs();
 		assertThat(nExp.getValue(), equalTo(5.0));
 		
-		parser = new Parser("24.5-5*4");
-		exp = parser.parse();
+		exp = parser.parse("24.5-5*4");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		bExp = (BinaryExpressionAST) exp;
 		
@@ -102,15 +98,15 @@ public class ParserTest {
 	
 	@Test
 	public void testBinaryExpressionsWithError() throws IOException {
-		Parser parser = new Parser("24.5-5*$(");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("24.5-5*$(");
 		assertThat(exp, equalTo(null));
 	}
 	
 	@Test
 	public void testCallFunction() throws IOException {
-		Parser parser = new Parser("2+sqrt(4)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("2+sqrt(4)");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
 		
@@ -128,8 +124,7 @@ public class ParserTest {
 		nExp = (NumberExpressionAST) cExp.getArgs().get(0);
 		assertThat(nExp.getValue(), equalTo(4.0));
 		
-		parser = new Parser("2 + pow(2, 4)");
-		exp = parser.parse();
+		exp = parser.parse("2 + pow(2, 4)");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		bExp = (BinaryExpressionAST) exp;
 		
@@ -154,8 +149,8 @@ public class ParserTest {
 	
 	@Test
 	public void testVariableExpression() throws IOException {
-		Parser parser = new Parser("$(hola)*sqrt(4)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("$(hola)*sqrt(4)");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
 		
@@ -176,16 +171,14 @@ public class ParserTest {
 	
 	@Test
 	public void testVariableExpressionWithErr() throws IOException {
-		Parser parser = new Parser("$hola)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("$hola)");
 		assertThat(exp, equalTo(null));
 		
-		parser = new Parser("$()");
-		exp = parser.parse();
+		exp = parser.parse("$()");
 		assertThat(exp, equalTo(null));
 		
-		parser = new Parser("$(hola+4");
-		exp = parser.parse();
+		exp = parser.parse("$(hola+4");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
 		
@@ -201,8 +194,8 @@ public class ParserTest {
 	
 	@Test
 	public void testParenthesisExpression() throws IOException {
-		Parser parser = new Parser("($(hola)*sqrt(4))");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("($(hola)*sqrt(4))");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
 		
@@ -223,8 +216,8 @@ public class ParserTest {
 	
 	@Test
 	public void testParenthesisExpressionWhithoutClosing() throws IOException {
-		Parser parser = new Parser("($(hola)*sqrt(4)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("($(hola)*sqrt(4)");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
 		
@@ -245,8 +238,8 @@ public class ParserTest {
 	
 	@Test
 	public void testUnaryExpression() throws IOException {
-		Parser parser = new Parser("($(hola)*-sqrt(-4))");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("($(hola)*-sqrt(-4))");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
 		
@@ -270,8 +263,7 @@ public class ParserTest {
 		NumberExpressionAST nExp = (NumberExpressionAST) uExp.getExpression();
 		assertThat(nExp.getValue(), equalTo(4.0));
 		
-		parser = new Parser("+sqrt(4)");
-		exp = parser.parse();
+		exp = parser.parse("+sqrt(4)");
 		assertThat(exp, instanceOf(CallExpressionAST.class));
 		cExp = (CallExpressionAST) exp;
 		assertThat(cExp.getFnName(), equalTo("sqrt"));
@@ -283,29 +275,29 @@ public class ParserTest {
 	
 	@Test
 	public void testUnaryExpressionWithError() throws IOException {
-		Parser parser = new Parser("-sqrt((4)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("-sqrt((4)");
 		assertThat(exp, equalTo(null));
 	}
 	
 	@Test
 	public void testCallExpressionWithNoArgumentsList() throws IOException {
-		Parser parser = new Parser("(hola)*sqrt(4)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("(hola)*sqrt(4)");
 		assertThat(exp, equalTo(null));
 	}
 	
 	@Test
 	public void testCallExpressionWithIncompleteArgumentsList() throws IOException {
-		Parser parser = new Parser("(hola(4,))*sqrt(4)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("(hola(4,))*sqrt(4)");
 		assertThat(exp, equalTo(null));
 	}
 	
 	@Test
 	public void testCallExpressionWithUnexpectedArgumentsList() throws IOException {
-		Parser parser = new Parser("(hola(4~))*sqrt(4)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("(hola(4~))*sqrt(4)");
 		assertThat(exp, equalTo(null));
 	}
 	
@@ -313,25 +305,21 @@ public class ParserTest {
 	public void testEvalExpression() throws IOException {
 		Map<String, Double> symbols = new HashMap<>();
 
-		Parser parser = new Parser("pow(sin($(PI)),2)+pow(cos($(PI)),2)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("pow(sin($(PI)),2)+pow(cos($(PI)),2)");
 		symbols.put("PI", Math.PI);
 		assertThat(exp.evaluate(symbols), equalTo(1.0));
 		
-		parser = new Parser("1-2");
-		exp = parser.parse();
+		exp = parser.parse("1-2");
 		assertThat(exp.evaluate(symbols), equalTo(-1.0));
 		
-		parser = new Parser("4*2");
-		exp = parser.parse();
+		exp = parser.parse("4*2");
 		assertThat(exp.evaluate(symbols), equalTo(8.0));
 		
-		parser = new Parser("4/2");
-		exp = parser.parse();
+		exp = parser.parse("4/2");
 		assertThat(exp.evaluate(symbols), equalTo(2.0));
 		
-		parser = new Parser("-(-200)");
-		exp = parser.parse();
+		exp = parser.parse("-(-200)");
 		assertThat(exp.evaluate(symbols), equalTo(200.0));
 	}
 	
@@ -341,69 +329,54 @@ public class ParserTest {
 		symbols.put("E", Math.E);
 		symbols.put("PI", Math.PI);
 
-		Parser parser = new Parser("pow(3,2)");
-		ExpressionAST exp = parser.parse();
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse("pow(3,2)");
 		assertThat(exp.evaluate(symbols), equalTo(9.0));
 		
-		parser = new Parser("sqrt(4)");
-		exp = parser.parse();
+		exp = parser.parse("sqrt(4)");
 		assertThat(exp.evaluate(symbols), equalTo(2.0));
 		
-		parser = new Parser("abs(-2)");
-		exp = parser.parse();
+		exp = parser.parse("abs(-2)");
 		assertThat(exp.evaluate(symbols), equalTo(2.0));
 		
-		parser = new Parser("max(-2,1)");
-		exp = parser.parse();
+		exp = parser.parse("max(-2,1)");
 		assertThat(exp.evaluate(symbols), equalTo(1.0));
 		
-		parser = new Parser("min(-2,1)");
-		exp = parser.parse();
+		exp = parser.parse("min(-2,1)");
 		assertThat(exp.evaluate(symbols), equalTo(-2.0));
 		
-		parser = new Parser("log10(max(-100,100))");
-		exp = parser.parse();
+		exp = parser.parse("log10(max(-100,100))");
 		assertThat(exp.evaluate(symbols), equalTo(2.0));
 		
-		parser = new Parser("log(pow($(E),-3/2))");
-		exp = parser.parse();
+		exp = parser.parse("log(pow($(E),-3/2))");
 		assertThat(exp.evaluate(symbols), equalTo(-1.5));
 		
-		parser = new Parser("ceil($(E))");
-		exp = parser.parse();
+		exp = parser.parse("ceil($(E))");
 		assertThat(exp.evaluate(symbols), equalTo(3.0));
 		
-		parser = new Parser("floor($(E))");
-		exp = parser.parse();
+		exp = parser.parse("floor($(E))");
 		assertThat(exp.evaluate(symbols), equalTo(2.0));
 		
-		parser = new Parser("round($(E))");
-		exp = parser.parse();
+		exp = parser.parse("round($(E))");
 		assertThat(exp.evaluate(symbols), equalTo(3.0));
 		
-		parser = new Parser("round($(E)-0.3)");
-		exp = parser.parse();
+		exp = parser.parse("round($(E)-0.3)");
 		assertThat(exp.evaluate(symbols), equalTo(2.0));
 		
-		parser = new Parser("tan($(PI))");
-		exp = parser.parse();
+		exp = parser.parse("tan($(PI))");
 		assertThat(exp.evaluate(symbols), greaterThanOrEqualTo(-0.0000001));
 		assertThat(exp.evaluate(symbols), lessThanOrEqualTo(0.0000001));
 		
-		parser = new Parser("atan(0)");
-		exp = parser.parse();
+		exp = parser.parse("atan(0)");
 		assertThat(exp.evaluate(symbols), equalTo(0.0));
 		
-		parser = new Parser("atan(1)");
-		exp = parser.parse();
+		exp = parser.parse("atan(1)");
 		assertThat(exp.evaluate(symbols), equalTo(Math.PI/4));
 		
-		parser = new Parser("asin(1)");
-		exp = parser.parse();
+		exp = parser.parse("asin(1)");
 		assertThat(exp.evaluate(symbols), equalTo(Math.PI/2));
 		
-		parser = new Parser("acos(0)");
-		exp = parser.parse();
+		exp = parser.parse("acos(0)");
 		assertThat(exp.evaluate(symbols), equalTo(Math.PI/2));
 	}
 }

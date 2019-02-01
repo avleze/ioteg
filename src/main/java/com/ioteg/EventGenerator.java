@@ -531,15 +531,15 @@ public class EventGenerator {
 		if (field.getAttribute("custom_behaviour") != null) {
 
 			if (CustomiseGeneration.rules.isEmpty()) {
-				CustomiseGeneration.ReadCustomFile(field.getAttribute("custom_behaviour").getValue(),
+				CustomiseGeneration.readCustomFile(field.getAttribute("custom_behaviour").getValue(),
 						field.getAttribute("type").getValue());
 				eventscustombehaviour = totalnumevents
-						/ CustomiseGeneration.ReadSimulations(field.getAttribute("custom_behaviour").getValue());
+						/ CustomiseGeneration.readSimulations(field.getAttribute("custom_behaviour").getValue());
 				controlcustombehaviour = 0;
 			}
 
 			if (controlcustombehaviour != eventscustombehaviour) {
-				result = CustomiseGeneration.GenerateValue();
+				result = CustomiseGeneration.generateValue();
 				controlcustombehaviour++;
 			} else { // No debería de llegar ya que previamente se habrá vaciado la lista de
 						// reglas...

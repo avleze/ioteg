@@ -2,35 +2,55 @@ package com.ioteg;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import org.apache.log4j.Logger;
 import org.jdom2.DataConversionException;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import com.ioteg.exprlang.Parser;
+import com.ioteg.exprlang.ast.ExpressionAST;
+
 public class CustomiseGeneration {
 
-	public static Map<String, Object> variables = new HashMap<>();
-	public static List<Rule<Object, Object, Object, Object, Object>> rules = new ArrayList<>();
-	public static float generatedvalue;
-	public static int controlpercentage;
+	protected static Map<String, Double> variables = new HashMap<>();
+	protected static List<Rule<Object, Object, Object, Object, Object>> rules = new ArrayList<>();
+	protected static float generatedvalue;
+	protected static int controlpercentage;
+	private static Parser parser;
+	protected static Random r;
+	protected static Logger logger;
 
-	public static void ReadCustomFile(String value, String type) throws JDOMException, IOException {
+	static {
+		logger = Logger.getRootLogger();
+		parser = new Parser();
+		try {
+			r = SecureRandom.getInstanceStrong();
+		} catch (NoSuchAlgorithmException e) {
+			logger.error(e);
+		}
+	}
+
+	public static void readCustomFile(String value, String type) throws JDOMException, IOException {
 
 		File xmlFile = new File(value);
 
 		if (xmlFile.exists()) {
-			ReadVariables(xmlFile, type);
-			ReadRules(xmlFile, type);
+			readVariables(xmlFile, type);
+			readRules(xmlFile, type);
 		}
 	}
 
-	private static void ReadRules(File xmlFile, String type) throws JDOMException, IOException {
+	private static void readRules(File xmlFile, String type) throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
@@ -39,72 +59,38 @@ public class CustomiseGeneration {
 		// To get the root
 		Element rootNode = document.getRootElement();
 
-		List<Element> rulesitem = rootNode.getChildren("rules");
-		List<Element> ruleitem = new ArrayList<>();
+		for (Element rulesInNode : rootNode.getChildren("rules"))
+			for (Element rule : rulesInNode.getChildren("rule")) {
+				float weight = Float.parseFloat(rule.getAttributeValue("weight"));
+				String value = null;
+				String min = null;
+				String max = null;
+				String sequence = null;
 
-		for (int i = 0; i < rulesitem.size(); i++) {
-			Element item = rulesitem.get(i);
-			ruleitem = item.getChildren("rule");
-		}
+				if (rule.getAttribute("value") != null)
+					value = Double.toString(obtainOperationValue(rule.getAttributeValue("value")));
 
-		for (int i = 0; i < ruleitem.size(); i++) {
-			Element item = ruleitem.get(i);
-			float weightvalue = Float.parseFloat(item.getAttributeValue("weight").toString());
-			String valuevalue = null, minvalue = null, maxvalue = null;
-			String sequencevalue = null;
-
-			if (item.getAttribute("value") != null) {
-				if (item.getAttributeValue("value").contains("$")) {
-					String value = ObtainVariableValue(item.getAttributeValue("value"));
-					if (CheckOperation(item.getAttributeValue("value"))) {
-						valuevalue = Float.toString(ObtainOperationValue(item.getAttributeValue("value")));
-					} else {
-						valuevalue = Float.toString(Float.parseFloat(value));
-					}
-				} else {
-					valuevalue = Float.toString(Float.parseFloat(item.getAttributeValue("value")));
-				}
-			}
-
-			if (item.getAttribute("min") != null && (item.getAttributeValue("max") != null)) {
-
-				if (item.getAttributeValue("min").contains("$")) {
-					String value = ObtainVariableValue(item.getAttributeValue("min"));
-					if (CheckOperation(item.getAttributeValue("min"))) {
-						minvalue = Float.toString(ObtainOperationValue(item.getAttributeValue("min")));
-					} else {
-						minvalue = Float.toString(Float.parseFloat(value));
-					}
-				} else {
-					float value = Float.parseFloat(item.getAttributeValue("min").toString());
-					minvalue = Float.toString(value);
+				if (rule.getAttribute("min") != null && (rule.getAttributeValue("max") != null)) {
+					min = Double.toString(obtainOperationValue(rule.getAttributeValue("min")));
+					max = Double.toString(obtainOperationValue(rule.getAttributeValue("max")));
 				}
 
-				if (item.getAttributeValue("max").contains("$")) {
-					String value = ObtainVariableValue(item.getAttributeValue("max"));
-					if (CheckOperation(item.getAttributeValue("max"))) {
-						maxvalue = Float.toString(ObtainOperationValue(item.getAttributeValue("max")));
-					} else {
-						maxvalue = Float.toString(Float.parseFloat(value));
-					}
-				} else {
-					float value = Float.parseFloat(item.getAttributeValue("max").toString());
-					maxvalue = Float.toString(value);
-				}
+				if (rule.getAttribute("sequence") != null)
+					sequence = rule.getAttributeValue("sequence");
+
+				rules.add(new Rule<>(weight, value, min, max, sequence));
 			}
-
-			if (item.getAttribute("sequence") != null) {
-				sequencevalue = item.getAttributeValue("sequence").toString();
-			}
-
-			Rule<Object, Object, Object, Object, Object> rule = new Rule<>(
-					weightvalue, valuevalue, minvalue, maxvalue, sequencevalue);
-
-			rules.add(rule);
-		}
 	}
 
-	public static void ReadVariables(File xmlFile, String type) throws JDOMException, IOException {
+	private static Double obtainOperationValue(String operation) throws IOException {
+
+		Parser parser = new Parser();
+		ExpressionAST exp = parser.parse(operation);
+
+		return exp.evaluate(variables);
+	}
+
+	public static void readVariables(File xmlFile, String type) throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
@@ -113,212 +99,38 @@ public class CustomiseGeneration {
 		// To get the root
 		Element rootNode = document.getRootElement();
 
-		List<Element> variablesitem = rootNode.getChildren("variables");
-		List<Element> variableitem = new ArrayList<>();
+		for (Element variablesInNode : rootNode.getChildren("variables"))
+			for (Element variable : variablesInNode.getChildren("variable"))
+				if (type.equals("Float"))
+					variables.put(variable.getAttributeValue("name"), obtainVariableValue(variable));
 
-		for (int i = 0; i < variablesitem.size(); i++) {
-			Element item = variablesitem.get(i);
-			variableitem = item.getChildren("variable");
-		}
-
-		for (int i = 0; i < variableitem.size(); i++) {
-			Element item = variableitem.get(i);
-			switch (type) {
-			case "Integer":
-				break;
-			case "Float":
-				variables.put(item.getAttributeValue("name"), ObtainFloatValue(item));
-				break;
-			case "Long":
-				break;
-			case "String":
-				break;
-			case "Boolean":
-				break;
-			case "Date":
-				break;
-			case "Time":
-				break;
-			}
-		}
 	}
 
-	private static Object ObtainFloatValue(Element item) throws DataConversionException {
+	private static Double obtainVariableValue(Element item) throws DataConversionException, IOException {
 
-		Float result = null, min, max = null;
-		String value = "";
+		Double result = null;
 
 		if (item.getAttributeValue("min") != null && (item.getAttributeValue("max") != null)) {
-			// Check if the values of min and max variables contain an operation
-			if (item.getAttributeValue("min").contains("$")) {
-				value = ObtainVariableValue(item.getAttributeValue("min"));
-				if (CheckOperation(item.getAttributeValue("min"))) {
-					min = ObtainOperationValue(item.getAttributeValue("min"));
-				} else {
-					min = Float.parseFloat(value);
-				}
-			} else {
-				min = Float.parseFloat(item.getAttributeValue("min"));
-			}
+			Double max;
+			Double min;
 
-			if (item.getAttributeValue("max").contains("$")) {
-				value = ObtainVariableValue(item.getAttributeValue("max"));
-				if (CheckOperation(item.getAttributeValue("max"))) {
-					max = ObtainOperationValue(item.getAttributeValue("max"));
-				} else {
-					max = Float.parseFloat(value);
-				}
-			} else {
-				max = Float.parseFloat(item.getAttributeValue("max"));
-			}
+			ExpressionAST exp = parser.parse(item.getAttributeValue("min"));
+			min = exp.evaluate(variables);
+			exp = parser.parse(item.getAttributeValue("max"));
+			max = exp.evaluate(variables);
 
-			result = min + (float) (Math.random() * ((max - min)));
+			result = r.doubles(min, max).findFirst().getAsDouble();
 		}
 
 		if (item.getAttribute("value") != null) {
-			// Check if the value is obtained from an operation which involves a saved
-			// variable
-			if (item.getAttributeValue("value").contains("$")) {
-				value = ObtainVariableValue(item.getAttributeValue("value"));
-				if (CheckOperation(item.getAttributeValue("value"))) {
-					result = ObtainOperationValue(item.getAttributeValue("value"));
-				} else {
-					result = Float.parseFloat(value);
-				}
-			} else {
-				result = item.getAttribute("value").getFloatValue();
-			}
+			ExpressionAST exp = parser.parse(item.getAttributeValue("value"));
+			result = exp.evaluate(variables);
 		}
 
 		return result;
 	}
 
-	private static float ObtainOperationValue(String operation) {
-
-		String[] opdiv = null;
-		float result = 0;
-
-		if (operation.contains("+")) {
-			opdiv = operation.split("\\+");
-			if (opdiv[0].contains("$") && result == 0.0) {
-				if (CheckOperation(opdiv[1])) {
-					result = ObtainOperationValue(opdiv[1]) + Float.parseFloat(ObtainVariableValue(opdiv[0]));
-				} else {
-					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) + Float.parseFloat(opdiv[1]);
-				}
-			}
-			if (opdiv[1].contains("$") && result == 0.0) {
-				if (CheckOperation(opdiv[0])) {
-					result = ObtainOperationValue(opdiv[0]) + Float.parseFloat(ObtainVariableValue(opdiv[1]));
-				} else {
-					result = Float.parseFloat(ObtainVariableValue(opdiv[1])) + Float.parseFloat(opdiv[0]);
-				}
-			}
-			if (!opdiv[0].contains("$") && !opdiv[1].contains("$") && result == 0.0) {
-				result = Float.parseFloat(opdiv[0]) + Float.parseFloat(opdiv[1]);
-			}
-		}
-
-		if (operation.contains("-")) {
-			opdiv = operation.split("-");
-			if (opdiv[0].contains("$") && result == 0.0) {
-				if (CheckOperation(opdiv[1])) {
-					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) - ObtainOperationValue(opdiv[1]);
-				} else {
-					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) - Float.parseFloat(opdiv[1]);
-				}
-			}
-			if (opdiv[1].contains("$") && result == 0.0) {
-				if (CheckOperation(opdiv[0])) {
-					result = ObtainOperationValue(opdiv[0]) - Float.parseFloat(ObtainVariableValue(opdiv[1]));
-				} else {
-					result = Float.parseFloat(opdiv[0]) - Float.parseFloat(ObtainVariableValue(opdiv[1]));
-				}
-			}
-			if (!opdiv[0].contains("$") && !opdiv[1].contains("$") && result == 0.0) {
-				result = Float.parseFloat(opdiv[0]) - Float.parseFloat(opdiv[1]);
-			}
-		}
-
-		if (operation.contains("*")) {
-			opdiv = operation.split("\\*");
-			if (opdiv[0].contains("$") && result == 0.0) {
-				if (CheckOperation(opdiv[1])) {
-					result = Float.parseFloat(opdiv[0]) * ObtainOperationValue(opdiv[1]);
-				} else {
-					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) * Float.parseFloat(opdiv[1]);
-				}
-			}
-			if (opdiv[1].contains("$") && result == 0.0) {
-				if (CheckOperation(opdiv[0])) {
-					result = Float.parseFloat(opdiv[1]) * ObtainOperationValue(opdiv[0]);
-				} else {
-					result = Float.parseFloat(ObtainVariableValue(opdiv[1])) * Float.parseFloat(opdiv[0]);
-				}
-			}
-			if (!opdiv[0].contains("$") && !opdiv[1].contains("$") && result == 0.0) {
-				result = Float.parseFloat(opdiv[0]) * Float.parseFloat(opdiv[1]);
-			}
-		}
-
-		if (operation.contains("/")) {
-			opdiv = operation.split("/");
-			if (opdiv[0].contains("$") && result == 0.0) {
-				if (CheckOperation(opdiv[1])) {
-					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) / ObtainOperationValue(opdiv[1]);
-				} else {
-					result = Float.parseFloat(ObtainVariableValue(opdiv[0])) / Float.parseFloat(opdiv[1]);
-				}
-			}
-			if (opdiv[1].contains("$") && result == 0.0) {
-				if (CheckOperation(opdiv[0])) {
-					result = ObtainOperationValue(opdiv[0]) / Float.parseFloat(ObtainVariableValue(opdiv[1]));
-				} else {
-					result = Float.parseFloat(opdiv[0]) / Float.parseFloat(ObtainVariableValue(opdiv[1]));
-				}
-			}
-			if (!opdiv[0].contains("$") && !opdiv[1].contains("$") && result == 0.0) {
-				result = Float.parseFloat(opdiv[0]) / Float.parseFloat(opdiv[1]);
-			}
-		}
-
-		return result;
-	}
-
-	private static boolean CheckOperation(String variablevalue) {
-
-		boolean exits = false;
-
-		if (variablevalue.contains("+")) {
-			exits = true;
-		}
-		if (variablevalue.contains("*")) {
-			exits = true;
-		}
-		if (variablevalue.contains("/")) {
-			exits = true;
-		}
-		if (variablevalue.contains("-")) {
-			exits = true;
-		}
-
-		return exits;
-	}
-
-	private static String ObtainVariableValue(String definedvar) {
-
-		String name = "";
-		String value = "";
-
-		name = definedvar.substring(definedvar.indexOf("(") + 1, definedvar.indexOf(")"));
-		if (variables.containsKey(name)) {
-			value = variables.get(name).toString();
-		}
-
-		return value;
-	}
-
-	public static int ReadSimulations(String xmlFile) throws JDOMException, IOException {
+	public static int readSimulations(String xmlFile) throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
@@ -329,7 +141,7 @@ public class CustomiseGeneration {
 		return Integer.parseInt(rootNode.getAttributeValue("simulations"));
 	}
 
-	public static String GenerateValue() {
+	public static String generateValue() {
 
 		Rule<Object, Object, Object, Object, Object> r = rules.get(0);
 		float eventsrule;
@@ -346,53 +158,59 @@ public class CustomiseGeneration {
 		}
 
 		if (controlpercentage == 0 && eventsrule == 0 && rules.size() == 1) {
-			GetRuleGeneratedValue(r);
+			getRuleGeneratedValue(r);
 		} else {
 			if (controlpercentage < eventsrule) {
-				GetRuleGeneratedValue(r);
+				getRuleGeneratedValue(r);
 				controlpercentage++;
 			} else {
 				rules.remove(0);
 				controlpercentage = 0;
 				generatedvalue = 0;
-				GenerateValue();
+				generateValue();
 			}
 		}
 
 		return Float.toString(generatedvalue);
 	}
 
-	private static void GetRuleGeneratedValue(Rule<Object, Object, Object, Object, Object> r) {
+	private static void getRuleGeneratedValue(Rule<Object, Object, Object, Object, Object> rule) {
 
-		if (!(r.second == null)) {
-			generatedvalue = Float.parseFloat(r.getValue().toString());
+		if (!(rule.second == null)) {
+			generatedvalue = Float.parseFloat(rule.getValue().toString());
 		}
 
-		if (!(r.getMin() == null)) {
-			if ((r.getSequence() == null)) {
-				float min = Float.parseFloat(r.getMin().toString());
-				float max = Float.parseFloat(r.getMax().toString());
+		if (!(rule.getMin() == null)) {
+			if ((rule.getSequence() == null)) {
+				float min = Float.parseFloat(rule.getMin().toString());
+				float max = Float.parseFloat(rule.getMax().toString());
 				generatedvalue = min + (float) (Math.random() * ((max - min)));
 			} else {
-				if (String.valueOf(r.getSequence()).equals("dec")) {
-					float min = Float.parseFloat(r.getMin().toString());
+				if (String.valueOf(rule.getSequence()).equals("dec")) {
+					float min = Float.parseFloat(rule.getMin().toString());
 					float max;
 					if (generatedvalue == 0) {
-						max = Float.parseFloat(r.getMax().toString());
+						max = Float.parseFloat(rule.getMax().toString());
 					} else {
 						max = generatedvalue;
 					}
-					generatedvalue = min + (float) (Math.random() * ((max - min)));
+					if(min != max)
+						generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
+					else
+						generatedvalue = min;
 				}
-				if (String.valueOf(r.getSequence()).equals("inc")) {
+				if (String.valueOf(rule.getSequence()).equals("inc")) {
 					float min;
-					float max = Float.parseFloat(r.getMax().toString());
+					float max = Float.parseFloat(rule.getMax().toString());
 					if (generatedvalue == 0) {
-						min = Float.parseFloat(r.getMin().toString());
+						min = Float.parseFloat(rule.getMin().toString());
 					} else {
 						min = generatedvalue;
 					}
-					generatedvalue = min + (float) (Math.random() * ((max - min)));
+					if(min != max)
+						generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
+					else
+						generatedvalue = max;
 				}
 			}
 		}
