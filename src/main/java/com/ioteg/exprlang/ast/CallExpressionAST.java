@@ -1,13 +1,13 @@
 package com.ioteg.exprlang.ast;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 public class CallExpressionAST extends ExpressionAST{
 	private String fnName;
-	private Vector<ExpressionAST> args;
+	private List<ExpressionAST> args;
 	
-	public CallExpressionAST(String fnName, Vector<ExpressionAST> args) {
+	public CallExpressionAST(String fnName, List<ExpressionAST> args) {
 		super();
 		this.fnName = fnName;
 		this.args = args;
@@ -17,7 +17,7 @@ public class CallExpressionAST extends ExpressionAST{
 		return fnName;
 	}
 
-	public Vector<ExpressionAST> getArgs() {
+	public List<ExpressionAST> getArgs() {
 		return args;
 	}
 

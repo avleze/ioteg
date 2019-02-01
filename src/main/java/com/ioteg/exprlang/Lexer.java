@@ -1,6 +1,5 @@
 package com.ioteg.exprlang;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -9,10 +8,10 @@ public class Lexer {
 
 	private Scanner inputReader;
 	private Character lastChar;
-	private String currentMatch;
+	private StringBuilder currentMatch;
 	private Token currentToken;
 	
-	public static Map<String, Token> singleCharacterTokens;
+	public static final Map<String, Token> singleCharacterTokens;
 
 	static {
 		singleCharacterTokens = new HashMap<>();
@@ -33,17 +32,17 @@ public class Lexer {
 		this.lastChar = ' ';
 	}
 
-	public Token getNextToken() throws IOException {
+	public Token getNextToken() {
 
 		while (Character.isWhitespace(lastChar)) {
 			lastChar = getNextCharacter();
 		}
 
 		if (Character.isAlphabetic(lastChar)) {
-			currentMatch = lastChar.toString();
+			currentMatch = new StringBuilder(lastChar.toString());
 
 			while (isalnum(lastChar = getNextCharacter())) {
-				currentMatch += lastChar;
+				currentMatch.append(lastChar);
 			}
 			
 			currentToken = Token.TOK_ID;
@@ -51,18 +50,18 @@ public class Lexer {
 		}
 
 		if (Character.isDigit(lastChar)) {
-			currentMatch = lastChar.toString();
+			currentMatch = new StringBuilder(lastChar.toString());
 
 			while (Character.isDigit(lastChar = getNextCharacter())) {
-				currentMatch += lastChar;
+				currentMatch.append(lastChar);
 			}
 			
 			if(lastChar == '.')
 			{
-				currentMatch += lastChar;
+				currentMatch.append(lastChar);
 			
 				while (Character.isDigit(lastChar = getNextCharacter())) {
-					currentMatch += lastChar;
+					currentMatch.append(lastChar);
 				}
 			}
 			
@@ -73,7 +72,7 @@ public class Lexer {
 		Token associatedToken = singleCharacterTokens.get(Character.toString(lastChar));
 
 		if (associatedToken != null) {
-			currentMatch = Character.toString(lastChar);
+			currentMatch = new StringBuilder(lastChar.toString());
 			lastChar = getNextCharacter();
 			currentToken = associatedToken;
 			return associatedToken;
@@ -86,7 +85,7 @@ public class Lexer {
 		}
 			
 
-		currentMatch = Character.toString(lastChar);
+		currentMatch = new StringBuilder(lastChar.toString());
 		lastChar = getNextCharacter();
 		currentToken = Token.UNKOWN;
 		return currentToken;
@@ -98,7 +97,7 @@ public class Lexer {
 	}
 
 	public String getCurrentMatch() {
-		return currentMatch;
+		return currentMatch.toString();
 	}
 	
 	public Token getCurrentToken() {

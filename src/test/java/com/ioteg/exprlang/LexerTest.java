@@ -1,149 +1,150 @@
 package com.ioteg.exprlang;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
+import static org.hamcrest.Matchers.equalTo;
 
 public class LexerTest {
 	
 	@Test
 	public void testArithmeticOperators() throws IOException {
 		Lexer lex = new Lexer("2+4");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "2");
-		assertEquals(lex.getNextToken(), Token.TOK_OP_SUM);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OP_SUM);
-		assertEquals(lex.getCurrentMatch(), "+");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "4");
-		assertEquals(lex.getNextToken(), Token.TOK_EOF);
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("2"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OP_SUM));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OP_SUM));
+		assertThat(lex.getCurrentMatch(), equalTo("+"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("4"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 		
 		lex = new Lexer("2*4");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "2");
-		assertEquals(lex.getNextToken(), Token.TOK_OP_MUL);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OP_MUL);
-		assertEquals(lex.getCurrentMatch(), "*");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "4");
-		assertEquals(lex.getNextToken(), Token.TOK_EOF);
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("2"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OP_MUL));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OP_MUL));
+		assertThat(lex.getCurrentMatch(), equalTo("*"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("4"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 		
 		lex = new Lexer("2-4");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "2");
-		assertEquals(lex.getNextToken(), Token.TOK_OP_SUB);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OP_SUB);
-		assertEquals(lex.getCurrentMatch(), "-");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "4");
-		assertEquals(lex.getNextToken(), Token.TOK_EOF);
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("2"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OP_SUB));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OP_SUB));
+		assertThat(lex.getCurrentMatch(), equalTo("-"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("4"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 		
 		lex = new Lexer("2/4");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "2");
-		assertEquals(lex.getNextToken(), Token.TOK_OP_DIV);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OP_DIV);
-		assertEquals(lex.getCurrentMatch(), "/");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "4");
-		assertEquals(lex.getNextToken(), Token.TOK_EOF);
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("2"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OP_DIV));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OP_DIV));
+		assertThat(lex.getCurrentMatch(), equalTo("/"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("4"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 	}
 	
 	@Test
 	public void testIdentifiers() throws IOException {
 		Lexer lex = new Lexer("2+$(hola)");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "2");
-		assertEquals(lex.getNextToken(), Token.TOK_OP_SUM);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OP_SUM);
-		assertEquals(lex.getCurrentMatch(), "+");
-		assertEquals(lex.getNextToken(), Token.TOK_DOLLAR);
-		assertEquals(lex.getCurrentToken(), Token.TOK_DOLLAR);
-		assertEquals(lex.getCurrentMatch(), "$");
-		assertEquals(lex.getNextToken(), Token.TOK_OPEN_PAREN);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OPEN_PAREN);
-		assertEquals(lex.getCurrentMatch(), "(");
-		assertEquals(lex.getNextToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentMatch(), "hola");
-		assertEquals(lex.getNextToken(), Token.TOK_CLOSED_PAREN);
-		assertEquals(lex.getCurrentToken(), Token.TOK_CLOSED_PAREN);
-		assertEquals(lex.getCurrentMatch(), ")");
-		assertEquals(lex.getNextToken(), Token.TOK_EOF);
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("2"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OP_SUM));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OP_SUM));
+		assertThat(lex.getCurrentMatch(), equalTo("+"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_DOLLAR));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_DOLLAR));
+		assertThat(lex.getCurrentMatch(), equalTo("$"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OPEN_PAREN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OPEN_PAREN));
+		assertThat(lex.getCurrentMatch(), equalTo("("));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentMatch(), equalTo("hola"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_CLOSED_PAREN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_CLOSED_PAREN));
+		assertThat(lex.getCurrentMatch(), equalTo(")"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 		
 		lex = new Lexer("sqrt($(hola))");
-		assertEquals(lex.getNextToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentMatch(), "sqrt");
-		assertEquals(lex.getNextToken(), Token.TOK_OPEN_PAREN);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OPEN_PAREN);
-		assertEquals(lex.getCurrentMatch(), "(");
-		assertEquals(lex.getNextToken(), Token.TOK_DOLLAR);
-		assertEquals(lex.getCurrentToken(), Token.TOK_DOLLAR);
-		assertEquals(lex.getCurrentMatch(), "$");
-		assertEquals(lex.getNextToken(), Token.TOK_OPEN_PAREN);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OPEN_PAREN);
-		assertEquals(lex.getCurrentMatch(), "(");
-		assertEquals(lex.getNextToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentMatch(), "hola");
-		assertEquals(lex.getNextToken(), Token.TOK_CLOSED_PAREN);
-		assertEquals(lex.getCurrentToken(), Token.TOK_CLOSED_PAREN);
-		assertEquals(lex.getCurrentMatch(), ")");
-		assertEquals(lex.getNextToken(), Token.TOK_CLOSED_PAREN);
-		assertEquals(lex.getCurrentToken(), Token.TOK_CLOSED_PAREN);
-		assertEquals(lex.getCurrentMatch(), ")");
-		assertEquals(lex.getNextToken(), Token.TOK_EOF);
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentMatch(), equalTo("sqrt"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OPEN_PAREN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OPEN_PAREN));
+		assertThat(lex.getCurrentMatch(), equalTo("("));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_DOLLAR));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_DOLLAR));
+		assertThat(lex.getCurrentMatch(), equalTo("$"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OPEN_PAREN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OPEN_PAREN));
+		assertThat(lex.getCurrentMatch(), equalTo("("));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentMatch(), equalTo("hola"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_CLOSED_PAREN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_CLOSED_PAREN));
+		assertThat(lex.getCurrentMatch(), equalTo(")"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_CLOSED_PAREN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_CLOSED_PAREN));
+		assertThat(lex.getCurrentMatch(), equalTo(")"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 	}
 	
 	@Test
 	public void testFloatingPointNumbers() throws IOException {
 		Lexer lex = new Lexer("20.45+$(hola)");
-		assertEquals(lex.getNextToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentToken(), Token.TOK_NUMBER);
-		assertEquals(lex.getCurrentMatch(), "20.45");
-		assertEquals(lex.getNextToken(), Token.TOK_OP_SUM);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OP_SUM);
-		assertEquals(lex.getCurrentMatch(), "+");
-		assertEquals(lex.getNextToken(), Token.TOK_DOLLAR);
-		assertEquals(lex.getCurrentToken(), Token.TOK_DOLLAR);
-		assertEquals(lex.getCurrentMatch(), "$");
-		assertEquals(lex.getNextToken(), Token.TOK_OPEN_PAREN);
-		assertEquals(lex.getCurrentToken(), Token.TOK_OPEN_PAREN);
-		assertEquals(lex.getCurrentMatch(), "(");
-		assertEquals(lex.getNextToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentMatch(), "hola");
-		assertEquals(lex.getNextToken(), Token.TOK_CLOSED_PAREN);
-		assertEquals(lex.getCurrentToken(), Token.TOK_CLOSED_PAREN);
-		assertEquals(lex.getCurrentMatch(), ")");
-		assertEquals(lex.getNextToken(), Token.TOK_EOF);
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
+		assertThat(lex.getCurrentMatch(), equalTo("20.45"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OP_SUM));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OP_SUM));
+		assertThat(lex.getCurrentMatch(), equalTo("+"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_DOLLAR));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_DOLLAR));
+		assertThat(lex.getCurrentMatch(), equalTo("$"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_OPEN_PAREN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_OPEN_PAREN));
+		assertThat(lex.getCurrentMatch(), equalTo("("));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentMatch(), equalTo("hola"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_CLOSED_PAREN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_CLOSED_PAREN));
+		assertThat(lex.getCurrentMatch(), equalTo(")"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 	}
 	
 	@Test
 	public void testUnkown() throws IOException {
 		Lexer lex = new Lexer(".~Unkown");
-		assertEquals(lex.getNextToken(), Token.UNKOWN);
-		assertEquals(lex.getCurrentToken(), Token.UNKOWN);
-		assertEquals(lex.getCurrentMatch(), ".");
-		assertEquals(lex.getNextToken(), Token.UNKOWN);
-		assertEquals(lex.getCurrentToken(), Token.UNKOWN);
-		assertEquals(lex.getCurrentMatch(), "~");
-		assertEquals(lex.getNextToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentToken(), Token.TOK_ID);
-		assertEquals(lex.getCurrentMatch(), "Unkown");
-		assertEquals(lex.getNextToken(), Token.TOK_EOF);
+		assertThat(lex.getNextToken(), equalTo(Token.UNKOWN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.UNKOWN));
+		assertThat(lex.getCurrentMatch(), equalTo("."));
+		assertThat(lex.getNextToken(), equalTo(Token.UNKOWN));
+		assertThat(lex.getCurrentToken(), equalTo(Token.UNKOWN));
+		assertThat(lex.getCurrentMatch(), equalTo("~"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_ID));
+		assertThat(lex.getCurrentMatch(), equalTo("Unkown"));
+		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 	}
 	
 }

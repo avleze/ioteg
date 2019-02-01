@@ -1,10 +1,10 @@
 package com.ioteg.exprlang;
 
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.equalTo;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +14,10 @@ import com.ioteg.exprlang.ast.ExpressionAST;
 import com.ioteg.exprlang.ast.NumberExpressionAST;
 import com.ioteg.exprlang.ast.UnaryExpressionAST;
 import com.ioteg.exprlang.ast.VariableExpressionAST;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.hamcrest.Matchers.instanceOf;
 
 public class ParserTest {
 	@Test
@@ -305,4 +309,101 @@ public class ParserTest {
 		assertThat(exp, equalTo(null));
 	}
 	
+	@Test
+	public void testEvalExpression() throws IOException {
+		Map<String, Double> symbols = new HashMap<>();
+
+		Parser parser = new Parser("pow(sin($(PI)),2)+pow(cos($(PI)),2)");
+		ExpressionAST exp = parser.parse();
+		symbols.put("PI", Math.PI);
+		assertThat(exp.evaluate(symbols), equalTo(1.0));
+		
+		parser = new Parser("1-2");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(-1.0));
+		
+		parser = new Parser("4*2");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(8.0));
+		
+		parser = new Parser("4/2");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(2.0));
+		
+		parser = new Parser("-(-200)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(200.0));
+	}
+	
+	@Test
+	public void testEvalFunctions() throws IOException {
+		Map<String, Double> symbols = new HashMap<>();
+		symbols.put("E", Math.E);
+		symbols.put("PI", Math.PI);
+
+		Parser parser = new Parser("pow(3,2)");
+		ExpressionAST exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(9.0));
+		
+		parser = new Parser("sqrt(4)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(2.0));
+		
+		parser = new Parser("abs(-2)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(2.0));
+		
+		parser = new Parser("max(-2,1)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(1.0));
+		
+		parser = new Parser("min(-2,1)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(-2.0));
+		
+		parser = new Parser("log10(max(-100,100))");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(2.0));
+		
+		parser = new Parser("log(pow($(E),-3/2))");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(-1.5));
+		
+		parser = new Parser("ceil($(E))");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(3.0));
+		
+		parser = new Parser("floor($(E))");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(2.0));
+		
+		parser = new Parser("round($(E))");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(3.0));
+		
+		parser = new Parser("round($(E)-0.3)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(2.0));
+		
+		parser = new Parser("tan($(PI))");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), greaterThanOrEqualTo(-0.0000001));
+		assertThat(exp.evaluate(symbols), lessThanOrEqualTo(0.0000001));
+		
+		parser = new Parser("atan(0)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(0.0));
+		
+		parser = new Parser("atan(1)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(Math.PI/4));
+		
+		parser = new Parser("asin(1)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(Math.PI/2));
+		
+		parser = new Parser("acos(0)");
+		exp = parser.parse();
+		assertThat(exp.evaluate(symbols), equalTo(Math.PI/2));
+	}
 }

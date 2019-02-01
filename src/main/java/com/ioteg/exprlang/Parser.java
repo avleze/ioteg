@@ -1,9 +1,9 @@
 package com.ioteg.exprlang;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 
 import com.ioteg.exprlang.ast.BinaryExpressionAST;
 import com.ioteg.exprlang.ast.CallExpressionAST;
@@ -14,10 +14,10 @@ import com.ioteg.exprlang.ast.VariableExpressionAST;
 
 public class Parser {
 	private Lexer lexer;
-	public static Map<Token, Integer> tokenPrecedence;
+	public static final EnumMap<Token, Integer> tokenPrecedence;
 
 	static {
-		tokenPrecedence = new HashMap<>();
+		tokenPrecedence = new EnumMap<>(Token.class);
 		tokenPrecedence.put(Token.TOK_OP_SUM, 20);
 		tokenPrecedence.put(Token.TOK_OP_SUB, 20);
 		tokenPrecedence.put(Token.TOK_OP_MUL, 40);
@@ -44,9 +44,9 @@ public class Parser {
 
 	private ExpressionAST parseBinaryExpressionRHS(int expressionPrecedence, ExpressionAST lhs) throws IOException {
 		while (true) {
-			int tokenPrecedence = getTokenPrecedence();
+			int tokPrecedence = getTokenPrecedence();
 
-			if (tokenPrecedence < expressionPrecedence)
+			if (tokPrecedence < expressionPrecedence)
 				return lhs;
 
 			Token binOp = lexer.getCurrentToken();
@@ -58,8 +58,8 @@ public class Parser {
 			// If BinOp binds less tightly with RHS than the operator after RHS, let
 			// the pending operator take RHS as its LHS.
 			int nextPrecedence = getTokenPrecedence();
-			if (tokenPrecedence < nextPrecedence) {
-				rhs = parseBinaryExpressionRHS(tokenPrecedence + 1, rhs);
+			if (tokPrecedence < nextPrecedence) {
+				rhs = parseBinaryExpressionRHS(tokPrecedence + 1, rhs);
 				if (rhs == null)
 					return null;
 			}
@@ -125,7 +125,7 @@ public class Parser {
 			return null;
 		}
 		lexer.getNextToken();
-		Vector<ExpressionAST> args = new Vector<>();
+		List<ExpressionAST> args = new ArrayList<>();
 
 		if (lexer.getCurrentToken() != Token.TOK_CLOSED_PAREN) {
 
