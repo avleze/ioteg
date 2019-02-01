@@ -1,6 +1,6 @@
-package ioteg;
+package com.ioteg;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,19 +18,20 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 
-public class DateGeneratorTestCase {
+public class TimeGeneratorTestCase {
 	private static List<Element> fields;
 
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = DateGeneratorTestCase.class.getClassLoader();
-		File xmlFile = new File(classLoader.getResource("./generators/testDateGenerator.xml").getFile());
+		ClassLoader classLoader = TimeGeneratorTestCase.class.getClassLoader();
+		File xmlFile = new File(classLoader.getResource("./generators/testTimeGenerator.xml").getFile());
 		Document document = builder.build(xmlFile);
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
 		EventGenerator.fieldvalues = new ArrayList<>();
+
 	}
 
 	@Test
@@ -39,16 +40,17 @@ public class DateGeneratorTestCase {
 
 		for (int i = 0; i < 1000; ++i) {
 			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-			SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-DD");
+			SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 			sdf.parse(strResult);
 		}
+
 	}
 
 	@Test
 	public void testFixedValue() throws JDOMException, IOException {
 		Element field = fields.get(1);
 		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-
-		assertTrue(strResult.equals("08-05-01"));
+		assertTrue(strResult.equals("14:24"));
 	}
+
 }

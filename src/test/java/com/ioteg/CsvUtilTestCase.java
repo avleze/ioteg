@@ -1,4 +1,4 @@
-package ioteg;
+package com.ioteg;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;

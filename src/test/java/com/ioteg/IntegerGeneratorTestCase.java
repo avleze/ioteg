@@ -1,4 +1,4 @@
-package ioteg;
+package com.ioteg;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,14 +17,15 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 
-public class LongGeneratorTestCase {
+public class IntegerGeneratorTestCase {
+
 	private static List<Element> fields;
 
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = LongGeneratorTestCase.class.getClassLoader();
-		File xmlFile = new File(classLoader.getResource("./generators/testLongGenerator.xml").getFile());
+		ClassLoader classLoader = IntegerGeneratorTestCase.class.getClassLoader();
+		File xmlFile = new File(classLoader.getResource("./generators/testRandomIntegerGenerator.xml").getFile());
 		Document document = builder.build(xmlFile);
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
@@ -38,9 +39,10 @@ public class LongGeneratorTestCase {
 		/** Test within a specified range **/
 		Element field = fields.get(0);
 		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-		Long result = Long.parseLong(strResult);
-		assertTrue(Long.valueOf("-10000000") < result);
-		assertTrue(result <= 0);
+		Integer result = Integer.parseInt(strResult);
+
+		assertTrue(100000 < result);
+		assertTrue(result < 999999);
 	}
 
 	@Test
@@ -51,10 +53,11 @@ public class LongGeneratorTestCase {
 
 		for (int i = 0; i < 100; ++i) {
 			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-			Long result = Long.parseLong(strResult);
+			Integer result = Integer.parseInt(strResult);
 			assertTrue(0 <= result);
 			assertTrue(result <= 9);
 		}
+
 	}
 
 	@Test
@@ -63,7 +66,8 @@ public class LongGeneratorTestCase {
 		/** Test of specified value **/
 		Element field = fields.get(2);
 		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
-		Long result = Long.parseLong(strResult);
-		assertEquals(Long.valueOf("9223372036854775807"), result);
+		Integer result = Integer.parseInt(strResult);
+		assertEquals(Integer.valueOf(104), result);
 	}
+
 }

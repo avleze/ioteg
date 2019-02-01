@@ -1,4 +1,4 @@
-package ioteg;
+package com.ioteg;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

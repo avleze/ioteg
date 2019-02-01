@@ -1,4 +1,4 @@
-package ioteg;
+package com.ioteg;
 
 import java.io.File;
 import java.io.FileWriter;

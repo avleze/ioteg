@@ -1,4 +1,4 @@
-package ioteg;
+package com.ioteg;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
