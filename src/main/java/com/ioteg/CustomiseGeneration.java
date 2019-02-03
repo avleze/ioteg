@@ -176,43 +176,47 @@ public class CustomiseGeneration {
 
 	private static void getRuleGeneratedValue(Rule<Object, Object, Object, Object, Object> rule) {
 
-		if (!(rule.second == null)) {
+		if (rule.getValue() != null)
 			generatedvalue = Float.parseFloat(rule.getValue().toString());
-		}
 
-		if (!(rule.getMin() == null)) {
+		if (rule.getMin() != null) {
 			if ((rule.getSequence() == null)) {
 				float min = Float.parseFloat(rule.getMin().toString());
 				float max = Float.parseFloat(rule.getMax().toString());
 				generatedvalue = min + (float) (Math.random() * ((max - min)));
-			} else {
-				if (String.valueOf(rule.getSequence()).equals("dec")) {
-					float min = Float.parseFloat(rule.getMin().toString());
-					float max;
-					if (generatedvalue == 0) {
-						max = Float.parseFloat(rule.getMax().toString());
-					} else {
-						max = generatedvalue;
-					}
-					if(min != max)
-						generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
-					else
-						generatedvalue = min;
-				}
-				if (String.valueOf(rule.getSequence()).equals("inc")) {
-					float min;
-					float max = Float.parseFloat(rule.getMax().toString());
-					if (generatedvalue == 0) {
-						min = Float.parseFloat(rule.getMin().toString());
-					} else {
-						min = generatedvalue;
-					}
-					if(min != max)
-						generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
-					else
-						generatedvalue = max;
-				}
-			}
+			} else if (String.valueOf(rule.getSequence()).equals("dec")) 
+				generateValueDecSequence(rule);
+			else if (String.valueOf(rule.getSequence()).equals("inc")) 
+				generateRuleValueIncSequence(rule);
+			
 		}
+	}
+
+	private static void generateValueDecSequence(Rule<Object, Object, Object, Object, Object> rule) {
+		float min = Float.parseFloat(rule.getMin().toString());
+		float max;
+		if (generatedvalue == 0)
+			max = Float.parseFloat(rule.getMax().toString());
+		else
+			max = generatedvalue;
+
+		if (min != max)
+			generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
+		else
+			generatedvalue = min;
+	}
+
+	private static void generateRuleValueIncSequence(Rule<Object, Object, Object, Object, Object> rule) {
+		float min;
+		float max = Float.parseFloat(rule.getMax().toString());
+		if (generatedvalue == 0)
+			min = Float.parseFloat(rule.getMin().toString());
+		else
+			min = generatedvalue;
+
+		if (min != max)
+			generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
+		else
+			generatedvalue = max;
 	}
 }
