@@ -22,8 +22,21 @@ import com.ioteg.exprlang.ast.ExpressionAST;
 
 public class CustomiseGeneration {
 
+	private static final String NAME_ATTR = "name";
+	private static final String VARIABLE_TAG = "variable";
+	private static final String VARIABLES_TAG = "variables";
+	private static final String WEIGHT_ATTR = "weight";
+	private static final String RULE_TAG = "rule";
+	private static final String RULES_TAG = "rules";
+	private static final String SEQUENCE_ATTR = "sequence";
+	private static final String INC_VALUE = "inc";
+	private static final String DEC_VALUE = "dec";
+	private static final String SIMULATIONS_TAG = "simulations";
+	private static final String MIN_ATTR = "min";
+	private static final String MAX_ATTR = "max";
+	private static final String VALUE_ATTR = "value";
 	protected static Map<String, Double> variables = new HashMap<>();
-	protected static List<Rule<Object, Object, Object, Object, Object>> rules = new ArrayList<>();
+	protected static List<Rule<Double, Double, Double, Double, String>> rules = new ArrayList<>();
 	protected static float generatedvalue;
 	protected static int controlpercentage;
 	private static Parser parser;
@@ -46,11 +59,11 @@ public class CustomiseGeneration {
 
 		if (xmlFile.exists()) {
 			readVariables(xmlFile, type);
-			readRules(xmlFile, type);
+			readRules(xmlFile);
 		}
 	}
 
-	private static void readRules(File xmlFile, String type) throws JDOMException, IOException {
+	private static void readRules(File xmlFile) throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
@@ -59,26 +72,26 @@ public class CustomiseGeneration {
 		// To get the root
 		Element rootNode = document.getRootElement();
 
-		for (Element rulesInNode : rootNode.getChildren("rules"))
-			for (Element rule : rulesInNode.getChildren("rule")) {
-				float weight = Float.parseFloat(rule.getAttributeValue("weight"));
-				String value = null;
-				String min = null;
-				String max = null;
-				String sequence = null;
-
-				if (rule.getAttribute("value") != null)
-					value = Double.toString(obtainOperationValue(rule.getAttributeValue("value")));
-
-				if (rule.getAttribute("min") != null && (rule.getAttributeValue("max") != null)) {
-					min = Double.toString(obtainOperationValue(rule.getAttributeValue("min")));
-					max = Double.toString(obtainOperationValue(rule.getAttributeValue("max")));
+		for (Element rulesInNode : rootNode.getChildren(RULES_TAG))
+			for (Element rule : rulesInNode.getChildren(RULE_TAG)) {
+				Double weight = Double.valueOf(rule.getAttributeValue(WEIGHT_ATTR));
+				String valueAttr = rule.getAttributeValue(VALUE_ATTR);
+				String minAttr = rule.getAttributeValue(MIN_ATTR);
+				String maxAttr = rule.getAttributeValue(MAX_ATTR);
+				String sequenceAttr = rule.getAttributeValue(SEQUENCE_ATTR);
+				
+				Double value = null;
+				Double min = null;
+				Double max = null;
+				
+				if (valueAttr != null)
+					value = obtainOperationValue(valueAttr);
+				if (minAttr != null && maxAttr != null) {
+					min = obtainOperationValue(minAttr);
+					max = obtainOperationValue(maxAttr);
 				}
 
-				if (rule.getAttribute("sequence") != null)
-					sequence = rule.getAttributeValue("sequence");
-
-				rules.add(new Rule<>(weight, value, min, max, sequence));
+				rules.add(new Rule<>(weight, value, min, max, sequenceAttr));
 			}
 	}
 
@@ -99,31 +112,32 @@ public class CustomiseGeneration {
 		// To get the root
 		Element rootNode = document.getRootElement();
 
-		for (Element variablesInNode : rootNode.getChildren("variables"))
-			for (Element variable : variablesInNode.getChildren("variable"))
+		for (Element variablesInNode : rootNode.getChildren(VARIABLES_TAG))
+			for (Element variable : variablesInNode.getChildren(VARIABLE_TAG))
 				if (type.equals("Float"))
-					variables.put(variable.getAttributeValue("name"), obtainVariableValue(variable));
+					variables.put(variable.getAttributeValue(NAME_ATTR), obtainVariableValue(variable));
 
 	}
 
 	private static Double obtainVariableValue(Element item) throws DataConversionException, IOException {
 
 		Double result = null;
+		String minStr = item.getAttributeValue(MIN_ATTR);
+		String maxStr = item.getAttributeValue(MAX_ATTR);
+		String valueStr = item.getAttributeValue(VALUE_ATTR);
 
-		if (item.getAttributeValue("min") != null && (item.getAttributeValue("max") != null)) {
+		if (minStr != null && maxStr != null) {
 			Double max;
 			Double min;
 
-			ExpressionAST exp = parser.parse(item.getAttributeValue("min"));
+			ExpressionAST exp = parser.parse(minStr);
 			min = exp.evaluate(variables);
-			exp = parser.parse(item.getAttributeValue("max"));
+			exp = parser.parse(maxStr);
 			max = exp.evaluate(variables);
 
 			result = r.doubles(min, max).findFirst().getAsDouble();
-		}
-
-		if (item.getAttribute("value") != null) {
-			ExpressionAST exp = parser.parse(item.getAttributeValue("value"));
+		} else if (valueStr != null) {
+			ExpressionAST exp = parser.parse(valueStr);
 			result = exp.evaluate(variables);
 		}
 
@@ -138,12 +152,12 @@ public class CustomiseGeneration {
 
 		// To get the root
 		Element rootNode = document.getRootElement();
-		return Integer.parseInt(rootNode.getAttributeValue("simulations"));
+		return Integer.parseInt(rootNode.getAttributeValue(SIMULATIONS_TAG));
 	}
 
 	public static String generateValue() {
 
-		Rule<Object, Object, Object, Object, Object> r = rules.get(0);
+		Rule<Double, Double, Double, Double, String> r = rules.get(0);
 		float eventsrule;
 
 		if (Float.parseFloat(r.getWeight().toString()) < 1) {
@@ -151,10 +165,10 @@ public class CustomiseGeneration {
 				eventsrule = 0;
 				controlpercentage = 0;
 			} else {
-				eventsrule = EventGenerator.eventscustombehaviour * Float.parseFloat(r.getWeight().toString());
+				eventsrule = EventGenerator.eventscustombehaviour * r.getWeight().floatValue();
 			}
 		} else {
-			eventsrule = Float.parseFloat(r.getWeight().toString());
+			eventsrule = r.getWeight().floatValue();
 		}
 
 		if (controlpercentage == 0 && eventsrule == 0 && rules.size() == 1) {
@@ -174,49 +188,49 @@ public class CustomiseGeneration {
 		return Float.toString(generatedvalue);
 	}
 
-	private static void getRuleGeneratedValue(Rule<Object, Object, Object, Object, Object> rule) {
+	private static void getRuleGeneratedValue(Rule<Double, Double, Double, Double, String> rule) {
 
 		if (rule.getValue() != null)
-			generatedvalue = Float.parseFloat(rule.getValue().toString());
+			generatedvalue = rule.getValue().floatValue();
 
 		if (rule.getMin() != null) {
 			if ((rule.getSequence() == null)) {
-				float min = Float.parseFloat(rule.getMin().toString());
-				float max = Float.parseFloat(rule.getMax().toString());
-				generatedvalue = min + (float) (Math.random() * ((max - min)));
-			} else if (String.valueOf(rule.getSequence()).equals("dec")) 
-				generateValueDecSequence(rule);
-			else if (String.valueOf(rule.getSequence()).equals("inc")) 
+				double min = rule.getMin();
+				double max = rule.getMax();
+				generatedvalue = (float) (min + Math.random() * (max - min));
+			} else if (rule.getSequence().equalsIgnoreCase(DEC_VALUE)) 
+				generateRuleValueDecSequence(rule);
+			else if (rule.getSequence().equalsIgnoreCase(INC_VALUE)) 
 				generateRuleValueIncSequence(rule);
 			
 		}
 	}
 
-	private static void generateValueDecSequence(Rule<Object, Object, Object, Object, Object> rule) {
-		float min = Float.parseFloat(rule.getMin().toString());
-		float max;
+	private static void generateRuleValueDecSequence(Rule<Double, Double, Double, Double, String> rule) {
+		Double min = rule.getMin();
+		Double max;
 		if (generatedvalue == 0)
-			max = Float.parseFloat(rule.getMax().toString());
+			max = rule.getMax();
 		else
-			max = generatedvalue;
+			max = (double) generatedvalue;
 
 		if (min != max)
 			generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
 		else
-			generatedvalue = min;
+			generatedvalue = min.floatValue();
 	}
 
-	private static void generateRuleValueIncSequence(Rule<Object, Object, Object, Object, Object> rule) {
-		float min;
-		float max = Float.parseFloat(rule.getMax().toString());
+	private static void generateRuleValueIncSequence(Rule<Double, Double, Double, Double, String> rule) {
+		Double min;
+		Double max = rule.getMax();
 		if (generatedvalue == 0)
-			min = Float.parseFloat(rule.getMin().toString());
+			min = rule.getMin();
 		else
-			min = generatedvalue;
+			min = (double) generatedvalue;
 
 		if (min != max)
 			generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
 		else
-			generatedvalue = max;
+			generatedvalue = max.floatValue();
 	}
 }
