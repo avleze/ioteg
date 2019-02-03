@@ -2,11 +2,11 @@ package com.ioteg;
 
 public class Rule<weight, value, min, max, sequence> {
 
-	public weight first;
-	public value second;
-	public min third;
-	public max fourth;
-	public sequence fifth;
+	private weight first;
+	private value second;
+	private min third;
+	private max fourth;
+	private sequence fifth;
 
 	public Rule() {
 	};

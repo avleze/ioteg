@@ -31,8 +31,7 @@ import com.ioteg.model.Field;
 
 public class EventGenerator {
 
-	public static final String[] types = { "Integer", "Float", "Long", "Boolean", "String", "Date", "Time" };
-	public static int chosen;
+	protected static final String[] types = { "Integer", "Float", "Long", "Boolean", "String", "Date", "Time" };
 	public static List<Map<String, List<Trio<String, String, String>>>> fieldvalues = new ArrayList<>();
 	public static int totalnumevents;
 	public static int iteration;
@@ -50,9 +49,7 @@ public class EventGenerator {
 			logger.error(e);
 		}
 	}
-	
-	
-	
+
 	public static void main(String args[]) throws Exception {
 
 		String input = args[0];
@@ -62,6 +59,7 @@ public class EventGenerator {
 		String path = input.substring(0, input.lastIndexOf("/") + 1);
 		SAXBuilder builder = new SAXBuilder();
 		File xmlFile = new File(input);
+		FileWriter values = null;
 
 		try {
 
@@ -85,7 +83,7 @@ public class EventGenerator {
 				RemovingComplexType(rootNode);
 			}
 
-			FileWriter values = new FileWriter(path + output);
+			values = new FileWriter(path + output);
 
 			if (type.equals("json")) {
 				JsonUtil.JsonFormatValues(values, document);
@@ -105,6 +103,8 @@ public class EventGenerator {
 			System.out.println(io.getMessage());
 		} catch (JDOMException jdomex) {
 			System.out.println(jdomex.getMessage());
+		} finally {
+			values.close();
 		}
 	}
 
@@ -137,138 +137,137 @@ public class EventGenerator {
 
 		FileReader eplF = new FileReader(new File(EPLfile));
 		String query = "";
-		;
 		BufferedReader bf = new BufferedReader(eplF);
+		try {
+			while (((query = bf.readLine()) != null)) {
+				if (query.contains(" where ") || query.contains(" WHERE ")) {
+					String subquery = "";
+					if (query.indexOf(" where ") != -1) {
+						subquery = query.substring(query.indexOf(" where ") + 7);
+					} else {
+						subquery = query.substring(query.indexOf(" WHERE ") + 7);
+					}
+					String copyquery = subquery;
 
-		while (((query = bf.readLine()) != null)) {
-			if (query.contains(" where ") || query.contains(" WHERE ")) {
-				String subquery = "";
-				if (query.indexOf(" where ") != -1) {
-					subquery = query.substring(query.indexOf(" where ") + 7);
-				} else {
-					subquery = query.substring(query.indexOf(" WHERE ") + 7);
-				}
-				String copyquery = subquery;
+					/* To save the logical operators */
 
-				/* To save the logical operators */
+					Pattern logicalop = Pattern.compile(" or | and | OR | AND ");
+					Matcher logicalmatcher = logicalop.matcher(copyquery);
+					List<String> logicaloplist = new ArrayList<>();
 
-				Pattern logicalop = Pattern.compile(" or | and | OR | AND ");
-				Matcher logicalmatcher = logicalop.matcher(copyquery);
-				List<String> logicaloplist = new ArrayList<>();
-
-				while (logicalmatcher.find()) {
-					logicaloplist.add(logicalmatcher.group().toLowerCase().trim());
-				}
-
-				/* To save the field, the relational operator and the value */
-
-				Pattern pattern = Pattern.compile("<=|>=|<|>|=|!=");
-				Matcher matcher = pattern.matcher(copyquery);
-				Trio<String, String, String> lastFieldPut = null;
-				// Check all occurrences
-				int i = 0; // to control the loop
-				while (matcher.find()) {
-					String field = copyquery.substring(0, matcher.start());
-					field = field.trim();
-					String operator = matcher.group();
-					copyquery = copyquery.substring(matcher.end() + 1);
-
-					copyquery = copyquery.trim();
-
-					Pattern word = Pattern.compile("(['\"])(.*?)(['\"][$]?)");
-					Pattern number = Pattern.compile("(?<!\\w)-?[0-9]+[$]?");
-					Pattern booleanPattern = Pattern.compile("true|false[$]?");
-
-					Matcher valuechar = word.matcher(copyquery);
-					Matcher valuenum = number.matcher(copyquery);
-					Matcher valueboolean = booleanPattern.matcher(copyquery);
-					String finalvalue = "";
-					String allmatch = "";
-
-					if (valuechar.find()) {
-						finalvalue = valuechar.group(2);
-						allmatch = valuechar.group();
-					} else if (valuenum.find()) {
-						finalvalue = valuenum.group(0);
-						allmatch = finalvalue;
-					} else if (valueboolean.find()) {
-						finalvalue = valueboolean.group(0);
-						allmatch = finalvalue;
+					while (logicalmatcher.find()) {
+						logicaloplist.add(logicalmatcher.group().toLowerCase().trim());
 					}
 
-					copyquery = copyquery.substring(copyquery.indexOf(allmatch) + allmatch.length());
-					copyquery.trim();
-					Trio<String, String, String> value = new Trio<>(field, operator, finalvalue);
-					if (!copyquery.isEmpty()) {
-						if (!logicaloplist.isEmpty()) {
-							if (logicaloplist.get(0).equals("or")) {
-								copyquery = copyquery.substring(3);
-							} else {
-								copyquery = copyquery.substring(4);
+					/* To save the field, the relational operator and the value */
+
+					Pattern pattern = Pattern.compile("<=|>=|<|>|=|!=");
+					Matcher matcher = pattern.matcher(copyquery);
+					Trio<String, String, String> lastFieldPut = null;
+					// Check all occurrences
+					int i = 0; // to control the loop
+					while (matcher.find()) {
+						String field = copyquery.substring(0, matcher.start());
+						field = field.trim();
+						String operator = matcher.group();
+						copyquery = copyquery.substring(matcher.end() + 1);
+
+						copyquery = copyquery.trim();
+
+						Pattern word = Pattern.compile("(['\"])(.*?)(['\"][$]?)");
+						Pattern number = Pattern.compile("(?<!\\w)-?[0-9]+[$]?");
+						Pattern booleanPattern = Pattern.compile("true|false[$]?");
+
+						Matcher valuechar = word.matcher(copyquery);
+						Matcher valuenum = number.matcher(copyquery);
+						Matcher valueboolean = booleanPattern.matcher(copyquery);
+						String finalvalue = "";
+						String allmatch = "";
+
+						if (valuechar.find()) {
+							finalvalue = valuechar.group(2);
+							allmatch = valuechar.group();
+						} else if (valuenum.find()) {
+							finalvalue = valuenum.group(0);
+							allmatch = finalvalue;
+						} else if (valueboolean.find()) {
+							finalvalue = valueboolean.group(0);
+							allmatch = finalvalue;
+						}
+
+						copyquery = copyquery.substring(copyquery.indexOf(allmatch) + allmatch.length());
+						Trio<String, String, String> value = new Trio<>(field, operator, finalvalue);
+						if (!copyquery.isEmpty()) {
+							if (!logicaloplist.isEmpty()) {
+								if (logicaloplist.get(0).equals("or")) {
+									copyquery = copyquery.substring(3);
+								} else {
+									copyquery = copyquery.substring(4);
+								}
 							}
 						}
-					}
 
-					if (i > 0) {
-						if (!logicaloplist.isEmpty()) {
-							if (logicaloplist.get(0).equals("or")) {
-								int originalsize = fieldvalues.size();
-								for (int j = 0; j < originalsize; j++) {
-									Map<String, List<Trio<String, String, String>>> values = new HashMap<>();
-									
-									for(Entry<String, List<Trio<String, String, String>>> entry : fieldvalues.get(j).entrySet())
-									{
-										List<Trio<String, String, String>> list = new ArrayList<>();
-										list.addAll(entry.getValue());
-										values.put(entry.getKey(), list);
+						if (i > 0) {
+							if (!logicaloplist.isEmpty()) {
+								if (logicaloplist.get(0).equals("or")) {
+									int originalsize = fieldvalues.size();
+									for (int j = 0; j < originalsize; j++) {
+										Map<String, List<Trio<String, String, String>>> values = new HashMap<>();
+
+										for (Entry<String, List<Trio<String, String, String>>> entry : fieldvalues
+												.get(j).entrySet()) {
+											List<Trio<String, String, String>> list = new ArrayList<>();
+											list.addAll(entry.getValue());
+											values.put(entry.getKey(), list);
+										}
+
+										values.get(lastFieldPut.getFirst()).remove(lastFieldPut);
+										values.get(value.getFirst()).add(value);
+										fieldvalues.add(values);
 									}
-
-									values.get(lastFieldPut.first).remove(lastFieldPut);
-									values.get(value.first).add(value);
-									fieldvalues.add(values);
+									logicaloplist.remove(0);
+								} else if (logicaloplist.get(0).equals("and")) {
+									for (Map<String, List<Trio<String, String, String>>> values : fieldvalues)
+										if (values.get(value.getFirst()) != null)
+											values.get(value.getFirst()).add(value);
+										else {
+											List<Trio<String, String, String>> list = new ArrayList<>();
+											list.add(value);
+											values.put(value.getFirst(), list);
+										}
+									logicaloplist.remove(0);
 								}
-								logicaloplist.remove(0);
-							} else if (logicaloplist.get(0).equals("and")) {
-								for (Map<String, List<Trio<String, String, String>>> values : fieldvalues) 
-									if(values.get(value.first) != null)
-										values.get(value.first).add(value);
+							}
+						} else {
+							if (fieldvalues.isEmpty()) {
+								Map<String, List<Trio<String, String, String>>> values = new HashMap<>();
+								List<Trio<String, String, String>> list = new ArrayList<>();
+								list.add(value);
+								values.put(value.getFirst(), list);
+								fieldvalues.add(values);
+							} else {
+								for (Map<String, List<Trio<String, String, String>>> values : fieldvalues)
+									if (values.get(value.getFirst()) != null)
+										values.get(value.getFirst()).add(value);
 									else {
 										List<Trio<String, String, String>> list = new ArrayList<>();
 										list.add(value);
-										values.put(value.first, list);
+										values.put(value.getFirst(), list);
 									}
-								logicaloplist.remove(0);
 							}
 						}
-					} else {
-						if (fieldvalues.isEmpty()) {
-							Map<String, List<Trio<String, String, String>>> values = new HashMap<>();
-							List<Trio<String, String, String>> list = new ArrayList<>();
-							list.add(value);
-							values.put(value.first, list);
-							fieldvalues.add(values);
-						} else {
-							for (Map<String, List<Trio<String, String, String>>> values : fieldvalues)
-								if(values.get(value.first) != null)
-									values.get(value.first).add(value);
-								else {
-									List<Trio<String, String, String>> list = new ArrayList<>();
-									list.add(value);
-									values.put(value.first, list);
-								}
-						}
+						matcher.reset();
+						matcher = pattern.matcher(copyquery);
+						i++;
+
+						lastFieldPut = value;
 					}
-					matcher.reset();
-					matcher = pattern.matcher(copyquery);
-					i++;
-					
-					lastFieldPut = value;
 				}
 			}
+		} finally {
+			bf.close();
+			eplF.close();
 		}
-
-		bf.close();
-		eplF.close();
 
 	}
 
@@ -349,14 +348,14 @@ public class EventGenerator {
 
 		String value = "";
 		String fieldname = field.getAttributeValue("name");
-		
+
 		FieldBuilder theBuilder = new FieldBuilder();
 		Field f = theBuilder.build(field);
 		Generable generator = null;
-		
+
 		if (!fieldvalues.isEmpty()) {
-			Map<String,List<Trio<String, String, String>>> values = fieldvalues.get(0);
-				
+			Map<String, List<Trio<String, String, String>>> values = fieldvalues.get(0);
+
 			if (values.get(fieldname) != null) {
 				generator = GeneratorsFactory.makeQueryRestrictionGenerator(f, values.get(fieldname));
 				value = generator.generate(f, 1).get(0);
@@ -370,7 +369,7 @@ public class EventGenerator {
 			}
 		} else {
 			generator = GeneratorsFactory.makeGenerator(f);
-			if(field.getAttributeValue("custom_behaviour") == null)
+			if (field.getAttributeValue("custom_behaviour") == null)
 				value = generator.generate(f, 1).get(0);
 			else
 				value = GenerateFloat(field);
@@ -392,18 +391,18 @@ public class EventGenerator {
 	public static StringBuilder GenerateValueComplexType(Element field, String type) throws JDOMException, IOException {
 
 		String quotes = field.getAttributeValue("quotes");
-		if(quotes == null)
+		if (quotes == null)
 			quotes = "false";
-		
+
 		String value = "";
 		String finalvalue = "";
 		StringBuilder result = new StringBuilder();
-
+		int chosen = 0;
 		List<Element> simpletype = field.getChildren();
 
 		if (field.getAttributeValue("chooseone") != null) { // Default: get attribute doesn't exist
 			int max = simpletype.size() - 1;
-			int chosen = r.nextInt(((max - 0) + 1) + 0);
+			chosen = r.nextInt(((max - 0) + 1) + 0);
 			Element simple = simpletype.get(chosen);
 
 			if (simple.getName().equals("field")) {
@@ -506,16 +505,16 @@ public class EventGenerator {
 	public static boolean ExistType(String type) {
 		boolean exist = false;
 
-		if(type != null) {
+		if (type != null) {
 			for (int i = 0; i < types.length; i++) {
 				if (type.equals(types[i])) {
 					exist = true;
 				}
-			}}
+			}
+		}
 		return exist;
 	}
 
-	
 	/**
 	 * Generate a value of Float type
 	 * 
@@ -553,11 +552,9 @@ public class EventGenerator {
 			FieldBuilder theBuilder = new FieldBuilder();
 			Field floatField = theBuilder.build(field);
 			Generator<Float> floatGenerator = GeneratorsFactory.makeFloatGenerator(floatField);
-			if(floatGenerator != null)
+			if (floatGenerator != null)
 				result = floatGenerator.generate(floatField, 1).get(0);
 
-			
-			
 		}
 
 		return result;

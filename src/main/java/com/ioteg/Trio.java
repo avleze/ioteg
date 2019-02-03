@@ -2,9 +2,9 @@ package com.ioteg;
 
 public class Trio<A, B, C> {
 
-	public A first;
-	public B second;
-	public C third;
+	private A first;
+	private B second;
+	private C third;
 
 	public Trio() {
 	};

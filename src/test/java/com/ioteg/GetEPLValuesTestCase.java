@@ -39,39 +39,39 @@ public class GetEPLValuesTestCase {
 				document.getRootElement());
 
 		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
-		assertEquals("field1", trioToTest.first);
-		assertEquals("<", trioToTest.second);
-		assertEquals("3", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals("<", trioToTest.getSecond());
+		assertEquals("3", trioToTest.getThird());
 
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(1);
-		assertEquals("field1", trioToTest.first);
-		assertEquals(">", trioToTest.second);
-		assertEquals("4", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals(">", trioToTest.getSecond());
+		assertEquals("4", trioToTest.getThird());
 
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(2);
-		assertEquals("field1", trioToTest.first);
-		assertEquals("=", trioToTest.second);
-		assertEquals("5", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals("=", trioToTest.getSecond());
+		assertEquals("5", trioToTest.getThird());
 
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(3);
-		assertEquals("field1", trioToTest.first);
-		assertEquals("<=", trioToTest.second);
-		assertEquals("-6", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals("<=", trioToTest.getSecond());
+		assertEquals("-6", trioToTest.getThird());
 
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(4);
-		assertEquals("field1", trioToTest.first);
-		assertEquals(">=", trioToTest.second);
-		assertEquals("7", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals(">=", trioToTest.getSecond());
+		assertEquals("7", trioToTest.getThird());
 
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(5);
-		assertEquals("field1", trioToTest.first);
-		assertEquals("!=", trioToTest.second);
-		assertEquals("8", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals("!=", trioToTest.getSecond());
+		assertEquals("8", trioToTest.getThird());
 		
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field10").get(0);
-		assertEquals("field10", trioToTest.first);
-		assertEquals("!=", trioToTest.second);
-		assertEquals("true", trioToTest.third);
+		assertEquals("field10", trioToTest.getFirst());
+		assertEquals("!=", trioToTest.getSecond());
+		assertEquals("true", trioToTest.getThird());
 
 	}
 
@@ -83,14 +83,14 @@ public class GetEPLValuesTestCase {
 				document.getRootElement());
 
 		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
-		assertEquals("field1", trioToTest.first);
-		assertEquals("<", trioToTest.second);
-		assertEquals("3", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals("<", trioToTest.getSecond());
+		assertEquals("3", trioToTest.getThird());
 
 		trioToTest = EventGenerator.fieldvalues.get(1).get("field1").get(0);
-		assertEquals("field1", trioToTest.first);
-		assertEquals(">", trioToTest.second);
-		assertEquals("4", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals(">", trioToTest.getSecond());
+		assertEquals("4", trioToTest.getThird());
 	}
 
 	@Test
@@ -101,14 +101,14 @@ public class GetEPLValuesTestCase {
 				document.getRootElement());
 
 		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
-		assertEquals("field1", trioToTest.first);
-		assertEquals("<", trioToTest.second);
-		assertEquals("3", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals("<", trioToTest.getSecond());
+		assertEquals("3", trioToTest.getThird());
 
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(1);
-		assertEquals("field1", trioToTest.first);
-		assertEquals(">", trioToTest.second);
-		assertEquals("4", trioToTest.third);
+		assertEquals("field1", trioToTest.getFirst());
+		assertEquals(">", trioToTest.getSecond());
+		assertEquals("4", trioToTest.getThird());
 	}
 
 	@Test
@@ -119,44 +119,44 @@ public class GetEPLValuesTestCase {
 				document.getRootElement());
 
 		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
-		assertThat("field1", equalTo(trioToTest.first));
-		assertEquals("<", trioToTest.second);
-		assertEquals("3", trioToTest.third);
+		assertThat("field1", equalTo(trioToTest.getFirst()));
+		assertEquals("<", trioToTest.getSecond());
+		assertEquals("3", trioToTest.getThird());
 
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field2").get(0);
-		assertThat("field2", equalTo(trioToTest.first));
-		assertEquals(">=", trioToTest.second);
-		assertEquals("50", trioToTest.third);
+		assertThat("field2", equalTo(trioToTest.getFirst()));
+		assertEquals(">=", trioToTest.getSecond());
+		assertEquals("50", trioToTest.getThird());
 		
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field3").get(0);
-		assertThat("field3", equalTo(trioToTest.first));
-		assertEquals("!=", trioToTest.second);
-		assertEquals("A", trioToTest.third);
+		assertThat("field3", equalTo(trioToTest.getFirst()));
+		assertEquals("!=", trioToTest.getSecond());
+		assertEquals("A", trioToTest.getThird());
 		
 		trioToTest = EventGenerator.fieldvalues.get(0).get("field4").get(0);
-		assertThat("field4", equalTo(trioToTest.first));
-		assertEquals("=", trioToTest.second);
-		assertEquals("B", trioToTest.third);
+		assertThat("field4", equalTo(trioToTest.getFirst()));
+		assertEquals("=", trioToTest.getSecond());
+		assertEquals("B", trioToTest.getThird());
 		
 		trioToTest = EventGenerator.fieldvalues.get(1).get("field1").get(0);
-		assertThat("field1", equalTo(trioToTest.first));
-		assertEquals("<", trioToTest.second);
-		assertEquals("3", trioToTest.third);
+		assertThat("field1", equalTo(trioToTest.getFirst()));
+		assertEquals("<", trioToTest.getSecond());
+		assertEquals("3", trioToTest.getThird());
 
 		trioToTest = EventGenerator.fieldvalues.get(1).get("field2").get(0);
-		assertThat("field2", equalTo(trioToTest.first));
-		assertEquals(">=", trioToTest.second);
-		assertEquals("50", trioToTest.third);
+		assertThat("field2", equalTo(trioToTest.getFirst()));
+		assertEquals(">=", trioToTest.getSecond());
+		assertEquals("50", trioToTest.getThird());
 		
 		trioToTest = EventGenerator.fieldvalues.get(1).get("field3").get(0);
-		assertThat("field3", equalTo(trioToTest.first));
-		assertEquals("!=", trioToTest.second);
-		assertEquals("A", trioToTest.third);
+		assertThat("field3", equalTo(trioToTest.getFirst()));
+		assertEquals("!=", trioToTest.getSecond());
+		assertEquals("A", trioToTest.getThird());
 		
 		trioToTest = EventGenerator.fieldvalues.get(1).get("field4").get(0);
-		assertThat("field4", equalTo(trioToTest.first));
-		assertEquals("=", trioToTest.second);
-		assertEquals("D", trioToTest.third);
+		assertThat("field4", equalTo(trioToTest.getFirst()));
+		assertEquals("=", trioToTest.getSecond());
+		assertEquals("D", trioToTest.getThird());
 	}
 	
 	@Test

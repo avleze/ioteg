@@ -10,7 +10,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-public class ValidationUtil extends EventGenerator {
+public class ValidationUtil{
 
 	private static final String CASE_ATTR = "case";
 	private static final String ISNUMERIC_ATTR = "isnumeric";
@@ -25,6 +25,8 @@ public class ValidationUtil extends EventGenerator {
 	private static final String OPTIONALFIELDS_TAG = "optionalfields";
 	private static Logger logger = Logger.getRootLogger();
 
+	
+	
 	public static Boolean validStandart(File xmlFile) throws JDOMException, IOException {
 
 		SAXBuilder builder = new SAXBuilder();
@@ -112,11 +114,10 @@ public class ValidationUtil extends EventGenerator {
 				} else {
 					String type = field.getAttributeValue(TYPE_ATTR);
 
-					if (!ExistType(type)) {
-						valid = validateComplexType(field, type) && valid;
-					} else {
+					if (EventGenerator.ExistType(type)) 
 						valid = validateSimpleType(field, type) && valid;
-					}
+					else 
+						valid = validateComplexType(field, type) && valid;
 				}
 			}
 		} else {
