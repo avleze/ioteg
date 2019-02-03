@@ -214,7 +214,7 @@ public class CustomiseGeneration {
 		else
 			max = (double) generatedvalue;
 
-		if (min != max)
+		if (min < max)
 			generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
 		else
 			generatedvalue = min.floatValue();
@@ -228,7 +228,7 @@ public class CustomiseGeneration {
 		else
 			min = (double) generatedvalue;
 
-		if (min != max)
+		if (min < max)
 			generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
 		else
 			generatedvalue = max.floatValue();
