@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,17 +33,26 @@ import com.ioteg.model.Field;
 
 public class EventGenerator {
 
-	protected static final String[] types = { "Integer", "Float", "Long", "Boolean", "String", "Date", "Time" };
-	public static List<Map<String, List<Trio<String, String, String>>>> fieldvalues = new ArrayList<>();
+	protected static final Set<String> types;
+	protected static List<Map<String, List<Trio<String, String, String>>>> fieldvalues = new ArrayList<>();
 	public static int totalnumevents;
 	public static int iteration;
 	public static int eventscustombehaviour;
 	public static int controlcustombehaviour;
-	public static final List<Integer> iterationvalues = new ArrayList<>();
+	protected static final List<Integer> iterationvalues = new ArrayList<>();
 	protected static Random r;
 	protected static Logger logger;
 
 	static {
+		types = new TreeSet<>();
+		types.add("Integer");
+		types.add("Float");
+		types.add("Long");
+		types.add("Boolean");
+		types.add("String");
+		types.add("Date");
+		types.add("Time");
+
 		logger = Logger.getRootLogger();
 		try {
 			r = SecureRandom.getInstanceStrong();
@@ -59,9 +70,8 @@ public class EventGenerator {
 		String path = input.substring(0, input.lastIndexOf("/") + 1);
 		SAXBuilder builder = new SAXBuilder();
 		File xmlFile = new File(input);
-		FileWriter values = null;
-
-		try {
+		
+		try (FileWriter values = new FileWriter(path + output)){
 
 			Calendar cal2 = Calendar.getInstance();
 			System.out.println("Start time: " + cal2.get(Calendar.MINUTE) + ":" + cal2.get(Calendar.SECOND) + ":"
@@ -83,8 +93,6 @@ public class EventGenerator {
 				RemovingComplexType(rootNode);
 			}
 
-			values = new FileWriter(path + output);
-
 			if (type.equals("json")) {
 				JsonUtil.JsonFormatValues(values, document);
 			}
@@ -96,15 +104,13 @@ public class EventGenerator {
 			}
 
 			Calendar cal3 = Calendar.getInstance();
-			System.out.println("End time: " + cal3.get(Calendar.MINUTE) + ":" + cal3.get(Calendar.SECOND) + ":"
+			logger.info("End time: " + cal3.get(Calendar.MINUTE) + ":" + cal3.get(Calendar.SECOND) + ":"
 					+ cal3.get(Calendar.MILLISECOND));
 
 		} catch (IOException io) {
-			System.out.println(io.getMessage());
+			logger.error(io.getMessage());
 		} catch (JDOMException jdomex) {
-			System.out.println(jdomex.getMessage());
-		} finally {
-			values.close();
+			logger.error(jdomex.getMessage());
 		}
 	}
 
@@ -137,8 +143,8 @@ public class EventGenerator {
 
 		FileReader eplF = new FileReader(new File(EPLfile));
 		String query = "";
-		BufferedReader bf = new BufferedReader(eplF);
-		try {
+		
+		try(BufferedReader bf = new BufferedReader(eplF)) {
 			while (((query = bf.readLine()) != null)) {
 				if (query.contains(" where ") || query.contains(" WHERE ")) {
 					String subquery = "";
@@ -264,11 +270,7 @@ public class EventGenerator {
 					}
 				}
 			}
-		} finally {
-			bf.close();
-			eplF.close();
 		}
-
 	}
 
 	public static void RemovingComplexType(Element rootNode) {
@@ -292,12 +294,8 @@ public class EventGenerator {
 				for (int k = 0; k < fieldvalues.get(j).size(); k++) {
 					if (fieldvalues.get(j).get(field.getAttributeValue("name")) != null) {
 
-						for (int t = 0; t < types.length; t++) {
-							if (types[t].equals(field.getAttributeValue("type"))) {
-								simple = true;
-							}
-
-						}
+						if (types.contains(field.getAttributeValue("type"))) 
+							simple = true;
 
 						if (!simple) {
 							fieldvalues.get(j).get(field.getAttributeValue("name")).remove(k);
@@ -360,11 +358,9 @@ public class EventGenerator {
 				generator = GeneratorsFactory.makeQueryRestrictionGenerator(f, values.get(fieldname));
 				value = generator.generate(f, 1).get(0);
 
-				if (!iterationvalues.isEmpty()) {
-					if (iterationvalues.get(0).equals(iteration)) {
-						iterationvalues.remove(0);
-						fieldvalues.remove(0);
-					}
+				if (!iterationvalues.isEmpty() && iterationvalues.get(0).equals(iteration)) {
+					iterationvalues.remove(0);
+					fieldvalues.remove(0);
 				}
 			}
 		} else {
@@ -503,16 +499,8 @@ public class EventGenerator {
 	 * @return true or false
 	 */
 	public static boolean ExistType(String type) {
-		boolean exist = false;
-
-		if (type != null) {
-			for (int i = 0; i < types.length; i++) {
-				if (type.equals(types[i])) {
-					exist = true;
-				}
-			}
-		}
-		return exist;
+		
+		return types.contains(type);
 	}
 
 	/**

@@ -79,11 +79,11 @@ public class CustomiseGeneration {
 				String minAttr = rule.getAttributeValue(MIN_ATTR);
 				String maxAttr = rule.getAttributeValue(MAX_ATTR);
 				String sequenceAttr = rule.getAttributeValue(SEQUENCE_ATTR);
-				
+
 				Double value = null;
 				Double min = null;
 				Double max = null;
-				
+
 				if (valueAttr != null)
 					value = obtainOperationValue(valueAttr);
 				if (minAttr != null && maxAttr != null) {
@@ -198,11 +198,12 @@ public class CustomiseGeneration {
 				double min = rule.getMin();
 				double max = rule.getMax();
 				generatedvalue = (float) (min + Math.random() * (max - min));
-			} else if (rule.getSequence().equalsIgnoreCase(DEC_VALUE)) 
+			} 
+			else if (rule.getSequence().equalsIgnoreCase(DEC_VALUE))
 				generateRuleValueDecSequence(rule);
-			else if (rule.getSequence().equalsIgnoreCase(INC_VALUE)) 
+			else if (rule.getSequence().equalsIgnoreCase(INC_VALUE))
 				generateRuleValueIncSequence(rule);
-			
+
 		}
 	}
 
