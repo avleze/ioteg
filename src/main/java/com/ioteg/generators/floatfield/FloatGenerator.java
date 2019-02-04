@@ -21,7 +21,7 @@ public class FloatGenerator extends Generator<Float> {
 		if (floatField.getPrecision() != null)
 			for (int i = 0; i < numberOfRequiredItems; ++i)
 			{
-				Float result = generationAlgorithm.generate(floatField);
+				Float result = generationAlgorithm.generate();
 				results.add(numberToSpecifiedPrecision(result, floatField.getPrecision()));
 			}
 		else

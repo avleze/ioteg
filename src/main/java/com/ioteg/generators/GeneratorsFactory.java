@@ -64,9 +64,9 @@ public class GeneratorsFactory {
 		Generator<Integer> integerGenerator = null;
 
 		if (integer.getValue() != null)
-			integerGenerator = new Generator<>(new FixedIntegerGenerationAlgorithm());
+			integerGenerator = new Generator<>(new FixedIntegerGenerationAlgorithm(integer));
 		else if (integer.getMin() != null && integer.getMax() != null)
-			integerGenerator = new Generator<>(new RandomIntegerGenerationAlgorithm());
+			integerGenerator = new Generator<>(new RandomIntegerGenerationAlgorithm(integer));
 
 		return integerGenerator;
 	}
@@ -77,9 +77,9 @@ public class GeneratorsFactory {
 		Generator<Long> longGenerator = null;
 
 		if (longField.getValue() != null)
-			longGenerator = new Generator<>(new FixedLongGenerationAlgorithm());
+			longGenerator = new Generator<>(new FixedLongGenerationAlgorithm(longField));
 		else if (longField.getMin() != null && longField.getMax() != null)
-			longGenerator = new Generator<>(new RandomLongGenerationAlgorithm());
+			longGenerator = new Generator<>(new RandomLongGenerationAlgorithm(longField));
 
 		return longGenerator;
 	}
@@ -88,9 +88,9 @@ public class GeneratorsFactory {
 		Generator<Float> floatGenerator = null;
 
 		if (floatField.getValue() != null)
-			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm());
+			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm(floatField));
 		else if (floatField.getMin() != null && floatField.getMax() != null)
-			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm());
+			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm(floatField));
 
 		return floatGenerator;
 	}
@@ -99,9 +99,9 @@ public class GeneratorsFactory {
 		Generator<Boolean> booleanGenerator = null;
 
 		if (booleanField.getValue() != null)
-			booleanGenerator = new BooleanGenerator(new FixedBooleanGenerationAlgorithm());
+			booleanGenerator = new BooleanGenerator(new FixedBooleanGenerationAlgorithm(booleanField));
 		else
-			booleanGenerator = new BooleanGenerator(new RandomBooleanGenerationAlgorithm());
+			booleanGenerator = new BooleanGenerator(new RandomBooleanGenerationAlgorithm(booleanField));
 
 		return booleanGenerator;
 	}
@@ -110,9 +110,9 @@ public class GeneratorsFactory {
 		Generator<Date> dateGenerator = null;
 
 		if (dateField.getValue() != null)
-			dateGenerator = new DateGenerator(new FixedDateGenerationAlgorithm());
+			dateGenerator = new DateGenerator(new FixedDateGenerationAlgorithm(dateField));
 		else
-			dateGenerator = new DateGenerator(new RandomDateGenerationAlgorithm());
+			dateGenerator = new DateGenerator(new RandomDateGenerationAlgorithm(dateField));
 
 		return dateGenerator;
 	}
@@ -125,9 +125,9 @@ public class GeneratorsFactory {
 		Generator<String> stringGenerator = null;
 
 		if (stringField.getValue() != null)
-			stringGenerator = new StringGenerator(new FixedStringGenerationAlgorithm());
+			stringGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(stringField));
 		else
-			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm());
+			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(stringField));
 
 		return stringGenerator;
 	}
@@ -136,9 +136,9 @@ public class GeneratorsFactory {
 		Generator<String> alphanumericGenerator = null;
 
 		if (alphanumericField.getValue() != null)
-			alphanumericGenerator = new StringGenerator(new FixedStringGenerationAlgorithm());
+			alphanumericGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(alphanumericField));
 		else
-			alphanumericGenerator = new StringGenerator(new RandomAlphanumericalGenerationAlgorithm());
+			alphanumericGenerator = new StringGenerator(new RandomAlphanumericalGenerationAlgorithm(alphanumericField));
 
 		return alphanumericGenerator;
 	}
@@ -149,54 +149,54 @@ public class GeneratorsFactory {
 		Generable generable = null;
 		
 		if(field.getType().equals("Integer"))
-			generable = makeQueryRestrictionIntegerGenerator(restrictions);
+			generable = makeQueryRestrictionIntegerGenerator(field, restrictions);
 		else if(field.getType().equals("String"))
-			generable = makeQueryRestrictionStringGenerator(restrictions);
+			generable = makeQueryRestrictionStringGenerator(field, restrictions);
 		else if(field.getType().equals("Alphanumeric"))
-			generable = makeQueryRestrictionAlphanumericGenerator(restrictions);
+			generable = makeQueryRestrictionAlphanumericGenerator(field, restrictions);
 		else if(field.getType().equals("Long"))
-			generable = makeQueryRestrictionLongGenerator(restrictions);
+			generable = makeQueryRestrictionLongGenerator(field, restrictions);
 		else if(field.getType().equals("Float"))
-			generable = makeQueryRestrictionFloatGenerator(restrictions);
+			generable = makeQueryRestrictionFloatGenerator(field, restrictions);
 		else if(field.getType().equals("Boolean"))
-			generable = makeQueryRestrictionBooleanGenerator(restrictions);
+			generable = makeQueryRestrictionBooleanGenerator(field, restrictions);
 		else if(field.getType().equals("Date"))
-			generable = makeQueryRestrictionDateGenerator(restrictions);
+			generable = makeQueryRestrictionDateGenerator(field, restrictions);
 		else if(field.getType().equals("Time"))
-			generable = makeQueryRestrictionTimeGenerator(restrictions);
+			generable = makeQueryRestrictionTimeGenerator(field, restrictions);
 		
 		return generable;
 	}
 	
-	public static Generator<Integer> makeQueryRestrictionIntegerGenerator(List<Trio<String, String, String>> restrictions) {
-		return new Generator<>(new IntegerQueryRestrictionGenerationAlgorithm(restrictions));
+	public static Generator<Integer> makeQueryRestrictionIntegerGenerator(Field field, List<Trio<String, String, String>> restrictions) {
+		return new Generator<>(new IntegerQueryRestrictionGenerationAlgorithm(field, restrictions));
 	}
 	
-	public static Generator<String> makeQueryRestrictionStringGenerator(List<Trio<String, String, String>> restrictions) {
-		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(restrictions));
+	public static Generator<String> makeQueryRestrictionStringGenerator(Field field, List<Trio<String, String, String>> restrictions) {
+		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(field, restrictions));
 	}
 	
-	public static Generator<String> makeQueryRestrictionAlphanumericGenerator(List<Trio<String, String, String>> restrictions) {
-		return new StringGenerator(new AlphanumericQueryRestrictionGenerationAlgorithm(restrictions));
+	public static Generator<String> makeQueryRestrictionAlphanumericGenerator(Field field, List<Trio<String, String, String>> restrictions) {
+		return new StringGenerator(new AlphanumericQueryRestrictionGenerationAlgorithm(field, restrictions));
 	}
 	
-	public static Generator<Long> makeQueryRestrictionLongGenerator(List<Trio<String, String, String>> restrictions) {
-		return new Generator<>(new LongQueryRestrictionGenerationAlgorithm(restrictions));
+	public static Generator<Long> makeQueryRestrictionLongGenerator(Field field, List<Trio<String, String, String>> restrictions) {
+		return new Generator<>(new LongQueryRestrictionGenerationAlgorithm(field, restrictions));
 	}
 	
-	public static Generator<Float> makeQueryRestrictionFloatGenerator(List<Trio<String, String, String>> restrictions) {
-		return new FloatGenerator(new FloatQueryRestrictionGenerationAlgorithm(restrictions));
+	public static Generator<Float> makeQueryRestrictionFloatGenerator(Field field, List<Trio<String, String, String>> restrictions) {
+		return new FloatGenerator(new FloatQueryRestrictionGenerationAlgorithm(field, restrictions));
 	}
 	
-	public static Generator<Boolean> makeQueryRestrictionBooleanGenerator(List<Trio<String, String, String>> restrictions) {
-		return new BooleanGenerator(new BooleanQueryRestrictionGenerationAlgorithm(restrictions));
+	public static Generator<Boolean> makeQueryRestrictionBooleanGenerator(Field field, List<Trio<String, String, String>> restrictions) {
+		return new BooleanGenerator(new BooleanQueryRestrictionGenerationAlgorithm(field, restrictions));
 	}
 	
-	public static Generator<Date> makeQueryRestrictionDateGenerator(List<Trio<String, String, String>> restrictions) {
-		return new DateGenerator(new DateQueryRestrictionGenerationAlgorithm(restrictions));
+	public static Generator<Date> makeQueryRestrictionDateGenerator(Field field, List<Trio<String, String, String>> restrictions) {
+		return new DateGenerator(new DateQueryRestrictionGenerationAlgorithm(field, restrictions));
 	}
 	
-	public static Generator<Date> makeQueryRestrictionTimeGenerator(List<Trio<String, String, String>> restrictions) {
-		return makeQueryRestrictionDateGenerator(restrictions);
+	public static Generator<Date> makeQueryRestrictionTimeGenerator(Field field, List<Trio<String, String, String>> restrictions) {
+		return makeQueryRestrictionDateGenerator(field, restrictions);
 	}
 }

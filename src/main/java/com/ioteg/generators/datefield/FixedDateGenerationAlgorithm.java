@@ -10,13 +10,17 @@ import com.ioteg.model.Field;
 
 public class FixedDateGenerationAlgorithm extends GenerationAlgorithm<Date> {
 	
+	public FixedDateGenerationAlgorithm(Field field) {
+		super(field);
+	}
+
 	@Override
-	public Date generate(Field dateField) {
-		SimpleDateFormat parser = new SimpleDateFormat(dateField.getFormat());
+	public Date generate() {
+		SimpleDateFormat parser = new SimpleDateFormat(field.getFormat());
        
 		Date result = null;
 		try {
-			 result = parser.parse(dateField.getValue());
+			 result = parser.parse(field.getValue());
 		} catch (ParseException e) {
 			logger.error(e);
 		}

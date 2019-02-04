@@ -23,7 +23,7 @@ public class DateGenerator extends Generator<Date>{
 			SimpleDateFormat sdf = new SimpleDateFormat(dateField.getFormat());
 			for (int i = 0; i < numberOfRequiredItems; ++i)
 			{
-				Date result = generationAlgorithm.generate(dateField);
+				Date result = generationAlgorithm.generate();
 				results.add(sdf.format(result));
 			}
 		}

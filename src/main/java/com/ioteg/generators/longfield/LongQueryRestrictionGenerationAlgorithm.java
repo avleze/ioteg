@@ -12,12 +12,14 @@ import com.ioteg.model.Field;
  */
 public class LongQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Long> {
 
-	public LongQueryRestrictionGenerationAlgorithm(List<Trio<String, String, String>> restrictions) {
-		super(restrictions);
+
+
+	public LongQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
+		super(field, restrictions);
 	}
 
 	@Override
-	public Long generate(Field longField) {
+	public Long generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);
 
 		String operator = fieldRestrictionInformation.getSecond();
@@ -28,11 +30,11 @@ public class LongQueryRestrictionGenerationAlgorithm extends QueryRestrictionGen
 		Long max = Long.MAX_VALUE;
 		Long min = Long.MIN_VALUE;
 
-		if (longField.getMax() != null)
-			max = longField.getMax().longValue();
+		if (field.getMax() != null)
+			max = field.getMax().longValue();
 
-		if (longField.getMin() != null)
-			min = longField.getMin().longValue();
+		if (field.getMin() != null)
+			min = field.getMin().longValue();
 
 		if (operator.equals("!="))
 			result = generateNotEqualValue(value, max, min);

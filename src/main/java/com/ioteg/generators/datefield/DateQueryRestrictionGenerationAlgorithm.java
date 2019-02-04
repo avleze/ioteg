@@ -12,17 +12,17 @@ import com.ioteg.model.Field;
 
 public class DateQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Date> {
 
-	public DateQueryRestrictionGenerationAlgorithm(List<Trio<String, String, String>> restrictions) {
-		super(restrictions);
+	public DateQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
+		super(field, restrictions);
 	}
 
 	@Override
-	public Date generate(Field dateField) {
+	public Date generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);
 
 		String operator = fieldRestrictionInformation.getSecond();
 
-		Date value = parseDateValue(dateField, fieldRestrictionInformation.getThird());
+		Date value = parseDateValue(field, fieldRestrictionInformation.getThird());
 
 		Date result = null;
 

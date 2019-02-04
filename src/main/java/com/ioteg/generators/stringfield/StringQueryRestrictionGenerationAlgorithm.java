@@ -9,12 +9,12 @@ import com.ioteg.model.Field;
 
 public class StringQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<String> {
 
-	public StringQueryRestrictionGenerationAlgorithm(List<Trio<String, String, String>> restrictions) {
-		super(restrictions);
+	public StringQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
+		super(field, restrictions);
 	}
 
 	@Override
-	public String generate(Field stringField) {
+	public String generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);
 
 		String operator = fieldRestrictionInformation.getSecond();
@@ -25,7 +25,7 @@ public class StringQueryRestrictionGenerationAlgorithm extends QueryRestrictionG
 		if (operator.equals("="))
 			result = value;
 		else if (operator.equals("!=")) 
-			result = generateNotEqualValue(stringField, value);
+			result = generateNotEqualValue(field, value);
 		
 
 		return result;

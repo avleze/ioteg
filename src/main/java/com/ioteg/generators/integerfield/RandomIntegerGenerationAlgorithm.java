@@ -6,10 +6,14 @@ import com.ioteg.model.Field;
 
 public class RandomIntegerGenerationAlgorithm extends GenerationAlgorithm<Integer> {
 		
+	public RandomIntegerGenerationAlgorithm(Field field) {
+		super(field);
+	}
+
 	@Override
-	public Integer generate(Field integer) {
-		Integer min = integer.getMin().intValue();
-		Integer max = integer.getMax().intValue();
+	public Integer generate() {
+		Integer min = field.getMin().intValue();
+		Integer max = field.getMax().intValue();
 		return min + r.nextInt(max - min);
 	}
 

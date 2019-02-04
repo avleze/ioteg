@@ -6,9 +6,13 @@ import com.ioteg.model.Field;
 
 public class RandomAlphanumericalGenerationAlgorithm extends GenerationAlgorithm<String> {
 
+	public RandomAlphanumericalGenerationAlgorithm(Field field) {
+		super(field);
+	}
+
 	@Override
-	public String generate(Field stringField) {
-		return RandomUtil.getAlphaNumRandStringRange(stringField.getLength(), stringField.getEndcharacter());
+	public String generate() {
+		return RandomUtil.getAlphaNumRandStringRange(field.getLength(), field.getEndcharacter());
 	}
 
 }

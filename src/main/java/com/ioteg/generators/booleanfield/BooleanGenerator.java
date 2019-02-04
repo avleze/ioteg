@@ -19,7 +19,7 @@ public class BooleanGenerator extends Generator<Boolean>{
 		
 		if(field.getIsNumeric())
 			for (int i = 0; i < numberOfRequiredItems; ++i)
-				results.add(booleanToNumericalString(generationAlgorithm.generate(field)));
+				results.add(booleanToNumericalString(generationAlgorithm.generate()));
 		else
 			results = super.generate(field, numberOfRequiredItems);
 		

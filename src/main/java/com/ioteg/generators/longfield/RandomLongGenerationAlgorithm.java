@@ -5,11 +5,14 @@ import com.ioteg.model.Field;
 
 public class RandomLongGenerationAlgorithm extends GenerationAlgorithm<Long> {
 	
-	
+	public RandomLongGenerationAlgorithm(Field field) {
+		super(field);
+	}
+
 	@Override
-	public Long generate(Field longField) {
-		Long min = longField.getMin().longValue();
-		Long max = longField.getMax().longValue();
+	public Long generate() {
+		Long min = field.getMin().longValue();
+		Long max = field.getMax().longValue();
 
 		return r.longs(min, max).findFirst().getAsLong();
 	}

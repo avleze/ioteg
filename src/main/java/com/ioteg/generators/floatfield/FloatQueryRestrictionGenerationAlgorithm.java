@@ -12,12 +12,14 @@ import com.ioteg.model.Field;
  */
 public class FloatQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Float> {
 
-	public FloatQueryRestrictionGenerationAlgorithm(List<Trio<String, String, String>> restrictions) {
-		super(restrictions);
+
+
+	public FloatQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
+		super(field, restrictions);
 	}
 
 	@Override
-	public Float generate(Field floatField) {
+	public Float generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);
 
 		String operator = fieldRestrictionInformation.getSecond();
@@ -28,11 +30,11 @@ public class FloatQueryRestrictionGenerationAlgorithm extends QueryRestrictionGe
 		Float max = Float.MAX_VALUE;
 		Float min = -Float.MAX_VALUE;
 
-		if (floatField.getMax() != null)
-			max = floatField.getMax().floatValue();
+		if (field.getMax() != null)
+			max = field.getMax().floatValue();
 
-		if (floatField.getMin() != null)
-			min = floatField.getMin().floatValue();
+		if (field.getMin() != null)
+			min = field.getMin().floatValue();
 
 		if (operator.equals("!="))
 			result = generateNotEqualValue(value, max, min);

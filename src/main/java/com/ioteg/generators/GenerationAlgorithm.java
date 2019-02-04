@@ -11,6 +11,12 @@ import com.ioteg.model.Field;
 public abstract class GenerationAlgorithm<T> {
 	protected static Logger logger;
 	protected static Random r;
+	protected Field field;
+	
+	public GenerationAlgorithm(Field field) {
+		super();
+		this.field = field;
+	}
 
 	static {
 		logger = Logger.getRootLogger();
@@ -21,5 +27,5 @@ public abstract class GenerationAlgorithm<T> {
 		}
 	}
 	
-	public abstract T generate(Field field);
+	public abstract T generate();
 }

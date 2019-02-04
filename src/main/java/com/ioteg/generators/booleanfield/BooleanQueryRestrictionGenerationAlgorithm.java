@@ -8,12 +8,12 @@ import com.ioteg.model.Field;
 
 public class BooleanQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Boolean>{
 
-	public BooleanQueryRestrictionGenerationAlgorithm(List<Trio<String, String, String>> restrictions) {
-		super(restrictions);
+	public BooleanQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
+		super(field, restrictions);
 	}
 
 	@Override
-	public Boolean generate(Field booleanField) {
+	public Boolean generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);
 		
 		String operator = fieldRestrictionInformation.getSecond();

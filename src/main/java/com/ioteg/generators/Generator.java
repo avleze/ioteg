@@ -19,7 +19,7 @@ public class Generator<T> implements Generable{
 		List<String> results = new ArrayList<>();
 
 		for (int i = 0; i < numberOfRequiredItems; ++i)
-			results.add(generationAlgorithm.generate(field).toString());
+			results.add(generationAlgorithm.generate().toString());
 		
 		return results;
 	}

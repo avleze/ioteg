@@ -20,7 +20,7 @@ public class StringGenerator extends Generator<String>{
 		
 		if (caseStr != null && caseStr.equalsIgnoreCase("low")) 
 			for (int i = 0; i < numberOfRequiredItems; ++i)
-				results.add(generationAlgorithm.generate(stringField).toLowerCase());
+				results.add(generationAlgorithm.generate().toLowerCase());
 		else
 			results = super.generate(stringField, numberOfRequiredItems);
 		

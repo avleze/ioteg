@@ -9,12 +9,13 @@ import com.ioteg.model.Field;
 
 public class AlphanumericQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<String> {
 
-	public AlphanumericQueryRestrictionGenerationAlgorithm(List<Trio<String, String, String>> restrictions) {
-		super(restrictions);
+	public AlphanumericQueryRestrictionGenerationAlgorithm(Field field,
+			List<Trio<String, String, String>> restrictions) {
+		super(field, restrictions);
 	}
 
 	@Override
-	public String generate(Field alphanumericField) {
+	public String generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);
 
 		String operator = fieldRestrictionInformation.getSecond();
@@ -25,7 +26,7 @@ public class AlphanumericQueryRestrictionGenerationAlgorithm extends QueryRestri
 		if (operator.equals("="))
 			result = value;
 		else if (operator.equals("!=")) 
-			result = generateNotEqualValue(alphanumericField, value);
+			result = generateNotEqualValue(field, value);
 		
 
 		return result;

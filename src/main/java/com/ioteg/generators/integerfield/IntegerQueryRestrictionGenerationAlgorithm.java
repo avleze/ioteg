@@ -12,12 +12,12 @@ import com.ioteg.model.Field;
  */
 public class IntegerQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Integer> {
 
-	public IntegerQueryRestrictionGenerationAlgorithm(List<Trio<String, String, String>> restrictions) {
-		super(restrictions);
+	public IntegerQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
+		super(field, restrictions);
 	}
 
 	@Override
-	public Integer generate(Field integerField) {
+	public Integer generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);
 
 		String operator = fieldRestrictionInformation.getSecond();
@@ -28,11 +28,11 @@ public class IntegerQueryRestrictionGenerationAlgorithm extends QueryRestriction
 		Integer max = Integer.MAX_VALUE;
 		Integer min = Integer.MIN_VALUE;
 
-		if (integerField.getMax() != null)
-			max = integerField.getMax().intValue();
+		if (field.getMax() != null)
+			max = field.getMax().intValue();
 
-		if (integerField.getMin() != null)
-			min = integerField.getMin().intValue();
+		if (field.getMin() != null)
+			min = field.getMin().intValue();
 
 		if (operator.equals("!="))
 			result = generateNotEqualValue(value, max, min);

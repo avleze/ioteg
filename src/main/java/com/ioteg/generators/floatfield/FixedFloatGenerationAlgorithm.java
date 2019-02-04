@@ -5,9 +5,13 @@ import com.ioteg.model.Field;
 
 public class FixedFloatGenerationAlgorithm extends GenerationAlgorithm<Float> {
 
+	public FixedFloatGenerationAlgorithm(Field field) {
+		super(field);
+	}
+
 	@Override
-	public Float generate(Field longField) {
-		return Float.valueOf(longField.getValue());
+	public Float generate() {
+		return Float.valueOf(field.getValue());
 	}
 
 }

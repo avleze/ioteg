@@ -5,9 +5,13 @@ import com.ioteg.model.Field;
 
 public class FixedStringGenerationAlgorithm extends GenerationAlgorithm<String> {
 
+	public FixedStringGenerationAlgorithm(Field field) {
+		super(field);
+	}
+
 	@Override
-	public String generate(Field stringField) {
-		return stringField.getValue();
+	public String generate() {
+		return field.getValue();
 	}
 
 }

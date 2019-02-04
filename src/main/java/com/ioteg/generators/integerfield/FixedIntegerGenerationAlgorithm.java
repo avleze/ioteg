@@ -5,9 +5,13 @@ import com.ioteg.model.Field;
 
 public class FixedIntegerGenerationAlgorithm extends GenerationAlgorithm<Integer> {
 
+	public FixedIntegerGenerationAlgorithm(Field field) {
+		super(field);
+	}
+
 	@Override
-	public Integer generate(Field integer) {
-		return Integer.valueOf(integer.getValue());
+	public Integer generate() {
+		return Integer.valueOf(field.getValue());
 	}
 
 }

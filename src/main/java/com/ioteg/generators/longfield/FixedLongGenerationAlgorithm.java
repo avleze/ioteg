@@ -5,9 +5,13 @@ import com.ioteg.model.Field;
 
 public class FixedLongGenerationAlgorithm extends GenerationAlgorithm<Long> {
 
+	public FixedLongGenerationAlgorithm(Field field) {
+		super(field);
+	}
+
 	@Override
-	public Long generate(Field longField) {
-		return Long.valueOf(longField.getValue());
+	public Long generate() {
+		return Long.valueOf(field.getValue());
 	}
 
 }
