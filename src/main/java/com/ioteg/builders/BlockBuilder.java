@@ -1,9 +1,11 @@
 package com.ioteg.builders;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
 
 import com.ioteg.model.Block;
 import com.ioteg.model.Field;
@@ -20,8 +22,10 @@ public class BlockBuilder {
 	/**
 	 * @param element The block element obtained with JDOM.
 	 * @return A block.
+	 * @throws IOException 
+	 * @throws JDOMException 
 	 */
-	public Block build(Element element) {
+	public Block build(Element element) throws JDOMException, IOException {
 		Block block = new Block();
 
 		/* The block parameters are obtained and setted */
@@ -44,7 +48,7 @@ public class BlockBuilder {
 		return block;
 	}
 
-	private void buildSubFields(Element element, Block block) {
+	private void buildSubFields(Element element, Block block) throws JDOMException, IOException {
 		FieldBuilder fieldBuilder = new FieldBuilder();
 		List<Element> fields = element.getChildren("field");
 		List<Field> fieldsOfTheBlock = new ArrayList<>();
@@ -57,7 +61,7 @@ public class BlockBuilder {
 		block.setFields(fieldsOfTheBlock);
 	}
 
-	private void buildSubOptionalsField(Element element, Block block) {
+	private void buildSubOptionalsField(Element element, Block block) throws JDOMException, IOException {
 		OptionalFieldsBuilder optionalFieldsBuilder = new OptionalFieldsBuilder();
 		List<Element> optionalFields = element.getChildren("optionalfields");
 		List<OptionalFields> optionalFieldsOfTheBlock = new ArrayList<>();

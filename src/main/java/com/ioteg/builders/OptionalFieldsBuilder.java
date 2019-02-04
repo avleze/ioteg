@@ -1,9 +1,11 @@
 package com.ioteg.builders;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
 
 import com.ioteg.model.Field;
 import com.ioteg.model.OptionalFields;
@@ -19,7 +21,7 @@ public class OptionalFieldsBuilder {
 	private static final String FIELD_KEYWORD = "field";
 	private static final String MANDATORY_KEYWORD = "mandatory";
 
-	public OptionalFields build(Element optionalFieldsElement) {
+	public OptionalFields build(Element optionalFieldsElement) throws JDOMException, IOException {
 
 		OptionalFields optionalFields = new OptionalFields();
 		FieldBuilder fieldBuilder = new FieldBuilder();

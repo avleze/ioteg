@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom_conditions simulations="10">
+<variables>
+ <variable name="var1" value="100.0"/>
+ <variable name="varDependentOfVar1" min="0" max="$(var1)"/>
+</variables>
+<rules>
+ <rule weight="0.3" value="$(varDependentOfVar1)"/>
+ <rule weight="0" min="$(varDependentOfVar1)" max="$(varDependentOfVar1)" sequence="inc"/>
+</rules>
+</custom_conditions>

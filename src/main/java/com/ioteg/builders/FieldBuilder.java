@@ -1,9 +1,11 @@
 package com.ioteg.builders;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
 
 import com.ioteg.model.Attribute;
 import com.ioteg.model.Field;
@@ -16,7 +18,7 @@ import com.ioteg.model.Field;
  */
 public class FieldBuilder {
 
-	public Field build(Element fieldElement) {
+	public Field build(Element fieldElement) throws JDOMException, IOException {
 		AttributeBuilder attributeBuilder = new AttributeBuilder();
 		Field field = new Field(attributeBuilder.build(fieldElement));
 
@@ -36,6 +38,11 @@ public class FieldBuilder {
 		buildSubFields(fieldElement, field);
 		buildAttributes(fieldElement, field);
 
+		CustomBehaviourBuilder customBehaviourBuilder = new CustomBehaviourBuilder();
+		
+		if(fieldElement.getAttributeValue("custom_behaviour") != null)
+			field.setCustomBehaviour(customBehaviourBuilder.build(fieldElement));
+		
 		return field;
 	}
 
@@ -59,8 +66,10 @@ public class FieldBuilder {
 	/**
 	 * @param fieldElement The XML element.
 	 * @param field        The field that is being built.
+	 * @throws IOException 
+	 * @throws JDOMException 
 	 */
-	private void buildSubFields(Element fieldElement, Field field) {
+	private void buildSubFields(Element fieldElement, Field field) throws JDOMException, IOException {
 		FieldBuilder fieldBuilder = new FieldBuilder();
 		List<Element> fields = fieldElement.getChildren("field");
 		List<Field> fieldsOfTheField = new ArrayList<>();
@@ -72,5 +81,4 @@ public class FieldBuilder {
 
 		field.setFields(fieldsOfTheField);
 	}
-
 }

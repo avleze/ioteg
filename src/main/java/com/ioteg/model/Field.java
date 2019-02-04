@@ -16,7 +16,8 @@ public class Field extends Attribute {
 	private String dependence;
 	private List<Field> fields;
 	private List<Attribute> attributes;
-
+	private CustomBehaviour customBehaviour;
+	
 	public Field(Attribute attr) {
 		this.type = attr.getType();
 		this.value = attr.getValue();
@@ -112,6 +113,14 @@ public class Field extends Attribute {
 	 */
 	public void setAttributes(List<Attribute> attributes) {
 		this.attributes = attributes;
+	}
+
+	public CustomBehaviour getCustomBehaviour() {
+		return customBehaviour;
+	}
+
+	public void setCustomBehaviour(CustomBehaviour customBehaviour) {
+		this.customBehaviour = customBehaviour;
 	}
 
 }

@@ -1,10 +1,17 @@
 package com.ioteg;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.is;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
@@ -14,9 +21,12 @@ import org.junit.jupiter.api.Test;
 import com.ioteg.builders.EventTypeBuilder;
 import com.ioteg.model.Attribute;
 import com.ioteg.model.Block;
+import com.ioteg.model.CustomBehaviour;
 import com.ioteg.model.EventType;
 import com.ioteg.model.Field;
 import com.ioteg.model.OptionalFields;
+import com.ioteg.model.RuleCustomBehaviour;
+import com.ioteg.model.VariableCustomBehaviour;
 
 public class BuildersTestCase {
 
@@ -298,6 +308,67 @@ public class BuildersTestCase {
 		Field testSubField = test1Field.getFields().get(0);
 		assertEquals("String", testSubField.getType());
 		assertEquals(Integer.valueOf(4), testSubField.getLength());
+	}
+	
+	@Test
+	public void testCustomBehaviour() throws JDOMException, IOException {
+		SAXBuilder builder = new SAXBuilder();
+		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
+		ClassLoader classLoader = getClass().getClassLoader();
+		File xmlFile = new File(classLoader.getResource("testCustomBehaviour.xml").getFile());
+		Document document = builder.build(xmlFile);
+		EventType eventType = eventTypeBuilder.build(document);
+
+		assertFalse(eventType.getBlocks().isEmpty());
+		assertEquals(1, eventType.getBlocks().size());
+
+		Block testCustomBehaviourBlock = eventType.getBlocks().get(0);
+
+		assertEquals("testCustomBehaviour", testCustomBehaviourBlock.getName());
+		assertEquals(Integer.valueOf(100), testCustomBehaviourBlock.getRepetition());
+		assertEquals(null, testCustomBehaviourBlock.getValue());
+
+		Field test1Field = testCustomBehaviourBlock.getFields().get(0);
+		assertEquals("test1", test1Field.getName());
+		assertEquals(false, test1Field.getQuotes());
+		assertEquals("Float", test1Field.getType());
+		assertEquals(null, test1Field.getValue());
+
+		CustomBehaviour testCustomBehaviour = test1Field.getCustomBehaviour();
+		
+		assertThat(testCustomBehaviour.getExternalFilePath(), equalTo("./src/test/resources/testFloatCustomBehaviour.xml"));
+		assertThat(testCustomBehaviour.getSimulations(), equalTo(10));
+		assertThat(testCustomBehaviour.getRules(), not(empty()));
+		assertThat(testCustomBehaviour.getVariables(), not(empty()));
+		
+		List<VariableCustomBehaviour> variables = testCustomBehaviour.getVariables();
+		List<RuleCustomBehaviour> rules = testCustomBehaviour.getRules();
+		
+		assertThat(variables.get(0).getMin(), is(nullValue()));
+		assertThat(variables.get(0).getMax(), is(nullValue()));
+		assertThat(variables.get(0).getName(), equalTo("var1"));
+		assertThat(variables.get(0).getValue(), equalTo("100.0"));
+
+		
+		assertThat(variables.get(1).getMin(), equalTo("0"));
+		assertThat(variables.get(1).getMax(), equalTo("$(var1)"));
+		assertThat(variables.get(1).getName(), equalTo("varDependentOfVar1"));
+		assertThat(variables.get(1).getValue(), is(nullValue()));
+		
+		
+		assertThat(rules.get(0).getMin(), is(nullValue()));
+		assertThat(rules.get(0).getMax(), is(nullValue()));
+		assertThat(rules.get(0).getWeight(), equalTo(0.3));
+		assertThat(rules.get(0).getValue(), equalTo("$(varDependentOfVar1)"));
+		assertThat(rules.get(0).getSequence(), is(nullValue()));
+
+		
+		assertThat(rules.get(1).getMin(), equalTo("$(varDependentOfVar1)"));
+		assertThat(rules.get(1).getMax(), equalTo("$(varDependentOfVar1)"));
+		assertThat(rules.get(1).getWeight(), equalTo(0.0));
+		assertThat(rules.get(1).getValue(), is(nullValue()));
+		assertThat(rules.get(1).getSequence(), equalTo("inc"));
+
 	}
 
 }

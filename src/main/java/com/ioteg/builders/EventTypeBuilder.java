@@ -1,10 +1,12 @@
 package com.ioteg.builders;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
 
 import com.ioteg.model.Block;
 import com.ioteg.model.EventType;
@@ -20,8 +22,10 @@ public class EventTypeBuilder {
 	/**
 	 * @param document The XML document obtained with JDOM.
 	 * @return An instance of a EventType.
+	 * @throws IOException 
+	 * @throws JDOMException 
 	 */
-	public EventType build(Document document) {
+	public EventType build(Document document) throws JDOMException, IOException {
 		EventType eventType = new EventType();
 		BlockBuilder blockBuilder = new BlockBuilder();
 
