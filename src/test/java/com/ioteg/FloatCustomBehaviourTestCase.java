@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +24,6 @@ import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.CustomiseGeneration;
 import com.ioteg.EventGenerator;
 
 public class FloatCustomBehaviourTestCase {
@@ -94,7 +92,6 @@ public class FloatCustomBehaviourTestCase {
 		EventGenerator.totalnumevents = 100;
 		String strResult = null;
 		Double result = null;
-		CustomiseGeneration.variables = new HashMap<>();
 		for (int events = 0; events < 100; ++events) {
 			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
 			Double previous = Double.parseDouble(strResult);
@@ -145,9 +142,6 @@ public class FloatCustomBehaviourTestCase {
 
 		Element field = fields.get(5);
 		EventGenerator.totalnumevents = 100;
-		CustomiseGeneration.generatedvalue = 0.0f;
-		EventGenerator.controlcustombehaviour = 0;
-		CustomiseGeneration.rules.clear();
 
 		String strResult = null;
 		Double result = null;
@@ -165,9 +159,6 @@ public class FloatCustomBehaviourTestCase {
 
 		Element field = fields.get(6);
 		EventGenerator.totalnumevents = 100;
-		CustomiseGeneration.generatedvalue = 0.0f;
-		EventGenerator.controlcustombehaviour = 0;
-		CustomiseGeneration.rules.clear();
 
 		String strResult = null;
 		Double result = null;
@@ -191,9 +182,6 @@ public class FloatCustomBehaviourTestCase {
 
 		Element field = fields.get(7);
 		EventGenerator.totalnumevents = 100;
-		CustomiseGeneration.generatedvalue = 0.0f;
-		EventGenerator.controlcustombehaviour = 0;
-		CustomiseGeneration.rules.clear();
 		String strResult = null;
 		Double result = null;
 
@@ -216,10 +204,6 @@ public class FloatCustomBehaviourTestCase {
 
 		Element field = fields.get(8);
 		EventGenerator.totalnumevents = 100;
-		CustomiseGeneration.generatedvalue = 0.0f;
-		EventGenerator.controlcustombehaviour = 0;
-		CustomiseGeneration.rules.clear();
-
 		String strResult = null;
 		Double result = null;
 
@@ -236,9 +220,6 @@ public class FloatCustomBehaviourTestCase {
 
 		Element field = fields.get(9);
 		EventGenerator.totalnumevents = 100;
-		CustomiseGeneration.generatedvalue = 0.0f;
-		EventGenerator.controlcustombehaviour = 0;
-		CustomiseGeneration.rules.clear();
 
 		String strResult = null;
 		Double result = null;
@@ -256,9 +237,6 @@ public class FloatCustomBehaviourTestCase {
 
 		Element field = fields.get(10);
 		EventGenerator.totalnumevents = 100;
-		CustomiseGeneration.generatedvalue = 0.0f;
-		EventGenerator.controlcustombehaviour = 0;
-		CustomiseGeneration.rules.clear();
 
 		String strResult = null;
 		Double result = null;

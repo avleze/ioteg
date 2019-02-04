@@ -31,21 +31,24 @@ public class CustomiseGeneration {
 	private static final String SEQUENCE_ATTR = "sequence";
 	private static final String INC_VALUE = "inc";
 	private static final String DEC_VALUE = "dec";
-	private static final String SIMULATIONS_TAG = "simulations";
 	private static final String MIN_ATTR = "min";
 	private static final String MAX_ATTR = "max";
 	private static final String VALUE_ATTR = "value";
-	protected static Map<String, Double> variables = new HashMap<>();
-	protected static List<Rule<Double, Double, Double, Double, String>> rules = new ArrayList<>();
-	protected static float generatedvalue;
-	protected static int controlpercentage;
-	private static Parser parser;
+	
+	protected Map<String, Double> variables = new HashMap<>();
+	protected List<Rule<Double, Double, Double, Double, String>> rules = new ArrayList<>();
+	protected Double generatedValue;
+	protected Parser parser;
 	protected static Random r;
 	protected static Logger logger;
-
+	protected Integer eventsCustomBehaviour;
+	protected Integer controlCustomBehaviour;
+	protected String fileCustomBehaviour;
+	protected Integer totalEventsGenerated;
+	protected Integer numOfEventsToGenerate;
+	
 	static {
 		logger = Logger.getRootLogger();
-		parser = new Parser();
 		try {
 			r = SecureRandom.getInstanceStrong();
 		} catch (NoSuchAlgorithmException e) {
@@ -53,17 +56,32 @@ public class CustomiseGeneration {
 		}
 	}
 
-	public static void readCustomFile(String value, String type) throws JDOMException, IOException {
+
+
+	public CustomiseGeneration(Integer numOfEventsToGenerate, Integer eventsCustomBehaviour, Integer controlCustomBehaviour,
+			String fileCustomBehaviour) throws JDOMException, IOException {
+		super();
+		this.numOfEventsToGenerate = numOfEventsToGenerate;
+		this.eventsCustomBehaviour = eventsCustomBehaviour;
+		this.controlCustomBehaviour = controlCustomBehaviour;
+		this.fileCustomBehaviour = fileCustomBehaviour;
+		this.totalEventsGenerated = 0;
+		this.generatedValue = 0.0;
+		this.parser = new Parser();
+		readCustomFile(fileCustomBehaviour);
+	}
+
+	public void readCustomFile(String value) throws JDOMException, IOException {
 
 		File xmlFile = new File(value);
 
 		if (xmlFile.exists()) {
-			readVariables(xmlFile, type);
+			readVariables(xmlFile);
 			readRules(xmlFile);
 		}
 	}
 
-	private static void readRules(File xmlFile) throws JDOMException, IOException {
+	private void readRules(File xmlFile) throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
@@ -95,7 +113,7 @@ public class CustomiseGeneration {
 			}
 	}
 
-	private static Double obtainOperationValue(String operation) throws IOException {
+	private Double obtainOperationValue(String operation) throws IOException {
 
 		Parser parser = new Parser();
 		ExpressionAST exp = parser.parse(operation);
@@ -103,7 +121,7 @@ public class CustomiseGeneration {
 		return exp.evaluate(variables);
 	}
 
-	public static void readVariables(File xmlFile, String type) throws JDOMException, IOException {
+	public void readVariables(File xmlFile) throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
 
 		// To build a document from the xml
@@ -114,12 +132,10 @@ public class CustomiseGeneration {
 
 		for (Element variablesInNode : rootNode.getChildren(VARIABLES_TAG))
 			for (Element variable : variablesInNode.getChildren(VARIABLE_TAG))
-				if (type.equals("Float"))
-					variables.put(variable.getAttributeValue(NAME_ATTR), obtainVariableValue(variable));
-
+				variables.put(variable.getAttributeValue(NAME_ATTR), obtainVariableValue(variable));
 	}
 
-	private static Double obtainVariableValue(Element item) throws DataConversionException, IOException {
+	private Double obtainVariableValue(Element item) throws DataConversionException, IOException {
 
 		Double result = null;
 		String minStr = item.getAttributeValue(MIN_ATTR);
@@ -144,60 +160,56 @@ public class CustomiseGeneration {
 		return result;
 	}
 
-	public static int readSimulations(String xmlFile) throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
+	
 
-		// To build a document from the xml
-		Document document = builder.build(xmlFile);
-
-		// To get the root
-		Element rootNode = document.getRootElement();
-		return Integer.parseInt(rootNode.getAttributeValue(SIMULATIONS_TAG));
+	public Integer getEventsCustomBehaviour() {
+		return eventsCustomBehaviour;
 	}
 
-	public static String generateValue() {
-
-		Rule<Double, Double, Double, Double, String> r = rules.get(0);
-		float eventsrule;
-
-		if (Float.parseFloat(r.getWeight().toString()) < 1) {
-			if (Float.parseFloat(r.getWeight().toString()) == 0) {
-				eventsrule = 0;
-				controlpercentage = 0;
-			} else {
-				eventsrule = EventGenerator.eventscustombehaviour * r.getWeight().floatValue();
-			}
-		} else {
-			eventsrule = r.getWeight().floatValue();
-		}
-
-		if (controlpercentage == 0 && eventsrule == 0 && rules.size() == 1) {
-			getRuleGeneratedValue(r);
-		} else {
-			if (controlpercentage < eventsrule) {
-				getRuleGeneratedValue(r);
-				controlpercentage++;
-			} else {
-				rules.remove(0);
-				controlpercentage = 0;
-				generatedvalue = 0;
-				generateValue();
-			}
-		}
-
-		return Float.toString(generatedvalue);
+	public Integer getControlCustomBehaviour() {
+		return controlCustomBehaviour;
 	}
 
-	private static void getRuleGeneratedValue(Rule<Double, Double, Double, Double, String> rule) {
+	public List<Rule<Double, Double, Double, Double, String>> getRules() {
+		return rules;
+	}
+
+	public String generateValue() {
+
+		Rule<Double, Double, Double, Double, String> rule = rules.get(0);
+
+		getRuleGeneratedValue(rule);
+
+		controlCustomBehaviour++;
+		totalEventsGenerated++;
+		
+		if(totalEventsGenerated == numOfEventsToGenerate)
+			rules.clear();
+		
+		if(rule.getWeight() < 1 && rule.getWeight() > 0)
+		{
+			Double eventsPerRule = rule.getWeight() * eventsCustomBehaviour;
+			
+			if(eventsPerRule.intValue() == controlCustomBehaviour)
+			{
+				rules.remove(rule);
+				controlCustomBehaviour = 0;
+			}
+		}
+		
+		return Double.toString(generatedValue);
+	}
+
+	private void getRuleGeneratedValue(Rule<Double, Double, Double, Double, String> rule) {
 
 		if (rule.getValue() != null)
-			generatedvalue = rule.getValue().floatValue();
+			generatedValue = rule.getValue();
 
 		if (rule.getMin() != null) {
 			if ((rule.getSequence() == null)) {
 				double min = rule.getMin();
 				double max = rule.getMax();
-				generatedvalue = (float) (min + Math.random() * (max - min));
+				generatedValue = (min + Math.random() * (max - min));
 			} 
 			else if (rule.getSequence().equalsIgnoreCase(DEC_VALUE))
 				generateRuleValueDecSequence(rule);
@@ -207,31 +219,31 @@ public class CustomiseGeneration {
 		}
 	}
 
-	private static void generateRuleValueDecSequence(Rule<Double, Double, Double, Double, String> rule) {
+	private void generateRuleValueDecSequence(Rule<Double, Double, Double, Double, String> rule) {
 		Double min = rule.getMin();
 		Double max;
-		if (generatedvalue == 0)
+		if (generatedValue == 0)
 			max = rule.getMax();
 		else
-			max = (double) generatedvalue;
+			max = (double) generatedValue;
 
 		if (min < max)
-			generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
+			generatedValue = r.doubles(min, max).findFirst().getAsDouble();
 		else
-			generatedvalue = min.floatValue();
+			generatedValue = min;
 	}
 
-	private static void generateRuleValueIncSequence(Rule<Double, Double, Double, Double, String> rule) {
+	private void generateRuleValueIncSequence(Rule<Double, Double, Double, Double, String> rule) {
 		Double min;
 		Double max = rule.getMax();
-		if (generatedvalue == 0)
+		if (generatedValue == 0)
 			min = rule.getMin();
 		else
-			min = (double) generatedvalue;
+			min = generatedValue;
 
 		if (min < max)
-			generatedvalue = (float) r.doubles(min, max).findFirst().getAsDouble();
+			generatedValue =  r.doubles(min, max).findFirst().getAsDouble();
 		else
-			generatedvalue = max.floatValue();
+			generatedValue = max;
 	}
 }

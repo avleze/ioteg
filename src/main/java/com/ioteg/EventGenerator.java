@@ -27,7 +27,6 @@ import org.jdom2.input.SAXBuilder;
 
 import com.ioteg.builders.FieldBuilder;
 import com.ioteg.generators.Generable;
-import com.ioteg.generators.Generator;
 import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.model.Field;
 
@@ -37,12 +36,11 @@ public class EventGenerator {
 	protected static List<Map<String, List<Trio<String, String, String>>>> fieldvalues = new ArrayList<>();
 	public static int totalnumevents;
 	public static int iteration;
-	public static int eventscustombehaviour;
-	public static int controlcustombehaviour;
 	protected static final List<Integer> iterationvalues = new ArrayList<>();
 	protected static Random r;
 	protected static Logger logger;
-
+	protected static CustomiseGeneration customiseBehaviour;
+	
 	static {
 		types = new TreeSet<>();
 		types.add("Integer");
@@ -502,6 +500,17 @@ public class EventGenerator {
 		
 		return types.contains(type);
 	}
+	
+	public static int readSimulations(String xmlFile) throws JDOMException, IOException {
+		SAXBuilder builder = new SAXBuilder();
+
+		// To build a document from the xml
+		Document document = builder.build(xmlFile);
+
+		// To get the root
+		Element rootNode = document.getRootElement();
+		return Integer.parseInt(rootNode.getAttributeValue("simulations"));
+	}
 
 	/**
 	 * Generate a value of Float type
@@ -512,38 +521,21 @@ public class EventGenerator {
 	 * @throws IOException
 	 * @throws JDOMException
 	 */
+	
 	private static String GenerateFloat(Element field) throws JDOMException, IOException {
 		String result = "";
-
-		if (field.getAttribute("custom_behaviour") != null) {
-
-			if (CustomiseGeneration.rules.isEmpty()) {
-				CustomiseGeneration.readCustomFile(field.getAttribute("custom_behaviour").getValue(),
-						field.getAttribute("type").getValue());
-				eventscustombehaviour = totalnumevents
-						/ CustomiseGeneration.readSimulations(field.getAttribute("custom_behaviour").getValue());
-				controlcustombehaviour = 0;
-			}
-
-			if (controlcustombehaviour != eventscustombehaviour) {
-				result = CustomiseGeneration.generateValue();
-				controlcustombehaviour++;
-			} else { // No debería de llegar ya que previamente se habrá vaciado la lista de
-						// reglas...
-				controlcustombehaviour = 0;
-				CustomiseGeneration.rules.clear();
-				CustomiseGeneration.generatedvalue = 0.0f;
-				result = GenerateFloat(field);
-			}
-
-		} else {
-			FieldBuilder theBuilder = new FieldBuilder();
-			Field floatField = theBuilder.build(field);
-			Generator<Float> floatGenerator = GeneratorsFactory.makeFloatGenerator(floatField);
-			if (floatGenerator != null)
-				result = floatGenerator.generate(floatField, 1).get(0);
-
+		
+		String customBehaviourAttr = field.getAttributeValue("custom_behaviour");
+		
+		if(customiseBehaviour == null || (customiseBehaviour != null && customiseBehaviour.getRules().isEmpty())) {
+			Integer eventsCustomBehaviour = totalnumevents / readSimulations(customBehaviourAttr);
+			String filePath = field.getAttribute("custom_behaviour").getValue();
+			customiseBehaviour = new CustomiseGeneration(totalnumevents, eventsCustomBehaviour, 0, filePath);
 		}
+		
+
+		result = customiseBehaviour.generateValue();
+	
 
 		return result;
 	}
