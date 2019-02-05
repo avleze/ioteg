@@ -34,6 +34,7 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
 		EventGenerator.fieldvalues = new ArrayList<>();
+		EventGenerator.totalnumevents = 100;
 	}
 
 
