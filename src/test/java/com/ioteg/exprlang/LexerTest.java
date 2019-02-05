@@ -11,7 +11,7 @@ public class LexerTest {
 	
 	@Test
 	public void testArithmeticOperators() throws IOException {
-		Lexer lex = new Lexer("2+4");
+		ExprLexer lex = new ExprLexer("2+4");
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentMatch(), equalTo("2"));
@@ -23,7 +23,7 @@ public class LexerTest {
 		assertThat(lex.getCurrentMatch(), equalTo("4"));
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 		
-		lex = new Lexer("2*4");
+		lex = new ExprLexer("2*4");
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentMatch(), equalTo("2"));
@@ -35,7 +35,7 @@ public class LexerTest {
 		assertThat(lex.getCurrentMatch(), equalTo("4"));
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 		
-		lex = new Lexer("2-4");
+		lex = new ExprLexer("2-4");
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentMatch(), equalTo("2"));
@@ -47,7 +47,7 @@ public class LexerTest {
 		assertThat(lex.getCurrentMatch(), equalTo("4"));
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 		
-		lex = new Lexer("2/4");
+		lex = new ExprLexer("2/4");
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentMatch(), equalTo("2"));
@@ -62,7 +62,7 @@ public class LexerTest {
 	
 	@Test
 	public void testIdentifiers() throws IOException {
-		Lexer lex = new Lexer("2+$(hola)");
+		ExprLexer lex = new ExprLexer("2+$(hola)");
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentMatch(), equalTo("2"));
@@ -83,7 +83,7 @@ public class LexerTest {
 		assertThat(lex.getCurrentMatch(), equalTo(")"));
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_EOF));
 		
-		lex = new Lexer("sqrt($(hola))");
+		lex = new ExprLexer("sqrt($(hola))");
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_ID));
 		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_ID));
 		assertThat(lex.getCurrentMatch(), equalTo("sqrt"));
@@ -110,7 +110,7 @@ public class LexerTest {
 	
 	@Test
 	public void testFloatingPointNumbers() throws IOException {
-		Lexer lex = new Lexer("20.45+$(hola)");
+		ExprLexer lex = new ExprLexer("20.45+$(hola)");
 		assertThat(lex.getNextToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentToken(), equalTo(Token.TOK_NUMBER));
 		assertThat(lex.getCurrentMatch(), equalTo("20.45"));
@@ -134,7 +134,7 @@ public class LexerTest {
 	
 	@Test
 	public void testUnkown() throws IOException {
-		Lexer lex = new Lexer(".~Unkown");
+		ExprLexer lex = new ExprLexer(".~Unkown");
 		assertThat(lex.getNextToken(), equalTo(Token.UNKOWN));
 		assertThat(lex.getCurrentToken(), equalTo(Token.UNKOWN));
 		assertThat(lex.getCurrentMatch(), equalTo("."));

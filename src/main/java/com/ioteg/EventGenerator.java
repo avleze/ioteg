@@ -39,7 +39,6 @@ public class EventGenerator {
 	protected static final List<Integer> iterationvalues = new ArrayList<>();
 	protected static Random r;
 	protected static Logger logger;
-	protected static Generable customiseBehaviour;
 	
 	static {
 		types = new TreeSet<>();

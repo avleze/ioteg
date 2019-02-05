@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ioteg.exprlang.Parser;
+import com.ioteg.exprlang.ExprParser;
 import com.ioteg.exprlang.ast.ExpressionAST;
 import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.model.Field;
@@ -18,7 +18,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 	private static final String DEC_VALUE = "dec";
 	protected Integer numOfEventsToGenerate;
 	protected Integer totalGeneratedEvents;
-	protected Parser parser;
+	protected ExprParser parser;
 	protected Map<String, Double> variables;
 	protected List<RuleCustomBehaviour> rules;
 	protected Double generatedValue;
@@ -29,7 +29,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 		super(field);
 		this.numOfEventsToGenerate = numOfEventsToGenerate;
 		this.totalGeneratedEvents = 0;
-		this.parser = new Parser();
+		this.parser = new ExprParser();
 		this.variables = getVariablesFromField(field);
 		this.rules = field.getCustomBehaviour().getRules();
 		this.generatedValue = null;

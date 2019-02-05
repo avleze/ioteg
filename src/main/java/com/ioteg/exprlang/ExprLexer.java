@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Lexer {
+public class ExprLexer {
 
 	private Scanner inputReader;
 	private Character lastChar;
@@ -26,7 +26,7 @@ public class Lexer {
 
 	}
 
-	public Lexer(String str) {
+	public ExprLexer(String str) {
 		this.inputReader = new Scanner(str);
 		this.inputReader.useDelimiter("");
 		this.lastChar = ' ';

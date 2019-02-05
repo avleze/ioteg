@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.instanceOf;
 public class ParserTest {
 	@Test
 	public void testBinaryExpressions() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("2+4");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
@@ -98,14 +98,14 @@ public class ParserTest {
 	
 	@Test
 	public void testBinaryExpressionsWithError() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("24.5-5*$(");
 		assertThat(exp, equalTo(null));
 	}
 	
 	@Test
 	public void testCallFunction() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("2+sqrt(4)");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
@@ -149,7 +149,7 @@ public class ParserTest {
 	
 	@Test
 	public void testVariableExpression() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("$(hola)*sqrt(4)");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
@@ -171,7 +171,7 @@ public class ParserTest {
 	
 	@Test
 	public void testVariableExpressionWithErr() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("$hola)");
 		assertThat(exp, equalTo(null));
 		
@@ -194,7 +194,7 @@ public class ParserTest {
 	
 	@Test
 	public void testParenthesisExpression() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("($(hola)*sqrt(4))");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
@@ -216,7 +216,7 @@ public class ParserTest {
 	
 	@Test
 	public void testParenthesisExpressionWhithoutClosing() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("($(hola)*sqrt(4)");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
@@ -238,7 +238,7 @@ public class ParserTest {
 	
 	@Test
 	public void testUnaryExpression() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("($(hola)*-sqrt(-4))");
 		assertThat(exp, instanceOf(BinaryExpressionAST.class));
 		BinaryExpressionAST bExp = (BinaryExpressionAST) exp;
@@ -275,28 +275,28 @@ public class ParserTest {
 	
 	@Test
 	public void testUnaryExpressionWithError() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("-sqrt((4)");
 		assertThat(exp, equalTo(null));
 	}
 	
 	@Test
 	public void testCallExpressionWithNoArgumentsList() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("(hola)*sqrt(4)");
 		assertThat(exp, equalTo(null));
 	}
 	
 	@Test
 	public void testCallExpressionWithIncompleteArgumentsList() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("(hola(4,))*sqrt(4)");
 		assertThat(exp, equalTo(null));
 	}
 	
 	@Test
 	public void testCallExpressionWithUnexpectedArgumentsList() throws IOException {
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("(hola(4~))*sqrt(4)");
 		assertThat(exp, equalTo(null));
 	}
@@ -305,7 +305,7 @@ public class ParserTest {
 	public void testEvalExpression() throws IOException {
 		Map<String, Double> symbols = new HashMap<>();
 
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("pow(sin($(PI)),2)+pow(cos($(PI)),2)");
 		symbols.put("PI", Math.PI);
 		assertThat(exp.evaluate(symbols), equalTo(1.0));
@@ -329,7 +329,7 @@ public class ParserTest {
 		symbols.put("E", Math.E);
 		symbols.put("PI", Math.PI);
 
-		Parser parser = new Parser();
+		ExprParser parser = new ExprParser();
 		ExpressionAST exp = parser.parse("pow(3,2)");
 		assertThat(exp.evaluate(symbols), equalTo(9.0));
 		

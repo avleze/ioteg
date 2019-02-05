@@ -15,8 +15,8 @@ import com.ioteg.exprlang.ast.NumberExpressionAST;
 import com.ioteg.exprlang.ast.UnaryExpressionAST;
 import com.ioteg.exprlang.ast.VariableExpressionAST;
 
-public class Parser {
-	private Lexer lexer;
+public class ExprParser {
+	private ExprLexer lexer;
 	protected static final Map<Token, Integer> tokenPrecedence;
 	protected static Logger logger;
 	
@@ -30,7 +30,7 @@ public class Parser {
 	}
 
 	public ExpressionAST parse(String str) throws IOException {
-		this.lexer = new Lexer(str);
+		this.lexer = new ExprLexer(str);
 		lexer.getNextToken();
 		return parseExpression();
 	}
