@@ -86,7 +86,7 @@ public class EventGenerator {
 
 			if (outputFormat.equals("json")) 
 				JsonUtil.JsonFormatValues(values, document);
-			if (outputFormat.equals("xml")) {
+			if (outputFormat.equals("xml")) 
 				XmlUtil.XmlFormatValues(values, document);
 			if (outputFormat.equals("csv")) 
 				CsvUtil.CsvFormatValues(values, document);
