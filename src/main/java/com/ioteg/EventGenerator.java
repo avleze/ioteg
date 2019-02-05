@@ -39,7 +39,7 @@ public class EventGenerator {
 	protected static final List<Integer> iterationvalues = new ArrayList<>();
 	protected static Random r;
 	protected static Logger logger;
-	protected static CustomiseGeneration customiseBehaviour;
+	protected static Generable customiseBehaviour;
 	
 	static {
 		types = new TreeSet<>();
@@ -362,11 +362,8 @@ public class EventGenerator {
 				}
 			}
 		} else {
-			generator = GeneratorsFactory.makeGenerator(f);
-			if (field.getAttributeValue("custom_behaviour") == null)
-				value = generator.generate(f, 1).get(0);
-			else
-				value = GenerateFloat(field);
+			generator = GeneratorsFactory.makeGenerator(f, totalnumevents);
+			value = generator.generate(f, 1).get(0);
 		}
 
 		return value;
@@ -500,43 +497,5 @@ public class EventGenerator {
 		
 		return types.contains(type);
 	}
-	
-	public static int readSimulations(String xmlFile) throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
 
-		// To build a document from the xml
-		Document document = builder.build(xmlFile);
-
-		// To get the root
-		Element rootNode = document.getRootElement();
-		return Integer.parseInt(rootNode.getAttributeValue("simulations"));
-	}
-
-	/**
-	 * Generate a value of Float type
-	 * 
-	 * @param field is the Element in which the value will be assigned
-	 * @return a value of the Float type according to the declared restriction and
-	 *         attributes of the Element field
-	 * @throws IOException
-	 * @throws JDOMException
-	 */
-	
-	private static String GenerateFloat(Element field) throws JDOMException, IOException {
-		String result = "";
-		
-		String customBehaviourAttr = field.getAttributeValue("custom_behaviour");
-		
-		if(customiseBehaviour == null || (customiseBehaviour != null && customiseBehaviour.getRules().isEmpty())) {
-			Integer eventsCustomBehaviour = totalnumevents / readSimulations(customBehaviourAttr);
-			String filePath = field.getAttribute("custom_behaviour").getValue();
-			customiseBehaviour = new CustomiseGeneration(totalnumevents, eventsCustomBehaviour, 0, filePath);
-		}
-		
-
-		result = customiseBehaviour.generateValue();
-	
-
-		return result;
-	}
 }
