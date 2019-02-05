@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -60,15 +59,11 @@ public class EventGenerator {
 		String outputFormat = args[1];
 		String eplFilePath = args[2];
 		String output = "";
-		String path = xmlEventSchema.substring(0, xmlEventSchema.lastIndexOf("/") + 1);
+		String path = xmlEventSchema.substring(0, xmlEventSchema.lastIndexOf('/') + 1);
 		SAXBuilder builder = new SAXBuilder();
 		File xmlFile = new File(xmlEventSchema);
 
 		try (FileWriter values = new FileWriter(path + output)) {
-
-			Calendar cal2 = Calendar.getInstance();
-			System.out.println("Start time: " + cal2.get(Calendar.MINUTE) + ":" + cal2.get(Calendar.SECOND) + ":"
-					+ cal2.get(Calendar.MILLISECOND));
 
 			if (!ValidationUtil.validStandart(xmlFile))
 				System.exit(1);

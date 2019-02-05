@@ -23,7 +23,7 @@ public class EPLConditionsParser {
 	private List<Map<String, List<Trio<String, String, String>>>> eplRestrictions;
 	private String eplFilePath;
 	private Element rootNode;
-	
+
 	public EPLConditionsParser(String eplFilePath, Element rootNode) {
 		super();
 		this.iterationValues = new ArrayList<>();
@@ -38,10 +38,11 @@ public class EPLConditionsParser {
 	 * 
 	 * @param EPLfile  contains the EPL queries
 	 * @param rootNode is the root of the event definition
-	 * @return 
+	 * @return
 	 * @throws IOException if the file causes problems
 	 */
-	public List<Map<String, List<Trio<String, String, String>>>> getRestrictions(Integer totalNumEvents) throws IOException {
+	public List<Map<String, List<Trio<String, String, String>>>> getRestrictions(Integer totalNumEvents)
+			throws IOException {
 		FileReader eplF = new FileReader(new File(eplFilePath));
 		String query = "";
 
@@ -49,9 +50,8 @@ public class EPLConditionsParser {
 			while ((query = bf.readLine()) != null) {
 				if (query.toLowerCase().contains(" where ")) {
 					String queryAfterWhere = "";
-					if (query.toLowerCase().indexOf(" where ") != -1) 
+					if (query.toLowerCase().indexOf(" where ") != -1)
 						queryAfterWhere = query.substring(query.toLowerCase().indexOf(" where ") + 7);
-					
 
 					Pattern logicalOperatorsPattern = Pattern.compile(" or | and | OR | AND ");
 					Matcher logicalOperatorsMatcher = logicalOperatorsPattern.matcher(queryAfterWhere);
@@ -61,12 +61,11 @@ public class EPLConditionsParser {
 						logicalOperators.add(logicalOperatorsMatcher.group().toLowerCase().trim());
 					}
 
-
 					Pattern relationalOperatorsPattern = Pattern.compile("<=|>=|<|>|=|!=");
 					Matcher relationalOperatorsMatcher = relationalOperatorsPattern.matcher(queryAfterWhere);
 					Trio<String, String, String> lastFieldPut = null;
-					int i = 0; 
-					
+					int i = 0;
+
 					while (relationalOperatorsMatcher.find()) {
 						String field = queryAfterWhere.substring(0, relationalOperatorsMatcher.start());
 						field = field.trim();
@@ -96,7 +95,8 @@ public class EPLConditionsParser {
 							matchedStr = finalvalue;
 						}
 
-						queryAfterWhere = queryAfterWhere.substring(queryAfterWhere.indexOf(matchedStr) + matchedStr.length());
+						queryAfterWhere = queryAfterWhere
+								.substring(queryAfterWhere.indexOf(matchedStr) + matchedStr.length());
 						Trio<String, String, String> singleRestriction = new Trio<>(field, operator, finalvalue);
 
 						if (!queryAfterWhere.isEmpty() && !logicalOperators.isEmpty()) {
@@ -129,13 +129,14 @@ public class EPLConditionsParser {
 				}
 			}
 		}
-		
+
 		removingComplexValues(totalNumEvents);
-		
+
 		return eplRestrictions;
 	}
 
-	private void addSingleRestriction(Trio<String, String, String> value, List<Map<String, List<Trio<String, String, String>>>> eplRestrictions) {
+	private void addSingleRestriction(Trio<String, String, String> value,
+			List<Map<String, List<Trio<String, String, String>>>> eplRestrictions) {
 		for (Map<String, List<Trio<String, String, String>>> values : eplRestrictions)
 			if (values.get(value.getFirst()) != null)
 				values.get(value.getFirst()).add(value);
@@ -146,22 +147,22 @@ public class EPLConditionsParser {
 			}
 	}
 
-	private void manageEmptyFieldValues(Trio<String, String, String> value, List<Map<String, List<Trio<String, String, String>>>> eplRestrictions) {
-		{
-			Map<String, List<Trio<String, String, String>>> values = new HashMap<>();
-			List<Trio<String, String, String>> list = new ArrayList<>();
-			list.add(value);
-			values.put(value.getFirst(), list);
-			eplRestrictions.add(values);
-		}
+	private void manageEmptyFieldValues(Trio<String, String, String> value,
+			List<Map<String, List<Trio<String, String, String>>>> eplRestrictions) {
+		Map<String, List<Trio<String, String, String>>> values = new HashMap<>();
+		List<Trio<String, String, String>> list = new ArrayList<>();
+		list.add(value);
+		values.put(value.getFirst(), list);
+		eplRestrictions.add(values);
 	}
 
-	private void manageAndEPLOperator(Trio<String, String, String> value, List<Map<String, List<Trio<String, String, String>>>> eplRestrictions) {
+	private void manageAndEPLOperator(Trio<String, String, String> value,
+			List<Map<String, List<Trio<String, String, String>>>> eplRestrictions) {
 		addSingleRestriction(value, eplRestrictions);
 	}
 
-	private void manageOrEPLOperator(Trio<String, String, String> lastFieldPut,
-		Trio<String, String, String> value, List<Map<String, List<Trio<String, String, String>>>> eplRestrictions) {
+	private void manageOrEPLOperator(Trio<String, String, String> lastFieldPut, Trio<String, String, String> value,
+			List<Map<String, List<Trio<String, String, String>>>> eplRestrictions) {
 		int originalSize = eplRestrictions.size();
 		for (int i = 0; i < originalSize; ++i) {
 			Map<String, List<Trio<String, String, String>>> values = new HashMap<>();
@@ -176,28 +177,25 @@ public class EPLConditionsParser {
 			values.get(value.getFirst()).add(value);
 			eplRestrictions.add(values);
 		}
-		
+
 	}
-	
-	
+
 	private void removingComplexValues(Integer totalNumEvents) {
 
 		List<Element> fieldchilds = new ArrayList<>();
 
-		for (Element block : rootNode.getChildren("block")) 
-			if (block.getAttributeValue("repeat") != null) 
+		for (Element block : rootNode.getChildren("block"))
+			if (block.getAttributeValue("repeat") != null)
 				fieldchilds.addAll(block.getChildren("field"));
-		
-		
-		for(Element field : fieldchilds)
-			if(!EventGenerator.existType(field.getAttributeValue("type"))) {
+
+		for (Element field : fieldchilds)
+			if (!EventGenerator.existType(field.getAttributeValue("type"))) {
 				Iterator<Map<String, List<Trio<String, String, String>>>> iRestrictions = eplRestrictions.iterator();
-				while(iRestrictions.hasNext())
-				{
+				while (iRestrictions.hasNext()) {
 					Map<String, List<Trio<String, String, String>>> restrictions = iRestrictions.next();
 					restrictions.remove(field.getAttributeValue("name"));
-					
-					if(restrictions.isEmpty())
+
+					if (restrictions.isEmpty())
 						iRestrictions.remove();
 				}
 			}
@@ -218,6 +216,5 @@ public class EPLConditionsParser {
 	public List<Map<String, List<Trio<String, String, String>>>> getEplRestrictions() {
 		return eplRestrictions;
 	}
-	
-	
+
 }

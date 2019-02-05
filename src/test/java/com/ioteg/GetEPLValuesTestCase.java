@@ -17,7 +17,6 @@ import com.ioteg.EventGenerator;
 import com.ioteg.Trio;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.not;
 
 public class GetEPLValuesTestCase {
 	private static File xmlFile;

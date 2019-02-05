@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ioteg.Trio;
 import com.ioteg.generators.booleanfield.BooleanGenerator;
 import com.ioteg.generators.booleanfield.BooleanQueryRestrictionGenerationAlgorithm;
@@ -18,9 +20,6 @@ import com.ioteg.generators.floatfield.FixedFloatGenerationAlgorithm;
 import com.ioteg.generators.floatfield.FloatGenerator;
 import com.ioteg.generators.floatfield.FloatQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.floatfield.RandomFloatGenerationAlgorithm;
-import com.ioteg.generators.integerfield.FixedIntegerGenerationAlgorithm;
-import com.ioteg.generators.integerfield.IntegerQueryRestrictionGenerationAlgorithm;
-import com.ioteg.generators.integerfield.RandomIntegerGenerationAlgorithm;
 import com.ioteg.generators.longfield.FixedLongGenerationAlgorithm;
 import com.ioteg.generators.longfield.LongQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.longfield.RandomLongGenerationAlgorithm;
@@ -34,6 +33,12 @@ import com.ioteg.model.Field;
 
 public class GeneratorsFactory {
 
+	protected static Logger logger;
+
+	static {
+		logger = Logger.getRootLogger();
+	}
+	
 	private GeneratorsFactory() {
 		throw new IllegalStateException("This is an utility class and can't be instantiated.");
 	}
@@ -43,14 +48,12 @@ public class GeneratorsFactory {
 	public static Generable makeGenerator(Field field, Integer totalNumberOfEvents) {
 		Generable generable = null;
 
-		if (field.getType().equals("Integer"))
+		if (field.getType().equals("Integer") || field.getType().equals("Long"))
 			generable = makeLongGenerator(field);
 		else if (field.getType().equals("String"))
 			generable = makeStringGenerator(field);
 		else if (field.getType().equals("Alphanumeric"))
 			generable = makeAlphanumericGenerator(field);
-		else if (field.getType().equals("Long"))
-			generable = makeLongGenerator(field);
 		else if (field.getType().equals("Float"))
 			generable = makeFloatGenerator(field, totalNumberOfEvents);
 		else if (field.getType().equals("Boolean"))
@@ -61,17 +64,6 @@ public class GeneratorsFactory {
 			generable = makeDateGenerator(field);
 
 		return generable;
-	}
-
-	public static Generator<Integer> makeIntegerGenerator(Field integer) {
-		Generator<Integer> integerGenerator = null;
-
-		if (integer.getValue() != null)
-			integerGenerator = new Generator<>(new FixedIntegerGenerationAlgorithm(integer));
-		else if (integer.getMin() != null && integer.getMax() != null)
-			integerGenerator = new Generator<>(new RandomIntegerGenerationAlgorithm(integer));
-
-		return integerGenerator;
 	}
 
 	public static Generator<Long> makeLongGenerator(Field longField) {
@@ -91,15 +83,15 @@ public class GeneratorsFactory {
 		if (floatField.getValue() != null)
 			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm(floatField));
 		else if (floatField.getCustomBehaviour() != null) {
+			
 			try {
-				
 				if(isNeededANewCustomiseBehaviourAlgorithm())
 					customiseBehaviourGenerationAlgorithm = new CustomiseBehaviourGenerationAlgorithm(floatField,
 						totalNumOfEvents);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			} catch (IOException e) {
+				logger.error(e);
 			}
+			
 			floatGenerator = new FloatGenerator(customiseBehaviourGenerationAlgorithm);
 		}
 		else if (floatField.getMin() != null && floatField.getMax() != null)
@@ -111,8 +103,7 @@ public class GeneratorsFactory {
 
 	private static boolean isNeededANewCustomiseBehaviourAlgorithm()
 	{
-		return customiseBehaviourGenerationAlgorithm == null || 
-				(customiseBehaviourGenerationAlgorithm != null && customiseBehaviourGenerationAlgorithm.getRules().isEmpty());
+		return customiseBehaviourGenerationAlgorithm == null || customiseBehaviourGenerationAlgorithm.getRules().isEmpty();
 	}
 
 	public static Generator<Boolean> makeBooleanGenerator(Field booleanField) {
@@ -167,13 +158,11 @@ public class GeneratorsFactory {
 			List<Trio<String, String, String>> restrictions) {
 		Generable generable = null;
 
-		if (field.getType().equals("Integer"))
-			generable = makeQueryRestrictionIntegerGenerator(field, restrictions);
-		else if (field.getType().equals("String"))
+		if (field.getType().equals("String"))
 			generable = makeQueryRestrictionStringGenerator(field, restrictions);
 		else if (field.getType().equals("Alphanumeric"))
 			generable = makeQueryRestrictionAlphanumericGenerator(field, restrictions);
-		else if (field.getType().equals("Long"))
+		else if (field.getType().equals("Integer") || field.getType().equals("Long"))
 			generable = makeQueryRestrictionLongGenerator(field, restrictions);
 		else if (field.getType().equals("Float"))
 			generable = makeQueryRestrictionFloatGenerator(field, restrictions);
@@ -187,10 +176,6 @@ public class GeneratorsFactory {
 		return generable;
 	}
 
-	public static Generator<Integer> makeQueryRestrictionIntegerGenerator(Field field,
-			List<Trio<String, String, String>> restrictions) {
-		return new Generator<>(new IntegerQueryRestrictionGenerationAlgorithm(field, restrictions));
-	}
 
 	public static Generator<String> makeQueryRestrictionStringGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
