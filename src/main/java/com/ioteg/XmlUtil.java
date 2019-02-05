@@ -103,7 +103,7 @@ public class XmlUtil extends EventGenerator {
 		String quotes = field.getAttributeValue("quotes");
 		String type = field.getAttributeValue("type");
 
-		if (!ExistType(type)) { // A non basic type
+		if (!existType(type)) { // A non basic type
 			sb.append(GenerateValueComplexType(field, "xml"));
 		} else {// A basic type
 
@@ -149,7 +149,7 @@ public class XmlUtil extends EventGenerator {
 			String quotes = elementop.getAttributeValue("quotes");
 			String type = elementop.getAttributeValue("type");
 
-			if (!ExistType(type)) {
+			if (!existType(type)) {
 				sb.append(GenerateValueComplexType(elementop, "xml"));
 			} else {
 				sb.append(" type=\"" + elementop.getAttributeValue("type") + "\">");

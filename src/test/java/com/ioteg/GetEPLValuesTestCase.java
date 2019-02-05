@@ -166,11 +166,6 @@ public class GetEPLValuesTestCase {
 		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/ComplexFieldExamples/EPLComplexFieldQuery.epl").getPath(),
 				document.getRootElement());
 
-		assertThat(EventGenerator.fieldvalues, not(empty()));
-		
-		
-		EventGenerator.RemovingComplexType(document.getRootElement());
-		
 		assertThat(EventGenerator.fieldvalues, empty());
 	}
 }

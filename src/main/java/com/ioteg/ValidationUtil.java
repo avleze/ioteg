@@ -114,7 +114,7 @@ public class ValidationUtil{
 				} else {
 					String type = field.getAttributeValue(TYPE_ATTR);
 
-					if (EventGenerator.ExistType(type)) 
+					if (EventGenerator.existType(type)) 
 						valid = validateSimpleType(field, type) && valid;
 					else 
 						valid = validateComplexType(field, type) && valid;

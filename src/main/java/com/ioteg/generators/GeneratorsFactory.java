@@ -44,7 +44,7 @@ public class GeneratorsFactory {
 		Generable generable = null;
 
 		if (field.getType().equals("Integer"))
-			generable = makeIntegerGenerator(field);
+			generable = makeLongGenerator(field);
 		else if (field.getType().equals("String"))
 			generable = makeStringGenerator(field);
 		else if (field.getType().equals("Alphanumeric"))

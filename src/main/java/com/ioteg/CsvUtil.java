@@ -104,7 +104,7 @@ public class CsvUtil extends EventGenerator {
 		StringBuilder sb = new StringBuilder();
 		String type = field.getAttributeValue("type");
 
-		if (!ExistType(type)) { // A non basic type
+		if (!existType(type)) { // A non basic type
 			List<Element> elements = field.getChildren();
 			Element first = elements.get(0);
 			if (first.getName().equals("field")) {
@@ -140,7 +140,7 @@ public class CsvUtil extends EventGenerator {
 		String type = field.getAttributeValue("type");
 		String value = "";
 
-		if (!ExistType(type)) { // A non basic type
+		if (!existType(type)) { // A non basic type
 			sb.append(GenerateValueComplexType(field, "csv"));
 		} else {// A basic type
 
@@ -186,7 +186,7 @@ public class CsvUtil extends EventGenerator {
 				sb.append(",");
 			}
 
-			if (!ExistType(type)) {
+			if (!existType(type)) {
 				sb.append(GenerateValueComplexType(elementop, "csv"));
 			} else {
 				value = GenerateValueSimpleType(type, elementop);

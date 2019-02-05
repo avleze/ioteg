@@ -116,7 +116,7 @@ public class JsonUtil extends EventGenerator {
 		String type = field.getAttributeValue("type");
 		String value = "";
 
-		if (!ExistType(type)) { // A non basic type
+		if (!existType(type)) { // A non basic type
 			sb.append(GenerateValueComplexType(field, "json"));
 		} else {// A basic type
 
@@ -162,7 +162,7 @@ public class JsonUtil extends EventGenerator {
 			String quotes = elementop.getAttributeValue("quotes");
 			String type = elementop.getAttributeValue("type");
 
-			if (!ExistType(type)) {
+			if (!existType(type)) {
 				sb.append(GenerateValueComplexType(elementop, "json"));
 			} else {
 				value = GenerateValueSimpleType(type, elementop);
