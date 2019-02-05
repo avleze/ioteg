@@ -6,13 +6,16 @@ import com.ioteg.model.Field;
 
 public class RandomStringGenerationAlgorithm extends GenerationAlgorithm<String> {
 
-	public RandomStringGenerationAlgorithm(Field field) {
+	protected String possibleChars;
+	
+	public RandomStringGenerationAlgorithm(Field field, String possibleChars) {
 		super(field);
+		this.possibleChars = possibleChars;
 	}
 
 	@Override
 	public String generate() {
-		return RandomUtil.getRandStringRange(field.getLength(), field.getEndcharacter());
+		return RandomUtil.getRandStringRange(field.getLength(), field.getEndcharacter(), possibleChars);
 	}
 
 }

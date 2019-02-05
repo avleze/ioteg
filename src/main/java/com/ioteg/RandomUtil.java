@@ -101,39 +101,21 @@ public class RandomUtil {
 		return calendar.getTimeInMillis();
 	}
 	
+
 	/**
-	 * Generate a random String
+	 * Generate a randomString
 	 * 
 	 * @param length determines the length of the String and
 	 * @param endcharacter   determines the last character for the range
-	 * @return a random String with a long length
-	 */
-	public static String getRandStringRange(int length, String endcharacter) {
-		final String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		StringBuilder result = new StringBuilder();
-		int lastPossibleIndex =  endcharacter == null ? SALTCHARS.length() : SALTCHARS.indexOf(endcharacter);
-		while (result.length() < length) {
-			int index = r.nextInt(lastPossibleIndex);
-			result.append(SALTCHARS.charAt(index));
-		}
-		
-		return result.toString();
-	}
-	
-	/**
-	 * Generate a random Alphanumeric String
-	 * 
-	 * @param length determines the length of the String and
-	 * @param endcharacter   determines the last character for the range
+	 * @param possibleChars	the possible chars to form the string.
 	 * @return a random Alphanumeric String with a long length
 	 */
-	public static String getAlphaNumRandStringRange(int length, String endcharacter) {
-		final String SALTCHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	public static String getRandStringRange(int length, String endcharacter, String possibleChars) {
 		StringBuilder result = new StringBuilder();
-		int lastPossibleIndex =  endcharacter == null ? SALTCHARS.length() : SALTCHARS.indexOf(endcharacter);
+		int lastPossibleIndex =  endcharacter == null ? possibleChars.length() : possibleChars.indexOf(endcharacter);
 		while (result.length() < length) {
 			int index = r.nextInt(lastPossibleIndex);
-			result.append(SALTCHARS.charAt(index));
+			result.append(possibleChars.charAt(index));
 		}
 		
 		return result.toString();

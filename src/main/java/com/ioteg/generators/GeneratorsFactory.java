@@ -23,9 +23,7 @@ import com.ioteg.generators.floatfield.RandomFloatGenerationAlgorithm;
 import com.ioteg.generators.longfield.FixedLongGenerationAlgorithm;
 import com.ioteg.generators.longfield.LongQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.longfield.RandomLongGenerationAlgorithm;
-import com.ioteg.generators.stringfield.AlphanumericQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.stringfield.FixedStringGenerationAlgorithm;
-import com.ioteg.generators.stringfield.RandomAlphanumericalGenerationAlgorithm;
 import com.ioteg.generators.stringfield.RandomStringGenerationAlgorithm;
 import com.ioteg.generators.stringfield.StringGenerator;
 import com.ioteg.generators.stringfield.StringQueryRestrictionGenerationAlgorithm;
@@ -33,6 +31,8 @@ import com.ioteg.model.Field;
 
 public class GeneratorsFactory {
 
+	private static final String ALPHABETICAL_VALUES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private static final String ALPHANUMERIC_VALUES = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	protected static Logger logger;
 
 	static {
@@ -138,7 +138,7 @@ public class GeneratorsFactory {
 		if (stringField.getValue() != null)
 			stringGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(stringField));
 		else
-			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(stringField));
+			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(stringField, ALPHABETICAL_VALUES));
 
 		return stringGenerator;
 	}
@@ -149,7 +149,7 @@ public class GeneratorsFactory {
 		if (alphanumericField.getValue() != null)
 			alphanumericGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(alphanumericField));
 		else
-			alphanumericGenerator = new StringGenerator(new RandomAlphanumericalGenerationAlgorithm(alphanumericField));
+			alphanumericGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(alphanumericField, ALPHANUMERIC_VALUES));
 
 		return alphanumericGenerator;
 	}
@@ -179,12 +179,12 @@ public class GeneratorsFactory {
 
 	public static Generator<String> makeQueryRestrictionStringGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
-		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(field, restrictions));
+		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(field, restrictions, ALPHABETICAL_VALUES));
 	}
 
 	public static Generator<String> makeQueryRestrictionAlphanumericGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
-		return new StringGenerator(new AlphanumericQueryRestrictionGenerationAlgorithm(field, restrictions));
+		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(field, restrictions, ALPHANUMERIC_VALUES));
 	}
 
 	public static Generator<Long> makeQueryRestrictionLongGenerator(Field field,

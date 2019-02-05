@@ -9,8 +9,11 @@ import com.ioteg.model.Field;
 
 public class StringQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<String> {
 
-	public StringQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
+	protected String possibleChars;
+	
+	public StringQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions, String possibleChars) {
 		super(field, restrictions);
+		this.possibleChars = possibleChars;
 	}
 
 	@Override
@@ -39,7 +42,7 @@ public class StringQueryRestrictionGenerationAlgorithm extends QueryRestrictionG
 	private String generateNotEqualValue(Field field, String value) {
 		String result;
 		do {
-			result = RandomUtil.getRandStringRange(field.getLength(), field.getEndcharacter());
+			result = RandomUtil.getRandStringRange(field.getLength(), field.getEndcharacter(), possibleChars);
 		} while (result.equals(value));
 		
 		return result;
