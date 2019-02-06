@@ -51,7 +51,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertTrue(result < Long.valueOf(24L));
 	}
 	
@@ -64,7 +64,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(20);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, lessThan(Long.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-20L)));
 	}
@@ -79,7 +79,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, lessThan(Long.valueOf(-24)));
 	}
 	
@@ -92,7 +92,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThan(24L));
 	}
 	
@@ -106,7 +106,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(19);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThan(24L));
 		assertThat(result, lessThanOrEqualTo(200L));
 	}
@@ -120,7 +120,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertEquals(result, Long.valueOf(24));
 	}
 	
@@ -133,7 +133,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertTrue(result != Long.valueOf(24));
 	}
 	
@@ -146,7 +146,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(21);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, not(Long.valueOf(20)));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-100)));
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(100)));
@@ -164,7 +164,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(24)));
 	}
 	
@@ -178,7 +178,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 
 		Element field = fields.get(19);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(24)));
 	}
 	
@@ -190,7 +190,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(18);
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(24)));
 	}
@@ -203,7 +203,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(20);
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-20)));
@@ -219,7 +219,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(18);
 	
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
 
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(-24)));
 	}

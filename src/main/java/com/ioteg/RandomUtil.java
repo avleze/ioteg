@@ -29,20 +29,6 @@ public class RandomUtil {
 		}
 	}
 
-	/**
-	 * return random primitive type long
-	 * 
-	 * @param minRange
-	 * @param maxRange
-	 * @return
-	 */
-	public static long getRandomPrimitiveLong(long minRange, long maxRange) {
-		if (minRange == Long.MIN_VALUE)
-			return (long) ((Math.random() * (maxRange - Const.ZERO + Const.ONE) + Const.ZERO + Const.ONE));
-		else
-			return (long) ((Math.random() * (maxRange - minRange + Const.ONE)) + minRange);
-
-	}
 
 	/**
 	 * return random date in range of min max date
@@ -57,7 +43,7 @@ public class RandomUtil {
 		}
 		long beginTime = minDate.getTime();
 		long endTime = maxDate.getTime() + TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS);
-		long lNewDate = RandomUtil.getRandomPrimitiveLong(beginTime, endTime);
+		long lNewDate = r.longs(beginTime, endTime).findFirst().getAsLong();
 		return new Date(lNewDate);
 	}
 

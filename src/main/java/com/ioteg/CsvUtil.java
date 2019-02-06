@@ -77,7 +77,7 @@ public class CsvUtil extends EventGenerator {
 							sb.append(aux);
 						}
 					} else {
-						sb.append(NormalFieldCsv(field));
+						sb.append(normalFieldCsv(field));
 					}
 					if ((e < fields.size() - 1)) {
 						sb.append(",");
@@ -134,7 +134,7 @@ public class CsvUtil extends EventGenerator {
 	 * @throws IOException
 	 * @throws JDOMException
 	 */
-	static Object NormalFieldCsv(Element field) throws JDOMException, IOException {
+	static Object normalFieldCsv(Element field) throws JDOMException, IOException {
 		StringBuilder sb = new StringBuilder();
 		String quotes = field.getAttributeValue("quotes");
 		String type = field.getAttributeValue("type");
@@ -144,7 +144,7 @@ public class CsvUtil extends EventGenerator {
 			sb.append(generateValueComplexType(field, "csv"));
 		} else {// A basic type
 
-			value = generateValueSimpleType(type, field);
+			value = generateValueSimpleType(field);
 
 			if (quotes.equals("true")) {
 				sb.append("\"" + value + "\"");
@@ -189,7 +189,7 @@ public class CsvUtil extends EventGenerator {
 			if (!existType(type)) {
 				sb.append(generateValueComplexType(elementop, "csv"));
 			} else {
-				value = generateValueSimpleType(type, elementop);
+				value = generateValueSimpleType(elementop);
 				if (quotes.equals("true")) {
 					sb.append("\"" + value + "\"");
 				} else {

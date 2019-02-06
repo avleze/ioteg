@@ -19,6 +19,14 @@ import com.ioteg.EventGenerator;
 import com.ioteg.Trio;
 
 public class EPLConditionsParser {
+	private static final String AND_KEYWORD = "and";
+	private static final String OR_KEYWORD = "or";
+	private static final String BOOLEAN_PATTERN = "true|false[$]?";
+	private static final String NUMBER_PATTERN = "(?<!\\w)-?[0-9]+[$]?";
+	private static final String WORD_PATTERN = "(['\"])(.*?)(['\"][$]?)";
+	private static final String RELATIONAL_OPERATORS_PATTERN = "<=|>=|<|>|=|!=";
+	private static final String LOGICAL_OPERATORS_PATTERN = " or | and | OR | AND ";
+	private static final String WHERE_KEYWORD_WITH_SPACES = " where ";
 	private List<Integer> iterationValues;
 	private List<Map<String, List<Trio<String, String, String>>>> eplRestrictions;
 	private String eplFilePath;
@@ -48,12 +56,12 @@ public class EPLConditionsParser {
 
 		try (BufferedReader bf = new BufferedReader(eplF)) {
 			while ((query = bf.readLine()) != null) {
-				if (query.toLowerCase().contains(" where ")) {
+				if (query.toLowerCase().contains(WHERE_KEYWORD_WITH_SPACES)) {
 					String queryAfterWhere = "";
-					if (query.toLowerCase().indexOf(" where ") != -1)
-						queryAfterWhere = query.substring(query.toLowerCase().indexOf(" where ") + 7);
+					if (query.toLowerCase().indexOf(WHERE_KEYWORD_WITH_SPACES) != -1)
+						queryAfterWhere = query.substring(query.toLowerCase().indexOf(WHERE_KEYWORD_WITH_SPACES) + 7);
 
-					Pattern logicalOperatorsPattern = Pattern.compile(" or | and | OR | AND ");
+					Pattern logicalOperatorsPattern = Pattern.compile(LOGICAL_OPERATORS_PATTERN);
 					Matcher logicalOperatorsMatcher = logicalOperatorsPattern.matcher(queryAfterWhere);
 					List<String> logicalOperators = new ArrayList<>();
 
@@ -61,7 +69,7 @@ public class EPLConditionsParser {
 						logicalOperators.add(logicalOperatorsMatcher.group().toLowerCase().trim());
 					}
 
-					Pattern relationalOperatorsPattern = Pattern.compile("<=|>=|<|>|=|!=");
+					Pattern relationalOperatorsPattern = Pattern.compile(RELATIONAL_OPERATORS_PATTERN);
 					Matcher relationalOperatorsMatcher = relationalOperatorsPattern.matcher(queryAfterWhere);
 					Trio<String, String, String> lastFieldPut = null;
 					int i = 0;
@@ -74,9 +82,9 @@ public class EPLConditionsParser {
 
 						queryAfterWhere = queryAfterWhere.trim();
 
-						Pattern wordPattern = Pattern.compile("(['\"])(.*?)(['\"][$]?)");
-						Pattern numberPattern = Pattern.compile("(?<!\\w)-?[0-9]+[$]?");
-						Pattern booleanPattern = Pattern.compile("true|false[$]?");
+						Pattern wordPattern = Pattern.compile(WORD_PATTERN);
+						Pattern numberPattern = Pattern.compile(NUMBER_PATTERN);
+						Pattern booleanPattern = Pattern.compile(BOOLEAN_PATTERN);
 
 						Matcher wordMatcher = wordPattern.matcher(queryAfterWhere);
 						Matcher numberMatcher = numberPattern.matcher(queryAfterWhere);
@@ -101,16 +109,16 @@ public class EPLConditionsParser {
 
 						if (!queryAfterWhere.isEmpty() && !logicalOperators.isEmpty()) {
 							String logicalOp = logicalOperators.get(0);
-							if (logicalOp.equals("or"))
+							if (logicalOp.equals(OR_KEYWORD))
 								queryAfterWhere = queryAfterWhere.substring(3);
 							else
 								queryAfterWhere = queryAfterWhere.substring(4);
 						}
 
 						if (i > 0 && !logicalOperators.isEmpty()) {
-							if (logicalOperators.get(0).equals("or"))
+							if (logicalOperators.get(0).equals(OR_KEYWORD))
 								manageOrEPLOperator(lastFieldPut, singleRestriction, eplRestrictions);
-							else if (logicalOperators.get(0).equals("and"))
+							else if (logicalOperators.get(0).equals(AND_KEYWORD))
 								manageAndEPLOperator(singleRestriction, eplRestrictions);
 							logicalOperators.remove(0);
 						} else {

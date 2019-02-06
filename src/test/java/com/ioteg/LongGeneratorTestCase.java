@@ -37,7 +37,7 @@ public class LongGeneratorTestCase {
 
 		/** Test within a specified range **/
 		Element field = fields.get(0);
-		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field);
 		Long result = Long.parseLong(strResult);
 		assertTrue(Long.valueOf("-10000000") < result);
 		assertTrue(result <= 0);
@@ -50,7 +50,7 @@ public class LongGeneratorTestCase {
 		Element field = fields.get(1);
 
 		for (int i = 0; i < 100; ++i) {
-			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field);
 			Long result = Long.parseLong(strResult);
 			assertTrue(0 <= result);
 			assertTrue(result <= 9);
@@ -62,7 +62,7 @@ public class LongGeneratorTestCase {
 
 		/** Test of specified value **/
 		Element field = fields.get(2);
-		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field);
 		Long result = Long.parseLong(strResult);
 		assertEquals(Long.valueOf("9223372036854775807"), result);
 	}

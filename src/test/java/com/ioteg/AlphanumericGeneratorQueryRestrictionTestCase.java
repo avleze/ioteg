@@ -49,7 +49,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(28);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, equalTo("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(23));
 	}
@@ -63,7 +63,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(28);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(10));
 	}
@@ -77,7 +77,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(29);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.toUpperCase(), matchesPattern("[0123456789ABCDEF]*"));
 		assertThat(result.length(), equalTo(10));
@@ -92,7 +92,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(30);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.toUpperCase(), matchesPattern("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
 		assertThat(result.length(), equalTo(12));
@@ -107,7 +107,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(32);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(12));
 		assertThat(result, matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
@@ -122,7 +122,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(33);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
 	}
@@ -136,7 +136,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(31);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, matchesPattern("[0123456789ABCDEF]*"));
 		assertThat(result.length(), equalTo(12));

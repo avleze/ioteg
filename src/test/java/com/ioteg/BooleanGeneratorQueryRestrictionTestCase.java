@@ -47,7 +47,7 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(9);
 
-		Boolean result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Boolean result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, equalTo(Boolean.valueOf(true)));
 	}
 	
@@ -60,22 +60,22 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(9);
 
-		Boolean result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Boolean result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, not(Boolean.valueOf(true)));
 
 		field = fields.get(10);
 		
-		result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, not(Boolean.valueOf(false)));
 		
 		field = fields.get(11);
 
-		Integer resultNum = Integer.valueOf(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer resultNum = Integer.valueOf(EventGenerator.generateValueSimpleType(field));
 		assertThat(resultNum, not(Integer.valueOf(1)));
 		
 		field = fields.get(12);
 
-		resultNum = Integer.valueOf(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		resultNum = Integer.valueOf(EventGenerator.generateValueSimpleType(field));
 		assertThat(resultNum, not(Integer.valueOf(0)));
 	}
 	

@@ -108,7 +108,7 @@ public class XmlUtil extends EventGenerator {
 		} else {// A basic type
 
 			sb.append(" type=\"" + field.getAttributeValue("type") + "\">");
-			value = generateValueSimpleType(type, field);
+			value = generateValueSimpleType(field);
 
 			if (quotes.equals("true")) {
 				sb.append("\"" + value + "\"");
@@ -153,7 +153,7 @@ public class XmlUtil extends EventGenerator {
 				sb.append(generateValueComplexType(elementop, "xml"));
 			} else {
 				sb.append(" type=\"" + elementop.getAttributeValue("type") + "\">");
-				value = generateValueSimpleType(type, elementop);
+				value = generateValueSimpleType(elementop);
 				if (quotes.equals("true")) {
 					sb.append("\"" + value + "\"");
 				} else {

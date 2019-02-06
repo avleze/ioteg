@@ -38,7 +38,7 @@ public class IntegerGeneratorTestCase {
 
 		/** Test within a specified range **/
 		Element field = fields.get(0);
-		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field);
 		Integer result = Integer.parseInt(strResult);
 
 		assertTrue(100000 < result);
@@ -52,7 +52,7 @@ public class IntegerGeneratorTestCase {
 		Element field = fields.get(1);
 
 		for (int i = 0; i < 100; ++i) {
-			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field);
 			Integer result = Integer.parseInt(strResult);
 			assertTrue(0 <= result);
 			assertTrue(result <= 9);
@@ -65,7 +65,7 @@ public class IntegerGeneratorTestCase {
 
 		/** Test of specified value **/
 		Element field = fields.get(2);
-		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field);
 		Integer result = Integer.parseInt(strResult);
 		assertEquals(Integer.valueOf(104), result);
 	}

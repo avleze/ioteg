@@ -47,7 +47,7 @@ public class DateGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(34);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, equalTo("96-05-10"));
 	}
 	
@@ -60,7 +60,7 @@ public class DateGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(34);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("96-06-10"));
 	}
 

@@ -98,12 +98,12 @@ public class EventGenerator {
 	 * A function to obtain values from the fields elements at the where clauses of
 	 * the EPL queries to assign them to the fields of the events
 	 * 
-	 * @param EPLfile  contains the EPL queries
+	 * @param eplFilePath  contains the EPL queries
 	 * @param rootNode is the root of the event definition
 	 * @throws IOException if the file causes problems
 	 */
-	public static void getEPLValues(String EPLfile, Element rootNode) throws IOException {
-		EPLConditionsParser eplConditionsParser = new EPLConditionsParser(EPLfile, rootNode);
+	public static void getEPLValues(String eplFilePath, Element rootNode) throws IOException {
+		EPLConditionsParser eplConditionsParser = new EPLConditionsParser(eplFilePath, rootNode);
 		fieldvalues = eplConditionsParser.getRestrictions(totalnumevents);
 		iterationvalues = eplConditionsParser.getIterationValues();
 	}
@@ -113,14 +113,13 @@ public class EventGenerator {
 	 * The assigned type is in the IoT-EG. This function select the correct value
 	 * generator according to the type.
 	 * 
-	 * @param type  is the String to check
 	 * @param field The element which the type @param type
 	 * @return a value of the specific type according to the declared restriction
 	 *         and attributes of the Element field
 	 * @throws IOException
 	 * @throws JDOMException
 	 */
-	public static String generateValueSimpleType(String type, Element field) throws JDOMException, IOException {
+	public static String generateValueSimpleType(Element field) throws JDOMException, IOException {
 
 		String value = "";
 		String fieldname = field.getAttributeValue("name");
@@ -187,15 +186,14 @@ public class EventGenerator {
 					result.append(XmlUtil.normalFieldsXml(simple));
 				}
 				if (type.equals("csv")) {
-					result.append(CsvUtil.NormalFieldCsv(simple) + ",");
+					result.append(CsvUtil.normalFieldCsv(simple) + ",");
 				}
 			} else {
 				if (type.equals("xml")) {
 					result.append(" type=\"" + simple.getAttributeValue("type") + "\">");
 				}
 
-				String stype = simple.getAttributeValue("type");
-				finalvalue = generateValueSimpleType(stype, simple);
+				finalvalue = generateValueSimpleType(simple);
 			}
 		}
 		if (field.getAttributeValue("dependence") != null) {
@@ -209,8 +207,7 @@ public class EventGenerator {
 				result.append(" type=\"" + simple.getAttributeValue("type") + "\">");
 			}
 
-			String stype = simple.getAttributeValue("type");
-			finalvalue = generateValueSimpleType(stype, simple);
+			finalvalue = generateValueSimpleType(simple);
 		}
 		if ((field.getAttributeValue("dependence") == null) && (field.getAttributeValue("chooseone") == null)) {
 			if (simpletype.get(0).getName().equals("field")) {
@@ -235,7 +232,7 @@ public class EventGenerator {
 				if (type.equals("csv")) {
 					for (int s = 0; s < simpletype.size(); s++) {
 						Element simple = simpletype.get(s);
-						result.append(CsvUtil.NormalFieldCsv(simple));
+						result.append(CsvUtil.normalFieldCsv(simple));
 						if (s < simpletype.size() - 1) {
 							result.append(",");
 						}
@@ -248,8 +245,7 @@ public class EventGenerator {
 
 				for (int s = 0; s < simpletype.size(); s++) {
 					Element simple = simpletype.get(s);
-					String stype = simple.getAttributeValue("type");
-					value = generateValueSimpleType(stype, simple);
+					value = generateValueSimpleType(simple);
 					finalvalue = finalvalue + value;
 				}
 			}

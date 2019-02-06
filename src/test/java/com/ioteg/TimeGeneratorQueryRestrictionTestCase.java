@@ -47,7 +47,7 @@ public class TimeGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(35);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, equalTo("12:43"));
 	}
 	
@@ -60,7 +60,7 @@ public class TimeGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(35);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("12:43"));
 	}
 

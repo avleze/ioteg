@@ -53,7 +53,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, lessThan(Float.valueOf(24)));
 	}
 	
@@ -66,7 +66,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(15);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, lessThan(Float.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-20.58f)));
 	}
@@ -81,7 +81,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, lessThan(Float.valueOf(-24)));
 	}
 	
@@ -94,7 +94,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThan(24f));
 	}
 	
@@ -108,7 +108,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(14);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThan(24f));
 		assertThat(result, lessThanOrEqualTo(200.34f));
 	}
@@ -122,7 +122,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, equalTo(Float.valueOf(24f)));
 	}
 	
@@ -135,7 +135,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, not(Float.valueOf(24f)));
 	}
 	
@@ -148,7 +148,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(16);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, not(Float.valueOf(24f)));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-100.134f)));
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(134.1f)));
@@ -166,7 +166,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(24)));
 	}
 	
@@ -180,7 +180,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 		Element field = fields.get(14);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(24)));
 	}
 	
@@ -192,7 +192,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(13);
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(24)));
 	}
@@ -205,7 +205,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(15);
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(24f)));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-20.58f)));
@@ -220,7 +220,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(13);
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
 
 
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(-24f)));
@@ -235,7 +235,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(17);
 	
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 
 		assertThat(Float.valueOf(result), lessThanOrEqualTo(Float.valueOf(-24f)));
 		assertThat(Float.valueOf(result), greaterThanOrEqualTo(Float.valueOf(-100.134234f)));

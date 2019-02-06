@@ -52,7 +52,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertTrue(result < Integer.valueOf(24));
 	}
 	
@@ -65,7 +65,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(7);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, lessThan(Integer.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-20)));
 	}
@@ -80,7 +80,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertTrue(result < Integer.valueOf(-24));
 	}
 	
@@ -93,7 +93,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThan(24));
 	}
 	
@@ -107,7 +107,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(6);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThan(24));
 		assertThat(result, lessThanOrEqualTo(200));
 	}
@@ -121,7 +121,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertEquals(result, Integer.valueOf(24));
 	}
 	
@@ -134,7 +134,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertTrue(result != Integer.valueOf(24));
 	}
 	
@@ -147,7 +147,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(8);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, not(Integer.valueOf(20)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-100)));
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(100)));
@@ -165,7 +165,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(24)));
 	}
 	
@@ -179,7 +179,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 		Element field = fields.get(6);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(24)));
 	}
 	
@@ -191,7 +191,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(0);
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(24)));
 	}
@@ -204,7 +204,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 				document.getRootElement());
 		
 		Element field = fields.get(7);
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-20)));
@@ -225,7 +225,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 				System.out.print(", [" + elIn.first + ", " + elIn.second + ", " + elIn.third + "]");
 			}
 		}*/
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 		
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(-24)));
 	}

@@ -120,7 +120,7 @@ public class JsonUtil extends EventGenerator {
 			sb.append(generateValueComplexType(field, "json"));
 		} else {// A basic type
 
-			value = generateValueSimpleType(type, field);
+			value = generateValueSimpleType(field);
 
 			if (quotes.equals("true")) {
 				sb.append("\"" + value + "\"");
@@ -165,7 +165,7 @@ public class JsonUtil extends EventGenerator {
 			if (!existType(type)) {
 				sb.append(generateValueComplexType(elementop, "json"));
 			} else {
-				value = generateValueSimpleType(type, elementop);
+				value = generateValueSimpleType(elementop);
 				if (quotes.equals("true")) {
 					sb.append("\"" + value + "\"");
 				} else {

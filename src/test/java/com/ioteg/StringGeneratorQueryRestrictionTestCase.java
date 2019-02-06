@@ -48,7 +48,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(22);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, equalTo("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(23));
 	}
@@ -62,7 +62,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(22);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(10));
 	}
@@ -76,7 +76,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(23);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, matchesPattern("[ABCDEF]*"));
 		assertThat(result.length(), equalTo(10));
@@ -91,7 +91,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(24);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(12));
 	}
@@ -105,7 +105,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(26);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(12));
 		assertThat(result, equalTo(result.toLowerCase()));
@@ -120,7 +120,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(27);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, equalTo(result.toLowerCase()));
 		assertThat(result, matchesPattern("[abcdef]*"));
@@ -135,7 +135,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		
 		Element field = fields.get(25);
 
-		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, matchesPattern("[ABCDEF]*"));
 		assertThat(result.length(), equalTo(12));

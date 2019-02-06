@@ -38,7 +38,7 @@ public class DateGeneratorTestCase {
 		Element field = fields.get(0);
 
 		for (int i = 0; i < 1000; ++i) {
-			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field);
 			SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-DD");
 			sdf.parse(strResult);
 		}
@@ -47,7 +47,7 @@ public class DateGeneratorTestCase {
 	@Test
 	public void testFixedValue() throws JDOMException, IOException {
 		Element field = fields.get(1);
-		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field);
 
 		assertTrue(strResult.equals("08-05-01"));
 	}
