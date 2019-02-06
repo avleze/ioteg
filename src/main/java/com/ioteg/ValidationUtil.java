@@ -28,7 +28,7 @@ public class ValidationUtil {
 	private ValidationUtil() {
 		throw new IllegalStateException("This is an utility class and can't be instantiated.");
 	}
-	
+
 	public static Boolean validStandart(File xmlFile) throws JDOMException, IOException {
 
 		SAXBuilder builder = new SAXBuilder();
@@ -78,14 +78,13 @@ public class ValidationUtil {
 	}
 
 	private static Boolean validateFieldElements(Element field) {
-
 		Boolean valid = true;
 
 		if (field.getName().equals(OPTIONALFIELDS_TAG))
 			valid = validateOptionalFieldsElements(field, valid);
-		else if (field.getName().equals(FIELD_TAG)) {
+		else if (field.getName().equals(FIELD_TAG))
 			valid = validateSingleField(field, valid);
-		} else
+		else
 			valid = false;
 
 		return valid;
@@ -173,6 +172,9 @@ public class ValidationUtil {
 			break;
 		case "Time":
 			valid = validateTime(field);
+			break;
+		default:
+			valid = false;
 			break;
 		}
 
