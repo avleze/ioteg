@@ -47,7 +47,7 @@ public class XmlUtilTestCase {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
 		
-		XmlUtil.XmlFormatValues(values, doc);
+		XmlUtil.xmlFormatValues(values, doc);
 
 		values.close();
 		
@@ -76,7 +76,7 @@ public class XmlUtilTestCase {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
 		Document doc = builder.build(xmlFile);
 		
-		XmlUtil.XmlFormatValues(values, doc);
+		XmlUtil.xmlFormatValues(values, doc);
 
 		values.close();
 		
@@ -101,7 +101,7 @@ public class XmlUtilTestCase {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);
 		
-		XmlUtil.XmlFormatValues(values, doc);
+		XmlUtil.xmlFormatValues(values, doc);
 
 		values.close();
 		

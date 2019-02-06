@@ -47,12 +47,12 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionLessOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertTrue(result < Integer.valueOf(24));
 	}
 	
@@ -60,12 +60,12 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(7);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, lessThan(Integer.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-20)));
 	}
@@ -75,12 +75,12 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperatorWithNegativeValue.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperatorWithNegativeValue.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertTrue(result < Integer.valueOf(-24));
 	}
 	
@@ -88,12 +88,12 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionGreaterOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThan(24));
 	}
 	
@@ -102,12 +102,12 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(6);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThan(24));
 		assertThat(result, lessThanOrEqualTo(200));
 	}
@@ -116,12 +116,12 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertEquals(result, Integer.valueOf(24));
 	}
 	
@@ -129,12 +129,12 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertTrue(result != Integer.valueOf(24));
 	}
 	
@@ -142,12 +142,12 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(8);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, not(Integer.valueOf(20)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-100)));
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(100)));
@@ -159,13 +159,13 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterEqualOperator.epl").getPath(),
 				document.getRootElement());
 
 
 		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(24)));
 	}
 	
@@ -173,13 +173,13 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterEqualOperator.epl").getPath(),
 				document.getRootElement());
 
 
 		Element field = fields.get(6);
 
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(24)));
 	}
 	
@@ -187,11 +187,11 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionLessEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(0);
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(24)));
 	}
@@ -200,11 +200,11 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(7);
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-20)));
@@ -215,7 +215,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	public void testIntegerQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(0);
@@ -225,7 +225,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 				System.out.print(", [" + elIn.first + ", " + elIn.second + ", " + elIn.third + "]");
 			}
 		}*/
-		Integer result = Integer.parseInt(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(-24)));
 	}

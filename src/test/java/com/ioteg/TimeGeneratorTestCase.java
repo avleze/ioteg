@@ -39,7 +39,7 @@ public class TimeGeneratorTestCase {
 		Element field = fields.get(0);
 
 		for (int i = 0; i < 1000; ++i) {
-			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 			sdf.parse(strResult);
 		}
@@ -49,7 +49,7 @@ public class TimeGeneratorTestCase {
 	@Test
 	public void testFixedValue() throws JDOMException, IOException {
 		Element field = fields.get(1);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertTrue(strResult.equals("14:24"));
 	}
 

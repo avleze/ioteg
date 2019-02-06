@@ -48,7 +48,7 @@ public class CsvUtilTestCase {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
-		CsvUtil.CsvFormatValues(values, doc);
+		CsvUtil.csvFormatValues(values, doc);
 
 		values.close();
 
@@ -74,7 +74,7 @@ public class CsvUtilTestCase {
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
-		CsvUtil.CsvFormatValues(values, doc);
+		CsvUtil.csvFormatValues(values, doc);
 
 		values.close();
 
@@ -99,7 +99,7 @@ public class CsvUtilTestCase {
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
-		CsvUtil.CsvFormatValues(values, doc);
+		CsvUtil.csvFormatValues(values, doc);
 
 		values.close();
 

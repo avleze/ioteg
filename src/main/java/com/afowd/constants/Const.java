@@ -97,4 +97,9 @@ public class Const {
 	public static final String HOURS = "HOURS";
 	public static final String MINUTES = "MINUTES";
 	public static final String SECONDS = "SECONDS";
+	
+	private Const() {
+		throw new IllegalStateException("This is an utility class and can't be instantiated.");
+	}
+	
 }

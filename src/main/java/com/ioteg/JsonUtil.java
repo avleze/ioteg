@@ -19,7 +19,7 @@ public class JsonUtil extends EventGenerator {
 	 * @throws IOException   files exceptions
 	 * @throws JDOMException
 	 */
-	public static void JsonFormatValues(FileWriter values, Document document) throws IOException, JDOMException {
+	public static void jsonFormatValues(FileWriter values, Document document) throws IOException, JDOMException {
 
 		BufferedWriter bw = new BufferedWriter(values);
 		StringBuilder sb = new StringBuilder();
@@ -43,7 +43,7 @@ public class JsonUtil extends EventGenerator {
 				sb.append("{"); // The beginning of a field
 				for (int e = 0; e < fields.size(); e++) {
 					Element field = fields.get(e);
-					sb.append(NormalFieldJson(field));
+					sb.append(normalFieldJson(field));
 					if ((e < fields.size() - 1)) {
 						sb.append(",");
 					}
@@ -73,7 +73,7 @@ public class JsonUtil extends EventGenerator {
 								sb.append(aux.toString());
 							}
 						} else {
-							sb.append(NormalFieldJson(field));
+							sb.append(normalFieldJson(field));
 						}
 						if ((e < fields.size() - 1)) {
 							sb.append(",");
@@ -108,7 +108,7 @@ public class JsonUtil extends EventGenerator {
 	 * @throws IOException
 	 * @throws JDOMException
 	 */
-	public static StringBuilder NormalFieldJson(Element field) throws JDOMException, IOException {
+	public static StringBuilder normalFieldJson(Element field) throws JDOMException, IOException {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("\"" + field.getAttributeValue("name") + "\":");
@@ -117,10 +117,10 @@ public class JsonUtil extends EventGenerator {
 		String value = "";
 
 		if (!existType(type)) { // A non basic type
-			sb.append(GenerateValueComplexType(field, "json"));
+			sb.append(generateValueComplexType(field, "json"));
 		} else {// A basic type
 
-			value = GenerateValueSimpleType(type, field);
+			value = generateValueSimpleType(type, field);
 
 			if (quotes.equals("true")) {
 				sb.append("\"" + value + "\"");
@@ -163,9 +163,9 @@ public class JsonUtil extends EventGenerator {
 			String type = elementop.getAttributeValue("type");
 
 			if (!existType(type)) {
-				sb.append(GenerateValueComplexType(elementop, "json"));
+				sb.append(generateValueComplexType(elementop, "json"));
 			} else {
-				value = GenerateValueSimpleType(type, elementop);
+				value = generateValueSimpleType(type, elementop);
 				if (quotes.equals("true")) {
 					sb.append("\"" + value + "\"");
 				} else {

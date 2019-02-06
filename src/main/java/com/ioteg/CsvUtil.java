@@ -20,7 +20,7 @@ public class CsvUtil extends EventGenerator {
 	 * @throws IOException   files exceptions
 	 * @throws JDOMException
 	 */
-	public static void CsvFormatValues(FileWriter values, Document document) throws IOException, JDOMException {
+	public static void csvFormatValues(FileWriter values, Document document) throws IOException, JDOMException {
 
 		BufferedWriter bw = new BufferedWriter(values);
 		StringBuilder sb = new StringBuilder();
@@ -53,7 +53,7 @@ public class CsvUtil extends EventGenerator {
 						}
 					}
 				} else {
-					sb.append(NormalFieldCsvHead(fields.get(f)));
+					sb.append(normalFieldCsvHead(fields.get(f)));
 
 					if (f != fields.size() - 1) {
 						sb.append(",");
@@ -69,7 +69,7 @@ public class CsvUtil extends EventGenerator {
 					Element field = fields.get(e);
 
 					if (field.getName().equals("optionalfields")) {
-						StringBuilder aux = OptionalFieldCsv(field);
+						StringBuilder aux = optionalFieldCsv(field);
 						if (aux.length() == 0) {
 							int length = sb.length();
 							sb.deleteCharAt(length - 1);
@@ -100,7 +100,7 @@ public class CsvUtil extends EventGenerator {
 	 * @param field is a normal field type element
 	 * @return the structure of the field for the top csv file
 	 */
-	private static StringBuilder NormalFieldCsvHead(Element field) {
+	private static StringBuilder normalFieldCsvHead(Element field) {
 		StringBuilder sb = new StringBuilder();
 		String type = field.getAttributeValue("type");
 
@@ -109,7 +109,7 @@ public class CsvUtil extends EventGenerator {
 			Element first = elements.get(0);
 			if (first.getName().equals("field")) {
 				for (int e = 0; e < elements.size(); e++) {
-					sb.append(field.getAttributeValue("name") + "." + NormalFieldCsvHead(elements.get(e)) + ",");
+					sb.append(field.getAttributeValue("name") + "." + normalFieldCsvHead(elements.get(e)) + ",");
 					if (e == elements.size() - 1) {
 						int length = sb.length();
 						sb.deleteCharAt(length - 1);
@@ -141,10 +141,10 @@ public class CsvUtil extends EventGenerator {
 		String value = "";
 
 		if (!existType(type)) { // A non basic type
-			sb.append(GenerateValueComplexType(field, "csv"));
+			sb.append(generateValueComplexType(field, "csv"));
 		} else {// A basic type
 
-			value = GenerateValueSimpleType(type, field);
+			value = generateValueSimpleType(type, field);
 
 			if (quotes.equals("true")) {
 				sb.append("\"" + value + "\"");
@@ -165,7 +165,7 @@ public class CsvUtil extends EventGenerator {
 	 * @throws IOException
 	 * @throws JDOMException
 	 */
-	static StringBuilder OptionalFieldCsv(Element field) throws JDOMException, IOException {
+	static StringBuilder optionalFieldCsv(Element field) throws JDOMException, IOException {
 
 		StringBuilder sb = new StringBuilder();
 		List<Element> optional = field.getChildren();
@@ -187,9 +187,9 @@ public class CsvUtil extends EventGenerator {
 			}
 
 			if (!existType(type)) {
-				sb.append(GenerateValueComplexType(elementop, "csv"));
+				sb.append(generateValueComplexType(elementop, "csv"));
 			} else {
-				value = GenerateValueSimpleType(type, elementop);
+				value = generateValueSimpleType(type, elementop);
 				if (quotes.equals("true")) {
 					sb.append("\"" + value + "\"");
 				} else {

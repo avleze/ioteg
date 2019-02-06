@@ -7,7 +7,7 @@ public class Trio<A, B, C> {
 	private C third;
 
 	public Trio() {
-	};
+	}
 
 	public Trio(A first, B second, C third) {
 		this.first = first;

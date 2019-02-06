@@ -38,16 +38,16 @@ public class BooleanGeneratorTestCase {
 
 		Element field = fields.get(0);
 		/** The loops are necessary in order to cover all the code **/
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		while (strResult.contains("0")) {
 			assertEquals("0", strResult);
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		}
 		assertEquals("1", strResult);
 
 		while (strResult.contains("1")) {
 			assertEquals("1", strResult);
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		}
 
 		assertEquals("0", strResult);
@@ -57,7 +57,7 @@ public class BooleanGeneratorTestCase {
 	public void testRandomAndNotNumeric() throws JDOMException, IOException {
 
 		Element field = fields.get(1);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertTrue("true".equals(strResult) || "false".equals(strResult));
 	}
@@ -66,7 +66,7 @@ public class BooleanGeneratorTestCase {
 	public void testFixedValue() throws JDOMException, IOException {
 
 		Element field = fields.get(2);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertTrue("true".equals(strResult));
 	}

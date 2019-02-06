@@ -16,6 +16,10 @@ public class RandomUtil {
 	protected static Random r;
 	protected static Logger logger;
 
+	private RandomUtil() {
+		throw new IllegalStateException("This is an utility class and can't be instantiated.");
+	}
+
 	static {
 		logger = Logger.getRootLogger();
 		try {
@@ -24,7 +28,7 @@ public class RandomUtil {
 			logger.error(e);
 		}
 	}
-	
+
 	/**
 	 * return random primitive type long
 	 * 
@@ -33,25 +37,11 @@ public class RandomUtil {
 	 * @return
 	 */
 	public static long getRandomPrimitiveLong(long minRange, long maxRange) {
-		if (minRange == Long.MIN_VALUE) {
-			long value = (long) ((Math.random() * (maxRange - Const.ZERO + Const.ONE) + Const.ZERO + Const.ONE));
-			return value;
-		} else {
+		if (minRange == Long.MIN_VALUE)
+			return (long) ((Math.random() * (maxRange - Const.ZERO + Const.ONE) + Const.ZERO + Const.ONE));
+		else
 			return (long) ((Math.random() * (maxRange - minRange + Const.ONE)) + minRange);
-		}
-	}
 
-	/**
-	 * return false if value need to be null
-	 * 
-	 * @return
-	 */
-	private static boolean getRandomValueOrNull() {
-		int lRandomNumber = (int) (Math.random() * Const.FIVE);
-		if (lRandomNumber % Const.FIVE == Const.ZERO) {
-			return true;
-		}
-		return false;
 	}
 
 	/**
@@ -62,7 +52,7 @@ public class RandomUtil {
 	 * @return
 	 */
 	public static Date getRandomDate(Date minDate, Date maxDate, boolean bAllowNulls) {
-		if (bAllowNulls && getRandomValueOrNull()) {
+		if (bAllowNulls && r.nextBoolean()) {
 			return null;
 		}
 		long beginTime = minDate.getTime();
@@ -100,24 +90,23 @@ public class RandomUtil {
 		calendar.set(Calendar.MILLISECOND, calendar.getActualMaximum(Calendar.MILLISECOND));
 		return calendar.getTimeInMillis();
 	}
-	
 
 	/**
 	 * Generate a randomString
 	 * 
-	 * @param length determines the length of the String and
-	 * @param endcharacter   determines the last character for the range
-	 * @param possibleChars	the possible chars to form the string.
+	 * @param length        determines the length of the String and
+	 * @param endcharacter  determines the last character for the range
+	 * @param possibleChars the possible chars to form the string.
 	 * @return a random Alphanumeric String with a long length
 	 */
 	public static String getRandStringRange(int length, String endcharacter, String possibleChars) {
 		StringBuilder result = new StringBuilder();
-		int lastPossibleIndex =  endcharacter == null ? possibleChars.length() : possibleChars.indexOf(endcharacter);
+		int lastPossibleIndex = endcharacter == null ? possibleChars.length() : possibleChars.indexOf(endcharacter);
 		while (result.length() < length) {
 			int index = r.nextInt(lastPossibleIndex);
 			result.append(possibleChars.charAt(index));
 		}
-		
+
 		return result.toString();
 	}
 

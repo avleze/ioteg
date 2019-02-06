@@ -25,6 +25,10 @@ public class ValidationUtil {
 	private static final String OPTIONALFIELDS_TAG = "optionalfields";
 	private static Logger logger = Logger.getRootLogger();
 
+	private ValidationUtil() {
+		throw new IllegalStateException("This is an utility class and can't be instantiated.");
+	}
+	
 	public static Boolean validStandart(File xmlFile) throws JDOMException, IOException {
 
 		SAXBuilder builder = new SAXBuilder();

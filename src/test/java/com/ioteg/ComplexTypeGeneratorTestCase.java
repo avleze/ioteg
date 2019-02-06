@@ -43,7 +43,7 @@ public class ComplexTypeGeneratorTestCase {
 	public void testGenerateComplexValueCsv() throws IOException, JDOMException {		
 		Element field = fields.get(36);
 
-		StringBuilder result = EventGenerator.GenerateValueComplexType(field, "csv");
+		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
 		String[] resultSplitted = result.toString().split(",");
 		
 		assertThat(resultSplitted[0].length(), equalTo(4));
@@ -55,7 +55,7 @@ public class ComplexTypeGeneratorTestCase {
 	public void testGenerateComplexValueCsvWithChooseoneAttributes() throws IOException, JDOMException {		
 		Element field = fields.get(37);
 
-		StringBuilder result = EventGenerator.GenerateValueComplexType(field, "csv");
+		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
 
 		String[] resultSplitted = result.toString().split(",");
 		
@@ -69,7 +69,7 @@ public class ComplexTypeGeneratorTestCase {
 	public void testGenerateComplexValueCsvWithChooseoneFields() throws IOException, JDOMException {		
 		Element field = fields.get(38);
 
-		StringBuilder result = EventGenerator.GenerateValueComplexType(field, "csv");
+		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
 		String[] resultSplitted = result.toString().split(",");
 		
 		assertThat(resultSplitted[0].length(), equalTo(4));
@@ -82,7 +82,7 @@ public class ComplexTypeGeneratorTestCase {
 	public void testGenerateComplexValueJson() throws IOException, JDOMException {		
 		Element field = fields.get(36);
 
-		StringBuilder result = EventGenerator.GenerateValueComplexType(field, "json");
+		StringBuilder result = EventGenerator.generateValueComplexType(field, "json");
 		String[] resultSplitted = result.toString().split(",");
 
 		assertThat(resultSplitted[0], matchesPattern("\\{\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
@@ -95,7 +95,7 @@ public class ComplexTypeGeneratorTestCase {
 	public void testGenerateComplexValueJsonWithChooseoneAttributes() throws IOException, JDOMException {		
 		Element field = fields.get(37);
 
-		StringBuilder result = EventGenerator.GenerateValueComplexType(field, "json");
+		StringBuilder result = EventGenerator.generateValueComplexType(field, "json");
 		String[] resultSplitted = result.toString().split(",");
 		assertThat(resultSplitted[0], matchesPattern("\\{\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 		assertThat(resultSplitted[1], matchesPattern("\"latitud\":-?\\d+\\.\\d{5}"));
@@ -107,7 +107,7 @@ public class ComplexTypeGeneratorTestCase {
 	public void testGenerateComplexValueJsonWithChooseoneFields() throws IOException, JDOMException {		
 		Element field = fields.get(38);
 
-		StringBuilder result = EventGenerator.GenerateValueComplexType(field, "json");
+		StringBuilder result = EventGenerator.generateValueComplexType(field, "json");
 		String[] resultSplitted = result.toString().split(",");
 		assertThat(resultSplitted[0], matchesPattern("\\{\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 		assertThat(resultSplitted[1], matchesPattern("\"latitud\":-?\\d+\\.\\d{5}"));
@@ -118,7 +118,7 @@ public class ComplexTypeGeneratorTestCase {
 	@Test
 	public void testGenerateComplexValueXml() throws IOException, JDOMException {		
 		Element field = fields.get(36);
-		StringBuilder result = EventGenerator.GenerateValueComplexType(field, "xml");
+		StringBuilder result = EventGenerator.generateValueComplexType(field, "xml");
 		String[] resultSplitted = result.toString().split("\n");
 
 		assertThat(resultSplitted[1], matchesPattern("<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"));
@@ -129,7 +129,7 @@ public class ComplexTypeGeneratorTestCase {
 	@Test
 	public void testGenerateComplexValueXmlWithChooseoneAttributes() throws IOException, JDOMException {		
 		Element field = fields.get(37);
-		StringBuilder result = EventGenerator.GenerateValueComplexType(field, "xml");
+		StringBuilder result = EventGenerator.generateValueComplexType(field, "xml");
 		String[] resultSplitted = result.toString().split("\n");
 
 		assertThat(resultSplitted[1], matchesPattern("<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"));
@@ -141,7 +141,7 @@ public class ComplexTypeGeneratorTestCase {
 	@Test
 	public void testGenerateComplexValueXmlWithChooseoneFields() throws IOException, JDOMException {		
 		Element field = fields.get(38);
-		StringBuilder result = EventGenerator.GenerateValueComplexType(field, "xml");
+		StringBuilder result = EventGenerator.generateValueComplexType(field, "xml");
 		String[] resultSplitted = result.toString().split("\n");
 		assertThat(resultSplitted[1], matchesPattern("<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"));
 		assertThat(resultSplitted[2], matchesPattern("<latitud type=\"Float\">-?\\d+\\.\\d{5}</latitud>"));

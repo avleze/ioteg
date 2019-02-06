@@ -42,12 +42,12 @@ public class DateGeneratorQueryRestrictionTestCase {
 	public void testDateQueryRestrictionEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/DateOperatorExamples/EPLDateQueryEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/DateOperatorExamples/EPLDateQueryEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(34);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, equalTo("96-05-10"));
 	}
 	
@@ -55,12 +55,12 @@ public class DateGeneratorQueryRestrictionTestCase {
 	public void testDateQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/DateOperatorExamples/EPLDateQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/DateOperatorExamples/EPLDateQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(34);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("96-06-10"));
 	}
 

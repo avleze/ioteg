@@ -46,12 +46,12 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionLessOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertTrue(result < Long.valueOf(24L));
 	}
 	
@@ -59,12 +59,12 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(20);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, lessThan(Long.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-20L)));
 	}
@@ -74,12 +74,12 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperatorWithNegativeValue.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperatorWithNegativeValue.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, lessThan(Long.valueOf(-24)));
 	}
 	
@@ -87,12 +87,12 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionGreaterOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThan(24L));
 	}
 	
@@ -101,12 +101,12 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(19);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThan(24L));
 		assertThat(result, lessThanOrEqualTo(200L));
 	}
@@ -115,12 +115,12 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertEquals(result, Long.valueOf(24));
 	}
 	
@@ -128,12 +128,12 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertTrue(result != Long.valueOf(24));
 	}
 	
@@ -141,12 +141,12 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(21);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, not(Long.valueOf(20)));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-100)));
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(100)));
@@ -158,13 +158,13 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterEqualOperator.epl").getPath(),
 				document.getRootElement());
 
 
 		Element field = fields.get(18);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(24)));
 	}
 	
@@ -172,13 +172,13 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterEqualOperator.epl").getPath(),
 				document.getRootElement());
 
 
 		Element field = fields.get(19);
 
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(24)));
 	}
 	
@@ -186,11 +186,11 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionLessEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(18);
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(24)));
 	}
@@ -199,11 +199,11 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(20);
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-20)));
@@ -214,12 +214,12 @@ public class LongGeneratorQueryRestrictionTestCase {
 	public void testLongQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(18);
 	
-		Long result = Long.parseLong(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(-24)));
 	}

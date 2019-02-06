@@ -34,7 +34,7 @@ public class GetEPLValuesTestCase {
 	public void testEPLOperators() throws JDOMException, IOException, ParseException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/EPLQuery.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/EPLQuery.epl").getPath(),
 				document.getRootElement());
 
 		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
@@ -78,7 +78,7 @@ public class GetEPLValuesTestCase {
 	public void testEPLOrOperator() throws JDOMException, IOException, ParseException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/EPLQueryOrOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/EPLQueryOrOperator.epl").getPath(),
 				document.getRootElement());
 
 		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
@@ -96,7 +96,7 @@ public class GetEPLValuesTestCase {
 	public void testEPLAndOperator() throws JDOMException, IOException, ParseException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/EPLQueryAndOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/EPLQueryAndOperator.epl").getPath(),
 				document.getRootElement());
 
 		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
@@ -114,7 +114,7 @@ public class GetEPLValuesTestCase {
 	public void testEPLNested() throws JDOMException, IOException, ParseException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/EPLQueryNested.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/EPLQueryNested.epl").getPath(),
 				document.getRootElement());
 
 		Trio<String, String, String> trioToTest = EventGenerator.fieldvalues.get(0).get("field1").get(0);
@@ -162,7 +162,7 @@ public class GetEPLValuesTestCase {
 	public void testEPLRemoveComplexType() throws JDOMException, IOException, ParseException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/ComplexFieldExamples/EPLComplexFieldQuery.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/ComplexFieldExamples/EPLComplexFieldQuery.epl").getPath(),
 				document.getRootElement());
 
 		assertThat(EventGenerator.fieldvalues, empty());

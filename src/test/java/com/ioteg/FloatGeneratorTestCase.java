@@ -38,7 +38,7 @@ public class FloatGeneratorTestCase {
 		Element field = fields.get(0);
 
 		for (int i = 0; i < 10000; ++i) {
-			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			Double result = Double.parseDouble(strResult);
 			assertTrue(0.0 <= result);
 			assertTrue(result <= 10);
@@ -52,7 +52,7 @@ public class FloatGeneratorTestCase {
 		Element field = fields.get(1);
 
 		for (int i = 0; i < 10000; ++i) {
-			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			Double result = Double.parseDouble(strResult);
 			assertTrue(23.54 <= result);
 			assertTrue(result <= 32.58);
@@ -65,7 +65,7 @@ public class FloatGeneratorTestCase {
 
 		/** Test of specified value **/
 		Element field = fields.get(2);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		Double result = Double.parseDouble(strResult);
 		assertEquals(Double.valueOf("104.567"), result);
 	}

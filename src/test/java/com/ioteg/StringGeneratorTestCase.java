@@ -37,7 +37,7 @@ public class StringGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultLength() throws JDOMException, IOException {
 		Element field = fields.get(0);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertTrue(strResult.matches("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
 		assertEquals(10, strResult.length());
@@ -46,7 +46,7 @@ public class StringGeneratorTestCase {
 	@Test
 	public void testRandomWithSpecifiedLength() throws JDOMException, IOException {
 		Element field = fields.get(1);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertTrue(strResult.matches("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
 		assertEquals(24, strResult.length());
@@ -56,7 +56,7 @@ public class StringGeneratorTestCase {
 	public void testRandomWithLowercase() throws JDOMException, IOException {
 
 		Element field = fields.get(2);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertTrue(strResult.matches("[abcdefghijklmnopqrstuvwxyz]*"));
 		assertEquals(24, strResult.length());
@@ -65,7 +65,7 @@ public class StringGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultLengthAndLowercase() throws JDOMException, IOException {
 		Element field = fields.get(3);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertTrue(strResult.matches("[abcdefghijklmnopqrstuvwxyz]*"));
 		assertEquals(10, strResult.length());
@@ -74,7 +74,7 @@ public class StringGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultLengthAndEndCharacter() throws JDOMException, IOException {
 		Element field = fields.get(4);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertTrue(strResult.matches("[abcdefg]*"));
 		assertEquals(10, strResult.length());
@@ -83,7 +83,7 @@ public class StringGeneratorTestCase {
 	@Test
 	public void testRandomWithSpecifiedLengthAndEndCharacter() throws JDOMException, IOException {
 		Element field = fields.get(5);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertTrue(strResult.matches("[abcdefg]*"));
 		assertEquals(24, strResult.length());
@@ -92,7 +92,7 @@ public class StringGeneratorTestCase {
 	@Test
 	public void testFixedValue() throws JDOMException, IOException {
 		Element field = fields.get(6);
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertTrue(strResult.equals("ABC"));
 		assertEquals(3, strResult.length());

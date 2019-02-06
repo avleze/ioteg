@@ -9,7 +9,7 @@ public class Rule<weight, value, min, max, sequence> {
 	private sequence fifth;
 
 	public Rule() {
-	};
+	}
 
 	public Rule(weight first, value second, min third, max fourth, sequence fifth) {
 		this.first = first;

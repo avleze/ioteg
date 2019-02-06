@@ -42,12 +42,12 @@ public class TimeGeneratorQueryRestrictionTestCase {
 	public void testTimeQueryRestrictionEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/TimeOperatorExamples/EPLTimeQueryEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/TimeOperatorExamples/EPLTimeQueryEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(35);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, equalTo("12:43"));
 	}
 	
@@ -55,12 +55,12 @@ public class TimeGeneratorQueryRestrictionTestCase {
 	public void testTimeQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/TimeOperatorExamples/EPLTimeQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/TimeOperatorExamples/EPLTimeQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(35);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("12:43"));
 	}
 

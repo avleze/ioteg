@@ -42,12 +42,12 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 	public void testBooleanQueryRestrictionEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/BooleanOperatorExamples/EPLBooleanQueryEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/BooleanOperatorExamples/EPLBooleanQueryEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(9);
 
-		Boolean result = Boolean.parseBoolean(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Boolean result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, equalTo(Boolean.valueOf(true)));
 	}
 	
@@ -55,27 +55,27 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 	public void testBooleanQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/BooleanOperatorExamples/EPLBooleanQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/BooleanOperatorExamples/EPLBooleanQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(9);
 
-		Boolean result = Boolean.parseBoolean(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Boolean result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, not(Boolean.valueOf(true)));
 
 		field = fields.get(10);
 		
-		result = Boolean.parseBoolean(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, not(Boolean.valueOf(false)));
 		
 		field = fields.get(11);
 
-		Integer resultNum = Integer.valueOf(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Integer resultNum = Integer.valueOf(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(resultNum, not(Integer.valueOf(1)));
 		
 		field = fields.get(12);
 
-		resultNum = Integer.valueOf(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		resultNum = Integer.valueOf(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(resultNum, not(Integer.valueOf(0)));
 	}
 	

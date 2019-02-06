@@ -20,7 +20,7 @@ public class XmlUtil extends EventGenerator {
 	 * @throws IOException   files exceptions
 	 * @throws JDOMException
 	 */
-	public static void XmlFormatValues(FileWriter values, Document document) throws IOException, JDOMException {
+	public static void xmlFormatValues(FileWriter values, Document document) throws IOException, JDOMException {
 
 		BufferedWriter bw = new BufferedWriter(values);
 		StringBuilder sb = new StringBuilder();
@@ -44,7 +44,7 @@ public class XmlUtil extends EventGenerator {
 				List<Element> fields = blck.getChildren();
 				for (int e = 0; e < fields.size(); e++) {
 					Element field = fields.get(e);
-					sb.append(NormalFieldsXml(field));
+					sb.append(normalFieldsXml(field));
 					if ((e == fields.size() - 1)) {
 						int lng = sb.length();
 						sb.delete(lng - 1, lng);
@@ -66,9 +66,9 @@ public class XmlUtil extends EventGenerator {
 						Element field = fields.get(e);
 
 						if (field.getName().equals("optionalfields")) {
-							sb.append(OptionalFieldsXml(field));
+							sb.append(optionalFieldsXml(field));
 						} else {
-							sb.append(NormalFieldsXml(field));
+							sb.append(normalFieldsXml(field));
 						}
 					}
 					bw.write(sb.toString());
@@ -94,7 +94,7 @@ public class XmlUtil extends EventGenerator {
 	 * @throws IOException
 	 * @throws JDOMException
 	 */
-	static StringBuilder NormalFieldsXml(Element field) throws JDOMException, IOException {
+	static StringBuilder normalFieldsXml(Element field) throws JDOMException, IOException {
 
 		StringBuilder sb = new StringBuilder();
 		String value = "";
@@ -104,11 +104,11 @@ public class XmlUtil extends EventGenerator {
 		String type = field.getAttributeValue("type");
 
 		if (!existType(type)) { // A non basic type
-			sb.append(GenerateValueComplexType(field, "xml"));
+			sb.append(generateValueComplexType(field, "xml"));
 		} else {// A basic type
 
 			sb.append(" type=\"" + field.getAttributeValue("type") + "\">");
-			value = GenerateValueSimpleType(type, field);
+			value = generateValueSimpleType(type, field);
 
 			if (quotes.equals("true")) {
 				sb.append("\"" + value + "\"");
@@ -131,7 +131,7 @@ public class XmlUtil extends EventGenerator {
 	 * @throws IOException
 	 * @throws JDOMException
 	 */
-	public static StringBuilder OptionalFieldsXml(Element field) throws JDOMException, IOException {
+	public static StringBuilder optionalFieldsXml(Element field) throws JDOMException, IOException {
 
 		List<Element> optional = field.getChildren();
 		int size = optional.size();
@@ -150,10 +150,10 @@ public class XmlUtil extends EventGenerator {
 			String type = elementop.getAttributeValue("type");
 
 			if (!existType(type)) {
-				sb.append(GenerateValueComplexType(elementop, "xml"));
+				sb.append(generateValueComplexType(elementop, "xml"));
 			} else {
 				sb.append(" type=\"" + elementop.getAttributeValue("type") + "\">");
-				value = GenerateValueSimpleType(type, elementop);
+				value = generateValueSimpleType(type, elementop);
 				if (quotes.equals("true")) {
 					sb.append("\"" + value + "\"");
 				} else {

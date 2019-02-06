@@ -43,12 +43,12 @@ public class StringGeneratorQueryRestrictionTestCase {
 	public void testStringQueryRestrictionEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(22);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, equalTo("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(23));
 	}
@@ -57,12 +57,12 @@ public class StringGeneratorQueryRestrictionTestCase {
 	public void testStringQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(22);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(10));
 	}
@@ -71,12 +71,12 @@ public class StringGeneratorQueryRestrictionTestCase {
 	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacter() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(23);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, matchesPattern("[ABCDEF]*"));
 		assertThat(result.length(), equalTo(10));
@@ -86,12 +86,12 @@ public class StringGeneratorQueryRestrictionTestCase {
 	public void testStringQueryRestrictionNotEqualOperatorWithLength() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(24);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(12));
 	}
@@ -100,12 +100,12 @@ public class StringGeneratorQueryRestrictionTestCase {
 	public void testStringQueryRestrictionNotEqualOperatorWithLengthAndCase() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(26);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(12));
 		assertThat(result, equalTo(result.toLowerCase()));
@@ -115,12 +115,12 @@ public class StringGeneratorQueryRestrictionTestCase {
 	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndCase() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(27);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, equalTo(result.toLowerCase()));
 		assertThat(result, matchesPattern("[abcdef]*"));
@@ -130,12 +130,12 @@ public class StringGeneratorQueryRestrictionTestCase {
 	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndLength() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(25);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, matchesPattern("[ABCDEF]*"));
 		assertThat(result.length(), equalTo(12));

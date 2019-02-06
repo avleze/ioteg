@@ -45,7 +45,7 @@ public class JsonUtilTestCase {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
-		JsonUtil.JsonFormatValues(values, doc);
+		JsonUtil.jsonFormatValues(values, doc);
 
 		String jsonResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
 
@@ -63,7 +63,7 @@ public class JsonUtilTestCase {
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
-		JsonUtil.JsonFormatValues(values, doc);
+		JsonUtil.jsonFormatValues(values, doc);
 
 		String jsonResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
 
@@ -81,7 +81,7 @@ public class JsonUtilTestCase {
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
-		JsonUtil.JsonFormatValues(values, doc);
+		JsonUtil.jsonFormatValues(values, doc);
 
 		String jsonResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
 		String resultRegex = "\\{\"testFormatValues\":\\[" + "\\{\"lugar\":\\{"

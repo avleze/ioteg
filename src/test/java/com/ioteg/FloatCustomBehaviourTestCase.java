@@ -53,7 +53,7 @@ public class FloatCustomBehaviourTestCase {
 			List<Double> resultsOfSimulation = new LinkedList<>();
 
 			for (int i = 0; i < 10; ++i) {
-				strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+				strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 				result = Double.parseDouble(strResult);
 				assertThat(result, allOf(greaterThanOrEqualTo(156.96), lessThanOrEqualTo(300.0)));
 				resultsOfSimulation.add(result);
@@ -75,7 +75,7 @@ public class FloatCustomBehaviourTestCase {
 			List<Double> resultsOfSimulation = new LinkedList<>();
 
 			for (int simulation = 0; simulation < 10; ++simulation) {
-				strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+				strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 				result = Double.parseDouble(strResult);
 				resultsOfSimulation.add(result);
 				assertThat(result, allOf(greaterThanOrEqualTo(156.96), lessThanOrEqualTo(300.0)));
@@ -93,10 +93,10 @@ public class FloatCustomBehaviourTestCase {
 		String strResult = null;
 		Double result = null;
 		for (int events = 0; events < 100; ++events) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			Double previous = Double.parseDouble(strResult);
 			for (int simulation = 1; simulation < 10; ++simulation) {
-				strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+				strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 				result = Double.parseDouble(strResult);
 				assertThat(result, equalTo(previous));
 				previous = result;
@@ -114,7 +114,7 @@ public class FloatCustomBehaviourTestCase {
 		Double result = null;
 
 		for (int i = 0; i < 1000; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, allOf(greaterThanOrEqualTo(0.0), lessThanOrEqualTo(100.0)));
 		}
@@ -130,7 +130,7 @@ public class FloatCustomBehaviourTestCase {
 		Double result = null;
 
 		for (int i = 0; i < 1000; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, allOf(greaterThanOrEqualTo(0.0), lessThanOrEqualTo(100.0)));
 		}
@@ -147,7 +147,7 @@ public class FloatCustomBehaviourTestCase {
 		Double result = null;
 
 		for (int i = 0; i < 100; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, equalTo(101.0));
 		}
@@ -164,13 +164,13 @@ public class FloatCustomBehaviourTestCase {
 		Double result = null;
 
 		for (int i = 0; i < 50; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, equalTo(99.0));
 		}
 
 		for (int i = 0; i < 50; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, equalTo(-99.0));
 		}
@@ -186,13 +186,13 @@ public class FloatCustomBehaviourTestCase {
 		Double result = null;
 
 		for (int i = 0; i < 50; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, equalTo(50.0));
 		}
 
 		for (int i = 0; i < 50; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, equalTo(.02));
 		}
@@ -208,7 +208,7 @@ public class FloatCustomBehaviourTestCase {
 		Double result = null;
 
 		for (int i = 0; i < 100; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, equalTo(200.0));
 		}
@@ -225,7 +225,7 @@ public class FloatCustomBehaviourTestCase {
 		Double result = null;
 
 		for (int i = 0; i < 100; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, equalTo(50.0));
 		}
@@ -242,7 +242,7 @@ public class FloatCustomBehaviourTestCase {
 		Double result = null;
 
 		for (int i = 0; i < 100; ++i) {
-			strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			result = Double.parseDouble(strResult);
 			assertThat(result, equalTo(101.0));
 		}

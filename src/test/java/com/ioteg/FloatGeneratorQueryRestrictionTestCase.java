@@ -48,12 +48,12 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionLessOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, lessThan(Float.valueOf(24)));
 	}
 	
@@ -61,12 +61,12 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(15);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, lessThan(Float.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-20.58f)));
 	}
@@ -76,12 +76,12 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperatorWithNegativeValue.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperatorWithNegativeValue.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, lessThan(Float.valueOf(-24)));
 	}
 	
@@ -89,12 +89,12 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionGreaterOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThan(24f));
 	}
 	
@@ -103,12 +103,12 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(14);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThan(24f));
 		assertThat(result, lessThanOrEqualTo(200.34f));
 	}
@@ -117,12 +117,12 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, equalTo(Float.valueOf(24f)));
 	}
 	
@@ -130,12 +130,12 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, not(Float.valueOf(24f)));
 	}
 	
@@ -143,12 +143,12 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(16);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, not(Float.valueOf(24f)));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-100.134f)));
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(134.1f)));
@@ -160,13 +160,13 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterEqualOperator.epl").getPath(),
 				document.getRootElement());
 
 
 		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(24)));
 	}
 	
@@ -174,13 +174,13 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterEqualOperator.epl").getPath(),
 				document.getRootElement());
 
 
 		Element field = fields.get(14);
 
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(24)));
 	}
 	
@@ -188,11 +188,11 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionLessEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(13);
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(24)));
 	}
@@ -201,11 +201,11 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(15);
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(24f)));
 		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-20.58f)));
@@ -216,11 +216,11 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(13);
-		Float result = Float.parseFloat(EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field));
+		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field));
 
 
 		assertThat(result, lessThanOrEqualTo(Float.valueOf(-24f)));
@@ -230,12 +230,12 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	public void testFloatQueryRestrictionWithPrecision() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(17);
 	
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 
 		assertThat(Float.valueOf(result), lessThanOrEqualTo(Float.valueOf(-24f)));
 		assertThat(Float.valueOf(result), greaterThanOrEqualTo(Float.valueOf(-100.134234f)));

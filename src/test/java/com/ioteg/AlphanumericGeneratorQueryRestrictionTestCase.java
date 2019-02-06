@@ -44,12 +44,12 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	public void testAlphanumericQueryRestrictionEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(28);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, equalTo("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(23));
 	}
@@ -58,12 +58,12 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	public void testAlphanumericQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(28);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(10));
 	}
@@ -72,12 +72,12 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacter() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(29);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.toUpperCase(), matchesPattern("[0123456789ABCDEF]*"));
 		assertThat(result.length(), equalTo(10));
@@ -87,12 +87,12 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLength() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(30);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.toUpperCase(), matchesPattern("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
 		assertThat(result.length(), equalTo(12));
@@ -102,12 +102,12 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLengthAndCase() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(32);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result.length(), equalTo(12));
 		assertThat(result, matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
@@ -117,12 +117,12 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndCase() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(33);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
 	}
@@ -131,12 +131,12 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndLength() throws IOException, JDOMException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
-		EventGenerator.GetEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
+		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
 				document.getRootElement());
 		
 		Element field = fields.get(31);
 
-		String result = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String result = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(result, matchesPattern("[0123456789ABCDEF]*"));
 		assertThat(result.length(), equalTo(12));

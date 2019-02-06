@@ -38,7 +38,7 @@ public class AlphanumericGeneratorTestCase {
 		Element field = fields.get(0);
 		for (int i = 0; i < 10000; ++i) {
 
-			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			assertTrue(strResult.matches("[0123456789ABCDEF]*"));
 			assertEquals(14, strResult.length());
 		}
@@ -49,7 +49,7 @@ public class AlphanumericGeneratorTestCase {
 		Element field = fields.get(1);
 		for (int i = 0; i < 10000; ++i) {
 
-			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			assertTrue(strResult.matches("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
 			assertEquals(10, strResult.length());
 		}
@@ -59,7 +59,7 @@ public class AlphanumericGeneratorTestCase {
 	public void testFixed() throws JDOMException, IOException {
 		Element field = fields.get(2);
 
-		String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+		String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 		assertEquals(String.valueOf("abc"), strResult);
 	}
 
@@ -68,7 +68,7 @@ public class AlphanumericGeneratorTestCase {
 		Element field = fields.get(3);
 		for (int i = 0; i < 10000; ++i) {
 
-			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			assertTrue(strResult.matches("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
 		}
 	}
@@ -78,7 +78,7 @@ public class AlphanumericGeneratorTestCase {
 		Element field = fields.get(4);
 		for (int i = 0; i < 10000; ++i) {
 
-			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			assertTrue(strResult.matches("[0123456789ABCDEF]*"));
 		}
 	}
@@ -88,7 +88,7 @@ public class AlphanumericGeneratorTestCase {
 		Element field = fields.get(5);
 		for (int i = 0; i < 10000; ++i) {
 
-			String strResult = EventGenerator.GenerateValueSimpleType(field.getAttributeValue("type"), field);
+			String strResult = EventGenerator.generateValueSimpleType(field.getAttributeValue("type"), field);
 			assertTrue(strResult.matches("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
 		}
 	}
