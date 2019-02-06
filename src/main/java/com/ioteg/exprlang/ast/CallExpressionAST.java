@@ -1,11 +1,24 @@
 package com.ioteg.exprlang.ast;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import org.apache.log4j.Logger;
+
 
 public class CallExpressionAST implements ExpressionAST{
 	private String fnName;
 	private List<ExpressionAST> args;
+	
+	protected static Random r;
+	protected static Logger logger;
+
+	static {
+		logger = Logger.getRootLogger();
+	}
 	
 	public CallExpressionAST(String fnName, List<ExpressionAST> args) {
 		super();
@@ -24,40 +37,48 @@ public class CallExpressionAST implements ExpressionAST{
 	@Override
 	public Double evaluate(Map<String, Double> symbols) {
 		Double result = null;
-
-		if(fnName.equals("sqrt"))
-			result = Math.sqrt(args.get(0).evaluate(symbols));
-		if(fnName.equals("abs"))
-			result = Math.abs(args.get(0).evaluate(symbols));
-		if(fnName.equals("sin"))
-			result = Math.sin(args.get(0).evaluate(symbols));
-		if(fnName.equals("cos"))
-			result = Math.cos(args.get(0).evaluate(symbols));
-		if(fnName.equals("tan"))
-			result = Math.tan(args.get(0).evaluate(symbols));
-		if(fnName.equals("asin"))
-			result = Math.asin(args.get(0).evaluate(symbols));
-		if(fnName.equals("acos"))
-			result = Math.acos(args.get(0).evaluate(symbols));
-		if(fnName.equals("atan"))
-			result = Math.atan(args.get(0).evaluate(symbols));
-		if(fnName.equals("floor"))
-			result = Math.floor(args.get(0).evaluate(symbols));
-		if(fnName.equals("ceil"))
-			result = Math.ceil(args.get(0).evaluate(symbols));
-		if(fnName.equals("log"))
-			result = Math.log(args.get(0).evaluate(symbols));
-		if(fnName.equals("round"))
-			result = (double) Math.round(args.get(0).evaluate(symbols));
-		if(fnName.equals("log10"))
-			result = Math.log10(args.get(0).evaluate(symbols));
-		if(fnName.equals("pow"))
-			result = Math.pow(args.get(0).evaluate(symbols), args.get(1).evaluate(symbols));	
-		if(fnName.equals("max"))
-			result = Math.max(args.get(0).evaluate(symbols), args.get(1).evaluate(symbols));	
-		if(fnName.equals("min"))
-			result = Math.min(args.get(0).evaluate(symbols), args.get(1).evaluate(symbols));	
+		Object resultObject = null;
+		
+		try {
+			if(isUnaryFunction())
+				resultObject = callUnaryFunction(symbols);
+			else if(isBinaryFunction())
+				resultObject = callBinaryFunction(symbols);
+		} catch(Exception e) {
+			logger.error(e);
+		}
+		
+		if(resultObject instanceof Double)
+			result = (Double) resultObject;
+		else if(resultObject instanceof Long || resultObject instanceof Integer)
+			result = Double.valueOf(resultObject.toString());
+		else 
+			result = null;
 		
 		return result; 
+	}
+
+	private boolean isBinaryFunction() {
+		return args.size() == 2;
+	}
+
+	private boolean isUnaryFunction() {
+		return args.size() == 1;
+	}
+
+	private Object callBinaryFunction(Map<String, Double> symbols)
+			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+		Object resultObject;
+		Method fn = Math.class.getMethod(fnName, double.class, double.class);
+		resultObject = fn.invoke(null, args.get(0).evaluate(symbols), args.get(1).evaluate(symbols));
+		return resultObject;
+	}
+
+	private Object callUnaryFunction(Map<String, Double> symbols)
+			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+		Object resultObject;
+		Method fn = Math.class.getMethod(fnName, double.class);
+		resultObject = fn.invoke(null, args.get(0).evaluate(symbols));
+		return resultObject;
 	}
 }
