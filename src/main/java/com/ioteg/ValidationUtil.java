@@ -10,7 +10,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-public class ValidationUtil{
+public class ValidationUtil {
 
 	private static final String CASE_ATTR = "case";
 	private static final String ISNUMERIC_ATTR = "isnumeric";
@@ -25,8 +25,6 @@ public class ValidationUtil{
 	private static final String OPTIONALFIELDS_TAG = "optionalfields";
 	private static Logger logger = Logger.getRootLogger();
 
-	
-	
 	public static Boolean validStandart(File xmlFile) throws JDOMException, IOException {
 
 		SAXBuilder builder = new SAXBuilder();
@@ -41,16 +39,9 @@ public class ValidationUtil{
 
 		Boolean valid = validateBlockElements(list);
 
-		if (valid) {
-			for (int i = 0; i < list.size() && valid; i++) {
-				Element block = list.get(i);
-				List<Element> fieldslist = block.getChildren();
-				for (int j = 0; j < fieldslist.size() && valid; j++) {
-					Element field = fieldslist.get(j);
-					valid = validateFieldElements(field);
-				}
-			}
-		}
+		for (Element block : list)
+			for (Element field : block.getChildren())
+				valid = validateFieldElements(field) && valid;
 
 		return valid;
 	}
@@ -59,8 +50,7 @@ public class ValidationUtil{
 		Boolean valid = true;
 		int repeat = 0;
 
-		for (int i = 0; i < list.size() && valid; i++) {
-			Element elem = list.get(i);
+		for (Element elem : list) {
 			if (elem.getName().equals("block")) {
 				if (elem.getAttributeValue(NAME_TAG) == null) {
 					logger.error("The \"name\" attribute of the block tag is needed");
@@ -87,43 +77,48 @@ public class ValidationUtil{
 
 		Boolean valid = true;
 
-		if ((field.getName().equals(OPTIONALFIELDS_TAG)) || (field.getName().equals(FIELD_TAG))) {
-			if (field.getName().equals(OPTIONALFIELDS_TAG)) {
-				List<Element> optionalf = field.getChildren();
-				for (int i = 0; i < optionalf.size(); i++) {
-					Element op = optionalf.get(i);
-					if (op.getName().equals(FIELD_TAG)) {
-						valid = (validateFieldElements(op) && valid);
-					} else {
-						logger.error("The children of the \"optionalfields\" must be \"field\"");
-						valid = false;
-					}
-				}
-			} else {
-				if (field.getAttributeValue(NAME_TAG) == null) {
-					logger.error("The \"field\" tag must have \"name\" attribute");
-					valid = false;
-				}
-				if (field.getAttributeValue(QUOTES_ATTR) == null) {
-					logger.error("The \"field\" tag must have \"quotes\" attribute");
-					valid = false;
-				}
-				if (field.getAttributeValue(TYPE_ATTR) == null) {
-					logger.error("The \"field\" tag must have \"type\" attribute");
-					valid = false;
-				} else {
-					String type = field.getAttributeValue(TYPE_ATTR);
+		if (field.getName().equals(OPTIONALFIELDS_TAG))
+			valid = validateOptionalFieldsElements(field, valid);
+		else if (field.getName().equals(FIELD_TAG)) {
+			valid = validateSingleField(field, valid);
+		} else
+			valid = false;
 
-					if (EventGenerator.existType(type)) 
-						valid = validateSimpleType(field, type) && valid;
-					else 
-						valid = validateComplexType(field, type) && valid;
-				}
-			}
-		} else {
+		return valid;
+	}
+
+	private static Boolean validateSingleField(Element field, Boolean valid) {
+		if (field.getAttributeValue(NAME_TAG) == null) {
+			logger.error("The \"field\" tag must have \"name\" attribute");
 			valid = false;
 		}
+		if (field.getAttributeValue(QUOTES_ATTR) == null) {
+			logger.error("The \"field\" tag must have \"quotes\" attribute");
+			valid = false;
+		}
+		if (field.getAttributeValue(TYPE_ATTR) == null) {
+			logger.error("The \"field\" tag must have \"type\" attribute");
+			valid = false;
+		} else {
+			String type = field.getAttributeValue(TYPE_ATTR);
 
+			if (EventGenerator.existType(type))
+				valid = validateSimpleType(field, type) && valid;
+			else
+				valid = validateComplexType(field, type) && valid;
+		}
+		return valid;
+	}
+
+	private static Boolean validateOptionalFieldsElements(Element field, Boolean valid) {
+		for (Element op : field.getChildren()) {
+			if (op.getName().equals(FIELD_TAG))
+				valid = validateFieldElements(op) && valid;
+			else {
+				logger.error("The children of the \"optionalfields\" must be \"field\"");
+				valid = false;
+			}
+		}
 		return valid;
 	}
 
@@ -135,13 +130,10 @@ public class ValidationUtil{
 			logger.error("Use \"ComplexType\" value to define a complex type");
 			valid = false;
 		} else {
-			List<Element> complelems = field.getChildren();
-			for (int i = 0; i < complelems.size() && valid; i++) {
-				Element element = complelems.get(i);
-				if (element.getName().equals(FIELD_TAG)) {
+			for (Element element : field.getChildren()) {
+				if (element.getName().equals(FIELD_TAG))
 					valid = validateFieldElements(element);
-				}
-				if (element.getName().equals("attribute")) {
+				else if (element.getName().equals("attribute")) {
 					if (element.getAttributeValue(TYPE_ATTR) != null) {
 						String attype = element.getAttributeValue(TYPE_ATTR);
 						valid = validateSimpleType(element, attype);
@@ -209,12 +201,10 @@ public class ValidationUtil{
 	private static Boolean validateBoolean(Element field) {
 		Boolean valid = true;
 
-		if (field.getAttributeValue(VALUE_ATTR) == null) {
-			if (hasBadIsNumericValue(field)) {
-				logger.error(
-						"The default value of the isnumeric attribute works with characters (\"true\" or \"false\"), if you want numbers asign \"true\" to isnumeric");
-				valid = false;
-			}
+		if (field.getAttributeValue(VALUE_ATTR) == null && hasBadIsNumericValue(field)) {
+			logger.error(
+					"The default value of the isnumeric attribute works with characters (\"true\" or \"false\"), if you want numbers asign \"true\" to isnumeric");
+			valid = false;
 		}
 
 		return valid;
