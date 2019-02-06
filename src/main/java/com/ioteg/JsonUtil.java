@@ -38,7 +38,7 @@ public class JsonUtil extends EventGenerator {
 				bw.write("{" + blck.getAttributeValue("value") + "}");
 			}
 
-			if (blck.getChildren().size() != 0 && blck.getAttributeValue("repeat") == null) {
+			if (!blck.getChildren().isEmpty() && blck.getAttributeValue("repeat") == null) {
 				List<Element> fields = blck.getChildren();
 				sb.append("{"); // The beginning of a field
 				for (int e = 0; e < fields.size(); e++) {
@@ -65,7 +65,7 @@ public class JsonUtil extends EventGenerator {
 						Element field = fields.get(e);
 
 						if (field.getName().equals("optionalfields")) {
-							StringBuilder aux = OptionalFieldsJson(field);
+							StringBuilder aux = optionalFieldsJson(field);
 							if (aux.length() == 0) {
 								int sizelenth = sb.length();
 								sb.deleteCharAt(sizelenth - 1);
@@ -142,7 +142,7 @@ public class JsonUtil extends EventGenerator {
 	 * @throws IOException
 	 * @throws JDOMException
 	 */
-	public static StringBuilder OptionalFieldsJson(Element field) throws JDOMException, IOException {
+	public static StringBuilder optionalFieldsJson(Element field) throws JDOMException, IOException {
 
 		List<Element> optional = field.getChildren();
 		int size = optional.size();

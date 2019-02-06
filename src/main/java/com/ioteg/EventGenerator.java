@@ -164,8 +164,7 @@ public class EventGenerator {
 		if (quotes == null)
 			quotes = "false";
 
-		String value = "";
-		String finalvalue = "";
+		StringBuilder finalvalue = new StringBuilder();
 		StringBuilder result = new StringBuilder();
 		int chosen = 0;
 		List<Element> simpletype = field.getChildren();
@@ -193,7 +192,7 @@ public class EventGenerator {
 					result.append(" type=\"" + simple.getAttributeValue("type") + "\">");
 				}
 
-				finalvalue = generateValueSimpleType(simple);
+				finalvalue = new StringBuilder(generateValueSimpleType(simple));
 			}
 		}
 		if (field.getAttributeValue("dependence") != null) {
@@ -207,7 +206,7 @@ public class EventGenerator {
 				result.append(" type=\"" + simple.getAttributeValue("type") + "\">");
 			}
 
-			finalvalue = generateValueSimpleType(simple);
+			finalvalue = new StringBuilder(generateValueSimpleType(simple));
 		}
 		if ((field.getAttributeValue("dependence") == null) && (field.getAttributeValue("chooseone") == null)) {
 			if (simpletype.get(0).getName().equals("field")) {
@@ -243,11 +242,8 @@ public class EventGenerator {
 					result.append(" type=\"" + field.getAttributeValue("type") + "\">");
 				}
 
-				for (int s = 0; s < simpletype.size(); s++) {
-					Element simple = simpletype.get(s);
-					value = generateValueSimpleType(simple);
-					finalvalue = finalvalue + value;
-				}
+				for (Element simple : simpletype) 
+					finalvalue.append(generateValueSimpleType(simple));
 			}
 		}
 

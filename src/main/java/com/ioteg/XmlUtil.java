@@ -40,7 +40,7 @@ public class XmlUtil extends EventGenerator {
 				bw.write("\n</" + nameblck + ">\n");
 			}
 
-			if (blck.getChildren().size() != 0 && blck.getAttributeValue("repeat") == null) {
+			if (!blck.getChildren().isEmpty() && blck.getAttributeValue("repeat") == null) {
 				List<Element> fields = blck.getChildren();
 				for (int e = 0; e < fields.size(); e++) {
 					Element field = fields.get(e);
