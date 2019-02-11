@@ -46,7 +46,7 @@ public class BuildersTestCase {
 		Block block2 = eventType.getBlocks().get(1);
 
 		assertEquals("cabecera", block.getName());
-		assertEquals(null, block.getRepetition());
+		assertEquals(1, block.getRepetition().intValue());
 		assertEquals("Hola", block.getValue());
 
 		assertEquals("feeds", block2.getName());
@@ -70,7 +70,7 @@ public class BuildersTestCase {
 		Block channelBlock = eventType.getBlocks().get(0);
 
 		assertEquals("channel", channelBlock.getName());
-		assertEquals(null, channelBlock.getRepetition());
+		assertEquals(1, channelBlock.getRepetition().intValue());
 		assertEquals(null, channelBlock.getValue());
 
 		Field id = channelBlock.getFields().get(0);
@@ -149,7 +149,7 @@ public class BuildersTestCase {
 		Block feedsBlock = eventType.getBlocks().get(1);
 
 		assertEquals("feeds", feedsBlock.getName());
-		assertEquals(Integer.valueOf(500), feedsBlock.getRepetition());
+		assertEquals(Integer.valueOf(2), feedsBlock.getRepetition());
 		assertEquals(null, feedsBlock.getValue());
 
 		Field createAt = feedsBlock.getFields().get(0);

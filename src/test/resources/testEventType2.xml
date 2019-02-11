@@ -13,7 +13,7 @@
 		<field name="updated_at" quotes="false" type="String" value="2016-04-19T07:39:07Z"></field>
 		<field name="last_entry_id" quotes="false" type="Integer" value="1201242"></field>
 	</block>
-	<block name="feeds" repeat="500">
+	<block name="feeds" repeat="2">
 		<field name="create_at" quotes="false" type="ComplexType">
 			<attribute type="Integer" value="2016"></attribute>
 			<attribute type="String" value="-"></attribute>
