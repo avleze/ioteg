@@ -36,7 +36,9 @@ public class BlockBuilder {
 
 		if (repetitionStr != null)
 			repetition = Integer.valueOf(repetitionStr);
-
+		else
+			repetition = 1;
+		
 		block.setName(name);
 		block.setValue(value);
 		block.setRepetition(repetition);

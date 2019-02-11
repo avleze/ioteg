@@ -27,12 +27,14 @@ public class EventTypeBuilder {
 	 */
 	public EventType build(Document document) throws JDOMException, IOException {
 		EventType eventType = new EventType();
+		String eventTypeName = document.getRootElement().getAttributeValue("name");
+		eventType.setName(eventTypeName);
 		BlockBuilder blockBuilder = new BlockBuilder();
 
 		List<Block> blocksOfTheEvent = new ArrayList<>();
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
-
+		
 		for (Element element : blocks) {
 			Block block = blockBuilder.build(element);
 			blocksOfTheEvent.add(block);
