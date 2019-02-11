@@ -8,7 +8,22 @@ import java.util.List;
  * @author Antonio Vélez Estévez
  */
 public class EventType {
+	private String name;
 	private List<Block> blocks;
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * @return the blocks
