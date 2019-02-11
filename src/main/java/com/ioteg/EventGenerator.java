@@ -22,7 +22,15 @@ import com.ioteg.builders.FieldBuilder;
 import com.ioteg.eplutils.EPLConditionsParser;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.model.Block;
+import com.ioteg.model.EventType;
 import com.ioteg.model.Field;
+import com.ioteg.model.OptionalFields;
+import com.ioteg.resultmodel.ArrayResultBlock;
+import com.ioteg.resultmodel.ResultBlock;
+import com.ioteg.resultmodel.ResultEvent;
+import com.ioteg.resultmodel.ResultField;
+import com.ioteg.resultmodel.ResultSimpleField;
 
 public class EventGenerator {
 
@@ -79,13 +87,12 @@ public class EventGenerator {
 			if (!eplFilePath.equals("null"))
 				getEPLValues(eplFilePath, rootNode);
 
-			if (outputFormat.equals("json")) 
+			if (outputFormat.equals("json"))
 				JsonUtil.jsonFormatValues(values, document);
-			if (outputFormat.equals("xml")) 
+			if (outputFormat.equals("xml"))
 				XmlUtil.xmlFormatValues(values, document);
-			if (outputFormat.equals("csv")) 
+			if (outputFormat.equals("csv"))
 				CsvUtil.csvFormatValues(values, document);
-			
 
 		} catch (IOException io) {
 			logger.error(io.getMessage());
@@ -98,8 +105,8 @@ public class EventGenerator {
 	 * A function to obtain values from the fields elements at the where clauses of
 	 * the EPL queries to assign them to the fields of the events
 	 * 
-	 * @param eplFilePath  contains the EPL queries
-	 * @param rootNode is the root of the event definition
+	 * @param eplFilePath contains the EPL queries
+	 * @param rootNode    is the root of the event definition
 	 * @throws IOException if the file causes problems
 	 */
 	public static void getEPLValues(String eplFilePath, Element rootNode) throws IOException {
@@ -107,7 +114,6 @@ public class EventGenerator {
 		fieldvalues = eplConditionsParser.getRestrictions(totalnumevents);
 		iterationvalues = eplConditionsParser.getIterationValues();
 	}
-
 
 	/**
 	 * The assigned type is in the IoT-EG. This function select the correct value
@@ -133,7 +139,7 @@ public class EventGenerator {
 
 			if (values.get(fieldname) != null) {
 				generator = GeneratorsFactory.makeQueryRestrictionGenerator(f, values.get(fieldname));
-				value = generator.generate(f, 1).get(0);
+				value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 				if (!iterationvalues.isEmpty() && iterationvalues.get(0).equals(iteration)) {
 					iterationvalues.remove(0);
@@ -142,7 +148,7 @@ public class EventGenerator {
 			}
 		} else {
 			generator = GeneratorsFactory.makeGenerator(f, totalnumevents);
-			value = generator.generate(f, 1).get(0);
+			value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		}
 
 		return value;
@@ -242,7 +248,7 @@ public class EventGenerator {
 					result.append(" type=\"" + field.getAttributeValue("type") + "\">");
 				}
 
-				for (Element simple : simpletype) 
+				for (Element simple : simpletype)
 					finalvalue.append(generateValueSimpleType(simple));
 			}
 		}
@@ -265,6 +271,38 @@ public class EventGenerator {
 	public static boolean existType(String type) {
 
 		return types.contains(type);
+	}
+
+	public static ResultEvent generateEvent(EventType event) throws IOException, JDOMException {
+
+		ResultEvent resultEvent = new ResultEvent(event.getName(), new ArrayList<>());
+		for (Block block : event.getBlocks()) {
+			
+			ArrayResultBlock resultBlocks = new ArrayResultBlock(new ArrayList<>());
+			for (int iteration = 0; iteration < block.getRepetition(); ++iteration) {
+				ResultBlock resultBlock = new ResultBlock(block.getName(), new ArrayList<ResultField>());
+				Integer totalNumOfEvents = block.getRepetition();
+
+				for (Field field : block.getFields()) {
+					Generable generator = GeneratorsFactory.makeGenerator(field, totalNumOfEvents);
+					ResultField resultField = generator.generate(1).get(0);
+					resultBlock.getResultFields().add(resultField);
+				}
+
+				for (OptionalFields optionalFields : block.getOptionalFields())
+					for (Field field : optionalFields.getFields()) {
+						Generable generator = GeneratorsFactory.makeGenerator(field, totalNumOfEvents);
+						ResultField resultField = generator.generate(1).get(0);
+						resultBlock.getResultFields().add(resultField);
+					}
+
+				resultBlocks.getResultBlocks().add(resultBlock);
+			}
+			
+			resultEvent.getArrayResultBlocks().add(resultBlocks);
+		}
+
+		return resultEvent;
 	}
 
 }
