@@ -11,6 +11,8 @@ import com.ioteg.generators.booleanfield.BooleanGenerator;
 import com.ioteg.generators.booleanfield.BooleanQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.FixedBooleanGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.RandomBooleanGenerationAlgorithm;
+import com.ioteg.generators.complexfield.ComplexFieldGenerator;
+import com.ioteg.generators.complexfield.ComplexFieldGeneratorAlgorithm;
 import com.ioteg.generators.datefield.DateGenerator;
 import com.ioteg.generators.datefield.DateQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.datefield.FixedDateGenerationAlgorithm;
@@ -62,26 +64,33 @@ public class GeneratorsFactory {
 			generable = makeDateGenerator(field);
 		else if (field.getType().equals("Time"))
 			generable = makeDateGenerator(field);
+		else
+			generable = makeComplexGenerator(field);
 
 		return generable;
 	}
 
-	public static Generator<Long> makeLongGenerator(Field longField) {
-		Generator<Long> longGenerator = null;
+	public static Generable makeComplexGenerator(Field field) {
+
+		return new ComplexFieldGenerator(new ComplexFieldGeneratorAlgorithm(field), field);
+	}
+
+	public static FieldGenerator<Long> makeLongGenerator(Field longField) {
+		FieldGenerator<Long> longGenerator = null;
 
 		if (longField.getValue() != null)
-			longGenerator = new Generator<>(new FixedLongGenerationAlgorithm(longField));
+			longGenerator = new FieldGenerator<>(new FixedLongGenerationAlgorithm(longField), longField);
 		else if (longField.getMin() != null && longField.getMax() != null)
-			longGenerator = new Generator<>(new RandomLongGenerationAlgorithm(longField));
+			longGenerator = new FieldGenerator<>(new RandomLongGenerationAlgorithm(longField), longField);
 
 		return longGenerator;
 	}
 
-	public static Generator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents) {
-		Generator<Float> floatGenerator = null;
+	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents) {
+		FieldGenerator<Float> floatGenerator = null;
 
 		if (floatField.getValue() != null)
-			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm(floatField));
+			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm(floatField), floatField);
 		else if (floatField.getCustomBehaviour() != null) {
 			
 			try {
@@ -92,10 +101,10 @@ public class GeneratorsFactory {
 				logger.error(e);
 			}
 			
-			floatGenerator = new FloatGenerator(customiseBehaviourGenerationAlgorithm);
+			floatGenerator = new FloatGenerator(customiseBehaviourGenerationAlgorithm, floatField);
 		}
 		else if (floatField.getMin() != null && floatField.getMax() != null)
-			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm(floatField));
+			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm(floatField), floatField);
 		
 
 		return floatGenerator;
@@ -106,50 +115,50 @@ public class GeneratorsFactory {
 		return customiseBehaviourGenerationAlgorithm == null || customiseBehaviourGenerationAlgorithm.getRules().isEmpty();
 	}
 
-	public static Generator<Boolean> makeBooleanGenerator(Field booleanField) {
-		Generator<Boolean> booleanGenerator = null;
+	public static FieldGenerator<Boolean> makeBooleanGenerator(Field booleanField) {
+		FieldGenerator<Boolean> booleanGenerator = null;
 
 		if (booleanField.getValue() != null)
-			booleanGenerator = new BooleanGenerator(new FixedBooleanGenerationAlgorithm(booleanField));
+			booleanGenerator = new BooleanGenerator(new FixedBooleanGenerationAlgorithm(booleanField), booleanField);
 		else
-			booleanGenerator = new BooleanGenerator(new RandomBooleanGenerationAlgorithm(booleanField));
+			booleanGenerator = new BooleanGenerator(new RandomBooleanGenerationAlgorithm(booleanField), booleanField);
 
 		return booleanGenerator;
 	}
 
-	public static Generator<Date> makeDateGenerator(Field dateField) {
-		Generator<Date> dateGenerator = null;
+	public static FieldGenerator<Date> makeDateGenerator(Field dateField) {
+		FieldGenerator<Date> dateGenerator = null;
 
 		if (dateField.getValue() != null)
-			dateGenerator = new DateGenerator(new FixedDateGenerationAlgorithm(dateField));
+			dateGenerator = new DateGenerator(new FixedDateGenerationAlgorithm(dateField), dateField);
 		else
-			dateGenerator = new DateGenerator(new RandomDateGenerationAlgorithm(dateField));
+			dateGenerator = new DateGenerator(new RandomDateGenerationAlgorithm(dateField), dateField);
 
 		return dateGenerator;
 	}
 
-	public static Generator<Date> makeTimeGenerator(Field timeField) {
+	public static FieldGenerator<Date> makeTimeGenerator(Field timeField) {
 		return makeDateGenerator(timeField);
 	}
 
-	public static Generator<String> makeStringGenerator(Field stringField) {
-		Generator<String> stringGenerator = null;
+	public static FieldGenerator<String> makeStringGenerator(Field stringField) {
+		FieldGenerator<String> stringGenerator = null;
 
 		if (stringField.getValue() != null)
-			stringGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(stringField));
+			stringGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(stringField), stringField);
 		else
-			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(stringField, ALPHABETICAL_VALUES));
+			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(stringField, ALPHABETICAL_VALUES), stringField);
 
 		return stringGenerator;
 	}
 
-	public static Generator<String> makeAlphanumericGenerator(Field alphanumericField) {
-		Generator<String> alphanumericGenerator = null;
+	public static FieldGenerator<String> makeAlphanumericGenerator(Field alphanumericField) {
+		FieldGenerator<String> alphanumericGenerator = null;
 
 		if (alphanumericField.getValue() != null)
-			alphanumericGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(alphanumericField));
+			alphanumericGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(alphanumericField), alphanumericField);
 		else
-			alphanumericGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(alphanumericField, ALPHANUMERIC_VALUES));
+			alphanumericGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(alphanumericField, ALPHANUMERIC_VALUES), alphanumericField);
 
 		return alphanumericGenerator;
 	}
@@ -177,37 +186,37 @@ public class GeneratorsFactory {
 	}
 
 
-	public static Generator<String> makeQueryRestrictionStringGenerator(Field field,
+	public static FieldGenerator<String> makeQueryRestrictionStringGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
-		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(field, restrictions, ALPHABETICAL_VALUES));
+		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(field, restrictions, ALPHABETICAL_VALUES), field);
 	}
 
-	public static Generator<String> makeQueryRestrictionAlphanumericGenerator(Field field,
+	public static FieldGenerator<String> makeQueryRestrictionAlphanumericGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
-		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(field, restrictions, ALPHANUMERIC_VALUES));
+		return new StringGenerator(new StringQueryRestrictionGenerationAlgorithm(field, restrictions, ALPHANUMERIC_VALUES), field);
 	}
 
-	public static Generator<Long> makeQueryRestrictionLongGenerator(Field field,
+	public static FieldGenerator<Long> makeQueryRestrictionLongGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
-		return new Generator<>(new LongQueryRestrictionGenerationAlgorithm(field, restrictions));
+		return new FieldGenerator<>(new LongQueryRestrictionGenerationAlgorithm(field, restrictions), field);
 	}
 
-	public static Generator<Float> makeQueryRestrictionFloatGenerator(Field field,
+	public static FieldGenerator<Float> makeQueryRestrictionFloatGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
-		return new FloatGenerator(new FloatQueryRestrictionGenerationAlgorithm(field, restrictions));
+		return new FloatGenerator(new FloatQueryRestrictionGenerationAlgorithm(field, restrictions), field);
 	}
 
-	public static Generator<Boolean> makeQueryRestrictionBooleanGenerator(Field field,
+	public static FieldGenerator<Boolean> makeQueryRestrictionBooleanGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
-		return new BooleanGenerator(new BooleanQueryRestrictionGenerationAlgorithm(field, restrictions));
+		return new BooleanGenerator(new BooleanQueryRestrictionGenerationAlgorithm(field, restrictions), field);
 	}
 
-	public static Generator<Date> makeQueryRestrictionDateGenerator(Field field,
+	public static FieldGenerator<Date> makeQueryRestrictionDateGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
-		return new DateGenerator(new DateQueryRestrictionGenerationAlgorithm(field, restrictions));
+		return new DateGenerator(new DateQueryRestrictionGenerationAlgorithm(field, restrictions), field);
 	}
 
-	public static Generator<Date> makeQueryRestrictionTimeGenerator(Field field,
+	public static FieldGenerator<Date> makeQueryRestrictionTimeGenerator(Field field,
 			List<Trio<String, String, String>> restrictions) {
 		return makeQueryRestrictionDateGenerator(field, restrictions);
 	}

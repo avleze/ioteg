@@ -2,8 +2,8 @@ package com.ioteg.generators;
 
 import java.util.List;
 
-import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultField;
 
 public interface Generable {
-	public List<String> generate(Field field, Integer numberOfRequiredItems);
+	public List<ResultField> generate(Integer numberOfRequiredItems);
 }

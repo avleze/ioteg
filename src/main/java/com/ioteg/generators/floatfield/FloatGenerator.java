@@ -5,27 +5,29 @@ import java.util.List;
 import java.util.Locale;
 
 import com.ioteg.generators.GenerationAlgorithm;
-import com.ioteg.generators.Generator;
+import com.ioteg.generators.FieldGenerator;
 import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultField;
+import com.ioteg.resultmodel.ResultSimpleField;
 
-public class FloatGenerator extends Generator<Float> {
+public class FloatGenerator extends FieldGenerator<Float> {
 
-	public FloatGenerator(GenerationAlgorithm<Float> generationAlgorithm) {
-		super(generationAlgorithm);
+	public FloatGenerator(GenerationAlgorithm<Float> generationAlgorithm, Field field) {
+		super(generationAlgorithm, field);
 	}
 
 	@Override
-	public List<String> generate(Field floatField, Integer numberOfRequiredItems) {
-		List<String> results = new ArrayList<>();
+	public List<ResultField> generate(Integer numberOfRequiredItems) {
+		List<ResultField> results = new ArrayList<>();
 
-		if (floatField.getPrecision() != null)
+		if (field.getPrecision() != null)
 			for (int i = 0; i < numberOfRequiredItems; ++i)
 			{
 				Float result = generationAlgorithm.generate();
-				results.add(numberToSpecifiedPrecision(result, floatField.getPrecision()));
+				results.add(new ResultSimpleField(field.getName(), numberToSpecifiedPrecision(result, field.getPrecision())));
 			}
 		else
-			results = super.generate(floatField, numberOfRequiredItems);
+			results = super.generate(numberOfRequiredItems);
 
 		return results;
 	}

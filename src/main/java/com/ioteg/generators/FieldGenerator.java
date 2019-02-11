@@ -3,24 +3,25 @@ package com.ioteg.generators;
 import java.util.ArrayList;
 import java.util.List;
 import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultField;
+import com.ioteg.resultmodel.ResultSimpleField;
 
-public class Generator<T> implements Generable{
-	
+public class FieldGenerator<T> implements Generable{
+
 	protected GenerationAlgorithm<T> generationAlgorithm;
-
+	protected Field field;
 	
-	public Generator(GenerationAlgorithm<T> generationAlgorithm) {
-		super();
+	public FieldGenerator(GenerationAlgorithm<T> generationAlgorithm, Field field) {
 		this.generationAlgorithm = generationAlgorithm;
+		this.field = field;
 	}
 
-
-	public List<String> generate(Field field, Integer numberOfRequiredItems) {
-		List<String> results = new ArrayList<>();
+	public List<ResultField> generate(Integer numberOfRequiredItems) {
+		List<ResultField> results = new ArrayList<>();
 
 		for (int i = 0; i < numberOfRequiredItems; ++i)
-			results.add(generationAlgorithm.generate().toString());
-		
+			results.add(new ResultSimpleField(field.getName(), generationAlgorithm.generate().toString()));
+
 		return results;
 	}
 }

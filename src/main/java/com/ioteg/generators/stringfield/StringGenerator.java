@@ -4,25 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ioteg.generators.GenerationAlgorithm;
-import com.ioteg.generators.Generator;
+import com.ioteg.generators.FieldGenerator;
 import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultField;
+import com.ioteg.resultmodel.ResultSimpleField;
 
-public class StringGenerator extends Generator<String>{
+public class StringGenerator extends FieldGenerator<String>{
 
-	public StringGenerator(GenerationAlgorithm<String> generationAlgorithm) {
-		super(generationAlgorithm);
+	public StringGenerator(GenerationAlgorithm<String> generationAlgorithm, Field field) {
+		super(generationAlgorithm, field);
 	}
 
 	@Override
-	public List<String> generate(Field stringField, Integer numberOfRequiredItems) {
-		List<String> results = new ArrayList<>();
-		String caseStr = stringField.getCase();
+	public List<ResultField> generate(Integer numberOfRequiredItems) {
+		List<ResultField> results = new ArrayList<>();
+		String caseStr = field.getCase();
 		
 		if (caseStr != null && caseStr.equalsIgnoreCase("low")) 
 			for (int i = 0; i < numberOfRequiredItems; ++i)
-				results.add(generationAlgorithm.generate().toLowerCase());
+				results.add(new ResultSimpleField(field.getName(), generationAlgorithm.generate().toLowerCase()));
 		else
-			results = super.generate(stringField, numberOfRequiredItems);
+			results = super.generate(numberOfRequiredItems);
 		
 		return results;
 	}
