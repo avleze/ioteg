@@ -21,7 +21,7 @@ public class BooleanGenerator extends FieldGenerator<Boolean>{
 		
 		if(field.getIsNumeric())
 			for (int i = 0; i < numberOfRequiredItems; ++i)
-				results.add(new ResultSimpleField(field.getName(), booleanToNumericalString(generationAlgorithm.generate())));
+				results.add(new ResultSimpleField(field.getName(), booleanToNumericalString(generationAlgorithm.generate()), field.getType()));
 		else
 			results = super.generate(numberOfRequiredItems);
 		

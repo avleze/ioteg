@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.ioteg.Trio;
+import com.ioteg.generators.block.BlockGenerator;
+import com.ioteg.generators.block.BlockGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.BooleanGenerator;
 import com.ioteg.generators.booleanfield.BooleanQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.FixedBooleanGenerationAlgorithm;
@@ -29,6 +31,7 @@ import com.ioteg.generators.stringfield.FixedStringGenerationAlgorithm;
 import com.ioteg.generators.stringfield.RandomStringGenerationAlgorithm;
 import com.ioteg.generators.stringfield.StringGenerator;
 import com.ioteg.generators.stringfield.StringQueryRestrictionGenerationAlgorithm;
+import com.ioteg.model.Block;
 import com.ioteg.model.Field;
 
 public class GeneratorsFactory {
@@ -70,6 +73,12 @@ public class GeneratorsFactory {
 		return generable;
 	}
 
+	public static BlockGenerator makeBlockGenerator(Block block) {
+		return new BlockGenerator(new BlockGenerationAlgorithm(block));
+		
+	}
+
+	
 	public static Generable makeComplexGenerator(Field field) {
 
 		return new ComplexFieldGenerator(new ComplexFieldGeneratorAlgorithm(field), field);

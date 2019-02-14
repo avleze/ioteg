@@ -17,7 +17,8 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	protected Boolean isFormedWithAttributes;
 	public ComplexFieldGeneratorAlgorithm(Field field) {
 		super(field);
-		makeGenerators(field);
+		if(!field.getChooseone())
+			makeGenerators(field);
 	}
 
 	private void makeGenerators(Field field) {
@@ -32,12 +33,30 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(new Field(attr), null));
 		}
 	}
+	
+	private void makeGeneratorsChooseone() {
+		this.fieldGenerators = new ArrayList<>();
+		this.isFormedWithAttributes = false;
+				
+		if (!field.getFields().isEmpty())
+		{
+			Integer selected = r.ints(0, field.getFields().size()).findFirst().getAsInt();
+			this.fieldGenerators.add(GeneratorsFactory.makeGenerator(field.getFields().get(selected), null));
+		}
+			
+		else {
+			this.isFormedWithAttributes = true;
+			Integer selected = r.ints(0, field.getAttributes().size()).findFirst().getAsInt();
+			this.fieldGenerators.add(GeneratorsFactory.makeGenerator(new Field(field.getAttributes().get(selected)), null));
+		}
+	}
 
 	@Override
 	public ResultField generate() {
 
 		List<ResultField> resultFieldsOfComplexField = new ArrayList<>();
-
+		if(field.getChooseone())
+			makeGeneratorsChooseone();
 		for (Generable generator : fieldGenerators)
 			resultFieldsOfComplexField.add(generator.generate(1).get(0));
 

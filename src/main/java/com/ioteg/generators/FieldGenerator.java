@@ -6,13 +6,12 @@ import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
-public class FieldGenerator<T> implements Generable{
+public class FieldGenerator<T> extends AbstractGenerator<T> implements Generable{
 
-	protected GenerationAlgorithm<T> generationAlgorithm;
 	protected Field field;
 	
 	public FieldGenerator(GenerationAlgorithm<T> generationAlgorithm, Field field) {
-		this.generationAlgorithm = generationAlgorithm;
+		super(generationAlgorithm);
 		this.field = field;
 	}
 
@@ -20,7 +19,7 @@ public class FieldGenerator<T> implements Generable{
 		List<ResultField> results = new ArrayList<>();
 
 		for (int i = 0; i < numberOfRequiredItems; ++i)
-			results.add(new ResultSimpleField(field.getName(), generationAlgorithm.generate().toString()));
+			results.add(new ResultSimpleField(field.getName(), generationAlgorithm.generate().toString(), field.getType()));
 
 		return results;
 	}
