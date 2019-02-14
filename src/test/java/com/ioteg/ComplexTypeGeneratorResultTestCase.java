@@ -1,7 +1,6 @@
 package com.ioteg;
 
 
-import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,18 +10,23 @@ import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.ioteg.EventGenerator;
 import com.ioteg.builders.EventTypeBuilder;
 import com.ioteg.model.EventType;
+import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultBlock;
+import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultEvent;
-import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
+import com.ioteg.resultmodel.serializers.ArrayResultBlockSerializer;
+import com.ioteg.resultmodel.serializers.ResultBlockSerializer;
+import com.ioteg.resultmodel.serializers.ResultComplexFieldSerializer;
+import com.ioteg.resultmodel.serializers.ResultEventSerializer;
+import com.ioteg.resultmodel.serializers.ResultSimpleFieldSerializer;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.instanceOf;
 
 public class ComplexTypeGeneratorResultTestCase {
 
@@ -43,6 +47,20 @@ public class ComplexTypeGeneratorResultTestCase {
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
 		EventType eventType = eventTypeBuilder.build(document);
 		ResultEvent result = EventGenerator.generateEvent(eventType);
+		SimpleModule module = new SimpleModule();
+		ObjectMapper jsonSerializer = new ObjectMapper();
+
+		module.addSerializer(ArrayResultBlock.class, new ArrayResultBlockSerializer(null));
+		module.addSerializer(ResultBlock.class, new ResultBlockSerializer(null));
+		module.addSerializer(ResultEvent.class, new ResultEventSerializer(null));
+		module.addSerializer(ResultSimpleField.class, new ResultSimpleFieldSerializer(null));
+		module.addSerializer(ResultComplexField.class, new ResultComplexFieldSerializer(null));
+
+		jsonSerializer.registerModule(module);
+
+		
+		jsonSerializer.enable(SerializationFeature.INDENT_OUTPUT);
+		jsonSerializer.writeValue(System.out, result);
 		/*
 		assertThat(result.getName(), equalTo("Channel 5186"));
 		assertThat(result.getResultBlocks(), not(nullValue()));
