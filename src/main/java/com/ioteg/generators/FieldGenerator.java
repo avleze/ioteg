@@ -19,7 +19,7 @@ public class FieldGenerator<T> extends AbstractGenerator<T> implements Generable
 		List<ResultField> results = new ArrayList<>();
 
 		for (int i = 0; i < numberOfRequiredItems; ++i)
-			results.add(new ResultSimpleField(field.getName(), generationAlgorithm.generate().toString(), field.getType()));
+			results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(), generationAlgorithm.generate().toString()));
 
 		return results;
 	}

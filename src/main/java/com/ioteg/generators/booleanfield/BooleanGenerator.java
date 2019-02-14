@@ -9,7 +9,7 @@ import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
-public class BooleanGenerator extends FieldGenerator<Boolean>{
+public class BooleanGenerator extends FieldGenerator<Boolean> {
 
 	public BooleanGenerator(GenerationAlgorithm<Boolean> generationAlgorithm, Field field) {
 		super(generationAlgorithm, field);
@@ -18,13 +18,14 @@ public class BooleanGenerator extends FieldGenerator<Boolean>{
 	@Override
 	public List<ResultField> generate(Integer numberOfRequiredItems) {
 		List<ResultField> results = new ArrayList<>();
-		
-		if(field.getIsNumeric())
+
+		if (field.getIsNumeric())
 			for (int i = 0; i < numberOfRequiredItems; ++i)
-				results.add(new ResultSimpleField(field.getName(), booleanToNumericalString(generationAlgorithm.generate()), field.getType()));
+				results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(),
+						booleanToNumericalString(generationAlgorithm.generate())));
 		else
 			results = super.generate(numberOfRequiredItems);
-		
+
 		return results;
 	}
 

@@ -3,7 +3,6 @@ package com.ioteg.resultmodel.serializers;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.ioteg.resultmodel.ResultComplexField;
@@ -21,25 +20,36 @@ public class ResultComplexFieldSerializer extends StdSerializer<ResultComplexFie
 	@Override
     public void serialize(
     		ResultComplexField value, JsonGenerator jgen, SerializerProvider provider) 
-      throws IOException, JsonProcessingException {
+      throws IOException {
 		
 		if(!value.getIsAComplexFieldFormedWithAttributes())
 		{			
-			jgen.writeFieldName(value.getName());
 			jgen.writeStartObject();
 				for(ResultField r : value.getValue())
-					jgen.writeObject(r);
+					if(r instanceof ResultSimpleField)
+						jgen.writeObject(r);
+					else
+					{
+						ResultComplexField rCF = (ResultComplexField) r;
+						if(rCF.getIsAComplexFieldFormedWithAttributes())
+							jgen.writeObject(rCF);
+						else
+							jgen.writeObjectField(rCF.getName(), rCF);
+					}
+				
 			jgen.writeEndObject();
 		}
 		else
 		{
 			StringBuilder str = new StringBuilder();
-			
 				for(ResultField r : value.getValue())
 					str.append(((ResultSimpleField)r).getValue());
 				
 			jgen.writeFieldName(value.getName());
-			jgen.writeRawValue(str.toString());
+			if(value.getQuotes())
+				jgen.writeString(str.toString());
+			else
+				jgen.writeRawValue(str.toString());
 		}
     }
 }

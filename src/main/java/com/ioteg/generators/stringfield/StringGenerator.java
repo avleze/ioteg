@@ -22,7 +22,7 @@ public class StringGenerator extends FieldGenerator<String>{
 		
 		if (caseStr != null && caseStr.equalsIgnoreCase("low")) 
 			for (int i = 0; i < numberOfRequiredItems; ++i)
-				results.add(new ResultSimpleField(field.getName(), generationAlgorithm.generate().toLowerCase(), field.getType()));
+				results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(), generationAlgorithm.generate().toLowerCase()));
 		else
 			results = super.generate(numberOfRequiredItems);
 		

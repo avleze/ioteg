@@ -26,7 +26,7 @@ public class DateGenerator extends FieldGenerator<Date>{
 			for (int i = 0; i < numberOfRequiredItems; ++i)
 			{
 				Date result = generationAlgorithm.generate();
-				results.add(new ResultSimpleField(field.getName(), sdf.format(result), field.getType()));
+				results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(), sdf.format(result)));
 			}
 		}
 		else

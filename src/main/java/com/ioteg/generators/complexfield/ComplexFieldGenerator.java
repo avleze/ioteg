@@ -15,6 +15,7 @@ public class ComplexFieldGenerator extends FieldGenerator<ResultField> {
 		super(generationAlgorithm, field);
 	}
 
+	@Override
 	public List<ResultField> generate(Integer numberOfRequiredItems) {
 		List<ResultField> results = new ArrayList<>();
 		

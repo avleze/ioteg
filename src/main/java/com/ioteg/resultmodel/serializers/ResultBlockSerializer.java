@@ -3,7 +3,6 @@ package com.ioteg.resultmodel.serializers;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.ioteg.resultmodel.ResultBlock;
@@ -20,7 +19,7 @@ public class ResultBlockSerializer extends StdSerializer<ResultBlock> {
 
 	@Override
 	public void serialize(ResultBlock value, JsonGenerator jgen, SerializerProvider provider)
-			throws IOException, JsonProcessingException {
+			throws IOException {
 
 		jgen.writeStartObject();
 		for (ResultField resultField : value.getResultFields()) {
@@ -29,7 +28,7 @@ public class ResultBlockSerializer extends StdSerializer<ResultBlock> {
 				jgen.writeObject(resultSimpleField);
 			}
 			else {
-				jgen.writeObject(resultField);
+				jgen.writeObjectField(resultField.getName(), resultField);
 			}
 		}
 		jgen.writeEndObject();

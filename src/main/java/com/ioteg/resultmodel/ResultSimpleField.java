@@ -2,12 +2,10 @@ package com.ioteg.resultmodel;
 
 public class ResultSimpleField extends ResultField {
 	protected String value;
-	protected String type;
-	
-	public ResultSimpleField( String name, String value, String type) {
-		super(name);
+
+	public ResultSimpleField(String name, String type, Boolean quotes, String value) {
+		super(name, type, quotes);
 		this.value = value;
-		this.type = type;
 	}
 
 	public String getValue() {
@@ -18,12 +16,4 @@ public class ResultSimpleField extends ResultField {
 		this.value = value;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-	
 }

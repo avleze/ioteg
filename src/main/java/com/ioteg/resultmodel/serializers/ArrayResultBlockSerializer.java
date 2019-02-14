@@ -3,7 +3,6 @@ package com.ioteg.resultmodel.serializers;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.ioteg.resultmodel.ArrayResultBlock;
@@ -19,19 +18,16 @@ public class ArrayResultBlockSerializer extends StdSerializer<ArrayResultBlock> 
 
 	@Override
 	public void serialize(ArrayResultBlock value, JsonGenerator jgen, SerializerProvider provider)
-			throws IOException, JsonProcessingException {
+			throws IOException {
 
-		if (value.getResultBlocks().size() != 1) {
-
-			jgen.writeFieldName("feeds");
+		if (value.getHasRepetitionTag()) {
 			jgen.writeStartArray();
-			for (ResultBlock resultBlock : value.getResultBlocks()) {
+			for (ResultBlock resultBlock : value.getResultBlocks())
 				jgen.writeObject(resultBlock);
-			}
 			jgen.writeEndArray();
 
 		} else {
-			jgen.writeObjectField(value.getResultBlocks().get(0).getName(), value.getResultBlocks().get(0));
+			jgen.writeObject(value.getResultBlocks().get(0));
 		}
 	}
 }

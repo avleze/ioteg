@@ -13,7 +13,24 @@ import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.ioteg.EventGenerator;
+import com.ioteg.builders.FieldBuilder;
+import com.ioteg.generators.Generable;
+import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ArrayResultBlock;
+import com.ioteg.resultmodel.ResultBlock;
+import com.ioteg.resultmodel.ResultComplexField;
+import com.ioteg.resultmodel.ResultEvent;
+import com.ioteg.resultmodel.ResultField;
+import com.ioteg.resultmodel.ResultSimpleField;
+import com.ioteg.resultmodel.serializers.ArrayResultBlockSerializer;
+import com.ioteg.resultmodel.serializers.ResultBlockSerializer;
+import com.ioteg.resultmodel.serializers.ResultComplexFieldSerializer;
+import com.ioteg.resultmodel.serializers.ResultEventSerializer;
+import com.ioteg.resultmodel.serializers.ResultSimpleFieldSerializer;
 
 import static org.hamcrest.Matchers.matchesPattern;
 
@@ -81,9 +98,25 @@ public class ComplexTypeGeneratorTestCase {
 	@Test
 	public void testGenerateComplexValueJson() throws IOException, JDOMException {		
 		Element field = fields.get(36);
+		FieldBuilder fB = new FieldBuilder();
+		Field modelField = fB.build(field);
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
+		
+		SimpleModule module = new SimpleModule();
+		ObjectMapper jsonSerializer = new ObjectMapper();
 
-		StringBuilder result = EventGenerator.generateValueComplexType(field, "json");
-		String[] resultSplitted = result.toString().split(",");
+		module.addSerializer(ArrayResultBlock.class, new ArrayResultBlockSerializer(null));
+		module.addSerializer(ResultBlock.class, new ResultBlockSerializer(null));
+		module.addSerializer(ResultEvent.class, new ResultEventSerializer(null));
+		module.addSerializer(ResultSimpleField.class, new ResultSimpleFieldSerializer(null));
+		module.addSerializer(ResultComplexField.class, new ResultComplexFieldSerializer(null));
+
+		jsonSerializer.registerModule(module);
+		
+		
+		
+		ResultField result = generator.generate(1).get(0);
+		String[] resultSplitted = jsonSerializer.writeValueAsString(result).split(",");
 
 		assertThat(resultSplitted[0], matchesPattern("\\{\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 		assertThat(resultSplitted[1], matchesPattern("\"latitud\":-?\\d+\\.\\d{5}"));
@@ -94,9 +127,25 @@ public class ComplexTypeGeneratorTestCase {
 	@Test
 	public void testGenerateComplexValueJsonWithChooseoneAttributes() throws IOException, JDOMException {		
 		Element field = fields.get(37);
+		FieldBuilder fB = new FieldBuilder();
+		Field modelField = fB.build(field);
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
+		
+		SimpleModule module = new SimpleModule();
+		ObjectMapper jsonSerializer = new ObjectMapper();
 
-		StringBuilder result = EventGenerator.generateValueComplexType(field, "json");
-		String[] resultSplitted = result.toString().split(",");
+		module.addSerializer(ArrayResultBlock.class, new ArrayResultBlockSerializer(null));
+		module.addSerializer(ResultBlock.class, new ResultBlockSerializer(null));
+		module.addSerializer(ResultEvent.class, new ResultEventSerializer(null));
+		module.addSerializer(ResultSimpleField.class, new ResultSimpleFieldSerializer(null));
+		module.addSerializer(ResultComplexField.class, new ResultComplexFieldSerializer(null));
+
+		jsonSerializer.registerModule(module);
+		
+		
+		
+		ResultField result = generator.generate(1).get(0);
+		String[] resultSplitted = jsonSerializer.writeValueAsString(result).split(",");
 		assertThat(resultSplitted[0], matchesPattern("\\{\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 		assertThat(resultSplitted[1], matchesPattern("\"latitud\":-?\\d+\\.\\d{5}"));
 		assertThat(resultSplitted[2], matchesPattern("\"longitud\":-?\\d+\\.\\d{5}"));
@@ -106,9 +155,25 @@ public class ComplexTypeGeneratorTestCase {
 	@Test
 	public void testGenerateComplexValueJsonWithChooseoneFields() throws IOException, JDOMException {		
 		Element field = fields.get(38);
+		FieldBuilder fB = new FieldBuilder();
+		Field modelField = fB.build(field);
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
+		
+		SimpleModule module = new SimpleModule();
+		ObjectMapper jsonSerializer = new ObjectMapper();
 
-		StringBuilder result = EventGenerator.generateValueComplexType(field, "json");
-		String[] resultSplitted = result.toString().split(",");
+		module.addSerializer(ArrayResultBlock.class, new ArrayResultBlockSerializer(null));
+		module.addSerializer(ResultBlock.class, new ResultBlockSerializer(null));
+		module.addSerializer(ResultEvent.class, new ResultEventSerializer(null));
+		module.addSerializer(ResultSimpleField.class, new ResultSimpleFieldSerializer(null));
+		module.addSerializer(ResultComplexField.class, new ResultComplexFieldSerializer(null));
+
+		jsonSerializer.registerModule(module);
+		
+		
+		
+		ResultField result = generator.generate(1).get(0);
+		String[] resultSplitted = jsonSerializer.writeValueAsString(result).split(",");
 		assertThat(resultSplitted[0], matchesPattern("\\{\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 		assertThat(resultSplitted[1], matchesPattern("\"latitud\":-?\\d+\\.\\d{5}"));
 		assertThat(resultSplitted[2], matchesPattern("\"longitud\":-?\\d+\\.\\d{5}"));

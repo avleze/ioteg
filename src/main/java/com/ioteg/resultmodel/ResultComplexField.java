@@ -6,8 +6,9 @@ public class ResultComplexField extends ResultField {
 	private List<ResultField> value;
 	private Boolean isAComplexFieldFormedWithAttributes;
 
-	public ResultComplexField(String name, List<ResultField> value, Boolean isAComplexFieldFormedWithAttributes) {
-		super(name);
+	public ResultComplexField(String name, String type, Boolean quotes, List<ResultField> value,
+			Boolean isAComplexFieldFormedWithAttributes) {
+		super(name, type, quotes);
 		this.value = value;
 		this.isAComplexFieldFormedWithAttributes = isAComplexFieldFormedWithAttributes;
 	}

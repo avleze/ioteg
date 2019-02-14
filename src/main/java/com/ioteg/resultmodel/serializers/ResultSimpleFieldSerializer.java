@@ -3,7 +3,6 @@ package com.ioteg.resultmodel.serializers;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -19,9 +18,13 @@ public class ResultSimpleFieldSerializer extends StdSerializer<ResultSimpleField
 	@Override
     public void serialize(
     		ResultSimpleField value, JsonGenerator jgen, SerializerProvider provider) 
-      throws IOException, JsonProcessingException {
+      throws IOException {
 
 		jgen.writeFieldName(value.getName());
-		jgen.writeRawValue(value.getValue());
+		if(value.getQuotes())
+			jgen.writeString(value.getValue());
+		else
+			jgen.writeRawValue(value.getValue());
+
     }
 }

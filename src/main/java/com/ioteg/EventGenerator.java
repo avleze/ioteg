@@ -179,11 +179,6 @@ public class EventGenerator {
 			Element simple = simpletype.get(chosen);
 
 			if (simple.getName().equals("field")) {
-				if (type.equals("json")) {
-					result.append("{");
-					result.append(JsonUtil.normalFieldJson(simple));
-					result.append("}");
-				}
 				if (type.equals("xml")) {
 					result.append(" type=\"" + simple.getAttributeValue("type") + "\">");
 					result.append(XmlUtil.normalFieldsXml(simple));
@@ -214,17 +209,6 @@ public class EventGenerator {
 		}
 		if ((field.getAttributeValue("dependence") == null) && (field.getAttributeValue("chooseone") == null)) {
 			if (simpletype.get(0).getName().equals("field")) {
-				if (type.equals("json")) {
-					result.append("{");
-					for (int s = 0; s < simpletype.size(); s++) {
-						Element simple = simpletype.get(s);
-						result.append(JsonUtil.normalFieldJson(simple));
-						if (s < simpletype.size() - 1) {
-							result.append(",");
-						}
-					}
-					result.append("}");
-				}
 				if (type.equals("xml")) {
 					result.append(">\n");
 					for (int s = 0; s < simpletype.size(); s++) {
@@ -271,14 +255,14 @@ public class EventGenerator {
 		return types.contains(type);
 	}
 
-	public static ResultEvent generateEvent(EventType event) throws IOException, JDOMException {
+	public static ResultEvent generateEvent(EventType event) {
 
 		ResultEvent resultEvent = new ResultEvent(event.getName(), new ArrayList<>());
 		for (Block block : event.getBlocks()) {
 			
-			ArrayResultBlock resultBlocks = new ArrayResultBlock(new ArrayList<>());
+			ArrayResultBlock resultBlocks = new ArrayResultBlock(new ArrayList<>(), block.getRepetition() != null);
 			BlockGenerator bGenerator = GeneratorsFactory.makeBlockGenerator(block);
-			resultBlocks.getResultBlocks().addAll(bGenerator.generate(block.getRepetition()));
+			resultBlocks.getResultBlocks().addAll(bGenerator.generate(block.getRepetition() == null ? 1 : block.getRepetition()));
 			resultEvent.getArrayResultBlocks().add(resultBlocks);
 		}
 

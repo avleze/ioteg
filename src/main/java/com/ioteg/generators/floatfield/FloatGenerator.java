@@ -24,7 +24,7 @@ public class FloatGenerator extends FieldGenerator<Float> {
 			for (int i = 0; i < numberOfRequiredItems; ++i)
 			{
 				Float result = generationAlgorithm.generate();
-				results.add(new ResultSimpleField(field.getName(), numberToSpecifiedPrecision(result, field.getPrecision()), field.getType()));
+				results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(), numberToSpecifiedPrecision(result, field.getPrecision())));
 			}
 		else
 			results = super.generate(numberOfRequiredItems);
