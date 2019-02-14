@@ -22,14 +22,12 @@ import com.ioteg.builders.FieldBuilder;
 import com.ioteg.eplutils.EPLConditionsParser;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.block.BlockGenerator;
 import com.ioteg.model.Block;
 import com.ioteg.model.EventType;
 import com.ioteg.model.Field;
-import com.ioteg.model.OptionalFields;
 import com.ioteg.resultmodel.ArrayResultBlock;
-import com.ioteg.resultmodel.ResultBlock;
 import com.ioteg.resultmodel.ResultEvent;
-import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
 public class EventGenerator {
@@ -279,26 +277,8 @@ public class EventGenerator {
 		for (Block block : event.getBlocks()) {
 			
 			ArrayResultBlock resultBlocks = new ArrayResultBlock(new ArrayList<>());
-			for (int iteration = 0; iteration < block.getRepetition(); ++iteration) {
-				ResultBlock resultBlock = new ResultBlock(block.getName(), new ArrayList<ResultField>());
-				Integer totalNumOfEvents = block.getRepetition();
-
-				for (Field field : block.getFields()) {
-					Generable generator = GeneratorsFactory.makeGenerator(field, totalNumOfEvents);
-					ResultField resultField = generator.generate(1).get(0);
-					resultBlock.getResultFields().add(resultField);
-				}
-
-				for (OptionalFields optionalFields : block.getOptionalFields())
-					for (Field field : optionalFields.getFields()) {
-						Generable generator = GeneratorsFactory.makeGenerator(field, totalNumOfEvents);
-						ResultField resultField = generator.generate(1).get(0);
-						resultBlock.getResultFields().add(resultField);
-					}
-
-				resultBlocks.getResultBlocks().add(resultBlock);
-			}
-			
+			BlockGenerator bGenerator = GeneratorsFactory.makeBlockGenerator(block);
+			resultBlocks.getResultBlocks().addAll(bGenerator.generate(block.getRepetition()));
 			resultEvent.getArrayResultBlocks().add(resultBlocks);
 		}
 
