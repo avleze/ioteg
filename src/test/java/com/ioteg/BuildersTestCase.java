@@ -102,7 +102,7 @@ public class BuildersTestCase {
 		assertEquals("latitude", latitude.getName());
 		assertEquals(false, latitude.getQuotes());
 		assertEquals("Float", latitude.getType());
-		assertEquals("47.528936", latitude.getValue());
+		assertEquals("47.52896", latitude.getValue());
 
 		Field longitude = channelBlock.getFields().get(4);
 		assertEquals("longitude", longitude.getName());
@@ -149,7 +149,7 @@ public class BuildersTestCase {
 		Block feedsBlock = eventType.getBlocks().get(1);
 
 		assertEquals("feeds", feedsBlock.getName());
-		assertEquals(Integer.valueOf(2), feedsBlock.getRepetition());
+		assertEquals(Integer.valueOf(300), feedsBlock.getRepetition());
 		assertEquals(null, feedsBlock.getValue());
 
 		Field createAt = feedsBlock.getFields().get(0);

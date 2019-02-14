@@ -4,7 +4,7 @@
  		<field name="id" quotes="false" type="Integer" value="5186"></field>
 		<field name="name" quotes="false" type="String" value="Channel 5186"></field>
 		<field name="description" quotes="false" type="String" value="Generated event type Channel 5186"></field>
-		<field name="latitude" quotes="false" type="Float" value="47.528936"></field>
+		<field name="latitude" quotes="false" type="Float" value="47.52896"></field>
 		<field name="longitude" quotes="false" type="Float" value="10.257247"></field>
 		<field name="field1" type="Boolean" isnumeric="true"></field>
 		<field name="field2" quotes="false" type="Alphanumeric" endcharacter="F"></field>

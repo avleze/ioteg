@@ -1,18 +1,16 @@
 package com.ioteg;
 
-
-
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.ioteg.EventGenerator;
 import com.ioteg.builders.EventTypeBuilder;
 import com.ioteg.model.EventType;
@@ -20,13 +18,17 @@ import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultBlock;
 import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultEvent;
+import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
-import com.ioteg.resultmodel.serializers.ArrayResultBlockSerializer;
-import com.ioteg.resultmodel.serializers.ResultBlockSerializer;
-import com.ioteg.resultmodel.serializers.ResultComplexFieldSerializer;
-import com.ioteg.resultmodel.serializers.ResultEventSerializer;
-import com.ioteg.resultmodel.serializers.ResultSimpleFieldSerializer;
 
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 public class ComplexTypeGeneratorResultTestCase {
 
@@ -42,79 +44,179 @@ public class ComplexTypeGeneratorResultTestCase {
 	}
 
 	@Test
-	public void testGenerateResultEvent() throws IOException, JDOMException {		
+	public void testGenerateResultEvent() throws IOException, JDOMException, ParseException {
 
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
 		EventType eventType = eventTypeBuilder.build(document);
 		ResultEvent result = EventGenerator.generateEvent(eventType);
-		SimpleModule module = new SimpleModule();
-		ObjectMapper jsonSerializer = new ObjectMapper();
 
-		module.addSerializer(ArrayResultBlock.class, new ArrayResultBlockSerializer(null));
-		module.addSerializer(ResultBlock.class, new ResultBlockSerializer(null));
-		module.addSerializer(ResultEvent.class, new ResultEventSerializer(null));
-		module.addSerializer(ResultSimpleField.class, new ResultSimpleFieldSerializer(null));
-		module.addSerializer(ResultComplexField.class, new ResultComplexFieldSerializer(null));
-
-		jsonSerializer.registerModule(module);
-
-		
-		jsonSerializer.enable(SerializationFeature.INDENT_OUTPUT);
-		jsonSerializer.writeValue(System.out, result);
-		/*
 		assertThat(result.getName(), equalTo("Channel 5186"));
-		assertThat(result.getResultBlocks(), not(nullValue()));
-		assertThat(result.getResultBlocks().size(), equalTo(3));
-		
-		ResultBlock resultBlock = result.getResultBlocks().get(0);
-		
+		assertThat(result.getArrayResultBlocks(), not(nullValue()));
+		assertThat(result.getArrayResultBlocks().size(), equalTo(2));
+
+		ResultBlock resultBlock = result.getArrayResultBlocks().get(0).getResultBlocks().get(0);
+
 		assertThat(resultBlock.getName(), equalTo("channel"));
 		assertThat(resultBlock.getResultFields(), not(nullValue()));
 		assertThat(resultBlock.getResultFields().size(), equalTo(11));
-		
+
 		ResultField resultField = resultBlock.getResultFields().get(0);
 		assertThat(resultField, instanceOf(ResultSimpleField.class));
 		ResultSimpleField resultSimpleField = (ResultSimpleField) resultField;
-		
+
 		assertThat(resultSimpleField.getName(), equalTo("id"));
 		assertThat(resultSimpleField.getValue(), equalTo("5186"));
-		
+
 		resultField = resultBlock.getResultFields().get(1);
 		assertThat(resultField, instanceOf(ResultSimpleField.class));
 		resultSimpleField = (ResultSimpleField) resultField;
-		
+
 		assertThat(resultSimpleField.getName(), equalTo("name"));
 		assertThat(resultSimpleField.getValue(), equalTo("Channel 5186"));
-		
+
 		resultField = resultBlock.getResultFields().get(2);
 		assertThat(resultField, instanceOf(ResultSimpleField.class));
 		resultSimpleField = (ResultSimpleField) resultField;
-		
+
 		assertThat(resultSimpleField.getName(), equalTo("description"));
 		assertThat(resultSimpleField.getValue(), equalTo("Generated event type Channel 5186"));
 
 		resultField = resultBlock.getResultFields().get(3);
 		assertThat(resultField, instanceOf(ResultSimpleField.class));
 		resultSimpleField = (ResultSimpleField) resultField;
-		
+
 		assertThat(resultSimpleField.getName(), equalTo("latitude"));
-		assertThat(resultSimpleField.getValue(), equalTo("47.528936"));
-		
+		assertThat(resultSimpleField.getValue(), equalTo("47.52896"));
+
 		resultField = resultBlock.getResultFields().get(4);
 		assertThat(resultField, instanceOf(ResultSimpleField.class));
 		resultSimpleField = (ResultSimpleField) resultField;
-		
+
 		assertThat(resultSimpleField.getName(), equalTo("longitude"));
 		assertThat(resultSimpleField.getValue(), equalTo("10.257247"));
-		
+
 		resultField = resultBlock.getResultFields().get(5);
 		assertThat(resultField, instanceOf(ResultSimpleField.class));
 		resultSimpleField = (ResultSimpleField) resultField;
+
+		assertThat(resultSimpleField.getName(), equalTo("field1"));
+		assertThat(resultSimpleField.getValue(), matchesPattern("0|1"));
 		
-		assertThat(resultSimpleField.getName(), equalTo("f"));
-		assertThat(resultSimpleField.getValue(), equalTo("10.257247"));*/
+		resultField = resultBlock.getResultFields().get(6);
+		assertThat(resultField, instanceOf(ResultSimpleField.class));
+		resultSimpleField = (ResultSimpleField) resultField;
+
+		assertThat(resultSimpleField.getName(), equalTo("field2"));
+		assertThat(resultSimpleField.getValue(), matchesPattern("[0123456789ABCDEF]*"));
+		
+		resultField = resultBlock.getResultFields().get(7);
+		assertThat(resultField, instanceOf(ResultSimpleField.class));
+		resultSimpleField = (ResultSimpleField) resultField;
+
+		assertThat(resultSimpleField.getName(), equalTo("field3"));
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-DD");
+		sdf.parse(resultSimpleField.getValue());
+		
+		resultField = resultBlock.getResultFields().get(8);
+		assertThat(resultField, instanceOf(ResultSimpleField.class));
+		resultSimpleField = (ResultSimpleField) resultField;
+
+		assertThat(resultSimpleField.getName(), equalTo("created_at"));
+		assertThat(resultSimpleField.getValue(), equalTo("2013-04-04T12:12:05Z"));
+		
+		resultField = resultBlock.getResultFields().get(9);
+		assertThat(resultField, instanceOf(ResultSimpleField.class));
+		resultSimpleField = (ResultSimpleField) resultField;
+
+		assertThat(resultSimpleField.getName(), equalTo("updated_at"));
+		assertThat(resultSimpleField.getValue(), equalTo("2016-04-19T07:39:07Z"));
+		
+		resultField = resultBlock.getResultFields().get(10);
+		assertThat(resultField, instanceOf(ResultSimpleField.class));
+		resultSimpleField = (ResultSimpleField) resultField;
+
+		assertThat(resultSimpleField.getName(), equalTo("last_entry_id"));
+		assertThat(resultSimpleField.getValue(), equalTo("1201242"));
+		
+		ArrayResultBlock resultBlocks = result.getArrayResultBlocks().get(1);
+		
+		
+		assertThat(resultBlocks.getResultBlocks().size(), equalTo(300));
+
+		for (ResultBlock rB : resultBlocks.getResultBlocks()) {
+			resultField = rB.getResultFields().get(0);
+			assertThat(resultField, instanceOf(ResultComplexField.class));
+			ResultComplexField resultComplexField = (ResultComplexField) resultField;
+
+			assertThat(resultComplexField.getName(), equalTo("create_at"));
+			assertThat(resultComplexField.getValue(), not(nullValue()));
+			
+			resultField = resultComplexField.getValue().get(0);
+			assertThat(resultField, instanceOf(ResultSimpleField.class));
+			resultSimpleField = (ResultSimpleField) resultField;
+			
+			assertThat(resultSimpleField.getName(), nullValue());
+			if(!resultSimpleField.getType().equalsIgnoreCase("Time"))
+				assertThat(resultSimpleField.getValue(), matchesPattern("2016|-|5|-|14|T|Z"));
+			else
+			{
+				sdf = new SimpleDateFormat("hh:mm:ss");
+				sdf.parse(resultSimpleField.getValue());
+			}
+			
+			resultField = rB.getResultFields().get(1);
+			assertThat(resultField, instanceOf(ResultSimpleField.class));
+			resultSimpleField = (ResultSimpleField) resultField;
+			
+			assertThat(resultSimpleField.getName(), equalTo("entry_id"));
+			assertThat(resultSimpleField.getType(), equalTo("Integer"));
+			assertThat(Integer.valueOf(resultSimpleField.getValue()), greaterThanOrEqualTo(100000));
+			assertThat(Integer.valueOf(resultSimpleField.getValue()), lessThanOrEqualTo(999999));
+			
+			resultField = rB.getResultFields().get(2);
+			assertThat(resultField, instanceOf(ResultSimpleField.class));
+			resultSimpleField = (ResultSimpleField) resultField;
+			
+			assertThat(resultSimpleField.getName(), equalTo("field1"));
+			assertThat(resultSimpleField.getType(), equalTo("Float"));
+			assertThat(Float.valueOf(resultSimpleField.getValue()), greaterThanOrEqualTo(19f));
+			assertThat(Float.valueOf(resultSimpleField.getValue()), lessThanOrEqualTo(20f));
+			assertThat(resultSimpleField.getValue(), matchesPattern("\\d{2}\\.\\d{2}"));
+			
+			resultField = rB.getResultFields().get(3);
+			assertThat(resultField, instanceOf(ResultSimpleField.class));
+			resultSimpleField = (ResultSimpleField) resultField;
+			
+			assertThat(resultSimpleField.getName(), equalTo("field2"));
+			assertThat(resultSimpleField.getType(), equalTo("Float"));
+			assertThat(Float.valueOf(resultSimpleField.getValue()), greaterThanOrEqualTo(5f));
+			assertThat(Float.valueOf(resultSimpleField.getValue()), lessThanOrEqualTo(10f));
+			assertThat(resultSimpleField.getValue(), matchesPattern("\\d{1,2}\\.\\d{2}"));
+			
+			resultField = rB.getResultFields().get(4);
+			assertThat(resultField, instanceOf(ResultSimpleField.class));
+			resultSimpleField = (ResultSimpleField) resultField;
+			
+			assertThat(resultSimpleField.getName(), equalTo("field3"));
+			assertThat(resultSimpleField.getType(), equalTo("Float"));
+			assertThat(Float.valueOf(resultSimpleField.getValue()), greaterThanOrEqualTo(40f));
+			assertThat(Float.valueOf(resultSimpleField.getValue()), lessThanOrEqualTo(50f));
+			assertThat(resultSimpleField.getValue(), matchesPattern("\\d{2}\\.\\d{2}"));
+			
+			if(rB.getResultFields().size() == 6)
+			{
+				resultField = rB.getResultFields().get(5);
+				assertThat(resultField, instanceOf(ResultSimpleField.class));
+				resultSimpleField = (ResultSimpleField) resultField;
+				
+				assertThat(resultSimpleField.getName(), equalTo("optionalField1"));
+				assertThat(resultSimpleField.getType(), equalTo("Float"));
+				assertThat(Float.valueOf(resultSimpleField.getValue()), greaterThanOrEqualTo(19f));
+				assertThat(Float.valueOf(resultSimpleField.getValue()), lessThanOrEqualTo(20f));
+				assertThat(resultSimpleField.getValue(), matchesPattern("\\d{2}\\.\\d{2}"));
+			}
+		}
+		
 	}
-	
-	
 
 }
