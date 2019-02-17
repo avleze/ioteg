@@ -15,7 +15,7 @@ public class XMLResultBlockSerializer implements XMLSerializer<ResultBlock> {
 		xmlResultComplexFieldSerializer = new XMLResultComplexFieldSerializer();
 		xmlResultSimpleFieldSerializer = new XMLResultSimpleFieldSerializer();
 	}
-	
+
 	@Override
 	public void serialize(ResultBlock resultBlock, XMLGenerator xmlGen) throws IOException {
 
@@ -23,8 +23,9 @@ public class XMLResultBlockSerializer implements XMLSerializer<ResultBlock> {
 			if (resultField instanceof ResultSimpleField) {
 				ResultSimpleField resultSimpleField = (ResultSimpleField) resultField;
 				xmlResultSimpleFieldSerializer.serialize(resultSimpleField, xmlGen);
-			} else
+			} else {
 				xmlResultComplexFieldSerializer.serialize((ResultComplexField) resultField, xmlGen);
+			}
 		}
 
 	}

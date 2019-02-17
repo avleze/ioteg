@@ -26,7 +26,7 @@ public class XMLGenerator {
 		outputStreamWriter.append("<" + fieldName + ">");
 		if(isObject)
 		{
-			xmlPrettyPrinter.incrementIndentation(this);
+			xmlPrettyPrinter.incrementIndentation();
 			xmlPrettyPrinter.nextLine(this);
 		}
 	}
@@ -48,7 +48,7 @@ public class XMLGenerator {
 
 		if(isObject)
 		{
-			xmlPrettyPrinter.incrementIndentation(this);
+			xmlPrettyPrinter.incrementIndentation();
 			xmlPrettyPrinter.nextLine(this);
 		}
 	}

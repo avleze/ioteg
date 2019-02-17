@@ -22,20 +22,14 @@ public class XMLPrettyPrinter {
 			xmlGenerator.writeRaw(String.join("", Collections.nCopies(indentationLevel, "  ")));
 	}
 
-	public void incrementAndIndent(XMLGenerator xmlGenerator) throws IOException {
-		if (activated) {
+	public void incrementIndentation() {
+		if (activated)
 			indentationLevel++;
-			xmlGenerator.writeRaw(String.join("", Collections.nCopies(indentationLevel, "  ")));
-		}
-	}
-	public void incrementIndentation(XMLGenerator xmlGenerator) throws IOException {
-		if (activated) {
-			indentationLevel++;
-		}
 	}
 
 	public void reduceIndentation() {
-		indentationLevel--;
+		if (activated)
+			indentationLevel--;
 	}
 
 	public void nextLine(XMLGenerator xmlGenerator) throws IOException {
