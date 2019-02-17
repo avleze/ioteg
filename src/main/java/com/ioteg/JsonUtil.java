@@ -15,11 +15,11 @@ import com.ioteg.resultmodel.ResultBlock;
 import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultEvent;
 import com.ioteg.resultmodel.ResultSimpleField;
-import com.ioteg.resultmodel.serializers.ArrayResultBlockSerializer;
-import com.ioteg.resultmodel.serializers.ResultBlockSerializer;
-import com.ioteg.resultmodel.serializers.ResultComplexFieldSerializer;
-import com.ioteg.resultmodel.serializers.ResultEventSerializer;
-import com.ioteg.resultmodel.serializers.ResultSimpleFieldSerializer;
+import com.ioteg.resultmodel.jsonserializers.ArrayResultBlockSerializer;
+import com.ioteg.resultmodel.jsonserializers.ResultBlockSerializer;
+import com.ioteg.resultmodel.jsonserializers.ResultComplexFieldSerializer;
+import com.ioteg.resultmodel.jsonserializers.ResultEventSerializer;
+import com.ioteg.resultmodel.jsonserializers.ResultSimpleFieldSerializer;
 
 public class JsonUtil extends EventGenerator {
 
@@ -29,7 +29,6 @@ public class JsonUtil extends EventGenerator {
 		
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
-
 		module.addSerializer(ArrayResultBlock.class, new ArrayResultBlockSerializer(null));
 		module.addSerializer(ResultBlock.class, new ResultBlockSerializer(null));
 		module.addSerializer(ResultEvent.class, new ResultEventSerializer(null));
