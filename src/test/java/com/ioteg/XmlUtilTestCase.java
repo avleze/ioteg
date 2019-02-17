@@ -3,9 +3,11 @@ package com.ioteg;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.junit.Assert.assertThat;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -19,6 +21,19 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 import com.ioteg.XmlUtil;
+import com.ioteg.builders.EventTypeBuilder;
+import com.ioteg.model.EventType;
+import com.ioteg.resultmodel.ArrayResultBlock;
+import com.ioteg.resultmodel.ResultBlock;
+import com.ioteg.resultmodel.ResultComplexField;
+import com.ioteg.resultmodel.ResultEvent;
+import com.ioteg.resultmodel.ResultSimpleField;
+import com.ioteg.resultmodel.xmlserializers.XMLArrayResultBlockSerializer;
+import com.ioteg.resultmodel.xmlserializers.XMLResultBlockSerializer;
+import com.ioteg.resultmodel.xmlserializers.XMLResultComplexFieldSerializer;
+import com.ioteg.resultmodel.xmlserializers.XMLResultEventSerializer;
+import com.ioteg.resultmodel.xmlserializers.XMLResultSimpleFieldSerializer;
+import com.ioteg.resultmodel.xmlserializers.XMLSerializerMapper;
 
 public class XmlUtilTestCase {
 
@@ -51,22 +66,21 @@ public class XmlUtilTestCase {
 
 		values.close();
 		
-		String xmlResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+		String result = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+		result = result.replace("\n", "");
+		result = result.replaceAll(">\\s*<", "><");
 		
-		String[] resultSplitted = xmlResult.toString().split("\n");
-		
-		assertThat(resultSplitted[0], matchesPattern("<xml>"));
-		assertThat(resultSplitted[1], matchesPattern("<testFormatValues>"));
-		assertThat(resultSplitted[2], matchesPattern("<feeds>"));
-		assertThat(resultSplitted[3], matchesPattern("<feed>"));
-		assertThat(resultSplitted[4], matchesPattern("<lugar>"));
-		assertThat(resultSplitted[5], matchesPattern("<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"));
-		assertThat(resultSplitted[6], matchesPattern("<latitud type=\"Float\">\"-?\\d+\\.\\d{5}\"</latitud>"));
-		assertThat(resultSplitted[7], matchesPattern("<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud>"));
-		assertThat(resultSplitted[8], matchesPattern("</lugar>"));
-		assertThat(resultSplitted[9], matchesPattern("</feed>"));
-		assertThat(resultSplitted[10], matchesPattern("</feeds>"));
-		assertThat(resultSplitted[11], matchesPattern("</xml>"));
+		assertThat(result, matchesPattern("<xml>"
+				+ "<testFormatValues>"
+				+ "<feed>"
+				+ "<lugar type=\"ComplexType\">"
+				+ "<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"
+				+ "<latitud type=\"Float\">\"-?\\d+\\.\\d{5}\"</latitud>"
+				+ "<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud>"
+				+ "</lugar>"
+				+ "</feed>"
+				+ "</testFormatValues>"
+				+ "</xml>"));
 
 	}
 	
@@ -80,48 +94,49 @@ public class XmlUtilTestCase {
 
 		values.close();
 		
-		String xmlResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
-		String[] resultSplitted = xmlResult.toString().split("\n");
+		String result = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+		result = result.replace("\n", "");
+		result = result.replaceAll(">\\s*<", "><");
 		
-		assertThat(resultSplitted[0], matchesPattern("<xml>"));
-		assertThat(resultSplitted[1], matchesPattern("<testFormatValues>"));
-		assertThat(resultSplitted[2], matchesPattern("<lugar>"));
-		assertThat(resultSplitted[3], matchesPattern("<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"));
-		assertThat(resultSplitted[4], matchesPattern("<latitud type=\"Float\">\"-?\\d+\\.\\d{5}\"</latitud>"));
-		assertThat(resultSplitted[5], matchesPattern("<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud>"));
-		assertThat(resultSplitted[6], matchesPattern("</lugar>"));
-		assertThat(resultSplitted[7], matchesPattern("</testFormatValues>"));
-		assertThat(resultSplitted[8], matchesPattern("</xml>"));
+		assertThat(result, matchesPattern("<xml>"
+				+ "<testFormatValues>"
+				+ "<lugar type=\"ComplexType\">"
+				+ "<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"
+				+ "<latitud type=\"Float\">\"-?\\d+\\.\\d{5}\"</latitud>"
+				+ "<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud>"
+				+ "</lugar>"
+				+ "</testFormatValues>"
+				+ "</xml>"));
 
 	}
 	
+	
+	
 	@Test
-	public void testXmlWithOptionalFields() throws IOException, JDOMException {
+	public void testXmlSerializerWithOptionalFields() throws IOException, JDOMException {
 		
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);
 		
 		XmlUtil.xmlFormatValues(values, doc);
 
-		values.close();
-		
-		String xmlResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
-		String[] resultSplitted = xmlResult.toString().split("\n");
-		
-		assertThat(resultSplitted[0], matchesPattern("<xml>"));
-		assertThat(resultSplitted[1], matchesPattern("<testFormatValues>"));
-		assertThat(resultSplitted[2], matchesPattern("<feeds>"));
-		assertThat(resultSplitted[3], matchesPattern("<feed>"));
-		assertThat(resultSplitted[4], matchesPattern("<lugar>"));
-		assertThat(resultSplitted[5], matchesPattern("<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"));
-		assertThat(resultSplitted[6], matchesPattern("<latitud type=\"Float\">\"-?\\d+\\.\\d{5}\"</latitud>"));
-		assertThat(resultSplitted[7], matchesPattern("<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud>"));
-		assertThat(resultSplitted[8], matchesPattern("</lugar>"));
-		assertThat(resultSplitted[9], matchesPattern("<nombreOpcional type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombreOpcional>"));
-		assertThat(resultSplitted[10], matchesPattern("<cadenaOpcional type=\"String\">\"[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}\"</cadenaOpcional>"));
-		assertThat(resultSplitted[11], matchesPattern("</feed>"));
-		assertThat(resultSplitted[12], matchesPattern("</feeds>"));
-		assertThat(resultSplitted[13], matchesPattern("</xml>"));
+		String result = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+
+		result = result.replace("\n", "");
+		result = result.replaceAll(">\\s*<", "><");
+		assertThat(result, matchesPattern("<xml>"
+				+ "<testFormatValues>"
+				+ "<feed>"
+				+ "<lugar type=\"ComplexType\">"
+				+ "<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre>"
+				+ "<latitud type=\"Float\">\"-?\\d+\\.\\d{5}\"</latitud>"
+				+ "<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud>"
+				+ "</lugar>"
+				+ "(<nombreOpcional type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombreOpcional>)?"
+				+ "(<cadenaOpcional type=\"String\">\"[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}\"</cadenaOpcional>)?"
+				+ "</feed>"
+				+ "</testFormatValues>"
+				+ "</xml>"));
 
 	}
 	
