@@ -1,9 +1,11 @@
 package com.ioteg.generators.stringfield;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.generators.FieldGenerator;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
@@ -16,7 +18,7 @@ public class StringGenerator extends FieldGenerator<String>{
 	}
 
 	@Override
-	public List<ResultField> generate(Integer numberOfRequiredItems) {
+	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, IOException {
 		List<ResultField> results = new ArrayList<>();
 		String caseStr = field.getCase();
 		

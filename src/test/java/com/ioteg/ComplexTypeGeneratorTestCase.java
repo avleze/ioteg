@@ -20,6 +20,7 @@ import com.ioteg.EventGenerator;
 import com.ioteg.builders.FieldBuilder;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultBlock;
@@ -97,7 +98,7 @@ public class ComplexTypeGeneratorTestCase {
 	}
 	
 	@Test
-	public void testGenerateComplexValueJson() throws IOException, JDOMException {		
+	public void testGenerateComplexValueJson() throws IOException, JDOMException, NotExistingGeneratorException {		
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -126,7 +127,7 @@ public class ComplexTypeGeneratorTestCase {
 	}
 	
 	@Test
-	public void testGenerateComplexValueJsonWithChooseoneAttributes() throws IOException, JDOMException {		
+	public void testGenerateComplexValueJsonWithChooseoneAttributes() throws IOException, JDOMException, NotExistingGeneratorException {		
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -154,7 +155,7 @@ public class ComplexTypeGeneratorTestCase {
 	}
 	
 	@Test
-	public void testGenerateComplexValueJsonWithChooseoneFields() throws IOException, JDOMException {		
+	public void testGenerateComplexValueJsonWithChooseoneFields() throws IOException, JDOMException, NotExistingGeneratorException {		
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);

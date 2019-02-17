@@ -1,5 +1,6 @@
 package com.ioteg.generators.block;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,6 +8,7 @@ import java.util.stream.Collectors;
 import com.ioteg.generators.AbstractGenerationAlgorithm;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Block;
 import com.ioteg.model.Field;
 import com.ioteg.model.OptionalFields;
@@ -20,20 +22,20 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 	protected Block block;
 	
 	
-	public BlockGenerationAlgorithm(Block block) {
+	public BlockGenerationAlgorithm(Block block) throws NotExistingGeneratorException, IOException {
 		super();
 		this.block = block;
 		makeGenerators(block);
 	}
 
-	private void makeGenerators(Block block) {
+	private void makeGenerators(Block block) throws NotExistingGeneratorException, IOException {
 		this.generators = new ArrayList<>();
 		
 		for (Field field : block.getFields()) 
 			generators.add(GeneratorsFactory.makeGenerator(field, block.getRepetition()));
 	}
 	
-	private void makeOptionalGenerators() {
+	private void makeOptionalGenerators() throws NotExistingGeneratorException, IOException {
 		this.optionalGenerators = new ArrayList<>();
 		for (OptionalFields optionalFields : block.getOptionalFields())
 			for(Field field : fieldsSelected(optionalFields))
@@ -68,7 +70,7 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		
 
 	@Override
-	public ResultBlock generate() {
+	public ResultBlock generate() throws NotExistingGeneratorException, IOException {
 		ResultBlock resultBlock = new ResultBlock(block.getName(), new ArrayList<ResultField>());
 		
 		makeOptionalGenerators();

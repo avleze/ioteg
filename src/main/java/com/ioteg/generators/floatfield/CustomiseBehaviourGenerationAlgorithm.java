@@ -24,7 +24,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 	protected Double generatedValue;
 	protected Integer generatedEventsInCurrentRule;
 	protected Integer eventsPerSimulation;
-	
+
 	public CustomiseBehaviourGenerationAlgorithm(Field field, Integer numOfEventsToGenerate) throws IOException {
 		super(field);
 		this.numOfEventsToGenerate = numOfEventsToGenerate;
@@ -41,16 +41,16 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 		return rules;
 	}
 
-	private Map<String, Double> getVariablesFromField(Field field) throws IOException {
+	private Map<String, Double> getVariablesFromField(Field field) {
 		Map<String, Double> vars = new HashMap<>();
 
 		for (VariableCustomBehaviour variable : field.getCustomBehaviour().getVariables())
 			vars.put(variable.getName(), obtainVariableValue(variable, vars));
-		
+
 		return vars;
 	}
 
-	private Double obtainVariableValue(VariableCustomBehaviour variable, Map<String, Double> vars) throws IOException {
+	private Double obtainVariableValue(VariableCustomBehaviour variable, Map<String, Double> vars) {
 
 		Double result = null;
 		String minStr = variable.getMin();
@@ -75,7 +75,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 		return result;
 	}
 
-	private Double obtainOperationValue(String operation) throws IOException {
+	private Double obtainOperationValue(String operation) {
 		ExpressionAST exp = parser.parse(operation);
 		return exp.evaluate(variables);
 	}
@@ -104,54 +104,47 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 		if (min < max)
 			generatedValue = r.doubles(min, max).findFirst().getAsDouble();
 	}
-	
+
 	private void generateValue(RuleCustomBehaviour rule) {
 
-		try {
-			if (rule.getValue() != null)
-				generatedValue = obtainOperationValue(rule.getValue());
-			else {
-				Double min = obtainOperationValue(rule.getMin());
-				Double max = obtainOperationValue(rule.getMax());
+		if (rule.getValue() != null)
+			generatedValue = obtainOperationValue(rule.getValue());
+		else {
+			Double min = obtainOperationValue(rule.getMin());
+			Double max = obtainOperationValue(rule.getMax());
 
-				if (rule.getSequence() == null)
-					generatedValue = (min + Math.random() * (max - min));
-				else if (rule.getSequence().equalsIgnoreCase(DEC_VALUE))
-					generateValueDecSequence(min, max);
-				else if (rule.getSequence().equalsIgnoreCase(INC_VALUE))
-					generateValueIncSequence(min, max);
-			}
-		} catch (IOException e) {
-			logger.error(e);
+			if (rule.getSequence() == null)
+				generatedValue = (min + Math.random() * (max - min));
+			else if (rule.getSequence().equalsIgnoreCase(DEC_VALUE))
+				generateValueDecSequence(min, max);
+			else if (rule.getSequence().equalsIgnoreCase(INC_VALUE))
+				generateValueIncSequence(min, max);
 		}
+
 	}
 
 	@Override
 	public Float generate() {
 		RuleCustomBehaviour rule = rules.get(0);
-		
+
 		generateValue(rule);
 
 		generatedEventsInCurrentRule++;
 		totalGeneratedEvents++;
-		
-		if(totalGeneratedEvents.equals(numOfEventsToGenerate))
+
+		if (totalGeneratedEvents.equals(numOfEventsToGenerate))
 			rules.clear();
-		
-		if(0 < rule.getWeight() && rule.getWeight() < 1)
-		{
+
+		if (0 < rule.getWeight() && rule.getWeight() < 1) {
 			Double eventsPerRule = rule.getWeight() * eventsPerSimulation;
-			
-			if(eventsPerRule.intValue() == generatedEventsInCurrentRule)
-			{
+
+			if (eventsPerRule.intValue() == generatedEventsInCurrentRule) {
 				rules.remove(rule);
 				generatedEventsInCurrentRule = 0;
 			}
 		}
-		
+
 		return generatedValue.floatValue();
 	}
-	
-
 
 }

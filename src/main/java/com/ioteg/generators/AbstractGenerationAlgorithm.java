@@ -1,10 +1,13 @@
 package com.ioteg.generators;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
+
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 
 public abstract class AbstractGenerationAlgorithm<T> {
@@ -20,5 +23,5 @@ public abstract class AbstractGenerationAlgorithm<T> {
 		}
 	}
 	
-	public abstract T generate();
+	public abstract T generate() throws NotExistingGeneratorException, IOException;
 }

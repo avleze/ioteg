@@ -3,15 +3,15 @@ package com.ioteg.resultmodel.xmlserializers;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class XMLSerializerMapper {
 	
 	private static Map<String, XMLSerializer<?>> customSerializers;
 	
 	static {
-		customSerializers = new ConcurrentHashMap<>();
+		customSerializers = new HashMap<>();
 	}
 	
 	public <T> String writeValueAsString(T object) throws IOException {

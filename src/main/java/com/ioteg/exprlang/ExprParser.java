@@ -1,6 +1,5 @@
 package com.ioteg.exprlang;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -29,13 +28,13 @@ public class ExprParser {
 		tokenPrecedence.put(Token.TOK_OP_DIV, 40);
 	}
 
-	public ExpressionAST parse(String str) throws IOException {
+	public ExpressionAST parse(String str)  {
 		this.lexer = new ExprLexer(str);
 		lexer.getNextToken();
 		return parseExpression();
 	}
 
-	private ExpressionAST parseExpression() throws IOException {
+	private ExpressionAST parseExpression() {
 		ExpressionAST lhs = parsePrimary();
 
 		if (lhs == null)
@@ -44,7 +43,7 @@ public class ExprParser {
 		return parseBinaryExpressionRHS(0, lhs);
 	}
 
-	private ExpressionAST parseBinaryExpressionRHS(int expressionPrecedence, ExpressionAST lhs) throws IOException {
+	private ExpressionAST parseBinaryExpressionRHS(int expressionPrecedence, ExpressionAST lhs) {
 		while (true) {
 			int tokPrecedence = getTokenPrecedence();
 
@@ -79,7 +78,7 @@ public class ExprParser {
 			return precedence;
 	}
 
-	private ExpressionAST parsePrimary() throws IOException {
+	private ExpressionAST parsePrimary()  {
 		ExpressionAST exp = null;
 
 		switch (lexer.getCurrentToken()) {
@@ -107,7 +106,7 @@ public class ExprParser {
 		return exp;
 	}
 
-	private ExpressionAST parseUnaryExpression() throws IOException {
+	private ExpressionAST parseUnaryExpression() {
 		Token operator = lexer.getCurrentToken();
 		lexer.getNextToken();
 		ExpressionAST primary = parsePrimary();
@@ -119,7 +118,7 @@ public class ExprParser {
 		return new UnaryExpressionAST(primary, operator);
 	}
 
-	private ExpressionAST parseCallFunctionExpression() throws IOException {
+	private ExpressionAST parseCallFunctionExpression() {
 		String idName = lexer.getCurrentMatch();
 
 		if (lexer.getNextToken() != Token.TOK_OPEN_PAREN) {
@@ -181,7 +180,7 @@ public class ExprParser {
 		return exp;
 	}
 
-	private ExpressionAST parseParenthesisExpression() throws IOException {
+	private ExpressionAST parseParenthesisExpression() {
 		ExpressionAST exp = null;
 		lexer.getNextToken();
 		exp = parseExpression();

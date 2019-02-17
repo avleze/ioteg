@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 import com.ioteg.JsonUtil;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.junit.Assert.assertThat;
@@ -41,7 +42,7 @@ public class JsonUtilTestCase {
 	}
 
 	@Test
-	public void testJsonComplexField() throws IOException, JDOMException {
+	public void testJsonComplexField() throws IOException, JDOMException, NotExistingGeneratorException {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
@@ -58,7 +59,7 @@ public class JsonUtilTestCase {
 	}
 
 	@Test
-	public void testJsonComplexFieldNotRepeatTag() throws IOException, JDOMException {
+	public void testJsonComplexFieldNotRepeatTag() throws IOException, JDOMException, NotExistingGeneratorException {
 		File xmlFile = new File(
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
 		Document doc = builder.build(xmlFile);
@@ -76,7 +77,7 @@ public class JsonUtilTestCase {
 	}
 	
 	@Test
-	public void testJsonComplexFieldWithOptionalFields() throws IOException, JDOMException {
+	public void testJsonComplexFieldWithOptionalFields() throws IOException, JDOMException, NotExistingGeneratorException {
 		File xmlFile = new File(
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);

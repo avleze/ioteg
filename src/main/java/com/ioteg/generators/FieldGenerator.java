@@ -1,7 +1,10 @@
 package com.ioteg.generators;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -15,7 +18,7 @@ public class FieldGenerator<T> extends AbstractGenerator<T> implements Generable
 		this.field = field;
 	}
 
-	public List<ResultField> generate(Integer numberOfRequiredItems) {
+	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, IOException {
 		List<ResultField> results = new ArrayList<>();
 
 		for (int i = 0; i < numberOfRequiredItems; ++i)

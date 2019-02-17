@@ -23,6 +23,7 @@ import com.ioteg.eplutils.EPLConditionsParser;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.block.BlockGenerator;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Block;
 import com.ioteg.model.EventType;
 import com.ioteg.model.Field;
@@ -136,8 +137,17 @@ public class EventGenerator {
 			Map<String, List<Trio<String, String, String>>> values = fieldvalues.get(0);
 
 			if (values.get(fieldname) != null) {
-				generator = GeneratorsFactory.makeQueryRestrictionGenerator(f, values.get(fieldname));
-				value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+				try {
+					generator = GeneratorsFactory.makeQueryRestrictionGenerator(f, values.get(fieldname));
+				} catch (NotExistingGeneratorException e) {
+					e.printStackTrace();
+				}
+				try {
+					value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+				} catch (NotExistingGeneratorException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				if (!iterationvalues.isEmpty() && iterationvalues.get(0).equals(iteration)) {
 					iterationvalues.remove(0);
@@ -145,8 +155,18 @@ public class EventGenerator {
 				}
 			}
 		} else {
-			generator = GeneratorsFactory.makeGenerator(f, totalnumevents);
-			value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+			try {
+				generator = GeneratorsFactory.makeGenerator(f, totalnumevents);
+			} catch (NotExistingGeneratorException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+			} catch (NotExistingGeneratorException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return value;
@@ -238,7 +258,7 @@ public class EventGenerator {
 		return types.contains(type);
 	}
 
-	public static ResultEvent generateEvent(EventType event) {
+	public static ResultEvent generateEvent(EventType event) throws NotExistingGeneratorException, IOException {
 
 		ResultEvent resultEvent = new ResultEvent(event.getName(), new ArrayList<>());
 		for (Block block : event.getBlocks()) {

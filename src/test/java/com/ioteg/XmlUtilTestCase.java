@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 import com.ioteg.XmlUtil;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 public class XmlUtilTestCase {
 
@@ -42,7 +43,7 @@ public class XmlUtilTestCase {
 	}
 	
 	@Test
-	public void testXmlComplexField() throws IOException, JDOMException {
+	public void testXmlComplexField() throws IOException, JDOMException, NotExistingGeneratorException {
 		
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
@@ -70,7 +71,7 @@ public class XmlUtilTestCase {
 	}
 	
 	@Test
-	public void testXmlComplexFieldNotRepeatTag() throws IOException, JDOMException {
+	public void testXmlComplexFieldNotRepeatTag() throws IOException, JDOMException, NotExistingGeneratorException {
 		
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
 		Document doc = builder.build(xmlFile);
@@ -98,7 +99,7 @@ public class XmlUtilTestCase {
 	
 	
 	@Test
-	public void testXmlSerializerWithOptionalFields() throws IOException, JDOMException {
+	public void testXmlSerializerWithOptionalFields() throws IOException, JDOMException, NotExistingGeneratorException {
 		
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);

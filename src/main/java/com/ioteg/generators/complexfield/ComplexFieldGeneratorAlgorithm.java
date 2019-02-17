@@ -1,11 +1,13 @@
 package com.ioteg.generators.complexfield;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Attribute;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultComplexField;
@@ -16,13 +18,13 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	protected List<Generable> fieldGenerators;
 	protected Boolean isFormedWithAttributes;
 
-	public ComplexFieldGeneratorAlgorithm(Field field) {
+	public ComplexFieldGeneratorAlgorithm(Field field) throws NotExistingGeneratorException, IOException {
 		super(field);
 		if (!field.getChooseone())
 			makeGenerators(field);
 	}
 
-	private void makeGenerators(Field field) {
+	private void makeGenerators(Field field) throws NotExistingGeneratorException, IOException {
 		this.fieldGenerators = new ArrayList<>();
 		this.isFormedWithAttributes = false;
 		if (!field.getFields().isEmpty())
@@ -35,7 +37,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 		}
 	}
 
-	private void makeGeneratorsChooseone() {
+	private void makeGeneratorsChooseone() throws NotExistingGeneratorException, IOException {
 		this.fieldGenerators = new ArrayList<>();
 		this.isFormedWithAttributes = false;
 
@@ -53,7 +55,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	}
 
 	@Override
-	public ResultField generate() {
+	public ResultField generate() throws NotExistingGeneratorException, IOException {
 
 		List<ResultField> resultFieldsOfComplexField = new ArrayList<>();
 		if (field.getChooseone())
