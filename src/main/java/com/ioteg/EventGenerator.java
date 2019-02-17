@@ -179,17 +179,11 @@ public class EventGenerator {
 			Element simple = simpletype.get(chosen);
 
 			if (simple.getName().equals("field")) {
-				if (type.equals("xml")) {
-					result.append(" type=\"" + simple.getAttributeValue("type") + "\">");
-					result.append(XmlUtil.normalFieldsXml(simple));
-				}
+				
 				if (type.equals("csv")) {
 					result.append(CsvUtil.normalFieldCsv(simple) + ",");
 				}
 			} else {
-				if (type.equals("xml")) {
-					result.append(" type=\"" + simple.getAttributeValue("type") + "\">");
-				}
 
 				finalvalue = new StringBuilder(generateValueSimpleType(simple));
 			}
@@ -201,21 +195,13 @@ public class EventGenerator {
 			}
 			Element simple = simpletype.get(chosen);
 
-			if (type.equals("xml")) {
-				result.append(" type=\"" + simple.getAttributeValue("type") + "\">");
-			}
+
 
 			finalvalue = new StringBuilder(generateValueSimpleType(simple));
 		}
 		if ((field.getAttributeValue("dependence") == null) && (field.getAttributeValue("chooseone") == null)) {
 			if (simpletype.get(0).getName().equals("field")) {
-				if (type.equals("xml")) {
-					result.append(">\n");
-					for (int s = 0; s < simpletype.size(); s++) {
-						Element simple = simpletype.get(s);
-						result.append(XmlUtil.normalFieldsXml(simple));
-					}
-				}
+				
 				if (type.equals("csv")) {
 					for (int s = 0; s < simpletype.size(); s++) {
 						Element simple = simpletype.get(s);
@@ -226,10 +212,7 @@ public class EventGenerator {
 					}
 				}
 			} else {
-				if (type.equals("xml")) {
-					result.append(" type=\"" + field.getAttributeValue("type") + "\">");
-				}
-
+			
 				for (Element simple : simpletype)
 					finalvalue.append(generateValueSimpleType(simple));
 			}
