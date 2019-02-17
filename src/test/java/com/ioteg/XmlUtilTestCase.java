@@ -3,11 +3,9 @@ package com.ioteg;
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.junit.Assert.assertThat;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -21,19 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 import com.ioteg.XmlUtil;
-import com.ioteg.builders.EventTypeBuilder;
-import com.ioteg.model.EventType;
-import com.ioteg.resultmodel.ArrayResultBlock;
-import com.ioteg.resultmodel.ResultBlock;
-import com.ioteg.resultmodel.ResultComplexField;
-import com.ioteg.resultmodel.ResultEvent;
-import com.ioteg.resultmodel.ResultSimpleField;
-import com.ioteg.resultmodel.xmlserializers.XMLArrayResultBlockSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultBlockSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultComplexFieldSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultEventSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultSimpleFieldSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLSerializerMapper;
 
 public class XmlUtilTestCase {
 
