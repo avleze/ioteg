@@ -1,4 +1,4 @@
-package com.ioteg.resultmodel.serializers;
+package com.ioteg.resultmodel.jsonserializers;
 
 import java.io.IOException;
 
