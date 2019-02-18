@@ -1,4 +1,4 @@
-package com.ioteg;
+package com.ioteg.normalgenerators;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

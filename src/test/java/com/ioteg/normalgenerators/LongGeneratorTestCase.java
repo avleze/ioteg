@@ -1,4 +1,4 @@
-package com.ioteg;
+package com.ioteg.normalgenerators;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,14 +19,14 @@ import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
-public class FloatGeneratorTestCase {
+public class LongGeneratorTestCase {
 	private static List<Element> fields;
 
 	@BeforeAll
 	public static void loadSchema() throws JDOMException, IOException {
 		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = FloatGeneratorTestCase.class.getClassLoader();
-		File xmlFile = new File(classLoader.getResource("./generators/testRandomFloatGenerator.xml").getFile());
+		ClassLoader classLoader = LongGeneratorTestCase.class.getClassLoader();
+		File xmlFile = new File(classLoader.getResource("./generators/testLongGenerator.xml").getFile());
 		Document document = builder.build(xmlFile);
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
@@ -35,31 +35,28 @@ public class FloatGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultRange() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-
-		Element field = fields.get(0);
-
-		for (int i = 0; i < 10000; ++i) {
-			String strResult = EventGenerator.generateValueSimpleType(field);
-			Double result = Double.parseDouble(strResult);
-			assertTrue(0.0 <= result);
-			assertTrue(result <= 10);
-		}
-	}
-
-	@Test
 	public void testRandomWithSpecifiedRange() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		/** Test within a specified range **/
+		Element field = fields.get(0);
+		String strResult = EventGenerator.generateValueSimpleType(field);
+		Long result = Long.parseLong(strResult);
+		assertTrue(Long.valueOf("-10000000") < result);
+		assertTrue(result <= 0);
+	}
+
+	@Test
+	public void testRandomWithDefaultRange() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+
+		/** Test of default range **/
 		Element field = fields.get(1);
 
-		for (int i = 0; i < 10000; ++i) {
+		for (int i = 0; i < 100; ++i) {
 			String strResult = EventGenerator.generateValueSimpleType(field);
-			Double result = Double.parseDouble(strResult);
-			assertTrue(23.54 <= result);
-			assertTrue(result <= 32.58);
+			Long result = Long.parseLong(strResult);
+			assertTrue(0 <= result);
+			assertTrue(result <= 9);
 		}
-
 	}
 
 	@Test
@@ -68,8 +65,7 @@ public class FloatGeneratorTestCase {
 		/** Test of specified value **/
 		Element field = fields.get(2);
 		String strResult = EventGenerator.generateValueSimpleType(field);
-		Double result = Double.parseDouble(strResult);
-		assertEquals(Double.valueOf("104.567"), result);
+		Long result = Long.parseLong(strResult);
+		assertEquals(Long.valueOf("9223372036854775807"), result);
 	}
-
 }
