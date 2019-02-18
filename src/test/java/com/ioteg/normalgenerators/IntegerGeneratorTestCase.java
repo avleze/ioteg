@@ -51,8 +51,8 @@ public class IntegerGeneratorTestCase {
 	public void testRandomWithDefaultRange() throws NotExistingGeneratorException, ExprLangParsingException {
 
 		Field field = new Field();
-		field.setMin(0.0);
-		field.setMax(9.0);
+		field.setMin(DEFAULT_MIN);
+		field.setMax(DEFAULT_MAX);
 		field.setName("testDefaultRange");
 		field.setQuotes(true);
 		field.setType("Integer");
