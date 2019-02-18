@@ -19,6 +19,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class LongGeneratorTestCase {
 
+	private static final double DEFAULT_MAX = 9.0;
+	private static final double DEFAULT_MIN = 0.0;
+
 	@Test
 	public void testRandomWithSpecifiedRange() throws NotExistingGeneratorException, ExprLangParsingException {
 
@@ -46,8 +49,8 @@ public class LongGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultRange() throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
-		field.setMin(0.0);
-		field.setMax(10.0);
+		field.setMin(DEFAULT_MIN);
+		field.setMax(DEFAULT_MAX);
 		field.setName("testDefaultRange");
 		field.setQuotes(true);
 		field.setType("Long");
@@ -71,8 +74,8 @@ public class LongGeneratorTestCase {
 	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException {
 		
 		Field field = new Field();
-		field.setMin(0.0);
-		field.setMax(10.0);
+		field.setMin(DEFAULT_MIN);
+		field.setMax(DEFAULT_MAX);
 		field.setName("testDefaultRange");
 		field.setQuotes(true);
 		field.setType("Long");
