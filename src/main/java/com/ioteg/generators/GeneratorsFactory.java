@@ -4,7 +4,6 @@ package com.ioteg.generators;
 import com.ioteg.generators.block.BlockGenerator;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.ioteg.Trio;
