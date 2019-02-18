@@ -23,7 +23,7 @@ public class GeneratorsFactory {
 		return NormalGeneratorsFactory.makeGenerator(field, totalNumEvent);
 	}
 	
-	public static Generable makeQueryRestrictionGenerator(Field field, List<Trio<String, String, String>> restrictions) throws NotExistingGeneratorException, IOException {
+	public static Generable makeQueryRestrictionGenerator(Field field, List<Trio<String, String, String>> restrictions) throws NotExistingGeneratorException {
 		return QueryRestrictionGeneratorsFactory.makeGenerator(field, restrictions);
 	}
 	

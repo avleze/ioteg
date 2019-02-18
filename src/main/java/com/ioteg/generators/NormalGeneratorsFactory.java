@@ -52,7 +52,7 @@ public class NormalGeneratorsFactory {
 			generable = makeDateGenerator(field);
 		else if (field.getType().equals("Time"))
 			generable = makeDateGenerator(field);
-		else if (!field.getType().equals(null))
+		else if (field.getType() != null)
 			generable = makeComplexGenerator(field);
 		else
 			throw new NotExistingGeneratorException("There is no existing generator for the type: null");
@@ -60,7 +60,8 @@ public class NormalGeneratorsFactory {
 		return generable;
 	}
 
-	public static Generable makeComplexGenerator(Field field) throws NotExistingGeneratorException, ExprLangParsingException {
+	public static Generable makeComplexGenerator(Field field)
+			throws NotExistingGeneratorException, ExprLangParsingException {
 		return new ComplexFieldGenerator(new ComplexFieldGeneratorAlgorithm(field), field);
 	}
 
@@ -75,7 +76,8 @@ public class NormalGeneratorsFactory {
 		return longGenerator;
 	}
 
-	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents) throws ExprLangParsingException   {
+	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents)
+			throws ExprLangParsingException {
 		FieldGenerator<Float> floatGenerator = null;
 
 		if (floatField.getValue() != null)
@@ -87,8 +89,9 @@ public class NormalGeneratorsFactory {
 						totalNumOfEvents);
 
 			floatGenerator = new FloatGenerator(customiseBehaviourGenerationAlgorithm, floatField);
-		} else if (floatField.getMin() != null && floatField.getMax() != null)
+		} else if (floatField.getMin() != null && floatField.getMax() != null) {
 			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm(floatField), floatField);
+		}
 
 		return floatGenerator;
 	}
