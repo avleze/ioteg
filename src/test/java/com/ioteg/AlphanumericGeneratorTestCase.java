@@ -3,10 +3,8 @@ package com.ioteg;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.jdom2.JDOMException;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
@@ -22,19 +20,23 @@ public class AlphanumericGeneratorTestCase {
 	private static final int DEFAULT_LENGTH = 10;
 
 	@Test
-	public void testRandomWithSpecifiedLengthAndEndcharacter() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-		
+	public void testRandomWithSpecifiedLengthAndEndcharacter()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+
 		Field field = new Field();
 		field.setLength(14);
 		field.setEndcharacter("F");
 		field.setName("cod_hex");
 		field.setQuotes(true);
 		field.setType("Alphanumeric");
-		
+
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
-		
-		/*<field name="cod_hex" quotes="true" type="Alphanumeric" length="14" endcharacter="F"></field>*/
-		
+
+		/*
+		 * <field name="cod_hex" quotes="true" type="Alphanumeric" length="14"
+		 * endcharacter="F"></field>
+		 */
+
 		for (int i = 0; i < 100; ++i) {
 
 			String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
@@ -44,7 +46,8 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndLowercase() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLengthAndLowercase()
+			throws NotExistingGeneratorException, ExprLangParsingException {
 
 		Field field = new Field();
 		field.setName("cod_hex");
@@ -52,10 +55,13 @@ public class AlphanumericGeneratorTestCase {
 		field.setType("Alphanumeric");
 		field.setCase("low");
 		field.setLength(10);
-		
+
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
-		
-		/*<field name="cod_hex" quotes="true" type="Alphanumeric" length="10" case="low"></field>*/
+
+		/*
+		 * <field name="cod_hex" quotes="true" type="Alphanumeric" length="10"
+		 * case="low"></field>
+		 */
 
 		for (int i = 0; i < 100; ++i) {
 
@@ -66,7 +72,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixed() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testFixed() throws NotExistingGeneratorException, ExprLangParsingException {
 
 		Field field = new Field();
 		field.setName("cod_hex");
@@ -76,26 +82,28 @@ public class AlphanumericGeneratorTestCase {
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
 
-		/*<field name="cod_hex" quotes="true" type="Alphanumeric" value="abc"></field>*/
+		/*
+		 * <field name="cod_hex" quotes="true" type="Alphanumeric" value="abc"></field>
+		 */
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		assertEquals(String.valueOf("abc"), strResult);
 	}
 
 	@Test
-	public void testRandomWithDefaultLength() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLength() throws NotExistingGeneratorException, ExprLangParsingException {
 
 		Field field = new Field();
 		field.setName("cod_hex");
 		field.setQuotes(true);
 		field.setType("Alphanumeric");
-		
+
 		field.setLength(DEFAULT_LENGTH);
-		/*<field name="cod_hex" quotes="true" type="Alphanumeric"></field>*/
-		
+		/* <field name="cod_hex" quotes="true" type="Alphanumeric"></field> */
+
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
 		List<ResultField> results = generator.generate(100);
-		
+
 		for (ResultField rF : results) {
 			String strResult = ((ResultSimpleField) rF).getValue();
 			assertTrue(strResult.matches("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]{10}"));
@@ -103,20 +111,24 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndEndcharacter() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLengthAndEndcharacter()
+			throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
-		
+
 		field.setName("cod_hex");
 		field.setQuotes(true);
 		field.setType("Alphanumeric");
 		field.setEndcharacter("F");
 		field.setLength(DEFAULT_LENGTH);
-		
-		/*<field name="cod_hex" quotes="true" type="Alphanumeric" endcharacter="F"></field>*/
-		
+
+		/*
+		 * <field name="cod_hex" quotes="true" type="Alphanumeric"
+		 * endcharacter="F"></field>
+		 */
+
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
 		List<ResultField> results = generator.generate(100);
-		
+
 		for (ResultField rF : results) {
 			String strResult = ((ResultSimpleField) rF).getValue();
 			assertTrue(strResult.matches("[0123456789ABCDEF]{10}"));
@@ -124,19 +136,21 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndLow() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLengthAndLow() throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
 		field.setName("cod_hex");
 		field.setQuotes(true);
 		field.setType("Alphanumeric");
 		field.setLength(DEFAULT_LENGTH);
 		field.setCase("low");
-		
-		/*<field name="cod_hex" quotes="true" type="Alphanumeric" case="low"></field>*/
-		
+
+		/*
+		 * <field name="cod_hex" quotes="true" type="Alphanumeric" case="low"></field>
+		 */
+
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
 		List<ResultField> results = generator.generate(100);
-		
+
 		for (ResultField rF : results) {
 			String strResult = ((ResultSimpleField) rF).getValue();
 			assertTrue(strResult.matches("[0123456789abcdefghijklmnopqrstuvwxyz]{10}"));
