@@ -31,6 +31,9 @@ public class Field extends Attribute {
 		this.isNumeric = attr.getIsNumeric();
 	}
 
+	public Field() {
+	}
+
 	/**
 	 * @return the name
 	 */
