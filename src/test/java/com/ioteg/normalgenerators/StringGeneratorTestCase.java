@@ -1,102 +1,135 @@
 package com.ioteg.normalgenerators;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.File;
+import static org.junit.Assert.assertThat;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.jdom2.Document;
-import org.jdom2.Element;
 import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.Generable;
+import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultSimpleField;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.matchesPattern;
 
 public class StringGeneratorTestCase {
 
-	private static List<Element> fields;
+	@Test
+	public void testRandomWithDefaultLength() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("test");
+		field.setType("String");
+		field.setLength(10);
 
-	@BeforeAll
-	public static void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = StringGeneratorTestCase.class.getClassLoader();
-		File xmlFile = new File(classLoader.getResource("./generators/testRandomStringGenerator.xml").getFile());
-		Document document = builder.build(xmlFile);
+		/* <field name="test" type="String"></field> */
 
-		List<Element> blocks = document.getRootElement().getChildren("block");
-		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<>();
+		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
+		assertThat(strResult, matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{10}"));
 	}
 
 	@Test
-	public void testRandomWithDefaultLength() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-		Element field = fields.get(0);
-		String strResult = EventGenerator.generateValueSimpleType(field);
+	public void testRandomWithSpecifiedLength() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("test");
+		field.setType("String");
+		field.setLength(24);
 
-		assertTrue(strResult.matches("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
-		assertEquals(10, strResult.length());
+		/* <field name="test" type="String" length="24"></field> */
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+
+		assertThat(strResult, matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{24}"));
 	}
 
 	@Test
-	public void testRandomWithSpecifiedLength() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-		Element field = fields.get(1);
-		String strResult = EventGenerator.generateValueSimpleType(field);
+	public void testRandomWithLowercase() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("test");
+		field.setType("String");
+		field.setLength(24);
+		field.setCase("low");
 
-		assertTrue(strResult.matches("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
-		assertEquals(24, strResult.length());
+		/* <field name="test" type="String" case="low" length="24"></field> */
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+
+		assertThat(strResult, matchesPattern("[abcdefghijklmnopqrstuvwxyz]{24}"));
 	}
 
 	@Test
-	public void testRandomWithLowercase() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLengthAndLowercase() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("test");
+		field.setType("String");
+		field.setLength(10);
+		field.setCase("low");
 
-		Element field = fields.get(2);
-		String strResult = EventGenerator.generateValueSimpleType(field);
+		/* <field name="test" type="String" case="low"></field> */
 
-		assertTrue(strResult.matches("[abcdefghijklmnopqrstuvwxyz]*"));
-		assertEquals(24, strResult.length());
+		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+
+		assertThat(strResult, matchesPattern("[abcdefghijklmnopqrstuvwxyz]{10}"));
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndLowercase() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-		Element field = fields.get(3);
-		String strResult = EventGenerator.generateValueSimpleType(field);
+	public void testRandomWithDefaultLengthAndEndCharacter() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("test");
+		field.setType("String");
+		field.setLength(10);
+		field.setEndcharacter("G");
+		field.setCase("low");
+		
+		/* <field name="test" type="String" case="low" endcharacter="G"></field> */
 
-		assertTrue(strResult.matches("[abcdefghijklmnopqrstuvwxyz]*"));
-		assertEquals(10, strResult.length());
+		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+
+		assertThat(strResult, matchesPattern("[abcdefg]*"));
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndEndCharacter() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-		Element field = fields.get(4);
-		String strResult = EventGenerator.generateValueSimpleType(field);
+	public void testRandomWithSpecifiedLengthAndEndCharacter() throws NotExistingGeneratorException, ExprLangParsingException
+			 {
+		Field field = new Field();
+		field.setName("test");
+		field.setType("String");
+		field.setLength(24);
+		field.setEndcharacter("G");
+		field.setCase("low");
+		
+		/*
+		 * <field name="test" type="String" case="low" endcharacter="G"
+		 * length="24"></field>
+		 */
 
-		assertTrue(strResult.matches("[abcdefg]*"));
-		assertEquals(10, strResult.length());
+		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+
+		assertThat(strResult, matchesPattern("[abcdefg]{24}"));
 	}
+	/**/
 
 	@Test
-	public void testRandomWithSpecifiedLengthAndEndCharacter() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-		Element field = fields.get(5);
-		String strResult = EventGenerator.generateValueSimpleType(field);
+	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException
+			 {
+		Field field = new Field();
+		field.setName("test");
+		field.setType("String");
+		field.setValue("ABC");
 
-		assertTrue(strResult.matches("[abcdefg]*"));
-		assertEquals(24, strResult.length());
-	}
+		/* <field name="test" type="String" value="ABC"></field> */
 
-	@Test
-	public void testFixedValue() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-		Element field = fields.get(6);
-		String strResult = EventGenerator.generateValueSimpleType(field);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
-		assertTrue(strResult.equals("ABC"));
-		assertEquals(3, strResult.length());
+		assertThat(strResult, equalTo("ABC"));
 	}
 }
