@@ -7,6 +7,7 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 
 import com.ioteg.builders.EventTypeBuilder;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.EventType;
 import com.ioteg.resultmodel.ArrayResultBlock;
@@ -23,7 +24,7 @@ import com.ioteg.resultmodel.xmlserializers.XMLSerializerMapper;
 
 public class XmlUtil extends EventGenerator {
 
-	public static void xmlFormatValues(FileWriter values, Document document) throws IOException, JDOMException, NotExistingGeneratorException {
+	public static void xmlFormatValues(FileWriter values, Document document) throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
 		EventType eventType = eventTypeBuilder.build(document);
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();

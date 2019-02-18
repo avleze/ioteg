@@ -9,6 +9,9 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+
 public class CsvUtil extends EventGenerator {
 
 	/**
@@ -19,8 +22,10 @@ public class CsvUtil extends EventGenerator {
 	 * @param document is the xml that has the structure
 	 * @throws IOException   files exceptions
 	 * @throws JDOMException
+	 * @throws ExprLangParsingException 
+	 * @throws NotExistingGeneratorException 
 	 */
-	public static void csvFormatValues(FileWriter values, Document document) throws IOException, JDOMException {
+	public static void csvFormatValues(FileWriter values, Document document) throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 
 		BufferedWriter bw = new BufferedWriter(values);
 		StringBuilder sb = new StringBuilder();
@@ -133,8 +138,10 @@ public class CsvUtil extends EventGenerator {
 	 * @return the structure of the field for the csv
 	 * @throws IOException
 	 * @throws JDOMException
+	 * @throws ExprLangParsingException 
+	 * @throws NotExistingGeneratorException 
 	 */
-	static Object normalFieldCsv(Element field) throws JDOMException, IOException {
+	static Object normalFieldCsv(Element field) throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		StringBuilder sb = new StringBuilder();
 		String quotes = field.getAttributeValue("quotes");
 		String type = field.getAttributeValue("type");
@@ -164,8 +171,10 @@ public class CsvUtil extends EventGenerator {
 	 * @return the structure of the field for the csv
 	 * @throws IOException
 	 * @throws JDOMException
+	 * @throws ExprLangParsingException 
+	 * @throws NotExistingGeneratorException 
 	 */
-	static StringBuilder optionalFieldCsv(Element field) throws JDOMException, IOException {
+	static StringBuilder optionalFieldCsv(Element field) throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		StringBuilder sb = new StringBuilder();
 		List<Element> optional = field.getChildren();

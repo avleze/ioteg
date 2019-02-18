@@ -22,6 +22,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 
 public class LongGeneratorQueryRestrictionTestCase {
@@ -43,7 +45,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testLongQueryRestrictionLessOperator() throws IOException, JDOMException {
+	public void testLongQueryRestrictionLessOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperator.epl").getPath(),
@@ -56,7 +58,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException {
+	public void testLongQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperator.epl").getPath(),
@@ -71,7 +73,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	
 	@Test
-	public void testLongQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException {
+	public void testLongQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperatorWithNegativeValue.epl").getPath(),
@@ -84,7 +86,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionGreaterOperator() throws IOException, JDOMException {
+	public void testLongQueryRestrictionGreaterOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterOperator.epl").getPath(),
@@ -98,7 +100,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	
 	@Test
-	public void testLongQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException {
+	public void testLongQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterOperator.epl").getPath(),
@@ -112,7 +114,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionEqualOperator() throws IOException, JDOMException {
+	public void testLongQueryRestrictionEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryEqualOperator.epl").getPath(),
@@ -125,7 +127,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
+	public void testLongQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryNotEqualOperator.epl").getPath(),
@@ -138,7 +140,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException {
+	public void testLongQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryNotEqualOperator.epl").getPath(),
@@ -155,7 +157,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 
 	
 	@Test
-	public void testLongQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException {
+	public void testLongQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterEqualOperator.epl").getPath(),
@@ -169,7 +171,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException {
+	public void testLongQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterEqualOperator.epl").getPath(),
@@ -183,7 +185,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessEqualOperator() throws IOException, JDOMException {
+	public void testLongQueryRestrictionLessEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperator.epl").getPath(),
@@ -196,7 +198,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException {
+	public void testLongQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperator.epl").getPath(),
@@ -211,7 +213,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException {
+	public void testLongQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperatorWithNegativeValue.epl").getPath(),

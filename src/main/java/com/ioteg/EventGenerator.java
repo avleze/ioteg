@@ -20,6 +20,7 @@ import org.jdom2.input.SAXBuilder;
 
 import com.ioteg.builders.FieldBuilder;
 import com.ioteg.eplutils.EPLConditionsParser;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.block.BlockGenerator;
@@ -123,8 +124,10 @@ public class EventGenerator {
 	 *         and attributes of the Element field
 	 * @throws IOException
 	 * @throws JDOMException
+	 * @throws NotExistingGeneratorException 
+	 * @throws ExprLangParsingException 
 	 */
-	public static String generateValueSimpleType(Element field) throws JDOMException, IOException {
+	public static String generateValueSimpleType(Element field) throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		String value = "";
 		String fieldname = field.getAttributeValue("name");
@@ -137,17 +140,9 @@ public class EventGenerator {
 			Map<String, List<Trio<String, String, String>>> values = fieldvalues.get(0);
 
 			if (values.get(fieldname) != null) {
-				try {
-					generator = GeneratorsFactory.makeQueryRestrictionGenerator(f, values.get(fieldname));
-				} catch (NotExistingGeneratorException e) {
-					e.printStackTrace();
-				}
-				try {
-					value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
-				} catch (NotExistingGeneratorException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				generator = GeneratorsFactory.makeQueryRestrictionGenerator(f, values.get(fieldname));
+
+				value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 				if (!iterationvalues.isEmpty() && iterationvalues.get(0).equals(iteration)) {
 					iterationvalues.remove(0);
@@ -155,18 +150,10 @@ public class EventGenerator {
 				}
 			}
 		} else {
-			try {
-				generator = GeneratorsFactory.makeGenerator(f, totalnumevents);
-			} catch (NotExistingGeneratorException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
-			} catch (NotExistingGeneratorException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			generator = GeneratorsFactory.makeGenerator(f, totalnumevents);
+			value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
+
 		}
 
 		return value;
@@ -181,8 +168,10 @@ public class EventGenerator {
 	 *         and attributes of the Element field
 	 * @throws IOException
 	 * @throws JDOMException
+	 * @throws ExprLangParsingException 
+	 * @throws NotExistingGeneratorException 
 	 */
-	public static StringBuilder generateValueComplexType(Element field, String type) throws JDOMException, IOException {
+	public static StringBuilder generateValueComplexType(Element field, String type) throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		String quotes = field.getAttributeValue("quotes");
 		if (quotes == null)
@@ -199,7 +188,7 @@ public class EventGenerator {
 			Element simple = simpletype.get(chosen);
 
 			if (simple.getName().equals("field")) {
-				
+
 				if (type.equals("csv")) {
 					result.append(CsvUtil.normalFieldCsv(simple) + ",");
 				}
@@ -215,13 +204,11 @@ public class EventGenerator {
 			}
 			Element simple = simpletype.get(chosen);
 
-
-
 			finalvalue = new StringBuilder(generateValueSimpleType(simple));
 		}
 		if ((field.getAttributeValue("dependence") == null) && (field.getAttributeValue("chooseone") == null)) {
 			if (simpletype.get(0).getName().equals("field")) {
-				
+
 				if (type.equals("csv")) {
 					for (int s = 0; s < simpletype.size(); s++) {
 						Element simple = simpletype.get(s);
@@ -232,7 +219,7 @@ public class EventGenerator {
 					}
 				}
 			} else {
-			
+
 				for (Element simple : simpletype)
 					finalvalue.append(generateValueSimpleType(simple));
 			}
@@ -258,14 +245,16 @@ public class EventGenerator {
 		return types.contains(type);
 	}
 
-	public static ResultEvent generateEvent(EventType event) throws NotExistingGeneratorException, IOException {
+	public static ResultEvent generateEvent(EventType event)
+			throws NotExistingGeneratorException, ExprLangParsingException {
 
 		ResultEvent resultEvent = new ResultEvent(event.getName(), new ArrayList<>());
 		for (Block block : event.getBlocks()) {
-			
+
 			ArrayResultBlock resultBlocks = new ArrayResultBlock(new ArrayList<>(), block.getRepetition() != null);
 			BlockGenerator bGenerator = GeneratorsFactory.makeBlockGenerator(block);
-			resultBlocks.getResultBlocks().addAll(bGenerator.generate(block.getRepetition() == null ? 1 : block.getRepetition()));
+			resultBlocks.getResultBlocks()
+					.addAll(bGenerator.generate(block.getRepetition() == null ? 1 : block.getRepetition()));
 			resultEvent.getArrayResultBlocks().add(resultBlocks);
 		}
 

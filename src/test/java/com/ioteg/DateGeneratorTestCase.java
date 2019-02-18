@@ -17,6 +17,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 public class DateGeneratorTestCase {
 	private static List<Element> fields;
@@ -34,7 +36,7 @@ public class DateGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandom() throws JDOMException, IOException, ParseException {
+	public void testRandom() throws JDOMException, IOException, ParseException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(0);
 
 		for (int i = 0; i < 1000; ++i) {
@@ -45,7 +47,7 @@ public class DateGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixedValue() throws JDOMException, IOException {
+	public void testFixedValue() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(1);
 		String strResult = EventGenerator.generateValueSimpleType(field);
 

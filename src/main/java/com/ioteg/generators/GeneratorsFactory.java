@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.ioteg.Trio;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.block.BlockGenerationAlgorithm;
 import com.ioteg.model.Block;
 import com.ioteg.model.Field;
@@ -18,7 +19,7 @@ public class GeneratorsFactory {
 		throw new IllegalStateException("This is an utility class and can't be instantiated.");
 	}
 
-	public static Generable makeGenerator(Field field, Integer totalNumEvent) throws NotExistingGeneratorException, IOException {
+	public static Generable makeGenerator(Field field, Integer totalNumEvent) throws NotExistingGeneratorException, ExprLangParsingException {
 		return NormalGeneratorsFactory.makeGenerator(field, totalNumEvent);
 	}
 	
@@ -26,7 +27,7 @@ public class GeneratorsFactory {
 		return QueryRestrictionGeneratorsFactory.makeGenerator(field, restrictions);
 	}
 	
-	public static BlockGenerator makeBlockGenerator(Block block) throws NotExistingGeneratorException, IOException {
+	public static BlockGenerator makeBlockGenerator(Block block) throws NotExistingGeneratorException, ExprLangParsingException {
 		return new BlockGenerator(new BlockGenerationAlgorithm(block));
 
 	}

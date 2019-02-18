@@ -16,6 +16,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 public class AlphanumericGeneratorTestCase {
 
@@ -34,7 +36,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithSpecifiedLengthAndEndcharacter() throws JDOMException, IOException {
+	public void testRandomWithSpecifiedLengthAndEndcharacter() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(0);
 		for (int i = 0; i < 10000; ++i) {
 
@@ -45,7 +47,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndLowercase() throws JDOMException, IOException {
+	public void testRandomWithDefaultLengthAndLowercase() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(1);
 		for (int i = 0; i < 10000; ++i) {
 
@@ -56,7 +58,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixed() throws JDOMException, IOException {
+	public void testFixed() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(2);
 
 		String strResult = EventGenerator.generateValueSimpleType(field);
@@ -64,7 +66,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLength() throws JDOMException, IOException {
+	public void testRandomWithDefaultLength() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(3);
 		for (int i = 0; i < 10000; ++i) {
 
@@ -74,7 +76,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndEndcharacter() throws JDOMException, IOException {
+	public void testRandomWithDefaultLengthAndEndcharacter() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(4);
 		for (int i = 0; i < 10000; ++i) {
 
@@ -84,7 +86,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndLow() throws JDOMException, IOException {
+	public void testRandomWithDefaultLengthAndLow() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(5);
 		for (int i = 0; i < 10000; ++i) {
 

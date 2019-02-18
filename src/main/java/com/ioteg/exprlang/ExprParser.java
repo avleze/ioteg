@@ -27,14 +27,23 @@ public class ExprParser {
 		tokenPrecedence.put(Token.TOK_OP_MUL, 40);
 		tokenPrecedence.put(Token.TOK_OP_DIV, 40);
 	}
+	
+	public class ExprLangParsingException extends Exception {
 
-	public ExpressionAST parse(String str)  {
+		private static final long serialVersionUID = 1L;
+
+		public ExprLangParsingException(String msg) {
+			super(msg);
+		}
+	}
+
+	public ExpressionAST parse(String str) throws ExprLangParsingException  {
 		this.lexer = new ExprLexer(str);
 		lexer.getNextToken();
 		return parseExpression();
 	}
 
-	private ExpressionAST parseExpression() {
+	private ExpressionAST parseExpression() throws ExprLangParsingException {
 		ExpressionAST lhs = parsePrimary();
 
 		if (lhs == null)
@@ -43,7 +52,7 @@ public class ExprParser {
 		return parseBinaryExpressionRHS(0, lhs);
 	}
 
-	private ExpressionAST parseBinaryExpressionRHS(int expressionPrecedence, ExpressionAST lhs) {
+	private ExpressionAST parseBinaryExpressionRHS(int expressionPrecedence, ExpressionAST lhs) throws ExprLangParsingException {
 		while (true) {
 			int tokPrecedence = getTokenPrecedence();
 
@@ -78,7 +87,7 @@ public class ExprParser {
 			return precedence;
 	}
 
-	private ExpressionAST parsePrimary()  {
+	private ExpressionAST parsePrimary() throws ExprLangParsingException  {
 		ExpressionAST exp = null;
 
 		switch (lexer.getCurrentToken()) {
@@ -99,14 +108,13 @@ public class ExprParser {
 			exp = parseUnaryExpression();
 			break;
 		default:
-			logger.error("Expected a expression.");
-			break;
+			throw new ExprLangParsingException("Expected a expression.");
 		}
 
 		return exp;
 	}
 
-	private ExpressionAST parseUnaryExpression() {
+	private ExpressionAST parseUnaryExpression() throws ExprLangParsingException {
 		Token operator = lexer.getCurrentToken();
 		lexer.getNextToken();
 		ExpressionAST primary = parsePrimary();
@@ -118,13 +126,11 @@ public class ExprParser {
 		return new UnaryExpressionAST(primary, operator);
 	}
 
-	private ExpressionAST parseCallFunctionExpression() {
+	private ExpressionAST parseCallFunctionExpression() throws ExprLangParsingException {
 		String idName = lexer.getCurrentMatch();
 
-		if (lexer.getNextToken() != Token.TOK_OPEN_PAREN) {
-			logger.error("The function " + idName + " needs a list of zero or more arguments. Expected (.");
-			return null;
-		}
+		if (lexer.getNextToken() != Token.TOK_OPEN_PAREN)
+			throw new ExprLangParsingException("The function " + idName + " needs a list of zero or more arguments. Expected (.");
 		lexer.getNextToken();
 		List<ExpressionAST> args = new ArrayList<>();
 
@@ -140,7 +146,7 @@ public class ExprParser {
 				if (lexer.getCurrentToken() == Token.TOK_CLOSED_PAREN)
 					break;
 				if (lexer.getCurrentToken() != Token.TOK_COMMA)
-					logger.error("Unexpected input in the arguments list of the function " + idName + ".");
+					throw new ExprLangParsingException("Unexpected input in the arguments list of the function " + idName + ".");
 
 				lexer.getNextToken();
 			}
@@ -180,7 +186,7 @@ public class ExprParser {
 		return exp;
 	}
 
-	private ExpressionAST parseParenthesisExpression() {
+	private ExpressionAST parseParenthesisExpression() throws ExprLangParsingException {
 		ExpressionAST exp = null;
 		lexer.getNextToken();
 		exp = parseExpression();

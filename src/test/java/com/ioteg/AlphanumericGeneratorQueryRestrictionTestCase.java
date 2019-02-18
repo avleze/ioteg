@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import static org.hamcrest.Matchers.matchesPattern;
 
@@ -41,7 +43,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testAlphanumericQueryRestrictionEqualOperator() throws IOException, JDOMException {
+	public void testAlphanumericQueryRestrictionEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryEqualOperator.epl").getPath(),
@@ -55,7 +57,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
+	public void testAlphanumericQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
@@ -69,7 +71,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacter() throws IOException, JDOMException {
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacter() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
@@ -84,7 +86,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLength() throws IOException, JDOMException {
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLength() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
@@ -99,7 +101,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLengthAndCase() throws IOException, JDOMException {
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLengthAndCase() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
@@ -114,7 +116,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndCase() throws IOException, JDOMException {
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndCase() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
@@ -128,7 +130,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndLength() throws IOException, JDOMException {
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndLength() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),

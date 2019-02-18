@@ -1,6 +1,5 @@
 package com.ioteg.generators.datefield;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +7,7 @@ import java.util.List;
 
 import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.FieldGenerator;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
@@ -20,7 +20,7 @@ public class DateGenerator extends FieldGenerator<Date>{
 	}
 
 	@Override
-	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, IOException {
+	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException {
 		List<ResultField> results = new ArrayList<>();
 		
 		if (field.getFormat() != null) {	

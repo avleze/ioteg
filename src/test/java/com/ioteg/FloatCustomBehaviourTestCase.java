@@ -25,6 +25,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 public class FloatCustomBehaviourTestCase {
 	private static List<Element> fields;
@@ -42,7 +44,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testSequenceIncreasing() throws JDOMException, IOException {
+	public void testSequenceIncreasing() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(0);
 		EventGenerator.totalnumevents = 100;
@@ -64,7 +66,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testSequenceDecreasing() throws JDOMException, IOException {
+	public void testSequenceDecreasing() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(1);
 		EventGenerator.totalnumevents = 100;
@@ -86,7 +88,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testRuleWithFixedVariable() throws JDOMException, IOException {
+	public void testRuleWithFixedVariable() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(2);
 		EventGenerator.totalnumevents = 100;
@@ -106,7 +108,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithMinVariableDependence() throws JDOMException, IOException {
+	public void testObtainVariableValueWithMinVariableDependence() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(3);
 		EventGenerator.totalnumevents = 100;
@@ -122,7 +124,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithMaxVariableDependence() throws JDOMException, IOException {
+	public void testObtainVariableValueWithMaxVariableDependence() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(4);
 		EventGenerator.totalnumevents = 100;
@@ -138,7 +140,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithSum() throws JDOMException, IOException {
+	public void testObtainVariableValueWithSum() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(5);
 		EventGenerator.totalnumevents = 100;
@@ -155,7 +157,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithSubstraction() throws JDOMException, IOException {
+	public void testObtainVariableValueWithSubstraction() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(6);
 		EventGenerator.totalnumevents = 100;
@@ -178,7 +180,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithDivision() throws JDOMException, IOException {
+	public void testObtainVariableValueWithDivision() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(7);
 		EventGenerator.totalnumevents = 100;
@@ -200,7 +202,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithProduct() throws JDOMException, IOException {
+	public void testObtainVariableValueWithProduct() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(8);
 		EventGenerator.totalnumevents = 100;
@@ -216,7 +218,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testRuleWithFixedValue() throws JDOMException, IOException {
+	public void testRuleWithFixedValue() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(9);
 		EventGenerator.totalnumevents = 100;
@@ -233,7 +235,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testRuleWithOperationValue() throws JDOMException, IOException {
+	public void testRuleWithOperationValue() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(10);
 		EventGenerator.totalnumevents = 100;

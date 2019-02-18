@@ -1,7 +1,8 @@
 package com.ioteg.generators;
 
-import java.io.IOException;
 import java.util.Date;
+
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.booleanfield.BooleanGenerator;
 import com.ioteg.generators.booleanfield.FixedBooleanGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.RandomBooleanGenerationAlgorithm;
@@ -34,7 +35,7 @@ public class NormalGeneratorsFactory {
 	private static CustomiseBehaviourGenerationAlgorithm customiseBehaviourGenerationAlgorithm;
 
 	public static Generable makeGenerator(Field field, Integer totalNumberOfEvents)
-			throws NotExistingGeneratorException, IOException {
+			throws NotExistingGeneratorException, ExprLangParsingException {
 		Generable generable = null;
 
 		if (field.getType().equals("Integer") || field.getType().equals("Long"))
@@ -59,7 +60,7 @@ public class NormalGeneratorsFactory {
 		return generable;
 	}
 
-	public static Generable makeComplexGenerator(Field field) throws NotExistingGeneratorException, IOException {
+	public static Generable makeComplexGenerator(Field field) throws NotExistingGeneratorException, ExprLangParsingException {
 		return new ComplexFieldGenerator(new ComplexFieldGeneratorAlgorithm(field), field);
 	}
 
@@ -74,7 +75,7 @@ public class NormalGeneratorsFactory {
 		return longGenerator;
 	}
 
-	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents) throws IOException {
+	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents) throws ExprLangParsingException   {
 		FieldGenerator<Float> floatGenerator = null;
 
 		if (floatField.getValue() != null)

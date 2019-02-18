@@ -9,6 +9,7 @@ import org.jdom2.JDOMException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.ioteg.builders.EventTypeBuilder;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.EventType;
 import com.ioteg.resultmodel.ArrayResultBlock;
@@ -24,7 +25,7 @@ import com.ioteg.resultmodel.jsonserializers.ResultSimpleFieldSerializer;
 
 public class JsonUtil extends EventGenerator {
 
-	public static void jsonFormatValues(FileWriter values, Document document) throws IOException, JDOMException, NotExistingGeneratorException {
+	public static void jsonFormatValues(FileWriter values, Document document) throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
 		EventType eventType = eventTypeBuilder.build(document);
 		

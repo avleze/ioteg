@@ -1,11 +1,11 @@
 package com.ioteg.generators.floatfield;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.ioteg.exprlang.ExprParser;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.exprlang.ast.ExpressionAST;
 import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.model.Field;
@@ -25,7 +25,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 	protected Integer generatedEventsInCurrentRule;
 	protected Integer eventsPerSimulation;
 
-	public CustomiseBehaviourGenerationAlgorithm(Field field, Integer numOfEventsToGenerate) throws IOException {
+	public CustomiseBehaviourGenerationAlgorithm(Field field, Integer numOfEventsToGenerate) throws ExprLangParsingException {
 		super(field);
 		this.numOfEventsToGenerate = numOfEventsToGenerate;
 		this.totalGeneratedEvents = 0;
@@ -41,7 +41,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 		return rules;
 	}
 
-	private Map<String, Double> getVariablesFromField(Field field) {
+	private Map<String, Double> getVariablesFromField(Field field) throws ExprLangParsingException {
 		Map<String, Double> vars = new HashMap<>();
 
 		for (VariableCustomBehaviour variable : field.getCustomBehaviour().getVariables())
@@ -50,7 +50,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 		return vars;
 	}
 
-	private Double obtainVariableValue(VariableCustomBehaviour variable, Map<String, Double> vars) {
+	private Double obtainVariableValue(VariableCustomBehaviour variable, Map<String, Double> vars) throws ExprLangParsingException {
 
 		Double result = null;
 		String minStr = variable.getMin();
@@ -75,7 +75,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 		return result;
 	}
 
-	private Double obtainOperationValue(String operation) {
+	private Double obtainOperationValue(String operation) throws ExprLangParsingException {
 		ExpressionAST exp = parser.parse(operation);
 		return exp.evaluate(variables);
 	}
@@ -105,7 +105,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 			generatedValue = r.doubles(min, max).findFirst().getAsDouble();
 	}
 
-	private void generateValue(RuleCustomBehaviour rule) {
+	private void generateValue(RuleCustomBehaviour rule) throws ExprLangParsingException {
 
 		if (rule.getValue() != null)
 			generatedValue = obtainOperationValue(rule.getValue());
@@ -124,7 +124,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 	}
 
 	@Override
-	public Float generate() {
+	public Float generate() throws ExprLangParsingException {
 		RuleCustomBehaviour rule = rules.get(0);
 
 		generateValue(rule);

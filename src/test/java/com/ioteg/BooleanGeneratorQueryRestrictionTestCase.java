@@ -13,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
@@ -39,7 +41,7 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 
 
 	@Test
-	public void testBooleanQueryRestrictionEqualOperator() throws IOException, JDOMException {
+	public void testBooleanQueryRestrictionEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/BooleanOperatorExamples/EPLBooleanQueryEqualOperator.epl").getPath(),
@@ -52,7 +54,7 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testBooleanQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
+	public void testBooleanQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/BooleanOperatorExamples/EPLBooleanQueryNotEqualOperator.epl").getPath(),

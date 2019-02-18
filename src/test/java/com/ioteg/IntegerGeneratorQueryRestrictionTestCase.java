@@ -16,6 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
@@ -44,7 +46,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testIntegerQueryRestrictionLessOperator() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionLessOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperator.epl").getPath(),
@@ -57,7 +59,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testIntegerQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperator.epl").getPath(),
@@ -72,7 +74,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	
 	
 	@Test
-	public void testIntegerQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperatorWithNegativeValue.epl").getPath(),
@@ -85,7 +87,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testIntegerQueryRestrictionGreaterOperator() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionGreaterOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterOperator.epl").getPath(),
@@ -99,7 +101,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	
 	
 	@Test
-	public void testIntegerQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterOperator.epl").getPath(),
@@ -113,7 +115,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testIntegerQueryRestrictionEqualOperator() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryEqualOperator.epl").getPath(),
@@ -126,7 +128,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testIntegerQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryNotEqualOperator.epl").getPath(),
@@ -139,7 +141,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testIntegerQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryNotEqualOperator.epl").getPath(),
@@ -156,7 +158,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	
 	@Test
-	public void testIntegerQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterEqualOperator.epl").getPath(),
@@ -170,7 +172,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testIntegerQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterEqualOperator.epl").getPath(),
@@ -184,7 +186,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testIntegerQueryRestrictionLessEqualOperator() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionLessEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperator.epl").getPath(),
@@ -197,7 +199,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testIntegerQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperator.epl").getPath(),
@@ -212,7 +214,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testIntegerQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException {
+	public void testIntegerQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperatorWithNegativeValue.epl").getPath(),

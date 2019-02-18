@@ -14,6 +14,8 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
@@ -45,7 +47,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testFloatQueryRestrictionLessOperator() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionLessOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperator.epl").getPath(),
@@ -58,7 +60,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testFloatQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperator.epl").getPath(),
@@ -73,7 +75,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	
 	
 	@Test
-	public void testFloatQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperatorWithNegativeValue.epl").getPath(),
@@ -86,7 +88,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testFloatQueryRestrictionGreaterOperator() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionGreaterOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterOperator.epl").getPath(),
@@ -100,7 +102,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	
 	
 	@Test
-	public void testFloatQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterOperator.epl").getPath(),
@@ -114,7 +116,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testFloatQueryRestrictionEqualOperator() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryEqualOperator.epl").getPath(),
@@ -127,7 +129,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testFloatQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryNotEqualOperator.epl").getPath(),
@@ -140,7 +142,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testFloatQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryNotEqualOperator.epl").getPath(),
@@ -157,7 +159,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	
 	@Test
-	public void testFloatQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterEqualOperator.epl").getPath(),
@@ -171,7 +173,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testFloatQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterEqualOperator.epl").getPath(),
@@ -185,7 +187,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testFloatQueryRestrictionLessEqualOperator() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionLessEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperator.epl").getPath(),
@@ -198,7 +200,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testFloatQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperator.epl").getPath(),
@@ -213,7 +215,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testFloatQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
@@ -227,7 +229,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 	}
 	
 	@RepeatedTest(10)
-	public void testFloatQueryRestrictionWithPrecision() throws IOException, JDOMException {
+	public void testFloatQueryRestrictionWithPrecision() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperatorWithNegativeValue.epl").getPath(),

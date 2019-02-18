@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.ioteg.EventGenerator;
 import com.ioteg.builders.FieldBuilder;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
@@ -59,7 +60,7 @@ public class ComplexTypeGeneratorTestCase {
 	}
 
 	@Test
-	public void testGenerateComplexValueCsv() throws IOException, JDOMException {		
+	public void testGenerateComplexValueCsv() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
 		Element field = fields.get(36);
 
 		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
@@ -71,7 +72,7 @@ public class ComplexTypeGeneratorTestCase {
 	}
 	
 	@Test
-	public void testGenerateComplexValueCsvWithChooseoneAttributes() throws IOException, JDOMException {		
+	public void testGenerateComplexValueCsvWithChooseoneAttributes() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
 		Element field = fields.get(37);
 
 		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
@@ -85,7 +86,7 @@ public class ComplexTypeGeneratorTestCase {
 	}
 	
 	@Test
-	public void testGenerateComplexValueCsvWithChooseoneFields() throws IOException, JDOMException {		
+	public void testGenerateComplexValueCsvWithChooseoneFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
 		Element field = fields.get(38);
 
 		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
@@ -98,7 +99,7 @@ public class ComplexTypeGeneratorTestCase {
 	}
 	
 	@Test
-	public void testGenerateComplexValueJson() throws IOException, JDOMException, NotExistingGeneratorException {		
+	public void testGenerateComplexValueJson() throws  JDOMException, NotExistingGeneratorException, ExprLangParsingException, IOException {		
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -127,7 +128,7 @@ public class ComplexTypeGeneratorTestCase {
 	}
 	
 	@Test
-	public void testGenerateComplexValueJsonWithChooseoneAttributes() throws IOException, JDOMException, NotExistingGeneratorException {		
+	public void testGenerateComplexValueJsonWithChooseoneAttributes() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -155,7 +156,7 @@ public class ComplexTypeGeneratorTestCase {
 	}
 	
 	@Test
-	public void testGenerateComplexValueJsonWithChooseoneFields() throws IOException, JDOMException, NotExistingGeneratorException {		
+	public void testGenerateComplexValueJsonWithChooseoneFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -184,7 +185,7 @@ public class ComplexTypeGeneratorTestCase {
 	
 	@Disabled(value="Disabled until generateValueComplexType is done")
 	@Test
-	public void testGenerateComplexValueXml() throws IOException, JDOMException {		
+	public void testGenerateComplexValueXml() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
 		Element field = fields.get(36);
 		StringBuilder result = EventGenerator.generateValueComplexType(field, "xml");
 		String[] resultSplitted = result.toString().split("\n");
@@ -196,7 +197,7 @@ public class ComplexTypeGeneratorTestCase {
 	
 	@Disabled(value="Disabled until generateValueComplexType is done")
 	@Test
-	public void testGenerateComplexValueXmlWithChooseoneAttributes() throws IOException, JDOMException {		
+	public void testGenerateComplexValueXmlWithChooseoneAttributes() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
 		Element field = fields.get(37);
 		StringBuilder result = EventGenerator.generateValueComplexType(field, "xml");
 		String[] resultSplitted = result.toString().split("\n");
@@ -209,7 +210,7 @@ public class ComplexTypeGeneratorTestCase {
 	
 	@Disabled(value="Disabled until generateValueComplexType is done")
 	@Test
-	public void testGenerateComplexValueXmlWithChooseoneFields() throws IOException, JDOMException {		
+	public void testGenerateComplexValueXmlWithChooseoneFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
 		Element field = fields.get(38);
 		StringBuilder result = EventGenerator.generateValueComplexType(field, "xml");
 		String[] resultSplitted = result.toString().split("\n");

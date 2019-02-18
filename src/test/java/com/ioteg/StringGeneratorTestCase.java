@@ -16,6 +16,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 public class StringGeneratorTestCase {
 
@@ -35,7 +37,7 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLength() throws JDOMException, IOException {
+	public void testRandomWithDefaultLength() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(0);
 		String strResult = EventGenerator.generateValueSimpleType(field);
 
@@ -44,7 +46,7 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithSpecifiedLength() throws JDOMException, IOException {
+	public void testRandomWithSpecifiedLength() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(1);
 		String strResult = EventGenerator.generateValueSimpleType(field);
 
@@ -53,7 +55,7 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithLowercase() throws JDOMException, IOException {
+	public void testRandomWithLowercase() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(2);
 		String strResult = EventGenerator.generateValueSimpleType(field);
@@ -63,7 +65,7 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndLowercase() throws JDOMException, IOException {
+	public void testRandomWithDefaultLengthAndLowercase() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(3);
 		String strResult = EventGenerator.generateValueSimpleType(field);
 
@@ -72,7 +74,7 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndEndCharacter() throws JDOMException, IOException {
+	public void testRandomWithDefaultLengthAndEndCharacter() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(4);
 		String strResult = EventGenerator.generateValueSimpleType(field);
 
@@ -81,7 +83,7 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithSpecifiedLengthAndEndCharacter() throws JDOMException, IOException {
+	public void testRandomWithSpecifiedLengthAndEndCharacter() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(5);
 		String strResult = EventGenerator.generateValueSimpleType(field);
 
@@ -90,7 +92,7 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixedValue() throws JDOMException, IOException {
+	public void testFixedValue() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(6);
 		String strResult = EventGenerator.generateValueSimpleType(field);
 

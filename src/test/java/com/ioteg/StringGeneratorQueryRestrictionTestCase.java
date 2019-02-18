@@ -13,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import static org.hamcrest.Matchers.matchesPattern;
 
@@ -40,7 +42,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testStringQueryRestrictionEqualOperator() throws IOException, JDOMException {
+	public void testStringQueryRestrictionEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryEqualOperator.epl").getPath(),
@@ -54,7 +56,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testStringQueryRestrictionNotEqualOperator() throws IOException, JDOMException {
+	public void testStringQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
@@ -68,7 +70,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacter() throws IOException, JDOMException {
+	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacter() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
@@ -83,7 +85,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithLength() throws IOException, JDOMException {
+	public void testStringQueryRestrictionNotEqualOperatorWithLength() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
@@ -97,7 +99,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithLengthAndCase() throws IOException, JDOMException {
+	public void testStringQueryRestrictionNotEqualOperatorWithLengthAndCase() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
@@ -112,7 +114,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndCase() throws IOException, JDOMException {
+	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndCase() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),
@@ -127,7 +129,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndLength() throws IOException, JDOMException {
+	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndLength() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = builder.build(xmlFile);
 		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/StringOperatorExamples/EPLStringQueryNotEqualOperator.epl").getPath(),

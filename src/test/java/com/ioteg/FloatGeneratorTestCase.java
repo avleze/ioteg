@@ -16,6 +16,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 public class FloatGeneratorTestCase {
 	private static List<Element> fields;
@@ -33,7 +35,7 @@ public class FloatGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultRange() throws JDOMException, IOException {
+	public void testRandomWithDefaultRange() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(0);
 
@@ -46,7 +48,7 @@ public class FloatGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithSpecifiedRange() throws JDOMException, IOException {
+	public void testRandomWithSpecifiedRange() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		/** Test within a specified range **/
 		Element field = fields.get(1);
@@ -61,7 +63,7 @@ public class FloatGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixedValue() throws JDOMException, IOException {
+	public void testFixedValue() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		/** Test of specified value **/
 		Element field = fields.get(2);

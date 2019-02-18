@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
 import com.ioteg.builders.EventTypeBuilder;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.EventType;
 import com.ioteg.resultmodel.ArrayResultBlock;
@@ -45,7 +46,7 @@ public class ComplexTypeGeneratorResultTestCase {
 	}
 
 	@Test
-	public void testGenerateResultEvent() throws IOException, JDOMException, ParseException, NotExistingGeneratorException {
+	public void testGenerateResultEvent() throws IOException, JDOMException, ParseException, NotExistingGeneratorException, ExprLangParsingException {
 
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
 		EventType eventType = eventTypeBuilder.build(document);

@@ -16,6 +16,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 public class BooleanGeneratorTestCase {
 
@@ -34,7 +36,7 @@ public class BooleanGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomAndNumeric() throws JDOMException, IOException {
+	public void testRandomAndNumeric() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(0);
 		/** The loops are necessary in order to cover all the code **/
@@ -54,7 +56,7 @@ public class BooleanGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomAndNotNumeric() throws JDOMException, IOException {
+	public void testRandomAndNotNumeric() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(1);
 		String strResult = EventGenerator.generateValueSimpleType(field);
@@ -63,7 +65,7 @@ public class BooleanGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixedValue() throws JDOMException, IOException {
+	public void testFixedValue() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
 		Element field = fields.get(2);
 		String strResult = EventGenerator.generateValueSimpleType(field);

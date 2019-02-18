@@ -21,6 +21,8 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.CsvUtil;
 import com.ioteg.EventGenerator;
+import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 public class CsvUtilTestCase {
 
@@ -44,7 +46,7 @@ public class CsvUtilTestCase {
 	}
 
 	@Test
-	public void testCsvComplexField() throws IOException, JDOMException {
+	public void testCsvComplexField() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
@@ -69,7 +71,7 @@ public class CsvUtilTestCase {
 	}
 
 	@Test
-	public void testCsvComplexFieldNotRepeatTag() throws IOException, JDOMException {
+	public void testCsvComplexFieldNotRepeatTag() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		File xmlFile = new File(
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
 		Document doc = builder.build(xmlFile);
@@ -94,7 +96,7 @@ public class CsvUtilTestCase {
 	}
 
 	@Test
-	public void testCsvWithOptionalFields() throws IOException, JDOMException {
+	public void testCsvWithOptionalFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		File xmlFile = new File(
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);
