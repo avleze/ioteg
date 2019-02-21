@@ -22,8 +22,8 @@ public class StringGeneratorQueryRestrictionTestCase {
 	private static final int DEFAULT_LENGTH = 10;
 
 	@Test
-	public void testStringQueryRestrictionEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException
-	{
+	public void testStringQueryRestrictionEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
@@ -42,8 +42,9 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testStringQueryRestrictionNotEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException
-	{		Field field = new Field();
+	public void testStringQueryRestrictionNotEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
 		field.setName("field23");
@@ -61,8 +62,9 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacter() throws NotExistingGeneratorException, ExprLangParsingException
-	{		Field field = new Field();
+	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacter()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
 		field.setName("field24");
@@ -80,8 +82,9 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithLength() throws NotExistingGeneratorException, ExprLangParsingException
-	{		Field field = new Field();
+	public void testStringQueryRestrictionNotEqualOperatorWithLength()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
 		field.setName("field25");
@@ -96,8 +99,9 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithLengthAndCase() throws NotExistingGeneratorException, ExprLangParsingException
-	{		Field field = new Field();
+	public void testStringQueryRestrictionNotEqualOperatorWithLengthAndCase()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
 		field.setName("field26");
@@ -113,8 +117,9 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndCase() throws NotExistingGeneratorException, ExprLangParsingException
-	{		Field field = new Field();
+	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndCase()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
 		field.setName("field27");
@@ -132,8 +137,9 @@ public class StringGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndLength() throws NotExistingGeneratorException, ExprLangParsingException
-	{		Field field = new Field();
+	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndLength()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
 		field.setName("field25");
