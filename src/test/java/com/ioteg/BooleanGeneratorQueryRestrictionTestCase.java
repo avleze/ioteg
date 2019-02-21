@@ -1,86 +1,78 @@
 package com.ioteg;
 
 import static org.junit.Assert.assertThat;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.Generable;
+import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultSimpleField;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
-
 public class BooleanGeneratorQueryRestrictionTestCase {
 
-	private static File xmlFile;
-	private static ClassLoader classLoader;
-	private static List<Element> fields;
+	@Test
+	public void testBooleanQueryRestrictionEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
 
-	@BeforeEach
-	public void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		classLoader = BooleanGeneratorQueryRestrictionTestCase.class.getClassLoader();
-		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
-		Document document = builder.build(xmlFile);
+		Field field = new Field();
+		field.setType("Boolean");
+		field.setIsNumeric(false);
+		field.setName("field10");
 
-		List<Element> blocks = document.getRootElement().getChildren("block");
-		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<>();
-		EventGenerator.totalnumevents = 100;
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field10", "=", "true"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		assertThat(rF.getValue(), equalTo("true"));
 	}
-
 
 	@Test
-	public void testBooleanQueryRestrictionEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/BooleanOperatorExamples/EPLBooleanQueryEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(9);
+	public void testBooleanQueryRestrictionNotEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Boolean result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, equalTo(Boolean.valueOf(true)));
+		Field field = new Field();
+		field.setType("Boolean");
+		field.setIsNumeric(false);
+		field.setName("field10");
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field10", "!=", "true"));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), not(equalTo("true")));
+
+		field.setName("field11");
+		restrictions.clear();
+		restrictions.add(new Trio<>("field11", "!=", "false"));
+		generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), not(equalTo("false")));
+
+		field.setName("field12");
+		field.setIsNumeric(true);
+		restrictions.clear();
+		restrictions.add(new Trio<>("field12", "!=", "1"));
+		generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), not(equalTo("1")));
+
+		field.setName("field13");
+		field.setIsNumeric(true);
+		restrictions.clear();
+		restrictions.add(new Trio<>("field13", "!=", "0"));
+		generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), not(equalTo("0")));
 	}
-	
-	@Test
-	public void testBooleanQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/BooleanOperatorExamples/EPLBooleanQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(9);
-
-		Boolean result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, not(Boolean.valueOf(true)));
-
-		field = fields.get(10);
-		
-		result = Boolean.parseBoolean(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, not(Boolean.valueOf(false)));
-		
-		field = fields.get(11);
-
-		Integer resultNum = Integer.valueOf(EventGenerator.generateValueSimpleType(field));
-		assertThat(resultNum, not(Integer.valueOf(1)));
-		
-		field = fields.get(12);
-
-		resultNum = Integer.valueOf(EventGenerator.generateValueSimpleType(field));
-		assertThat(resultNum, not(Integer.valueOf(0)));
-	}
-	
-
 
 }
