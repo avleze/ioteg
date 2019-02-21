@@ -2,69 +2,54 @@ package com.ioteg;
 
 import static org.junit.Assert.assertThat;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.Generable;
+import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultSimpleField;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
-
-
 public class DateGeneratorQueryRestrictionTestCase {
 
-	private static File xmlFile;
-	private static ClassLoader classLoader;
-	private static List<Element> fields;
+	private static Field field;
 
-	@BeforeEach
-	public void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		classLoader = DateGeneratorQueryRestrictionTestCase.class.getClassLoader();
-		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
-		Document document = builder.build(xmlFile);
-
-		List<Element> blocks = document.getRootElement().getChildren("block");
-		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<>();
+	@BeforeAll
+	public static void initialize() {
+		field = new Field();
+		field.setType("Date");
+		field.setName("field35");
+		field.setFormat("yy-MM-dd");
 	}
 
 	@Test
-	public void testDateQueryRestrictionEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/DateOperatorExamples/EPLDateQueryEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(34);
+	public void testDateQueryRestrictionEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field35", "=", "96-05-10"));
 
-		String result = EventGenerator.generateValueSimpleType(field);
-		assertThat(result, equalTo("96-05-10"));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), equalTo("96-05-10"));
 	}
-	
+
 	@Test
-	public void testDateQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/DateOperatorExamples/EPLDateQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(34);
+	public void testDateQueryRestrictionNotEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field35", "!=", "96-05-10"));
 
-		String result = EventGenerator.generateValueSimpleType(field);
-		assertThat(result, not("96-06-10"));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), not(equalTo("96-05-10")));
 	}
-
 
 }
