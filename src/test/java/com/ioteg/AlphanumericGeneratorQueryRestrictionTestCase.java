@@ -2,147 +2,156 @@ package com.ioteg;
 
 import static org.junit.Assert.assertThat;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.Generable;
+import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultSimpleField;
 
 import static org.hamcrest.Matchers.matchesPattern;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
-
-
 public class AlphanumericGeneratorQueryRestrictionTestCase {
 
-	private static File xmlFile;
-	private static ClassLoader classLoader;
-	private static List<Element> fields;
+	private static final int DEFAULT_LENGTH = 10;
 
-	@BeforeEach
-	public void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		classLoader = AlphanumericGeneratorQueryRestrictionTestCase.class.getClassLoader();
-		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
-		Document document = builder.build(xmlFile);
+	@Test
+	public void testAlphanumericQueryRestrictionEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Alphanumeric");
+		field.setQuotes(false);
+		field.setName("field29");
+		field.setLength(DEFAULT_LENGTH);
 
-		List<Element> blocks = document.getRootElement().getChildren("block");
-		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<>();
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field29", "=", "HOLA ESTO ES UNA PRUEBA"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), equalTo("HOLA ESTO ES UNA PRUEBA"));
+		assertThat(rF.getValue().length(), equalTo(23));
 	}
 
 	@Test
-	public void testAlphanumericQueryRestrictionEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(28);
+	public void testAlphanumericQueryRestrictionNotEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Alphanumeric");
+		field.setQuotes(false);
+		field.setName("field29");
+		field.setLength(DEFAULT_LENGTH);
 
-		String result = EventGenerator.generateValueSimpleType(field);
-		assertThat(result, equalTo("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(result.length(), equalTo(23));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field29", "!=", "HOLA ESTO ES UNA PRUEBA"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		assertThat(rF.getValue(), not(equalTo("HOLA ESTO ES UNA PRUEBA")));
+		assertThat(rF.getValue(), matchesPattern("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
+		assertThat(rF.getValue().length(), equalTo(10));
 	}
-	
+
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(28);
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacter()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Alphanumeric");
+		field.setQuotes(false);
+		field.setName("field30");
+		field.setEndcharacter("F");
+		field.setLength(DEFAULT_LENGTH);
 
-		String result = EventGenerator.generateValueSimpleType(field);
-		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(result.length(), equalTo(10));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field30", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
+		assertThat(rF.getValue(), matchesPattern("[0123456789ABCDEF]*"));
+		assertThat(rF.getValue().length(), equalTo(10));
 	}
-	
+
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacter() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(29);
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLength()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Alphanumeric");
+		field.setQuotes(false);
+		field.setName("field31");
+		field.setLength(12);
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field31", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
-		String result = EventGenerator.generateValueSimpleType(field);
-		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(result.toUpperCase(), matchesPattern("[0123456789ABCDEF]*"));
-		assertThat(result.length(), equalTo(10));
+		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
+		assertThat(rF.getValue(), matchesPattern("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
 	}
-	
+
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLength() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(30);
-
-		String result = EventGenerator.generateValueSimpleType(field);
-		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(result.toUpperCase(), matchesPattern("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
-		assertThat(result.length(), equalTo(12));
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLengthAndCase()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Alphanumeric");
+		field.setQuotes(false);
+		field.setName("field33");
+		field.setLength(12);
+		field.setCase("low");
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field33", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
+		assertThat(rF.getValue().length(), equalTo(12));
+		assertThat(rF.getValue(), matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
 	}
-	
+
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLengthAndCase() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(32);
-
-		String result = EventGenerator.generateValueSimpleType(field);
-		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(result.length(), equalTo(12));
-		assertThat(result, matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndCase()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("String");
+		field.setQuotes(false);
+		field.setName("field34");
+		field.setCase("low");
+		field.setEndcharacter("F");
+		field.setLength(DEFAULT_LENGTH);
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field34", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
+		assertThat(rF.getValue(), matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
 	}
-	
+
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndCase() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(33);
+	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndLength()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("String");
+		field.setQuotes(false);
+		field.setName("field31");
+		field.setEndcharacter("F");
+		field.setLength(12);
 
-		String result = EventGenerator.generateValueSimpleType(field);
-		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(result, matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field31", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
+		assertThat(rF.getValue(), matchesPattern("[0123456789ABCDEF]*"));
+		assertThat(rF.getValue().length(), equalTo(12));
 	}
-	
-	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndLength() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/AlphanumericOperatorExamples/EPLAlphanumericQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(31);
-
-		String result = EventGenerator.generateValueSimpleType(field);
-		assertThat(result, not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(result, matchesPattern("[0123456789ABCDEF]*"));
-		assertThat(result.length(), equalTo(12));
-	}
-
 
 }
