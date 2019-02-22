@@ -29,6 +29,12 @@ public class LongQueryRestrictionGenerationAlgorithm extends QueryRestrictionGen
 
 		Long max = Long.MAX_VALUE;
 		Long min = Long.MIN_VALUE;
+		
+		if(field.getType().equalsIgnoreCase("Integer"))
+		{
+			max = (long) Integer.MAX_VALUE;
+			min = (long) Integer.MIN_VALUE;
+		} 
 
 		if (field.getMax() != null)
 			max = field.getMax().longValue();
@@ -50,7 +56,10 @@ public class LongQueryRestrictionGenerationAlgorithm extends QueryRestrictionGen
 			else if (operator.equals("<="))
 				max = value;
 
-			result = r.longs(min, max).findFirst().getAsLong();
+			if(min != max)
+				result = r.longs(min, max).findFirst().getAsLong();
+			else
+				result = min;
 		}
 
 		return result;
