@@ -1,234 +1,293 @@
 package com.ioteg;
 
 import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.Generable;
+import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultSimpleField;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.equalTo;
 
 import static org.hamcrest.Matchers.not;
 
-
 public class IntegerGeneratorQueryRestrictionTestCase {
 
-	private static File xmlFile;
-	private static ClassLoader classLoader;
-	private static List<Element> fields;
+	@Test
+	public void testIntegerQueryRestrictionLessOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field1");
+		field.setMin(0.0);
+		field.setMax(9.0);
 
-	@BeforeEach
-	public void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		classLoader = IntegerGeneratorQueryRestrictionTestCase.class.getClassLoader();
-		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
-		Document document = builder.build(xmlFile);
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field1", "<", "24"));
 
-		List<Element> blocks = document.getRootElement().getChildren("block");
-		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<>();
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
+		assertThat(result, lessThan(Integer.valueOf(24)));
 	}
 
 	@Test
-	public void testIntegerQueryRestrictionLessOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(0);
+	public void testIntegerQueryRestrictionLessOperatorWithMinValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field8");
+		field.setMin(-20.0);
+		field.setMax(9.0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
-		assertTrue(result < Integer.valueOf(24));
-	}
-	
-	@Test
-	public void testIntegerQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(7);
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field8", "<", "24"));
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
 		assertThat(result, lessThan(Integer.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-20)));
 	}
-	
-	
-	@Test
-	public void testIntegerQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessOperatorWithNegativeValue.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
-		assertTrue(result < Integer.valueOf(-24));
+	@Test
+	public void testIntegerQueryRestrictionLessOperatorWithNegativeValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field1");
+		field.setMin(-30.0);
+		field.setMax(9.0);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field1", "<", "-24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
+
+		assertThat(result, lessThan(Integer.valueOf(-24)));
+		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-30)));
 	}
-	
-	@Test
-	public void testIntegerQueryRestrictionGreaterOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
+	@Test
+	public void testIntegerQueryRestrictionGreaterOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field1");
+		field.setMin(0.0);
+		field.setMax(30.0);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field1", ">", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
 		assertThat(result, greaterThan(24));
+		assertThat(result, lessThanOrEqualTo(30));
 	}
-	
-	
-	@Test
-	public void testIntegerQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(6);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
+	@Test
+	public void testIntegerQueryRestrictionGreaterOperatorWithMaxValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field7");
+		field.setMax(200.0);
+		field.setMin(0.0);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field7", ">", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
 		assertThat(result, greaterThan(24));
 		assertThat(result, lessThanOrEqualTo(200));
 	}
-	
-	@Test
-	public void testIntegerQueryRestrictionEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
-		assertEquals(result, Integer.valueOf(24));
+	@Test
+	public void testIntegerQueryRestrictionEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field1");
+		field.setMin(0.0);
+		field.setMax(9.0);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field1", "=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
+		assertThat(result, equalTo(24));
 	}
-	
-	@Test
-	public void testIntegerQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
-		assertTrue(result != Integer.valueOf(24));
+	@Test
+	public void testIntegerQueryRestrictionNotEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field1");
+		field.setMin(0.0);
+		field.setMax(9.0);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field1", "!=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
+		assertThat(result, not(equalTo(24)));
 	}
-	
-	@Test
-	public void testIntegerQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(8);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
+	@Test
+	public void testIntegerQueryRestrictionNotEqualOperatorWithMinAndMax()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field9");
+		field.setMax(100.0);
+		field.setMin(-100.0);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field9", "!=", "20"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
+
 		assertThat(result, not(Integer.valueOf(20)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-100)));
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(100)));
 
 	}
 
-	
 	@Test
-	public void testIntegerQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterEqualOperator.epl").getPath(),
-				document.getRootElement());
+	public void testIntegerQueryRestrictionGreaterEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field1");
+		field.setMin(0.0);
+		field.setMax(9.0);
 
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field1", ">=", "3"));
 
-		Element field = fields.get(0);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
+		Integer result = Integer.parseInt(rF.getValue());
+		assertThat(result, greaterThanOrEqualTo(3));
+		assertThat(result, lessThanOrEqualTo(9));
+
+	}
+
+	@Test
+	public void testIntegerQueryRestrictionGreaterEqualOperatorWithMaxAttribute()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field7");
+		field.setMax(200.0);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field7", ">=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(24)));
 	}
-	
+
 	@Test
-	public void testIntegerQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryGreaterEqualOperator.epl").getPath(),
-				document.getRootElement());
+	public void testIntegerQueryRestrictionLessEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field1");
+		field.setMin(0.0);
+		field.setMax(9.0);
 
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field1", "<=", "24"));
 
-		Element field = fields.get(6);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(24)));
-	}
-	
-	@Test
-	public void testIntegerQueryRestrictionLessEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(0);
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
-
+		Integer result = Integer.parseInt(rF.getValue());
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(24)));
 	}
-	
-	@Test
-	public void testIntegerQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(7);
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
 
+	@Test
+	public void testIntegerQueryRestrictionLessEqualOperatorWithMinValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field1");
+		field.setMin(-20.0);
+		field.setMax(9.0);
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field1", "<=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Integer.valueOf(-20)));
 
 	}
-	
+
 	@Test
-	public void testIntegerQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/IntegerOperatorExamples/EPLIntegerQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(0);
-		/*for (List<Trio<String, String, String>> el : EventGenerator.fieldvalues) {
-			System.out.println();
-			for (Trio<String, String, String> elIn : el) {
-				System.out.print(", [" + elIn.first + ", " + elIn.second + ", " + elIn.third + "]");
-			}
-		}*/
-		Integer result = Integer.parseInt(EventGenerator.generateValueSimpleType(field));
-		
+	public void testIntegerQueryRestrictionLessEqualOperatorWithNegativeValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Integer");
+		field.setQuotes(false);
+		field.setName("field1");
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field1", "<=", "-24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Integer result = Integer.parseInt(rF.getValue());
 		assertThat(result, lessThanOrEqualTo(Integer.valueOf(-24)));
 	}
 }
