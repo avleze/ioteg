@@ -7,221 +7,280 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.Generable;
+import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultSimpleField;
 
 
 public class LongGeneratorQueryRestrictionTestCase {
 
-	private static File xmlFile;
-	private static ClassLoader classLoader;
-	private static List<Element> fields;
-
-	@BeforeEach
-	public void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		classLoader = LongGeneratorQueryRestrictionTestCase.class.getClassLoader();
-		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
-		Document document = builder.build(xmlFile);
-
-		List<Element> blocks = document.getRootElement().getChildren("block");
-		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<>();
-	}
-
 	@Test
-	public void testLongQueryRestrictionLessOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(18);
+	public void testLongQueryRestrictionLessOperator() throws NotExistingGeneratorException, ExprLangParsingException  {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field19");
+		field.setMin(-50.0);
+		field.setMax(50.0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
-		assertTrue(result < Long.valueOf(24L));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field19", "<", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
+		assertThat(result, lessThan(Long.valueOf(24L)));
+		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-50L)));
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(20);
+	public void testLongQueryRestrictionLessOperatorWithMinValue() throws NotExistingGeneratorException, ExprLangParsingException  {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field21");
+		field.setMin(-20.0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field21", "<", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
 		assertThat(result, lessThan(Long.valueOf(24)));
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-20L)));
 	}
 	
 	
 	@Test
-	public void testLongQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessOperatorWithNegativeValue.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(18);
+	public void testLongQueryRestrictionLessOperatorWithNegativeValue() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field19");
+		field.setMin(-50.0);
+		field.setMax(50.0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field19", "<", "-24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
 		assertThat(result, lessThan(Long.valueOf(-24)));
+		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-50)));
 	}
 	
 	@Test
-	public void testLongQueryRestrictionGreaterOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(18);
+	public void testLongQueryRestrictionGreaterOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field19");
+		field.setMin(-50.0);
+		field.setMax(50.0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field19", ">", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
 		assertThat(result, greaterThan(24L));
+		assertThat(result, lessThanOrEqualTo(50L));
 	}
 	
 	
 	@Test
-	public void testLongQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(19);
+	public void testLongQueryRestrictionGreaterOperatorWithMaxValue() throws NotExistingGeneratorException, ExprLangParsingException  {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field20");
+		field.setMax(200.0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field20", ">", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
 		assertThat(result, greaterThan(24L));
 		assertThat(result, lessThanOrEqualTo(200L));
 	}
 	
 	@Test
-	public void testLongQueryRestrictionEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(18);
+	public void testLongQueryRestrictionEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field19");
+		field.setMin(-50.0);
+		field.setMax(50.0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field19", "=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
 		assertEquals(result, Long.valueOf(24));
 	}
 	
 	@Test
-	public void testLongQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(18);
+	public void testLongQueryRestrictionNotEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field19");
+		field.setMin(-50.0);
+		field.setMax(50.0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
-		assertTrue(result != Long.valueOf(24));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field19", "!=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
+		assertThat(result, not(24L));
+		assertThat(result, greaterThanOrEqualTo(-50L));
+		assertThat(result, lessThanOrEqualTo(50L));
+
 	}
 	
 	@Test
-	public void testLongQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(21);
+	public void testLongQueryRestrictionNotEqualOperatorWithMinAndMax() throws NotExistingGeneratorException, ExprLangParsingException  {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field22");
+		field.setMin(-100.0);
+		field.setMax(100.0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, not(Long.valueOf(20)));
-		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-100)));
-		assertThat(result, lessThanOrEqualTo(Long.valueOf(100)));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field22", "!=", "20"));
 
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
+		assertThat(result, not(20L));
+		assertThat(result, greaterThanOrEqualTo(-100L));
+		assertThat(result, lessThanOrEqualTo(100L));
 	}
 
 	
 	@Test
-	public void testLongQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterEqualOperator.epl").getPath(),
-				document.getRootElement());
+	public void testLongQueryRestrictionGreaterEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException  {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field19");
+		field.setMin(-50.0);
+		field.setMax(50.0);
 
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field19", ">=", "24"));
 
-		Element field = fields.get(18);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
+		Long result = Long.parseLong(rF.getValue());
 		assertThat(result, greaterThanOrEqualTo(Long.valueOf(24)));
+		assertThat(result, lessThanOrEqualTo(Long.valueOf(50)));
 	}
 	
 	@Test
-	public void testLongQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryGreaterEqualOperator.epl").getPath(),
-				document.getRootElement());
+	public void testLongQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws NotExistingGeneratorException, ExprLangParsingException  {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field20");
+		field.setMax(200.0);
 
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field20", ">=", "24"));
 
-		Element field = fields.get(19);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, greaterThanOrEqualTo(Long.valueOf(24)));
+		Long result = Long.parseLong(rF.getValue());
+		assertThat(result, greaterThanOrEqualTo(24L));
+		assertThat(result, lessThanOrEqualTo(200L));
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(18);
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
+	public void testLongQueryRestrictionLessEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException  {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field19");
+		field.setMin(-50.0);
+		field.setMax(50.0);
 
-		assertThat(result, lessThanOrEqualTo(Long.valueOf(24)));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field19", "<=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
+		assertThat(result, lessThanOrEqualTo(24L));
+		assertThat(result, greaterThanOrEqualTo(-50L));
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(20);
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
+	public void testLongQueryRestrictionLessEqualOperatorWithMinValue() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field21");
+		field.setMin(-20.0);
 
-		assertThat(result, lessThanOrEqualTo(Long.valueOf(24)));
-		assertThat(result, greaterThanOrEqualTo(Long.valueOf(-20)));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field21", "<=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
+
+		assertThat(result, lessThanOrEqualTo(24L));
+		assertThat(result, greaterThanOrEqualTo(-20L));
 
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/LongOperatorExamples/EPLLongQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(18);
-	
-		Long result = Long.parseLong(EventGenerator.generateValueSimpleType(field));
+	public void testLongQueryRestrictionLessEqualOperatorWithNegativeValue() throws NotExistingGeneratorException, ExprLangParsingException  {
+		Field field = new Field();
+		field.setType("Long");
+		field.setQuotes(false);
+		field.setName("field19");
+		field.setMin(-50.0);
+		field.setMax(50.0);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field19", "<=", "-24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Long result = Long.parseLong(rF.getValue());
 
 		assertThat(result, lessThanOrEqualTo(Long.valueOf(-24)));
 	}
