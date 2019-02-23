@@ -56,7 +56,7 @@ public class LongQueryRestrictionGenerationAlgorithm extends QueryRestrictionGen
 			else if (operator.equals("<="))
 				max = value;
 
-			if(min != max)
+			if(!min.equals(max))
 				result = r.longs(min, max).findFirst().getAsLong();
 			else
 				result = min;
