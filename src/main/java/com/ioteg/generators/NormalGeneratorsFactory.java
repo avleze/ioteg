@@ -32,8 +32,6 @@ public class NormalGeneratorsFactory {
 		throw new IllegalStateException("This is an utility class and can't be instantiated.");
 	}
 
-	private static CustomiseBehaviourGenerationAlgorithm customiseBehaviourGenerationAlgorithm;
-
 	public static Generable makeGenerator(Field field, Integer totalNumberOfEvents)
 			throws NotExistingGeneratorException, ExprLangParsingException {
 		Generable generable = null;
@@ -83,22 +81,13 @@ public class NormalGeneratorsFactory {
 		if (floatField.getValue() != null)
 			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm(floatField), floatField);
 		else if (floatField.getCustomBehaviour() != null) {
-
-			if (isNeededANewCustomiseBehaviourAlgorithm())
-				customiseBehaviourGenerationAlgorithm = new CustomiseBehaviourGenerationAlgorithm(floatField,
-						totalNumOfEvents);
-
-			floatGenerator = new FloatGenerator(customiseBehaviourGenerationAlgorithm, floatField);
+			floatGenerator = new FloatGenerator(new CustomiseBehaviourGenerationAlgorithm(floatField, totalNumOfEvents),
+					floatField);
 		} else if (floatField.getMin() != null && floatField.getMax() != null) {
 			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm(floatField), floatField);
 		}
 
 		return floatGenerator;
-	}
-
-	private static boolean isNeededANewCustomiseBehaviourAlgorithm() {
-		return customiseBehaviourGenerationAlgorithm == null
-				|| customiseBehaviourGenerationAlgorithm.getRules().isEmpty();
 	}
 
 	public static FieldGenerator<Boolean> makeBooleanGenerator(Field booleanField) {

@@ -9,54 +9,55 @@ import static org.hamcrest.Matchers.allOf;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.Generable;
+import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.model.CustomBehaviour;
+import com.ioteg.model.Field;
+import com.ioteg.model.RuleCustomBehaviour;
+import com.ioteg.model.VariableCustomBehaviour;
+import com.ioteg.resultmodel.ResultSimpleField;
 
 public class FloatCustomBehaviourTestCase {
-	private static List<Element> fields;
-
-	@BeforeAll
-	public static void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		ClassLoader classLoader = FloatCustomBehaviourTestCase.class.getClassLoader();
-		File xmlFile = new File(classLoader.getResource("./generators/testFloatCustomBehaviour.xml").getFile());
-		Document document = builder.build(xmlFile);
-
-		List<Element> blocks = document.getRootElement().getChildren("block");
-		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<>();
-	}
 
 	@Test
-	public void testSequenceIncreasing() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testSequenceIncreasing() throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Element field = fields.get(0);
-		EventGenerator.totalnumevents = 100;
-		String strResult = null;
+		Field field = new Field();
+		field.setType("Float");
+
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(10);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
+
+		variables.add(new VariableCustomBehaviour("var1", null, null, "156.96"));
+		rules.add(new RuleCustomBehaviour(0.0, null, "$(var1)", "300", "inc"));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
+
 		Double result = null;
 		for (int events = 0; events < 10; ++events) {
 
 			List<Double> resultsOfSimulation = new LinkedList<>();
 
 			for (int i = 0; i < 10; ++i) {
-				strResult = EventGenerator.generateValueSimpleType(field);
-				result = Double.parseDouble(strResult);
+				ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+				result = Double.parseDouble(rF.getValue());
 				assertThat(result, allOf(greaterThanOrEqualTo(156.96), lessThanOrEqualTo(300.0)));
 				resultsOfSimulation.add(result);
 			}
@@ -66,19 +67,33 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testSequenceDecreasing() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testSequenceDecreasing() throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Element field = fields.get(1);
-		EventGenerator.totalnumevents = 100;
-		String strResult = null;
+		Field field = new Field();
+		field.setType("Float");
+
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(10);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
+
+		variables.add(new VariableCustomBehaviour("var1", null, null, "156.96"));
+		rules.add(new RuleCustomBehaviour(0.0, null, "$(var1)", "300", "dec"));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
+
 		Double result = null;
-
 		for (int events = 0; events < 10; ++events) {
 			List<Double> resultsOfSimulation = new LinkedList<>();
 
 			for (int simulation = 0; simulation < 10; ++simulation) {
-				strResult = EventGenerator.generateValueSimpleType(field);
-				result = Double.parseDouble(strResult);
+				ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+				result = Double.parseDouble(rF.getValue());
 				resultsOfSimulation.add(result);
 				assertThat(result, allOf(greaterThanOrEqualTo(156.96), lessThanOrEqualTo(300.0)));
 			}
@@ -88,18 +103,33 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testRuleWithFixedVariable() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testRuleWithFixedVariable() throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Element field = fields.get(2);
-		EventGenerator.totalnumevents = 100;
-		String strResult = null;
+		Field field = new Field();
+		field.setType("Float");
+
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(10);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
+
+		variables.add(new VariableCustomBehaviour("var1", "0", "100", null));
+		rules.add(new RuleCustomBehaviour(0.0, "$(var1)", null, null, null));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
+
 		Double result = null;
-		for (int events = 0; events < 100; ++events) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			Double previous = Double.parseDouble(strResult);
+		for (int events = 0; events < 10; ++events) {
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double previous = Double.parseDouble(rF.getValue());
 			for (int simulation = 1; simulation < 10; ++simulation) {
-				strResult = EventGenerator.generateValueSimpleType(field);
-				result = Double.parseDouble(strResult);
+				rF = (ResultSimpleField) generator.generate(1).get(0);
+				result = Double.parseDouble(rF.getValue());
 				assertThat(result, equalTo(previous));
 				previous = result;
 			}
@@ -108,144 +138,266 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithMinVariableDependence() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testObtainVariableValueWithMinVariableDependence()
+			throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Element field = fields.get(3);
-		EventGenerator.totalnumevents = 100;
-		String strResult = null;
-		Double result = null;
+		Field field = new Field();
+		field.setType("Float");
 
-		for (int i = 0; i < 1000; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
-			assertThat(result, allOf(greaterThanOrEqualTo(0.0), lessThanOrEqualTo(100.0)));
-		}
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(10);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-	}
+		variables.add(new VariableCustomBehaviour("var1", null, null, "0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", "$(var1)", "100", null));
 
-	@Test
-	public void testObtainVariableValueWithMaxVariableDependence() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+		rules.add(new RuleCustomBehaviour(0.0, null, "$(varDependentOfVar1)", "$(varDependentOfVar1)", null));
 
-		Element field = fields.get(4);
-		EventGenerator.totalnumevents = 100;
-		String strResult = null;
-		Double result = null;
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
 
-		for (int i = 0; i < 1000; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
-			assertThat(result, allOf(greaterThanOrEqualTo(0.0), lessThanOrEqualTo(100.0)));
-		}
+		field.setCustomBehaviour(customBehaviour);
 
-	}
-
-	@Test
-	public void testObtainVariableValueWithSum() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-
-		Element field = fields.get(5);
-		EventGenerator.totalnumevents = 100;
-
-		String strResult = null;
-		Double result = null;
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
 
 		for (int i = 0; i < 100; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
+			assertThat(result, allOf(greaterThanOrEqualTo(0.0), lessThanOrEqualTo(100.0)));
+		}
+
+	}
+
+	@Test
+	public void testObtainVariableValueWithMaxVariableDependence()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+
+		Field field = new Field();
+		field.setType("Float");
+
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(10);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
+
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", "0", "$(var1)", null));
+
+		rules.add(new RuleCustomBehaviour(0.0, null, "$(varDependentOfVar1)", "$(varDependentOfVar1)", null));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
+
+		for (int i = 0; i < 100; ++i) {
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
+			assertThat(result, allOf(greaterThanOrEqualTo(0.0), lessThanOrEqualTo(100.0)));
+		}
+
+	}
+
+	@Test
+	public void testObtainVariableValueWithSum() throws NotExistingGeneratorException, ExprLangParsingException {
+
+		Field field = new Field();
+		field.setType("Float");
+
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(1);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
+
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", null, null, "$(var1)+1"));
+		variables.add(new VariableCustomBehaviour("var2DependentOfVar1", null, null, "1+$(var1)"));
+
+		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
+		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
+
+		for (int i = 0; i < 100; ++i) {
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
 			assertThat(result, equalTo(101.0));
 		}
 
 	}
 
 	@Test
-	public void testObtainVariableValueWithSubstraction() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testObtainVariableValueWithSubstraction()
+			throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Element field = fields.get(6);
-		EventGenerator.totalnumevents = 100;
+		Field field = new Field();
+		field.setType("Float");
 
-		String strResult = null;
-		Double result = null;
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(1);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
+
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", null, null, "$(var1)-1"));
+		variables.add(new VariableCustomBehaviour("var2DependentOfVar1", null, null, "1-$(var1)"));
+
+		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
+		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
 
 		for (int i = 0; i < 50; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
 			assertThat(result, equalTo(99.0));
 		}
 
 		for (int i = 0; i < 50; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
 			assertThat(result, equalTo(-99.0));
 		}
 
 	}
 
 	@Test
-	public void testObtainVariableValueWithDivision() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testObtainVariableValueWithDivision() throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Element field = fields.get(7);
-		EventGenerator.totalnumevents = 100;
-		String strResult = null;
-		Double result = null;
+		Field field = new Field();
+		field.setType("Float");
+
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(1);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
+
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", null, null, "$(var1)/2"));
+		variables.add(new VariableCustomBehaviour("var2DependentOfVar1", null, null, "2/$(var1)"));
+
+		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
+		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
 
 		for (int i = 0; i < 50; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
 			assertThat(result, equalTo(50.0));
 		}
 
 		for (int i = 0; i < 50; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
 			assertThat(result, equalTo(.02));
 		}
 
 	}
 
 	@Test
-	public void testObtainVariableValueWithProduct() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testObtainVariableValueWithProduct() throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Element field = fields.get(8);
-		EventGenerator.totalnumevents = 100;
-		String strResult = null;
-		Double result = null;
+		Field field = new Field();
+		field.setType("Float");
+
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(1);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
+
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", null, null, "$(var1)*2"));
+		variables.add(new VariableCustomBehaviour("var2DependentOfVar1", null, null, "2*$(var1)"));
+
+		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
+		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
 
 		for (int i = 0; i < 100; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
 			assertThat(result, equalTo(200.0));
 		}
 
 	}
 
 	@Test
-	public void testRuleWithFixedValue() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testRuleWithFixedValue() throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Element field = fields.get(9);
-		EventGenerator.totalnumevents = 100;
+		Field field = new Field();
+		field.setType("Float");
 
-		String strResult = null;
-		Double result = null;
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(1);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		for (int i = 0; i < 100; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
+		rules.add(new RuleCustomBehaviour(0.0, "50.0", null, null, null));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
+
+		for (int i = 0; i < 10; ++i) {
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
 			assertThat(result, equalTo(50.0));
 		}
 
 	}
 
 	@Test
-	public void testRuleWithOperationValue() throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testRuleWithOperationValue() throws NotExistingGeneratorException, ExprLangParsingException {
 
-		Element field = fields.get(10);
-		EventGenerator.totalnumevents = 100;
+		Field field = new Field();
+		field.setType("Float");
 
-		String strResult = null;
-		Double result = null;
+		CustomBehaviour customBehaviour = new CustomBehaviour();
+		customBehaviour.setSimulations(1);
+		List<VariableCustomBehaviour> variables = new ArrayList<>();
+		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+
+		rules.add(new RuleCustomBehaviour(0.0, "$(var1)+1", null, null, null));
+
+		customBehaviour.setVariables(variables);
+		customBehaviour.setRules(rules);
+
+		field.setCustomBehaviour(customBehaviour);
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, 100);
 		for (int i = 0; i < 100; ++i) {
-			strResult = EventGenerator.generateValueSimpleType(field);
-			result = Double.parseDouble(strResult);
+			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+			Double result = Double.parseDouble(rF.getValue());
 			assertThat(result, equalTo(101.0));
 		}
 
