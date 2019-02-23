@@ -1,4 +1,4 @@
-package com.ioteg.normalgenerators;
+package com.ioteg.generators.normal;
 
 import static org.junit.Assert.assertThat;
 import java.util.List;

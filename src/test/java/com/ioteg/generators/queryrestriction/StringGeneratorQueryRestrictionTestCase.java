@@ -1,11 +1,11 @@
-package com.ioteg;
+package com.ioteg.generators.queryrestriction;
 
 import static org.junit.Assert.assertThat;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
+import com.ioteg.Trio;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
@@ -18,139 +18,142 @@ import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
-public class AlphanumericGeneratorQueryRestrictionTestCase {
+public class StringGeneratorQueryRestrictionTestCase {
 
 	private static final int DEFAULT_LENGTH = 10;
 
 	@Test
-	public void testAlphanumericQueryRestrictionEqualOperator()
+	public void testStringQueryRestrictionEqualOperator()
 			throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
-		field.setType("Alphanumeric");
+		field.setType("String");
 		field.setQuotes(false);
-		field.setName("field29");
+		field.setName("field23");
 		field.setLength(DEFAULT_LENGTH);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
-		restrictions.add(new Trio<>("field29", "=", "HOLA ESTO ES UNA PRUEBA"));
+		restrictions.add(new Trio<>("field23", "=", "HOLA ESTO ES UNA PRUEBA"));
 
 		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
 		assertThat(rF.getValue(), equalTo("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(rF.getValue().length(), equalTo(23));
 	}
 
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperator()
+	public void testStringQueryRestrictionNotEqualOperator()
 			throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
-		field.setType("Alphanumeric");
+		field.setType("String");
 		field.setQuotes(false);
-		field.setName("field29");
+		field.setName("field23");
 		field.setLength(DEFAULT_LENGTH);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
-		restrictions.add(new Trio<>("field29", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		restrictions.add(new Trio<>("field23", "!=", "HOLA ESTO ES UNA PRUEBA"));
 
 		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		assertThat(rF.getValue(), not(equalTo("HOLA ESTO ES UNA PRUEBA")));
-		assertThat(rF.getValue(), matchesPattern("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
 		assertThat(rF.getValue().length(), equalTo(10));
 	}
 
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacter()
+	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacter()
 			throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
-		field.setType("Alphanumeric");
+		field.setType("String");
 		field.setQuotes(false);
-		field.setName("field30");
+		field.setName("field24");
 		field.setEndcharacter("F");
 		field.setLength(DEFAULT_LENGTH);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
-		restrictions.add(new Trio<>("field30", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		restrictions.add(new Trio<>("field24", "!=", "HOLA ESTO ES UNA PRUEBA"));
 		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(rF.getValue(), matchesPattern("[0123456789ABCDEF]*"));
+		assertThat(rF.getValue(), matchesPattern("[ABCDEF]*"));
 		assertThat(rF.getValue().length(), equalTo(10));
 	}
 
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLength()
+	public void testStringQueryRestrictionNotEqualOperatorWithLength()
 			throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
-		field.setType("Alphanumeric");
+		field.setType("String");
 		field.setQuotes(false);
-		field.setName("field31");
+		field.setName("field25");
 		field.setLength(12);
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
-		restrictions.add(new Trio<>("field31", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		restrictions.add(new Trio<>("field25", "!=", "HOLA ESTO ES UNA PRUEBA"));
 		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(rF.getValue(), matchesPattern("[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"));
+		assertThat(rF.getValue().length(), equalTo(12));
 	}
 
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLengthAndCase()
+	public void testStringQueryRestrictionNotEqualOperatorWithLengthAndCase()
 			throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
-		field.setType("Alphanumeric");
+		field.setType("String");
 		field.setQuotes(false);
-		field.setName("field33");
+		field.setName("field26");
 		field.setLength(12);
 		field.setCase("low");
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
-		restrictions.add(new Trio<>("field33", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		restrictions.add(new Trio<>("field26", "!=", "HOLA ESTO ES UNA PRUEBA"));
 		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(rF.getValue().length(), equalTo(12));
-		assertThat(rF.getValue(), matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
+		assertThat(rF.getValue(), equalTo(rF.getValue().toLowerCase()));
 	}
 
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndCase()
+	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndCase()
 			throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
-		field.setName("field34");
+		field.setName("field27");
 		field.setCase("low");
 		field.setEndcharacter("F");
 		field.setLength(DEFAULT_LENGTH);
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
-		restrictions.add(new Trio<>("field34", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		restrictions.add(new Trio<>("field27", "!=", "HOLA ESTO ES UNA PRUEBA"));
 		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(rF.getValue(), matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
+		assertThat(rF.getValue(), equalTo(rF.getValue().toLowerCase()));
+		assertThat(rF.getValue(), matchesPattern("[abcdef]*"));
 	}
 
 	@Test
-	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndLength()
+	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndLength()
 			throws NotExistingGeneratorException, ExprLangParsingException {
 		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
-		field.setName("field31");
+		field.setName("field25");
 		field.setEndcharacter("F");
 		field.setLength(12);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
-		restrictions.add(new Trio<>("field31", "!=", "HOLA ESTO ES UNA PRUEBA"));
+		restrictions.add(new Trio<>("field25", "!=", "HOLA ESTO ES UNA PRUEBA"));
 		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
-		assertThat(rF.getValue(), matchesPattern("[0123456789ABCDEF]*"));
+		assertThat(rF.getValue(), matchesPattern("[ABCDEF]*"));
 		assertThat(rF.getValue().length(), equalTo(12));
 	}
 
