@@ -1,21 +1,17 @@
 package com.ioteg;
 
 import static org.junit.Assert.assertThat;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.Generable;
+import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultSimpleField;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
@@ -23,224 +19,304 @@ import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.matchesPattern;
 
-
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 
-
 public class FloatGeneratorQueryRestrictionTestCase {
 
-	private static File xmlFile;
-	private static ClassLoader classLoader;
-	private static List<Element> fields;
+	@Test
+	public void testFloatQueryRestrictionLessOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field14");
+		field.setType("Float");
+		field.setMin(-50.0);
+		field.setMax(50.0);
+		field.setQuotes(false);
 
-	@BeforeEach
-	public void loadSchema() throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		classLoader = FloatGeneratorQueryRestrictionTestCase.class.getClassLoader();
-		xmlFile = new File(classLoader.getResource("./EPLSamples/testEplQuery.xml").getFile());
-		Document document = builder.build(xmlFile);
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field14", "<", "24"));
 
-		List<Element> blocks = document.getRootElement().getChildren("block");
-		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<>();
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
+		assertThat(result, lessThan(24f));
+		assertThat(result, greaterThanOrEqualTo(-50f));
 	}
 
 	@Test
-	public void testFloatQueryRestrictionLessOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(13);
+	public void testFloatQueryRestrictionLessOperatorWithMinValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field16");
+		field.setType("Float");
+		field.setMin(-20.58);
+		field.setMax(50.0);
+		field.setQuotes(false);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, lessThan(Float.valueOf(24)));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field16", "<", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
+		assertThat(result, lessThan(24f));
+		assertThat(result, greaterThanOrEqualTo(-20.58f));
 	}
-	
-	@Test
-	public void testFloatQueryRestrictionLessOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(15);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, lessThan(Float.valueOf(24)));
-		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-20.58f)));
+	@Test
+	public void testFloatQueryRestrictionLessOperatorWithNegativeValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field14");
+		field.setType("Float");
+		field.setMin(-50.0);
+		field.setMax(50.0);
+		field.setQuotes(false);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field14", "<", "-24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
+		assertThat(result, lessThan(-24f));
+		assertThat(result, greaterThanOrEqualTo(-50f));
 	}
-	
-	
-	@Test
-	public void testFloatQueryRestrictionLessOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessOperatorWithNegativeValue.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(13);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, lessThan(Float.valueOf(-24)));
-	}
-	
 	@Test
-	public void testFloatQueryRestrictionGreaterOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(13);
+	public void testFloatQueryRestrictionGreaterOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field14");
+		field.setType("Float");
+		field.setMin(-50.0);
+		field.setMax(50.0);
+		field.setQuotes(false);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field14", ">", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
 		assertThat(result, greaterThan(24f));
+		assertThat(result, lessThanOrEqualTo(50f));
 	}
-	
-	
-	@Test
-	public void testFloatQueryRestrictionGreaterOperatorWithMaxValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(14);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
+	@Test
+	public void testFloatQueryRestrictionGreaterOperatorWithMaxValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field15");
+		field.setType("Float");
+		field.setMax(200.34);
+		field.setQuotes(false);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field15", ">", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
 		assertThat(result, greaterThan(24f));
 		assertThat(result, lessThanOrEqualTo(200.34f));
 	}
-	
+
 	@Test
-	public void testFloatQueryRestrictionEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(13);
+	public void testFloatQueryRestrictionEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field14");
+		field.setType("Float");
+		field.setMin(-50.0);
+		field.setMax(50.0);
+		field.setQuotes(false);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, equalTo(Float.valueOf(24f)));
-	}
-	
-	@Test
-	public void testFloatQueryRestrictionNotEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(13);
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field14", "=", "24"));
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, not(Float.valueOf(24f)));
-	}
-	
-	@Test
-	public void testFloatQueryRestrictionNotEqualOperatorWithMinAndMax() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryNotEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(16);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, not(Float.valueOf(24f)));
-		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-100.134f)));
-		assertThat(result, lessThanOrEqualTo(Float.valueOf(134.1f)));
-
+		Float result = Float.parseFloat(rF.getValue());
+		assertThat(result, equalTo(24f));
 	}
 
-	
 	@Test
-	public void testFloatQueryRestrictionGreaterEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterEqualOperator.epl").getPath(),
-				document.getRootElement());
+	public void testFloatQueryRestrictionNotEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field14");
+		field.setType("Float");
+		field.setMin(-50.0);
+		field.setMax(50.0);
+		field.setQuotes(false);
 
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field14", "!=", "24"));
 
-		Element field = fields.get(13);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, greaterThanOrEqualTo(Float.valueOf(24)));
+		Float result = Float.parseFloat(rF.getValue());
+		assertThat(result, not(24f));
 	}
-	
+
 	@Test
-	public void testFloatQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryGreaterEqualOperator.epl").getPath(),
-				document.getRootElement());
+	public void testFloatQueryRestrictionNotEqualOperatorWithMinAndMax()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field17");
+		field.setType("Float");
+		field.setMin(-100.134);
+		field.setMax(134.1);
+		field.setQuotes(false);
 
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field14", "!=", "20"));
 
-		Element field = fields.get(14);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
-		assertThat(result, greaterThanOrEqualTo(Float.valueOf(24)));
+		Float result = Float.parseFloat(rF.getValue());
+		assertThat(result, greaterThanOrEqualTo(-100.134f));
+		assertThat(result, lessThanOrEqualTo(134.1f));
+		assertThat(result, not(20f));
 	}
-	
+
 	@Test
-	public void testFloatQueryRestrictionLessEqualOperator() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(13);
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
+	public void testFloatQueryRestrictionGreaterEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field14");
+		field.setType("Float");
+		field.setMin(-50.0);
+		field.setMax(50.0);
+		field.setQuotes(false);
 
-		assertThat(result, lessThanOrEqualTo(Float.valueOf(24)));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field14", ">=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
+		assertThat(result, greaterThanOrEqualTo(24f));
+		assertThat(result, lessThanOrEqualTo(50f));
+
 	}
-	
+
 	@Test
-	public void testFloatQueryRestrictionLessEqualOperatorWithMinValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperator.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(15);
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
+	public void testFloatQueryRestrictionGreaterEqualOperatorWithMaxAttribute()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field15");
+		field.setType("Float");
+		field.setMax(200.34);
+		field.setQuotes(false);
 
-		assertThat(result, lessThanOrEqualTo(Float.valueOf(24f)));
-		assertThat(result, greaterThanOrEqualTo(Float.valueOf(-20.58f)));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field15", ">=", "24"));
 
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
+		assertThat(result, greaterThanOrEqualTo(24f));
+		assertThat(result, lessThanOrEqualTo(200.34f));
 	}
-	
+
 	@Test
-	public void testFloatQueryRestrictionLessEqualOperatorWithNegativeValue() throws IOException, JDOMException, NumberFormatException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(13);
-		Float result = Float.parseFloat(EventGenerator.generateValueSimpleType(field));
+	public void testFloatQueryRestrictionLessEqualOperator()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field14");
+		field.setType("Float");
+		field.setMin(-50.0);
+		field.setMax(50.0);
+		field.setQuotes(false);
 
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field14", "<=", "24"));
 
-		assertThat(result, lessThanOrEqualTo(Float.valueOf(-24f)));
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
+
+		assertThat(result, lessThanOrEqualTo(24f));
+		assertThat(result, greaterThanOrEqualTo(-50f));
 	}
-	
+
+	@Test
+	public void testFloatQueryRestrictionLessEqualOperatorWithMinValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field16");
+		field.setType("Float");
+		field.setMin(-20.58);
+		field.setQuotes(false);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field16", "<=", "24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
+
+		assertThat(result, lessThanOrEqualTo(24f));
+		assertThat(result, greaterThanOrEqualTo(-20.58f));
+	}
+
+	@Test
+	public void testFloatQueryRestrictionLessEqualOperatorWithNegativeValue()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field14");
+		field.setType("Float");
+		field.setMin(-50.0);
+		field.setMax(50.0);
+		field.setQuotes(false);
+
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field14", "<=", "-24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
+
+		assertThat(result, lessThanOrEqualTo(-24f));
+		assertThat(result, greaterThanOrEqualTo(-50f));
+	}
+
 	@RepeatedTest(10)
-	public void testFloatQueryRestrictionWithPrecision() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		SAXBuilder builder = new SAXBuilder();
-		Document document = builder.build(xmlFile);
-		EventGenerator.getEPLValues(classLoader.getResource("./EPLSamples/FloatOperatorExamples/EPLFloatQueryLessEqualOperatorWithNegativeValue.epl").getPath(),
-				document.getRootElement());
-		
-		Element field = fields.get(17);
-	
-		String result = EventGenerator.generateValueSimpleType(field);
+	public void testFloatQueryRestrictionWithPrecision()
+			throws NotExistingGeneratorException, ExprLangParsingException {
+		Field field = new Field();
+		field.setName("field18");
+		field.setType("Float");
+		field.setPrecision(3);
+		field.setMin(-100.134234);
+		field.setMax(134.10034);
+		field.setQuotes(false);
 
-		assertThat(Float.valueOf(result), lessThanOrEqualTo(Float.valueOf(-24f)));
-		assertThat(Float.valueOf(result), greaterThanOrEqualTo(Float.valueOf(-100.134234f)));
-		assertThat(result, matchesPattern("-?\\d+\\.\\d{3}"));
+		List<Trio<String, String, String>> restrictions = new ArrayList<>();
+		restrictions.add(new Trio<>("field18", "<=", "-24"));
+
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
+
+		Float result = Float.parseFloat(rF.getValue());
+
+		assertThat(result, lessThanOrEqualTo(-24f));
+		assertThat(result, greaterThanOrEqualTo(-100.134234f));
+		assertThat(rF.getValue(), matchesPattern("-?\\d+\\.\\d{3}"));
 	}
 }
