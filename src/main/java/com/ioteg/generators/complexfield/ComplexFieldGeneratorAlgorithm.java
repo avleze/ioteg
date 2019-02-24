@@ -17,7 +17,8 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 
 	protected List<Generable> fieldGenerators;
 	protected Boolean isFormedWithAttributes;
-
+	protected String type;
+	
 	public ComplexFieldGeneratorAlgorithm(Field field) throws NotExistingGeneratorException, ExprLangParsingException {
 		super(field);
 		if (!field.getChooseone())
@@ -27,6 +28,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	private void makeGenerators(Field field) throws NotExistingGeneratorException, ExprLangParsingException {
 		this.fieldGenerators = new ArrayList<>();
 		this.isFormedWithAttributes = false;
+		this.type = field.getType();
 		if (!field.getFields().isEmpty())
 			for (Field fld : field.getFields())
 				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(fld, null));
@@ -43,12 +45,14 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 
 		if (!field.getFields().isEmpty()) {
 			Integer selected = r.ints(0, field.getFields().size()).findFirst().getAsInt();
+			this.type = field.getFields().get(selected).getType();
 			this.fieldGenerators.add(GeneratorsFactory.makeGenerator(field.getFields().get(selected), null));
 		}
 
 		else {
 			this.isFormedWithAttributes = true;
 			Integer selected = r.ints(0, field.getAttributes().size()).findFirst().getAsInt();
+			this.type = field.getAttributes().get(selected).getType();
 			this.fieldGenerators
 					.add(GeneratorsFactory.makeGenerator(new Field(field.getAttributes().get(selected)), null));
 		}
@@ -62,8 +66,8 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 			makeGeneratorsChooseone();
 		for (Generable generator : fieldGenerators)
 			resultFieldsOfComplexField.add(generator.generate(1).get(0));
-
-		return new ResultComplexField(field.getName(), field.getType(), field.getQuotes(), resultFieldsOfComplexField,
+		
+		return new ResultComplexField(field.getName(), this.type , field.getQuotes(), resultFieldsOfComplexField,
 				isFormedWithAttributes);
 	}
 }

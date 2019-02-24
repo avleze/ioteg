@@ -24,8 +24,12 @@ public class XMLResultComplexFieldSerializer implements XMLSerializer<ResultComp
 		
 		if (!value.getIsAComplexFieldFormedWithAttributes()) {
 			xmlGen.writeStartFieldWithAttributes(value.getName(), attributes, true);
-			for(ResultField field : value.getValue())
-				xmlResultSimpleFieldSerializer.serialize((ResultSimpleField) field, xmlGen);
+			for(ResultField field : value.getValue()) {
+				if(field instanceof ResultSimpleField)
+					xmlResultSimpleFieldSerializer.serialize((ResultSimpleField) field, xmlGen);
+				else
+					this.serialize((ResultComplexField)field, xmlGen);
+			}
 			xmlGen.writeEndField(value.getName(), true);
 		} else {
 			StringBuilder str = new StringBuilder();
@@ -33,7 +37,12 @@ public class XMLResultComplexFieldSerializer implements XMLSerializer<ResultComp
 				str.append(((ResultSimpleField) r).getValue());
 
 			xmlGen.writeStartFieldWithAttributes(value.getName(), attributes, false);
-			xmlGen.writeRaw(str.toString());
+			
+			String finalStr = str.toString();
+			if(value.getQuotes())
+				finalStr = "\"" + finalStr + "\"";
+			
+			xmlGen.writeRaw(finalStr);
 			xmlGen.writeEndField(value.getName(), false);
 		}
 	}
