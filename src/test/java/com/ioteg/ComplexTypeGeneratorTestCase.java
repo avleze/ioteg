@@ -11,7 +11,6 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,8 +44,6 @@ import static org.hamcrest.Matchers.matchesPattern;
 
 import static org.hamcrest.Matchers.equalTo;
 
-
-
 public class ComplexTypeGeneratorTestCase {
 
 	private static File xmlFile;
@@ -66,51 +63,55 @@ public class ComplexTypeGeneratorTestCase {
 	}
 
 	@Test
-	public void testGenerateComplexValueCsv() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
+	public void testGenerateComplexValueCsv()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(36);
 
 		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
 		String[] resultSplitted = result.toString().split(",");
-		
+
 		assertThat(resultSplitted[0].length(), equalTo(4));
 		assertThat(resultSplitted[1], matchesPattern("-?\\d+\\.\\d{5}"));
 		assertThat(resultSplitted[2], matchesPattern("-?\\d+\\.\\d{5}"));
 	}
-	
+
 	@Test
-	public void testGenerateComplexValueCsvWithChooseoneAttributes() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
+	public void testGenerateComplexValueCsvWithChooseoneAttributes()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(37);
 
 		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
 
 		String[] resultSplitted = result.toString().split(",");
-		
+
 		assertThat(resultSplitted[0].length(), equalTo(4));
 		assertThat(resultSplitted[1], matchesPattern("-?\\d+\\.\\d{5}"));
 		assertThat(resultSplitted[2], matchesPattern("-?\\d+\\.\\d{5}"));
 		assertThat(resultSplitted[3], matchesPattern("\"(red|green|blue)\""));
 	}
-	
+
 	@Test
-	public void testGenerateComplexValueCsvWithChooseoneFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
+	public void testGenerateComplexValueCsvWithChooseoneFields()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(38);
 
 		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
 		String[] resultSplitted = result.toString().split(",");
-		
+
 		assertThat(resultSplitted[0].length(), equalTo(4));
 		assertThat(resultSplitted[1], matchesPattern("-?\\d+\\.\\d{5}"));
 		assertThat(resultSplitted[2], matchesPattern("-?\\d+\\.\\d{5}"));
 		assertThat(resultSplitted[3], matchesPattern("-?\\d+\\.\\d{5}"));
 	}
-	
+
 	@Test
-	public void testGenerateComplexValueJson() throws  JDOMException, NotExistingGeneratorException, ExprLangParsingException, IOException {		
+	public void testGenerateComplexValueJson()
+			throws JDOMException, NotExistingGeneratorException, ExprLangParsingException, IOException {
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
 		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
-		
+
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
 
@@ -121,9 +122,7 @@ public class ComplexTypeGeneratorTestCase {
 		module.addSerializer(ResultComplexField.class, new ResultComplexFieldSerializer(null));
 
 		jsonSerializer.registerModule(module);
-		
-		
-		
+
 		ResultField result = generator.generate(1).get(0);
 		String[] resultSplitted = jsonSerializer.writeValueAsString(result).split(",");
 
@@ -132,14 +131,15 @@ public class ComplexTypeGeneratorTestCase {
 		assertThat(resultSplitted[2], matchesPattern("\"longitud\":-?\\d+\\.\\d{5}\\}"));
 
 	}
-	
+
 	@Test
-	public void testGenerateComplexValueJsonWithChooseoneAttributes() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
+	public void testGenerateComplexValueJsonWithChooseoneAttributes()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
 		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
-		
+
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
 
@@ -150,9 +150,7 @@ public class ComplexTypeGeneratorTestCase {
 		module.addSerializer(ResultComplexField.class, new ResultComplexFieldSerializer(null));
 
 		jsonSerializer.registerModule(module);
-		
-		
-		
+
 		ResultField result = generator.generate(1).get(0);
 		String[] resultSplitted = jsonSerializer.writeValueAsString(result).split(",");
 		assertThat(resultSplitted[0], matchesPattern("\\{\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
@@ -160,14 +158,15 @@ public class ComplexTypeGeneratorTestCase {
 		assertThat(resultSplitted[2], matchesPattern("\"longitud\":-?\\d+\\.\\d{5}"));
 		assertThat(resultSplitted[3], matchesPattern("\"color\":\"(red|green|blue)\"\\}"));
 	}
-	
+
 	@Test
-	public void testGenerateComplexValueJsonWithChooseoneFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
+	public void testGenerateComplexValueJsonWithChooseoneFields()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
 		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
-		
+
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
 
@@ -178,9 +177,7 @@ public class ComplexTypeGeneratorTestCase {
 		module.addSerializer(ResultComplexField.class, new ResultComplexFieldSerializer(null));
 
 		jsonSerializer.registerModule(module);
-		
-		
-		
+
 		ResultField result = generator.generate(1).get(0);
 		String[] resultSplitted = jsonSerializer.writeValueAsString(result).split(",");
 		assertThat(resultSplitted[0], matchesPattern("\\{\"nombre\":[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
@@ -188,96 +185,99 @@ public class ComplexTypeGeneratorTestCase {
 		assertThat(resultSplitted[2], matchesPattern("\"longitud\":-?\\d+\\.\\d{5}"));
 		assertThat(resultSplitted[3], matchesPattern("\"fields\":\\{\"(f1|f2)\":-?\\d+\\.\\d{5}\\}\\}"));
 	}
-	
-	//@Disabled(value="Disabled until generateValueComplexType is done")
+
 	@Test
-	public void testGenerateComplexValueXml() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
+	public void testGenerateComplexValueXml()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);		
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
 
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
-		
+
 		xmlSerializerMapper.registerCustomSerializer(ResultEvent.class, new XMLResultEventSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ArrayResultBlock.class, new XMLArrayResultBlockSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultBlock.class, new XMLResultBlockSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultSimpleField.class, new XMLResultSimpleFieldSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultComplexField.class, new XMLResultComplexFieldSerializer());
-		
+
 		ResultComplexField rCF = (ResultComplexField) generator.generate(1).get(0);
 
 		String result = xmlSerializerMapper.writeValueAsString(rCF);
-		
+
 		String[] resultSplitted = result.toString().split("\n");
 
 		assertThat(resultSplitted[0], matchesPattern(" *<lugar type=\"ComplexType\"> *"));
-		assertThat(resultSplitted[1], matchesPattern(" *<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre> *"));
+		assertThat(resultSplitted[1],
+				matchesPattern(" *<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre> *"));
 		assertThat(resultSplitted[2], matchesPattern(" *<latitud type=\"Float\">-?\\d+\\.\\d{5}</latitud> *"));
 		assertThat(resultSplitted[3], matchesPattern(" *<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud> *"));
 		assertThat(resultSplitted[4], matchesPattern(" *</lugar> *"));
 	}
-	
-	//@Disabled(value="Disabled until generateValueComplexType is done")
+
 	@Test
-	public void testGenerateComplexValueXmlWithChooseoneAttributes() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
+	public void testGenerateComplexValueXmlWithChooseoneAttributes()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);		
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
 
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
-		
+
 		xmlSerializerMapper.registerCustomSerializer(ResultEvent.class, new XMLResultEventSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ArrayResultBlock.class, new XMLArrayResultBlockSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultBlock.class, new XMLResultBlockSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultSimpleField.class, new XMLResultSimpleFieldSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultComplexField.class, new XMLResultComplexFieldSerializer());
-		
+
 		ResultComplexField rCF = (ResultComplexField) generator.generate(1).get(0);
 
 		String result = xmlSerializerMapper.writeValueAsString(rCF);
-		
+
 		String[] resultSplitted = result.toString().split("\n");
 
 		assertThat(resultSplitted[0], matchesPattern(" *<lugarchooseone type=\"ComplexType\"> *"));
-		assertThat(resultSplitted[1], matchesPattern(" *<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre> *"));
+		assertThat(resultSplitted[1],
+				matchesPattern(" *<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre> *"));
 		assertThat(resultSplitted[2], matchesPattern(" *<latitud type=\"Float\">-?\\d+\\.\\d{5}</latitud> *"));
 		assertThat(resultSplitted[3], matchesPattern(" *<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud> *"));
 		assertThat(resultSplitted[4], matchesPattern(" *<color type=\"String\">\"(red|green|blue)\"</color> *"));
 		assertThat(resultSplitted[5], matchesPattern(" *</lugarchooseone> *"));
 	}
-	
+
 	@Test
-	public void testGenerateComplexValueXmlWithChooseoneFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {		
+	public void testGenerateComplexValueXmlWithChooseoneFields()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);		
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
 
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
-		
+
 		xmlSerializerMapper.registerCustomSerializer(ResultEvent.class, new XMLResultEventSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ArrayResultBlock.class, new XMLArrayResultBlockSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultBlock.class, new XMLResultBlockSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultSimpleField.class, new XMLResultSimpleFieldSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultComplexField.class, new XMLResultComplexFieldSerializer());
-		
+
 		ResultComplexField rCF = (ResultComplexField) generator.generate(1).get(0);
 
 		String result = xmlSerializerMapper.writeValueAsString(rCF);
-		
+
 		String[] resultSplitted = result.toString().split("\n");
 		assertThat(resultSplitted[0], matchesPattern(" *<lugarchooseone type=\"ComplexType\"> *"));
-		assertThat(resultSplitted[1], matchesPattern(" *<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre> *"));
+		assertThat(resultSplitted[1],
+				matchesPattern(" *<nombre type=\"String\">[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}</nombre> *"));
 		assertThat(resultSplitted[2], matchesPattern(" *<latitud type=\"Float\">-?\\d+\\.\\d{5}</latitud> *"));
 		assertThat(resultSplitted[3], matchesPattern(" *<longitud type=\"Float\">-?\\d+\\.\\d{5}</longitud> *"));
 		assertThat(resultSplitted[4], matchesPattern(" *<fields type=\"Float\"> *"));
-		assertThat(resultSplitted[5], matchesPattern(" *((<f1 type=\"Float\">-?\\d+\\.\\d{5}</f1>)|(<f2 type=\"Float\">-?\\d+\\.\\d{5}</f2>)) *"));
+		assertThat(resultSplitted[5], matchesPattern(
+				" *((<f1 type=\"Float\">-?\\d+\\.\\d{5}</f1>)|(<f2 type=\"Float\">-?\\d+\\.\\d{5}</f2>)) *"));
 		assertThat(resultSplitted[6], matchesPattern(" *</fields>"));
 		assertThat(resultSplitted[7], matchesPattern(" *</lugarchooseone> *"));
-
 	}
-	
 
 }
