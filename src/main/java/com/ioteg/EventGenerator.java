@@ -18,26 +18,21 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-import com.ioteg.builders.FieldBuilder;
 import com.ioteg.eplutils.EPLConditionsParser;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
-import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.block.BlockGenerator;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Block;
 import com.ioteg.model.EventType;
-import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultEvent;
-import com.ioteg.resultmodel.ResultSimpleField;
 
 public class EventGenerator {
 
 	protected static final Set<String> types;
 	protected static List<Map<String, List<Trio<String, String, String>>>> fieldvalues = new ArrayList<>();
 	public static int totalnumevents;
-	public static int iteration;
 	protected static List<Integer> iterationvalues;
 	protected static Random r;
 	protected static Logger logger;
@@ -115,124 +110,7 @@ public class EventGenerator {
 		iterationvalues = eplConditionsParser.getIterationValues();
 	}
 
-	/**
-	 * The assigned type is in the IoT-EG. This function select the correct value
-	 * generator according to the type.
-	 * 
-	 * @param field The element which the type @param type
-	 * @return a value of the specific type according to the declared restriction
-	 *         and attributes of the Element field
-	 * @throws IOException
-	 * @throws JDOMException
-	 * @throws NotExistingGeneratorException 
-	 * @throws ExprLangParsingException 
-	 */
-	public static String generateValueSimpleType(Element field) throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
 
-		String value = "";
-		String fieldname = field.getAttributeValue("name");
-
-		FieldBuilder theBuilder = new FieldBuilder();
-		Field f = theBuilder.build(field);
-		Generable generator = null;
-
-		if (!fieldvalues.isEmpty()) {
-			Map<String, List<Trio<String, String, String>>> values = fieldvalues.get(0);
-
-			if (values.get(fieldname) != null) {
-				generator = GeneratorsFactory.makeQueryRestrictionGenerator(f, values.get(fieldname));
-
-				value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
-
-				if (!iterationvalues.isEmpty() && iterationvalues.get(0).equals(iteration)) {
-					iterationvalues.remove(0);
-					fieldvalues.remove(0);
-				}
-			}
-		} else {
-
-			generator = GeneratorsFactory.makeGenerator(f, totalnumevents);
-			value = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
-
-		}
-
-		return value;
-	}
-
-	/**
-	 * The assigned type is not in the IoT-EG. This function construct the
-	 * complextype (composed by simple types).
-	 * 
-	 * @param field The element which a complextype
-	 * @return a value of the specific type according to the declared restriction
-	 *         and attributes of the Element field
-	 * @throws IOException
-	 * @throws JDOMException
-	 * @throws ExprLangParsingException 
-	 * @throws NotExistingGeneratorException 
-	 */
-	public static StringBuilder generateValueComplexType(Element field, String type) throws JDOMException, IOException, NotExistingGeneratorException, ExprLangParsingException {
-
-		String quotes = field.getAttributeValue("quotes");
-		if (quotes == null)
-			quotes = "false";
-
-		StringBuilder finalvalue = new StringBuilder();
-		StringBuilder result = new StringBuilder();
-		int chosen = 0;
-		List<Element> simpletype = field.getChildren();
-
-		if (field.getAttributeValue("chooseone") != null) { // Default: get attribute doesn't exist
-			int max = simpletype.size() - 1;
-			chosen = r.nextInt(((max - 0) + 1) + 0);
-			Element simple = simpletype.get(chosen);
-
-			if (simple.getName().equals("field")) {
-
-				if (type.equals("csv")) {
-					result.append(CsvUtil.normalFieldCsv(simple) + ",");
-				}
-			} else {
-
-				finalvalue = new StringBuilder(generateValueSimpleType(simple));
-			}
-		}
-		if (field.getAttributeValue("dependence") != null) {
-			if (field.getAttributeValue("dependence").equals("true")) {
-				int max = simpletype.size() - 1;
-				chosen = r.nextInt(((max - 1) + 1) + 1);
-			}
-			Element simple = simpletype.get(chosen);
-
-			finalvalue = new StringBuilder(generateValueSimpleType(simple));
-		}
-		if ((field.getAttributeValue("dependence") == null) && (field.getAttributeValue("chooseone") == null)) {
-			if (simpletype.get(0).getName().equals("field")) {
-
-				if (type.equals("csv")) {
-					for (int s = 0; s < simpletype.size(); s++) {
-						Element simple = simpletype.get(s);
-						result.append(CsvUtil.normalFieldCsv(simple));
-						if (s < simpletype.size() - 1) {
-							result.append(",");
-						}
-					}
-				}
-			} else {
-
-				for (Element simple : simpletype)
-					finalvalue.append(generateValueSimpleType(simple));
-			}
-		}
-
-		if (quotes.equals("true")) {
-			result.append("\"" + finalvalue + "\"");
-		} else {
-			result.append(finalvalue);
-		}
-
-		return result;
-	}
 
 	/**
 	 * Determine if the type is a "basic" type include in the IoT-EG
