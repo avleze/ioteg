@@ -1,7 +1,7 @@
 package com.ioteg;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -9,9 +9,6 @@ import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.http.converter.HttpMessageNotWritableException;
-
 import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultBlock;
 import com.ioteg.resultmodel.ResultComplexField;
@@ -44,7 +41,7 @@ public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object
 	}
 
 	public XMLHttpMessageConverter() {
-         super(new MediaType("application", "xml", Charset.forName("UTF-8")));
+         super(new MediaType("application", "xml", StandardCharsets.UTF_8));
 	}
 
 	@Override
@@ -54,14 +51,14 @@ public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object
 
 	@Override
 	protected Object readInternal(Class<? extends Object> clazz, HttpInputMessage inputMessage)
-			throws IOException, HttpMessageNotReadableException {
+			throws IOException {
 
 		return null;
 	}
 
 	@Override
 	protected void writeInternal(Object t, HttpOutputMessage outputMessage)
-			throws IOException, HttpMessageNotWritableException {
+			throws IOException {
 		outputMessage.getBody().write(xmlSerializerMapper.writeValueAsString(t).getBytes());
 	}
 

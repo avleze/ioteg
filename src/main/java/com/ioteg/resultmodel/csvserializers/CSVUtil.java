@@ -16,6 +16,10 @@ public class CSVUtil {
 		csvResultEventSerializer = new CSVResultEventSerializer();
 	}
 	
+	private CSVUtil() {
+		
+	}
+	
 	public static String serializeResultEvent(EventType model, ResultEvent resultEvent) throws IOException {
 		OutputStream out = new ByteArrayOutputStream();
 		

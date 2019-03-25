@@ -38,7 +38,7 @@ public class CSVGenerator {
 			values[i] = null;
 	}
 
-	public void writeField(String fieldName, String value) throws IOException {
+	public void writeField(String fieldName, String value) {
 		values[headerPositions.get(fieldName)] = value;
 	}
 

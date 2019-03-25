@@ -15,10 +15,12 @@ public class CSVResultComplexFieldSerializer implements CSVSerializer<ResultComp
 			for (ResultField r : value.getValue())
 				if (r instanceof ResultSimpleField) {
 					ResultSimpleField rF = (ResultSimpleField) r;
-					String val = rF.getValue();
-					if (rF.getQuotes())
-						val = "\"" + val + "\"";
-					csvGen.writeField(value.getName() + "." + rF.getName(), val);
+					StringBuilder val = new StringBuilder(rF.getValue());
+					if (rF.getQuotes()) {
+						val.insert(0, "\"");
+						val.append("\"");
+					}
+					csvGen.writeField(value.getName() + "." + rF.getName(), val.toString());
 				}
 		} else {
 			StringBuilder str = new StringBuilder();
