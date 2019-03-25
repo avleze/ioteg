@@ -3,7 +3,7 @@ package com.ioteg.generators;
 import java.util.Date;
 import java.util.List;
 
-import com.ioteg.Trio;
+import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.booleanfield.BooleanGenerator;
 import com.ioteg.generators.booleanfield.BooleanQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.datefield.DateGenerator;

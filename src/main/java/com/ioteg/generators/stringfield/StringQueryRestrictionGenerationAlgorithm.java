@@ -3,7 +3,7 @@ package com.ioteg.generators.stringfield;
 import java.util.List;
 
 import com.ioteg.RandomUtil;
-import com.ioteg.Trio;
+import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.QueryRestrictionGenerationAlgorithm;
 import com.ioteg.model.Field;
 

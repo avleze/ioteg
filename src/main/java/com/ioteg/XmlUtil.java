@@ -22,7 +22,11 @@ import com.ioteg.resultmodel.xmlserializers.XMLResultEventSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLResultSimpleFieldSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLSerializerMapper;
 
-public class XmlUtil extends EventGenerator {
+public class XmlUtil {
+	
+	private XmlUtil() {
+		
+	}
 
 	public static void xmlFormatValues(FileWriter values, Document document) throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();

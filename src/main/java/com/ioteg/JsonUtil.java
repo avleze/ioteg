@@ -23,7 +23,7 @@ import com.ioteg.resultmodel.jsonserializers.ResultComplexFieldSerializer;
 import com.ioteg.resultmodel.jsonserializers.ResultEventSerializer;
 import com.ioteg.resultmodel.jsonserializers.ResultSimpleFieldSerializer;
 
-public class JsonUtil extends EventGenerator {
+public class JsonUtil {
 
 	public static void jsonFormatValues(FileWriter values, Document document) throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
@@ -39,7 +39,7 @@ public class JsonUtil extends EventGenerator {
 
 		jsonSerializer.registerModule(module);
 
-		ResultEvent resultEvent = generateEvent(eventType);
+		ResultEvent resultEvent = EventGenerator.generateEvent(eventType);
 
 		values.write(jsonSerializer.writeValueAsString(resultEvent));
 		values.close();

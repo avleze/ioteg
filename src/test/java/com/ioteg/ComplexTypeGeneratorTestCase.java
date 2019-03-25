@@ -4,7 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.ioteg.EventGenerator;
 import com.ioteg.builders.FieldBuilder;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
@@ -57,7 +55,6 @@ public class ComplexTypeGeneratorTestCase {
 
 		List<Element> blocks = document.getRootElement().getChildren("block");
 		fields = blocks.get(0).getChildren("field");
-		EventGenerator.fieldvalues = new ArrayList<>();
 	}
 
 	/*@Disabled(value="needs refactoring")

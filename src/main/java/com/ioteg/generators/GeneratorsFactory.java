@@ -6,7 +6,7 @@ import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import java.util.List;
 
-import com.ioteg.Trio;
+import com.ioteg.eplutils.Trio;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.block.BlockGenerationAlgorithm;
 import com.ioteg.model.Block;

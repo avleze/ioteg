@@ -9,8 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
@@ -20,7 +18,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.CsvUtil;
-import com.ioteg.EventGenerator;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
@@ -42,7 +39,6 @@ public class CsvUtilTestCase {
 
 		tempFile = File.createTempFile("temp", "file");
 		values = new FileWriter(tempFile);
-		EventGenerator.fieldvalues = new ArrayList<>();
 	}
 
 	@Test

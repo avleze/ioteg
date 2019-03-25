@@ -15,8 +15,7 @@ import java.util.regex.Pattern;
 
 import org.jdom2.Element;
 
-import com.ioteg.EventGenerator;
-import com.ioteg.Trio;
+import com.ioteg.model.SimpleTypes;
 
 public class EPLConditionsParser {
 	private static final String AND_KEYWORD = "and";
@@ -197,7 +196,7 @@ public class EPLConditionsParser {
 				fieldchilds.addAll(block.getChildren("field"));
 
 		for (Element field : fieldchilds)
-			if (!EventGenerator.existType(field.getAttributeValue("type"))) {
+			if (!SimpleTypes.exists(field.getAttributeValue("type"))) {
 				Iterator<Map<String, List<Trio<String, String, String>>>> iRestrictions = eplRestrictions.iterator();
 				while (iRestrictions.hasNext()) {
 					Map<String, List<Trio<String, String, String>>> restrictions = iRestrictions.next();

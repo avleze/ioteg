@@ -10,6 +10,8 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import com.ioteg.model.SimpleTypes;
+
 public class ValidationUtil {
 
 	private static final String CASE_ATTR = "case";
@@ -105,7 +107,7 @@ public class ValidationUtil {
 		} else {
 			String type = field.getAttributeValue(TYPE_ATTR);
 
-			if (EventGenerator.existType(type))
+			if (SimpleTypes.exists(type))
 				valid = validateSimpleType(field, type) && valid;
 			else
 				valid = validateComplexType(field, type) && valid;

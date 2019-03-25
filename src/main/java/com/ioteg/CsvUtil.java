@@ -14,6 +14,9 @@ import com.ioteg.resultmodel.csvserializers.CSVUtil;
 
 public class CsvUtil {
 
+	private CsvUtil() {
+		
+	}
 	
 	public static void csvFormatValues(FileWriter values, Document document) throws IOException, NotExistingGeneratorException, ExprLangParsingException, JDOMException {
 

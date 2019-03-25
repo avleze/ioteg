@@ -1,4 +1,4 @@
-package com.ioteg;
+package com.ioteg.eplutils;
 
 public class Trio<A, B, C> {
 

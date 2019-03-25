@@ -1,7 +1,8 @@
 package com.ioteg.generators;
 
 import java.util.List;
-import com.ioteg.Trio;
+
+import com.ioteg.eplutils.Trio;
 import com.ioteg.model.Field;
 
 public abstract class QueryRestrictionGenerationAlgorithm<T> extends GenerationAlgorithm<T> {

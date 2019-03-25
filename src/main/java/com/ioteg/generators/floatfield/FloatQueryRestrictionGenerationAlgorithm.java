@@ -2,7 +2,7 @@ package com.ioteg.generators.floatfield;
 
 import java.util.List;
 
-import com.ioteg.Trio;
+import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.QueryRestrictionGenerationAlgorithm;
 import com.ioteg.model.Field;
 
