@@ -25,6 +25,10 @@ import com.ioteg.resultmodel.jsonserializers.ResultSimpleFieldSerializer;
 
 public class JsonUtil {
 
+	private JsonUtil() {
+		
+	}
+	
 	public static void jsonFormatValues(FileWriter values, Document document) throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
 		EventType eventType = eventTypeBuilder.build(document);

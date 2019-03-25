@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class SimpleTypes {
+	
 	private static final Set<String> types;
 	static {
 		types = new TreeSet<>();
@@ -15,6 +16,10 @@ public class SimpleTypes {
 		types.add("Alphanumeric");
 		types.add("Date");
 		types.add("Time");
+	}
+	
+	private SimpleTypes() {
+		
 	}
 	
 	public static boolean exists(Object object) {
