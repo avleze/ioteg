@@ -20,7 +20,7 @@ import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import static org.hamcrest.Matchers.matchesPattern;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class JsonUtilTestCase {
 

@@ -2,6 +2,10 @@ package com.ioteg.resultmodel;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ioteg.resultmodel.jsonserializers.ArrayResultBlockSerializer;
+
+@JsonSerialize(using = ArrayResultBlockSerializer.class)
 public class ArrayResultBlock {
 	private List<ResultBlock> resultBlocks;
 	private Boolean hasRepetitionTag;

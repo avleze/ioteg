@@ -127,6 +127,7 @@ public class EventGenerator {
 			throws NotExistingGeneratorException, ExprLangParsingException {
 
 		ResultEvent resultEvent = new ResultEvent(event.getName(), new ArrayList<>());
+		resultEvent.setModel(event);
 		for (Block block : event.getBlocks()) {
 
 			ArrayResultBlock resultBlocks = new ArrayResultBlock(new ArrayList<>(), block.getRepetition() != null);

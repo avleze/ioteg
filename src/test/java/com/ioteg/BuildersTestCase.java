@@ -1,6 +1,7 @@
 package com.ioteg;
 
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.hamcrest.Matchers.equalTo;
@@ -8,7 +9,6 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.is;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,6 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.Test;
-
 import com.ioteg.builders.EventTypeBuilder;
 import com.ioteg.model.Attribute;
 import com.ioteg.model.Block;
@@ -27,7 +26,6 @@ import com.ioteg.model.Field;
 import com.ioteg.model.OptionalFields;
 import com.ioteg.model.RuleCustomBehaviour;
 import com.ioteg.model.VariableCustomBehaviour;
-
 public class BuildersTestCase {
 
 	@Test

@@ -13,6 +13,10 @@ public class ResultComplexFieldSerializer extends StdSerializer<ResultComplexFie
     
 	private static final long serialVersionUID = 1L;
 
+	public ResultComplexFieldSerializer() {
+		this(null);
+	}
+	
 	public ResultComplexFieldSerializer(Class<ResultComplexField> t) {
 		super(t);
 	}

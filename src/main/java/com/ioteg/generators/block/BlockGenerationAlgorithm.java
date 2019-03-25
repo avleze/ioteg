@@ -46,17 +46,19 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		List<Field> fields = new ArrayList<>();
 		
 		Integer numOfFields = optionalFields.getFields().size();
-		Boolean atLeastOne = optionalFields.getMandatory().equalsIgnoreCase("true") || optionalFields.getMandatory().equalsIgnoreCase("1");
+		Boolean atLeastOne = false;
+		if(optionalFields.getMandatory() != null)
+			atLeastOne = optionalFields.getMandatory().equalsIgnoreCase("true") || optionalFields.getMandatory().equalsIgnoreCase("1");
+		Integer lowerBound = 0;
+		if(atLeastOne)
+			lowerBound = 1;
 		
-		Integer howManyFields = r.ints(0, numOfFields).findFirst().getAsInt();
-		
-		if(atLeastOne && howManyFields == 0)
-			howManyFields = 1;
+		Integer howManyFields = r.ints(lowerBound, numOfFields + 1).findFirst().getAsInt();
 		
 		List<Integer> selectedIndexes = new ArrayList<>();
 	
 		if(numOfFields != 1)
-			selectedIndexes = r.ints(0, numOfFields - 1).limit(howManyFields).boxed().collect(Collectors.toList());
+			selectedIndexes = r.ints(0, numOfFields).limit(howManyFields).boxed().collect(Collectors.toList());
 		else if(atLeastOne)
 			selectedIndexes.add(0);
 		else if(r.nextBoolean())

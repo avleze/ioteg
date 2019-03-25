@@ -12,18 +12,24 @@ public class ResultEventSerializer extends StdSerializer<ResultEvent> {
 
 	private static final long serialVersionUID = 1L;
 
+	public ResultEventSerializer() {
+		this(null);
+	}
+
 	public ResultEventSerializer(Class<ResultEvent> t) {
 		super(t);
 	}
 
 	@Override
-	public void serialize(ResultEvent value, JsonGenerator jgen, SerializerProvider provider)
-			throws IOException {
+	public void serialize(ResultEvent value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
 
 		jgen.writeStartObject();
-		for(ArrayResultBlock arrayResultBlock : value.getArrayResultBlocks())
-			jgen.writeObjectField(arrayResultBlock.getResultBlocks().get(0).getName(), arrayResultBlock);
-			
+
+		if (value.getArrayResultBlocks() != null) {
+			for (ArrayResultBlock arrayResultBlock : value.getArrayResultBlocks())
+				jgen.writeObjectField(arrayResultBlock.getResultBlocks().get(0).getName(), arrayResultBlock);
+		}
+		
 		jgen.writeEndObject();
 
 	}

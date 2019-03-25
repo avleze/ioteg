@@ -2,6 +2,10 @@ package com.ioteg.resultmodel;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ioteg.resultmodel.jsonserializers.ResultBlockSerializer;
+
+@JsonSerialize(using = ResultBlockSerializer.class)
 public class ResultBlock {
 	private String name;
 	private List<ResultField> resultFields;

@@ -12,6 +12,10 @@ public class ArrayResultBlockSerializer extends StdSerializer<ArrayResultBlock> 
 
 	private static final long serialVersionUID = 1L;
 
+	public ArrayResultBlockSerializer() {
+		this(null);
+	}
+	
 	public ArrayResultBlockSerializer(Class<ArrayResultBlock> t) {
 		super(t);
 	}

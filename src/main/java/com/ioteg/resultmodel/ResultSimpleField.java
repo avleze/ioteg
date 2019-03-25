@@ -1,5 +1,9 @@
 package com.ioteg.resultmodel;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ioteg.resultmodel.jsonserializers.ResultSimpleFieldSerializer;
+
+@JsonSerialize(using = ResultSimpleFieldSerializer.class)
 public class ResultSimpleField extends ResultField {
 	protected String value;
 

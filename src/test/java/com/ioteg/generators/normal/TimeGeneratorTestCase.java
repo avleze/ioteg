@@ -1,12 +1,13 @@
 package com.ioteg.generators.normal;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import static org.hamcrest.Matchers.equalTo;
 
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
@@ -55,7 +56,7 @@ public class TimeGeneratorTestCase {
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
-		assertTrue(strResult.equals("14:24"));
+		assertThat(strResult, equalTo("14:24"));
 	}
 
 }

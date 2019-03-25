@@ -11,6 +11,11 @@ public class ResultSimpleFieldSerializer extends StdSerializer<ResultSimpleField
     
 	private static final long serialVersionUID = 1L;
 
+	public ResultSimpleFieldSerializer() {
+		this(null);
+	}
+	
+	
 	public ResultSimpleFieldSerializer(Class<ResultSimpleField> t) {
 		super(t);
 	}

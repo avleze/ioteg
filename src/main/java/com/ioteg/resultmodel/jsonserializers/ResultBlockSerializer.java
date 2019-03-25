@@ -13,6 +13,10 @@ public class ResultBlockSerializer extends StdSerializer<ResultBlock> {
     
 	private static final long serialVersionUID = 1L;
 
+	public ResultBlockSerializer() {
+		this(null);
+	}
+	
 	public ResultBlockSerializer(Class<ResultBlock> t) {
 		super(t);
 	}

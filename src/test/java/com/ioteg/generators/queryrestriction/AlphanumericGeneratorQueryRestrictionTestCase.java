@@ -1,6 +1,6 @@
 package com.ioteg.generators.queryrestriction;
 
-import static org.junit.Assert.assertThat;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ import static org.hamcrest.Matchers.matchesPattern;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AlphanumericGeneratorQueryRestrictionTestCase {
 

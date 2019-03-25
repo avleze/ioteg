@@ -2,6 +2,10 @@ package com.ioteg.resultmodel;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.ioteg.resultmodel.jsonserializers.ResultComplexFieldSerializer;
+
+@JsonSerialize(using = ResultComplexFieldSerializer.class)
 public class ResultComplexField extends ResultField {
 	private List<ResultField> value;
 	private Boolean isAComplexFieldFormedWithAttributes;
