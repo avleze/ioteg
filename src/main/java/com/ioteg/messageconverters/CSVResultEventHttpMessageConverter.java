@@ -1,4 +1,4 @@
-package com.ioteg;
+package com.ioteg.messageconverters;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
