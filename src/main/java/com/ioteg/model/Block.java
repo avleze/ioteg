@@ -2,6 +2,7 @@ package com.ioteg.model;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +17,9 @@ public class Block {
 	private String name;
 	private String value;
 	private Integer repetition;
+	@Valid
 	private List<Field> fields;
+	@Valid
 	private List<OptionalFields> optionalFields;
 
 	/**

@@ -7,6 +7,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This class represents a field inside a block or another field in the data
  * model.
@@ -14,10 +17,10 @@ import javax.validation.constraints.NotNull;
  * @author Antonio Vélez Estévez
  */
 public class Field extends Attribute {
-	@NotEmpty
-	@NotNull
+	@NotEmpty(message = "The field name can't be empty.")
+	@NotNull(message = "The field name can't be null.")
 	private String name;
-	@NotNull
+	@NotNull(message = "The field quotes can't be null.")
 	private Boolean quotes;
 	private Boolean chooseone;
 	private String dependence;
@@ -28,23 +31,64 @@ public class Field extends Attribute {
 	private CustomBehaviour customBehaviour;
 
 	public Field(String name, Boolean quotes, Attribute attr) {
+		super(attr.getType(), attr.getValue(), attr.getMin(), attr.getStep(), attr.getUnit(), attr.getMax(),
+				attr.getPrecision(), attr.getLength(), attr.getCase(), attr.getBegin(), attr.getEnd(),
+				attr.getEndcharacter(), attr.getFormat(), attr.getIsNumeric());
 		this.name = name;
 		this.quotes = quotes;
-		this.type = attr.getType();
-		this.value = attr.getValue();
-		this.min = attr.getMin();
-		this.max = attr.getMax();
-		this.precision = attr.getPrecision();
-		this.length = attr.getLength();
-		this.strCase = attr.getCase();
-		this.endcharacter = attr.getEndcharacter();
-		this.format = attr.getFormat();
-		this.isNumeric = attr.getIsNumeric();
 	}
 
-	public Field(String name, Boolean quotes) {
+	public Field(String name, Boolean quotes, String type) {
+		super(type);
 		this.name = name;
 		this.quotes = quotes;
+	}
+
+	/**
+	 * @param type
+	 * @param value
+	 * @param min
+	 * @param step
+	 * @param unit
+	 * @param max
+	 * @param precision
+	 * @param length
+	 * @param strCase
+	 * @param begin
+	 * @param end
+	 * @param endcharacter
+	 * @param format
+	 * @param isNumeric
+	 * @param name
+	 * @param quotes
+	 * @param chooseone
+	 * @param dependence
+	 * @param fields
+	 * @param attributes
+	 * @param customBehaviour
+	 */
+
+	@JsonCreator
+	public Field(@NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
+			@JsonProperty("min") Double min, @JsonProperty("step") String step, @JsonProperty("unit") String unit,
+			@JsonProperty("max") Double max, @JsonProperty("precision") Integer precision,
+			@JsonProperty("length") Integer length, @JsonProperty("strCase") String strCase,
+			@JsonProperty("begin") String begin, @JsonProperty("end") String end,
+			@JsonProperty("endcharacter") String endcharacter, @JsonProperty("format") String format,
+			@JsonProperty("isNumeric") Boolean isNumeric, @NotEmpty @NotNull @JsonProperty("name") String name,
+			@NotNull @JsonProperty("quotes") Boolean quotes, @JsonProperty("chooseone") Boolean chooseone,
+			@JsonProperty("dependence") String dependence, @Valid @JsonProperty("fields") List<Field> fields,
+			@Valid @JsonProperty("attributes") List<Attribute> attributes,
+			@JsonProperty("customBehaviour") CustomBehaviour customBehaviour) {
+		super(type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format,
+				isNumeric);
+		this.name = name;
+		this.quotes = quotes;
+		this.chooseone = chooseone;
+		this.dependence = dependence;
+		this.fields = fields;
+		this.attributes = attributes;
+		this.customBehaviour = customBehaviour;
 	}
 
 	/**

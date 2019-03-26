@@ -23,10 +23,9 @@ public class LongGeneratorTestCase {
 	@Test
 	public void testRandomWithSpecifiedRange() throws Exception {
 
-		Field field = new Field("test", false);
+		Field field = new Field("test", false, "Long");
 		field.setMin(-10000000.0);
 		field.setMax(0.0);
-		field.setType("Long");
 
 		/*
 		 * <field name="test" quotes="false" type="Long" min="-10000000"
@@ -44,10 +43,9 @@ public class LongGeneratorTestCase {
 
 	@Test
 	public void testRandomWithDefaultRange() throws Exception {
-		Field field = new Field("testDefaultRange", true);
+		Field field = new Field("testDefaultRange", true, "Long");
 		field.setMin(DEFAULT_MIN);
 		field.setMax(DEFAULT_MAX);
-		field.setType("Long");
 
 		/*
 		 * 	<field name="testDefaultRange" quotes="true" type="Long"></field>
@@ -66,10 +64,9 @@ public class LongGeneratorTestCase {
 
 	@Test
 	public void testFixedValue() throws Exception {
-		Field field = new Field("testFixedValue", true);
+		Field field = new Field("testFixedValue", true, "Long");
 		field.setMin(DEFAULT_MIN);
 		field.setMax(DEFAULT_MAX);
-		field.setType("Long");
 		field.setValue("9223372036854775807");
 
 		/*<field name="testDefaultValue" quotes="false" type="Long" value="9223372036854775807"></field>*/

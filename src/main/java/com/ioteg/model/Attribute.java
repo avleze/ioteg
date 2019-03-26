@@ -3,6 +3,9 @@ package com.ioteg.model;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This class represents an attribute inside a complex field in the data model.
  * 
@@ -25,6 +28,50 @@ public class Attribute {
 	protected String endcharacter;
 	protected String format;
 	protected Boolean isNumeric;
+
+	/**
+	 * @param type
+	 * @param value
+	 * @param min
+	 * @param step
+	 * @param unit
+	 * @param max
+	 * @param precision
+	 * @param length
+	 * @param strCase
+	 * @param begin
+	 * @param end
+	 * @param endcharacter
+	 * @param format
+	 * @param isNumeric
+	 */
+	@JsonCreator
+	public Attribute(@NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
+			@JsonProperty("min") Double min, @JsonProperty("step") String step, @JsonProperty("unit") String unit,
+			@JsonProperty("max") Double max, @JsonProperty("precision") Integer precision,
+			@JsonProperty("length") Integer length, @JsonProperty("strCase") String strCase,
+			@JsonProperty("begin") String begin, @JsonProperty("end") String end,
+			@JsonProperty("endcharacter") String endcharacter, @JsonProperty("format") String format,
+			@JsonProperty("isNumeric") Boolean isNumeric) {
+		this.type = type;
+		this.value = value;
+		this.min = min;
+		this.step = step;
+		this.unit = unit;
+		this.max = max;
+		this.precision = precision;
+		this.length = length;
+		this.strCase = strCase;
+		this.begin = begin;
+		this.end = end;
+		this.endcharacter = endcharacter;
+		this.format = format;
+		this.isNumeric = isNumeric;
+	}
+
+	public Attribute(@NotEmpty @NotNull String type) {
+		this.type = type;
+	}
 
 	/**
 	 * @return the type
@@ -67,7 +114,6 @@ public class Attribute {
 	public void setMin(Double min) {
 		this.min = min;
 	}
-	
 
 	/**
 	 * @return the step

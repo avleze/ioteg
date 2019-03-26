@@ -23,8 +23,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testStringQueryRestrictionEqualOperator()
 			throws Exception {
-		Field field = new Field("field23", false);
-		field.setType("String");
+		Field field = new Field("field23", false, "String");
 		field.setLength(DEFAULT_LENGTH);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -41,8 +40,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testStringQueryRestrictionNotEqualOperator()
 			throws Exception {
-		Field field = new Field("field23", false);
-		field.setType("String");
+		Field field = new Field("field23", false, "String");
 		field.setLength(DEFAULT_LENGTH);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -59,8 +57,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacter()
 			throws Exception {
-		Field field = new Field("field24", false);
-		field.setType("String");
+		Field field = new Field("field24", false, "String");
 		field.setEndcharacter("F");
 		field.setLength(DEFAULT_LENGTH);
 
@@ -77,8 +74,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testStringQueryRestrictionNotEqualOperatorWithLength()
 			throws Exception {
-		Field field = new Field("field25", false);
-		field.setType("String");
+		Field field = new Field("field25", false, "String");
 		field.setLength(12);
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field25", "!=", "HOLA ESTO ES UNA PRUEBA"));
@@ -92,8 +88,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testStringQueryRestrictionNotEqualOperatorWithLengthAndCase()
 			throws Exception {
-		Field field = new Field("field26", false);
-		field.setType("String");
+		Field field = new Field("field26", false, "String");
 		field.setLength(12);
 		field.setCase("low");
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -108,7 +103,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndCase()
 			throws Exception {
-		Field field = new Field("field27", false);
+		Field field = new Field("field27", false, "String");
 		field.setType("String");
 		field.setCase("low");
 		field.setEndcharacter("F");
@@ -126,8 +121,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testStringQueryRestrictionNotEqualOperatorWithEndCharacterAndLength()
 			throws Exception {
-		Field field = new Field("field25", false);
-		field.setType("String");
+		Field field = new Field("field25", false, "String");
 		field.setEndcharacter("F");
 		field.setLength(12);
 

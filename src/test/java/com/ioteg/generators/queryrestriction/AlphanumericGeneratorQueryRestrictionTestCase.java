@@ -28,8 +28,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testAlphanumericQueryRestrictionEqualOperator()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("field29", false);
-		field.setType("Alphanumeric");
+		Field field = new Field("field29", false, "Alphanumeric");
 		field.setLength(DEFAULT_LENGTH);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -45,8 +44,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperator()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("field29", false);
-		field.setType("Alphanumeric");
+		Field field = new Field("field29", false, "Alphanumeric");
 		field.setLength(DEFAULT_LENGTH);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -64,8 +62,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacter()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("field30", false);
-		field.setType("Alphanumeric");
+		Field field = new Field("field30", false, "Alphanumeric");
 		field.setEndcharacter("F");
 		field.setLength(DEFAULT_LENGTH);
 
@@ -82,8 +79,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLength()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("field31", false);
-		field.setType("Alphanumeric");
+		Field field = new Field("field31", false, "Alphanumeric");
 		field.setLength(12);
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field31", "!=", "HOLA ESTO ES UNA PRUEBA"));
@@ -97,8 +93,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLengthAndCase()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("field33", false);
-		field.setType("Alphanumeric");
+		Field field = new Field("field33", false, "Alphanumeric");
 		field.setLength(12);
 		field.setCase("low");
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -113,8 +108,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndCase()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("field34", false);
-		field.setType("String");
+		Field field = new Field("field34", false, "Alphanumeric");
 		field.setCase("low");
 		field.setEndcharacter("F");
 		field.setLength(DEFAULT_LENGTH);
@@ -129,8 +123,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndLength()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("field31", false);
-		field.setType("String");
+		Field field = new Field("field31", false, "Alphanumeric");
 		field.setEndcharacter("F");
 		field.setLength(12);
 

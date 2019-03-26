@@ -20,8 +20,7 @@ public class BooleanGeneratorTestCase {
 
 	@Test
 	public void testRandomAndNumeric() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("boolean", false);
-		field.setType("Boolean");
+		Field field = new Field("boolean", false, "Boolean");
 		field.setIsNumeric(true);
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
@@ -44,8 +43,7 @@ public class BooleanGeneratorTestCase {
 
 	@Test
 	public void testRandomAndNotNumeric() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("boolean", false);
-		field.setType("Boolean");
+		Field field = new Field("boolean", false, "Boolean");
 		field.setIsNumeric(false);
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
@@ -57,8 +55,7 @@ public class BooleanGeneratorTestCase {
 
 	@Test
 	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("boolean", false);
-		field.setType("Boolean");
+		Field field = new Field("boolean", false, "Boolean");
 		field.setValue("true");
 		field.setIsNumeric(DEFAULT_IS_NUMERIC);
 

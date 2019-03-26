@@ -21,8 +21,7 @@ public class TimeGeneratorTestCase {
 
 	@Test
 	public void testRandom() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field("testRandom", true);
-		field.setType("Time");
+		Field field = new Field("testRandom", true, "Time");
 		field.setFormat("hh:mm");
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
@@ -41,8 +40,7 @@ public class TimeGeneratorTestCase {
 
 	@Test
 	public void testFixedValue() throws Exception {
-		Field field = new Field("testFixed", true);
-		field.setType("Time");
+		Field field = new Field("testFixed", true, "Time");
 		field.setFormat("HH:mm");
 		field.setValue("14:24");
 

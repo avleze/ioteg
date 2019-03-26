@@ -22,8 +22,7 @@ public class DateGeneratorTestCase {
 
 	@Test
 	public void testRandom() throws Exception {
-		Field field = new Field("date", true);
-		field.setType("Date");
+		Field field = new Field("date", true, "Date");
 		field.setFormat("yy-MM-DD");
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
@@ -41,8 +40,7 @@ public class DateGeneratorTestCase {
 
 	@Test
 	public void testFixedValue() throws Exception {
-		Field field = new Field("date", true);
-		field.setType("Date");
+		Field field = new Field("date", true, "Date");
 		field.setFormat("yy-mm-dd");
 		field.setValue("08-05-01");
 
@@ -75,8 +73,7 @@ public class DateGeneratorTestCase {
 			"1996-10-01:06:08:08:008,1996-10-01:06:08:08:000,-2,MILLISECOND,yyyy-MM-DD:HH:mm:ss:SSS,-2, 14"})
 
 	public void testSequentialIncremental(String begin, String end,String step,String unit, String format, int difference, int type) throws Exception {
-		Field field = new Field("date", true);
-		field.setType("Date");
+		Field field = new Field("date", true, "Date");
 		field.setFormat(format);
 		field.setBegin(begin);
 		field.setEnd(end);

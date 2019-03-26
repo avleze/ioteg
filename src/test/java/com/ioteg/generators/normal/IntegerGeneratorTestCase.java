@@ -27,10 +27,9 @@ public class IntegerGeneratorTestCase {
 	@Test
 	public void testRandomWithSpecifiedRange() throws Exception {
 
-		Field field = new Field("test", false);
+		Field field = new Field("test", false, "Integer");
 		field.setMin(100000.0);
 		field.setMax(999999.0);
-		field.setType("Integer");
 
 		/*
 		 * <field name="test" quotes="false" type="Integer" min="100000"
@@ -49,10 +48,9 @@ public class IntegerGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultRange() throws Exception {
 
-		Field field = new Field("testDefaultRange", true);
+		Field field = new Field("testDefaultRange", true, "Integer");
 		field.setMin(DEFAULT_MIN);
 		field.setMax(DEFAULT_MAX);
-		field.setType("Integer");
 
 		/*
 		 * <field name="testDefaultRange" quotes="true" type="Integer"></field>
@@ -74,10 +72,9 @@ public class IntegerGeneratorTestCase {
 	public void testFixedValue() throws Exception {
 
 		/*<field name="testDefaultValue" quotes="false" type="Integer" value="104"></field>*/
-		Field field = new Field("testDefaultValue", false);
+		Field field = new Field("testDefaultValue", false, "Integer");
 		field.setMin(DEFAULT_MIN);
 		field.setMax(DEFAULT_MAX);
-		field.setType("Integer");
 		field.setValue("104");
 		
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
@@ -89,11 +86,10 @@ public class IntegerGeneratorTestCase {
 	
 	@Test
 	public void testSequential() throws Exception {
-		Field field = new Field("test", false);
+		Field field = new Field("test", false, "Integer");
 		field.setBegin("2");
 		field.setEnd("20");
 		field.setStep("1");
-		field.setType("Integer");
 
 		/*
 		 * <field name="test" quotes="false" type="Float" begin="2" step="1"

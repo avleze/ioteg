@@ -13,7 +13,6 @@ import com.ioteg.model.Attribute;
 public class AttributeBuilder {
 
 	public Attribute build(Element attributeElement) {
-		Attribute attribute = new Attribute();
 
 		String type = attributeElement.getAttributeValue("type");
 		String value = attributeElement.getAttributeValue("value");
@@ -24,21 +23,14 @@ public class AttributeBuilder {
 		String precision = attributeElement.getAttributeValue("precision");
 		String length = attributeElement.getAttributeValue("length");
 		String strCase = attributeElement.getAttributeValue("case");
-		String beginString = attributeElement.getAttributeValue("begin");
-		String endString = attributeElement.getAttributeValue("end");
+		String begin = attributeElement.getAttributeValue("begin");
+		String end = attributeElement.getAttributeValue("end");
 		String endcharacter = attributeElement.getAttributeValue("endcharacter");
 		String format = attributeElement.getAttributeValue("format");
 		String isNumeric = attributeElement.getAttributeValue("isnumeric");
 
 		if (hasDefaultLength(type, length))
 			length = "10";
-
-		attribute.setType(type);
-		attribute.setValue(value);
-		attribute.setBegin(beginString);
-		attribute.setEnd(endString);
-		attribute.setStep(step);
-		attribute.setUnit(unit);
 		
 		if (hasDefaultRangeFloat(type, min, max)) {
 			min = "0";
@@ -47,24 +39,23 @@ public class AttributeBuilder {
 			min = "0";
 			max = "9";
 		}
-
+		Double minValue = null;
 		if (min != null)
-			attribute.setMin(Double.valueOf(min));
+			minValue = Double.valueOf(min);
+		
+		Double maxValue = null;
 		if (max != null)
-			attribute.setMax(Double.valueOf(max));
+			maxValue = Double.valueOf(max);
 
+		Integer precisionValue = null;
 		if (precision != null)
-			attribute.setPrecision(Integer.valueOf(precision));
+			precisionValue = Integer.valueOf(precision);
 
+		Integer lengthValue = null;
 		if (length != null)
-			attribute.setLength(Integer.valueOf(length));
-
-		attribute.setCase(strCase);
-		attribute.setEndcharacter(endcharacter);
-		attribute.setFormat(format);
-		attribute.setIsNumeric(Boolean.valueOf(isNumeric));
-
-		return attribute;
+			lengthValue = Integer.valueOf(length);
+		
+		return new Attribute(type, value, minValue, step, unit, maxValue, precisionValue, lengthValue, strCase, begin, end, endcharacter, format, Boolean.valueOf(isNumeric));
 	}
 
 	private boolean hasDefaultLength(String type, String length) {
