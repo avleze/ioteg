@@ -4,38 +4,32 @@ import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.model.Field;
 
 public class SequentialFloatGenerationAlgorithm extends GenerationAlgorithm<Float> {
-		
+
 	private Double step;
+	private Double begin;
+	private Double end;
 	private Double value;
-	private Double limit;
 
 	public SequentialFloatGenerationAlgorithm(Field field) {
 		super(field);
 		this.step = Double.valueOf(field.getStep());
-		if (step < 0) {
-			this.value = Double.valueOf(field.getEnd());
-			this.limit = Double.valueOf(field.getBegin());
-		} else {
-			this.value = Double.valueOf(field.getBegin());
-			this.limit = Double.valueOf(field.getEnd());
-		}
+
+		this.begin = Double.valueOf(field.getBegin());
+		this.end = Double.valueOf(field.getEnd());
+
+		this.value = begin;
 	}
 
 	@Override
 	public Float generate() {
 		Double actualValue = this.value;
 
-		if (step < 0) {
-			if (value + step >= limit)
-				value += step;
-			else
-				value = Double.valueOf(field.getEnd());
-		} else {
-			if (value + step <= limit)
-				value += step;
-			else
-				value = Double.valueOf(field.getBegin());
-		}
+		if (step > 0 && (value + step) <= end)
+			value += step;
+		else if (step < 0 && (value + step) >= end)
+			value += step;
+		else
+			value = begin;
 
 		return actualValue.floatValue();
 	}

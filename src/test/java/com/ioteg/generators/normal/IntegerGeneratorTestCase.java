@@ -3,15 +3,12 @@ package com.ioteg.generators.normal;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
-import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -28,7 +25,7 @@ public class IntegerGeneratorTestCase {
 	private static final double DEFAULT_MIN = 0.0;
 
 	@Test
-	public void testRandomWithSpecifiedRange() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public void testRandomWithSpecifiedRange() throws Exception {
 
 		Field field = new Field();
 		field.setMin(100000.0);
@@ -52,7 +49,7 @@ public class IntegerGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultRange() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public void testRandomWithDefaultRange() throws Exception {
 
 		Field field = new Field();
 		field.setMin(DEFAULT_MIN);
@@ -78,7 +75,7 @@ public class IntegerGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public void testFixedValue() throws Exception {
 
 		/*<field name="testDefaultValue" quotes="false" type="Integer" value="104"></field>*/
 		Field field = new Field();
@@ -97,7 +94,7 @@ public class IntegerGeneratorTestCase {
 	}
 	
 	@Test
-	public void testSequential() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public void testSequential() throws Exception {
 		Field field = new Field();
 		field.setName("test");
 		field.setQuotes(false);
@@ -107,8 +104,8 @@ public class IntegerGeneratorTestCase {
 		field.setType("Integer");
 
 		/*
-		 * <field name="test" quotes="false" type="Float" min="2" step="1"
-		 * max="20"></field>
+		 * <field name="test" quotes="false" type="Float" begin="2" step="1"
+		 * end="20"></field>
 		 */
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
@@ -129,10 +126,11 @@ public class IntegerGeneratorTestCase {
 		
 		
 		field.setStep("-1");
-
+		field.setBegin("20");
+		field.setEnd("2");
 		/*
-		 * <field name="test" quotes="false" type="Float" min="2" step="-1"
-		 * max="20"></field>
+		 * <field name="test" quotes="false" type="Float" begin="20" step="-1"
+		 * end="2"></field>
 		 */
 
 		generator = GeneratorsFactory.makeGenerator(field, null);

@@ -159,8 +159,11 @@ public class StringGeneratorTestCase {
 		rSF = (ResultSimpleField) results.get(3);
 		assertThat(rSF.getValue(), equalTo("Z"));
 
+		
+		field.setBegin("AE");
+		field.setEnd("Z");
 		field.setStep("-2");
-		/* <field name="test" type="String" begin="Z" step="-2" end="AE"></field> */
+		/* <field name="test" type="String" begin="AE" step="-2" end="Z"></field> */
 
 
 		generator = GeneratorsFactory.makeGenerator(field, null);

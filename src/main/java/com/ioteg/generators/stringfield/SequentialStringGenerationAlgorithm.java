@@ -16,20 +16,9 @@ public class SequentialStringGenerationAlgorithm extends GenerationAlgorithm<Str
 		super(field);
 		this.possibleChars = possibleChars;
 		this.step = Integer.valueOf(field.getStep());
-		
-		if(step < 0)
-		{
-			this.beginIndex = calculateIndex(field.getEnd());
-			this.endIndex = calculateIndex(field.getBegin());
-		}
-		else
-		{
-			this.beginIndex = calculateIndex(field.getBegin());
-			this.endIndex = calculateIndex(field.getEnd());
-		}
-		
+		this.beginIndex = calculateIndex(field.getBegin());
+		this.endIndex = calculateIndex(field.getEnd());
 		this.index = beginIndex;
-
 	}
 
 	private int calculateIndex(String str) {
@@ -47,7 +36,7 @@ public class SequentialStringGenerationAlgorithm extends GenerationAlgorithm<Str
 		String value = getString(index);
 		if (step > 0 && (index + step <= endIndex))
 			index += step;
-		else if(step < 0 && (index + step >= endIndex))
+		else if (step < 0 && (index + step >= endIndex))
 			index += step;
 		else
 			index = beginIndex;
@@ -56,7 +45,8 @@ public class SequentialStringGenerationAlgorithm extends GenerationAlgorithm<Str
 	}
 
 	private String getString(int n) {
-		char[] buf = new char[(int) floor(log((possibleChars.length() - 1) * (n + 1)) / log(possibleChars.length()))];
+		char[] buf = new char[(int) floor(
+				log((double) (possibleChars.length() - 1) * (n + 1)) / log(possibleChars.length()))];
 		for (int i = buf.length - 1; i >= 0; i--) {
 			n--;
 			buf[i] = possibleChars.charAt(n % possibleChars.length());

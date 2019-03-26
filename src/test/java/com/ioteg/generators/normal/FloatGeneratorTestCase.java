@@ -122,7 +122,8 @@ public class FloatGeneratorTestCase {
 		
 		
 		field.setStep("-1.25");
-
+		field.setBegin("20.0");
+		field.setEnd("2.25");
 		/*
 		 * <field name="test" quotes="false" type="Float" min="2.25" step="-1.25"
 		 * max="20.0"></field>
