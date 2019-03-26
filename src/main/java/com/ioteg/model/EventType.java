@@ -2,6 +2,8 @@ package com.ioteg.model;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 /**
  * This class represents an event type.
  * 
@@ -9,6 +11,7 @@ import java.util.List;
  */
 public class EventType {
 	private String name;
+	@Valid
 	private List<Block> blocks;
 
 	/**

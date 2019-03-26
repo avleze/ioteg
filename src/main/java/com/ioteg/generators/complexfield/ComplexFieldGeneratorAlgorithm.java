@@ -1,5 +1,6 @@
 package com.ioteg.generators.complexfield;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +20,13 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	protected Boolean isFormedWithAttributes;
 	protected String type;
 	
-	public ComplexFieldGeneratorAlgorithm(Field field) throws NotExistingGeneratorException, ExprLangParsingException {
+	public ComplexFieldGeneratorAlgorithm(Field field) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		super(field);
 		if (!field.getChooseone())
 			makeGenerators(field);
 	}
 
-	private void makeGenerators(Field field) throws NotExistingGeneratorException, ExprLangParsingException {
+	private void makeGenerators(Field field) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		this.fieldGenerators = new ArrayList<>();
 		this.isFormedWithAttributes = false;
 		this.type = field.getType();
@@ -39,7 +40,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 		}
 	}
 
-	private void makeGeneratorsChooseone() throws NotExistingGeneratorException, ExprLangParsingException {
+	private void makeGeneratorsChooseone() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		this.fieldGenerators = new ArrayList<>();
 		this.isFormedWithAttributes = false;
 
@@ -59,7 +60,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	}
 
 	@Override
-	public ResultField generate() throws NotExistingGeneratorException, ExprLangParsingException {
+	public ResultField generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		List<ResultField> resultFieldsOfComplexField = new ArrayList<>();
 		if (field.getChooseone())

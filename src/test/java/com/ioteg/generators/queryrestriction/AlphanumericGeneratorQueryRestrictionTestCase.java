@@ -2,6 +2,7 @@ package com.ioteg.generators.queryrestriction;
 
 
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testAlphanumericQueryRestrictionEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Alphanumeric");
 		field.setQuotes(false);
@@ -45,7 +46,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Alphanumeric");
 		field.setQuotes(false);
@@ -66,7 +67,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacter()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Alphanumeric");
 		field.setQuotes(false);
@@ -86,7 +87,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLength()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Alphanumeric");
 		field.setQuotes(false);
@@ -103,7 +104,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithLengthAndCase()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Alphanumeric");
 		field.setQuotes(false);
@@ -121,7 +122,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndCase()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);
@@ -139,7 +140,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testAlphanumericQueryRestrictionNotEqualOperatorWithEndCharacterAndLength()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("String");
 		field.setQuotes(false);

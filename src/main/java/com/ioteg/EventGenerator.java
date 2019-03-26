@@ -1,5 +1,6 @@
 package com.ioteg;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.GeneratorsFactory;
@@ -17,7 +18,7 @@ public class EventGenerator {
 	}
 
 	public static ResultEvent generateEvent(EventType event)
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		ResultEvent resultEvent = new ResultEvent(event.getName(), new ArrayList<>());
 		resultEvent.setModel(event);

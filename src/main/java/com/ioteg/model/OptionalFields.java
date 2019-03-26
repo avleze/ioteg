@@ -2,6 +2,8 @@ package com.ioteg.model;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 /**
  * This class represents a set of optional fields in the data model.
  * 
@@ -9,6 +11,7 @@ import java.util.List;
  */
 public class OptionalFields {
 	private String mandatory;
+	@Valid
 	private List<Field> fields;
 
 	/**

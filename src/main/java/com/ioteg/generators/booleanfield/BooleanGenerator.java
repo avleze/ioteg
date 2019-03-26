@@ -1,5 +1,6 @@
 package com.ioteg.generators.booleanfield;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class BooleanGenerator extends FieldGenerator<Boolean> {
 	}
 
 	@Override
-	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException {
+	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultField> results = new ArrayList<>();
 
 		if (field.getIsNumeric())

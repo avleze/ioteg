@@ -2,6 +2,7 @@ package com.ioteg.generators;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.text.ParseException;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -23,5 +24,5 @@ public abstract class AbstractGenerationAlgorithm<T> {
 		}
 	}
 	
-	public abstract T generate() throws NotExistingGeneratorException, ExprLangParsingException;
+	public abstract T generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException;
 }

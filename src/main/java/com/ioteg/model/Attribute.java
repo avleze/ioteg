@@ -1,18 +1,27 @@
 package com.ioteg.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * This class represents an attribute inside a complex field in the data model.
  * 
  * @author Antonio Vélez Estévez
  */
 public class Attribute {
+	@NotEmpty
+	@NotNull
 	protected String type;
 	protected String value;
 	protected Double min;
+	protected String step;
+	protected String unit;
 	protected Double max;
 	protected Integer precision;
 	protected Integer length;
 	protected String strCase;
+	protected String begin;
+	protected String end;
 	protected String endcharacter;
 	protected String format;
 	protected Boolean isNumeric;
@@ -57,6 +66,35 @@ public class Attribute {
 	 */
 	public void setMin(Double min) {
 		this.min = min;
+	}
+	
+
+	/**
+	 * @return the step
+	 */
+	public String getStep() {
+		return step;
+	}
+
+	/**
+	 * @param step the step to set
+	 */
+	public void setStep(String step) {
+		this.step = step;
+	}
+
+	/**
+	 * @return the unit
+	 */
+	public String getUnit() {
+		return unit;
+	}
+
+	/**
+	 * @param unit the unit to set
+	 */
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	/**
@@ -113,6 +151,34 @@ public class Attribute {
 	 */
 	public void setCase(String strCase) {
 		this.strCase = strCase;
+	}
+
+	/**
+	 * @return the begin
+	 */
+	public String getBegin() {
+		return begin;
+	}
+
+	/**
+	 * @param begin the begin to set
+	 */
+	public void setBegin(String begin) {
+		this.begin = begin;
+	}
+
+	/**
+	 * @return the end
+	 */
+	public String getEnd() {
+		return end;
+	}
+
+	/**
+	 * @param end the end to set
+	 */
+	public void setEnd(String end) {
+		this.end = end;
 	}
 
 	/**

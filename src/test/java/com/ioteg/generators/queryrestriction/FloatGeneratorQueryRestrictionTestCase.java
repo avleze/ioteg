@@ -1,6 +1,8 @@
 package com.ioteg.generators.queryrestriction;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.RepeatedTest;
@@ -26,7 +28,7 @@ import static org.hamcrest.Matchers.not;
 public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
-	public void testFloatQueryRestrictionLessOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testFloatQueryRestrictionLessOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field14");
 		field.setType("Float");
@@ -47,7 +49,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionLessOperatorWithMinValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field16");
 		field.setType("Float");
@@ -68,7 +70,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionLessOperatorWithNegativeValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field14");
 		field.setType("Float");
@@ -89,7 +91,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionGreaterOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field14");
 		field.setType("Float");
@@ -110,7 +112,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionGreaterOperatorWithMaxValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field15");
 		field.setType("Float");
@@ -130,7 +132,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field14");
 		field.setType("Float");
@@ -150,7 +152,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionNotEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field14");
 		field.setType("Float");
@@ -170,7 +172,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionNotEqualOperatorWithMinAndMax()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field17");
 		field.setType("Float");
@@ -192,7 +194,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionGreaterEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field14");
 		field.setType("Float");
@@ -214,7 +216,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionGreaterEqualOperatorWithMaxAttribute()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field15");
 		field.setType("Float");
@@ -234,7 +236,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionLessEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field14");
 		field.setType("Float");
@@ -256,7 +258,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionLessEqualOperatorWithMinValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field16");
 		field.setType("Float");
@@ -277,7 +279,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testFloatQueryRestrictionLessEqualOperatorWithNegativeValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field14");
 		field.setType("Float");
@@ -299,7 +301,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 
 	@RepeatedTest(10)
 	public void testFloatQueryRestrictionWithPrecision()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("field18");
 		field.setType("Float");

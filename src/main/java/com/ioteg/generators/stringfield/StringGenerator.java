@@ -1,5 +1,6 @@
 package com.ioteg.generators.stringfield;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class StringGenerator extends FieldGenerator<String>{
 	}
 
 	@Override
-	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException {
+	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultField> results = new ArrayList<>();
 		String caseStr = field.getCase();
 		

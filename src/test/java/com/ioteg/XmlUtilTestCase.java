@@ -5,11 +5,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.jdom2.Document;
-import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,8 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.XmlUtil;
-import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
-import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 public class XmlUtilTestCase {
 
@@ -34,14 +30,14 @@ public class XmlUtilTestCase {
 	}
 	
 	@BeforeEach
-	public void loadSchema() throws JDOMException, IOException {
+	public void loadSchema() throws Exception {
 
 		tempFile = File.createTempFile("temp", "file");
 		values = new FileWriter(tempFile);
 	}
 	
 	@Test
-	public void testXmlComplexField() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testXmlComplexField() throws Exception {
 		
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
@@ -69,7 +65,7 @@ public class XmlUtilTestCase {
 	}
 	
 	@Test
-	public void testXmlComplexFieldNotRepeatTag() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testXmlComplexFieldNotRepeatTag() throws Exception {
 		
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
 		Document doc = builder.build(xmlFile);
@@ -97,7 +93,7 @@ public class XmlUtilTestCase {
 	
 	
 	@Test
-	public void testXmlSerializerWithOptionalFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testXmlSerializerWithOptionalFields() throws Exception {
 		
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);
@@ -125,7 +121,7 @@ public class XmlUtilTestCase {
 	}
 	
 	@AfterEach
-	public void teardown() throws IOException {
+	public void teardown() throws Exception {
 		tempFile.delete();
 		values.close();
 	}

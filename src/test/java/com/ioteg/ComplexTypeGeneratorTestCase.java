@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -104,7 +105,7 @@ public class ComplexTypeGeneratorTestCase {
 
 	@Test
 	public void testGenerateComplexValueJson()
-			throws JDOMException, NotExistingGeneratorException, ExprLangParsingException, IOException {
+			throws JDOMException, NotExistingGeneratorException, ExprLangParsingException, IOException, ParseException {
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -132,7 +133,7 @@ public class ComplexTypeGeneratorTestCase {
 
 	@Test
 	public void testGenerateComplexValueJsonWithChooseoneAttributes()
-			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -159,7 +160,7 @@ public class ComplexTypeGeneratorTestCase {
 
 	@Test
 	public void testGenerateComplexValueJsonWithChooseoneFields()
-			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -186,7 +187,7 @@ public class ComplexTypeGeneratorTestCase {
 
 	@Test
 	public void testGenerateComplexValueXml()
-			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -216,7 +217,7 @@ public class ComplexTypeGeneratorTestCase {
 
 	@Test
 	public void testGenerateComplexValueXmlWithChooseoneAttributes()
-			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
@@ -247,7 +248,7 @@ public class ComplexTypeGeneratorTestCase {
 
 	@Test
 	public void testGenerateComplexValueXmlWithChooseoneFields()
-			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);

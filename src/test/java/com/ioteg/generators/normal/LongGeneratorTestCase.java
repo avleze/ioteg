@@ -5,10 +5,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
-import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -23,7 +21,7 @@ public class LongGeneratorTestCase {
 	private static final double DEFAULT_MIN = 0.0;
 
 	@Test
-	public void testRandomWithSpecifiedRange() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithSpecifiedRange() throws Exception {
 
 		Field field = new Field();
 		field.setMin(-10000000.0);
@@ -47,7 +45,7 @@ public class LongGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultRange() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultRange() throws Exception {
 		Field field = new Field();
 		field.setMin(DEFAULT_MIN);
 		field.setMax(DEFAULT_MAX);
@@ -71,7 +69,7 @@ public class LongGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testFixedValue() throws Exception {
 		
 		Field field = new Field();
 		field.setMin(DEFAULT_MIN);

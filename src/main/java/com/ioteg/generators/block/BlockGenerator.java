@@ -1,5 +1,6 @@
 package com.ioteg.generators.block;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class BlockGenerator extends AbstractGenerator<ResultBlock> {
 		super(blockGenerationAlgorithm);
 	}
 		
-	public List<ResultBlock> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException {
+	public List<ResultBlock> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultBlock> results = new ArrayList<>();
 
 		for (int i = 0; i < numberOfRequiredItems; ++i)

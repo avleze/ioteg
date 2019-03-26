@@ -41,7 +41,7 @@ public class TimeGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testFixedValue() throws Exception {
 		Field field = new Field();
 		field.setType("Time");
 		field.setQuotes(true);

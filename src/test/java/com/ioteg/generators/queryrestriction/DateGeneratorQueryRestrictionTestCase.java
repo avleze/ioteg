@@ -2,6 +2,7 @@ package com.ioteg.generators.queryrestriction;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,7 +32,7 @@ public class DateGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testDateQueryRestrictionEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testDateQueryRestrictionEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field35", "=", "96-05-10"));
 
@@ -43,7 +44,7 @@ public class DateGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testDateQueryRestrictionNotEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field35", "!=", "96-05-10"));
 

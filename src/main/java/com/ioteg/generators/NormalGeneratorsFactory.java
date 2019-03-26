@@ -1,5 +1,6 @@
 package com.ioteg.generators;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
@@ -11,15 +12,19 @@ import com.ioteg.generators.complexfield.ComplexFieldGeneratorAlgorithm;
 import com.ioteg.generators.datefield.DateGenerator;
 import com.ioteg.generators.datefield.FixedDateGenerationAlgorithm;
 import com.ioteg.generators.datefield.RandomDateGenerationAlgorithm;
+import com.ioteg.generators.datefield.SequentialDateGenerationAlgorithm;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.generators.floatfield.CustomiseBehaviourGenerationAlgorithm;
 import com.ioteg.generators.floatfield.FixedFloatGenerationAlgorithm;
 import com.ioteg.generators.floatfield.FloatGenerator;
 import com.ioteg.generators.floatfield.RandomFloatGenerationAlgorithm;
+import com.ioteg.generators.floatfield.SequentialFloatGenerationAlgorithm;
 import com.ioteg.generators.longfield.FixedLongGenerationAlgorithm;
 import com.ioteg.generators.longfield.RandomLongGenerationAlgorithm;
+import com.ioteg.generators.longfield.SequentialLongGenerationAlgorithm;
 import com.ioteg.generators.stringfield.FixedStringGenerationAlgorithm;
 import com.ioteg.generators.stringfield.RandomStringGenerationAlgorithm;
+import com.ioteg.generators.stringfield.SequentialStringGenerationAlgorithm;
 import com.ioteg.generators.stringfield.StringGenerator;
 import com.ioteg.model.Field;
 
@@ -33,7 +38,7 @@ public class NormalGeneratorsFactory {
 	}
 
 	public static Generable makeGenerator(Field field, Integer totalNumberOfEvents)
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Generable generable = null;
 
 		if (field.getType().equals("Integer") || field.getType().equals("Long"))
@@ -59,7 +64,7 @@ public class NormalGeneratorsFactory {
 	}
 
 	public static Generable makeComplexGenerator(Field field)
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		return new ComplexFieldGenerator(new ComplexFieldGeneratorAlgorithm(field), field);
 	}
 
@@ -68,6 +73,8 @@ public class NormalGeneratorsFactory {
 
 		if (longField.getValue() != null)
 			longGenerator = new FieldGenerator<>(new FixedLongGenerationAlgorithm(longField), longField);
+		else if (longField.getBegin() != null && longField.getEnd() != null && longField.getStep() != null)
+			longGenerator = new FieldGenerator<>(new SequentialLongGenerationAlgorithm(longField), longField);
 		else if (longField.getMin() != null && longField.getMax() != null)
 			longGenerator = new FieldGenerator<>(new RandomLongGenerationAlgorithm(longField), longField);
 
@@ -83,6 +90,8 @@ public class NormalGeneratorsFactory {
 		else if (floatField.getCustomBehaviour() != null) {
 			floatGenerator = new FloatGenerator(new CustomiseBehaviourGenerationAlgorithm(floatField, totalNumOfEvents),
 					floatField);
+		} else if (floatField.getBegin() != null && floatField.getEnd() != null && floatField.getStep() != null) {
+			floatGenerator = new FloatGenerator(new SequentialFloatGenerationAlgorithm(floatField), floatField);
 		} else if (floatField.getMin() != null && floatField.getMax() != null) {
 			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm(floatField), floatField);
 		}
@@ -101,18 +110,20 @@ public class NormalGeneratorsFactory {
 		return booleanGenerator;
 	}
 
-	public static FieldGenerator<Date> makeDateGenerator(Field dateField) {
+	public static FieldGenerator<Date> makeDateGenerator(Field dateField) throws ParseException {
 		FieldGenerator<Date> dateGenerator = null;
 
 		if (dateField.getValue() != null)
 			dateGenerator = new DateGenerator(new FixedDateGenerationAlgorithm(dateField), dateField);
+		else if (dateField.getBegin() != null && dateField.getEnd() != null && dateField.getStep() != null)
+			dateGenerator = new DateGenerator(new SequentialDateGenerationAlgorithm(dateField), dateField);
 		else
 			dateGenerator = new DateGenerator(new RandomDateGenerationAlgorithm(dateField), dateField);
 
 		return dateGenerator;
 	}
 
-	public static FieldGenerator<Date> makeTimeGenerator(Field timeField) {
+	public static FieldGenerator<Date> makeTimeGenerator(Field timeField) throws ParseException {
 		return makeDateGenerator(timeField);
 	}
 
@@ -121,6 +132,9 @@ public class NormalGeneratorsFactory {
 
 		if (stringField.getValue() != null)
 			stringGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(stringField), stringField);
+		else if (stringField.getBegin() != null && stringField.getStep() != null)
+			stringGenerator = new StringGenerator(
+					new SequentialStringGenerationAlgorithm(stringField, ALPHABETICAL_VALUES), stringField);
 		else
 			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(stringField, ALPHABETICAL_VALUES),
 					stringField);
@@ -134,6 +148,9 @@ public class NormalGeneratorsFactory {
 		if (alphanumericField.getValue() != null)
 			alphanumericGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(alphanumericField),
 					alphanumericField);
+		else if (alphanumericField.getBegin() != null && alphanumericField.getStep() != null)
+			alphanumericGenerator = new StringGenerator(
+					new SequentialStringGenerationAlgorithm(alphanumericField, ALPHANUMERIC_VALUES), alphanumericField);
 		else
 			alphanumericGenerator = new StringGenerator(
 					new RandomStringGenerationAlgorithm(alphanumericField, ALPHANUMERIC_VALUES), alphanumericField);

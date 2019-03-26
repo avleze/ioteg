@@ -8,10 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.eplutils.Trio;
-import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
-import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultSimpleField;
 
@@ -31,7 +29,7 @@ public class TimeGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testTimeQueryRestrictionEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testTimeQueryRestrictionEqualOperator() throws Exception {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field36", "=", "12:43"));
 
@@ -43,7 +41,7 @@ public class TimeGeneratorQueryRestrictionTestCase {
 	}
 
 	@Test
-	public void testTimeQueryRestrictionNotEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testTimeQueryRestrictionNotEqualOperator() throws Exception {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field36", "!=", "12:43"));
 

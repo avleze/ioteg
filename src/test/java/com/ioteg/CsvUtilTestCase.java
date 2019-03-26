@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
@@ -42,7 +44,7 @@ public class CsvUtilTestCase {
 	}
 
 	@Test
-	public void testCsvComplexField() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testCsvComplexField() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
@@ -65,7 +67,7 @@ public class CsvUtilTestCase {
 	}
 
 	@Test
-	public void testCsvWithOptionalFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testCsvWithOptionalFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		File xmlFile = new File(
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);

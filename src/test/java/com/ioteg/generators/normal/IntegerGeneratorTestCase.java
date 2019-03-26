@@ -2,6 +2,8 @@ package com.ioteg.generators.normal;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.text.ParseException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,8 @@ import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
+
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -24,7 +28,7 @@ public class IntegerGeneratorTestCase {
 	private static final double DEFAULT_MIN = 0.0;
 
 	@Test
-	public void testRandomWithSpecifiedRange() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithSpecifiedRange() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setMin(100000.0);
@@ -48,7 +52,7 @@ public class IntegerGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultRange() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultRange() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setMin(DEFAULT_MIN);
@@ -74,7 +78,7 @@ public class IntegerGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		/*<field name="testDefaultValue" quotes="false" type="Integer" value="104"></field>*/
 		Field field = new Field();
@@ -90,6 +94,63 @@ public class IntegerGeneratorTestCase {
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		Integer result = Integer.parseInt(strResult);
 		assertEquals(Integer.valueOf(104), result);
+	}
+	
+	@Test
+	public void testSequential() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+		Field field = new Field();
+		field.setName("test");
+		field.setQuotes(false);
+		field.setBegin("2");
+		field.setEnd("20");
+		field.setStep("1");
+		field.setType("Integer");
+
+		/*
+		 * <field name="test" quotes="false" type="Float" min="2" step="1"
+		 * max="20"></field>
+		 */
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		List<ResultField> results = generator.generate(5);
+
+		for (int i = 0; i < results.size(); ++i) {
+
+			Integer actual = Integer.valueOf(((ResultSimpleField) results.get(i)).getValue());
+			Integer next = null;
+			if (i != results.size() - 1)
+				next = Integer.valueOf(((ResultSimpleField) results.get(i + 1)).getValue());
+
+			assertThat(actual, lessThanOrEqualTo(20));
+			assertThat(actual, greaterThanOrEqualTo(2));
+			if (next != null)
+				assertThat(next - actual, equalTo(1));
+		}
+		
+		
+		field.setStep("-1");
+
+		/*
+		 * <field name="test" quotes="false" type="Float" min="2" step="-1"
+		 * max="20"></field>
+		 */
+
+		generator = GeneratorsFactory.makeGenerator(field, null);
+		results = generator.generate(5);
+
+		for (int i = 0; i < results.size(); ++i) {
+
+			Integer actual = Integer.valueOf(((ResultSimpleField) results.get(i)).getValue());
+			Integer next = null;
+			if (i != results.size() - 1)
+				next = Integer.valueOf(((ResultSimpleField) results.get(i + 1)).getValue());
+
+			assertThat(actual, lessThanOrEqualTo(20));
+			assertThat(actual, greaterThanOrEqualTo(2));
+			if (next != null)
+				assertThat(next - actual, equalTo(-1));
+		}
+
 	}
 
 }

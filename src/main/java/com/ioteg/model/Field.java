@@ -3,6 +3,10 @@ package com.ioteg.model;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * This class represents a field inside a block or another field in the data
  * model.
@@ -10,11 +14,16 @@ import java.util.List;
  * @author Antonio Vélez Estévez
  */
 public class Field extends Attribute {
+	@NotEmpty
+	@NotNull
 	private String name;
+	@NotNull
 	private Boolean quotes;
 	private Boolean chooseone;
 	private String dependence;
+	@Valid
 	private List<Field> fields;
+	@Valid
 	private List<Attribute> attributes;
 	private CustomBehaviour customBehaviour;
 	

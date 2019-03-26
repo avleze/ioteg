@@ -1,5 +1,6 @@
 package com.ioteg.generators.block;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,20 +23,20 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 	protected Block block;
 	
 	
-	public BlockGenerationAlgorithm(Block block) throws NotExistingGeneratorException, ExprLangParsingException {
+	public BlockGenerationAlgorithm(Block block) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		super();
 		this.block = block;
 		makeGenerators(block);
 	}
 
-	private void makeGenerators(Block block) throws NotExistingGeneratorException, ExprLangParsingException {
+	private void makeGenerators(Block block) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		this.generators = new ArrayList<>();
 		
 		for (Field field : block.getFields()) 
 			generators.add(GeneratorsFactory.makeGenerator(field, block.getRepetition()));
 	}
 	
-	private void makeOptionalGenerators() throws NotExistingGeneratorException, ExprLangParsingException {
+	private void makeOptionalGenerators() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		this.optionalGenerators = new ArrayList<>();
 		for (OptionalFields optionalFields : block.getOptionalFields())
 			for(Field field : fieldsSelected(optionalFields))
@@ -72,7 +73,7 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		
 
 	@Override
-	public ResultBlock generate() throws NotExistingGeneratorException, ExprLangParsingException {
+	public ResultBlock generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		ResultBlock resultBlock = new ResultBlock(block.getName(), new ArrayList<ResultField>());
 		
 		makeOptionalGenerators();

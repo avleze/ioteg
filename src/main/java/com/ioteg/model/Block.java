@@ -2,12 +2,17 @@ package com.ioteg.model;
 
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * This class represents a block inside an event type in the data model.
  * 
  * @author Antonio Vélez Estévez
  */
 public class Block {
+	@NotEmpty
+	@NotNull
 	private String name;
 	private String value;
 	private Integer repetition;

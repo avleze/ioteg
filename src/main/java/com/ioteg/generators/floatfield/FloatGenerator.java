@@ -1,5 +1,6 @@
 package com.ioteg.generators.floatfield;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -19,7 +20,7 @@ public class FloatGenerator extends FieldGenerator<Float> {
 	}
 
 	@Override
-	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException {
+	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultField> results = new ArrayList<>();
 
 		if (field.getPrecision() != null)

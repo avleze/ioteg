@@ -1,6 +1,9 @@
 package com.ioteg.controllers;
 
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +20,11 @@ import com.ioteg.resultmodel.ResultEvent;
 @RestController
 public class EventGenerationController {
 	
-	@PostMapping(name = "/generateEvent")
+	@PostMapping("/generateEvent")
 	@ResponseBody
     @CrossOrigin(origins = "*")
-	public ResultEvent generateEvent(@RequestBody EventType eventType, HttpServletRequest request) throws NotExistingGeneratorException, ExprLangParsingException {
+	public ResultEvent generateEvent(@RequestBody @Valid EventType eventType, HttpServletRequest req) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		return EventGenerator.generateEvent(eventType);
 	}
+
 }

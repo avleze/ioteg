@@ -2,6 +2,8 @@ package com.ioteg;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 
@@ -18,7 +20,7 @@ public class CsvUtil {
 		
 	}
 	
-	public static void csvFormatValues(FileWriter values, Document document) throws IOException, NotExistingGeneratorException, ExprLangParsingException, JDOMException {
+	public static void csvFormatValues(FileWriter values, Document document) throws IOException, NotExistingGeneratorException, ExprLangParsingException, JDOMException, ParseException {
 
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
 		EventType eventType = eventTypeBuilder.build(document);

@@ -7,6 +7,8 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ import com.ioteg.resultmodel.ResultSimpleField;
 public class LongGeneratorQueryRestrictionTestCase {
 
 	@Test
-	public void testLongQueryRestrictionLessOperator() throws NotExistingGeneratorException, ExprLangParsingException  {
+	public void testLongQueryRestrictionLessOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -44,7 +46,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessOperatorWithMinValue() throws NotExistingGeneratorException, ExprLangParsingException  {
+	public void testLongQueryRestrictionLessOperatorWithMinValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -64,7 +66,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	
 	@Test
-	public void testLongQueryRestrictionLessOperatorWithNegativeValue() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testLongQueryRestrictionLessOperatorWithNegativeValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -84,7 +86,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionGreaterOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testLongQueryRestrictionGreaterOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -105,7 +107,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	
 	@Test
-	public void testLongQueryRestrictionGreaterOperatorWithMaxValue() throws NotExistingGeneratorException, ExprLangParsingException  {
+	public void testLongQueryRestrictionGreaterOperatorWithMaxValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -124,7 +126,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testLongQueryRestrictionEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -143,7 +145,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionNotEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testLongQueryRestrictionNotEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -165,7 +167,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionNotEqualOperatorWithMinAndMax() throws NotExistingGeneratorException, ExprLangParsingException  {
+	public void testLongQueryRestrictionNotEqualOperatorWithMinAndMax() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -187,7 +189,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 
 	
 	@Test
-	public void testLongQueryRestrictionGreaterEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException  {
+	public void testLongQueryRestrictionGreaterEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -207,7 +209,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws NotExistingGeneratorException, ExprLangParsingException  {
+	public void testLongQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -226,7 +228,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException  {
+	public void testLongQueryRestrictionLessEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -246,7 +248,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessEqualOperatorWithMinValue() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testLongQueryRestrictionLessEqualOperatorWithMinValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);
@@ -267,7 +269,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 	}
 	
 	@Test
-	public void testLongQueryRestrictionLessEqualOperatorWithNegativeValue() throws NotExistingGeneratorException, ExprLangParsingException  {
+	public void testLongQueryRestrictionLessEqualOperatorWithNegativeValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
 		Field field = new Field();
 		field.setType("Long");
 		field.setQuotes(false);

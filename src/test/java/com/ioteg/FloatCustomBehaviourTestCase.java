@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.allOf;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -30,7 +31,7 @@ import com.ioteg.resultmodel.ResultSimpleField;
 public class FloatCustomBehaviourTestCase {
 
 	@Test
-	public void testSequenceIncreasing() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testSequenceIncreasing() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -67,7 +68,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testSequenceDecreasing() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testSequenceDecreasing() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -103,7 +104,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testRuleWithFixedVariable() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRuleWithFixedVariable() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -139,7 +140,7 @@ public class FloatCustomBehaviourTestCase {
 
 	@Test
 	public void testObtainVariableValueWithMinVariableDependence()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -171,7 +172,7 @@ public class FloatCustomBehaviourTestCase {
 
 	@Test
 	public void testObtainVariableValueWithMaxVariableDependence()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -202,7 +203,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithSum() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testObtainVariableValueWithSum() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -236,7 +237,7 @@ public class FloatCustomBehaviourTestCase {
 
 	@Test
 	public void testObtainVariableValueWithSubstraction()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -275,7 +276,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithDivision() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testObtainVariableValueWithDivision() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -314,7 +315,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testObtainVariableValueWithProduct() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testObtainVariableValueWithProduct() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -347,7 +348,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testRuleWithFixedValue() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRuleWithFixedValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");
@@ -375,7 +376,7 @@ public class FloatCustomBehaviourTestCase {
 	}
 
 	@Test
-	public void testRuleWithOperationValue() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRuleWithOperationValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Float");

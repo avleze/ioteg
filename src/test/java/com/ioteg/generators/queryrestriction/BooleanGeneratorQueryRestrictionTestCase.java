@@ -1,6 +1,8 @@
 package com.ioteg.generators.queryrestriction;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -20,7 +22,7 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testBooleanQueryRestrictionEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Boolean");
@@ -39,7 +41,7 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testBooleanQueryRestrictionNotEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setType("Boolean");

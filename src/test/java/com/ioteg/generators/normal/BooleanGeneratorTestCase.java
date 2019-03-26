@@ -3,6 +3,8 @@ package com.ioteg.generators.normal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.ParseException;
+
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
@@ -17,7 +19,7 @@ public class BooleanGeneratorTestCase {
 	private static final boolean DEFAULT_IS_NUMERIC = false;
 
 	@Test
-	public void testRandomAndNumeric() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomAndNumeric() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Boolean");
 		field.setIsNumeric(true);
@@ -41,7 +43,7 @@ public class BooleanGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomAndNotNumeric() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomAndNotNumeric() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Boolean");
 		field.setIsNumeric(false);
@@ -54,7 +56,7 @@ public class BooleanGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Boolean");
 		field.setValue("true");

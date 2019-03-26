@@ -3,19 +3,20 @@ package com.ioteg.generators.normal;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
-import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
+import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;
 
+import java.util.List;
+
 public class StringGeneratorTestCase {
 
 	@Test
-	public void testRandomWithDefaultLength() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLength() throws Exception {
 		Field field = new Field();
 		field.setName("test");
 		field.setType("String");
@@ -30,7 +31,7 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithSpecifiedLength() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithSpecifiedLength() throws Exception {
 		Field field = new Field();
 		field.setName("test");
 		field.setType("String");
@@ -45,7 +46,7 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithLowercase() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithLowercase() throws Exception {
 		Field field = new Field();
 		field.setName("test");
 		field.setType("String");
@@ -61,7 +62,8 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndLowercase() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLengthAndLowercase()
+			throws Exception {
 		Field field = new Field();
 		field.setName("test");
 		field.setType("String");
@@ -77,14 +79,15 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndEndCharacter() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLengthAndEndCharacter()
+			throws Exception {
 		Field field = new Field();
 		field.setName("test");
 		field.setType("String");
 		field.setLength(10);
 		field.setEndcharacter("G");
 		field.setCase("low");
-		
+
 		/* <field name="test" type="String" case="low" endcharacter="G"></field> */
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
@@ -94,15 +97,15 @@ public class StringGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithSpecifiedLengthAndEndCharacter() throws NotExistingGeneratorException, ExprLangParsingException
-			 {
+	public void testRandomWithSpecifiedLengthAndEndCharacter()
+			throws Exception {
 		Field field = new Field();
 		field.setName("test");
 		field.setType("String");
 		field.setLength(24);
 		field.setEndcharacter("G");
 		field.setCase("low");
-		
+
 		/*
 		 * <field name="test" type="String" case="low" endcharacter="G"
 		 * length="24"></field>
@@ -116,8 +119,7 @@ public class StringGeneratorTestCase {
 	/**/
 
 	@Test
-	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException
-			 {
+	public void testFixedValue() throws Exception {
 		Field field = new Field();
 		field.setName("test");
 		field.setType("String");
@@ -129,5 +131,51 @@ public class StringGeneratorTestCase {
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 		assertThat(strResult, equalTo("ABC"));
+	}
+
+	@Test
+	public void testSequential() throws Exception {
+		Field field = new Field();
+		field.setName("test");
+		field.setType("String");
+		field.setBegin("Z");
+		field.setEnd("AE");
+		field.setStep("2");
+
+		/* <field name="test" type="String" begin="Z" step="2" end="AE"></field> */
+
+		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		List<ResultField> results = generator.generate(4);
+
+		ResultSimpleField rSF = (ResultSimpleField) results.get(0);
+		assertThat(rSF.getValue(), equalTo("Z"));
+
+		rSF = (ResultSimpleField) results.get(1);
+		assertThat(rSF.getValue(), equalTo("AB"));
+
+		rSF = (ResultSimpleField) results.get(2);
+		assertThat(rSF.getValue(), equalTo("AD"));
+
+		rSF = (ResultSimpleField) results.get(3);
+		assertThat(rSF.getValue(), equalTo("Z"));
+
+		field.setStep("-2");
+		/* <field name="test" type="String" begin="Z" step="-2" end="AE"></field> */
+
+
+		generator = GeneratorsFactory.makeGenerator(field, null);
+		results = generator.generate(4);
+
+		rSF = (ResultSimpleField) results.get(0);
+		assertThat(rSF.getValue(), equalTo("AE"));
+
+		rSF = (ResultSimpleField) results.get(1);
+		assertThat(rSF.getValue(), equalTo("AC"));
+
+		rSF = (ResultSimpleField) results.get(2);
+		assertThat(rSF.getValue(), equalTo("AA"));
+
+		rSF = (ResultSimpleField) results.get(3);
+		assertThat(rSF.getValue(), equalTo("AE"));
 	}
 }

@@ -3,6 +3,7 @@ package com.ioteg.generators.normal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ public class AlphanumericGeneratorTestCase {
 
 	@Test
 	public void testRandomWithSpecifiedLengthAndEndcharacter()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setLength(14);
@@ -47,7 +48,7 @@ public class AlphanumericGeneratorTestCase {
 
 	@Test
 	public void testRandomWithDefaultLengthAndLowercase()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setName("cod_hex");
@@ -72,7 +73,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testFixed() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testFixed() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setName("cod_hex");
@@ -91,7 +92,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLength() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLength() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		Field field = new Field();
 		field.setName("cod_hex");
@@ -112,7 +113,7 @@ public class AlphanumericGeneratorTestCase {
 
 	@Test
 	public void testRandomWithDefaultLengthAndEndcharacter()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 
 		field.setName("cod_hex");
@@ -136,7 +137,7 @@ public class AlphanumericGeneratorTestCase {
 	}
 
 	@Test
-	public void testRandomWithDefaultLengthAndLow() throws NotExistingGeneratorException, ExprLangParsingException {
+	public void testRandomWithDefaultLengthAndLow() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setName("cod_hex");
 		field.setQuotes(true);

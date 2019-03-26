@@ -1,6 +1,8 @@
 package com.ioteg.generators.queryrestriction;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -25,7 +27,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionLessOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -45,7 +47,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionLessOperatorWithMinValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -66,7 +68,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionLessOperatorWithNegativeValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -88,7 +90,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionGreaterOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -109,7 +111,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionGreaterOperatorWithMaxValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -130,7 +132,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -150,7 +152,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionNotEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -170,7 +172,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionNotEqualOperatorWithMinAndMax()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -194,7 +196,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionGreaterEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -216,7 +218,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionGreaterEqualOperatorWithMaxAttribute()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -235,7 +237,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionLessEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -255,7 +257,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionLessEqualOperatorWithMinValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);
@@ -276,7 +278,7 @@ public class IntegerGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testIntegerQueryRestrictionLessEqualOperatorWithNegativeValue()
-			throws NotExistingGeneratorException, ExprLangParsingException {
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Field field = new Field();
 		field.setType("Integer");
 		field.setQuotes(false);

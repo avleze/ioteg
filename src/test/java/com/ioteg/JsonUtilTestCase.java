@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
@@ -40,7 +42,7 @@ public class JsonUtilTestCase {
 	}
 
 	@Test
-	public void testJsonComplexField() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testJsonComplexField() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
 
@@ -57,7 +59,7 @@ public class JsonUtilTestCase {
 	}
 
 	@Test
-	public void testJsonComplexFieldNotRepeatTag() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testJsonComplexFieldNotRepeatTag() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		File xmlFile = new File(
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesNotRepeatTag.xml").getFile());
 		Document doc = builder.build(xmlFile);
@@ -75,7 +77,7 @@ public class JsonUtilTestCase {
 	}
 	
 	@Test
-	public void testJsonComplexFieldWithOptionalFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+	public void testJsonComplexFieldWithOptionalFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		File xmlFile = new File(
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);

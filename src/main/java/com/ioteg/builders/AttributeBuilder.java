@@ -18,10 +18,14 @@ public class AttributeBuilder {
 		String type = attributeElement.getAttributeValue("type");
 		String value = attributeElement.getAttributeValue("value");
 		String min = attributeElement.getAttributeValue("min");
+		String step = attributeElement.getAttributeValue("step");
+		String unit = attributeElement.getAttributeValue("unit");
 		String max = attributeElement.getAttributeValue("max");
 		String precision = attributeElement.getAttributeValue("precision");
 		String length = attributeElement.getAttributeValue("length");
 		String strCase = attributeElement.getAttributeValue("case");
+		String beginString = attributeElement.getAttributeValue("begin");
+		String endString = attributeElement.getAttributeValue("end");
 		String endcharacter = attributeElement.getAttributeValue("endcharacter");
 		String format = attributeElement.getAttributeValue("format");
 		String isNumeric = attributeElement.getAttributeValue("isnumeric");
@@ -31,7 +35,11 @@ public class AttributeBuilder {
 
 		attribute.setType(type);
 		attribute.setValue(value);
-
+		attribute.setBegin(beginString);
+		attribute.setEnd(endString);
+		attribute.setStep(step);
+		attribute.setUnit(unit);
+		
 		if (hasDefaultRangeFloat(type, min, max)) {
 			min = "0";
 			max = "10";
