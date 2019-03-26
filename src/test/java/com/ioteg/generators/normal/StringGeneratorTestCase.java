@@ -17,8 +17,7 @@ public class StringGeneratorTestCase {
 
 	@Test
 	public void testRandomWithDefaultLength() throws Exception {
-		Field field = new Field();
-		field.setName("test");
+		Field field = new Field("test", false);
 		field.setType("String");
 		field.setLength(10);
 
@@ -32,8 +31,7 @@ public class StringGeneratorTestCase {
 
 	@Test
 	public void testRandomWithSpecifiedLength() throws Exception {
-		Field field = new Field();
-		field.setName("test");
+		Field field = new Field("test", false);
 		field.setType("String");
 		field.setLength(24);
 
@@ -47,8 +45,7 @@ public class StringGeneratorTestCase {
 
 	@Test
 	public void testRandomWithLowercase() throws Exception {
-		Field field = new Field();
-		field.setName("test");
+		Field field = new Field("test", false);
 		field.setType("String");
 		field.setLength(24);
 		field.setCase("low");
@@ -64,8 +61,7 @@ public class StringGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultLengthAndLowercase()
 			throws Exception {
-		Field field = new Field();
-		field.setName("test");
+		Field field = new Field("test", false);
 		field.setType("String");
 		field.setLength(10);
 		field.setCase("low");
@@ -81,8 +77,7 @@ public class StringGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultLengthAndEndCharacter()
 			throws Exception {
-		Field field = new Field();
-		field.setName("test");
+		Field field = new Field("test", false);
 		field.setType("String");
 		field.setLength(10);
 		field.setEndcharacter("G");
@@ -99,8 +94,7 @@ public class StringGeneratorTestCase {
 	@Test
 	public void testRandomWithSpecifiedLengthAndEndCharacter()
 			throws Exception {
-		Field field = new Field();
-		field.setName("test");
+		Field field = new Field("test", false);
 		field.setType("String");
 		field.setLength(24);
 		field.setEndcharacter("G");
@@ -120,8 +114,7 @@ public class StringGeneratorTestCase {
 
 	@Test
 	public void testFixedValue() throws Exception {
-		Field field = new Field();
-		field.setName("test");
+		Field field = new Field("test", false);
 		field.setType("String");
 		field.setValue("ABC");
 
@@ -135,8 +128,7 @@ public class StringGeneratorTestCase {
 
 	@Test
 	public void testSequential() throws Exception {
-		Field field = new Field();
-		field.setName("test");
+		Field field = new Field("test", false);
 		field.setType("String");
 		field.setBegin("Z");
 		field.setEnd("AE");

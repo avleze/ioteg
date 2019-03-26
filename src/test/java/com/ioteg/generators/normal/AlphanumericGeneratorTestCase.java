@@ -24,11 +24,9 @@ public class AlphanumericGeneratorTestCase {
 	public void testRandomWithSpecifiedLengthAndEndcharacter()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("cod_hex", true);
 		field.setLength(14);
 		field.setEndcharacter("F");
-		field.setName("cod_hex");
-		field.setQuotes(true);
 		field.setType("Alphanumeric");
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, null);
@@ -50,9 +48,7 @@ public class AlphanumericGeneratorTestCase {
 	public void testRandomWithDefaultLengthAndLowercase()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
-		field.setName("cod_hex");
-		field.setQuotes(true);
+		Field field = new Field("cod_hex", true);
 		field.setType("Alphanumeric");
 		field.setCase("low");
 		field.setLength(10);
@@ -75,9 +71,7 @@ public class AlphanumericGeneratorTestCase {
 	@Test
 	public void testFixed() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
-		field.setName("cod_hex");
-		field.setQuotes(true);
+		Field field = new Field("cod_hex", true);
 		field.setType("Alphanumeric");
 		field.setValue("abc");
 
@@ -94,9 +88,7 @@ public class AlphanumericGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultLength() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
-		field.setName("cod_hex");
-		field.setQuotes(true);
+		Field field = new Field("cod_hex", true);
 		field.setType("Alphanumeric");
 
 		field.setLength(DEFAULT_LENGTH);
@@ -114,10 +106,8 @@ public class AlphanumericGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultLengthAndEndcharacter()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
+		Field field = new Field("cod_hex", true);
 
-		field.setName("cod_hex");
-		field.setQuotes(true);
 		field.setType("Alphanumeric");
 		field.setEndcharacter("F");
 		field.setLength(DEFAULT_LENGTH);
@@ -138,9 +128,7 @@ public class AlphanumericGeneratorTestCase {
 
 	@Test
 	public void testRandomWithDefaultLengthAndLow() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
-		field.setName("cod_hex");
-		field.setQuotes(true);
+		Field field = new Field("cod_hex", true);
 		field.setType("Alphanumeric");
 		field.setLength(DEFAULT_LENGTH);
 		field.setCase("low");

@@ -36,7 +36,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 		else {
 			this.isFormedWithAttributes = true;
 			for (Attribute attr : field.getAttributes())
-				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(new Field(attr), null));
+				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(new Field(null, false, attr), null));
 		}
 	}
 
@@ -55,7 +55,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 			Integer selected = r.ints(0, field.getAttributes().size()).findFirst().getAsInt();
 			this.type = field.getAttributes().get(selected).getType();
 			this.fieldGenerators
-					.add(GeneratorsFactory.makeGenerator(new Field(field.getAttributes().get(selected)), null));
+					.add(GeneratorsFactory.makeGenerator(new Field(null, false,field.getAttributes().get(selected)), null));
 		}
 	}
 

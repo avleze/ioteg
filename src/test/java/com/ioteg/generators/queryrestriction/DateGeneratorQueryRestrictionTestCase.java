@@ -25,9 +25,8 @@ public class DateGeneratorQueryRestrictionTestCase {
 
 	@BeforeAll
 	public static void initialize() {
-		field = new Field();
+		field = new Field("field35", false);
 		field.setType("Date");
-		field.setName("field35");
 		field.setFormat("yy-MM-dd");
 	}
 

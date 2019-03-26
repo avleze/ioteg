@@ -27,11 +27,9 @@ public class IntegerGeneratorTestCase {
 	@Test
 	public void testRandomWithSpecifiedRange() throws Exception {
 
-		Field field = new Field();
+		Field field = new Field("test", false);
 		field.setMin(100000.0);
 		field.setMax(999999.0);
-		field.setName("test");
-		field.setQuotes(false);
 		field.setType("Integer");
 
 		/*
@@ -51,11 +49,9 @@ public class IntegerGeneratorTestCase {
 	@Test
 	public void testRandomWithDefaultRange() throws Exception {
 
-		Field field = new Field();
+		Field field = new Field("testDefaultRange", true);
 		field.setMin(DEFAULT_MIN);
 		field.setMax(DEFAULT_MAX);
-		field.setName("testDefaultRange");
-		field.setQuotes(true);
 		field.setType("Integer");
 
 		/*
@@ -78,11 +74,9 @@ public class IntegerGeneratorTestCase {
 	public void testFixedValue() throws Exception {
 
 		/*<field name="testDefaultValue" quotes="false" type="Integer" value="104"></field>*/
-		Field field = new Field();
+		Field field = new Field("testDefaultValue", false);
 		field.setMin(DEFAULT_MIN);
 		field.setMax(DEFAULT_MAX);
-		field.setName("testDefaultValue");
-		field.setQuotes(false);
 		field.setType("Integer");
 		field.setValue("104");
 		
@@ -95,9 +89,7 @@ public class IntegerGeneratorTestCase {
 	
 	@Test
 	public void testSequential() throws Exception {
-		Field field = new Field();
-		field.setName("test");
-		field.setQuotes(false);
+		Field field = new Field("test", false);
 		field.setBegin("2");
 		field.setEnd("20");
 		field.setStep("1");

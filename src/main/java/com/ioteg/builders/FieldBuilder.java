@@ -20,7 +20,6 @@ public class FieldBuilder {
 
 	public Field build(Element fieldElement) throws JDOMException, IOException {
 		AttributeBuilder attributeBuilder = new AttributeBuilder();
-		Field field = new Field(attributeBuilder.build(fieldElement));
 
 		String name = fieldElement.getAttributeValue("name");
 		String quotes = fieldElement.getAttributeValue("quotes");
@@ -30,8 +29,8 @@ public class FieldBuilder {
 		if (dependence == null)
 			dependence = "false";
 
-		field.setName(name);
-		field.setQuotes(Boolean.valueOf(quotes));
+		Field field = new Field(name, Boolean.valueOf(quotes), attributeBuilder.build(fieldElement));
+
 		field.setChooseone(Boolean.valueOf(chooseone));
 		field.setDependence(dependence);
 
@@ -39,10 +38,10 @@ public class FieldBuilder {
 		buildAttributes(fieldElement, field);
 
 		CustomBehaviourBuilder customBehaviourBuilder = new CustomBehaviourBuilder();
-		
-		if(fieldElement.getAttributeValue("custom_behaviour") != null)
+
+		if (fieldElement.getAttributeValue("custom_behaviour") != null)
 			field.setCustomBehaviour(customBehaviourBuilder.build(fieldElement));
-		
+
 		return field;
 	}
 
@@ -66,8 +65,8 @@ public class FieldBuilder {
 	/**
 	 * @param fieldElement The XML element.
 	 * @param field        The field that is being built.
-	 * @throws IOException 
-	 * @throws JDOMException 
+	 * @throws IOException
+	 * @throws JDOMException
 	 */
 	private void buildSubFields(Element fieldElement, Field field) throws JDOMException, IOException {
 		FieldBuilder fieldBuilder = new FieldBuilder();

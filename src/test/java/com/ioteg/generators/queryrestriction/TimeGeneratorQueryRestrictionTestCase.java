@@ -22,9 +22,8 @@ public class TimeGeneratorQueryRestrictionTestCase {
 
 	@BeforeAll
 	public static void initialize() {
-		field = new Field();
+		field = new Field("field36", false);
 		field.setType("Time");
-		field.setName("field36");
 		field.setFormat("HH:mm");
 	}
 

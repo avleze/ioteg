@@ -22,12 +22,11 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testBooleanQueryRestrictionEqualOperator()
-			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+			throws Exception {
 
-		Field field = new Field();
+		Field field = new Field("field10", false);
 		field.setType("Boolean");
 		field.setIsNumeric(false);
-		field.setName("field10");
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field10", "=", "true"));
@@ -43,10 +42,9 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 	public void testBooleanQueryRestrictionNotEqualOperator()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("field10", false);
 		field.setType("Boolean");
 		field.setIsNumeric(false);
-		field.setName("field10");
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field10", "!=", "true"));

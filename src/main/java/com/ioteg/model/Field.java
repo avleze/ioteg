@@ -26,8 +26,10 @@ public class Field extends Attribute {
 	@Valid
 	private List<Attribute> attributes;
 	private CustomBehaviour customBehaviour;
-	
-	public Field(Attribute attr) {
+
+	public Field(String name, Boolean quotes, Attribute attr) {
+		this.name = name;
+		this.quotes = quotes;
 		this.type = attr.getType();
 		this.value = attr.getValue();
 		this.min = attr.getMin();
@@ -40,7 +42,9 @@ public class Field extends Attribute {
 		this.isNumeric = attr.getIsNumeric();
 	}
 
-	public Field() {
+	public Field(String name, Boolean quotes) {
+		this.name = name;
+		this.quotes = quotes;
 	}
 
 	/**

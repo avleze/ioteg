@@ -27,10 +27,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 
 	@Test
 	public void testLongQueryRestrictionLessOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
-		Field field = new Field();
+		Field field = new Field("field19", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field19");
 		field.setMin(-50.0);
 		field.setMax(50.0);
 
@@ -47,10 +45,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionLessOperatorWithMinValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
-		Field field = new Field();
+		Field field = new Field("field21", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field21");
 		field.setMin(-20.0);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -67,10 +63,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionLessOperatorWithNegativeValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
+		Field field = new Field("field19", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field19");
 		field.setMin(-50.0);
 		field.setMax(50.0);
 
@@ -87,10 +81,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionGreaterOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
+		Field field = new Field("field19", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field19");
 		field.setMin(-50.0);
 		field.setMax(50.0);
 
@@ -108,10 +100,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionGreaterOperatorWithMaxValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
-		Field field = new Field();
+		Field field = new Field("field20", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field20");
 		field.setMax(200.0);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -127,10 +117,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
+		Field field = new Field("field19", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field19");
 		field.setMin(-50.0);
 		field.setMax(50.0);
 
@@ -146,10 +134,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionNotEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
+		Field field = new Field("field19", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field19");
 		field.setMin(-50.0);
 		field.setMax(50.0);
 
@@ -168,10 +154,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionNotEqualOperatorWithMinAndMax() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
-		Field field = new Field();
+		Field field = new Field("field22", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field22");
 		field.setMin(-100.0);
 		field.setMax(100.0);
 
@@ -190,10 +174,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionGreaterEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
-		Field field = new Field();
+		Field field = new Field("field19", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field19");
 		field.setMin(-50.0);
 		field.setMax(50.0);
 
@@ -210,10 +192,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionGreaterEqualOperatorWithMaxAttribute() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
-		Field field = new Field();
+		Field field = new Field("field20", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field20");
 		field.setMax(200.0);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -229,10 +209,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionLessEqualOperator() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
-		Field field = new Field();
+		Field field = new Field("field19", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field19");
 		field.setMin(-50.0);
 		field.setMax(50.0);
 
@@ -249,10 +227,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionLessEqualOperatorWithMinValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
+		Field field = new Field("field21", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field21");
 		field.setMin(-20.0);
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
@@ -270,10 +246,8 @@ public class LongGeneratorQueryRestrictionTestCase {
 	
 	@Test
 	public void testLongQueryRestrictionLessEqualOperatorWithNegativeValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException  {
-		Field field = new Field();
+		Field field = new Field("field19", false);
 		field.setType("Long");
-		field.setQuotes(false);
-		field.setName("field19");
 		field.setMin(-50.0);
 		field.setMax(50.0);
 

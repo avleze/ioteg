@@ -33,7 +33,7 @@ public class FloatCustomBehaviourTestCase {
 	@Test
 	public void testSequenceIncreasing() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -70,7 +70,7 @@ public class FloatCustomBehaviourTestCase {
 	@Test
 	public void testSequenceDecreasing() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -106,7 +106,7 @@ public class FloatCustomBehaviourTestCase {
 	@Test
 	public void testRuleWithFixedVariable() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -142,7 +142,7 @@ public class FloatCustomBehaviourTestCase {
 	public void testObtainVariableValueWithMinVariableDependence()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -174,7 +174,7 @@ public class FloatCustomBehaviourTestCase {
 	public void testObtainVariableValueWithMaxVariableDependence()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -205,7 +205,7 @@ public class FloatCustomBehaviourTestCase {
 	@Test
 	public void testObtainVariableValueWithSum() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -239,7 +239,7 @@ public class FloatCustomBehaviourTestCase {
 	public void testObtainVariableValueWithSubstraction()
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -278,7 +278,7 @@ public class FloatCustomBehaviourTestCase {
 	@Test
 	public void testObtainVariableValueWithDivision() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -317,7 +317,7 @@ public class FloatCustomBehaviourTestCase {
 	@Test
 	public void testObtainVariableValueWithProduct() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -350,7 +350,7 @@ public class FloatCustomBehaviourTestCase {
 	@Test
 	public void testRuleWithFixedValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();
@@ -378,7 +378,7 @@ public class FloatCustomBehaviourTestCase {
 	@Test
 	public void testRuleWithOperationValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		Field field = new Field();
+		Field field = new Field("float", false);
 		field.setType("Float");
 
 		CustomBehaviour customBehaviour = new CustomBehaviour();

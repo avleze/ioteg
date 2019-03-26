@@ -25,12 +25,10 @@ public class FloatGeneratorTestCase {
 
 	@Test
 	public void testRandomWithDefaultRange() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
+		Field field = new Field("test", false);
 		field.setMin(DEFAULT_MIN);
 		field.setMax(DEFAULT_MAX);
 		field.setPrecision(2);
-		field.setName("test");
-		field.setQuotes(false);
 		field.setType("Float");
 
 		/* <field name="test" quotes="false" precision="2" type="Float"></field> */
@@ -48,12 +46,10 @@ public class FloatGeneratorTestCase {
 
 	@Test
 	public void testRandomWithSpecifiedRange() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
+		Field field = new Field("test", false);
 		field.setMin(23.54);
 		field.setMax(32.58);
 		field.setPrecision(2);
-		field.setName("test");
-		field.setQuotes(false);
 		field.setType("Float");
 
 		/*
@@ -75,10 +71,8 @@ public class FloatGeneratorTestCase {
 
 	@Test
 	public void testFixedValue() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
+		Field field = new Field("test", false);
 		field.setValue("104.567");
-		field.setName("test");
-		field.setQuotes(false);
 		field.setType("Float");
 
 		/* <field name="test" quotes="false" type="Float" value="104.567"></field> */
@@ -91,9 +85,8 @@ public class FloatGeneratorTestCase {
 
 	@Test
 	public void testSequential() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		Field field = new Field();
-		field.setName("test");
-		field.setQuotes(false);
+		Field field = new Field("test", false);
+
 		field.setBegin("2.25");
 		field.setEnd("20.0");
 		field.setStep("1.25");
