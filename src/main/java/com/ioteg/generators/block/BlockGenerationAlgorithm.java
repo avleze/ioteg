@@ -19,7 +19,7 @@ import com.ioteg.resultmodel.ResultField;
 public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<ResultBlock> {
 
 	protected List<Generable> generators;
-	protected List<Generable> optionalGenerators;
+	protected List<List<Generable>> optionalGenerators;
 	protected Block block;
 	
 	
@@ -27,6 +27,7 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		super();
 		this.block = block;
 		makeGenerators(block);
+		makeOptionalGenerators();
 	}
 
 	private void makeGenerators(Block block) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
@@ -38,13 +39,18 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 	
 	private void makeOptionalGenerators() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		this.optionalGenerators = new ArrayList<>();
+		int index = 0;
 		for (OptionalFields optionalFields : block.getOptionalFields())
-			for(Field field : fieldsSelected(optionalFields))
-				optionalGenerators.add(GeneratorsFactory.makeGenerator(field, block.getRepetition()));
+		{
+			optionalGenerators.add(new ArrayList<>());
+			for(Field field : optionalFields.getFields())
+				optionalGenerators.get(index).add(GeneratorsFactory.makeGenerator(field, block.getRepetition()));
+			++index;
+		}
+			
 	}
 	
-	private List<Field> fieldsSelected(OptionalFields optionalFields) {
-		List<Field> fields = new ArrayList<>();
+	private List<Integer> selectGenerators(OptionalFields optionalFields) {
 		
 		Integer numOfFields = optionalFields.getFields().size();
 		Boolean atLeastOne = false;
@@ -64,24 +70,28 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 			selectedIndexes.add(0);
 		else if(r.nextBoolean())
 			selectedIndexes.add(0);
-
-		for(Integer index : selectedIndexes)
-			fields.add(optionalFields.getFields().get(index));
 		
-		return fields;
+		return selectedIndexes;
 	}
 		
 
 	@Override
 	public ResultBlock generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		ResultBlock resultBlock = new ResultBlock(block.getName(), new ArrayList<ResultField>());
-		
-		makeOptionalGenerators();
+		List<Generable> generatorsSelected = new ArrayList<>();
+		int optionalFieldIndex = 0;
+		for(OptionalFields optionalFields: this.block.getOptionalFields())
+		{
+			for(Integer index : selectGenerators(optionalFields))
+				generatorsSelected.add(optionalGenerators.get(optionalFieldIndex).get(index));
+			++optionalFieldIndex;
+		}
+			
 		
 		for (Generable generator : this.generators) 
 			resultBlock.getResultFields().add(generator.generate(1).get(0));
 
-		for (Generable generator : this.optionalGenerators) 
+		for (Generable generator : generatorsSelected) 
 			resultBlock.getResultFields().add(generator.generate(1).get(0));
 		
 		return resultBlock;
