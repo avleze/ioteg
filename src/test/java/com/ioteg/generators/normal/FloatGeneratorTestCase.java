@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
@@ -32,7 +33,7 @@ public class FloatGeneratorTestCase {
 
 		/* <field name="test" quotes="false" precision="2" type="Float"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		List<ResultField> results = generator.generate(100);
 
 		for (ResultField rF : results) {
@@ -55,7 +56,7 @@ public class FloatGeneratorTestCase {
 		 * max="32.58"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		List<ResultField> results = generator.generate(100);
 
 		for (ResultField rF : results) {
@@ -74,7 +75,7 @@ public class FloatGeneratorTestCase {
 
 		/* <field name="test" quotes="false" type="Float" value="104.567"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		Double result = Double.parseDouble(strResult);
 		assertThat(result, equalTo(104.567));
@@ -93,7 +94,7 @@ public class FloatGeneratorTestCase {
 		 * max="20.0"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		List<ResultField> results = generator.generate(5);
 
 		for (int i = 0; i < results.size(); ++i) {
@@ -118,7 +119,7 @@ public class FloatGeneratorTestCase {
 		 * max="20.0"></field>
 		 */
 
-		generator = GeneratorsFactory.makeGenerator(field, null);
+		generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		results = generator.generate(5);
 
 		for (int i = 0; i < results.size(); ++i) {

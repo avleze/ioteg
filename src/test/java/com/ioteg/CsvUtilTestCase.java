@@ -7,8 +7,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.ParseException;
 
 import org.jdom2.Document;
@@ -19,9 +17,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.CsvUtil;
+import com.ioteg.builders.EventTypeBuilder;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.context.GenerationContext;
+import com.ioteg.generators.eventtype.EventTypeGenerationAlgorithm;
+import com.ioteg.generators.eventtype.EventTypeGenerator;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.model.EventType;
+import com.ioteg.resultmodel.csvserializers.CSVUtil;
 
 public class CsvUtilTestCase {
 
@@ -29,11 +32,13 @@ public class CsvUtilTestCase {
 	private FileWriter values;
 	private static SAXBuilder builder;
 	private static ClassLoader classLoader;
+	private static EventTypeBuilder eventTypeBuilder;
 
 	@BeforeAll
 	public static void setup() {
 		builder = new SAXBuilder();
 		classLoader = CsvUtilTestCase.class.getClassLoader();
+		eventTypeBuilder = new EventTypeBuilder();
 	}
 
 	@BeforeEach
@@ -44,13 +49,16 @@ public class CsvUtilTestCase {
 	}
 
 	@Test
-	public void testCsvComplexField() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public void testCsvComplexField()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		File xmlFile = new File(classLoader.getResource("./FormatValueTestFiles/testFormatValues.xml").getFile());
 		Document doc = builder.build(xmlFile);
+		EventType eventType = eventTypeBuilder.build(doc);
 
-		CsvUtil.csvFormatValues(values, doc);
-
-		String csvResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
+		GenerationContext context = new GenerationContext();
+		EventTypeGenerator eventTypeGenerator = new EventTypeGenerator(new EventTypeGenerationAlgorithm(eventType, context), context);
+	
+		String csvResult = CSVUtil.serializeResultEvent(eventType, eventTypeGenerator.generate(1).get(0));
 
 		String[] lines = csvResult.split("\n");
 
@@ -67,16 +75,17 @@ public class CsvUtilTestCase {
 	}
 
 	@Test
-	public void testCsvWithOptionalFields() throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public void testCsvWithOptionalFields()
+			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		File xmlFile = new File(
 				classLoader.getResource("./FormatValueTestFiles/testFormatValuesWithOptionalFields.xml").getFile());
 		Document doc = builder.build(xmlFile);
+		EventType eventType = eventTypeBuilder.build(doc);
 
-		CsvUtil.csvFormatValues(values, doc);
-
-		String csvResult = new String(Files.readAllBytes(Paths.get(tempFile.getPath())));
-		
-		String[] lines = csvResult.split("\n");
+		GenerationContext context = new GenerationContext();
+		EventTypeGenerator eventTypeGenerator = new EventTypeGenerator(new EventTypeGenerationAlgorithm(eventType, context), context);
+	
+		String csvResult = CSVUtil.serializeResultEvent(eventType, eventTypeGenerator.generate(1).get(0));		String[] lines = csvResult.split("\n");
 
 		String[] headings = lines[0].split(",");
 		String[] result = lines[1].split(",");
@@ -90,13 +99,13 @@ public class CsvUtilTestCase {
 		assertThat(result[0], matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}"));
 		assertThat(result[1], matchesPattern("\"-?\\d+\\.\\d{5}\""));
 		assertThat(result[2], matchesPattern("-?\\d+\\.\\d{5}"));
-		
-		if(result.length >= 4)
+
+		if (result.length >= 4)
 			assertThat(result[3], matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}|"));
-		if(result.length == 5)
+		if (result.length == 5)
 			assertThat(result[4], matchesPattern("\"[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{4}\""));
 	}
-	
+
 	@AfterEach
 	public void teardown() throws IOException {
 		tempFile.delete();

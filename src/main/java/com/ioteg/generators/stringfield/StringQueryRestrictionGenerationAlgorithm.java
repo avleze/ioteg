@@ -5,14 +5,15 @@ import java.util.List;
 import com.ioteg.RandomUtil;
 import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.QueryRestrictionGenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
 public class StringQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<String> {
 
 	protected String possibleChars;
 	
-	public StringQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions, String possibleChars) {
-		super(field, restrictions);
+	public StringQueryRestrictionGenerationAlgorithm(Field field, GenerationContext generationContext, List<Trio<String, String, String>> restrictions, String possibleChars) {
+		super(field, generationContext, restrictions);
 		this.possibleChars = possibleChars;
 	}
 

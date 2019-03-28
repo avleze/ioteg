@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
 public class SequentialDateGenerationAlgorithm extends GenerationAlgorithm<Date> {
@@ -17,8 +18,8 @@ public class SequentialDateGenerationAlgorithm extends GenerationAlgorithm<Date>
 	protected Integer unit;
 	protected Calendar calendar;
 
-	public SequentialDateGenerationAlgorithm(Field field) throws ParseException {
-		super(field);
+	public SequentialDateGenerationAlgorithm(Field field, GenerationContext generationContext) throws ParseException {
+		super(field, generationContext);
 		SimpleDateFormat parser = new SimpleDateFormat(field.getFormat());
 		this.calendar = GregorianCalendar.getInstance();
 		this.step = Integer.parseInt(field.getStep());

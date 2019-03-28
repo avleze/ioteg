@@ -8,6 +8,7 @@ import com.ioteg.exprlang.ExprParser;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.exprlang.ast.ExpressionAST;
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 import com.ioteg.model.RuleCustomBehaviour;
 import com.ioteg.model.VariableCustomBehaviour;
@@ -25,8 +26,8 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 	protected Integer generatedEventsInCurrentRule;
 	protected Integer eventsPerSimulation;
 
-	public CustomiseBehaviourGenerationAlgorithm(Field field, Integer numOfEventsToGenerate) throws ExprLangParsingException {
-		super(field);
+	public CustomiseBehaviourGenerationAlgorithm(Field field, Integer numOfEventsToGenerate, GenerationContext generationContext) throws ExprLangParsingException {
+		super(field, generationContext);
 		this.numOfEventsToGenerate = numOfEventsToGenerate;
 		this.totalGeneratedEvents = 0;
 		this.parser = new ExprParser();

@@ -1,6 +1,7 @@
 package com.ioteg.generators.longfield;
 
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
 public class SequentialLongGenerationAlgorithm extends GenerationAlgorithm<Long> {
@@ -11,8 +12,8 @@ public class SequentialLongGenerationAlgorithm extends GenerationAlgorithm<Long>
 
 	private Long value;
 
-	public SequentialLongGenerationAlgorithm(Field field) {
-		super(field);
+	public SequentialLongGenerationAlgorithm(Field field, GenerationContext generationContext) {
+		super(field, generationContext);
 		this.begin = Long.valueOf(field.getBegin());
 		this.step = Long.valueOf(field.getStep());
 		this.end = Long.valueOf(field.getEnd());

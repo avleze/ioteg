@@ -18,6 +18,7 @@ import com.ioteg.eplutils.Trio;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -34,7 +35,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field19", "<", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -50,7 +51,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field21", "<", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -68,7 +69,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field19", "<", "-24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -85,7 +86,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field19", ">", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -102,7 +103,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field20", ">", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -119,7 +120,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field19", "=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -135,7 +136,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field19", "!=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -154,7 +155,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field22", "!=", "20"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -173,7 +174,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field19", ">=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -189,7 +190,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field20", ">=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -206,7 +207,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field19", "<=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -222,7 +223,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field21", "<=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());
@@ -241,7 +242,7 @@ public class LongGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field19", "<=", "-24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Long result = Long.parseLong(rF.getValue());

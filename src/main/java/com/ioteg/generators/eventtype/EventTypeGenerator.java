@@ -1,4 +1,4 @@
-package com.ioteg.generators.block;
+package com.ioteg.generators.eventtype;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -9,22 +9,23 @@ import com.ioteg.generators.AbstractGenerationAlgorithm;
 import com.ioteg.generators.AbstractGenerator;
 import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
-import com.ioteg.resultmodel.ResultBlock;
+import com.ioteg.resultmodel.ResultEvent;
 
-public class BlockGenerator extends AbstractGenerator<ResultBlock> {
 
-	public BlockGenerator(AbstractGenerationAlgorithm<ResultBlock> generationAlgorithm,
-			GenerationContext generationContext) {
+public class EventTypeGenerator extends AbstractGenerator<ResultEvent> {
+
+
+	public EventTypeGenerator(AbstractGenerationAlgorithm<ResultEvent> generationAlgorithm, GenerationContext generationContext) {
 		super(generationAlgorithm, generationContext);
 	}
 
-	public List<ResultBlock> generate(Integer numberOfRequiredItems)
-			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		List<ResultBlock> results = new ArrayList<>();
+	public List<ResultEvent> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+		List<ResultEvent> results = new ArrayList<>();
 
 		for (int i = 0; i < numberOfRequiredItems; ++i)
 			results.add(generationAlgorithm.generate());
 
 		return results;
 	}
+
 }

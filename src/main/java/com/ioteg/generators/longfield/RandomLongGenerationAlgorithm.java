@@ -1,12 +1,13 @@
 package com.ioteg.generators.longfield;
 
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
 public class RandomLongGenerationAlgorithm extends GenerationAlgorithm<Long> {
 	
-	public RandomLongGenerationAlgorithm(Field field) {
-		super(field);
+	public RandomLongGenerationAlgorithm(Field field, GenerationContext generationContext) {
+		super(field, generationContext);
 	}
 
 	@Override

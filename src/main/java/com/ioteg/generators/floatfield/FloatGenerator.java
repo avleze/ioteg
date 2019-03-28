@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.FieldGenerator;
@@ -15,8 +16,11 @@ import com.ioteg.resultmodel.ResultSimpleField;
 
 public class FloatGenerator extends FieldGenerator<Float> {
 
-	public FloatGenerator(GenerationAlgorithm<Float> generationAlgorithm, Field field) {
-		super(generationAlgorithm, field);
+
+
+	public FloatGenerator(GenerationAlgorithm<Float> generationAlgorithm, Field field,
+			GenerationContext generationContext) {
+		super(generationAlgorithm, field, generationContext);
 	}
 
 	@Override

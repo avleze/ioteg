@@ -8,12 +8,13 @@ import java.util.List;
 import com.ioteg.RandomUtil;
 import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.QueryRestrictionGenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
 public class DateQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Date> {
 
-	public DateQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
-		super(field, restrictions);
+	public DateQueryRestrictionGenerationAlgorithm(Field field, GenerationContext generationContext, List<Trio<String, String, String>> restrictions) {
+		super(field, generationContext, restrictions);
 	}
 
 	@Override

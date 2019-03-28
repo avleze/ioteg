@@ -6,6 +6,7 @@ import java.util.List;
 import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.booleanfield.BooleanGenerator;
 import com.ioteg.generators.booleanfield.BooleanQueryRestrictionGenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.datefield.DateGenerator;
 import com.ioteg.generators.datefield.DateQueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
@@ -27,23 +28,23 @@ public class QueryRestrictionGeneratorsFactory {
 	}
 	
 	public static Generable makeGenerator(Field field,
-			List<Trio<String, String, String>> restrictions) throws NotExistingGeneratorException {
+			List<Trio<String, String, String>> restrictions, GenerationContext generationContext) throws NotExistingGeneratorException {
 		Generable generable = null;
 
 		if (field.getType().equals("String"))
-			generable = makeQueryRestrictionStringGenerator(field, restrictions);
+			generable = makeQueryRestrictionStringGenerator(field, restrictions, generationContext);
 		else if (field.getType().equals("Alphanumeric"))
-			generable = makeQueryRestrictionAlphanumericGenerator(field, restrictions);
+			generable = makeQueryRestrictionAlphanumericGenerator(field, restrictions, generationContext);
 		else if (field.getType().equals("Integer") || field.getType().equals("Long"))
-			generable = makeQueryRestrictionLongGenerator(field, restrictions);
+			generable = makeQueryRestrictionLongGenerator(field, restrictions, generationContext);
 		else if (field.getType().equals("Float"))
-			generable = makeQueryRestrictionFloatGenerator(field, restrictions);
+			generable = makeQueryRestrictionFloatGenerator(field, restrictions, generationContext);
 		else if (field.getType().equals("Boolean"))
-			generable = makeQueryRestrictionBooleanGenerator(field, restrictions);
+			generable = makeQueryRestrictionBooleanGenerator(field, restrictions, generationContext);
 		else if (field.getType().equals("Date"))
-			generable = makeQueryRestrictionDateGenerator(field, restrictions);
+			generable = makeQueryRestrictionDateGenerator(field, restrictions, generationContext);
 		else if (field.getType().equals("Time"))
-			generable = makeQueryRestrictionTimeGenerator(field, restrictions);
+			generable = makeQueryRestrictionTimeGenerator(field, restrictions, generationContext);
 		else
 			throw new NotExistingGeneratorException("There is no query restriction generator for type: " + field.getType());
 	
@@ -52,39 +53,39 @@ public class QueryRestrictionGeneratorsFactory {
 	}
 
 	public static FieldGenerator<String> makeQueryRestrictionStringGenerator(Field field,
-			List<Trio<String, String, String>> restrictions) {
+			List<Trio<String, String, String>> restrictions, GenerationContext generationContext) {
 		return new StringGenerator(
-				new StringQueryRestrictionGenerationAlgorithm(field, restrictions, ALPHABETICAL_VALUES), field);
+				new StringQueryRestrictionGenerationAlgorithm(field, generationContext, restrictions, ALPHABETICAL_VALUES), field, generationContext);
 	}
 
 	public static FieldGenerator<String> makeQueryRestrictionAlphanumericGenerator(Field field,
-			List<Trio<String, String, String>> restrictions) {
+			List<Trio<String, String, String>> restrictions, GenerationContext generationContext) {
 		return new StringGenerator(
-				new StringQueryRestrictionGenerationAlgorithm(field, restrictions, ALPHANUMERIC_VALUES), field);
+				new StringQueryRestrictionGenerationAlgorithm(field, generationContext, restrictions, ALPHANUMERIC_VALUES), field, generationContext);
 	}
 
 	public static FieldGenerator<Long> makeQueryRestrictionLongGenerator(Field field,
-			List<Trio<String, String, String>> restrictions) {
-		return new FieldGenerator<>(new LongQueryRestrictionGenerationAlgorithm(field, restrictions), field);
+			List<Trio<String, String, String>> restrictions, GenerationContext generationContext) {
+		return new FieldGenerator<>(new LongQueryRestrictionGenerationAlgorithm(field, generationContext, restrictions), field, generationContext);
 	}
 
 	public static FieldGenerator<Float> makeQueryRestrictionFloatGenerator(Field field,
-			List<Trio<String, String, String>> restrictions) {
-		return new FloatGenerator(new FloatQueryRestrictionGenerationAlgorithm(field, restrictions), field);
+			List<Trio<String, String, String>> restrictions, GenerationContext generationContext) {
+		return new FloatGenerator(new FloatQueryRestrictionGenerationAlgorithm(field, generationContext, restrictions), field, generationContext);
 	}
 
 	public static FieldGenerator<Boolean> makeQueryRestrictionBooleanGenerator(Field field,
-			List<Trio<String, String, String>> restrictions) {
-		return new BooleanGenerator(new BooleanQueryRestrictionGenerationAlgorithm(field, restrictions), field);
+			List<Trio<String, String, String>> restrictions, GenerationContext generationContext) {
+		return new BooleanGenerator(new BooleanQueryRestrictionGenerationAlgorithm(field, generationContext, restrictions), field, generationContext);
 	}
 
 	public static FieldGenerator<Date> makeQueryRestrictionDateGenerator(Field field,
-			List<Trio<String, String, String>> restrictions) {
-		return new DateGenerator(new DateQueryRestrictionGenerationAlgorithm(field, restrictions), field);
+			List<Trio<String, String, String>> restrictions, GenerationContext generationContext) {
+		return new DateGenerator(new DateQueryRestrictionGenerationAlgorithm(field, generationContext, restrictions), field, generationContext);
 	}
 
 	public static FieldGenerator<Date> makeQueryRestrictionTimeGenerator(Field field,
-			List<Trio<String, String, String>> restrictions) {
-		return makeQueryRestrictionDateGenerator(field, restrictions);
+			List<Trio<String, String, String>> restrictions, GenerationContext generationContext) {
+		return makeQueryRestrictionDateGenerator(field, restrictions, generationContext);
 	}
 }

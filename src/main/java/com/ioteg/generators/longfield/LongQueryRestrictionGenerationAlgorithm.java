@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.QueryRestrictionGenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
 /**
@@ -12,10 +13,9 @@ import com.ioteg.model.Field;
  */
 public class LongQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Long> {
 
-
-
-	public LongQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
-		super(field, restrictions);
+	public LongQueryRestrictionGenerationAlgorithm(Field field, GenerationContext generationContext,
+			List<Trio<String, String, String>> restrictions) {
+		super(field, generationContext, restrictions);
 	}
 
 	@Override
@@ -29,12 +29,11 @@ public class LongQueryRestrictionGenerationAlgorithm extends QueryRestrictionGen
 
 		Long max = Long.MAX_VALUE;
 		Long min = Long.MIN_VALUE;
-		
-		if(field.getType().equalsIgnoreCase("Integer"))
-		{
+
+		if (field.getType().equalsIgnoreCase("Integer")) {
 			max = (long) Integer.MAX_VALUE;
 			min = (long) Integer.MIN_VALUE;
-		} 
+		}
 
 		if (field.getMax() != null)
 			max = field.getMax().longValue();
@@ -56,7 +55,7 @@ public class LongQueryRestrictionGenerationAlgorithm extends QueryRestrictionGen
 			else if (operator.equals("<="))
 				max = value;
 
-			if(!min.equals(max))
+			if (!min.equals(max))
 				result = r.longs(min, max).findFirst().getAsLong();
 			else
 				result = min;

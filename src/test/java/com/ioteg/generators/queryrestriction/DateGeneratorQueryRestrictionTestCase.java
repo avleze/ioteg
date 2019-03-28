@@ -12,6 +12,7 @@ import com.ioteg.eplutils.Trio;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -34,7 +35,7 @@ public class DateGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field35", "=", "96-05-10"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), equalTo("96-05-10"));
@@ -46,7 +47,7 @@ public class DateGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field35", "!=", "96-05-10"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not(equalTo("96-05-10")));

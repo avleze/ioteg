@@ -8,6 +8,7 @@ import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Attribute;
 import com.ioteg.model.Field;
@@ -20,8 +21,8 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	protected Boolean isFormedWithAttributes;
 	protected String type;
 	
-	public ComplexFieldGeneratorAlgorithm(Field field) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		super(field);
+	public ComplexFieldGeneratorAlgorithm(Field field, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+		super(field, generationContext);
 		if (!field.getChooseone())
 			makeGenerators(field);
 	}
@@ -32,11 +33,11 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 		this.type = field.getType();
 		if (!field.getFields().isEmpty())
 			for (Field fld : field.getFields())
-				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(fld, null));
+				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(fld, null, generationContext));
 		else {
 			this.isFormedWithAttributes = true;
 			for (Attribute attr : field.getAttributes())
-				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(new Field(null, false, attr), null));
+				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(new Field(null, false, attr), null, generationContext));
 		}
 	}
 
@@ -47,7 +48,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 		if (!field.getFields().isEmpty()) {
 			Integer selected = r.ints(0, field.getFields().size()).findFirst().getAsInt();
 			this.type = field.getFields().get(selected).getType();
-			this.fieldGenerators.add(GeneratorsFactory.makeGenerator(field.getFields().get(selected), null));
+			this.fieldGenerators.add(GeneratorsFactory.makeGenerator(field.getFields().get(selected), null, generationContext));
 		}
 
 		else {
@@ -55,7 +56,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 			Integer selected = r.ints(0, field.getAttributes().size()).findFirst().getAsInt();
 			this.type = field.getAttributes().get(selected).getType();
 			this.fieldGenerators
-					.add(GeneratorsFactory.makeGenerator(new Field(null, false,field.getAttributes().get(selected)), null));
+					.add(GeneratorsFactory.makeGenerator(new Field(null, false,field.getAttributes().get(selected)), null, generationContext));
 		}
 	}
 

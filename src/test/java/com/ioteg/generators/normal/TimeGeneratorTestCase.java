@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
@@ -24,7 +25,7 @@ public class TimeGeneratorTestCase {
 		Field field = new Field("testRandom", true, "Time");
 		field.setFormat("hh:mm");
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		List<ResultField> results = generator.generate(100);
 
@@ -49,7 +50,7 @@ public class TimeGeneratorTestCase {
 		 * format="HH:mm"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		assertThat(strResult, equalTo("14:24"));

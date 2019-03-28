@@ -9,6 +9,7 @@ import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.AbstractGenerationAlgorithm;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Block;
 import com.ioteg.model.Field;
@@ -21,11 +22,13 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 	protected List<Generable> generators;
 	protected List<List<Generable>> optionalGenerators;
 	protected Block block;
+	protected GenerationContext generationContext;
 	
 	
-	public BlockGenerationAlgorithm(Block block) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public BlockGenerationAlgorithm(Block block, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		super();
 		this.block = block;
+		this.generationContext = generationContext;
 		makeGenerators(block);
 		makeOptionalGenerators();
 	}
@@ -34,7 +37,7 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		this.generators = new ArrayList<>();
 		
 		for (Field field : block.getFields()) 
-			generators.add(GeneratorsFactory.makeGenerator(field, block.getRepetition()));
+			generators.add(GeneratorsFactory.makeGenerator(field, block.getRepetition(), generationContext));
 	}
 	
 	private void makeOptionalGenerators() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
@@ -44,7 +47,7 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		{
 			optionalGenerators.add(new ArrayList<>());
 			for(Field field : optionalFields.getFields())
-				optionalGenerators.get(index).add(GeneratorsFactory.makeGenerator(field, block.getRepetition()));
+				optionalGenerators.get(index).add(GeneratorsFactory.makeGenerator(field, block.getRepetition(), generationContext));
 			++index;
 		}
 			

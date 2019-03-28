@@ -2,6 +2,7 @@ package com.ioteg.generators;
 
 
 import com.ioteg.generators.block.BlockGenerator;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import java.text.ParseException;
@@ -19,16 +20,16 @@ public class GeneratorsFactory {
 		throw new IllegalStateException("This is an utility class and can't be instantiated.");
 	}
 
-	public static Generable makeGenerator(Field field, Integer totalNumEvent) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		return NormalGeneratorsFactory.makeGenerator(field, totalNumEvent);
+	public static Generable makeGenerator(Field field, Integer totalNumEvent, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+		return NormalGeneratorsFactory.makeGenerator(field, totalNumEvent, generationContext);
 	}
 	
-	public static Generable makeQueryRestrictionGenerator(Field field, List<Trio<String, String, String>> restrictions) throws NotExistingGeneratorException {
-		return QueryRestrictionGeneratorsFactory.makeGenerator(field, restrictions);
+	public static Generable makeQueryRestrictionGenerator(Field field, List<Trio<String, String, String>> restrictions, GenerationContext generationContext) throws NotExistingGeneratorException {
+		return QueryRestrictionGeneratorsFactory.makeGenerator(field, restrictions, generationContext);
 	}
 	
-	public static BlockGenerator makeBlockGenerator(Block block) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		return new BlockGenerator(new BlockGenerationAlgorithm(block));
+	public static BlockGenerator makeBlockGenerator(Block block, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+		return new BlockGenerator(new BlockGenerationAlgorithm(block, generationContext), generationContext);
 
 	}
 

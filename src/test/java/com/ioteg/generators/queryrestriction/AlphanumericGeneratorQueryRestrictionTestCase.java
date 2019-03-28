@@ -11,6 +11,7 @@ import com.ioteg.eplutils.Trio;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -34,7 +35,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field29", "=", "HOLA ESTO ES UNA PRUEBA"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), equalTo("HOLA ESTO ES UNA PRUEBA"));
@@ -50,7 +51,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field29", "!=", "HOLA ESTO ES UNA PRUEBA"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
@@ -68,7 +69,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field30", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
@@ -83,7 +84,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		field.setLength(12);
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field31", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
@@ -98,7 +99,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		field.setCase("low");
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field33", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(rF.getValue().length(), equalTo(12));
@@ -114,7 +115,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 		field.setLength(DEFAULT_LENGTH);
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field34", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(rF.getValue(), matchesPattern("[0123456789abcdefghijklmnopqrstuvwxyz]*"));
@@ -129,7 +130,7 @@ public class AlphanumericGeneratorQueryRestrictionTestCase {
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field31", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(rF.getValue(), matchesPattern("[0123456789ABCDEF]*"));

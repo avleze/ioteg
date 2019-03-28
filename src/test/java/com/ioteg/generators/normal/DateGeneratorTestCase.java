@@ -14,6 +14,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -25,7 +26,7 @@ public class DateGeneratorTestCase {
 		Field field = new Field("date", true, "Date");
 		field.setFormat("yy-MM-DD");
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		List<ResultField> results = generator.generate(100);
 
@@ -49,7 +50,7 @@ public class DateGeneratorTestCase {
 		 * format="yy-mm-dd"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
@@ -85,7 +86,7 @@ public class DateGeneratorTestCase {
 		 * format="yy-mm-dd"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		List<ResultField> results = generator.generate(6);
 		SimpleDateFormat parser = new SimpleDateFormat(field.getFormat());
 		Calendar actual = Calendar.getInstance();

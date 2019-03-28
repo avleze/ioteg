@@ -12,6 +12,7 @@ import com.ioteg.eplutils.Trio;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -36,7 +37,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field14", "<", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -54,7 +55,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field16", "<", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -72,7 +73,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field14", "<", "-24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -90,7 +91,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field14", ">", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -107,7 +108,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field15", ">", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -125,7 +126,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field14", "=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -142,7 +143,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field14", "!=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -159,7 +160,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field14", "!=", "20"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -178,7 +179,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field14", ">=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -196,7 +197,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field15", ">=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -214,7 +215,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field14", "<=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -232,7 +233,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field16", "<=", "24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -251,7 +252,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field14", "<=", "-24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());
@@ -271,7 +272,7 @@ public class FloatGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field18", "<=", "-24"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		Float result = Float.parseFloat(rF.getValue());

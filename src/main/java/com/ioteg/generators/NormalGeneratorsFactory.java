@@ -9,6 +9,7 @@ import com.ioteg.generators.booleanfield.FixedBooleanGenerationAlgorithm;
 import com.ioteg.generators.booleanfield.RandomBooleanGenerationAlgorithm;
 import com.ioteg.generators.complexfield.ComplexFieldGenerator;
 import com.ioteg.generators.complexfield.ComplexFieldGeneratorAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.datefield.DateGenerator;
 import com.ioteg.generators.datefield.FixedDateGenerationAlgorithm;
 import com.ioteg.generators.datefield.RandomDateGenerationAlgorithm;
@@ -37,123 +38,123 @@ public class NormalGeneratorsFactory {
 		throw new IllegalStateException("This is an utility class and can't be instantiated.");
 	}
 
-	public static Generable makeGenerator(Field field, Integer totalNumberOfEvents)
+	public static Generable makeGenerator(Field field, Integer totalNumberOfEvents, GenerationContext generationContext)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Generable generable = null;
 
 		if (field.getType().equals("Integer") || field.getType().equals("Long"))
-			generable = makeLongGenerator(field);
+			generable = makeLongGenerator(field, generationContext);
 		else if (field.getType().equals("String"))
-			generable = makeStringGenerator(field);
+			generable = makeStringGenerator(field, generationContext);
 		else if (field.getType().equals("Alphanumeric"))
-			generable = makeAlphanumericGenerator(field);
+			generable = makeAlphanumericGenerator(field, generationContext);
 		else if (field.getType().equals("Float"))
-			generable = makeFloatGenerator(field, totalNumberOfEvents);
+			generable = makeFloatGenerator(field, totalNumberOfEvents, generationContext);
 		else if (field.getType().equals("Boolean"))
-			generable = makeBooleanGenerator(field);
+			generable = makeBooleanGenerator(field, generationContext);
 		else if (field.getType().equals("Date"))
-			generable = makeDateGenerator(field);
+			generable = makeDateGenerator(field, generationContext);
 		else if (field.getType().equals("Time"))
-			generable = makeDateGenerator(field);
+			generable = makeDateGenerator(field, generationContext);
 		else if (field.getType() != null)
-			generable = makeComplexGenerator(field);
+			generable = makeComplexGenerator(field, generationContext);
 		else
 			throw new NotExistingGeneratorException("There is no existing generator for the type: null");
 
 		return generable;
 	}
 
-	public static Generable makeComplexGenerator(Field field)
+	public static Generable makeComplexGenerator(Field field, GenerationContext generationContext)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		return new ComplexFieldGenerator(new ComplexFieldGeneratorAlgorithm(field), field);
+		return new ComplexFieldGenerator(new ComplexFieldGeneratorAlgorithm(field, generationContext), field, generationContext);
 	}
 
-	public static FieldGenerator<Long> makeLongGenerator(Field longField) {
+	public static FieldGenerator<Long> makeLongGenerator(Field longField, GenerationContext generationContext) {
 		FieldGenerator<Long> longGenerator = null;
 
 		if (longField.getValue() != null)
-			longGenerator = new FieldGenerator<>(new FixedLongGenerationAlgorithm(longField), longField);
+			longGenerator = new FieldGenerator<>(new FixedLongGenerationAlgorithm(longField, generationContext), longField, generationContext);
 		else if (longField.getBegin() != null && longField.getEnd() != null && longField.getStep() != null)
-			longGenerator = new FieldGenerator<>(new SequentialLongGenerationAlgorithm(longField), longField);
+			longGenerator = new FieldGenerator<>(new SequentialLongGenerationAlgorithm(longField, generationContext), longField, generationContext);
 		else if (longField.getMin() != null && longField.getMax() != null)
-			longGenerator = new FieldGenerator<>(new RandomLongGenerationAlgorithm(longField), longField);
+			longGenerator = new FieldGenerator<>(new RandomLongGenerationAlgorithm(longField, generationContext), longField, generationContext);
 
 		return longGenerator;
 	}
 
-	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents)
+	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents, GenerationContext generationContext)
 			throws ExprLangParsingException {
 		FieldGenerator<Float> floatGenerator = null;
 
 		if (floatField.getValue() != null)
-			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm(floatField), floatField);
+			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm(floatField, generationContext), floatField, generationContext);
 		else if (floatField.getCustomBehaviour() != null) {
-			floatGenerator = new FloatGenerator(new CustomiseBehaviourGenerationAlgorithm(floatField, totalNumOfEvents),
-					floatField);
+			floatGenerator = new FloatGenerator(new CustomiseBehaviourGenerationAlgorithm(floatField, totalNumOfEvents, generationContext),
+					floatField, generationContext);
 		} else if (floatField.getBegin() != null && floatField.getEnd() != null && floatField.getStep() != null) {
-			floatGenerator = new FloatGenerator(new SequentialFloatGenerationAlgorithm(floatField), floatField);
+			floatGenerator = new FloatGenerator(new SequentialFloatGenerationAlgorithm(floatField, generationContext), floatField, generationContext);
 		} else if (floatField.getMin() != null && floatField.getMax() != null) {
-			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm(floatField), floatField);
+			floatGenerator = new FloatGenerator(new RandomFloatGenerationAlgorithm(floatField, generationContext), floatField, generationContext);
 		}
 
 		return floatGenerator;
 	}
 
-	public static FieldGenerator<Boolean> makeBooleanGenerator(Field booleanField) {
+	public static FieldGenerator<Boolean> makeBooleanGenerator(Field booleanField, GenerationContext generationContext) {
 		FieldGenerator<Boolean> booleanGenerator = null;
 
 		if (booleanField.getValue() != null)
-			booleanGenerator = new BooleanGenerator(new FixedBooleanGenerationAlgorithm(booleanField), booleanField);
+			booleanGenerator = new BooleanGenerator(new FixedBooleanGenerationAlgorithm(booleanField, generationContext), booleanField, generationContext);
 		else
-			booleanGenerator = new BooleanGenerator(new RandomBooleanGenerationAlgorithm(booleanField), booleanField);
+			booleanGenerator = new BooleanGenerator(new RandomBooleanGenerationAlgorithm(booleanField, generationContext), booleanField, generationContext);
 
 		return booleanGenerator;
 	}
 
-	public static FieldGenerator<Date> makeDateGenerator(Field dateField) throws ParseException {
+	public static FieldGenerator<Date> makeDateGenerator(Field dateField, GenerationContext generationContext) throws ParseException {
 		FieldGenerator<Date> dateGenerator = null;
 
 		if (dateField.getValue() != null)
-			dateGenerator = new DateGenerator(new FixedDateGenerationAlgorithm(dateField), dateField);
+			dateGenerator = new DateGenerator(new FixedDateGenerationAlgorithm(dateField, generationContext), dateField, generationContext);
 		else if (dateField.getBegin() != null && dateField.getEnd() != null && dateField.getStep() != null)
-			dateGenerator = new DateGenerator(new SequentialDateGenerationAlgorithm(dateField), dateField);
+			dateGenerator = new DateGenerator(new SequentialDateGenerationAlgorithm(dateField, generationContext), dateField, generationContext);
 		else
-			dateGenerator = new DateGenerator(new RandomDateGenerationAlgorithm(dateField), dateField);
+			dateGenerator = new DateGenerator(new RandomDateGenerationAlgorithm(dateField, generationContext), dateField, generationContext);
 
 		return dateGenerator;
 	}
 
-	public static FieldGenerator<Date> makeTimeGenerator(Field timeField) throws ParseException {
-		return makeDateGenerator(timeField);
+	public static FieldGenerator<Date> makeTimeGenerator(Field timeField, GenerationContext generationContext) throws ParseException {
+		return makeDateGenerator(timeField, generationContext);
 	}
 
-	public static FieldGenerator<String> makeStringGenerator(Field stringField) {
+	public static FieldGenerator<String> makeStringGenerator(Field stringField, GenerationContext generationContext) {
 		FieldGenerator<String> stringGenerator = null;
 
 		if (stringField.getValue() != null)
-			stringGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(stringField), stringField);
+			stringGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(stringField, generationContext), stringField, null);
 		else if (stringField.getBegin() != null && stringField.getStep() != null)
 			stringGenerator = new StringGenerator(
-					new SequentialStringGenerationAlgorithm(stringField, ALPHABETICAL_VALUES), stringField);
+					new SequentialStringGenerationAlgorithm(stringField, ALPHABETICAL_VALUES, generationContext), stringField, generationContext);
 		else
-			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(stringField, ALPHABETICAL_VALUES),
-					stringField);
+			stringGenerator = new StringGenerator(new RandomStringGenerationAlgorithm(stringField, generationContext, ALPHABETICAL_VALUES),
+					stringField, generationContext);
 
 		return stringGenerator;
 	}
 
-	public static FieldGenerator<String> makeAlphanumericGenerator(Field alphanumericField) {
+	public static FieldGenerator<String> makeAlphanumericGenerator(Field alphanumericField, GenerationContext generationContext) {
 		FieldGenerator<String> alphanumericGenerator = null;
 
 		if (alphanumericField.getValue() != null)
-			alphanumericGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(alphanumericField),
-					alphanumericField);
+			alphanumericGenerator = new StringGenerator(new FixedStringGenerationAlgorithm(alphanumericField, generationContext),
+					alphanumericField, generationContext);
 		else if (alphanumericField.getBegin() != null && alphanumericField.getStep() != null)
 			alphanumericGenerator = new StringGenerator(
-					new SequentialStringGenerationAlgorithm(alphanumericField, ALPHANUMERIC_VALUES), alphanumericField);
+					new SequentialStringGenerationAlgorithm(alphanumericField, ALPHANUMERIC_VALUES, generationContext), alphanumericField, generationContext);
 		else
 			alphanumericGenerator = new StringGenerator(
-					new RandomStringGenerationAlgorithm(alphanumericField, ALPHANUMERIC_VALUES), alphanumericField);
+					new RandomStringGenerationAlgorithm(alphanumericField, generationContext, ALPHANUMERIC_VALUES), alphanumericField, generationContext);
 
 		return alphanumericGenerator;
 	}

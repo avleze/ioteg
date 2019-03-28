@@ -11,6 +11,7 @@ import com.ioteg.eplutils.Trio;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -30,7 +31,7 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field10", "=", "true"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
@@ -46,14 +47,14 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field10", "!=", "true"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not(equalTo("true")));
 
 		field.setName("field11");
 		restrictions.clear();
 		restrictions.add(new Trio<>("field11", "!=", "false"));
-		generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not(equalTo("false")));
 
@@ -61,7 +62,7 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 		field.setIsNumeric(true);
 		restrictions.clear();
 		restrictions.add(new Trio<>("field12", "!=", "1"));
-		generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not(equalTo("1")));
 
@@ -69,7 +70,7 @@ public class BooleanGeneratorQueryRestrictionTestCase {
 		field.setIsNumeric(true);
 		restrictions.clear();
 		restrictions.add(new Trio<>("field13", "!=", "0"));
-		generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not(equalTo("0")));
 	}

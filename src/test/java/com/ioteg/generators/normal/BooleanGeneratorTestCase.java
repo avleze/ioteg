@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -23,7 +24,7 @@ public class BooleanGeneratorTestCase {
 		Field field = new Field("boolean", false, "Boolean");
 		field.setIsNumeric(true);
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		/** The loops are necessary in order to cover all the code **/
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
@@ -46,7 +47,7 @@ public class BooleanGeneratorTestCase {
 		Field field = new Field("boolean", false, "Boolean");
 		field.setIsNumeric(false);
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
@@ -59,7 +60,7 @@ public class BooleanGeneratorTestCase {
 		field.setValue("true");
 		field.setIsNumeric(DEFAULT_IS_NUMERIC);
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 

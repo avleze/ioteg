@@ -19,6 +19,7 @@ import com.ioteg.builders.FieldBuilder;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ArrayResultBlock;
@@ -58,50 +59,50 @@ public class ComplexTypeGeneratorTestCase {
 		fields = blocks.get(0).getChildren("field");
 	}
 
-	/*@Disabled(value="needs refactoring")
-	@Test
-	public void testGenerateComplexValueCsv()
-			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		Element field = fields.get(36);
-
-		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
-		String[] resultSplitted = result.toString().split(",");
-
-		assertThat(resultSplitted[0].length(), equalTo(4));
-		assertThat(resultSplitted[1], matchesPattern("-?\\d+\\.\\d{5}"));
-		assertThat(resultSplitted[2], matchesPattern("-?\\d+\\.\\d{5}"));
-	}
-
-	@Disabled(value="needs refactoring")
-	@Test
-	public void testGenerateComplexValueCsvWithChooseoneAttributes()
-			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		Element field = fields.get(37);
-
-		StringBuilder result = GeneratorsFactory.makeGenerator(field, totalNumEvent)(field, "csv");
-
-		String[] resultSplitted = result.toString().split(",");
-
-		assertThat(resultSplitted[0].length(), equalTo(4));
-		assertThat(resultSplitted[1], matchesPattern("-?\\d+\\.\\d{5}"));
-		assertThat(resultSplitted[2], matchesPattern("-?\\d+\\.\\d{5}"));
-		assertThat(resultSplitted[3], matchesPattern("\"(red|green|blue)\""));
-	}
-	
-	@Disabled(value="needs refactoring")
-	@Test
-	public void testGenerateComplexValueCsvWithChooseoneFields()
-			throws IOException, JDOMException, NotExistingGeneratorException, ExprLangParsingException {
-		Element field = fields.get(38);
-
-		StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
-		String[] resultSplitted = result.toString().split(",");
-
-		assertThat(resultSplitted[0].length(), equalTo(4));
-		assertThat(resultSplitted[1], matchesPattern("-?\\d+\\.\\d{5}"));
-		assertThat(resultSplitted[2], matchesPattern("-?\\d+\\.\\d{5}"));
-		assertThat(resultSplitted[3], matchesPattern("-?\\d+\\.\\d{5}"));
-	}*/
+	/*
+	 * @Disabled(value="needs refactoring")
+	 * 
+	 * @Test public void testGenerateComplexValueCsv() throws IOException,
+	 * JDOMException, NotExistingGeneratorException, ExprLangParsingException {
+	 * Element field = fields.get(36);
+	 * 
+	 * StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
+	 * String[] resultSplitted = result.toString().split(",");
+	 * 
+	 * assertThat(resultSplitted[0].length(), equalTo(4));
+	 * assertThat(resultSplitted[1], matchesPattern("-?\\d+\\.\\d{5}"));
+	 * assertThat(resultSplitted[2], matchesPattern("-?\\d+\\.\\d{5}")); }
+	 * 
+	 * @Disabled(value="needs refactoring")
+	 * 
+	 * @Test public void testGenerateComplexValueCsvWithChooseoneAttributes() throws
+	 * IOException, JDOMException, NotExistingGeneratorException,
+	 * ExprLangParsingException { Element field = fields.get(37);
+	 * 
+	 * StringBuilder result = GeneratorsFactory.makeGenerator(field,
+	 * totalNumEvent)(field, "csv");
+	 * 
+	 * String[] resultSplitted = result.toString().split(",");
+	 * 
+	 * assertThat(resultSplitted[0].length(), equalTo(4));
+	 * assertThat(resultSplitted[1], matchesPattern("-?\\d+\\.\\d{5}"));
+	 * assertThat(resultSplitted[2], matchesPattern("-?\\d+\\.\\d{5}"));
+	 * assertThat(resultSplitted[3], matchesPattern("\"(red|green|blue)\"")); }
+	 * 
+	 * @Disabled(value="needs refactoring")
+	 * 
+	 * @Test public void testGenerateComplexValueCsvWithChooseoneFields() throws
+	 * IOException, JDOMException, NotExistingGeneratorException,
+	 * ExprLangParsingException { Element field = fields.get(38);
+	 * 
+	 * StringBuilder result = EventGenerator.generateValueComplexType(field, "csv");
+	 * String[] resultSplitted = result.toString().split(",");
+	 * 
+	 * assertThat(resultSplitted[0].length(), equalTo(4));
+	 * assertThat(resultSplitted[1], matchesPattern("-?\\d+\\.\\d{5}"));
+	 * assertThat(resultSplitted[2], matchesPattern("-?\\d+\\.\\d{5}"));
+	 * assertThat(resultSplitted[3], matchesPattern("-?\\d+\\.\\d{5}")); }
+	 */
 
 	@Test
 	public void testGenerateComplexValueJson()
@@ -109,7 +110,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
 
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
@@ -137,7 +138,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
 
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
@@ -164,7 +165,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
 
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
@@ -191,7 +192,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
 
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
 
@@ -221,7 +222,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
 
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
 
@@ -252,7 +253,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1);
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
 
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
 

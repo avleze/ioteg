@@ -1,6 +1,7 @@
 package com.ioteg.generators.stringfield;
 
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 import static java.lang.Math.*;
 
@@ -12,8 +13,8 @@ public class SequentialStringGenerationAlgorithm extends GenerationAlgorithm<Str
 	private int endIndex;
 	private int step;
 
-	public SequentialStringGenerationAlgorithm(Field field, String possibleChars) {
-		super(field);
+	public SequentialStringGenerationAlgorithm(Field field, String possibleChars, GenerationContext generationContext) {
+		super(field, generationContext);
 		this.possibleChars = possibleChars;
 		this.step = Integer.valueOf(field.getStep());
 		this.beginIndex = calculateIndex(field.getBegin());

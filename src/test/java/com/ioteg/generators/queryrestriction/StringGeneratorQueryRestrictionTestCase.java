@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultSimpleField;
 
@@ -29,7 +30,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field23", "=", "HOLA ESTO ES UNA PRUEBA"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
@@ -46,7 +47,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field23", "!=", "HOLA ESTO ES UNA PRUEBA"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
@@ -63,7 +64,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field24", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
@@ -78,7 +79,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		field.setLength(12);
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field25", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
@@ -93,7 +94,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		field.setCase("low");
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field26", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
 		assertThat(rF.getValue().length(), equalTo(12));
@@ -110,7 +111,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 		field.setLength(DEFAULT_LENGTH);
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field27", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));
@@ -127,7 +128,7 @@ public class StringGeneratorQueryRestrictionTestCase {
 
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field25", "!=", "HOLA ESTO ES UNA PRUEBA"));
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
 		assertThat(rF.getValue(), not("HOLA ESTO ES UNA PRUEBA"));

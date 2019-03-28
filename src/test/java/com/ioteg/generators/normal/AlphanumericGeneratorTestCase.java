@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
@@ -28,7 +29,7 @@ public class AlphanumericGeneratorTestCase {
 		field.setLength(14);
 		field.setEndcharacter("F");
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		/*
 		 * <field name="cod_hex" quotes="true" type="Alphanumeric" length="14"
@@ -51,7 +52,7 @@ public class AlphanumericGeneratorTestCase {
 		field.setCase("low");
 		field.setLength(10);
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		/*
 		 * <field name="cod_hex" quotes="true" type="Alphanumeric" length="10"
@@ -72,7 +73,7 @@ public class AlphanumericGeneratorTestCase {
 		Field field = new Field("cod_hex", true, "Alphanumeric");
 		field.setValue("abc");
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		/*
 		 * <field name="cod_hex" quotes="true" type="Alphanumeric" value="abc"></field>
@@ -90,7 +91,7 @@ public class AlphanumericGeneratorTestCase {
 		field.setLength(DEFAULT_LENGTH);
 		/* <field name="cod_hex" quotes="true" type="Alphanumeric"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		List<ResultField> results = generator.generate(100);
 
 		for (ResultField rF : results) {
@@ -112,7 +113,7 @@ public class AlphanumericGeneratorTestCase {
 		 * endcharacter="F"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		List<ResultField> results = generator.generate(100);
 
 		for (ResultField rF : results) {
@@ -131,7 +132,7 @@ public class AlphanumericGeneratorTestCase {
 		 * <field name="cod_hex" quotes="true" type="Alphanumeric" case="low"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		List<ResultField> results = generator.generate(100);
 
 		for (ResultField rF : results) {

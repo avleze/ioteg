@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.FieldGenerator;
@@ -16,8 +17,10 @@ import com.ioteg.resultmodel.ResultSimpleField;
 
 public class DateGenerator extends FieldGenerator<Date>{
 
-	public DateGenerator(GenerationAlgorithm<Date> generationAlgorithm, Field field) {
-		super(generationAlgorithm, field);
+
+	public DateGenerator(GenerationAlgorithm<Date> generationAlgorithm, Field field,
+			GenerationContext generationContext) {
+		super(generationAlgorithm, field, generationContext);
 	}
 
 	@Override

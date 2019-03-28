@@ -11,9 +11,11 @@ import org.jdom2.input.SAXBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.ioteg.EventGenerator;
 import com.ioteg.builders.EventTypeBuilder;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generators.context.GenerationContext;
+import com.ioteg.generators.eventtype.EventTypeGenerationAlgorithm;
+import com.ioteg.generators.eventtype.EventTypeGenerator;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.EventType;
 import com.ioteg.resultmodel.ArrayResultBlock;
@@ -50,7 +52,9 @@ public class ComplexTypeGeneratorResultTestCase {
 
 		EventTypeBuilder eventTypeBuilder = new EventTypeBuilder();
 		EventType eventType = eventTypeBuilder.build(document);
-		ResultEvent result = EventGenerator.generateEvent(eventType);
+		GenerationContext context = new GenerationContext();
+		EventTypeGenerator eventTypeGenerator = new EventTypeGenerator(new EventTypeGenerationAlgorithm(eventType, context), context);
+		ResultEvent result = eventTypeGenerator.generate(1).get(0);
 
 		assertThat(result.getName(), equalTo("Channel 5186"));
 		assertThat(result.getArrayResultBlocks(), not(nullValue()));

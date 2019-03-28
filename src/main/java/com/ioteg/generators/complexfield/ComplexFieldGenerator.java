@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.FieldGenerator;
@@ -13,18 +14,18 @@ import com.ioteg.resultmodel.ResultField;
 
 public class ComplexFieldGenerator extends FieldGenerator<ResultField> {
 
-
-	public ComplexFieldGenerator(GenerationAlgorithm<ResultField> generationAlgorithm, Field field) {
-		super(generationAlgorithm, field);
+	public ComplexFieldGenerator(GenerationAlgorithm<ResultField> generationAlgorithm, Field field,
+			GenerationContext generationContext) {
+		super(generationAlgorithm, field, generationContext);
 	}
 
 	@Override
-	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public List<ResultField> generate(Integer numberOfRequiredItems)
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultField> results = new ArrayList<>();
-		
-		for(int i = 0; i < numberOfRequiredItems; ++i)
-			results.add(generationAlgorithm.generate());
 
+		for (int i = 0; i < numberOfRequiredItems; ++i)
+			results.add(generationAlgorithm.generate());
 
 		return results;
 	}

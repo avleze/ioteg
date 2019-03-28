@@ -4,12 +4,13 @@ import java.util.List;
 
 import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.QueryRestrictionGenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
 public class BooleanQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Boolean>{
 
-	public BooleanQueryRestrictionGenerationAlgorithm(Field field, List<Trio<String, String, String>> restrictions) {
-		super(field, restrictions);
+	public BooleanQueryRestrictionGenerationAlgorithm(Field field, GenerationContext generationContext, List<Trio<String, String, String>> restrictions) {
+		super(field, generationContext, restrictions);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
@@ -32,7 +33,7 @@ public class LongGeneratorTestCase {
 		 * max="0"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
@@ -51,7 +52,7 @@ public class LongGeneratorTestCase {
 		 * 	<field name="testDefaultRange" quotes="true" type="Long"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		List<ResultField> results = generator.generate(100);
 
 		for (ResultField rF : results) {
@@ -71,7 +72,7 @@ public class LongGeneratorTestCase {
 
 		/*<field name="testDefaultValue" quotes="false" type="Long" value="9223372036854775807"></field>*/
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null);
+		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		Long result = Long.parseLong(strResult);
 		assertThat(result, equalTo(9223372036854775807L));

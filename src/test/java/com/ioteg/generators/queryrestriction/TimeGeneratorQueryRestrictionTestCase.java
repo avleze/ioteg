@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.Generable;
 import com.ioteg.generators.GeneratorsFactory;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultSimpleField;
 
@@ -32,7 +33,7 @@ public class TimeGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field36", "=", "12:43"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 
@@ -44,7 +45,7 @@ public class TimeGeneratorQueryRestrictionTestCase {
 		List<Trio<String, String, String>> restrictions = new ArrayList<>();
 		restrictions.add(new Trio<>("field36", "!=", "12:43"));
 
-		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions);
+		Generable generator = GeneratorsFactory.makeQueryRestrictionGenerator(field, restrictions, new GenerationContext());
 
 		ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 

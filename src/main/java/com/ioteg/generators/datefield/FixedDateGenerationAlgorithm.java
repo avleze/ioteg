@@ -6,12 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.ioteg.generators.GenerationAlgorithm;
+import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
 public class FixedDateGenerationAlgorithm extends GenerationAlgorithm<Date> {
-	
-	public FixedDateGenerationAlgorithm(Field field) {
-		super(field);
+
+	public FixedDateGenerationAlgorithm(Field field, GenerationContext generationContext) {
+		super(field, generationContext);
 	}
 
 	@Override
