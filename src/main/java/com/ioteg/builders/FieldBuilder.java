@@ -8,6 +8,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 
 import com.ioteg.model.Attribute;
+import com.ioteg.model.CustomBehaviour;
 import com.ioteg.model.Field;
 
 /**
@@ -25,31 +26,34 @@ public class FieldBuilder {
 		String quotes = fieldElement.getAttributeValue("quotes");
 		String chooseone = fieldElement.getAttributeValue("chooseone");
 		String dependence = fieldElement.getAttributeValue("dependence");
+		Attribute attr = attributeBuilder.build(fieldElement);
 
-		if (dependence == null)
-			dependence = "false";
-
-		Field field = new Field(name, Boolean.valueOf(quotes), attributeBuilder.build(fieldElement));
-
-		field.setChooseone(Boolean.valueOf(chooseone));
-		field.setDependence(dependence);
-
-		buildSubFields(fieldElement, field);
-		buildAttributes(fieldElement, field);
+		List<Field> subFields = buildSubFields(fieldElement);
+		List<Attribute> attributes = buildAttributes(fieldElement);
 
 		CustomBehaviourBuilder customBehaviourBuilder = new CustomBehaviourBuilder();
-
+		CustomBehaviour customBehaviour = null;
 		if (fieldElement.getAttributeValue("custom_behaviour") != null)
-			field.setCustomBehaviour(customBehaviourBuilder.build(fieldElement));
+			customBehaviour = customBehaviourBuilder.build(fieldElement);
 
-		return field;
+		Boolean chooseoneValue = null;
+		if(chooseone != null)
+			chooseoneValue = Boolean.valueOf(chooseone);
+		
+		Boolean quotesValue = null;
+		if(quotes != null)
+			quotesValue = Boolean.valueOf(quotes);
+		
+		return new Field(attr.getType(), attr.getValue(), attr.getMin(), attr.getStep(), attr.getUnit(), attr.getMax(),
+				attr.getPrecision(), attr.getLength(), attr.getCase(), attr.getBegin(), attr.getEnd(),
+				attr.getEndcharacter(), attr.getFormat(), attr.getIsNumeric(), name, quotesValue, chooseoneValue,
+				dependence, subFields, attributes, customBehaviour);
 	}
 
 	/**
 	 * @param fieldElement The XML element.
-	 * @param field        The field that is being built.
 	 */
-	private void buildAttributes(Element fieldElement, Field field) {
+	private List<Attribute> buildAttributes(Element fieldElement) {
 		AttributeBuilder attributeBuilder = new AttributeBuilder();
 		List<Element> attributes = fieldElement.getChildren("attribute");
 		List<Attribute> attributesOfTheField = new ArrayList<>();
@@ -59,7 +63,7 @@ public class FieldBuilder {
 			attributesOfTheField.add(attribute);
 		}
 
-		field.setAttributes(attributesOfTheField);
+		return attributesOfTheField;
 	}
 
 	/**
@@ -68,7 +72,7 @@ public class FieldBuilder {
 	 * @throws IOException
 	 * @throws JDOMException
 	 */
-	private void buildSubFields(Element fieldElement, Field field) throws JDOMException, IOException {
+	private List<Field> buildSubFields(Element fieldElement) throws JDOMException, IOException {
 		FieldBuilder fieldBuilder = new FieldBuilder();
 		List<Element> fields = fieldElement.getChildren("field");
 		List<Field> fieldsOfTheField = new ArrayList<>();
@@ -78,6 +82,6 @@ public class FieldBuilder {
 			fieldsOfTheField.add(subField);
 		}
 
-		field.setFields(fieldsOfTheField);
+		return fieldsOfTheField;
 	}
 }

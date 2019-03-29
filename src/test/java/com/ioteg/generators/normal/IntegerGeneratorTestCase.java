@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 public class IntegerGeneratorTestCase {
 
-	private static final double DEFAULT_MAX = 9.0;
+	private static final double DEFAULT_MAX = 10.0;
 	private static final double DEFAULT_MIN = 0.0;
 
 	@Test
@@ -64,7 +64,7 @@ public class IntegerGeneratorTestCase {
 			String strResult = ((ResultSimpleField) rF).getValue();
 			Integer result = Integer.parseInt(strResult);
 			assertThat(result, greaterThanOrEqualTo(0));
-			assertThat(result, lessThanOrEqualTo(9));
+			assertThat(result, lessThanOrEqualTo(10));
 		}
 
 	}

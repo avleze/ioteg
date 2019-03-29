@@ -55,12 +55,28 @@ public class Attribute {
 			@JsonProperty("isNumeric") Boolean isNumeric) {
 		this.type = type;
 		this.value = value;
-		this.min = min;
+		
+		if(min == null)
+			this.min = 0.0;
+		else
+			this.min = min;
+		
 		this.step = step;
 		this.unit = unit;
-		this.max = max;
+		
+		if(max == null)
+			this.max = 10.0;
+		else
+			this.max = max;
+		
 		this.precision = precision;
-		this.length = length;
+		
+		
+		if(length == null)
+			this.length = 10;
+		else
+			this.length = length;
+		
 		this.strCase = strCase;
 		this.begin = begin;
 		this.end = end;

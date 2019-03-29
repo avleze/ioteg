@@ -83,24 +83,24 @@ public class Field extends Attribute {
 			@JsonProperty("customBehaviour") CustomBehaviour customBehaviour) {
 		super(type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format,
 				isNumeric);
+		
+		if(quotes == null)
+			quotes = false;
+		if(fields == null)
+			fields = new ArrayList<>();
+		if(dependence == null)
+			dependence = "false";
+		if(chooseone == null)
+			chooseone = false;
+		if(attributes == null)
+			attributes = new ArrayList<>();
+		
 		this.name = name;
 		this.quotes = quotes;
 		this.chooseone = chooseone;
-		if(chooseone == null)
-			this.chooseone = false;
-		
 		this.dependence = dependence;
-		if(dependence == null)
-			this.dependence = "false";
-		
 		this.fields = fields;
-		if(fields == null)
-			this.fields = new ArrayList<>();
-		
 		this.attributes = attributes;
-		if(attributes == null)
-			this.attributes = new ArrayList<>();
-		
 		this.customBehaviour = customBehaviour;
 	}
 

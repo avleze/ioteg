@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class LongGeneratorTestCase {
 
-	private static final double DEFAULT_MAX = 9.0;
+	private static final double DEFAULT_MAX = 10.0;
 	private static final double DEFAULT_MIN = 0.0;
 
 	@Test
@@ -59,7 +59,7 @@ public class LongGeneratorTestCase {
 			String strResult = ((ResultSimpleField) rF).getValue();
 			Long result = Long.valueOf(strResult);
 			assertThat(result, greaterThanOrEqualTo(0L));
-			assertThat(result, lessThanOrEqualTo(9L));
+			assertThat(result, lessThanOrEqualTo(10L));
 		}
 	}
 

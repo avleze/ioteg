@@ -28,17 +28,8 @@ public class AttributeBuilder {
 		String endcharacter = attributeElement.getAttributeValue("endcharacter");
 		String format = attributeElement.getAttributeValue("format");
 		String isNumeric = attributeElement.getAttributeValue("isnumeric");
-
-		if (hasDefaultLength(type, length))
-			length = "10";
 		
-		if (hasDefaultRangeFloat(type, min, max)) {
-			min = "0";
-			max = "10";
-		} else if (hasDefaultRangeInteger(type, min, max) || hasDefaultRangeLong(type, min, max)) {
-			min = "0";
-			max = "9";
-		}
+
 		Double minValue = null;
 		if (min != null)
 			minValue = Double.valueOf(min);
@@ -58,20 +49,4 @@ public class AttributeBuilder {
 		return new Attribute(type, value, minValue, step, unit, maxValue, precisionValue, lengthValue, strCase, begin, end, endcharacter, format, Boolean.valueOf(isNumeric));
 	}
 
-	private boolean hasDefaultLength(String type, String length) {
-		return length == null && (type.equals("String") || type.equals("Alphanumeric"));
-	}
-
-	private boolean hasDefaultRangeFloat(String type, String min, String max) {
-		return min == null && max == null && type.equals("Float");
-
-	}
-
-	private boolean hasDefaultRangeInteger(String type, String min, String max) {
-		return min == null && max == null && type.equals("Integer");
-	}
-	
-	private boolean hasDefaultRangeLong(String type, String min, String max) {
-		return min == null && max == null && type.equals("Long");
-	}
 }
