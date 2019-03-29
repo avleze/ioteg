@@ -50,7 +50,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 			if(needsToGenerateIndex(dependence))
 				selected = r.ints(0, field.getFields().size()).findFirst().getAsInt();
 			else
-				selected = generationContext.getDependenceIndex(field.getName());
+				selected = generationContext.getDependenceIndex(field.getDependence());
 			
 			this.type = field.getFields().get(selected).getType();
 			this.fieldGenerators.add(GeneratorsFactory.makeGenerator(field.getFields().get(selected), null, generationContext));
@@ -76,11 +76,11 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 
 	
 	private boolean needsToGenerateIndex(String dependence) {
-		return dependence == null || dependence.equals("true");
+		return dependence == null || dependence.equals("true") || dependence.equals("false");
 	}
 	
 	private boolean isDependent(String dependence) {
-		return dependence != null;
+		return dependence != null && !dependence.equals("false");
 	}
 
 	@Override

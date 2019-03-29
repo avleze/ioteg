@@ -1,6 +1,7 @@
 
 package com.ioteg.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -85,9 +86,21 @@ public class Field extends Attribute {
 		this.name = name;
 		this.quotes = quotes;
 		this.chooseone = chooseone;
+		if(chooseone == null)
+			this.chooseone = false;
+		
 		this.dependence = dependence;
+		if(dependence == null)
+			this.dependence = "false";
+		
 		this.fields = fields;
+		if(fields == null)
+			this.fields = new ArrayList<>();
+		
 		this.attributes = attributes;
+		if(attributes == null)
+			this.attributes = new ArrayList<>();
+		
 		this.customBehaviour = customBehaviour;
 	}
 
