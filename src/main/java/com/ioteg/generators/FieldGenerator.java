@@ -14,7 +14,6 @@ import com.ioteg.resultmodel.ResultSimpleField;
 public class FieldGenerator<T> extends AbstractGenerator<T> implements Generable {
 
 	protected Field field;
-	protected GenerationContext generationContext;
 
 	public FieldGenerator(GenerationAlgorithm<T> generationAlgorithm, Field field,
 			GenerationContext generationContext) {
