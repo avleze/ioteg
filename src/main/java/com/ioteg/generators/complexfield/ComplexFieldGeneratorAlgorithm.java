@@ -20,14 +20,15 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	protected List<Generable> fieldGenerators;
 	protected Boolean isFormedWithAttributes;
 	protected String type;
-	
-	public ComplexFieldGeneratorAlgorithm(Field field, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+
+	public ComplexFieldGeneratorAlgorithm(Field field, GenerationContext generationContext)
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		super(field, generationContext);
-		if (!field.getChooseone())
-			makeGenerators(field);
+		makeGenerators(field);
 	}
 
-	private void makeGenerators(Field field) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	private void makeGenerators(Field field)
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		this.fieldGenerators = new ArrayList<>();
 		this.isFormedWithAttributes = false;
 		this.type = field.getType();
@@ -37,48 +38,47 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 		else {
 			this.isFormedWithAttributes = true;
 			for (Attribute attr : field.getAttributes())
-				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(new Field(null, false, attr), null, generationContext));
+				this.fieldGenerators
+						.add(GeneratorsFactory.makeGenerator(new Field(null, false, attr), null, generationContext));
 		}
 	}
 
-	private void makeGeneratorsChooseone() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		this.fieldGenerators = new ArrayList<>();
-		this.isFormedWithAttributes = false;
+	private Integer selectGeneratorsChooseone()
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+
 		Integer selected = null;
 		String dependence = field.getDependence();
-		if (!field.getFields().isEmpty()) {
-			if(needsToGenerateIndex(dependence))
+		if (!isFormedWithAttributes) {
+			if (needsToGenerateIndex(dependence))
 				selected = r.ints(0, field.getFields().size()).findFirst().getAsInt();
 			else
 				selected = generationContext.getDependenceIndex(field.getDependence());
-			
+
 			this.type = field.getFields().get(selected).getType();
-			this.fieldGenerators.add(GeneratorsFactory.makeGenerator(field.getFields().get(selected), null, generationContext));
+			this.fieldGenerators
+					.add(GeneratorsFactory.makeGenerator(field.getFields().get(selected), null, generationContext));
 		}
 
 		else {
-			this.isFormedWithAttributes = true;
-			if(needsToGenerateIndex(dependence))
+			if (needsToGenerateIndex(dependence))
 				selected = r.ints(0, field.getAttributes().size()).findFirst().getAsInt();
 			else
 				selected = generationContext.getDependenceIndex(field.getDependence());
 			this.type = field.getAttributes().get(selected).getType();
-			this.fieldGenerators
-					.add(GeneratorsFactory.makeGenerator(new Field(null, false,field.getAttributes().get(selected)), null, generationContext));
+			this.fieldGenerators.add(GeneratorsFactory.makeGenerator(
+					new Field(null, false, field.getAttributes().get(selected)), null, generationContext));
 		}
-		
+
 		if (needsToGenerateIndex(dependence))
 			generationContext.putDependenceIndex(field.getName(), selected);
 
+		return selected;
 	}
-	
-	
 
-	
 	private boolean needsToGenerateIndex(String dependence) {
 		return dependence == null || dependence.equals("true") || dependence.equals("false");
 	}
-	
+
 	private boolean isDependent(String dependence) {
 		return dependence != null && !dependence.equals("false");
 	}
@@ -87,12 +87,16 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	public ResultField generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
 		List<ResultField> resultFieldsOfComplexField = new ArrayList<>();
-		if (field.getChooseone() || isDependent(field.getDependence()))
-			makeGeneratorsChooseone();
-		for (Generable generator : fieldGenerators)
-			resultFieldsOfComplexField.add(generator.generate(1).get(0));
-		
-		return new ResultComplexField(field.getName(), this.type , field.getQuotes(), resultFieldsOfComplexField,
+
+		if (field.getChooseone() || isDependent(field.getDependence())) {
+			Integer selected = selectGeneratorsChooseone();
+			resultFieldsOfComplexField.add(fieldGenerators.get(selected).generate(1).get(0));
+		} else {
+			for (Generable generator : fieldGenerators)
+				resultFieldsOfComplexField.add(generator.generate(1).get(0));
+		}
+
+		return new ResultComplexField(field.getName(), this.type, field.getQuotes(), resultFieldsOfComplexField,
 				isFormedWithAttributes);
 	}
 }
