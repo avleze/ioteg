@@ -23,13 +23,11 @@ public class OptionalFieldsBuilder {
 
 	public OptionalFields build(Element optionalFieldsElement) throws JDOMException, IOException {
 
-		OptionalFields optionalFields = new OptionalFields();
 		FieldBuilder fieldBuilder = new FieldBuilder();
 
 		String mandatory = optionalFieldsElement.getAttributeValue(MANDATORY_KEYWORD);
-
-		optionalFields.setMandatory(mandatory);
-
+		Boolean mandatoryValue = Boolean.valueOf(mandatory);
+		
 		List<Element> fieldsElement = optionalFieldsElement.getChildren(FIELD_KEYWORD);
 		List<Field> fieldsOfTheOptionalFields = new ArrayList<>();
 		for (Element fieldElement : fieldsElement) {
@@ -37,9 +35,8 @@ public class OptionalFieldsBuilder {
 			fieldsOfTheOptionalFields.add(field);
 		}
 
-		optionalFields.setFields(fieldsOfTheOptionalFields);
 
-		return optionalFields;
+		return new OptionalFields(mandatoryValue, fieldsOfTheOptionalFields);
 	}
 
 }

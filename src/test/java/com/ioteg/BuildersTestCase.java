@@ -221,7 +221,7 @@ public class BuildersTestCase {
 
 		OptionalFields optionalFields = feedsBlock.getOptionalFields().get(0);
 		field1 = optionalFields.getFields().get(0);
-		assertEquals("false", optionalFields.getMandatory());
+		assertEquals(false, optionalFields.getMandatory());
 		assertEquals("optionalField1", field1.getName());
 		assertEquals(false, field1.getQuotes());
 		assertEquals("Float", field1.getType());

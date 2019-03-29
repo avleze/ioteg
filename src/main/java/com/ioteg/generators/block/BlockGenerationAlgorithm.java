@@ -58,7 +58,7 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		Integer numOfFields = optionalFields.getFields().size();
 		Boolean atLeastOne = false;
 		if(optionalFields.getMandatory() != null)
-			atLeastOne = optionalFields.getMandatory().equalsIgnoreCase("true") || optionalFields.getMandatory().equalsIgnoreCase("1");
+			atLeastOne = optionalFields.getMandatory();
 		Integer lowerBound = 0;
 		if(atLeastOne)
 			lowerBound = 1;

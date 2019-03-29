@@ -1,8 +1,12 @@
 package com.ioteg.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * This class represents a set of optional fields in the data model.
@@ -10,21 +14,37 @@ import javax.validation.Valid;
  * @author Antonio Vélez Estévez
  */
 public class OptionalFields {
-	private String mandatory;
+	private Boolean mandatory;
 	@Valid
 	private List<Field> fields;
 
 	/**
+	 * @param mandatory
+	 * @param fields
+	 */
+	@JsonCreator
+	public OptionalFields(@JsonProperty("mandatory") Boolean mandatory,
+			@Valid @JsonProperty("fields") List<Field> fields) {
+		if (mandatory == null)
+			mandatory = true;
+		if (fields == null)
+			fields = new ArrayList<>();
+
+		this.mandatory = mandatory;
+		this.fields = fields;
+	}
+
+	/**
 	 * @return the mandatory
 	 */
-	public String getMandatory() {
+	public Boolean getMandatory() {
 		return mandatory;
 	}
 
 	/**
 	 * @param mandatory the mandatory to set
 	 */
-	public void setMandatory(String mandatory) {
+	public void setMandatory(Boolean mandatory) {
 		this.mandatory = mandatory;
 	}
 
