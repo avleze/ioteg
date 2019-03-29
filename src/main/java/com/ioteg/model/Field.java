@@ -21,7 +21,6 @@ public class Field extends Attribute {
 	@NotEmpty(message = "The field name can't be empty.")
 	@NotNull(message = "The field name can't be null.")
 	private String name;
-	@NotNull(message = "The field quotes can't be null.")
 	private Boolean quotes;
 	private Boolean chooseone;
 	private String dependence;
