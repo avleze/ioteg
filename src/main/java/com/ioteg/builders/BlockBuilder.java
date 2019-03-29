@@ -26,8 +26,6 @@ public class BlockBuilder {
 	 * @throws JDOMException 
 	 */
 	public Block build(Element element) throws JDOMException, IOException {
-		Block block = new Block();
-
 		/* The block parameters are obtained and setted */
 		String name = element.getAttributeValue("name");
 		String value = element.getAttributeValue("value");
@@ -36,19 +34,15 @@ public class BlockBuilder {
 
 		if (repetitionStr != null)
 			repetition = Integer.valueOf(repetitionStr);
-		
-		block.setName(name);
-		block.setValue(value);
-		block.setRepetition(repetition);
 
 		/* Subfields and subOptionalFields are looked for */
-		buildSubFields(element, block);
-		buildSubOptionalsField(element, block);
+		List<Field> subFields = buildSubFields(element);
+		List<OptionalFields> subOptionalFields = buildSubOptionalsField(element);
 
-		return block;
+		return new Block(name, value, repetition, subFields, subOptionalFields);
 	}
 
-	private void buildSubFields(Element element, Block block) throws JDOMException, IOException {
+	private List<Field> buildSubFields(Element element) throws JDOMException, IOException {
 		FieldBuilder fieldBuilder = new FieldBuilder();
 		List<Element> fields = element.getChildren("field");
 		List<Field> fieldsOfTheBlock = new ArrayList<>();
@@ -58,10 +52,10 @@ public class BlockBuilder {
 			fieldsOfTheBlock.add(field);
 		}
 
-		block.setFields(fieldsOfTheBlock);
+		return fieldsOfTheBlock;
 	}
 
-	private void buildSubOptionalsField(Element element, Block block) throws JDOMException, IOException {
+	private List<OptionalFields> buildSubOptionalsField(Element element) throws JDOMException, IOException {
 		OptionalFieldsBuilder optionalFieldsBuilder = new OptionalFieldsBuilder();
 		List<Element> optionalFields = element.getChildren("optionalfields");
 		List<OptionalFields> optionalFieldsOfTheBlock = new ArrayList<>();
@@ -71,7 +65,7 @@ public class BlockBuilder {
 			optionalFieldsOfTheBlock.add(optionalField);
 		}
 
-		block.setOptionalFields(optionalFieldsOfTheBlock);
+		return optionalFieldsOfTheBlock;
 	}
 
 }

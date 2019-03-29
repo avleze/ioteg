@@ -49,10 +49,10 @@ public class Attribute {
 	public Attribute(@NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
 			@JsonProperty("min") Double min, @JsonProperty("step") String step, @JsonProperty("unit") String unit,
 			@JsonProperty("max") Double max, @JsonProperty("precision") Integer precision,
-			@JsonProperty("length") Integer length, @JsonProperty("strCase") String strCase,
+			@JsonProperty("length") Integer length, @JsonProperty("case") String strCase,
 			@JsonProperty("begin") String begin, @JsonProperty("end") String end,
 			@JsonProperty("endcharacter") String endcharacter, @JsonProperty("format") String format,
-			@JsonProperty("isNumeric") Boolean isNumeric) {
+			@JsonProperty("isnumeric") Boolean isNumeric) {
 		this.type = type;
 		this.value = value;
 		

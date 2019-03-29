@@ -1,10 +1,14 @@
 package com.ioteg.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * This class represents a block inside an event type in the data model.
@@ -21,6 +25,30 @@ public class Block {
 	private List<Field> fields;
 	@Valid
 	private List<OptionalFields> optionalFields;
+
+	/**
+	 * @param name
+	 * @param value
+	 * @param repetition
+	 * @param fields
+	 * @param optionalFields
+	 */
+	@JsonCreator
+	public Block(@NotEmpty @NotNull @JsonProperty("name") String name, @JsonProperty("value") String value,
+			@JsonProperty("repetition") Integer repetition, @Valid @JsonProperty("fields") List<Field> fields,
+			@Valid @JsonProperty("optionalfields") List<OptionalFields> optionalFields) {
+
+		if (optionalFields == null)
+			optionalFields = new ArrayList<>();
+		if (fields == null)
+			fields = new ArrayList<>();
+
+		this.name = name;
+		this.value = value;
+		this.repetition = repetition;
+		this.fields = fields;
+		this.optionalFields = optionalFields;
+	}
 
 	/**
 	 * @return the name
