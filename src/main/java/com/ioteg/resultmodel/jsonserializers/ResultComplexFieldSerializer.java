@@ -10,50 +10,41 @@ import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
 public class ResultComplexFieldSerializer extends StdSerializer<ResultComplexField> {
-    
+
 	private static final long serialVersionUID = 1L;
 
 	public ResultComplexFieldSerializer() {
 		this(null);
 	}
-	
+
 	public ResultComplexFieldSerializer(Class<ResultComplexField> t) {
 		super(t);
 	}
 
 	@Override
-    public void serialize(
-    		ResultComplexField value, JsonGenerator jgen, SerializerProvider provider) 
-      throws IOException {
-		
-		if(!value.getIsAComplexFieldFormedWithAttributes())
-		{			
+	public void serialize(ResultComplexField value, JsonGenerator jgen, SerializerProvider provider)
+			throws IOException {
+
+		if (!value.getIsAComplexFieldFormedWithAttributes()) {
 			jgen.writeStartObject();
-				for(ResultField r : value.getValue())
-					if(r instanceof ResultSimpleField)
-						jgen.writeObject(r);
-					else
-					{
-						ResultComplexField rCF = (ResultComplexField) r;
-						if(rCF.getIsAComplexFieldFormedWithAttributes())
-							jgen.writeObject(rCF);
-						else
-							jgen.writeObjectField(rCF.getName(), rCF);
-					}
-				
+			for (ResultField r : value.getValue())
+				if (r instanceof ResultSimpleField)
+					jgen.writeObject(r);
+				else {
+					ResultComplexField rCF = (ResultComplexField) r;
+					jgen.writeObjectField(rCF.getName(), rCF);
+				}
+
 			jgen.writeEndObject();
-		}
-		else
-		{
+		} else {
 			StringBuilder str = new StringBuilder();
-				for(ResultField r : value.getValue())
-					str.append(((ResultSimpleField)r).getValue());
-				
-			jgen.writeFieldName(value.getName());
-			if(value.getQuotes())
+			for (ResultField r : value.getValue())
+				str.append(((ResultSimpleField) r).getValue());
+
+			if (value.getQuotes())
 				jgen.writeString(str.toString());
 			else
 				jgen.writeRawValue(str.toString());
 		}
-    }
+	}
 }

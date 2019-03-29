@@ -3,6 +3,8 @@ package com.ioteg.generators;
 
 import com.ioteg.generators.block.BlockGenerator;
 import com.ioteg.generators.context.GenerationContext;
+import com.ioteg.generators.eventtype.EventTypeGenerationAlgorithm;
+import com.ioteg.generators.eventtype.EventTypeGenerator;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 import java.text.ParseException;
@@ -12,6 +14,7 @@ import com.ioteg.eplutils.Trio;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.block.BlockGenerationAlgorithm;
 import com.ioteg.model.Block;
+import com.ioteg.model.EventType;
 import com.ioteg.model.Field;
 
 public class GeneratorsFactory {
@@ -31,6 +34,11 @@ public class GeneratorsFactory {
 	public static BlockGenerator makeBlockGenerator(Block block, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		return new BlockGenerator(new BlockGenerationAlgorithm(block, generationContext), generationContext);
 
+	}
+	
+	public static EventTypeGenerator makeEventTypeGenerator(EventType eventType) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+		GenerationContext context = new GenerationContext();
+		return new EventTypeGenerator(new EventTypeGenerationAlgorithm(eventType, context), context);
 	}
 
 	
