@@ -2,6 +2,8 @@ package com.ioteg.messageconverters;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -17,8 +19,10 @@ import com.ioteg.resultmodel.ResultSimpleField;
 import com.ioteg.resultmodel.xmlserializers.XMLArrayResultBlockSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLResultBlockSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLResultComplexFieldSerializer;
+import com.ioteg.resultmodel.xmlserializers.XMLResultEventListSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLResultEventSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLResultSimpleFieldSerializer;
+import com.ioteg.resultmodel.xmlserializers.XMLSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLSerializerMapper;
 
 public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object> {
@@ -31,6 +35,7 @@ public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object
 		supportedTypes.add(ResultEvent.class.getSimpleName());
 		supportedTypes.add(ResultBlock.class.getSimpleName());
 		supportedTypes.add(ResultComplexField.class.getSimpleName());
+		supportedTypes.add(ArrayList.class.getSimpleName());
 
 		xmlSerializerMapper = new XMLSerializerMapper();
 		xmlSerializerMapper.registerCustomSerializer(ResultEvent.class, new XMLResultEventSerializer());
@@ -38,6 +43,8 @@ public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object
 		xmlSerializerMapper.registerCustomSerializer(ResultBlock.class, new XMLResultBlockSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultSimpleField.class, new XMLResultSimpleFieldSerializer());
 		xmlSerializerMapper.registerCustomSerializer(ResultComplexField.class, new XMLResultComplexFieldSerializer());
+		xmlSerializerMapper.registerCustomSerializer(ArrayList.class , new XMLResultEventListSerializer());
+
 	}
 
 	public XMLHttpMessageConverter() {
