@@ -76,7 +76,7 @@ public class Field extends Attribute {
 			@JsonProperty("begin") String begin, @JsonProperty("end") String end,
 			@JsonProperty("endcharacter") String endcharacter, @JsonProperty("format") String format,
 			@JsonProperty("isNumeric") Boolean isNumeric, @NotEmpty @NotNull @JsonProperty("name") String name,
-			@NotNull @JsonProperty("quotes") Boolean quotes, @JsonProperty("chooseone") Boolean chooseone,
+			@JsonProperty("quotes") Boolean quotes, @JsonProperty("chooseone") Boolean chooseone,
 			@JsonProperty("dependence") String dependence, @Valid @JsonProperty("fields") List<Field> fields,
 			@Valid @JsonProperty("attributes") List<Attribute> attributes,
 			@JsonProperty("customBehaviour") CustomBehaviour customBehaviour) {
