@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
-import com.ioteg.model.ConfigurableEventType;
 import com.ioteg.model.ConfigurableEventTypes;
 import com.ioteg.model.EventType;
 import com.ioteg.model.EventTypes;
