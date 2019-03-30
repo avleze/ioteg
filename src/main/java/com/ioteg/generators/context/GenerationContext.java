@@ -8,8 +8,8 @@ import java.util.concurrent.ConcurrentMap;
 import com.ioteg.resultmodel.ResultField;
 
 public class GenerationContext {
-	Map<String, Integer> selectedDependableIndexes;
-	ConcurrentMap<String, ResultField> injectableResultFields;
+	private Map<String, Integer> selectedDependableIndexes;
+	private ConcurrentMap<String, ResultField> injectableResultFields;
 
 	public GenerationContext(ConcurrentMap<String, ResultField> injectableResultFields) {
 		if(injectableResultFields == null)

@@ -6,11 +6,11 @@ import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EventTypes {
+public class EventTypeList {
 	@Valid
 	private List<EventType> eventTypes;
 
-	public EventTypes(@Valid @JsonProperty("eventTypes") List<EventType> eventTypes) {
+	public EventTypeList(@Valid @JsonProperty("eventTypes") List<EventType> eventTypes) {
 		super();
 		this.eventTypes = eventTypes;
 	}

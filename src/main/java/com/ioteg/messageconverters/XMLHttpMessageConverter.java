@@ -3,7 +3,6 @@ package com.ioteg.messageconverters;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -22,7 +21,6 @@ import com.ioteg.resultmodel.xmlserializers.XMLResultComplexFieldSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLResultEventListSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLResultEventSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLResultSimpleFieldSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLSerializerMapper;
 
 public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object> {

@@ -20,9 +20,9 @@ import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.GeneratorsFactory;
 import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
-import com.ioteg.model.ConfigurableEventTypes;
+import com.ioteg.model.ConfigurableEventList;
 import com.ioteg.model.EventType;
-import com.ioteg.model.EventTypes;
+import com.ioteg.model.EventTypeList;
 import com.ioteg.resultmodel.ResultEvent;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.services.periodicgeneration.PeriodicEventGenerationService;
@@ -37,7 +37,7 @@ public class EventGenerationController {
 	@PostMapping("/generateEvents")
 	@ResponseBody
 	@CrossOrigin(origins = "*")
-	public List<ResultEvent> generateEvents(@RequestBody @Valid EventTypes eventTypes)
+	public List<ResultEvent> generateEvents(@RequestBody @Valid EventTypeList eventTypes)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultEvent> results = new ArrayList<>();
 		ConcurrentMap<String, ResultField> sharedConcurrentMap = new ConcurrentHashMap<>();
@@ -51,7 +51,7 @@ public class EventGenerationController {
 	@PostMapping("/generateConfigurableEvents")
 	@ResponseBody
 	@CrossOrigin(origins = "*")
-	public void generateConfigurableEvents(@RequestBody @Valid ConfigurableEventTypes configurableEventTypes)
+	public void generateConfigurableEvents(@RequestBody @Valid ConfigurableEventList configurableEventTypes)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		
 		periodicEventGenerationService.executeConfigurableEventTypes(configurableEventTypes.getConfigurableEventTypes());
