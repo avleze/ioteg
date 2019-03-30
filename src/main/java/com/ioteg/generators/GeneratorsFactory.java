@@ -36,8 +36,7 @@ public class GeneratorsFactory {
 
 	}
 	
-	public static EventTypeGenerator makeEventTypeGenerator(EventType eventType) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		GenerationContext context = new GenerationContext();
+	public static EventTypeGenerator makeEventTypeGenerator(EventType eventType, GenerationContext context) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		return new EventTypeGenerator(new EventTypeGenerationAlgorithm(eventType, context), context);
 	}
 
