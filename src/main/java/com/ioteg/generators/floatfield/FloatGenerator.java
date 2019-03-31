@@ -16,23 +16,27 @@ import com.ioteg.resultmodel.ResultSimpleField;
 
 public class FloatGenerator extends FieldGenerator<Float> {
 
-
-
 	public FloatGenerator(GenerationAlgorithm<Float> generationAlgorithm, Field field,
 			GenerationContext generationContext) {
 		super(generationAlgorithm, field, generationContext);
 	}
 
 	@Override
-	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public List<ResultField> generate(Integer numberOfRequiredItems)
+			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultField> results = new ArrayList<>();
 
-		if (field.getPrecision() != null)
-			for (int i = 0; i < numberOfRequiredItems; ++i)
-			{
+		if (field.getPrecision() != null) {
+			for (int i = 0; i < numberOfRequiredItems; ++i) {
 				Float result = generationAlgorithm.generate();
-				results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(), numberToSpecifiedPrecision(result, field.getPrecision())));
+				results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(),
+						numberToSpecifiedPrecision(result, field.getPrecision())));
 			}
+
+			if(field != null && field.getInjectable())
+				generationContext.putInjectableResultField(field.getName(), results.get(results.size() - 1));
+		}
+
 		else
 			results = super.generate(numberOfRequiredItems);
 

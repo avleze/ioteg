@@ -26,6 +26,7 @@ public class FieldBuilder {
 		String quotes = fieldElement.getAttributeValue("quotes");
 		String chooseone = fieldElement.getAttributeValue("chooseone");
 		String dependence = fieldElement.getAttributeValue("dependence");
+		String injectable = fieldElement.getAttributeValue("injectable");
 		Attribute attr = attributeBuilder.build(fieldElement);
 
 		List<Field> subFields = buildSubFields(fieldElement);
@@ -47,7 +48,7 @@ public class FieldBuilder {
 		return new Field(attr.getType(), attr.getValue(), attr.getMin(), attr.getStep(), attr.getUnit(), attr.getMax(),
 				attr.getPrecision(), attr.getLength(), attr.getCase(), attr.getBegin(), attr.getEnd(),
 				attr.getEndcharacter(), attr.getFormat(), attr.getIsNumeric(), name, quotesValue, chooseoneValue,
-				dependence, subFields, attributes, customBehaviour);
+				dependence, Boolean.valueOf(injectable), subFields, attributes, customBehaviour);
 	}
 
 	/**

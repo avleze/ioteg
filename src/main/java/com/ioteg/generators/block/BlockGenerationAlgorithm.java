@@ -13,6 +13,7 @@ import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.Block;
 import com.ioteg.model.Field;
+import com.ioteg.model.InjectedField;
 import com.ioteg.model.OptionalFields;
 import com.ioteg.resultmodel.ResultBlock;
 import com.ioteg.resultmodel.ResultField;
@@ -97,6 +98,9 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		for (Generable generator : generatorsSelected) 
 			resultBlock.getResultFields().add(generator.generate(1).get(0));
 		
+		for (InjectedField injectedField : block.getInjectedFields())
+			resultBlock.getResultFields().add(generationContext.getInjectableResultField(injectedField.getName()));
+
 		return resultBlock;
 	}
 	

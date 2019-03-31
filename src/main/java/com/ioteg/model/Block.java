@@ -24,6 +24,8 @@ public class Block {
 	@Valid
 	private List<Field> fields;
 	@Valid
+	private List<InjectedField> injectedFields;
+	@Valid
 	private List<OptionalFields> optionalFields;
 
 	/**
@@ -36,8 +38,11 @@ public class Block {
 	@JsonCreator
 	public Block(@NotEmpty @NotNull @JsonProperty("name") String name, @JsonProperty("value") String value,
 			@JsonProperty("repetition") Integer repetition, @Valid @JsonProperty("fields") List<Field> fields,
+			@Valid @JsonProperty("injectedfields") List<InjectedField> injectedFields,
 			@Valid @JsonProperty("optionalfields") List<OptionalFields> optionalFields) {
-
+		
+		if (injectedFields == null)
+			injectedFields = new ArrayList<>();
 		if (optionalFields == null)
 			optionalFields = new ArrayList<>();
 		if (fields == null)
@@ -47,6 +52,7 @@ public class Block {
 		this.value = value;
 		this.repetition = repetition;
 		this.fields = fields;
+		this.injectedFields = injectedFields;
 		this.optionalFields = optionalFields;
 	}
 
@@ -104,6 +110,21 @@ public class Block {
 	 */
 	public void setFields(List<Field> fields) {
 		this.fields = fields;
+	}
+	
+
+	/**
+	 * @return the injectedFields
+	 */
+	public List<InjectedField> getInjectedFields() {
+		return injectedFields;
+	}
+
+	/**
+	 * @param injectedFields the injectedFields to set
+	 */
+	public void setInjectedFields(List<InjectedField> injectedFields) {
+		this.injectedFields = injectedFields;
 	}
 
 	/**

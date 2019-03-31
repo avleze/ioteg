@@ -24,6 +24,7 @@ public class Field extends Attribute {
 	private Boolean quotes;
 	private Boolean chooseone;
 	private String dependence;
+	private Boolean injectable;
 	@Valid
 	private List<Field> fields;
 	@Valid
@@ -36,12 +37,14 @@ public class Field extends Attribute {
 				attr.getEndcharacter(), attr.getFormat(), attr.getIsNumeric());
 		this.name = name;
 		this.quotes = quotes;
+		this.injectable = false;
 	}
 
 	public Field(String name, Boolean quotes, String type) {
 		super(type);
 		this.name = name;
 		this.quotes = quotes;
+		this.injectable = false;
 	}
 
 	/**
@@ -77,27 +80,31 @@ public class Field extends Attribute {
 			@JsonProperty("endcharacter") String endcharacter, @JsonProperty("format") String format,
 			@JsonProperty("isNumeric") Boolean isNumeric, @NotEmpty @NotNull @JsonProperty("name") String name,
 			@JsonProperty("quotes") Boolean quotes, @JsonProperty("chooseone") Boolean chooseone,
-			@JsonProperty("dependence") String dependence, @Valid @JsonProperty("fields") List<Field> fields,
+			@JsonProperty("dependence") String dependence, @JsonProperty("injectable") Boolean injectable,
+			@Valid @JsonProperty("fields") List<Field> fields,
 			@Valid @JsonProperty("attributes") List<Attribute> attributes,
 			@JsonProperty("customBehaviour") CustomBehaviour customBehaviour) {
 		super(type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format,
 				isNumeric);
-		
-		if(quotes == null)
+
+		if (quotes == null)
 			quotes = false;
-		if(fields == null)
+		if (fields == null)
 			fields = new ArrayList<>();
-		if(dependence == null)
+		if (dependence == null)
 			dependence = "false";
-		if(chooseone == null)
+		if (injectable == null)
+			injectable = false;
+		if (chooseone == null)
 			chooseone = false;
-		if(attributes == null)
+		if (attributes == null)
 			attributes = new ArrayList<>();
-		
+
 		this.name = name;
 		this.quotes = quotes;
 		this.chooseone = chooseone;
 		this.dependence = dependence;
+		this.injectable = injectable;
 		this.fields = fields;
 		this.attributes = attributes;
 		this.customBehaviour = customBehaviour;
@@ -157,6 +164,20 @@ public class Field extends Attribute {
 	 */
 	public void setDependence(String dependence) {
 		this.dependence = dependence;
+	}
+
+	/**
+	 * @return the injectable
+	 */
+	public Boolean getInjectable() {
+		return injectable;
+	}
+
+	/**
+	 * @param injectable the injectable to set
+	 */
+	public void setInjectable(Boolean injectable) {
+		this.injectable = injectable;
 	}
 
 	/**

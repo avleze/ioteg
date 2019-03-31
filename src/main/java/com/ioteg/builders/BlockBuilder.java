@@ -9,6 +9,7 @@ import org.jdom2.JDOMException;
 
 import com.ioteg.model.Block;
 import com.ioteg.model.Field;
+import com.ioteg.model.InjectedField;
 import com.ioteg.model.OptionalFields;
 
 /**
@@ -22,8 +23,8 @@ public class BlockBuilder {
 	/**
 	 * @param element The block element obtained with JDOM.
 	 * @return A block.
-	 * @throws IOException 
-	 * @throws JDOMException 
+	 * @throws IOException
+	 * @throws JDOMException
 	 */
 	public Block build(Element element) throws JDOMException, IOException {
 		/* The block parameters are obtained and setted */
@@ -38,8 +39,9 @@ public class BlockBuilder {
 		/* Subfields and subOptionalFields are looked for */
 		List<Field> subFields = buildSubFields(element);
 		List<OptionalFields> subOptionalFields = buildSubOptionalsField(element);
+		List<InjectedField> subInjectedFields = buildSubInjectedField(element);
 
-		return new Block(name, value, repetition, subFields, subOptionalFields);
+		return new Block(name, value, repetition, subFields, subInjectedFields, subOptionalFields);
 	}
 
 	private List<Field> buildSubFields(Element element) throws JDOMException, IOException {
@@ -66,6 +68,16 @@ public class BlockBuilder {
 		}
 
 		return optionalFieldsOfTheBlock;
+	}
+
+	private List<InjectedField> buildSubInjectedField(Element element) throws JDOMException, IOException {
+		List<Element> injectedFields = element.getChildren("inject");
+		List<InjectedField> injectedFieldsOfTheBlock = new ArrayList<>();
+
+		for (Element injectedField : injectedFields)
+			injectedFieldsOfTheBlock.add(new InjectedField(injectedField.getAttributeValue("name")));
+
+		return injectedFieldsOfTheBlock;
 	}
 
 }

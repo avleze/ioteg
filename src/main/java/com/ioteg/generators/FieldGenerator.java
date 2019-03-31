@@ -28,6 +28,9 @@ public class FieldGenerator<T> extends AbstractGenerator<T> implements Generable
 		for (int i = 0; i < numberOfRequiredItems; ++i)
 			results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(),
 					generationAlgorithm.generate().toString()));
+		
+		if(field != null && field.getInjectable())
+			generationContext.putInjectableResultField(field.getName(), results.get(results.size() - 1));
 
 		return results;
 	}
