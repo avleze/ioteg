@@ -8,8 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * This class represents an attribute inside a complex field in the data model.
- * 
+ *
  * @author Antonio Vélez Estévez
+ * @version $Id: $Id
  */
 public class Attribute {
 	@NotEmpty
@@ -30,20 +31,22 @@ public class Attribute {
 	protected Boolean isNumeric;
 
 	/**
-	 * @param type
-	 * @param value
-	 * @param min
-	 * @param step
-	 * @param unit
-	 * @param max
-	 * @param precision
-	 * @param length
-	 * @param strCase
-	 * @param begin
-	 * @param end
-	 * @param endcharacter
-	 * @param format
-	 * @param isNumeric
+	 * <p>Constructor for Attribute.</p>
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 * @param min a {@link java.lang.Double} object.
+	 * @param step a {@link java.lang.String} object.
+	 * @param unit a {@link java.lang.String} object.
+	 * @param max a {@link java.lang.Double} object.
+	 * @param precision a {@link java.lang.Integer} object.
+	 * @param length a {@link java.lang.Integer} object.
+	 * @param strCase a {@link java.lang.String} object.
+	 * @param begin a {@link java.lang.String} object.
+	 * @param end a {@link java.lang.String} object.
+	 * @param endcharacter a {@link java.lang.String} object.
+	 * @param format a {@link java.lang.String} object.
+	 * @param isNumeric a {@link java.lang.Boolean} object.
 	 */
 	@JsonCreator
 	public Attribute(@NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
@@ -85,11 +88,18 @@ public class Attribute {
 		this.isNumeric = isNumeric;
 	}
 
+	/**
+	 * <p>Constructor for Attribute.</p>
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 */
 	public Attribute(@NotEmpty @NotNull String type) {
 		this.type = type;
 	}
 
 	/**
+	 * <p>Getter for the field <code>type</code>.</p>
+	 *
 	 * @return the type
 	 */
 	public String getType() {
@@ -97,6 +107,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>type</code>.</p>
+	 *
 	 * @param type the type to set
 	 */
 	public void setType(String type) {
@@ -104,6 +116,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>value</code>.</p>
+	 *
 	 * @return the value
 	 */
 	public String getValue() {
@@ -111,6 +125,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>value</code>.</p>
+	 *
 	 * @param value the value to set
 	 */
 	public void setValue(String value) {
@@ -118,6 +134,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>min</code>.</p>
+	 *
 	 * @return the min
 	 */
 	public Double getMin() {
@@ -125,6 +143,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>min</code>.</p>
+	 *
 	 * @param min the min to set
 	 */
 	public void setMin(Double min) {
@@ -132,6 +152,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>step</code>.</p>
+	 *
 	 * @return the step
 	 */
 	public String getStep() {
@@ -139,6 +161,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>step</code>.</p>
+	 *
 	 * @param step the step to set
 	 */
 	public void setStep(String step) {
@@ -146,6 +170,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>unit</code>.</p>
+	 *
 	 * @return the unit
 	 */
 	public String getUnit() {
@@ -153,6 +179,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>unit</code>.</p>
+	 *
 	 * @param unit the unit to set
 	 */
 	public void setUnit(String unit) {
@@ -160,6 +188,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>max</code>.</p>
+	 *
 	 * @return the max
 	 */
 	public Double getMax() {
@@ -167,6 +197,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>max</code>.</p>
+	 *
 	 * @param max the max to set
 	 */
 	public void setMax(Double max) {
@@ -174,6 +206,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>precision</code>.</p>
+	 *
 	 * @return the precision
 	 */
 	public Integer getPrecision() {
@@ -181,6 +215,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>precision</code>.</p>
+	 *
 	 * @param precision the precision to set
 	 */
 	public void setPrecision(Integer precision) {
@@ -188,6 +224,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>length</code>.</p>
+	 *
 	 * @return the length
 	 */
 	public Integer getLength() {
@@ -195,6 +233,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>length</code>.</p>
+	 *
 	 * @param length the length to set
 	 */
 	public void setLength(Integer length) {
@@ -202,6 +242,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>getCase.</p>
+	 *
 	 * @return the case
 	 */
 	public String getCase() {
@@ -209,13 +251,17 @@ public class Attribute {
 	}
 
 	/**
-	 * @param case_ the case to set
+	 * <p>setCase.</p>
+	 *
+	 * @param strCase a {@link java.lang.String} object.
 	 */
 	public void setCase(String strCase) {
 		this.strCase = strCase;
 	}
 
 	/**
+	 * <p>Getter for the field <code>begin</code>.</p>
+	 *
 	 * @return the begin
 	 */
 	public String getBegin() {
@@ -223,6 +269,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>begin</code>.</p>
+	 *
 	 * @param begin the begin to set
 	 */
 	public void setBegin(String begin) {
@@ -230,6 +278,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>end</code>.</p>
+	 *
 	 * @return the end
 	 */
 	public String getEnd() {
@@ -237,6 +287,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>end</code>.</p>
+	 *
 	 * @param end the end to set
 	 */
 	public void setEnd(String end) {
@@ -244,6 +296,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>endcharacter</code>.</p>
+	 *
 	 * @return the endcharacter
 	 */
 	public String getEndcharacter() {
@@ -251,6 +305,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>endcharacter</code>.</p>
+	 *
 	 * @param endcharacter the endcharacter to set
 	 */
 	public void setEndcharacter(String endcharacter) {
@@ -258,6 +314,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>format</code>.</p>
+	 *
 	 * @return the format
 	 */
 	public String getFormat() {
@@ -265,6 +323,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>format</code>.</p>
+	 *
 	 * @param format the format to set
 	 */
 	public void setFormat(String format) {
@@ -272,6 +332,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Getter for the field <code>isNumeric</code>.</p>
+	 *
 	 * @return the isNumeric
 	 */
 	public Boolean getIsNumeric() {
@@ -279,6 +341,8 @@ public class Attribute {
 	}
 
 	/**
+	 * <p>Setter for the field <code>isNumeric</code>.</p>
+	 *
 	 * @param isNumeric the isNumeric to set
 	 */
 	public void setIsNumeric(Boolean isNumeric) {

@@ -8,16 +8,26 @@ import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
 /**
- * @author antonio
+ * <p>LongQueryRestrictionGenerationAlgorithm class.</p>
  *
+ * @author antonio
+ * @version $Id: $Id
  */
 public class LongQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Long> {
 
+	/**
+	 * <p>Constructor for LongQueryRestrictionGenerationAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @param restrictions a {@link java.util.List} object.
+	 */
 	public LongQueryRestrictionGenerationAlgorithm(Field field, GenerationContext generationContext,
 			List<Trio<String, String, String>> restrictions) {
 		super(field, generationContext, restrictions);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Long generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);

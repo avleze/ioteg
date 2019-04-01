@@ -15,14 +15,28 @@ import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
+/**
+ * <p>DateGenerator class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class DateGenerator extends FieldGenerator<Date>{
 
 
+	/**
+	 * <p>Constructor for DateGenerator.</p>
+	 *
+	 * @param generationAlgorithm a {@link com.ioteg.generators.GenerationAlgorithm} object.
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 */
 	public DateGenerator(GenerationAlgorithm<Date> generationAlgorithm, Field field,
 			GenerationContext generationContext) {
 		super(generationAlgorithm, field, generationContext);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public List<ResultField> generate(Integer numberOfRequiredItems) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultField> results = new ArrayList<>();

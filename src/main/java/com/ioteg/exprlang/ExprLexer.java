@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * <p>ExprLexer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class ExprLexer {
 
 	private Scanner inputReader;
@@ -11,6 +17,7 @@ public class ExprLexer {
 	private StringBuilder currentMatch;
 	private Token currentToken;
 	
+	/** Constant <code>singleCharacterTokens</code> */
 	protected static final Map<String, Token> singleCharacterTokens;
 
 	static {
@@ -26,12 +33,22 @@ public class ExprLexer {
 
 	}
 
+	/**
+	 * <p>Constructor for ExprLexer.</p>
+	 *
+	 * @param str a {@link java.lang.String} object.
+	 */
 	public ExprLexer(String str) {
 		this.inputReader = new Scanner(str);
 		this.inputReader.useDelimiter("");
 		this.lastChar = ' ';
 	}
 
+	/**
+	 * <p>getNextToken.</p>
+	 *
+	 * @return a {@link com.ioteg.exprlang.Token} object.
+	 */
 	public Token getNextToken() {
 
 		while (Character.isWhitespace(lastChar)) {
@@ -96,10 +113,20 @@ public class ExprLexer {
 		return Character.isAlphabetic(ch) || Character.isDigit(ch);
 	}
 
+	/**
+	 * <p>Getter for the field <code>currentMatch</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getCurrentMatch() {
 		return currentMatch.toString();
 	}
 	
+	/**
+	 * <p>Getter for the field <code>currentToken</code>.</p>
+	 *
+	 * @return a {@link com.ioteg.exprlang.Token} object.
+	 */
 	public Token getCurrentToken() {
 		return currentToken;
 	}

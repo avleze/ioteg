@@ -14,16 +14,19 @@ import com.ioteg.model.EventType;
 /**
  * This class is a builder which allows to build an EventType from its
  * definition in a XML Document.
- * 
+ *
  * @author Antonio Vélez Estévez
+ * @version $Id: $Id
  */
 public class EventTypeBuilder {
 
 	/**
+	 * <p>build.</p>
+	 *
 	 * @param document The XML document obtained with JDOM.
 	 * @return An instance of a EventType.
-	 * @throws IOException 
-	 * @throws JDOMException 
+	 * @throws java.io.IOException if any.
+	 * @throws org.jdom2.JDOMException if any.
 	 */
 	public EventType build(Document document) throws JDOMException, IOException {
 		EventType eventType = new EventType();

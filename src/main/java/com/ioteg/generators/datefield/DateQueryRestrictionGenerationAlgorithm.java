@@ -11,12 +11,26 @@ import com.ioteg.generators.QueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
+/**
+ * <p>DateQueryRestrictionGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class DateQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<Date> {
 
+	/**
+	 * <p>Constructor for DateQueryRestrictionGenerationAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @param restrictions a {@link java.util.List} object.
+	 */
 	public DateQueryRestrictionGenerationAlgorithm(Field field, GenerationContext generationContext, List<Trio<String, String, String>> restrictions) {
 		super(field, generationContext, restrictions);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Date generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);

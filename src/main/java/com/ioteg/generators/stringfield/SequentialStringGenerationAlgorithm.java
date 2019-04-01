@@ -5,6 +5,12 @@ import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 import static java.lang.Math.*;
 
+/**
+ * <p>SequentialStringGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class SequentialStringGenerationAlgorithm extends GenerationAlgorithm<String> {
 
 	protected String possibleChars;
@@ -13,6 +19,13 @@ public class SequentialStringGenerationAlgorithm extends GenerationAlgorithm<Str
 	private int endIndex;
 	private int step;
 
+	/**
+	 * <p>Constructor for SequentialStringGenerationAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param possibleChars a {@link java.lang.String} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 */
 	public SequentialStringGenerationAlgorithm(Field field, String possibleChars, GenerationContext generationContext) {
 		super(field, generationContext);
 		this.possibleChars = possibleChars;
@@ -31,6 +44,7 @@ public class SequentialStringGenerationAlgorithm extends GenerationAlgorithm<Str
 		return computedIndex;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String generate() {
 

@@ -3,6 +3,12 @@ package com.ioteg.model;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * <p>SimpleTypes class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class SimpleTypes {
 	
 	private static final Set<String> types;
@@ -22,6 +28,12 @@ public class SimpleTypes {
 		
 	}
 	
+	/**
+	 * <p>exists.</p>
+	 *
+	 * @param object a {@link java.lang.Object} object.
+	 * @return a boolean.
+	 */
 	public static boolean exists(Object object) {
 		return types.contains(object);
 	}

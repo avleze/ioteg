@@ -7,6 +7,12 @@ import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
+/**
+ * <p>CSVResultBlockSerializer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class CSVResultBlockSerializer implements CSVSerializer<ResultBlock> {
 
 	private static CSVResultComplexFieldSerializer csvResultComplexFieldSerializer;
@@ -15,6 +21,7 @@ public class CSVResultBlockSerializer implements CSVSerializer<ResultBlock> {
 		csvResultComplexFieldSerializer = new CSVResultComplexFieldSerializer();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void serialize(ResultBlock value, CSVGenerator csvGen) throws IOException {
 		csvGen.writeStartObject();

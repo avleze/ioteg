@@ -11,8 +11,16 @@ import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 
 
+/**
+ * <p>Abstract AbstractGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public abstract class AbstractGenerationAlgorithm<T> {
+	/** Constant <code>logger</code> */
 	protected static Logger logger;
+	/** Constant <code>r</code> */
 	protected static Random r;
 
 	static {
@@ -24,5 +32,13 @@ public abstract class AbstractGenerationAlgorithm<T> {
 		}
 	}
 	
+	/**
+	 * <p>generate.</p>
+	 *
+	 * @return a T object.
+	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 * @throws java.text.ParseException if any.
+	 */
 	public abstract T generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException;
 }

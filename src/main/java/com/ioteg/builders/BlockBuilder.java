@@ -15,16 +15,19 @@ import com.ioteg.model.OptionalFields;
 /**
  * This class is a builder which allows to build an Block from its definition in
  * a XML Element.
- * 
+ *
  * @author Antonio Vélez Estévez
+ * @version $Id: $Id
  */
 public class BlockBuilder {
 
 	/**
+	 * <p>build.</p>
+	 *
 	 * @param element The block element obtained with JDOM.
 	 * @return A block.
-	 * @throws IOException
-	 * @throws JDOMException
+	 * @throws java.io.IOException if any.
+	 * @throws org.jdom2.JDOMException if any.
 	 */
 	public Block build(Element element) throws JDOMException, IOException {
 		/* The block parameters are obtained and setted */

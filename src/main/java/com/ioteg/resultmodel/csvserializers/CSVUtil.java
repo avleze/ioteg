@@ -8,6 +8,12 @@ import com.ioteg.model.Block;
 import com.ioteg.model.EventType;
 import com.ioteg.resultmodel.ResultEvent;
 
+/**
+ * <p>CSVUtil class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class CSVUtil {
 
 	private static CSVSerializer<ResultEvent> csvResultEventSerializer;
@@ -20,6 +26,14 @@ public class CSVUtil {
 		
 	}
 	
+	/**
+	 * <p>serializeResultEvent.</p>
+	 *
+	 * @param model a {@link com.ioteg.model.EventType} object.
+	 * @param resultEvent a {@link com.ioteg.resultmodel.ResultEvent} object.
+	 * @return a {@link java.lang.String} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public static String serializeResultEvent(EventType model, ResultEvent resultEvent) throws IOException {
 		OutputStream out = new ByteArrayOutputStream();
 		

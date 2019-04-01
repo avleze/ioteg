@@ -8,18 +8,33 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultEvent;
 
+/**
+ * <p>ResultEventSerializer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class ResultEventSerializer extends StdSerializer<ResultEvent> {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for ResultEventSerializer.</p>
+	 */
 	public ResultEventSerializer() {
 		this(null);
 	}
 
+	/**
+	 * <p>Constructor for ResultEventSerializer.</p>
+	 *
+	 * @param t a {@link java.lang.Class} object.
+	 */
 	public ResultEventSerializer(Class<ResultEvent> t) {
 		super(t);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void serialize(ResultEvent value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
 

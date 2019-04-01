@@ -13,6 +13,12 @@ import com.ioteg.model.Field;
 import com.ioteg.model.RuleCustomBehaviour;
 import com.ioteg.model.VariableCustomBehaviour;
 
+/**
+ * <p>CustomiseBehaviourGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<Float> {
 
 	private static final String INC_VALUE = "inc";
@@ -26,6 +32,14 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 	protected Integer generatedEventsInCurrentRule;
 	protected Integer eventsPerSimulation;
 
+	/**
+	 * <p>Constructor for CustomiseBehaviourGenerationAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param numOfEventsToGenerate a {@link java.lang.Integer} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 */
 	public CustomiseBehaviourGenerationAlgorithm(Field field, Integer numOfEventsToGenerate, GenerationContext generationContext) throws ExprLangParsingException {
 		super(field, generationContext);
 		this.numOfEventsToGenerate = numOfEventsToGenerate;
@@ -38,6 +52,11 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 		this.eventsPerSimulation = numOfEventsToGenerate / field.getCustomBehaviour().getSimulations();
 	}
 
+	/**
+	 * <p>Getter for the field <code>rules</code>.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<RuleCustomBehaviour> getRules() {
 		return rules;
 	}
@@ -124,6 +143,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Float generate() throws ExprLangParsingException {
 		RuleCustomBehaviour rule = rules.get(0);

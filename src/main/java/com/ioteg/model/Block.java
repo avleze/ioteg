@@ -12,8 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * This class represents a block inside an event type in the data model.
- * 
+ *
  * @author Antonio Vélez Estévez
+ * @version $Id: $Id
  */
 public class Block {
 	@NotEmpty
@@ -29,11 +30,14 @@ public class Block {
 	private List<OptionalFields> optionalFields;
 
 	/**
-	 * @param name
-	 * @param value
-	 * @param repetition
-	 * @param fields
-	 * @param optionalFields
+	 * <p>Constructor for Block.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 * @param repetition a {@link java.lang.Integer} object.
+	 * @param fields a {@link java.util.List} object.
+	 * @param optionalFields a {@link java.util.List} object.
+	 * @param injectedFields a {@link java.util.List} object.
 	 */
 	@JsonCreator
 	public Block(@NotEmpty @NotNull @JsonProperty("name") String name, @JsonProperty("value") String value,
@@ -57,6 +61,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Getter for the field <code>name</code>.</p>
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -64,6 +70,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Setter for the field <code>name</code>.</p>
+	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -71,6 +79,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Getter for the field <code>value</code>.</p>
+	 *
 	 * @return the value
 	 */
 	public String getValue() {
@@ -78,6 +88,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Setter for the field <code>value</code>.</p>
+	 *
 	 * @param value the value to set
 	 */
 	public void setValue(String value) {
@@ -85,6 +97,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Getter for the field <code>repetition</code>.</p>
+	 *
 	 * @return the repetition
 	 */
 	public Integer getRepetition() {
@@ -92,6 +106,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Setter for the field <code>repetition</code>.</p>
+	 *
 	 * @param repetition the repetition to set
 	 */
 	public void setRepetition(Integer repetition) {
@@ -99,6 +115,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Getter for the field <code>fields</code>.</p>
+	 *
 	 * @return the fields
 	 */
 	public List<Field> getFields() {
@@ -106,6 +124,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Setter for the field <code>fields</code>.</p>
+	 *
 	 * @param fields the fields to set
 	 */
 	public void setFields(List<Field> fields) {
@@ -114,6 +134,8 @@ public class Block {
 	
 
 	/**
+	 * <p>Getter for the field <code>injectedFields</code>.</p>
+	 *
 	 * @return the injectedFields
 	 */
 	public List<InjectedField> getInjectedFields() {
@@ -121,6 +143,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Setter for the field <code>injectedFields</code>.</p>
+	 *
 	 * @param injectedFields the injectedFields to set
 	 */
 	public void setInjectedFields(List<InjectedField> injectedFields) {
@@ -128,6 +152,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Getter for the field <code>optionalFields</code>.</p>
+	 *
 	 * @return the optionalFields
 	 */
 	public List<OptionalFields> getOptionalFields() {
@@ -135,6 +161,8 @@ public class Block {
 	}
 
 	/**
+	 * <p>Setter for the field <code>optionalFields</code>.</p>
+	 *
 	 * @param optionalFields the optionalFields to set
 	 */
 	public void setOptionalFields(List<OptionalFields> optionalFields) {

@@ -15,12 +15,27 @@ import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultField;
 
+/**
+ * <p>ComplexFieldGeneratorAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultField> {
 
 	protected List<Generable> fieldGenerators;
 	protected Boolean isFormedWithAttributes;
 	protected String type;
 
+	/**
+	 * <p>Constructor for ComplexFieldGeneratorAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 * @throws java.text.ParseException if any.
+	 */
 	public ComplexFieldGeneratorAlgorithm(Field field, GenerationContext generationContext)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		super(field, generationContext);
@@ -83,6 +98,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 		return dependence != null && !dependence.equals("false");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public ResultField generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 

@@ -29,6 +29,12 @@ import com.ioteg.generators.stringfield.SequentialStringGenerationAlgorithm;
 import com.ioteg.generators.stringfield.StringGenerator;
 import com.ioteg.model.Field;
 
+/**
+ * <p>NormalGeneratorsFactory class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class NormalGeneratorsFactory {
 
 	private static final String ALPHABETICAL_VALUES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -38,6 +44,17 @@ public class NormalGeneratorsFactory {
 		throw new IllegalStateException("This is an utility class and can't be instantiated.");
 	}
 
+	/**
+	 * <p>makeGenerator.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param totalNumberOfEvents a {@link java.lang.Integer} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @return a {@link com.ioteg.generators.Generable} object.
+	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 * @throws java.text.ParseException if any.
+	 */
 	public static Generable makeGenerator(Field field, Integer totalNumberOfEvents, GenerationContext generationContext)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Generable generable = null;
@@ -64,11 +81,28 @@ public class NormalGeneratorsFactory {
 		return generable;
 	}
 
+	/**
+	 * <p>makeComplexGenerator.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @return a {@link com.ioteg.generators.Generable} object.
+	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 * @throws java.text.ParseException if any.
+	 */
 	public static Generable makeComplexGenerator(Field field, GenerationContext generationContext)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		return new ComplexFieldGenerator(new ComplexFieldGeneratorAlgorithm(field, generationContext), field, generationContext);
 	}
 
+	/**
+	 * <p>makeLongGenerator.</p>
+	 *
+	 * @param longField a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @return a {@link com.ioteg.generators.FieldGenerator} object.
+	 */
 	public static FieldGenerator<Long> makeLongGenerator(Field longField, GenerationContext generationContext) {
 		FieldGenerator<Long> longGenerator = null;
 
@@ -82,6 +116,15 @@ public class NormalGeneratorsFactory {
 		return longGenerator;
 	}
 
+	/**
+	 * <p>makeFloatGenerator.</p>
+	 *
+	 * @param floatField a {@link com.ioteg.model.Field} object.
+	 * @param totalNumOfEvents a {@link java.lang.Integer} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @return a {@link com.ioteg.generators.FieldGenerator} object.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 */
 	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents, GenerationContext generationContext)
 			throws ExprLangParsingException {
 		FieldGenerator<Float> floatGenerator = null;
@@ -100,6 +143,13 @@ public class NormalGeneratorsFactory {
 		return floatGenerator;
 	}
 
+	/**
+	 * <p>makeBooleanGenerator.</p>
+	 *
+	 * @param booleanField a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @return a {@link com.ioteg.generators.FieldGenerator} object.
+	 */
 	public static FieldGenerator<Boolean> makeBooleanGenerator(Field booleanField, GenerationContext generationContext) {
 		FieldGenerator<Boolean> booleanGenerator = null;
 
@@ -111,6 +161,14 @@ public class NormalGeneratorsFactory {
 		return booleanGenerator;
 	}
 
+	/**
+	 * <p>makeDateGenerator.</p>
+	 *
+	 * @param dateField a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @return a {@link com.ioteg.generators.FieldGenerator} object.
+	 * @throws java.text.ParseException if any.
+	 */
 	public static FieldGenerator<Date> makeDateGenerator(Field dateField, GenerationContext generationContext) throws ParseException {
 		FieldGenerator<Date> dateGenerator = null;
 
@@ -124,10 +182,25 @@ public class NormalGeneratorsFactory {
 		return dateGenerator;
 	}
 
+	/**
+	 * <p>makeTimeGenerator.</p>
+	 *
+	 * @param timeField a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @return a {@link com.ioteg.generators.FieldGenerator} object.
+	 * @throws java.text.ParseException if any.
+	 */
 	public static FieldGenerator<Date> makeTimeGenerator(Field timeField, GenerationContext generationContext) throws ParseException {
 		return makeDateGenerator(timeField, generationContext);
 	}
 
+	/**
+	 * <p>makeStringGenerator.</p>
+	 *
+	 * @param stringField a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @return a {@link com.ioteg.generators.FieldGenerator} object.
+	 */
 	public static FieldGenerator<String> makeStringGenerator(Field stringField, GenerationContext generationContext) {
 		FieldGenerator<String> stringGenerator = null;
 
@@ -143,6 +216,13 @@ public class NormalGeneratorsFactory {
 		return stringGenerator;
 	}
 
+	/**
+	 * <p>makeAlphanumericGenerator.</p>
+	 *
+	 * @param alphanumericField a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @return a {@link com.ioteg.generators.FieldGenerator} object.
+	 */
 	public static FieldGenerator<String> makeAlphanumericGenerator(Field alphanumericField, GenerationContext generationContext) {
 		FieldGenerator<String> alphanumericGenerator = null;
 

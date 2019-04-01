@@ -10,17 +10,28 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import com.ioteg.resultmodel.ResultEvent;
 import com.ioteg.resultmodel.csvserializers.CSVUtil;
 
+/**
+ * <p>CSVResultEventHttpMessageConverter class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class CSVResultEventHttpMessageConverter extends AbstractHttpMessageConverter<ResultEvent> {
 
+	/**
+	 * <p>Constructor for CSVResultEventHttpMessageConverter.</p>
+	 */
 	public CSVResultEventHttpMessageConverter() {
          super(new MediaType("application", "csv", StandardCharsets.UTF_8));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean supports(Class<?> clazz) {		
 		return clazz.getSimpleName().equalsIgnoreCase(ResultEvent.class.getSimpleName());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected ResultEvent readInternal(Class<? extends ResultEvent> clazz, HttpInputMessage inputMessage)
 			throws IOException {
@@ -28,6 +39,7 @@ public class CSVResultEventHttpMessageConverter extends AbstractHttpMessageConve
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void writeInternal(ResultEvent t, HttpOutputMessage outputMessage)
 			throws IOException {

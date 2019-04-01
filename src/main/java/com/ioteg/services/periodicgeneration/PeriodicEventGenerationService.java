@@ -16,6 +16,12 @@ import com.ioteg.generators.exceptions.NotExistingGeneratorException;
 import com.ioteg.model.ConfigurableEventType;
 import com.ioteg.resultmodel.ResultField;
 
+/**
+ * <p>PeriodicEventGenerationService class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 @Service
 public class PeriodicEventGenerationService {
 
@@ -24,6 +30,14 @@ public class PeriodicEventGenerationService {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
+	/**
+	 * <p>executeConfigurableEventTypes.</p>
+	 *
+	 * @param configurableEventTypes a {@link java.util.List} object.
+	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 * @throws java.text.ParseException if any.
+	 */
 	public void executeConfigurableEventTypes(List<ConfigurableEventType> configurableEventTypes)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 

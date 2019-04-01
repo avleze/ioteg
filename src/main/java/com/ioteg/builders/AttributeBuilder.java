@@ -7,11 +7,18 @@ import com.ioteg.model.Attribute;
 /**
  * This class is a builder which allows to build an Attribute from its
  * definition in a XML Element.
- * 
+ *
  * @author Antonio Vélez Estévez
+ * @version $Id: $Id
  */
 public class AttributeBuilder {
 
+	/**
+	 * <p>build.</p>
+	 *
+	 * @param attributeElement a {@link org.jdom2.Element} object.
+	 * @return a {@link com.ioteg.model.Attribute} object.
+	 */
 	public Attribute build(Element attributeElement) {
 
 		String type = attributeElement.getAttributeValue("type");

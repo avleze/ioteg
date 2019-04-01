@@ -9,31 +9,56 @@ import java.util.Random;
 import org.apache.log4j.Logger;
 
 
+/**
+ * <p>CallExpressionAST class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class CallExpressionAST implements ExpressionAST{
 	private String fnName;
 	private List<ExpressionAST> args;
 	
+	/** Constant <code>r</code> */
 	protected static Random r;
+	/** Constant <code>logger</code> */
 	protected static Logger logger;
 
 	static {
 		logger = Logger.getRootLogger();
 	}
 	
+	/**
+	 * <p>Constructor for CallExpressionAST.</p>
+	 *
+	 * @param fnName a {@link java.lang.String} object.
+	 * @param args a {@link java.util.List} object.
+	 */
 	public CallExpressionAST(String fnName, List<ExpressionAST> args) {
 		super();
 		this.fnName = fnName;
 		this.args = args;
 	}
 
+	/**
+	 * <p>Getter for the field <code>fnName</code>.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getFnName() {
 		return fnName;
 	}
 
+	/**
+	 * <p>Getter for the field <code>args</code>.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<ExpressionAST> getArgs() {
 		return args;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Double evaluate(Map<String, Double> symbols) {
 		Double result = null;

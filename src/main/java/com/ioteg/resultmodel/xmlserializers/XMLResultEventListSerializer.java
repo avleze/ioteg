@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.util.List;
 import com.ioteg.resultmodel.ResultEvent;
 
+/**
+ * <p>XMLResultEventListSerializer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class XMLResultEventListSerializer implements XMLSerializer<List<ResultEvent>> {
 
 	private static XMLResultEventSerializer xmlResultEventSerializer;
@@ -12,6 +18,7 @@ public class XMLResultEventListSerializer implements XMLSerializer<List<ResultEv
 		xmlResultEventSerializer = new XMLResultEventSerializer();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void serialize(List<ResultEvent> value, XMLGenerator xmlGen) throws IOException {
 

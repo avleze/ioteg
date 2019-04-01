@@ -11,9 +11,17 @@ import org.apache.log4j.Logger;
 
 import com.afowd.constants.Const;
 
+/**
+ * <p>RandomUtil class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class RandomUtil {
 
+	/** Constant <code>r</code> */
 	protected static Random r;
+	/** Constant <code>logger</code> */
 	protected static Logger logger;
 
 	private RandomUtil() {
@@ -32,10 +40,11 @@ public class RandomUtil {
 
 	/**
 	 * return random date in range of min max date
-	 * 
-	 * @param minDate
-	 * @param maxDate
-	 * @return
+	 *
+	 * @param minDate a {@link java.util.Date} object.
+	 * @param maxDate a {@link java.util.Date} object.
+	 * @param bAllowNulls a boolean.
+	 * @return a {@link java.util.Date} object.
 	 */
 	public static Date getRandomDate(Date minDate, Date maxDate, boolean bAllowNulls) {
 		if (bAllowNulls && r.nextBoolean()) {
@@ -49,8 +58,8 @@ public class RandomUtil {
 
 	/**
 	 * minimum date 01.00.0001 or long value -62135773200000
-	 * 
-	 * @return
+	 *
+	 * @return a long.
 	 */
 	public static long getMinimumDate() {
 		Calendar calendar = Calendar.getInstance();
@@ -64,8 +73,8 @@ public class RandomUtil {
 
 	/**
 	 * maximum date 17.34.292269054 or long value -9223372025090751617
-	 * 
-	 * @return
+	 *
+	 * @return a long.
 	 */
 	public static long getMaximumDate() {
 		Calendar calendar = Calendar.getInstance();
@@ -79,7 +88,7 @@ public class RandomUtil {
 
 	/**
 	 * Generate a randomString
-	 * 
+	 *
 	 * @param length        determines the length of the String and
 	 * @param endcharacter  determines the last character for the range
 	 * @param possibleChars the possible chars to form the string.

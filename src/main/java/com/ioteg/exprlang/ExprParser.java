@@ -14,9 +14,17 @@ import com.ioteg.exprlang.ast.NumberExpressionAST;
 import com.ioteg.exprlang.ast.UnaryExpressionAST;
 import com.ioteg.exprlang.ast.VariableExpressionAST;
 
+/**
+ * <p>ExprParser class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class ExprParser {
 	private ExprLexer lexer;
+	/** Constant <code>tokenPrecedence</code> */
 	protected static final Map<Token, Integer> tokenPrecedence;
+	/** Constant <code>logger</code> */
 	protected static Logger logger;
 	
 	static {
@@ -37,6 +45,13 @@ public class ExprParser {
 		}
 	}
 
+	/**
+	 * <p>parse.</p>
+	 *
+	 * @param str a {@link java.lang.String} object.
+	 * @return a {@link com.ioteg.exprlang.ast.ExpressionAST} object.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 */
 	public ExpressionAST parse(String str) throws ExprLangParsingException  {
 		this.lexer = new ExprLexer(str);
 		lexer.getNextToken();

@@ -9,18 +9,33 @@ import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
+/**
+ * <p>ResultComplexFieldSerializer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class ResultComplexFieldSerializer extends StdSerializer<ResultComplexField> {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for ResultComplexFieldSerializer.</p>
+	 */
 	public ResultComplexFieldSerializer() {
 		this(null);
 	}
 
+	/**
+	 * <p>Constructor for ResultComplexFieldSerializer.</p>
+	 *
+	 * @param t a {@link java.lang.Class} object.
+	 */
 	public ResultComplexFieldSerializer(Class<ResultComplexField> t) {
 		super(t);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void serialize(ResultComplexField value, JsonGenerator jgen, SerializerProvider provider)
 			throws IOException {

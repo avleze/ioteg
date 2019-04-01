@@ -23,6 +23,12 @@ import com.ioteg.resultmodel.xmlserializers.XMLResultEventSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLResultSimpleFieldSerializer;
 import com.ioteg.resultmodel.xmlserializers.XMLSerializerMapper;
 
+/**
+ * <p>XMLHttpMessageConverter class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object> {
 
 	private static XMLSerializerMapper xmlSerializerMapper;
@@ -45,15 +51,20 @@ public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object
 
 	}
 
+	/**
+	 * <p>Constructor for XMLHttpMessageConverter.</p>
+	 */
 	public XMLHttpMessageConverter() {
          super(new MediaType("application", "xml", StandardCharsets.UTF_8));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean supports(Class<?> clazz) {		
 		return supportedTypes.contains(clazz.getSimpleName());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Object readInternal(Class<? extends Object> clazz, HttpInputMessage inputMessage)
 			throws IOException {
@@ -61,6 +72,7 @@ public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void writeInternal(Object t, HttpOutputMessage outputMessage)
 			throws IOException {

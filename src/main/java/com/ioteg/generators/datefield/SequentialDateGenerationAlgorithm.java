@@ -10,6 +10,12 @@ import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
+/**
+ * <p>SequentialDateGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class SequentialDateGenerationAlgorithm extends GenerationAlgorithm<Date> {
 
 	protected Integer step;
@@ -18,6 +24,13 @@ public class SequentialDateGenerationAlgorithm extends GenerationAlgorithm<Date>
 	protected Integer unit;
 	protected Calendar calendar;
 
+	/**
+	 * <p>Constructor for SequentialDateGenerationAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @throws java.text.ParseException if any.
+	 */
 	public SequentialDateGenerationAlgorithm(Field field, GenerationContext generationContext) throws ParseException {
 		super(field, generationContext);
 		SimpleDateFormat parser = new SimpleDateFormat(field.getFormat());
@@ -48,6 +61,7 @@ public class SequentialDateGenerationAlgorithm extends GenerationAlgorithm<Date>
 		this.calendar.setTime(this.begin.getTime());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Date generate() {
 		Date timeToReturn = this.calendar.getTime();

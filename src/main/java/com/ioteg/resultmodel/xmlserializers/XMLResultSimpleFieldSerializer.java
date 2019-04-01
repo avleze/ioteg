@@ -6,8 +6,15 @@ import java.util.Map;
 
 import com.ioteg.resultmodel.ResultSimpleField;
 
+/**
+ * <p>XMLResultSimpleFieldSerializer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class XMLResultSimpleFieldSerializer implements XMLSerializer<ResultSimpleField> {
 
+	/** {@inheritDoc} */
 	@Override
 	public void serialize(ResultSimpleField value, XMLGenerator xmlGen) throws IOException {
 

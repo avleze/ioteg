@@ -13,13 +13,27 @@ import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
+/**
+ * <p>StringGenerator class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class StringGenerator extends FieldGenerator<String> {
 
+	/**
+	 * <p>Constructor for StringGenerator.</p>
+	 *
+	 * @param generationAlgorithm a {@link com.ioteg.generators.GenerationAlgorithm} object.
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 */
 	public StringGenerator(GenerationAlgorithm<String> generationAlgorithm, Field field,
 			GenerationContext generationContext) {
 		super(generationAlgorithm, field, generationContext);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public List<ResultField> generate(Integer numberOfRequiredItems)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {

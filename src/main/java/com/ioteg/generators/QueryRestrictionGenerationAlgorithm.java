@@ -6,14 +6,22 @@ import com.ioteg.eplutils.Trio;
 import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
+/**
+ * <p>Abstract QueryRestrictionGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public abstract class QueryRestrictionGenerationAlgorithm<T> extends GenerationAlgorithm<T> {
 
 	protected List<Trio<String, String, String>> restrictions;
 
 	/**
-	 * @param field
-	 * @param generationContext
-	 * @param restrictions
+	 * <p>Constructor for QueryRestrictionGenerationAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @param restrictions a {@link java.util.List} object.
 	 */
 	public QueryRestrictionGenerationAlgorithm(Field field, GenerationContext generationContext,
 			List<Trio<String, String, String>> restrictions) {

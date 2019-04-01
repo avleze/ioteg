@@ -12,13 +12,27 @@ import com.ioteg.generators.FieldGenerator;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 
+/**
+ * <p>ComplexFieldGenerator class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class ComplexFieldGenerator extends FieldGenerator<ResultField> {
 
+	/**
+	 * <p>Constructor for ComplexFieldGenerator.</p>
+	 *
+	 * @param generationAlgorithm a {@link com.ioteg.generators.GenerationAlgorithm} object.
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 */
 	public ComplexFieldGenerator(GenerationAlgorithm<ResultField> generationAlgorithm, Field field,
 			GenerationContext generationContext) {
 		super(generationAlgorithm, field, generationContext);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public List<ResultField> generate(Integer numberOfRequiredItems)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {

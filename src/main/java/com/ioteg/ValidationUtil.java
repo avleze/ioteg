@@ -12,6 +12,12 @@ import org.jdom2.input.SAXBuilder;
 
 import com.ioteg.model.SimpleTypes;
 
+/**
+ * <p>ValidationUtil class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class ValidationUtil {
 
 	private static final String CASE_ATTR = "case";
@@ -31,6 +37,14 @@ public class ValidationUtil {
 		throw new IllegalStateException("This is an utility class and can't be instantiated.");
 	}
 
+	/**
+	 * <p>validStandart.</p>
+	 *
+	 * @param xmlFile a {@link java.io.File} object.
+	 * @return a {@link java.lang.Boolean} object.
+	 * @throws org.jdom2.JDOMException if any.
+	 * @throws java.io.IOException if any.
+	 */
 	public static Boolean validStandart(File xmlFile) throws JDOMException, IOException {
 
 		SAXBuilder builder = new SAXBuilder();

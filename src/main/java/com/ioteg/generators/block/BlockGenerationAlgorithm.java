@@ -18,6 +18,12 @@ import com.ioteg.model.OptionalFields;
 import com.ioteg.resultmodel.ResultBlock;
 import com.ioteg.resultmodel.ResultField;
 
+/**
+ * <p>BlockGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<ResultBlock> {
 
 	protected List<Generable> generators;
@@ -26,6 +32,15 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 	protected GenerationContext generationContext;
 	
 	
+	/**
+	 * <p>Constructor for BlockGenerationAlgorithm.</p>
+	 *
+	 * @param block a {@link com.ioteg.model.Block} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 * @throws java.text.ParseException if any.
+	 */
 	public BlockGenerationAlgorithm(Block block, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		super();
 		this.block = block;
@@ -79,6 +94,7 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 	}
 		
 
+	/** {@inheritDoc} */
 	@Override
 	public ResultBlock generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		ResultBlock resultBlock = new ResultBlock(block.getName(), new ArrayList<ResultField>());

@@ -4,6 +4,12 @@ import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
+/**
+ * <p>SequentialFloatGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class SequentialFloatGenerationAlgorithm extends GenerationAlgorithm<Float> {
 
 	private Double step;
@@ -11,6 +17,12 @@ public class SequentialFloatGenerationAlgorithm extends GenerationAlgorithm<Floa
 	private Double end;
 	private Double value;
 
+	/**
+	 * <p>Constructor for SequentialFloatGenerationAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 */
 	public SequentialFloatGenerationAlgorithm(Field field, GenerationContext generationContext) {
 		super(field, generationContext);
 		this.step = Double.valueOf(field.getStep());
@@ -21,6 +33,7 @@ public class SequentialFloatGenerationAlgorithm extends GenerationAlgorithm<Floa
 		this.value = begin;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Float generate() {
 		Double actualValue = this.value;

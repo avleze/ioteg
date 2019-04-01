@@ -6,8 +6,15 @@ import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
+/**
+ * <p>CSVResultComplexFieldSerializer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class CSVResultComplexFieldSerializer implements CSVSerializer<ResultComplexField> {
 
+	/** {@inheritDoc} */
 	@Override
 	public void serialize(ResultComplexField value, CSVGenerator csvGen) throws IOException {
 

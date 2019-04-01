@@ -8,15 +8,30 @@ import com.ioteg.generators.QueryRestrictionGenerationAlgorithm;
 import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
+/**
+ * <p>StringQueryRestrictionGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class StringQueryRestrictionGenerationAlgorithm extends QueryRestrictionGenerationAlgorithm<String> {
 
 	protected String possibleChars;
 	
+	/**
+	 * <p>Constructor for StringQueryRestrictionGenerationAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @param restrictions a {@link java.util.List} object.
+	 * @param possibleChars a {@link java.lang.String} object.
+	 */
 	public StringQueryRestrictionGenerationAlgorithm(Field field, GenerationContext generationContext, List<Trio<String, String, String>> restrictions, String possibleChars) {
 		super(field, generationContext, restrictions);
 		this.possibleChars = possibleChars;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String generate() {
 		Trio<String, String, String> fieldRestrictionInformation = restrictions.get(0);

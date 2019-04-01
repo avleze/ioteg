@@ -14,6 +14,12 @@ import com.ioteg.model.EventType;
 import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultEvent;
 
+/**
+ * <p>EventTypeGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class EventTypeGenerationAlgorithm extends AbstractGenerationAlgorithm<ResultEvent> {
 
 	protected EventType eventType;
@@ -23,10 +29,13 @@ public class EventTypeGenerationAlgorithm extends AbstractGenerationAlgorithm<Re
 	protected Integer repetitions;
 	
 	/**
-	 * @param eventType
-	 * @throws ParseException 
-	 * @throws ExprLangParsingException 
-	 * @throws NotExistingGeneratorException 
+	 * <p>Constructor for EventTypeGenerationAlgorithm.</p>
+	 *
+	 * @param eventType a {@link com.ioteg.model.EventType} object.
+	 * @throws java.text.ParseException if any.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
 	 */
 	public EventTypeGenerationAlgorithm(EventType eventType, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		this.generationContext = generationContext;
@@ -45,6 +54,7 @@ public class EventTypeGenerationAlgorithm extends AbstractGenerationAlgorithm<Re
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public ResultEvent generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 

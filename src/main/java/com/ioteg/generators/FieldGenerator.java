@@ -11,16 +11,30 @@ import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
+/**
+ * <p>FieldGenerator class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class FieldGenerator<T> extends AbstractGenerator<T> implements Generable {
 
 	protected Field field;
 
+	/**
+	 * <p>Constructor for FieldGenerator.</p>
+	 *
+	 * @param generationAlgorithm a {@link com.ioteg.generators.GenerationAlgorithm} object.
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 */
 	public FieldGenerator(GenerationAlgorithm<T> generationAlgorithm, Field field,
 			GenerationContext generationContext) {
 		super(generationAlgorithm, generationContext);
 		this.field = field;
 	}
 
+	/** {@inheritDoc} */
 	public List<ResultField> generate(Integer numberOfRequiredItems)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultField> results = new ArrayList<>();

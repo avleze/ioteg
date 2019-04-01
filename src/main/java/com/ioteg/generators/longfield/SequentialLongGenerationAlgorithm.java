@@ -4,6 +4,12 @@ import com.ioteg.generators.GenerationAlgorithm;
 import com.ioteg.generators.context.GenerationContext;
 import com.ioteg.model.Field;
 
+/**
+ * <p>SequentialLongGenerationAlgorithm class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class SequentialLongGenerationAlgorithm extends GenerationAlgorithm<Long> {
 
 	private Long begin;
@@ -12,6 +18,12 @@ public class SequentialLongGenerationAlgorithm extends GenerationAlgorithm<Long>
 
 	private Long value;
 
+	/**
+	 * <p>Constructor for SequentialLongGenerationAlgorithm.</p>
+	 *
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 */
 	public SequentialLongGenerationAlgorithm(Field field, GenerationContext generationContext) {
 		super(field, generationContext);
 		this.begin = Long.valueOf(field.getBegin());
@@ -22,6 +34,7 @@ public class SequentialLongGenerationAlgorithm extends GenerationAlgorithm<Long>
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Long generate() {
 		Long actualValue = this.value;

@@ -17,6 +17,12 @@ import org.jdom2.Element;
 
 import com.ioteg.model.SimpleTypes;
 
+/**
+ * <p>EPLConditionsParser class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class EPLConditionsParser {
 	private static final String AND_KEYWORD = "and";
 	private static final String OR_KEYWORD = "or";
@@ -31,6 +37,12 @@ public class EPLConditionsParser {
 	private String eplFilePath;
 	private Element rootNode;
 
+	/**
+	 * <p>Constructor for EPLConditionsParser.</p>
+	 *
+	 * @param eplFilePath a {@link java.lang.String} object.
+	 * @param rootNode a {@link org.jdom2.Element} object.
+	 */
 	public EPLConditionsParser(String eplFilePath, Element rootNode) {
 		super();
 		this.iterationValues = new ArrayList<>();
@@ -42,11 +54,10 @@ public class EPLConditionsParser {
 	/**
 	 * A function to obtain values from the fields elements at the where clauses of
 	 * the EPL queries to assign them to the fields of the events
-	 * 
-	 * @param EPLfile  contains the EPL queries
-	 * @param rootNode is the root of the event definition
-	 * @return
-	 * @throws IOException if the file causes problems
+	 *
+	 * @throws java.io.IOException if the file causes problems
+	 * @param totalNumEvents a {@link java.lang.Integer} object.
+	 * @return a {@link java.util.List} object.
 	 */
 	public List<Map<String, List<Trio<String, String, String>>>> getRestrictions(Integer totalNumEvents)
 			throws IOException {
@@ -216,10 +227,20 @@ public class EPLConditionsParser {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field <code>iterationValues</code>.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<Integer> getIterationValues() {
 		return iterationValues;
 	}
 
+	/**
+	 * <p>Getter for the field <code>eplRestrictions</code>.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<Map<String, List<Trio<String, String, String>>>> getEplRestrictions() {
 		return eplRestrictions;
 	}

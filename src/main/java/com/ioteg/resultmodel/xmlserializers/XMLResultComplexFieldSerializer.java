@@ -8,6 +8,12 @@ import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
+/**
+ * <p>XMLResultComplexFieldSerializer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class XMLResultComplexFieldSerializer implements XMLSerializer<ResultComplexField> {
 
 	private static XMLResultSimpleFieldSerializer xmlResultSimpleFieldSerializer;
@@ -16,6 +22,7 @@ public class XMLResultComplexFieldSerializer implements XMLSerializer<ResultComp
 		xmlResultSimpleFieldSerializer = new XMLResultSimpleFieldSerializer();
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void serialize(ResultComplexField value, XMLGenerator xmlGen) throws IOException {
 

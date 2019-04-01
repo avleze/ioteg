@@ -5,6 +5,12 @@ import java.io.IOException;
 import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultEvent;
 
+/**
+ * <p>CSVResultEventSerializer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class CSVResultEventSerializer implements CSVSerializer<ResultEvent> {
 	 
 	private static CSVArrayResultBlockSerializer csvArrayResultBlockSerializer;
@@ -14,6 +20,7 @@ public class CSVResultEventSerializer implements CSVSerializer<ResultEvent> {
 	}
 	
 	
+	/** {@inheritDoc} */
 	@Override
 	public void serialize(ResultEvent value, CSVGenerator csvGen) throws IOException {
 		ArrayResultBlock blockWithRepTag = null;

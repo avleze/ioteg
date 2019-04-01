@@ -14,13 +14,27 @@ import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
 
+/**
+ * <p>FloatGenerator class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class FloatGenerator extends FieldGenerator<Float> {
 
+	/**
+	 * <p>Constructor for FloatGenerator.</p>
+	 *
+	 * @param generationAlgorithm a {@link com.ioteg.generators.GenerationAlgorithm} object.
+	 * @param field a {@link com.ioteg.model.Field} object.
+	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 */
 	public FloatGenerator(GenerationAlgorithm<Float> generationAlgorithm, Field field,
 			GenerationContext generationContext) {
 		super(generationAlgorithm, field, generationContext);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public List<ResultField> generate(Integer numberOfRequiredItems)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {

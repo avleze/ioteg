@@ -16,8 +16,10 @@ import com.ioteg.model.VariableCustomBehaviour;
 
 
 /**
- * @author Antonio Vélez Estévez.
+ * <p>CustomBehaviourBuilder class.</p>
  *
+ * @author Antonio Vélez Estévez.
+ * @version $Id: $Id
  */
 public class CustomBehaviourBuilder {
 	private static final String SIMULATIONS_ATTR = "simulations";
@@ -27,6 +29,14 @@ public class CustomBehaviourBuilder {
 	private static final String RULES_TAG = "rules";
 	private static final String RULE_TAG = "rule";
 
+	/**
+	 * <p>build.</p>
+	 *
+	 * @param fieldElement a {@link org.jdom2.Element} object.
+	 * @return a {@link com.ioteg.model.CustomBehaviour} object.
+	 * @throws org.jdom2.JDOMException if any.
+	 * @throws java.io.IOException if any.
+	 */
 	public CustomBehaviour build(Element fieldElement) throws JDOMException, IOException {
 		CustomBehaviour customBehaviour = new CustomBehaviour();
 		

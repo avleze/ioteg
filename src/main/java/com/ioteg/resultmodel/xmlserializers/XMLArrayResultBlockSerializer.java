@@ -5,6 +5,12 @@ import java.io.IOException;
 import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultBlock;
 
+/**
+ * <p>XMLArrayResultBlockSerializer class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class XMLArrayResultBlockSerializer implements XMLSerializer<ArrayResultBlock>{	
 	
 	private static XMLResultBlockSerializer xmlResultBlockSerializer;
@@ -13,6 +19,7 @@ public class XMLArrayResultBlockSerializer implements XMLSerializer<ArrayResultB
 		xmlResultBlockSerializer = new XMLResultBlockSerializer();
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void serialize(ArrayResultBlock value, XMLGenerator xmlGen) throws IOException {
 		xmlGen.writeStartField(value.getResultBlocks().get(0).getName(), true);

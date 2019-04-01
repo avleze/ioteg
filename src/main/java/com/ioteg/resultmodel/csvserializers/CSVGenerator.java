@@ -8,14 +8,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>CSVGenerator class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 public class CSVGenerator {
 	private Writer outputStreamWriter;
 	private Map<String, Integer> headerPositions;
 	private String[] values;
 
 	/**
-	 * @param stringBuilder
-	 * @throws IOException 
+	 * <p>Constructor for CSVGenerator.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 * @param out a {@link java.io.OutputStream} object.
+	 * @param header a {@link java.util.List} object.
 	 */
 	public CSVGenerator(OutputStream out, List<String> header) throws IOException {
 		super();
@@ -33,15 +42,29 @@ public class CSVGenerator {
 		outputStreamWriter.append(header.get(header.size() - 1) + "\n");
 	}
 
+	/**
+	 * <p>writeStartObject.</p>
+	 */
 	public void writeStartObject() {
 		for (int i = 0; i < values.length; ++i)
 			values[i] = null;
 	}
 
+	/**
+	 * <p>writeField.</p>
+	 *
+	 * @param fieldName a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 */
 	public void writeField(String fieldName, String value) {
 		values[headerPositions.get(fieldName)] = value;
 	}
 
+	/**
+	 * <p>writeEndObject.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 */
 	public void writeEndObject() throws IOException {
 
 		for (int i = 0; i < values.length - 1; ++i) {
@@ -59,6 +82,11 @@ public class CSVGenerator {
 		outputStreamWriter.append(finalValueToWrite + "\n");
 	}
 
+	/**
+	 * <p>close.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 */
 	public void close() throws IOException {
 		outputStreamWriter.close();
 	}

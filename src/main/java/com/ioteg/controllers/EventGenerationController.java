@@ -27,6 +27,12 @@ import com.ioteg.resultmodel.ResultEvent;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.services.periodicgeneration.PeriodicEventGenerationService;
 
+/**
+ * <p>EventGenerationController class.</p>
+ *
+ * @author antonio
+ * @version $Id: $Id
+ */
 @RestController
 public class EventGenerationController {
 
@@ -34,6 +40,15 @@ public class EventGenerationController {
 	private PeriodicEventGenerationService periodicEventGenerationService;
 	
 
+	/**
+	 * <p>generateEvents.</p>
+	 *
+	 * @param eventTypes a {@link com.ioteg.model.EventTypeList} object.
+	 * @return a {@link java.util.List} object.
+	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 * @throws java.text.ParseException if any.
+	 */
 	@PostMapping("/generateEvents")
 	@ResponseBody
 	@CrossOrigin(origins = "*")
@@ -48,6 +63,14 @@ public class EventGenerationController {
 		return results;
 	}
 	
+	/**
+	 * <p>generateConfigurableEvents.</p>
+	 *
+	 * @param configurableEventTypes a {@link com.ioteg.model.ConfigurableEventList} object.
+	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
+	 * @throws java.text.ParseException if any.
+	 */
 	@PostMapping("/generateConfigurableEvents")
 	@ResponseBody
 	@CrossOrigin(origins = "*")

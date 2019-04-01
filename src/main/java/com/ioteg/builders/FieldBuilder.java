@@ -14,11 +14,20 @@ import com.ioteg.model.Field;
 /**
  * This class is a builder which allows to build an Field from its definition in
  * a XML Element.
- * 
+ *
  * @author Antonio Vélez Estévez
+ * @version $Id: $Id
  */
 public class FieldBuilder {
 
+	/**
+	 * <p>build.</p>
+	 *
+	 * @param fieldElement a {@link org.jdom2.Element} object.
+	 * @return a {@link com.ioteg.model.Field} object.
+	 * @throws org.jdom2.JDOMException if any.
+	 * @throws java.io.IOException if any.
+	 */
 	public Field build(Element fieldElement) throws JDOMException, IOException {
 		AttributeBuilder attributeBuilder = new AttributeBuilder();
 
@@ -69,9 +78,8 @@ public class FieldBuilder {
 
 	/**
 	 * @param fieldElement The XML element.
-	 * @param field        The field that is being built.
-	 * @throws IOException
-	 * @throws JDOMException
+	 * @throws IOException if any.
+	 * @throws JDOMException if any.
 	 */
 	private List<Field> buildSubFields(Element fieldElement) throws JDOMException, IOException {
 		FieldBuilder fieldBuilder = new FieldBuilder();
