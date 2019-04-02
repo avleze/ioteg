@@ -13,9 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.ioteg.builders.EventTypeBuilder;
-import com.ioteg.generators.context.GenerationContext;
-import com.ioteg.generators.eventtype.EventTypeGenerationAlgorithm;
-import com.ioteg.generators.eventtype.EventTypeGenerator;
+import com.ioteg.generation.EventTypeGenerationAlgorithm;
+import com.ioteg.generation.EventTypeGenerator;
+import com.ioteg.generation.GenerationContext;
 import com.ioteg.model.EventType;
 import com.ioteg.resultmodel.ArrayResultBlock;
 import com.ioteg.resultmodel.ResultBlock;

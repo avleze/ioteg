@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import com.ioteg.generators.Generable;
-import com.ioteg.generators.GeneratorsFactory;
-import com.ioteg.generators.context.GenerationContext;
+import com.ioteg.generation.Generable;
+import com.ioteg.generation.GenerationContext;
+import com.ioteg.generation.GeneratorsFactory;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;

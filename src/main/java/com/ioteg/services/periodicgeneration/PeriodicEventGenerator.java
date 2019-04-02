@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
-import com.ioteg.generators.context.GenerationContext;
-import com.ioteg.generators.eventtype.EventTypeGenerationAlgorithm;
-import com.ioteg.generators.eventtype.EventTypeGenerator;
-import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.generation.EventTypeGenerationAlgorithm;
+import com.ioteg.generation.EventTypeGenerator;
+import com.ioteg.generation.GenerationContext;
+import com.ioteg.generation.NotExistingGeneratorException;
 import com.ioteg.model.EventType;
 
 /**
@@ -29,8 +29,8 @@ public class PeriodicEventGenerator implements Runnable {
 	 * @param eventType a {@link com.ioteg.model.EventType} object.
 	 * @throws java.text.ParseException if any.
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
-	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
-	 * @param generationContext a {@link com.ioteg.generators.context.GenerationContext} object.
+	 * @throws com.ioteg.generation.NotExistingGeneratorException if any.
+	 * @param generationContext a {@link com.ioteg.generation.GenerationContext} object.
 	 * @param objectMapper a {@link com.fasterxml.jackson.databind.ObjectMapper} object.
 	 */
 	public PeriodicEventGenerator(EventType eventType, GenerationContext generationContext, ObjectMapper objectMapper) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {

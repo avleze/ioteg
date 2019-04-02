@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
-import com.ioteg.generators.context.GenerationContext;
-import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.generation.GenerationContext;
+import com.ioteg.generation.NotExistingGeneratorException;
 import com.ioteg.model.ConfigurableEventType;
 import com.ioteg.resultmodel.ResultField;
 
@@ -34,7 +34,7 @@ public class PeriodicEventGenerationService {
 	 * <p>executeConfigurableEventTypes.</p>
 	 *
 	 * @param configurableEventTypes a {@link java.util.List} object.
-	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.generation.NotExistingGeneratorException if any.
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
 	 * @throws java.text.ParseException if any.
 	 */

@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
-import com.ioteg.generators.GeneratorsFactory;
-import com.ioteg.generators.context.GenerationContext;
-import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.generation.GenerationContext;
+import com.ioteg.generation.GeneratorsFactory;
+import com.ioteg.generation.NotExistingGeneratorException;
 import com.ioteg.model.ConfigurableEventList;
 import com.ioteg.model.EventType;
 import com.ioteg.model.EventTypeList;
@@ -45,7 +45,7 @@ public class EventGenerationController {
 	 *
 	 * @param eventTypes a {@link com.ioteg.model.EventTypeList} object.
 	 * @return a {@link java.util.List} object.
-	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.generation.NotExistingGeneratorException if any.
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
 	 * @throws java.text.ParseException if any.
 	 */
@@ -67,7 +67,7 @@ public class EventGenerationController {
 	 * <p>generateConfigurableEvents.</p>
 	 *
 	 * @param configurableEventTypes a {@link com.ioteg.model.ConfigurableEventList} object.
-	 * @throws com.ioteg.generators.exceptions.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.generation.NotExistingGeneratorException if any.
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
 	 * @throws java.text.ParseException if any.
 	 */

@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
-import com.ioteg.generators.Generable;
-import com.ioteg.generators.GeneratorsFactory;
-import com.ioteg.generators.context.GenerationContext;
-import com.ioteg.generators.exceptions.NotExistingGeneratorException;
+import com.ioteg.generation.Generable;
+import com.ioteg.generation.GenerationContext;
+import com.ioteg.generation.GeneratorsFactory;
+import com.ioteg.generation.NotExistingGeneratorException;
 import com.ioteg.model.Field;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
