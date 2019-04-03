@@ -8,17 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Rol implements Serializable{
+public class Role implements Serializable{
 
 	private static final long serialVersionUID = 9190709637494759982L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
-	protected String name;
+	protected String roleName;
 	
 	@SuppressWarnings("unused")
-	private Rol() {
+	private Role() {
 		
 	}
 	
@@ -26,10 +26,10 @@ public class Rol implements Serializable{
 	 * @param id
 	 * @param rol
 	 */
-	public Rol(Long id, String name) {
+	public Role(Long id, String roleName) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.roleName = roleName;
 	}
 	
 	/**
@@ -49,14 +49,14 @@ public class Rol implements Serializable{
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return roleName;
 	}
 
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.name = name;
+		this.roleName = name;
 	}
 	
 	

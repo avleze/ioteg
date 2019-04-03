@@ -39,7 +39,7 @@ public class User implements UserDetails {
 	private boolean isEnabled;
 
 	@ManyToMany
-	private Set<Rol> roles;
+	private Set<Role> roles;
 
 	@SuppressWarnings("unused")
 	private User() {
@@ -61,7 +61,7 @@ public class User implements UserDetails {
 			@JsonProperty("isAccountNonExpired") boolean isAccountNonExpired,
 			@JsonProperty("isAccountNonLocked") boolean isAccountNonLocked,
 			@JsonProperty("isCredentialsNonExpired") boolean isCredentialsNonExpired,
-			@JsonProperty("isEnabled") boolean isEnabled, Set<Rol> roles) {
+			@JsonProperty("isEnabled") boolean isEnabled, Set<Role> roles) {
 		super();
 		this.id = id;
 		this.username = username;
