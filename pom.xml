@@ -12,6 +12,12 @@
 		<version>2.1.3.RELEASE</version>
 	</parent>
 	<dependencies>
+
+		<dependency>
+			<groupId>com.ioteg</groupId>
+			<artifactId>ioteg-exprlang</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jdom/jdom2 -->
 		<dependency>
 			<groupId>org.jdom</groupId>
