@@ -7,5 +7,5 @@ addons:
 script:
   - mkdir ./localdependencies
   - wget -P "./localdependencies" https://github.com/avleze/ioteg-exprlang/releases/download/1.0.0/ioteg-exprlang-1.0.0.jar
-  - mvn install:install -file -Dfile=./localdependencies/ioteg-exprlang-1.0.0.jar
+  - mvn install:install-file -Dfile=./localdependencies/ioteg-exprlang-1.0.0.jar
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
