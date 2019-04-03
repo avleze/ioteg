@@ -73,7 +73,7 @@ public class BlockBuilder {
 		return optionalFieldsOfTheBlock;
 	}
 
-	private List<InjectedField> buildSubInjectedField(Element element) throws JDOMException, IOException {
+	private List<InjectedField> buildSubInjectedField(Element element) {
 		List<Element> injectedFields = element.getChildren("inject");
 		List<InjectedField> injectedFieldsOfTheBlock = new ArrayList<>();
 

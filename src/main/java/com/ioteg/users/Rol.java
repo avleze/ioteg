@@ -1,16 +1,21 @@
 package com.ioteg.users;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Rol {
+public class Rol implements Serializable{
+
+	private static final long serialVersionUID = 9190709637494759982L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
-	protected String rol;
+	protected String name;
 	
 	@SuppressWarnings("unused")
 	private Rol() {
@@ -21,10 +26,10 @@ public class Rol {
 	 * @param id
 	 * @param rol
 	 */
-	public Rol(Long id, String rol) {
+	public Rol(Long id, String name) {
 		super();
 		this.id = id;
-		this.rol = rol;
+		this.name = name;
 	}
 	
 	/**
@@ -39,17 +44,20 @@ public class Rol {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	/**
-	 * @return the rol
+	 * @return the name
 	 */
-	public String getRol() {
-		return rol;
+	public String getName() {
+		return name;
 	}
+
 	/**
-	 * @param rol the rol to set
+	 * @param name the name to set
 	 */
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setName(String name) {
+		this.name = name;
 	}
+	
 	
 }
