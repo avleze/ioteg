@@ -3,6 +3,11 @@ package com.ioteg.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -14,31 +19,62 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Antonio Vélez Estévez
  * @version $Id: $Id
  */
+
+@Entity
 public class OptionalFields {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private Boolean mandatory;
 	@Valid
+	@OneToMany
 	private List<Field> fields;
 
+	@SuppressWarnings("unused")
+	private OptionalFields() {
+		
+	}
+
 	/**
-	 * <p>Constructor for OptionalFields.</p>
+	 * <p>
+	 * Constructor for OptionalFields.
+	 * </p>
 	 *
+	 * @param id        a {@link java.lang.Long} object.
 	 * @param mandatory a {@link java.lang.Boolean} object.
-	 * @param fields a {@link java.util.List} object.
+	 * @param fields    a {@link java.util.List} object.
 	 */
 	@JsonCreator
-	public OptionalFields(@JsonProperty("mandatory") Boolean mandatory,
+	public OptionalFields(@JsonProperty("id") Long id, @JsonProperty("mandatory") Boolean mandatory,
 			@Valid @JsonProperty("fields") List<Field> fields) {
 		if (mandatory == null)
 			mandatory = true;
 		if (fields == null)
 			fields = new ArrayList<>();
 
+		this.id = id;
 		this.mandatory = mandatory;
 		this.fields = fields;
 	}
+	
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
 
 	/**
-	 * <p>Getter for the field <code>mandatory</code>.</p>
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * <p>
+	 * Getter for the field <code>mandatory</code>.
+	 * </p>
 	 *
 	 * @return the mandatory
 	 */
@@ -47,7 +83,9 @@ public class OptionalFields {
 	}
 
 	/**
-	 * <p>Setter for the field <code>mandatory</code>.</p>
+	 * <p>
+	 * Setter for the field <code>mandatory</code>.
+	 * </p>
 	 *
 	 * @param mandatory the mandatory to set
 	 */
@@ -56,7 +94,9 @@ public class OptionalFields {
 	}
 
 	/**
-	 * <p>Getter for the field <code>fields</code>.</p>
+	 * <p>
+	 * Getter for the field <code>fields</code>.
+	 * </p>
 	 *
 	 * @return the fields
 	 */
@@ -65,7 +105,9 @@ public class OptionalFields {
 	}
 
 	/**
-	 * <p>Setter for the field <code>fields</code>.</p>
+	 * <p>
+	 * Setter for the field <code>fields</code>.
+	 * </p>
 	 *
 	 * @param fields the fields to set
 	 */

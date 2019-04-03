@@ -1,5 +1,11 @@
 package com.ioteg.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -12,7 +18,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Antonio Vélez Estévez
  * @version $Id: $Id
  */
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Attribute {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	protected Long id;
 	@NotEmpty
 	@NotNull
 	protected String type;
@@ -30,56 +43,63 @@ public class Attribute {
 	protected String format;
 	protected Boolean isNumeric;
 
+	protected Attribute() {
+
+	}
+
 	/**
-	 * <p>Constructor for Attribute.</p>
-	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param value a {@link java.lang.String} object.
-	 * @param min a {@link java.lang.Double} object.
-	 * @param step a {@link java.lang.String} object.
-	 * @param unit a {@link java.lang.String} object.
-	 * @param max a {@link java.lang.Double} object.
-	 * @param precision a {@link java.lang.Integer} object.
-	 * @param length a {@link java.lang.Integer} object.
-	 * @param strCase a {@link java.lang.String} object.
-	 * @param begin a {@link java.lang.String} object.
-	 * @param end a {@link java.lang.String} object.
+	 * <p>
+	 * Constructor for Attribute.
+	 * </p>
+	 * 
+	 * @param id           a {@link java.lang.Long} object.
+	 * @param type         a {@link java.lang.String} object.
+	 * @param value        a {@link java.lang.String} object.
+	 * @param min          a {@link java.lang.Double} object.
+	 * @param step         a {@link java.lang.String} object.
+	 * @param unit         a {@link java.lang.String} object.
+	 * @param max          a {@link java.lang.Double} object.
+	 * @param precision    a {@link java.lang.Integer} object.
+	 * @param length       a {@link java.lang.Integer} object.
+	 * @param strCase      a {@link java.lang.String} object.
+	 * @param begin        a {@link java.lang.String} object.
+	 * @param end          a {@link java.lang.String} object.
 	 * @param endcharacter a {@link java.lang.String} object.
-	 * @param format a {@link java.lang.String} object.
-	 * @param isNumeric a {@link java.lang.Boolean} object.
+	 * @param format       a {@link java.lang.String} object.
+	 * @param isNumeric    a {@link java.lang.Boolean} object.
 	 */
 	@JsonCreator
-	public Attribute(@NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
-			@JsonProperty("min") Double min, @JsonProperty("step") String step, @JsonProperty("unit") String unit,
-			@JsonProperty("max") Double max, @JsonProperty("precision") Integer precision,
-			@JsonProperty("length") Integer length, @JsonProperty("case") String strCase,
-			@JsonProperty("begin") String begin, @JsonProperty("end") String end,
+	public Attribute(@JsonProperty("id") Long id, @NotEmpty @NotNull @JsonProperty("type") String type,
+			@JsonProperty("value") String value, @JsonProperty("min") Double min, @JsonProperty("step") String step,
+			@JsonProperty("unit") String unit, @JsonProperty("max") Double max,
+			@JsonProperty("precision") Integer precision, @JsonProperty("length") Integer length,
+			@JsonProperty("case") String strCase, @JsonProperty("begin") String begin, @JsonProperty("end") String end,
 			@JsonProperty("endcharacter") String endcharacter, @JsonProperty("format") String format,
 			@JsonProperty("isnumeric") Boolean isNumeric) {
+		this.id = id;
 		this.type = type;
 		this.value = value;
-		
-		if(min == null)
+
+		if (min == null)
 			this.min = 0.0;
 		else
 			this.min = min;
-		
+
 		this.step = step;
 		this.unit = unit;
-		
-		if(max == null)
+
+		if (max == null)
 			this.max = 10.0;
 		else
 			this.max = max;
-		
+
 		this.precision = precision;
-		
-		
-		if(length == null)
+
+		if (length == null)
 			this.length = 10;
 		else
 			this.length = length;
-		
+
 		this.strCase = strCase;
 		this.begin = begin;
 		this.end = end;
@@ -89,7 +109,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Constructor for Attribute.</p>
+	 * <p>
+	 * Constructor for Attribute.
+	 * </p>
 	 *
 	 * @param type a {@link java.lang.String} object.
 	 */
@@ -98,7 +120,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>type</code>.</p>
+	 * <p>
+	 * Getter for the field <code>type</code>.
+	 * </p>
 	 *
 	 * @return the type
 	 */
@@ -107,7 +131,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>type</code>.</p>
+	 * <p>
+	 * Setter for the field <code>type</code>.
+	 * </p>
 	 *
 	 * @param type the type to set
 	 */
@@ -116,7 +142,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>value</code>.</p>
+	 * <p>
+	 * Getter for the field <code>value</code>.
+	 * </p>
 	 *
 	 * @return the value
 	 */
@@ -125,7 +153,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>value</code>.</p>
+	 * <p>
+	 * Setter for the field <code>value</code>.
+	 * </p>
 	 *
 	 * @param value the value to set
 	 */
@@ -134,7 +164,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>min</code>.</p>
+	 * <p>
+	 * Getter for the field <code>min</code>.
+	 * </p>
 	 *
 	 * @return the min
 	 */
@@ -143,7 +175,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>min</code>.</p>
+	 * <p>
+	 * Setter for the field <code>min</code>.
+	 * </p>
 	 *
 	 * @param min the min to set
 	 */
@@ -152,7 +186,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>step</code>.</p>
+	 * <p>
+	 * Getter for the field <code>step</code>.
+	 * </p>
 	 *
 	 * @return the step
 	 */
@@ -161,7 +197,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>step</code>.</p>
+	 * <p>
+	 * Setter for the field <code>step</code>.
+	 * </p>
 	 *
 	 * @param step the step to set
 	 */
@@ -170,7 +208,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>unit</code>.</p>
+	 * <p>
+	 * Getter for the field <code>unit</code>.
+	 * </p>
 	 *
 	 * @return the unit
 	 */
@@ -179,7 +219,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>unit</code>.</p>
+	 * <p>
+	 * Setter for the field <code>unit</code>.
+	 * </p>
 	 *
 	 * @param unit the unit to set
 	 */
@@ -188,7 +230,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>max</code>.</p>
+	 * <p>
+	 * Getter for the field <code>max</code>.
+	 * </p>
 	 *
 	 * @return the max
 	 */
@@ -197,7 +241,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>max</code>.</p>
+	 * <p>
+	 * Setter for the field <code>max</code>.
+	 * </p>
 	 *
 	 * @param max the max to set
 	 */
@@ -206,7 +252,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>precision</code>.</p>
+	 * <p>
+	 * Getter for the field <code>precision</code>.
+	 * </p>
 	 *
 	 * @return the precision
 	 */
@@ -215,7 +263,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>precision</code>.</p>
+	 * <p>
+	 * Setter for the field <code>precision</code>.
+	 * </p>
 	 *
 	 * @param precision the precision to set
 	 */
@@ -224,7 +274,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>length</code>.</p>
+	 * <p>
+	 * Getter for the field <code>length</code>.
+	 * </p>
 	 *
 	 * @return the length
 	 */
@@ -233,7 +285,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>length</code>.</p>
+	 * <p>
+	 * Setter for the field <code>length</code>.
+	 * </p>
 	 *
 	 * @param length the length to set
 	 */
@@ -242,7 +296,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>getCase.</p>
+	 * <p>
+	 * getCase.
+	 * </p>
 	 *
 	 * @return the case
 	 */
@@ -251,7 +307,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>setCase.</p>
+	 * <p>
+	 * setCase.
+	 * </p>
 	 *
 	 * @param strCase a {@link java.lang.String} object.
 	 */
@@ -260,7 +318,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>begin</code>.</p>
+	 * <p>
+	 * Getter for the field <code>begin</code>.
+	 * </p>
 	 *
 	 * @return the begin
 	 */
@@ -269,7 +329,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>begin</code>.</p>
+	 * <p>
+	 * Setter for the field <code>begin</code>.
+	 * </p>
 	 *
 	 * @param begin the begin to set
 	 */
@@ -278,7 +340,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>end</code>.</p>
+	 * <p>
+	 * Getter for the field <code>end</code>.
+	 * </p>
 	 *
 	 * @return the end
 	 */
@@ -287,7 +351,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>end</code>.</p>
+	 * <p>
+	 * Setter for the field <code>end</code>.
+	 * </p>
 	 *
 	 * @param end the end to set
 	 */
@@ -296,7 +362,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>endcharacter</code>.</p>
+	 * <p>
+	 * Getter for the field <code>endcharacter</code>.
+	 * </p>
 	 *
 	 * @return the endcharacter
 	 */
@@ -305,7 +373,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>endcharacter</code>.</p>
+	 * <p>
+	 * Setter for the field <code>endcharacter</code>.
+	 * </p>
 	 *
 	 * @param endcharacter the endcharacter to set
 	 */
@@ -314,7 +384,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>format</code>.</p>
+	 * <p>
+	 * Getter for the field <code>format</code>.
+	 * </p>
 	 *
 	 * @return the format
 	 */
@@ -323,7 +395,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>format</code>.</p>
+	 * <p>
+	 * Setter for the field <code>format</code>.
+	 * </p>
 	 *
 	 * @param format the format to set
 	 */
@@ -332,7 +406,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>isNumeric</code>.</p>
+	 * <p>
+	 * Getter for the field <code>isNumeric</code>.
+	 * </p>
 	 *
 	 * @return the isNumeric
 	 */
@@ -341,7 +417,9 @@ public class Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>isNumeric</code>.</p>
+	 * <p>
+	 * Setter for the field <code>isNumeric</code>.
+	 * </p>
 	 *
 	 * @param isNumeric the isNumeric to set
 	 */

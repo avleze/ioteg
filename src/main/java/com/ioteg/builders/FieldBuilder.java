@@ -54,7 +54,7 @@ public class FieldBuilder {
 		if(quotes != null)
 			quotesValue = Boolean.valueOf(quotes);
 		
-		return new Field(attr.getType(), attr.getValue(), attr.getMin(), attr.getStep(), attr.getUnit(), attr.getMax(),
+		return new Field(null, attr.getType(), attr.getValue(), attr.getMin(), attr.getStep(), attr.getUnit(), attr.getMax(),
 				attr.getPrecision(), attr.getLength(), attr.getCase(), attr.getBegin(), attr.getEnd(),
 				attr.getEndcharacter(), attr.getFormat(), attr.getIsNumeric(), name, quotesValue, chooseoneValue,
 				dependence, Boolean.valueOf(injectable), subFields, attributes, customBehaviour);

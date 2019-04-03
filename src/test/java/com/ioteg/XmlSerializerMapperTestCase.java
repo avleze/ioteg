@@ -22,12 +22,12 @@ import com.ioteg.resultmodel.ResultBlock;
 import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultEvent;
 import com.ioteg.resultmodel.ResultSimpleField;
-import com.ioteg.resultmodel.xmlserializers.XMLArrayResultBlockSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultBlockSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultComplexFieldSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultEventSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultSimpleFieldSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLSerializerMapper;
+import com.ioteg.serializers.xml.XMLArrayResultBlockSerializer;
+import com.ioteg.serializers.xml.XMLResultBlockSerializer;
+import com.ioteg.serializers.xml.XMLResultComplexFieldSerializer;
+import com.ioteg.serializers.xml.XMLResultEventSerializer;
+import com.ioteg.serializers.xml.XMLResultSimpleFieldSerializer;
+import com.ioteg.serializers.xml.XMLSerializerMapper;
 
 public class XmlSerializerMapperTestCase {
 

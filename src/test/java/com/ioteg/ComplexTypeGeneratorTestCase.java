@@ -28,17 +28,17 @@ import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultEvent;
 import com.ioteg.resultmodel.ResultField;
 import com.ioteg.resultmodel.ResultSimpleField;
-import com.ioteg.resultmodel.jsonserializers.ArrayResultBlockSerializer;
-import com.ioteg.resultmodel.jsonserializers.ResultBlockSerializer;
-import com.ioteg.resultmodel.jsonserializers.ResultComplexFieldSerializer;
-import com.ioteg.resultmodel.jsonserializers.ResultEventSerializer;
-import com.ioteg.resultmodel.jsonserializers.ResultSimpleFieldSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLArrayResultBlockSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultBlockSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultComplexFieldSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultEventSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLResultSimpleFieldSerializer;
-import com.ioteg.resultmodel.xmlserializers.XMLSerializerMapper;
+import com.ioteg.serializers.json.ArrayResultBlockSerializer;
+import com.ioteg.serializers.json.ResultBlockSerializer;
+import com.ioteg.serializers.json.ResultComplexFieldSerializer;
+import com.ioteg.serializers.json.ResultEventSerializer;
+import com.ioteg.serializers.json.ResultSimpleFieldSerializer;
+import com.ioteg.serializers.xml.XMLArrayResultBlockSerializer;
+import com.ioteg.serializers.xml.XMLResultBlockSerializer;
+import com.ioteg.serializers.xml.XMLResultComplexFieldSerializer;
+import com.ioteg.serializers.xml.XMLResultEventSerializer;
+import com.ioteg.serializers.xml.XMLResultSimpleFieldSerializer;
+import com.ioteg.serializers.xml.XMLSerializerMapper;
 
 import static org.hamcrest.Matchers.matchesPattern;
 

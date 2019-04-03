@@ -29,9 +29,7 @@ public class EventTypeBuilder {
 	 * @throws org.jdom2.JDOMException if any.
 	 */
 	public EventType build(Document document) throws JDOMException, IOException {
-		EventType eventType = new EventType();
 		String eventTypeName = document.getRootElement().getAttributeValue("name");
-		eventType.setName(eventTypeName);
 		BlockBuilder blockBuilder = new BlockBuilder();
 
 		List<Block> blocksOfTheEvent = new ArrayList<>();
@@ -43,8 +41,6 @@ public class EventTypeBuilder {
 			blocksOfTheEvent.add(block);
 		}
 
-		eventType.setBlocks(blocksOfTheEvent);
-
-		return eventType;
+		return new EventType(null, eventTypeName, blocksOfTheEvent);
 	}
 }

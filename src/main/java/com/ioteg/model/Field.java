@@ -4,6 +4,9 @@ package com.ioteg.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -18,6 +21,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Antonio Vélez Estévez
  * @version $Id: $Id
  */
+
+@Entity
 public class Field extends Attribute {
 	@NotEmpty(message = "The field name can't be empty.")
 	@NotNull(message = "The field name can't be null.")
@@ -27,20 +32,30 @@ public class Field extends Attribute {
 	private String dependence;
 	private Boolean injectable;
 	@Valid
+	@OneToMany
 	private List<Field> fields;
 	@Valid
+	@OneToMany
 	private List<Attribute> attributes;
+	@OneToOne
 	private CustomBehaviour customBehaviour;
 
+	@SuppressWarnings("unused")
+	private Field() {
+		super();
+	}
+	
 	/**
-	 * <p>Constructor for Field.</p>
+	 * <p>
+	 * Constructor for Field.
+	 * </p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name   a {@link java.lang.String} object.
 	 * @param quotes a {@link java.lang.Boolean} object.
-	 * @param attr a {@link com.ioteg.model.Attribute} object.
+	 * @param attr   a {@link com.ioteg.model.Attribute} object.
 	 */
 	public Field(String name, Boolean quotes, Attribute attr) {
-		super(attr.getType(), attr.getValue(), attr.getMin(), attr.getStep(), attr.getUnit(), attr.getMax(),
+		super(null, attr.getType(), attr.getValue(), attr.getMin(), attr.getStep(), attr.getUnit(), attr.getMax(),
 				attr.getPrecision(), attr.getLength(), attr.getCase(), attr.getBegin(), attr.getEnd(),
 				attr.getEndcharacter(), attr.getFormat(), attr.getIsNumeric());
 		this.name = name;
@@ -49,11 +64,13 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Constructor for Field.</p>
+	 * <p>
+	 * Constructor for Field.
+	 * </p>
 	 *
-	 * @param name a {@link java.lang.String} object.
+	 * @param name   a {@link java.lang.String} object.
 	 * @param quotes a {@link java.lang.Boolean} object.
-	 * @param type a {@link java.lang.String} object.
+	 * @param type   a {@link java.lang.String} object.
 	 */
 	public Field(String name, Boolean quotes, String type) {
 		super(type);
@@ -63,34 +80,37 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Constructor for Field.</p>
-	 *
-	 * @param type a {@link java.lang.String} object.
-	 * @param value a {@link java.lang.String} object.
-	 * @param min a {@link java.lang.Double} object.
-	 * @param step a {@link java.lang.String} object.
-	 * @param unit a {@link java.lang.String} object.
-	 * @param max a {@link java.lang.Double} object.
-	 * @param precision a {@link java.lang.Integer} object.
-	 * @param length a {@link java.lang.Integer} object.
-	 * @param strCase a {@link java.lang.String} object.
-	 * @param begin a {@link java.lang.String} object.
-	 * @param end a {@link java.lang.String} object.
-	 * @param endcharacter a {@link java.lang.String} object.
-	 * @param format a {@link java.lang.String} object.
-	 * @param isNumeric a {@link java.lang.Boolean} object.
-	 * @param name a {@link java.lang.String} object.
-	 * @param quotes a {@link java.lang.Boolean} object.
-	 * @param chooseone a {@link java.lang.Boolean} object.
-	 * @param dependence a {@link java.lang.String} object.
-	 * @param fields a {@link java.util.List} object.
-	 * @param attributes a {@link java.util.List} object.
+	 * <p>
+	 * Constructor for Field.
+	 * </p>
+	 * 
+	 * @param id			  a {@link java.lang.Long} object.
+	 * @param type            a {@link java.lang.String} object.
+	 * @param value           a {@link java.lang.String} object.
+	 * @param min             a {@link java.lang.Double} object.
+	 * @param step            a {@link java.lang.String} object.
+	 * @param unit            a {@link java.lang.String} object.
+	 * @param max             a {@link java.lang.Double} object.
+	 * @param precision       a {@link java.lang.Integer} object.
+	 * @param length          a {@link java.lang.Integer} object.
+	 * @param strCase         a {@link java.lang.String} object.
+	 * @param begin           a {@link java.lang.String} object.
+	 * @param end             a {@link java.lang.String} object.
+	 * @param endcharacter    a {@link java.lang.String} object.
+	 * @param format          a {@link java.lang.String} object.
+	 * @param isNumeric       a {@link java.lang.Boolean} object.
+	 * @param name            a {@link java.lang.String} object.
+	 * @param quotes          a {@link java.lang.Boolean} object.
+	 * @param chooseone       a {@link java.lang.Boolean} object.
+	 * @param dependence      a {@link java.lang.String} object.
+	 * @param fields          a {@link java.util.List} object.
+	 * @param attributes      a {@link java.util.List} object.
 	 * @param customBehaviour a {@link com.ioteg.model.CustomBehaviour} object.
-	 * @param injectable a {@link java.lang.Boolean} object.
+	 * @param injectable      a {@link java.lang.Boolean} object.
 	 */
 
 	@JsonCreator
-	public Field(@NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
+	public Field(@JsonProperty("id") Long id, @NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
 			@JsonProperty("min") Double min, @JsonProperty("step") String step, @JsonProperty("unit") String unit,
 			@JsonProperty("max") Double max, @JsonProperty("precision") Integer precision,
 			@JsonProperty("length") Integer length, @JsonProperty("strCase") String strCase,
@@ -102,7 +122,7 @@ public class Field extends Attribute {
 			@Valid @JsonProperty("fields") List<Field> fields,
 			@Valid @JsonProperty("attributes") List<Attribute> attributes,
 			@JsonProperty("customBehaviour") CustomBehaviour customBehaviour) {
-		super(type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format,
+		super(id, type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format,
 				isNumeric);
 
 		if (quotes == null)
@@ -127,9 +147,11 @@ public class Field extends Attribute {
 		this.attributes = attributes;
 		this.customBehaviour = customBehaviour;
 	}
-
+	
 	/**
-	 * <p>Getter for the field <code>name</code>.</p>
+	 * <p>
+	 * Getter for the field <code>name</code>.
+	 * </p>
 	 *
 	 * @return the name
 	 */
@@ -138,7 +160,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>name</code>.</p>
+	 * <p>
+	 * Setter for the field <code>name</code>.
+	 * </p>
 	 *
 	 * @param name the name to set
 	 */
@@ -147,7 +171,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>quotes</code>.</p>
+	 * <p>
+	 * Getter for the field <code>quotes</code>.
+	 * </p>
 	 *
 	 * @return the quotes
 	 */
@@ -156,7 +182,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>quotes</code>.</p>
+	 * <p>
+	 * Setter for the field <code>quotes</code>.
+	 * </p>
 	 *
 	 * @param quotes the quotes to set
 	 */
@@ -165,7 +193,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>chooseone</code>.</p>
+	 * <p>
+	 * Getter for the field <code>chooseone</code>.
+	 * </p>
 	 *
 	 * @return the chooseone
 	 */
@@ -174,7 +204,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>chooseone</code>.</p>
+	 * <p>
+	 * Setter for the field <code>chooseone</code>.
+	 * </p>
 	 *
 	 * @param chooseone the chooseone to set
 	 */
@@ -183,7 +215,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>dependence</code>.</p>
+	 * <p>
+	 * Getter for the field <code>dependence</code>.
+	 * </p>
 	 *
 	 * @return the dependence
 	 */
@@ -192,7 +226,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>dependence</code>.</p>
+	 * <p>
+	 * Setter for the field <code>dependence</code>.
+	 * </p>
 	 *
 	 * @param dependence the dependence to set
 	 */
@@ -201,7 +237,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>injectable</code>.</p>
+	 * <p>
+	 * Getter for the field <code>injectable</code>.
+	 * </p>
 	 *
 	 * @return the injectable
 	 */
@@ -210,7 +248,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>injectable</code>.</p>
+	 * <p>
+	 * Setter for the field <code>injectable</code>.
+	 * </p>
 	 *
 	 * @param injectable the injectable to set
 	 */
@@ -219,7 +259,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>fields</code>.</p>
+	 * <p>
+	 * Getter for the field <code>fields</code>.
+	 * </p>
 	 *
 	 * @return the fields
 	 */
@@ -228,7 +270,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>fields</code>.</p>
+	 * <p>
+	 * Setter for the field <code>fields</code>.
+	 * </p>
 	 *
 	 * @param fields the fields to set
 	 */
@@ -237,7 +281,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>attributes</code>.</p>
+	 * <p>
+	 * Getter for the field <code>attributes</code>.
+	 * </p>
 	 *
 	 * @return the attributes
 	 */
@@ -246,7 +292,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>attributes</code>.</p>
+	 * <p>
+	 * Setter for the field <code>attributes</code>.
+	 * </p>
 	 *
 	 * @param attributes the attributes to set
 	 */
@@ -255,7 +303,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Getter for the field <code>customBehaviour</code>.</p>
+	 * <p>
+	 * Getter for the field <code>customBehaviour</code>.
+	 * </p>
 	 *
 	 * @return a {@link com.ioteg.model.CustomBehaviour} object.
 	 */
@@ -264,7 +314,9 @@ public class Field extends Attribute {
 	}
 
 	/**
-	 * <p>Setter for the field <code>customBehaviour</code>.</p>
+	 * <p>
+	 * Setter for the field <code>customBehaviour</code>.
+	 * </p>
 	 *
 	 * @param customBehaviour a {@link com.ioteg.model.CustomBehaviour} object.
 	 */

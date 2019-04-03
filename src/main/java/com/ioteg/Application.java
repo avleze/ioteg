@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 
-import com.ioteg.messageconverters.CSVResultEventHttpMessageConverter;
-import com.ioteg.messageconverters.XMLHttpMessageConverter;
+import com.ioteg.http.converters.CSVResultEventHttpMessageConverter;
+import com.ioteg.http.converters.XMLHttpMessageConverter;
 
 
 /**

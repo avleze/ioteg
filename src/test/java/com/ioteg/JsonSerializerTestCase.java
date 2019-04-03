@@ -27,11 +27,11 @@ import com.ioteg.resultmodel.ResultBlock;
 import com.ioteg.resultmodel.ResultComplexField;
 import com.ioteg.resultmodel.ResultEvent;
 import com.ioteg.resultmodel.ResultSimpleField;
-import com.ioteg.resultmodel.jsonserializers.ArrayResultBlockSerializer;
-import com.ioteg.resultmodel.jsonserializers.ResultBlockSerializer;
-import com.ioteg.resultmodel.jsonserializers.ResultComplexFieldSerializer;
-import com.ioteg.resultmodel.jsonserializers.ResultEventSerializer;
-import com.ioteg.resultmodel.jsonserializers.ResultSimpleFieldSerializer;
+import com.ioteg.serializers.json.ArrayResultBlockSerializer;
+import com.ioteg.serializers.json.ResultBlockSerializer;
+import com.ioteg.serializers.json.ResultComplexFieldSerializer;
+import com.ioteg.serializers.json.ResultEventSerializer;
+import com.ioteg.serializers.json.ResultSimpleFieldSerializer;
 
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.MatcherAssert.assertThat;

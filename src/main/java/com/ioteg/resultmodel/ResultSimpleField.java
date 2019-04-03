@@ -1,7 +1,7 @@
 package com.ioteg.resultmodel;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ioteg.resultmodel.jsonserializers.ResultSimpleFieldSerializer;
+import com.ioteg.serializers.json.ResultSimpleFieldSerializer;
 
 /**
  * <p>ResultSimpleField class.</p>

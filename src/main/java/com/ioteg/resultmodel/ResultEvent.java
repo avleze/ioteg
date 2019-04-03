@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ioteg.model.EventType;
-import com.ioteg.resultmodel.jsonserializers.ResultEventSerializer;
+import com.ioteg.serializers.json.ResultEventSerializer;
 
 /**
  * <p>ResultEvent class.</p>

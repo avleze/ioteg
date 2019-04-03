@@ -3,7 +3,7 @@ package com.ioteg.resultmodel;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ioteg.resultmodel.jsonserializers.ResultBlockSerializer;
+import com.ioteg.serializers.json.ResultBlockSerializer;
 
 /**
  * <p>ResultBlock class.</p>

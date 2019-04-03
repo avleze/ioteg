@@ -14,9 +14,10 @@ import com.ioteg.model.CustomBehaviour;
 import com.ioteg.model.RuleCustomBehaviour;
 import com.ioteg.model.VariableCustomBehaviour;
 
-
 /**
- * <p>CustomBehaviourBuilder class.</p>
+ * <p>
+ * CustomBehaviourBuilder class.
+ * </p>
  *
  * @author Antonio Vélez Estévez.
  * @version $Id: $Id
@@ -30,71 +31,62 @@ public class CustomBehaviourBuilder {
 	private static final String RULE_TAG = "rule";
 
 	/**
-	 * <p>build.</p>
+	 * <p>
+	 * build.
+	 * </p>
 	 *
 	 * @param fieldElement a {@link org.jdom2.Element} object.
 	 * @return a {@link com.ioteg.model.CustomBehaviour} object.
 	 * @throws org.jdom2.JDOMException if any.
-	 * @throws java.io.IOException if any.
+	 * @throws java.io.IOException     if any.
 	 */
 	public CustomBehaviour build(Element fieldElement) throws JDOMException, IOException {
-		CustomBehaviour customBehaviour = new CustomBehaviour();
-		
 		String externalFilePath = fieldElement.getAttributeValue(CUSTOM_BEHAVIOUR_ATTR);
-		customBehaviour.setExternalFilePath(externalFilePath);
-		
+
 		File xmlFile = new File(externalFilePath);
 		SAXBuilder builder = new SAXBuilder();
 		Document customBehaviourDocument = builder.build(xmlFile);
 		Element customConditions = customBehaviourDocument.getRootElement();
 
-		buildVariables(customConditions, customBehaviour);
-		buildRules(customConditions, customBehaviour);
-		
 		Integer simulations = Integer.valueOf(customConditions.getAttributeValue(SIMULATIONS_ATTR));
-		customBehaviour.setSimulations(simulations);
-		
-		return customBehaviour;
+
+		return new CustomBehaviour(null, externalFilePath, simulations, buildVariables(customConditions),
+				buildRules(customConditions));
 	}
 
 	/**
 	 * @param customConditions
-	 * @param customBehaviour
 	 */
-	private void buildVariables(Element customConditions, CustomBehaviour customBehaviour) {
+	private List<VariableCustomBehaviour> buildVariables(Element customConditions) {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		for (Element variablesInNode : customConditions.getChildren(VARIABLES_TAG))
-			for (Element variable : variablesInNode.getChildren(VARIABLE_TAG))	
-			{
+			for (Element variable : variablesInNode.getChildren(VARIABLE_TAG)) {
 				String name = variable.getAttributeValue("name");
 				String min = variable.getAttributeValue("min");
 				String max = variable.getAttributeValue("max");
 				String value = variable.getAttributeValue("value");
-				
-				variables.add(new VariableCustomBehaviour(name, min, max, value));
+
+				variables.add(new VariableCustomBehaviour(null, name, min, max, value));
 			}
-		
-		customBehaviour.setVariables(variables);
+		return variables;
 	}
 
 	/**
 	 * @param customConditions
-	 * @param customBehaviour
 	 */
-	private void buildRules(Element customConditions, CustomBehaviour customBehaviour) {
+	private List<RuleCustomBehaviour> buildRules(Element customConditions) {
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 		for (Element variablesInNode : customConditions.getChildren(RULES_TAG))
-			for (Element variable : variablesInNode.getChildren(RULE_TAG))	
-			{
+			for (Element variable : variablesInNode.getChildren(RULE_TAG)) {
 				String min = variable.getAttributeValue("min");
 				String max = variable.getAttributeValue("max");
 				String value = variable.getAttributeValue("value");
 				String sequence = variable.getAttributeValue("sequence");
 				Double weight = Double.valueOf(variable.getAttributeValue("weight"));
 
-				rules.add(new RuleCustomBehaviour(weight, value, min, max, sequence));
+				rules.add(new RuleCustomBehaviour(null, weight, value, min, max, sequence));
 			}
-		
-		customBehaviour.setRules(rules);
+
+		return rules;
 	}
 }

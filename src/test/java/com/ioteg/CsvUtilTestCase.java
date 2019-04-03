@@ -24,7 +24,7 @@ import com.ioteg.generation.EventTypeGenerator;
 import com.ioteg.generation.GenerationContext;
 import com.ioteg.generation.NotExistingGeneratorException;
 import com.ioteg.model.EventType;
-import com.ioteg.resultmodel.csvserializers.CSVUtil;
+import com.ioteg.serializers.csv.CSVUtil;
 
 public class CsvUtilTestCase {
 

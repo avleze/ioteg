@@ -3,6 +3,11 @@ package com.ioteg.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,35 +21,53 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Antonio Vélez Estévez
  * @version $Id: $Id
  */
+
+@Entity
 public class Block {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@NotEmpty
 	@NotNull
 	private String name;
 	private String value;
 	private Integer repetition;
 	@Valid
+	@OneToMany
 	private List<Field> fields;
 	@Valid
+	@OneToMany
 	private List<InjectedField> injectedFields;
 	@Valid
+	@OneToMany
 	private List<OptionalFields> optionalFields;
 
+	@SuppressWarnings("unused")
+	private Block() {
+
+	}
+
 	/**
-	 * <p>Constructor for Block.</p>
-	 *
-	 * @param name a {@link java.lang.String} object.
-	 * @param value a {@link java.lang.String} object.
-	 * @param repetition a {@link java.lang.Integer} object.
-	 * @param fields a {@link java.util.List} object.
+	 * <p>
+	 * Constructor for Block.
+	 * </p>
+	 * 
+	 * @param id             a {@link java.lang.Long} object.
+	 * @param name           a {@link java.lang.String} object.
+	 * @param value          a {@link java.lang.String} object.
+	 * @param repetition     a {@link java.lang.Integer} object.
+	 * @param fields         a {@link java.util.List} object.
 	 * @param optionalFields a {@link java.util.List} object.
 	 * @param injectedFields a {@link java.util.List} object.
 	 */
 	@JsonCreator
-	public Block(@NotEmpty @NotNull @JsonProperty("name") String name, @JsonProperty("value") String value,
-			@JsonProperty("repetition") Integer repetition, @Valid @JsonProperty("fields") List<Field> fields,
+	public Block(@JsonProperty("id") Long id, @NotEmpty @NotNull @JsonProperty("name") String name,
+			@JsonProperty("value") String value, @JsonProperty("repetition") Integer repetition,
+			@Valid @JsonProperty("fields") List<Field> fields,
 			@Valid @JsonProperty("injectedfields") List<InjectedField> injectedFields,
 			@Valid @JsonProperty("optionalfields") List<OptionalFields> optionalFields) {
-		
+
 		if (injectedFields == null)
 			injectedFields = new ArrayList<>();
 		if (optionalFields == null)
@@ -52,6 +75,7 @@ public class Block {
 		if (fields == null)
 			fields = new ArrayList<>();
 
+		this.id = id;
 		this.name = name;
 		this.value = value;
 		this.repetition = repetition;
@@ -61,7 +85,23 @@ public class Block {
 	}
 
 	/**
-	 * <p>Getter for the field <code>name</code>.</p>
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	/**
+	 * <p>
+	 * Getter for the field <code>name</code>.
+	 * </p>
 	 *
 	 * @return the name
 	 */
@@ -70,7 +110,9 @@ public class Block {
 	}
 
 	/**
-	 * <p>Setter for the field <code>name</code>.</p>
+	 * <p>
+	 * Setter for the field <code>name</code>.
+	 * </p>
 	 *
 	 * @param name the name to set
 	 */
@@ -79,7 +121,9 @@ public class Block {
 	}
 
 	/**
-	 * <p>Getter for the field <code>value</code>.</p>
+	 * <p>
+	 * Getter for the field <code>value</code>.
+	 * </p>
 	 *
 	 * @return the value
 	 */
@@ -88,7 +132,9 @@ public class Block {
 	}
 
 	/**
-	 * <p>Setter for the field <code>value</code>.</p>
+	 * <p>
+	 * Setter for the field <code>value</code>.
+	 * </p>
 	 *
 	 * @param value the value to set
 	 */
@@ -97,7 +143,9 @@ public class Block {
 	}
 
 	/**
-	 * <p>Getter for the field <code>repetition</code>.</p>
+	 * <p>
+	 * Getter for the field <code>repetition</code>.
+	 * </p>
 	 *
 	 * @return the repetition
 	 */
@@ -106,7 +154,9 @@ public class Block {
 	}
 
 	/**
-	 * <p>Setter for the field <code>repetition</code>.</p>
+	 * <p>
+	 * Setter for the field <code>repetition</code>.
+	 * </p>
 	 *
 	 * @param repetition the repetition to set
 	 */
@@ -115,7 +165,9 @@ public class Block {
 	}
 
 	/**
-	 * <p>Getter for the field <code>fields</code>.</p>
+	 * <p>
+	 * Getter for the field <code>fields</code>.
+	 * </p>
 	 *
 	 * @return the fields
 	 */
@@ -124,17 +176,20 @@ public class Block {
 	}
 
 	/**
-	 * <p>Setter for the field <code>fields</code>.</p>
+	 * <p>
+	 * Setter for the field <code>fields</code>.
+	 * </p>
 	 *
 	 * @param fields the fields to set
 	 */
 	public void setFields(List<Field> fields) {
 		this.fields = fields;
 	}
-	
 
 	/**
-	 * <p>Getter for the field <code>injectedFields</code>.</p>
+	 * <p>
+	 * Getter for the field <code>injectedFields</code>.
+	 * </p>
 	 *
 	 * @return the injectedFields
 	 */
@@ -143,7 +198,9 @@ public class Block {
 	}
 
 	/**
-	 * <p>Setter for the field <code>injectedFields</code>.</p>
+	 * <p>
+	 * Setter for the field <code>injectedFields</code>.
+	 * </p>
 	 *
 	 * @param injectedFields the injectedFields to set
 	 */
@@ -152,7 +209,9 @@ public class Block {
 	}
 
 	/**
-	 * <p>Getter for the field <code>optionalFields</code>.</p>
+	 * <p>
+	 * Getter for the field <code>optionalFields</code>.
+	 * </p>
 	 *
 	 * @return the optionalFields
 	 */
@@ -161,7 +220,9 @@ public class Block {
 	}
 
 	/**
-	 * <p>Setter for the field <code>optionalFields</code>.</p>
+	 * <p>
+	 * Setter for the field <code>optionalFields</code>.
+	 * </p>
 	 *
 	 * @param optionalFields the optionalFields to set
 	 */

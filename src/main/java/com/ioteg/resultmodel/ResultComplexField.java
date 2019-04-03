@@ -3,7 +3,7 @@ package com.ioteg.resultmodel;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.ioteg.resultmodel.jsonserializers.ResultComplexFieldSerializer;
+import com.ioteg.serializers.json.ResultComplexFieldSerializer;
 
 /**
  * <p>ResultComplexField class.</p>
