@@ -70,7 +70,7 @@ public class NormalGeneratorsFactory {
 	 */
 	public static Generable makeComplexGenerator(Field field, GenerationContext generationContext)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		return new ComplexFieldGenerator(new ComplexFieldGeneratorAlgorithm(field, generationContext), field, generationContext);
+		return new ComplexFieldGenerator(new ComplexFieldGenerationAlgorithm(field, generationContext), field, generationContext);
 	}
 
 	/**

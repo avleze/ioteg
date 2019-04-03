@@ -16,7 +16,7 @@ import com.ioteg.resultmodel.ResultField;
  * @author antonio
  * @version $Id: $Id
  */
-public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultField> {
+public class ComplexFieldGenerationAlgorithm extends GenerationAlgorithm<ResultField> {
 
 	protected List<Generable> fieldGenerators;
 	protected Boolean isFormedWithAttributes;
@@ -31,7 +31,7 @@ public class ComplexFieldGeneratorAlgorithm extends GenerationAlgorithm<ResultFi
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
 	 * @throws java.text.ParseException if any.
 	 */
-	public ComplexFieldGeneratorAlgorithm(Field field, GenerationContext generationContext)
+	public ComplexFieldGenerationAlgorithm(Field field, GenerationContext generationContext)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		super(field, generationContext);
 		makeGenerators(field);
