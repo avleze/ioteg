@@ -1,4 +1,4 @@
-package com.ioteg.generators.normal;
+package com.ioteg.generation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

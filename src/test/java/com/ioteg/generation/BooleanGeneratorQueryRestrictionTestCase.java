@@ -1,4 +1,4 @@
-package com.ioteg.generators.queryrestriction;
+package com.ioteg.generation;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 

@@ -1,4 +1,4 @@
-package com.ioteg;
+package com.ioteg.serializers.csv;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.matchesPattern;

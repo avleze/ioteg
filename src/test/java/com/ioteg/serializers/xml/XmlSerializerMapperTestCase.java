@@ -1,4 +1,4 @@
-package com.ioteg;
+package com.ioteg.serializers.xml;
 
 import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.MatcherAssert.assertThat;
