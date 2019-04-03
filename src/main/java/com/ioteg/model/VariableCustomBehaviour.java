@@ -26,10 +26,6 @@ public class VariableCustomBehaviour {
 	private String max;
 	private String value;
 
-	@SuppressWarnings("unused")
-	private VariableCustomBehaviour() {
-		
-	}
 	
 	/**
 	 * <p>

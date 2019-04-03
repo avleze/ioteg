@@ -42,7 +42,7 @@ public class Field extends Attribute {
 
 	@SuppressWarnings("unused")
 	private Field() {
-		super();
+
 	}
 	
 	/**
