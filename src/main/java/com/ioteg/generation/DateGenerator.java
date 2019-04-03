@@ -45,7 +45,7 @@ public class DateGenerator extends FieldGenerator<Date>{
 				results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(), sdf.format(result)));
 			}
 			
-			if(field != null && field.getInjectable())
+			if(field.getInjectable())
 				generationContext.putInjectableResultField(field.getName(), results.get(results.size() - 1));
 		}
 		else

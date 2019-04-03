@@ -40,7 +40,7 @@ public class StringGenerator extends FieldGenerator<String> {
 			for (int i = 0; i < numberOfRequiredItems; ++i)
 				results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(),
 						generationAlgorithm.generate().toLowerCase()));
-			if(field != null && field.getInjectable())
+			if(field.getInjectable())
 				generationContext.putInjectableResultField(field.getName(), results.get(results.size() - 1));
 		}
 

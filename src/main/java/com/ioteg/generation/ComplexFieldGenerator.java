@@ -37,7 +37,7 @@ public class ComplexFieldGenerator extends FieldGenerator<ResultField> {
 		for (int i = 0; i < numberOfRequiredItems; ++i)
 			results.add(generationAlgorithm.generate());
 
-		if(field != null && field.getInjectable())
+		if(field.getInjectable())
 			generationContext.putInjectableResultField(field.getName(), results.get(results.size() - 1));
 		
 		return results;

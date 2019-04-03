@@ -41,7 +41,7 @@ public class FieldGenerator<T> extends AbstractGenerator<T> implements Generable
 			results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(),
 					generationAlgorithm.generate().toString()));
 		
-		if(field != null && field.getInjectable())
+		if(field.getInjectable())
 			generationContext.putInjectableResultField(field.getName(), results.get(results.size() - 1));
 
 		return results;

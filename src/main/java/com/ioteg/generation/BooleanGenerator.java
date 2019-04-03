@@ -39,7 +39,7 @@ public class BooleanGenerator extends FieldGenerator<Boolean> {
 			for (int i = 0; i < numberOfRequiredItems; ++i)
 				results.add(new ResultSimpleField(field.getName(), field.getType(), field.getQuotes(),
 						booleanToNumericalString(generationAlgorithm.generate())));
-			if(field != null && field.getInjectable())
+			if(field.getInjectable())
 				generationContext.putInjectableResultField(field.getName(), results.get(results.size() - 1));
 		}
 

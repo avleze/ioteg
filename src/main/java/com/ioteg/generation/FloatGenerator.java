@@ -43,7 +43,7 @@ public class FloatGenerator extends FieldGenerator<Float> {
 						numberToSpecifiedPrecision(result, field.getPrecision())));
 			}
 
-			if(field != null && field.getInjectable())
+			if(field.getInjectable())
 				generationContext.putInjectableResultField(field.getName(), results.get(results.size() - 1));
 		}
 
