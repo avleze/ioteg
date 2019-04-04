@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.ioteg.exprlang.ExprParser;
+import com.ioteg.exprlang.ExpressionAST;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
-import com.ioteg.exprlang.ast.ExpressionAST;
 import com.ioteg.model.Field;
 import com.ioteg.model.RuleCustomBehaviour;
 import com.ioteg.model.VariableCustomBehaviour;
