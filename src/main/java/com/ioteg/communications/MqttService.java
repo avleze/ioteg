@@ -1,5 +1,7 @@
 package com.ioteg.communications;
 
+import javax.annotation.PreDestroy;
+
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -16,5 +18,10 @@ public class MqttService {
 	
 	public void sendMessage(String topic, String message) throws MqttPersistenceException, MqttException {
 		mqttClient.publish(topic, new MqttMessage(message.getBytes()));
+	}
+	
+	@PreDestroy
+	private void closeMqttClient() throws MqttException {
+		mqttClient.close();
 	}
 }
