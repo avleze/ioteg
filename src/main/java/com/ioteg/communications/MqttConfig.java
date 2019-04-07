@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 
 @Configuration
-@Profile({"production", "development"})
+@Profile({"production", "development", "default"})
 public class MqttConfig {
 	
 	@Autowired

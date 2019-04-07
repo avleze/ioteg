@@ -36,7 +36,7 @@ import com.ioteg.services.periodicgeneration.PeriodicEventGenerationService;
 @RestController
 public class EventGenerationController {
 
-	@Autowired
+	@Autowired(required = false)
 	private PeriodicEventGenerationService periodicEventGenerationService;
 	
 

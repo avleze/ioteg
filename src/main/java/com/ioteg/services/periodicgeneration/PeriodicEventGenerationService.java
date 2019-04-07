@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +25,7 @@ import com.ioteg.resultmodel.ResultField;
  * @version $Id: $Id
  */
 @Service
+@Profile({"production", "development", "default"})
 public class PeriodicEventGenerationService {
 
 	private ScheduledThreadPoolExecutor scheduledPool = new ScheduledThreadPoolExecutor(4);
