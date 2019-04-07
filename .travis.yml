@@ -8,4 +8,4 @@ script:
   - mkdir ./localdependencies
   - wget -P "./localdependencies" https://github.com/avleze/ioteg-exprlang/releases/download/v1.0.2/ioteg-exprlang-1.0.2.jar
   - mvn install:install-file -Dfile=./localdependencies/ioteg-exprlang-1.0.2.jar
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  - mvn clean -Dspring.profiles.active=testing org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
