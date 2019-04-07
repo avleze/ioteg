@@ -1,17 +1,16 @@
 package com.ioteg.services.periodicgeneration;
 
 import java.text.ParseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.ioteg.communications.MqttService;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generation.EventTypeGenerationAlgorithm;
 import com.ioteg.generation.EventTypeGenerator;
 import com.ioteg.generation.GenerationContext;
 import com.ioteg.generation.NotExistingGeneratorException;
 import com.ioteg.model.EventType;
+import com.ioteg.resultmodel.ResultEvent;
 
 /**
  * <p>PeriodicEventGenerator class.</p>
@@ -21,8 +20,8 @@ import com.ioteg.model.EventType;
  */
 public class PeriodicEventGenerator implements Runnable {
 	private EventTypeGenerator eventTypeGenerator;
-	private Logger logger = LoggerFactory.getLogger(PeriodicEventGenerator.class);
 	private ObjectMapper objectMapper;
+	private MqttService mqttService;
 	/**
 	 * <p>Constructor for PeriodicEventGenerator.</p>
 	 *
@@ -33,19 +32,21 @@ public class PeriodicEventGenerator implements Runnable {
 	 * @param generationContext a {@link com.ioteg.generation.GenerationContext} object.
 	 * @param objectMapper a {@link com.fasterxml.jackson.databind.ObjectMapper} object.
 	 */
-	public PeriodicEventGenerator(EventType eventType, GenerationContext generationContext, ObjectMapper objectMapper) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	public PeriodicEventGenerator(EventType eventType, GenerationContext generationContext, ObjectMapper objectMapper, MqttService mqttService) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		this.eventTypeGenerator = new EventTypeGenerator(new EventTypeGenerationAlgorithm(eventType, generationContext), generationContext);
 		this.objectMapper = objectMapper;
 		this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+		this.mqttService = mqttService;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void run() {
 		try {
-			logger.info(objectMapper.writeValueAsString(eventTypeGenerator.generate(1)));
+			ResultEvent resultEvent = eventTypeGenerator.generate(1).get(0);
+			mqttService.sendMessage(resultEvent.getName(), objectMapper.writeValueAsString(resultEvent));
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

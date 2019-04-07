@@ -110,7 +110,11 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 			resultBlock.getResultFields().add(generator.generate(1).get(0));
 		
 		for (InjectedField injectedField : block.getInjectedFields())
-			resultBlock.getResultFields().add(generationContext.getInjectableResultField(injectedField.getName()));
+		{
+			ResultField resultField = generationContext.getInjectableResultField(injectedField.getName());
+			if(resultField != null)
+				resultBlock.getResultFields().add(resultField);
+		}
 
 		return resultBlock;
 	}

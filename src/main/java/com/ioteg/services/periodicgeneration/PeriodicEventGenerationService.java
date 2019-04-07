@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ioteg.communications.MqttService;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generation.GenerationContext;
 import com.ioteg.generation.NotExistingGeneratorException;
@@ -29,6 +30,9 @@ public class PeriodicEventGenerationService {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+	@Autowired
+	private MqttService mqttService;
+	
 	
 	/**
 	 * <p>executeConfigurableEventTypes.</p>
@@ -45,7 +49,7 @@ public class PeriodicEventGenerationService {
 
 		for (ConfigurableEventType configurableEventType : configurableEventTypes)
 			scheduledPool.scheduleAtFixedRate(new PeriodicEventGenerator(configurableEventType.getEventType(),
-					new GenerationContext(sharedConcurrentMap), objectMapper), configurableEventType.getDelay(), configurableEventType.getPeriod(), configurableEventType.getUnit());
+					new GenerationContext(sharedConcurrentMap), objectMapper, mqttService), configurableEventType.getDelay(), configurableEventType.getPeriod(), configurableEventType.getUnit());
 	}
 
 }
