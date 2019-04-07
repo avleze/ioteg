@@ -1,6 +1,9 @@
 package com.ioteg.services.periodicgeneration;
 
 import java.text.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.ioteg.communications.MqttService;
@@ -20,6 +23,7 @@ import com.ioteg.resultmodel.ResultEvent;
  */
 public class PeriodicEventGenerator implements Runnable {
 	private EventTypeGenerator eventTypeGenerator;
+	private Logger logger = LoggerFactory.getLogger(PeriodicEventGenerator.class);
 	private ObjectMapper objectMapper;
 	private MqttService mqttService;
 	/**
@@ -46,7 +50,7 @@ public class PeriodicEventGenerator implements Runnable {
 			ResultEvent resultEvent = eventTypeGenerator.generate(1).get(0);
 			mqttService.sendMessage(resultEvent.getName(), objectMapper.writeValueAsString(resultEvent));
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.toString());
 		}
 	}
 	
