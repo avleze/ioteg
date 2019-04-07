@@ -38,7 +38,7 @@ public class CSVHeaderBuilder {
 					result.add(field.getName());
 				else
 					result.addAll(getComplexFieldCSVHeader(field));
-
+		
 		return result;
 	}
 

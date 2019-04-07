@@ -1,16 +1,21 @@
 package com.ioteg.communications;
 
+import java.io.IOException;
+
 import javax.annotation.PreDestroy;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ioteg.serializers.csv.CSVUtil;
+import com.ioteg.serializers.xml.XMLSerializerMapper;
 
 @Service
 @Profile({"production", "development", "default"})
@@ -20,8 +25,24 @@ public class MqttService {
 	@Autowired
 	private MqttClient mqttClient;
 	
-	public void sendMessage(String topic, String message) throws MqttPersistenceException, MqttException {
-		mqttClient.publish(topic, new MqttMessage(message.getBytes()));
+	@Autowired
+	private ObjectMapper objectMapper;
+	
+	@Autowired
+	private XMLSerializerMapper xmlSerializerMapper;
+	
+	public void sendMessage(String topic, MqttResultEvent message) throws MqttException, IOException {
+		
+		String serializedMessage = "";
+		if(message.getType().equals("application/csv"))
+			serializedMessage = CSVUtil.serializeResultEvent(message.getMessage().getModel(), message.getMessage());
+		else if(message.getType().equals("application/xml"))
+			serializedMessage = xmlSerializerMapper.writeValueAsString(message.getMessage());
+		else
+			serializedMessage = objectMapper.writeValueAsString(message.getMessage());
+			
+		
+		mqttClient.publish(topic, new MqttMessage(serializedMessage.getBytes()));
 	}
 	
 	@PreDestroy

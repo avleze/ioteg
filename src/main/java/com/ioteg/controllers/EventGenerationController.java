@@ -56,7 +56,6 @@ public class EventGenerationController {
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		List<ResultEvent> results = new ArrayList<>();
 		ConcurrentMap<String, ResultField> sharedConcurrentMap = new ConcurrentHashMap<>();
-		
 		for(EventType eventType : eventTypes.getEventTypes())
 			results.add(GeneratorsFactory.makeEventTypeGenerator(eventType, new GenerationContext(sharedConcurrentMap)).generate(1).get(0));
 		

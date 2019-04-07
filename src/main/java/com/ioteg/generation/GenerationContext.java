@@ -25,7 +25,7 @@ public class GenerationContext {
 	public GenerationContext(ConcurrentMap<String, ResultField> injectableResultFields) {
 		if(injectableResultFields == null)
 			injectableResultFields = new ConcurrentHashMap<>();
-		
+
 		this.selectedDependableIndexes = new HashMap<>();
 		this.injectableResultFields = injectableResultFields;
 	}

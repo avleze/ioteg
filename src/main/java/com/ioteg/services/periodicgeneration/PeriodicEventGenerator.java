@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.ioteg.communications.MqttResultEvent;
 import com.ioteg.communications.MqttService;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 import com.ioteg.generation.EventTypeGenerationAlgorithm;
@@ -48,9 +49,9 @@ public class PeriodicEventGenerator implements Runnable {
 	public void run() {
 		try {
 			ResultEvent resultEvent = eventTypeGenerator.generate(1).get(0);
-			mqttService.sendMessage(resultEvent.getName(), objectMapper.writeValueAsString(resultEvent));
+			mqttService.sendMessage(resultEvent.getName(), new MqttResultEvent(resultEvent, "application/json"));
 		} catch (Exception e) {
-			logger.error(e.toString());
+			logger.error(e.getMessage(), e);
 		}
 	}
 	

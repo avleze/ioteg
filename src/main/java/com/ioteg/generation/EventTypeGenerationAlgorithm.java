@@ -20,6 +20,7 @@ public class EventTypeGenerationAlgorithm extends AbstractGenerationAlgorithm<Re
 	protected EventType eventType;
 	protected List<BlockGenerator> blockGenerators;
 	protected BlockGenerator blockGeneratorWithRepetition;
+	protected Block blockWithRepetition;
 	protected GenerationContext generationContext;
 	protected Integer repetitions;
 	
@@ -37,12 +38,14 @@ public class EventTypeGenerationAlgorithm extends AbstractGenerationAlgorithm<Re
 		this.eventType = eventType;
 		this.blockGenerators = new ArrayList<>();
 		this.blockGeneratorWithRepetition = null;
+		this.blockWithRepetition = null;
 		for (Block block : eventType.getBlocks()) 
 		{
 			BlockGenerator blockGenerator = GeneratorsFactory.makeBlockGenerator(block, generationContext);
 			blockGenerators.add(blockGenerator);
 			if(block.getRepetition() != null)
 			{
+				blockWithRepetition = block;
 				blockGeneratorWithRepetition = blockGenerator;
 				repetitions = block.getRepetition();
 			}
@@ -55,6 +58,7 @@ public class EventTypeGenerationAlgorithm extends AbstractGenerationAlgorithm<Re
 
 		ResultEvent resultEvent = new ResultEvent(eventType.getName(), new ArrayList<>());
 		resultEvent.setModel(eventType);
+		
 		for (BlockGenerator blockGenerator : this.blockGenerators) {
 
 			ArrayResultBlock resultBlocks = new ArrayResultBlock(new ArrayList<>(), blockGenerator == blockGeneratorWithRepetition);

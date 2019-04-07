@@ -47,11 +47,11 @@ public class PeriodicEventGenerationService {
 	public void executeConfigurableEventTypes(List<ConfigurableEventType> configurableEventTypes)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 
-		ConcurrentMap<String, ResultField> sharedConcurrentMap = new ConcurrentHashMap<>();
+		ConcurrentMap<String, ResultField> sharedResults = new ConcurrentHashMap<>();
 
 		for (ConfigurableEventType configurableEventType : configurableEventTypes)
 			scheduledPool.scheduleAtFixedRate(new PeriodicEventGenerator(configurableEventType.getEventType(),
-					new GenerationContext(sharedConcurrentMap), objectMapper, mqttService), configurableEventType.getDelay(), configurableEventType.getPeriod(), configurableEventType.getUnit());
+					new GenerationContext(sharedResults), objectMapper, mqttService), configurableEventType.getDelay(), configurableEventType.getPeriod(), configurableEventType.getUnit());
 	}
 
 }
