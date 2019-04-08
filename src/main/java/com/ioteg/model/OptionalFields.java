@@ -2,11 +2,10 @@ package com.ioteg.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -24,8 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class OptionalFields {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private UUID id;
 	private Boolean mandatory;
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL)
@@ -46,8 +44,10 @@ public class OptionalFields {
 	 * @param fields    a {@link java.util.List} object.
 	 */
 	@JsonCreator
-	public OptionalFields(@JsonProperty("id") Long id, @JsonProperty("mandatory") Boolean mandatory,
+	public OptionalFields(@JsonProperty("id") UUID id, @JsonProperty("mandatory") Boolean mandatory,
 			@Valid @JsonProperty("fields") List<Field> fields) {
+		if(id == null)
+			id = UUID.randomUUID();
 		if (mandatory == null)
 			mandatory = true;
 		if (fields == null)
@@ -61,14 +61,14 @@ public class OptionalFields {
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

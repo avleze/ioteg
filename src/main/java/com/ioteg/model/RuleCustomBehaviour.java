@@ -1,8 +1,8 @@
 package com.ioteg.model;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,8 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class RuleCustomBehaviour {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private UUID id;
 	private Double weight;
 	private String value;
 	private String min;
@@ -46,11 +45,12 @@ public class RuleCustomBehaviour {
 	 * @param sequence a {@link java.lang.String} object.
 	 */
 	@JsonCreator
-	public RuleCustomBehaviour(@JsonProperty("id") Long id, @JsonProperty("weight") Double weight,
+	public RuleCustomBehaviour(@JsonProperty("id") UUID id, @JsonProperty("weight") Double weight,
 			@JsonProperty("value") String value, @JsonProperty("min") String min, @JsonProperty("max") String max,
 			@JsonProperty("sequence") String sequence) {
 		super();
-
+		if(id == null)
+			id = UUID.randomUUID();
 		this.id = id;
 		this.weight = weight;
 		this.value = value;

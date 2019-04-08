@@ -2,11 +2,10 @@ package com.ioteg.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -24,8 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class CustomBehaviour {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private UUID id;
 	private String externalFilePath;
 	private Integer simulations;
 	@OneToMany(cascade = CascadeType.ALL)
@@ -50,11 +48,13 @@ public class CustomBehaviour {
 	 * @param rules            a {@link java.util.List} object.
 	 */
 	@JsonCreator
-	public CustomBehaviour(@JsonProperty("id") Long id, @JsonProperty("externalFilePath") String externalFilePath,
+	public CustomBehaviour(@JsonProperty("id") UUID id, @JsonProperty("externalFilePath") String externalFilePath,
 			@JsonProperty("simulations") Integer simulations,
 			@JsonProperty("variables") List<VariableCustomBehaviour> variables,
 			@JsonProperty("rules") List<RuleCustomBehaviour> rules) {
 		super();
+		if(id == null)
+			id = UUID.randomUUID();
 		if (variables == null)
 			variables = new ArrayList<>();
 		if (rules == null)

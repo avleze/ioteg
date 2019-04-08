@@ -2,11 +2,10 @@ package com.ioteg.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -26,8 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class Block {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private UUID id;
 
 	@NotEmpty
 	@NotNull
@@ -63,12 +61,13 @@ public class Block {
 	 * @param injectedFields a {@link java.util.List} object.
 	 */
 	@JsonCreator
-	public Block(@JsonProperty("id") Long id, @NotEmpty @NotNull @JsonProperty("name") String name,
+	public Block(@JsonProperty("id") UUID id, @NotEmpty @NotNull @JsonProperty("name") String name,
 			@JsonProperty("value") String value, @JsonProperty("repetition") Integer repetition,
 			@Valid @JsonProperty("fields") List<Field> fields,
 			@Valid @JsonProperty("injectedfields") List<InjectedField> injectedFields,
 			@Valid @JsonProperty("optionalfields") List<OptionalFields> optionalFields) {
-
+		if(id == null)
+			id = UUID.randomUUID();
 		if (injectedFields == null)
 			injectedFields = new ArrayList<>();
 		if (optionalFields == null)
@@ -88,14 +87,14 @@ public class Block {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public UUID getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

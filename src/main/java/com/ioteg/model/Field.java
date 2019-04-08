@@ -3,6 +3,7 @@ package com.ioteg.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -111,7 +112,7 @@ public class Field extends Attribute {
 	 */
 
 	@JsonCreator
-	public Field(@JsonProperty("id") Long id, @NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
+	public Field(@JsonProperty("id") UUID id, @NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
 			@JsonProperty("min") Double min, @JsonProperty("step") String step, @JsonProperty("unit") String unit,
 			@JsonProperty("max") Double max, @JsonProperty("precision") Integer precision,
 			@JsonProperty("length") Integer length, @JsonProperty("strCase") String strCase,
@@ -125,7 +126,6 @@ public class Field extends Attribute {
 			@JsonProperty("customBehaviour") CustomBehaviour customBehaviour) {
 		super(id, type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format,
 				isNumeric);
-
 		if (quotes == null)
 			quotes = false;
 		if (fields == null)
@@ -324,5 +324,6 @@ public class Field extends Attribute {
 	public void setCustomBehaviour(CustomBehaviour customBehaviour) {
 		this.customBehaviour = customBehaviour;
 	}
+	
 
 }

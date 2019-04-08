@@ -2,10 +2,10 @@ package com.ioteg.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -25,8 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class EventType {
 	@Id
-	@GeneratedValue
-	private Long id;
+	private UUID id;
 
 	@NotEmpty
 	@NotNull
@@ -47,9 +46,11 @@ public class EventType {
 	 * @param blocks
 	 */
 	@JsonCreator
-	public EventType(@JsonProperty("id") Long id, @JsonProperty("name") @NotEmpty @NotNull String name,
+	public EventType(@JsonProperty("id") UUID id, @JsonProperty("name") @NotEmpty @NotNull String name,
 			@JsonProperty("blocks") @Valid List<Block> blocks) {
 		super();
+		if(id == null)
+			id = UUID.randomUUID();
 		if (blocks == null)
 			blocks = new ArrayList<>();
 
@@ -61,14 +62,14 @@ public class EventType {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public UUID getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

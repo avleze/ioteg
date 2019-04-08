@@ -18,33 +18,46 @@ import com.ioteg.serializers.csv.CSVUtil;
 import com.ioteg.serializers.xml.XMLSerializerMapper;
 
 @Service
-@Profile({"production", "development", "default"})
+@Profile({ "production", "development", "default" })
 public class MqttService {
 	private Logger logger = LoggerFactory.getLogger(MqttService.class);
 
 	@Autowired
 	private MqttClient mqttClient;
-	
+
 	@Autowired
 	private ObjectMapper objectMapper;
-	
+
 	@Autowired
 	private XMLSerializerMapper xmlSerializerMapper;
-	
+
 	public void sendMessage(String topic, MqttResultEvent message) throws MqttException, IOException {
-		
 		String serializedMessage = "";
-		if(message.getType().equals("application/csv"))
-			serializedMessage = CSVUtil.serializeResultEvent(message.getMessage().getModel(), message.getMessage());
-		else if(message.getType().equals("application/xml"))
-			serializedMessage = xmlSerializerMapper.writeValueAsString(message.getMessage());
-		else
-			serializedMessage = objectMapper.writeValueAsString(message.getMessage());
-			
 		
-		mqttClient.publish(topic, new MqttMessage(serializedMessage.getBytes()));
+		try {
+			serializedMessage = CSVUtil.serializeResultEvent(message.getMessage().getModel(),
+					message.getMessage());
+			mqttClient.publish(String.format("%s/%s", topic, "csv"), new MqttMessage(serializedMessage.getBytes()));
+		} catch (Exception e) {
+
+		}
+
+		try {
+			serializedMessage = xmlSerializerMapper.writeValueAsString(message.getMessage());
+			mqttClient.publish(String.format("%s/%s", topic, "xml"), new MqttMessage(serializedMessage.getBytes()));
+		} catch (Exception e) {
+
+		}
+
+		try {
+			serializedMessage = objectMapper.writeValueAsString(message.getMessage());
+			mqttClient.publish(String.format("%s/%s", topic, "json"), new MqttMessage(serializedMessage.getBytes()));
+		} catch (Exception e) {
+
+		}
+
 	}
-	
+
 	@PreDestroy
 	private void closeMqttClient() throws MqttException {
 		logger.info("Closing MQTT Client");

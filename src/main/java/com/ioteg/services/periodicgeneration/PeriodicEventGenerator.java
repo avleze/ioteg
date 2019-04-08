@@ -58,7 +58,7 @@ public class PeriodicEventGenerator implements Runnable {
 	public void run() {
 		try {
 			ResultEvent resultEvent = eventTypeGenerator.generate(1).get(0);
-			mqttService.sendMessage(resultEvent.getName(), new MqttResultEvent(resultEvent, "application/json"));
+			mqttService.sendMessage(this.topic, new MqttResultEvent(resultEvent, "application/json"));
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
