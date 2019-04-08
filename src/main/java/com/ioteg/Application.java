@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.ioteg.http.converters.CSVResultEventHttpMessageConverter;
 import com.ioteg.http.converters.XMLHttpMessageConverter;
 import com.ioteg.resultmodel.ArrayResultBlock;
@@ -56,7 +58,7 @@ public class Application {
 	 */
 	@Bean
 	public HttpMessageConverters additionalConverters() {
-		return new HttpMessageConverters(new XMLHttpMessageConverter(), new CSVResultEventHttpMessageConverter());
+		return new HttpMessageConverters(new XMLHttpMessageConverter(xmlSerializerMapper()), new CSVResultEventHttpMessageConverter());
 	}
 
 	@Bean
@@ -75,6 +77,12 @@ public class Application {
 		xmlSerializerMapper.registerCustomSerializer(ArrayList.class , new XMLResultEventListSerializer());
 		return xmlSerializerMapper;
 	}
+	
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
+	
 	
 }

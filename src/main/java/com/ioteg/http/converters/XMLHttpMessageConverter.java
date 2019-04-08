@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -24,7 +23,6 @@ import com.ioteg.serializers.xml.XMLSerializerMapper;
  */
 public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object> {
 
-	@Autowired
 	private XMLSerializerMapper xmlSerializerMapper;
 	private static Set<String> supportedTypes;
 	
@@ -39,8 +37,9 @@ public class XMLHttpMessageConverter extends AbstractHttpMessageConverter<Object
 	/**
 	 * <p>Constructor for XMLHttpMessageConverter.</p>
 	 */
-	public XMLHttpMessageConverter() {
+	public XMLHttpMessageConverter(XMLSerializerMapper xmlSerializerMapper) {
          super(new MediaType("application", "xml", StandardCharsets.UTF_8));
+         this.xmlSerializerMapper = xmlSerializerMapper;
 	}
 
 	/** {@inheritDoc} */

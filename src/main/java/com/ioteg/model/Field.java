@@ -4,6 +4,7 @@ package com.ioteg.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -32,12 +33,12 @@ public class Field extends Attribute {
 	private String dependence;
 	private Boolean injectable;
 	@Valid
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Field> fields;
 	@Valid
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Attribute> attributes;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private CustomBehaviour customBehaviour;
 
 	@SuppressWarnings("unused")

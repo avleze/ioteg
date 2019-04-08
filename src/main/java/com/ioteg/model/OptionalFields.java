@@ -3,6 +3,7 @@ package com.ioteg.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class OptionalFields {
 	private Long id;
 	private Boolean mandatory;
 	@Valid
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Field> fields;
 
 	@SuppressWarnings("unused")

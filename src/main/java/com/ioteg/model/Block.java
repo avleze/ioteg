@@ -3,6 +3,7 @@ package com.ioteg.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,13 +35,13 @@ public class Block {
 	private String value;
 	private Integer repetition;
 	@Valid
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Field> fields;
 	@Valid
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<InjectedField> injectedFields;
 	@Valid
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<OptionalFields> optionalFields;
 
 	@SuppressWarnings("unused")
