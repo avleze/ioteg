@@ -39,23 +39,22 @@ public class MqttService {
 					message.getMessage());
 			mqttClient.publish(String.format("%s/%s", topic, "csv"), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
-
+			logger.error(e.getMessage());
 		}
 
 		try {
 			serializedMessage = xmlSerializerMapper.writeValueAsString(message.getMessage());
 			mqttClient.publish(String.format("%s/%s", topic, "xml"), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
-
+			logger.error(e.getMessage());
 		}
-
+		
 		try {
 			serializedMessage = objectMapper.writeValueAsString(message.getMessage());
 			mqttClient.publish(String.format("%s/%s", topic, "json"), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
-
+			logger.error(e.getMessage());
 		}
-
 	}
 
 	@PreDestroy
