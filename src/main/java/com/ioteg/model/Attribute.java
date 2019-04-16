@@ -103,6 +103,30 @@ public class Attribute {
 		this.isNumeric = isNumeric;
 	}
 
+	
+	
+	/**
+	 * @param type
+	 * @param value
+	 * @param min
+	 * @param step
+	 * @param unit
+	 * @param max
+	 * @param precision
+	 * @param length
+	 * @param strCase
+	 * @param begin
+	 * @param end
+	 * @param endcharacter
+	 * @param format
+	 * @param isNumeric
+	 */
+	public Attribute(@NotEmpty @NotNull String type, String value, Double min, String step, String unit, Double max,
+			Integer precision, Integer length, String strCase, String begin, String end, String endcharacter,
+			String format, Boolean isNumeric) {
+		this(null, type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format, isNumeric);
+	}
+
 	/**
 	 * <p>
 	 * Constructor for Attribute.

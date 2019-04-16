@@ -53,7 +53,7 @@ public class AttributeBuilder {
 		if (length != null)
 			lengthValue = Integer.valueOf(length);
 		
-		return new Attribute(null, type, value, minValue, step, unit, maxValue, precisionValue, lengthValue, strCase, begin, end, endcharacter, format, Boolean.valueOf(isNumeric));
+		return new Attribute(type, value, minValue, step, unit, maxValue, precisionValue, lengthValue, strCase, begin, end, endcharacter, format, Boolean.valueOf(isNumeric));
 	}
 
 }

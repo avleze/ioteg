@@ -57,7 +57,7 @@ public class Field extends Attribute {
 	 * @param attr   a {@link com.ioteg.model.Attribute} object.
 	 */
 	public Field(String name, Boolean quotes, Attribute attr) {
-		super(null, attr.getType(), attr.getValue(), attr.getMin(), attr.getStep(), attr.getUnit(), attr.getMax(),
+		super(attr.getType(), attr.getValue(), attr.getMin(), attr.getStep(), attr.getUnit(), attr.getMax(),
 				attr.getPrecision(), attr.getLength(), attr.getCase(), attr.getBegin(), attr.getEnd(),
 				attr.getEndcharacter(), attr.getFormat(), attr.getIsNumeric());
 		this.name = name;
