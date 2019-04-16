@@ -42,7 +42,7 @@ public class FloatCustomBehaviourTestCase {
 		variables.add(new VariableCustomBehaviour("var1", null, null, "156.96"));
 		rules.add(new RuleCustomBehaviour(0.0, null, "$(var1)", "300", "inc"));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 10, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
 
@@ -73,7 +73,7 @@ public class FloatCustomBehaviourTestCase {
 		variables.add(new VariableCustomBehaviour("var1", null, null, "156.96"));
 		rules.add(new RuleCustomBehaviour(0.0, null, "$(var1)", "300", "dec"));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 10, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
@@ -104,7 +104,7 @@ public class FloatCustomBehaviourTestCase {
 		variables.add(new VariableCustomBehaviour("var1", "0", "100", null));
 		rules.add(new RuleCustomBehaviour(0.0, "$(var1)", null, null, null));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 10, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
 
@@ -136,7 +136,7 @@ public class FloatCustomBehaviourTestCase {
 
 		rules.add(new RuleCustomBehaviour(0.0, null, "$(varDependentOfVar1)", "$(varDependentOfVar1)", null));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 10, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
@@ -163,7 +163,7 @@ public class FloatCustomBehaviourTestCase {
 
 		rules.add(new RuleCustomBehaviour(0.0, null, "$(varDependentOfVar1)", "$(varDependentOfVar1)", null));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 10, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
 
@@ -191,7 +191,7 @@ public class FloatCustomBehaviourTestCase {
 		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
 
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 1, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
 
@@ -220,7 +220,7 @@ public class FloatCustomBehaviourTestCase {
 		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
 		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 1, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
 
@@ -253,7 +253,7 @@ public class FloatCustomBehaviourTestCase {
 		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
 		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 1, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
 
@@ -286,7 +286,7 @@ public class FloatCustomBehaviourTestCase {
 		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
 		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 1, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
 
@@ -308,7 +308,7 @@ public class FloatCustomBehaviourTestCase {
 
 		rules.add(new RuleCustomBehaviour(0.0, "50.0", null, null, null));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 1, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
 
@@ -332,7 +332,7 @@ public class FloatCustomBehaviourTestCase {
 
 		rules.add(new RuleCustomBehaviour(0.0, "$(var1)+1", null, null, null));
 
-		field.setCustomBehaviour(new CustomBehaviour(null, null, 1, variables, rules));
+		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
 		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
 		for (int i = 0; i < 100; ++i) {

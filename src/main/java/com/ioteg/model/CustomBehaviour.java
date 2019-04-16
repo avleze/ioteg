@@ -66,6 +66,17 @@ public class CustomBehaviour {
 		this.variables = variables;
 		this.rules = rules;
 	}
+	
+	/**
+	 * @param externalFilePath
+	 * @param simulations
+	 * @param variables
+	 * @param rules
+	 */
+	public CustomBehaviour(String externalFilePath, Integer simulations, List<VariableCustomBehaviour> variables,
+			List<RuleCustomBehaviour> rules) {
+		this(null, externalFilePath, simulations, variables, rules);
+	}
 
 	/**
 	 * <p>

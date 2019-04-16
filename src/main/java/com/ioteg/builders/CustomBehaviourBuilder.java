@@ -50,7 +50,7 @@ public class CustomBehaviourBuilder {
 
 		Integer simulations = Integer.valueOf(customConditions.getAttributeValue(SIMULATIONS_ATTR));
 
-		return new CustomBehaviour(null, externalFilePath, simulations, buildVariables(customConditions),
+		return new CustomBehaviour(externalFilePath, simulations, buildVariables(customConditions),
 				buildRules(customConditions));
 	}
 
