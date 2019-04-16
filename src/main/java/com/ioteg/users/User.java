@@ -39,19 +39,15 @@ public class User implements UserDetails {
 	@UniqueUsername
 	@Column(unique = true)
 	private String username;
-	
+
 	@NotNull
 	@NotEmpty
 	@Email
 	private String email;
-	
+
 	@NotNull
 	@NotEmpty
 	private String password;
-	private boolean isAccountNonExpired;
-	private boolean isAccountNonLocked;
-	private boolean isCredentialsNonExpired;
-	private boolean isEnabled;
 
 	@ManyToMany
 	private Set<Role> roles;
@@ -78,10 +74,7 @@ public class User implements UserDetails {
 	 */
 	public User(@JsonProperty("id") Long id, @NotNull @NotEmpty @JsonProperty("username") String username,
 			@JsonProperty("email") String email, @NotNull @NotEmpty @JsonProperty("password") String password,
-			@JsonProperty("isAccountNonExpired") boolean isAccountNonExpired,
-			@JsonProperty("isAccountNonLocked") boolean isAccountNonLocked,
-			@JsonProperty("isCredentialsNonExpired") boolean isCredentialsNonExpired,
-			@JsonProperty("isEnabled") boolean isEnabled, @JsonProperty("roles") Set<Role> roles) {
+			@JsonProperty("roles") Set<Role> roles) {
 		super();
 		if (roles == null)
 			roles = new HashSet<>();
@@ -90,10 +83,6 @@ public class User implements UserDetails {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.isAccountNonExpired = isAccountNonExpired;
-		this.isAccountNonLocked = isAccountNonLocked;
-		this.isCredentialsNonExpired = isCredentialsNonExpired;
-		this.isEnabled = isEnabled;
 		this.roles = roles;
 	}
 
@@ -128,22 +117,22 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return this.isAccountNonExpired;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return this.isAccountNonLocked;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return this.isCredentialsNonExpired;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return this.isEnabled;
+		return true;
 	}
 
 	/**
@@ -214,34 +203,6 @@ public class User implements UserDetails {
 	 */
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	/**
-	 * @param isAccountNonExpired the isAccountNonExpired to set
-	 */
-	public void setAccountNonExpired(boolean isAccountNonExpired) {
-		this.isAccountNonExpired = isAccountNonExpired;
-	}
-
-	/**
-	 * @param isAccountNonLocked the isAccountNonLocked to set
-	 */
-	public void setAccountNonLocked(boolean isAccountNonLocked) {
-		this.isAccountNonLocked = isAccountNonLocked;
-	}
-
-	/**
-	 * @param isCredentialsNonExpired the isCredentialsNonExpired to set
-	 */
-	public void setCredentialsNonExpired(boolean isCredentialsNonExpired) {
-		this.isCredentialsNonExpired = isCredentialsNonExpired;
-	}
-
-	/**
-	 * @param isEnabled the isEnabled to set
-	 */
-	public void setEnabled(boolean isEnabled) {
-		this.isEnabled = isEnabled;
 	}
 
 }
