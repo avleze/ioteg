@@ -77,30 +77,24 @@ public class Attribute {
 			@JsonProperty("isnumeric") Boolean isNumeric) {
 		if (id == null)
 			id = UUID.randomUUID();
+		if (isNumeric == null)
+			isNumeric = false;			
+		if (min == null)
+			min = 0.0;
+		if (max == null)
+			max = 10.0;
+		if (length == null)
+			length = 10;
+		
 		this.id = id;
 		this.type = type;
 		this.value = value;
-
-		if (min == null)
-			this.min = 0.0;
-		else
-			this.min = min;
-
+		this.min = min;
 		this.step = step;
 		this.unit = unit;
-
-		if (max == null)
-			this.max = 10.0;
-		else
-			this.max = max;
-
+		this.max = max;
 		this.precision = precision;
-
-		if (length == null)
-			this.length = 10;
-		else
-			this.length = length;
-
+		this.length = length;
 		this.strCase = strCase;
 		this.begin = begin;
 		this.end = end;

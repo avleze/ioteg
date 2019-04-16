@@ -2,7 +2,6 @@ package com.ioteg.controllers;
 
 import java.security.Principal;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import javax.validation.Valid;
@@ -67,8 +66,6 @@ public class EventGenerationController {
 			loggedUser.getChannels().add(channel);
 			userRepository.save(loggedUser);
 
-			List<String> topicsCreated = periodicEventGenerationService.executeAsyncChannel(channel,
-					loggedUser.getMqttApiKey());
 			response = ResponseEntity.ok().body(channel);
 		}
 

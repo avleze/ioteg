@@ -1,15 +1,17 @@
 package com.ioteg.users;
 
+import java.security.Principal;
 import java.security.SecureRandom;
 
 import javax.validation.Valid;
 
-import org.eclipse.paho.client.mqttv3.internal.websocket.Base64;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +27,7 @@ public class UserController {
 	@Autowired
 	private SecureRandom secureRandom;
 
-	@PostMapping("/signup")
+	@PostMapping
 	public ResponseEntity<User> signUp(@RequestBody @Valid User user) {
 		ResponseEntity<User> response = null;
 		
@@ -37,7 +39,8 @@ public class UserController {
 			user.setEnabled(true);
 			byte[] apikey = new byte[16];
 			secureRandom.nextBytes(apikey);
-			user.setMqttApiKey(Base64.encodeBytes(apikey));
+			
+			user.setMqttApiKey(Base64.encodeBase64URLSafeString(apikey));
 			response = ResponseEntity.ok().build();
 			userRepository.save(user);
 		}
@@ -47,4 +50,22 @@ public class UserController {
 		
 		return response;
 	}
+	
+	@PutMapping
+	public ResponseEntity<User> modifyUser(@RequestBody @Valid UserDTO user, Principal principal) {
+		ResponseEntity<User> response = null;
+		
+		try {
+			User databaseUser = userRepository.findByUsername(principal.getName()).get();
+			databaseUser.setUsername(user.getUsername());
+			databaseUser.setEmail(user.getEmail());
+			userRepository.save(databaseUser);
+		}
+		catch(Exception e) {
+			response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+		
+		return response;
+	}
+	
 }

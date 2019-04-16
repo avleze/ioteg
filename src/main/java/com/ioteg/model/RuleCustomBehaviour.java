@@ -37,7 +37,7 @@ public class RuleCustomBehaviour {
 	 * Constructor for RuleCustomBehaviour.
 	 * </p>
 	 * 
-	 * @param id       a {@link java.lang.Long} object.
+	 * @param id       a {@link java.util.UUID} object.
 	 * @param weight   a {@link java.lang.Double} object.
 	 * @param value    a {@link java.lang.String} object.
 	 * @param min      a {@link java.lang.String} object.
@@ -48,8 +48,7 @@ public class RuleCustomBehaviour {
 	public RuleCustomBehaviour(@JsonProperty("id") UUID id, @JsonProperty("weight") Double weight,
 			@JsonProperty("value") String value, @JsonProperty("min") String min, @JsonProperty("max") String max,
 			@JsonProperty("sequence") String sequence) {
-		super();
-		if(id == null)
+		if (id == null)
 			id = UUID.randomUUID();
 		this.id = id;
 		this.weight = weight;
@@ -57,6 +56,18 @@ public class RuleCustomBehaviour {
 		this.min = min;
 		this.max = max;
 		this.sequence = sequence;
+	}
+
+	/**
+	 * @param id
+	 * @param weight
+	 * @param value
+	 * @param min
+	 * @param max
+	 * @param sequence
+	 */
+	public RuleCustomBehaviour(Double weight, String value, String min, String max, String sequence) {
+		this(null, weight, value, min, max, sequence);
 	}
 
 	/**

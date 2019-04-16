@@ -84,7 +84,7 @@ public class CustomBehaviourBuilder {
 				String sequence = variable.getAttributeValue("sequence");
 				Double weight = Double.valueOf(variable.getAttributeValue("weight"));
 
-				rules.add(new RuleCustomBehaviour(null, weight, value, min, max, sequence));
+				rules.add(new RuleCustomBehaviour(weight, value, min, max, sequence));
 			}
 
 		return rules;

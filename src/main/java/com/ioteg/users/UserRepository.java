@@ -12,9 +12,9 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	@Query("SELECT u FROM User u INNER JOIN u.channels c WHERE :id IN (SELECT e.id FROM c.configurableEventTypes e)")
 	public Optional<User> findUserWithConfigurableEvent(@Param("id") UUID id);
 	
-	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles rol WHERE u.username = :username")
+	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles rol WHERE u.username = :username OR u.email = :username")
 	public Optional<User> findByUsername(@Param("username") String username);
 	
-	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles LEFT JOIN FETCH u.channels rol WHERE u.username = :username")
+	@Query("SELECT u FROM User u LEFT JOIN FETCH u.roles LEFT JOIN FETCH u.channels rol WHERE u.username = :username OR u.email = :username")
 	public Optional<User> findByUsernameWithChannels(@Param("username") String username);
 }

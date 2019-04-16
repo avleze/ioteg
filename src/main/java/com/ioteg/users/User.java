@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -38,6 +39,12 @@ public class User implements UserDetails {
 	@UniqueUsername
 	@Column(unique = true)
 	private String username;
+	
+	@NotNull
+	@NotEmpty
+	@Email
+	private String email;
+	
 	@NotNull
 	@NotEmpty
 	private String password;
@@ -70,7 +77,7 @@ public class User implements UserDetails {
 	 * @param roles
 	 */
 	public User(@JsonProperty("id") Long id, @NotNull @NotEmpty @JsonProperty("username") String username,
-			@NotNull @NotEmpty @JsonProperty("password") String password,
+			@JsonProperty("email") String email, @NotNull @NotEmpty @JsonProperty("password") String password,
 			@JsonProperty("isAccountNonExpired") boolean isAccountNonExpired,
 			@JsonProperty("isAccountNonLocked") boolean isAccountNonLocked,
 			@JsonProperty("isCredentialsNonExpired") boolean isCredentialsNonExpired,
@@ -81,6 +88,7 @@ public class User implements UserDetails {
 
 		this.id = id;
 		this.username = username;
+		this.email = email;
 		this.password = password;
 		this.isAccountNonExpired = isAccountNonExpired;
 		this.isAccountNonLocked = isAccountNonLocked;
@@ -102,6 +110,20 @@ public class User implements UserDetails {
 	@Override
 	public String getUsername() {
 		return this.username;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override

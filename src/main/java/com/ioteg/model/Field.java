@@ -149,6 +149,52 @@ public class Field extends Attribute {
 		this.customBehaviour = customBehaviour;
 	}
 	
+	
+	
+	
+	/**
+	 * @param id
+	 * @param type
+	 * @param value
+	 * @param min
+	 * @param step
+	 * @param unit
+	 * @param max
+	 * @param precision
+	 * @param length
+	 * @param strCase
+	 * @param begin
+	 * @param end
+	 * @param endcharacter
+	 * @param format
+	 * @param isNumeric
+	 * @param name
+	 * @param quotes
+	 * @param chooseone
+	 * @param dependence
+	 * @param injectable
+	 * @param fields
+	 * @param attributes
+	 * @param customBehaviour
+	 */
+	public Field(@NotEmpty @NotNull String type, String value, Double min, String step, String unit,
+			Double max, Integer precision, Integer length, String strCase, String begin, String end,
+			String endcharacter, String format, Boolean isNumeric,
+			@NotEmpty(message = "The field name can't be empty.") @NotNull(message = "The field name can't be null.") String name,
+			Boolean quotes, Boolean chooseone, String dependence, Boolean injectable, @Valid List<Field> fields,
+			@Valid List<Attribute> attributes, CustomBehaviour customBehaviour) {
+		super(null, type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format,
+				isNumeric);
+		this.name = name;
+		this.quotes = quotes;
+		this.chooseone = chooseone;
+		this.dependence = dependence;
+		this.injectable = injectable;
+		this.fields = fields;
+		this.attributes = attributes;
+		this.customBehaviour = customBehaviour;
+	}
+
 	/**
 	 * <p>
 	 * Getter for the field <code>name</code>.
