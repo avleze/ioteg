@@ -183,16 +183,8 @@ public class Field extends Attribute {
 			@NotEmpty(message = "The field name can't be empty.") @NotNull(message = "The field name can't be null.") String name,
 			Boolean quotes, Boolean chooseone, String dependence, Boolean injectable, @Valid List<Field> fields,
 			@Valid List<Attribute> attributes, CustomBehaviour customBehaviour) {
-		super(null, type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format,
-				isNumeric);
-		this.name = name;
-		this.quotes = quotes;
-		this.chooseone = chooseone;
-		this.dependence = dependence;
-		this.injectable = injectable;
-		this.fields = fields;
-		this.attributes = attributes;
-		this.customBehaviour = customBehaviour;
+		this(null, type, value, min, step, unit, max, precision, length, strCase, begin, end, endcharacter, format,
+				isNumeric, name, quotes, chooseone, dependence, injectable, fields, attributes, customBehaviour);
 	}
 
 	/**
