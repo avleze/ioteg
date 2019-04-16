@@ -104,4 +104,9 @@ public class ChannelType {
 			return ((ChannelType) obj).getId().equals(this.id);
 		return false;
 	}
+	
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
 }
