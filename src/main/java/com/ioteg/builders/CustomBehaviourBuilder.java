@@ -66,7 +66,7 @@ public class CustomBehaviourBuilder {
 				String max = variable.getAttributeValue("max");
 				String value = variable.getAttributeValue("value");
 
-				variables.add(new VariableCustomBehaviour(null, name, min, max, value));
+				variables.add(new VariableCustomBehaviour(name, min, max, value));
 			}
 		return variables;
 	}

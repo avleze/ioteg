@@ -39,7 +39,7 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", null, null, "156.96"));
+		variables.add(new VariableCustomBehaviour("var1", null, null, "156.96"));
 		rules.add(new RuleCustomBehaviour(0.0, null, "$(var1)", "300", "inc"));
 
 		field.setCustomBehaviour(new CustomBehaviour(null, null, 10, variables, rules));
@@ -70,7 +70,7 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", null, null, "156.96"));
+		variables.add(new VariableCustomBehaviour("var1", null, null, "156.96"));
 		rules.add(new RuleCustomBehaviour(0.0, null, "$(var1)", "300", "dec"));
 
 		field.setCustomBehaviour(new CustomBehaviour(null, null, 10, variables, rules));
@@ -101,7 +101,7 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", "0", "100", null));
+		variables.add(new VariableCustomBehaviour("var1", "0", "100", null));
 		rules.add(new RuleCustomBehaviour(0.0, "$(var1)", null, null, null));
 
 		field.setCustomBehaviour(new CustomBehaviour(null, null, 10, variables, rules));
@@ -131,8 +131,8 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", null, null, "0"));
-		variables.add(new VariableCustomBehaviour(null, "varDependentOfVar1", "$(var1)", "100", null));
+		variables.add(new VariableCustomBehaviour("var1", null, null, "0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", "$(var1)", "100", null));
 
 		rules.add(new RuleCustomBehaviour(0.0, null, "$(varDependentOfVar1)", "$(varDependentOfVar1)", null));
 
@@ -158,8 +158,8 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", null, null, "100.0"));
-		variables.add(new VariableCustomBehaviour(null, "varDependentOfVar1", "0", "$(var1)", null));
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", "0", "$(var1)", null));
 
 		rules.add(new RuleCustomBehaviour(0.0, null, "$(varDependentOfVar1)", "$(varDependentOfVar1)", null));
 
@@ -183,9 +183,9 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", null, null, "100.0"));
-		variables.add(new VariableCustomBehaviour(null, "varDependentOfVar1", null, null, "$(var1)+1"));
-		variables.add(new VariableCustomBehaviour(null, "var2DependentOfVar1", null, null, "1+$(var1)"));
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", null, null, "$(var1)+1"));
+		variables.add(new VariableCustomBehaviour("var2DependentOfVar1", null, null, "1+$(var1)"));
 
 		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
 		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
@@ -213,9 +213,9 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", null, null, "100.0"));
-		variables.add(new VariableCustomBehaviour(null, "varDependentOfVar1", null, null, "$(var1)-1"));
-		variables.add(new VariableCustomBehaviour(null, "var2DependentOfVar1", null, null, "1-$(var1)"));
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", null, null, "$(var1)-1"));
+		variables.add(new VariableCustomBehaviour("var2DependentOfVar1", null, null, "1-$(var1)"));
 
 		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
 		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
@@ -246,9 +246,9 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", null, null, "100.0"));
-		variables.add(new VariableCustomBehaviour(null, "varDependentOfVar1", null, null, "$(var1)/2"));
-		variables.add(new VariableCustomBehaviour(null, "var2DependentOfVar1", null, null, "2/$(var1)"));
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", null, null, "$(var1)/2"));
+		variables.add(new VariableCustomBehaviour("var2DependentOfVar1", null, null, "2/$(var1)"));
 
 		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
 		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
@@ -279,9 +279,9 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", null, null, "100.0"));
-		variables.add(new VariableCustomBehaviour(null, "varDependentOfVar1", null, null, "$(var1)*2"));
-		variables.add(new VariableCustomBehaviour(null, "var2DependentOfVar1", null, null, "2*$(var1)"));
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("varDependentOfVar1", null, null, "$(var1)*2"));
+		variables.add(new VariableCustomBehaviour("var2DependentOfVar1", null, null, "2*$(var1)"));
 
 		rules.add(new RuleCustomBehaviour(0.5, "$(varDependentOfVar1)", null, null, null));
 		rules.add(new RuleCustomBehaviour(0.0, "$(var2DependentOfVar1)", null, null, null));
@@ -328,7 +328,7 @@ public class FloatCustomBehaviourTestCase {
 		List<VariableCustomBehaviour> variables = new ArrayList<>();
 		List<RuleCustomBehaviour> rules = new ArrayList<>();
 
-		variables.add(new VariableCustomBehaviour(null, "var1", null, null, "100.0"));
+		variables.add(new VariableCustomBehaviour("var1", null, null, "100.0"));
 
 		rules.add(new RuleCustomBehaviour(0.0, "$(var1)+1", null, null, null));
 

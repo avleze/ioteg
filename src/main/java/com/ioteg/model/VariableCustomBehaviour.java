@@ -52,6 +52,18 @@ public class VariableCustomBehaviour {
 		this.max = max;
 		this.value = value;
 	}
+	
+	
+
+	/**
+	 * @param name
+	 * @param min
+	 * @param max
+	 * @param value
+	 */
+	public VariableCustomBehaviour(String name, String min, String max, String value) {
+		this(null, name, min, max, value);
+	}
 
 	/**
 	 * <p>
