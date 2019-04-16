@@ -58,6 +58,16 @@ public class OptionalFields {
 		this.fields = fields;
 	}
 	
+	
+	
+	/**
+	 * @param mandatory
+	 * @param fields
+	 */
+	public OptionalFields(Boolean mandatory, @Valid List<Field> fields) {
+		this(null, mandatory, fields);
+	}
+
 	/**
 	 * @return the id
 	 */

@@ -45,7 +45,7 @@ public class OptionalFieldsBuilder {
 		}
 
 
-		return new OptionalFields(null, mandatoryValue, fieldsOfTheOptionalFields);
+		return new OptionalFields(mandatoryValue, fieldsOfTheOptionalFields);
 	}
 
 }
