@@ -2,6 +2,7 @@ package com.ioteg.users;
 
 import java.security.Principal;
 import java.security.SecureRandom;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -56,10 +57,14 @@ public class UserController {
 		ResponseEntity<User> response = null;
 		
 		try {
-			User databaseUser = userRepository.findByUsername(principal.getName()).get();
-			databaseUser.setUsername(user.getUsername());
-			databaseUser.setEmail(user.getEmail());
-			userRepository.save(databaseUser);
+			Optional<User> databaseUser = userRepository.findByUsername(principal.getName());
+			if(databaseUser.isPresent())
+			{
+				databaseUser.get().setUsername(user.getUsername());
+				databaseUser.get().setEmail(user.getEmail());
+				userRepository.save(databaseUser.get());
+			}
+			
 		}
 		catch(Exception e) {
 			response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

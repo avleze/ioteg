@@ -62,11 +62,12 @@ public class EventGenerationController {
 		ResponseEntity<ChannelType> response = ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
 		if (user != null) {
-			User loggedUser = userRepository.findByUsernameWithChannels(user.getName()).get();
-			loggedUser.getChannels().add(channel);
-			userRepository.save(loggedUser);
-
-			response = ResponseEntity.ok().body(channel);
+			Optional<User> loggedUser = userRepository.findByUsernameWithChannels(user.getName());
+			if (loggedUser.isPresent()) {
+				loggedUser.get().getChannels().add(channel);
+				userRepository.save(loggedUser.get());
+				response = ResponseEntity.ok().body(channel);
+			}
 		}
 
 		return response;
