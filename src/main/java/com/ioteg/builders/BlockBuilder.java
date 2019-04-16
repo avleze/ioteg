@@ -44,7 +44,7 @@ public class BlockBuilder {
 		List<OptionalFields> subOptionalFields = buildSubOptionalsField(element);
 		List<InjectedField> subInjectedFields = buildSubInjectedField(element);
 
-		return new Block(null, name, value, repetition, subFields, subInjectedFields, subOptionalFields);
+		return new Block(name, value, repetition, subFields, subInjectedFields, subOptionalFields);
 	}
 
 	private List<Field> buildSubFields(Element element) throws JDOMException, IOException {

@@ -83,6 +83,21 @@ public class Block {
 		this.injectedFields = injectedFields;
 		this.optionalFields = optionalFields;
 	}
+	
+	
+
+	/**
+	 * @param name
+	 * @param value
+	 * @param repetition
+	 * @param fields
+	 * @param injectedFields
+	 * @param optionalFields
+	 */
+	public Block(@NotEmpty @NotNull String name, String value, Integer repetition, @Valid List<Field> fields,
+			@Valid List<InjectedField> injectedFields, @Valid List<OptionalFields> optionalFields) {
+		this(null, name, value, repetition, fields, injectedFields, optionalFields);
+	}
 
 	/**
 	 * @return the id
