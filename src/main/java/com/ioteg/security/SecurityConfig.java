@@ -17,9 +17,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import static com.ioteg.security.SecurityConstants.*;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -45,11 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
-	}
-
-	@Bean
-	public SecureRandom secureRandom() throws NoSuchAlgorithmException {
-		return SecureRandom.getInstanceStrong();
 	}
 
 	@Bean

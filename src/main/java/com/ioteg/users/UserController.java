@@ -1,6 +1,5 @@
 package com.ioteg.users;
 
-import java.security.Principal;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +22,10 @@ public class UserController {
 
 	@PostMapping
 	public ResponseEntity<User> signUp(@RequestBody @Valid User user) {
-		ResponseEntity<User> response = null;
+		ResponseEntity<User> response = ResponseEntity.ok().build();
 		
 		try {
 			userService.signup(user);
-			response = ResponseEntity.ok().build();
 		}
 		catch(Exception e) {
 			response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -37,7 +35,7 @@ public class UserController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<User> modifyUser(@RequestBody @Valid UserDTO user, Principal principal) {
+	public ResponseEntity<User> modifyUser(@RequestBody @Valid UserDTO user) {
 		ResponseEntity<User> response = ResponseEntity.ok().build();
 		
 		try {

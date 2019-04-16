@@ -1,8 +1,11 @@
 package com.ioteg.users;
 
+import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.SecureRandom;
 import java.util.Optional;
+
+import javax.annotation.PostConstruct;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +21,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
+
 	private SecureRandom secureRandom;
+	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -54,5 +58,10 @@ public class UserService implements UserDetailsService {
 	
 	private Principal authenticatedUser() {
 		return SecurityContextHolder.getContext().getAuthentication();
+	}
+	
+	@PostConstruct
+	private void initialize() throws NoSuchAlgorithmException {
+		this.secureRandom = SecureRandom.getInstanceStrong();
 	}
 }
