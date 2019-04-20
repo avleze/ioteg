@@ -1,6 +1,7 @@
 package com.ioteg.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.ioteg.model.CustomBehaviour;
@@ -10,16 +11,29 @@ import com.ioteg.repositories.VariableCustomBehaviourRepository;
 @Service
 public class VariableCustomBehaviourService {
 
-	@Autowired
 	private CustomBehaviourService customBehaviourService;
-	
-	@Autowired
 	private VariableCustomBehaviourRepository variableCustomBehaviourRepository;
+	private UserService userService;
 	
-	
+	/**
+	 * @param customBehaviourService
+	 * @param variableCustomBehaviourRepository
+	 * @param userService
+	 */
+	@Autowired
+	public VariableCustomBehaviourService(CustomBehaviourService customBehaviourService,
+			VariableCustomBehaviourRepository variableCustomBehaviourRepository, UserService userService) {
+		super();
+		this.customBehaviourService = customBehaviourService;
+		this.variableCustomBehaviourRepository = variableCustomBehaviourRepository;
+		this.userService = userService;
+	}
+
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER')")
 	public VariableCustomBehaviour createVariableCustomBehaviourRepository(Long customBehaviourId,
 			VariableCustomBehaviour variableCustomBehaviour) throws ResourceNotFoundException {
 	
+		variableCustomBehaviour.setOwner(userService.loadLoggedUser());
 		VariableCustomBehaviour storedVariableCustomBehaviour = variableCustomBehaviourRepository.save(variableCustomBehaviour);
 		
 		CustomBehaviour customBehaviour = customBehaviourService.loadById(customBehaviourId);
@@ -29,7 +43,8 @@ public class VariableCustomBehaviourService {
 		return storedVariableCustomBehaviour;
 	}
 	
-	public VariableCustomBehaviour modifyRuleCustomBehaviour(Long variableCustomBehaviourId,
+	@PreAuthorize("hasPermission(#variableCustomBehaviourId, 'VariableCustomBehaviour', 'OWNER')")
+	public VariableCustomBehaviour modifyVariableCustomBehaviour(Long variableCustomBehaviourId,
 			VariableCustomBehaviour variableCustomBehaviour) throws ResourceNotFoundException {
 	
 		VariableCustomBehaviour storedVariableCustomBehaviour =  this.loadById(variableCustomBehaviourId);
@@ -42,10 +57,12 @@ public class VariableCustomBehaviourService {
 		return variableCustomBehaviourRepository.save(storedVariableCustomBehaviour);
 	}
 	
-	public void removeRuleCustomBehaviour(Long variableCustomBehaviourId) {
+	@PreAuthorize("hasPermission(#variableCustomBehaviourId, 'VariableCustomBehaviour', 'OWNER')")
+	public void removeVariableCustomBehaviour(Long variableCustomBehaviourId) {
 		variableCustomBehaviourRepository.deleteById(variableCustomBehaviourId);
 	}
 
+	@PreAuthorize("hasPermission(#variableCustomBehaviourId, 'VariableCustomBehaviour', 'OWNER')")
 	public VariableCustomBehaviour loadById(Long variableCustomBehaviourId) throws ResourceNotFoundException {
 		return variableCustomBehaviourRepository.findById(variableCustomBehaviourId)
 				.orElseThrow(() -> new ResourceNotFoundException("VariableCustomBehaviour " + variableCustomBehaviourId, "VariableCustomBehaviour not found."));

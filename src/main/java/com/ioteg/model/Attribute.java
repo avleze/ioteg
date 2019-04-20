@@ -1,11 +1,6 @@
 package com.ioteg.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -22,12 +17,8 @@ import com.ioteg.users.User;
  */
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Attribute {
+public class Attribute extends OwnedEntity{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	protected Long id;
 	@NotEmpty
 	@NotNull
 	protected String type;

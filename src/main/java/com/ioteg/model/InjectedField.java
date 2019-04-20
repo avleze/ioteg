@@ -1,10 +1,6 @@
 package com.ioteg.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,10 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @version $Id: $Id
  */
 @Entity
-public class InjectedField {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+public class InjectedField extends OwnedEntity{
+
 	private String name;
 
 	@SuppressWarnings("unused")

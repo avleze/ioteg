@@ -52,7 +52,7 @@ public class UserController {
 	@PatchMapping("/{id}/password")
 	public ResponseEntity<Object> changePassword(@PathVariable("id") Long id, @RequestBody @Valid PasswordDTO passwordDTO) {
 		ResponseEntity<Object> response = ResponseEntity.ok().build();
-
+		
 		try {
 			userService.changePassword(id, passwordDTO);
 		} catch (PasswordNotMatchException passwordNotMatchException) {

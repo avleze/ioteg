@@ -4,9 +4,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,13 +22,23 @@ import com.ioteg.users.User;
 @Service
 public class UserService implements UserDetailsService {
 
-	@Autowired
 	private UserRepository userRepository;
-
 	private SecureRandom secureRandom;
-
-	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	/**
+	 * @param userRepository
+	 * @param bCryptPasswordEncoder
+	 * @throws NoSuchAlgorithmException
+	 */
+	@Autowired
+	public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder)
+			throws NoSuchAlgorithmException {
+		super();
+		this.userRepository = userRepository;
+		this.secureRandom = SecureRandom.getInstanceStrong();
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -38,6 +49,7 @@ public class UserService implements UserDetailsService {
 		return user.get();
 	}
 
+	@PreAuthorize("hasPermission(#id, 'User', 'OWNER')")
 	public User loadUserById(Long id) throws UsernameNotFoundException {
 		Optional<User> user = userRepository.findById(id);
 		if (!user.isPresent())
@@ -45,7 +57,17 @@ public class UserService implements UserDetailsService {
 
 		return user.get();
 	}
-	
+
+	public User loadLoggedUser() throws UsernameNotFoundException {
+		Optional<User> user = userRepository
+				.findByUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		if (!user.isPresent())
+			throw new UsernameNotFoundException("Username not found");
+
+		return user.get();
+	}
+
+	@PreAuthorize("hasPermission(#id, 'User', 'OWNER')")
 	public User loadUserByIdWithChannels(Long id) throws UsernameNotFoundException {
 		Optional<User> user = userRepository.findUserByIdWithChannels(id);
 		if (!user.isPresent())
@@ -62,6 +84,7 @@ public class UserService implements UserDetailsService {
 		return userRepository.save(user);
 	}
 
+	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER')")
 	public void modifyUserData(Long userId, User newUserData) {
 		User user = loadUserById(userId);
 
@@ -70,7 +93,7 @@ public class UserService implements UserDetailsService {
 		userRepository.save(user);
 	}
 
-
+	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER')")
 	public void changePassword(Long userId, PasswordDTO passwordDTO) throws PasswordNotMatchException {
 		User user = loadUserById(userId);
 
@@ -80,14 +103,9 @@ public class UserService implements UserDetailsService {
 		} else
 			throw new PasswordNotMatchException();
 	}
-	
+
 	public User save(User user) {
 		return userRepository.save(user);
-	}
-
-	@PostConstruct
-	private void initialize() throws NoSuchAlgorithmException {
-		this.secureRandom = SecureRandom.getInstanceStrong();
 	}
 
 	private String generateMQTTApiKey() {

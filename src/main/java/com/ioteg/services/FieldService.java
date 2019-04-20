@@ -1,6 +1,7 @@
 package com.ioteg.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.ioteg.model.Block;
@@ -11,17 +12,31 @@ import com.ioteg.repositories.FieldRepository;
 @Service
 public class FieldService {
 
-	@Autowired
 	private BlockService blockService;
-
-	@Autowired
 	private OptionalFieldsService optionalFieldsService;
-	
-	@Autowired
 	private FieldRepository fieldRepository;
+	private UserService userService;
+	
+	/**
+	 * @param blockService
+	 * @param optionalFieldsService
+	 * @param fieldRepository
+	 * @param userService
+	 */
+	@Autowired
+	public FieldService(BlockService blockService, OptionalFieldsService optionalFieldsService,
+			FieldRepository fieldRepository, UserService userService) {
+		super();
+		this.blockService = blockService;
+		this.optionalFieldsService = optionalFieldsService;
+		this.fieldRepository = fieldRepository;
+		this.userService = userService;
+	}
 
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
 	public Field createField(Long blockId, Field field) throws ResourceNotFoundException {
 
+		field.setOwner(userService.loadLoggedUser());
 		Field storedField = fieldRepository.save(field);
 		Block block = blockService.loadById(blockId);
 		block.getFields().add(storedField);
@@ -30,8 +45,10 @@ public class FieldService {
 		return storedField;
 	}
 
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
 	public Field createSubField(Long fieldId, Field field) throws ResourceNotFoundException {
 
+		field.setOwner(userService.loadLoggedUser());
 		Field storedField = fieldRepository.save(field);
 
 		Field parentField = this.loadById(fieldId);
@@ -41,8 +58,10 @@ public class FieldService {
 		return storedField;
 	}
 	
+	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
 	public Field createFieldInOptionalFields(Long optionalFieldsId, Field field) throws ResourceNotFoundException {
 
+		field.setOwner(userService.loadLoggedUser());
 		Field storedField = fieldRepository.save(field);
 
 		OptionalFields parentOptionalFields = optionalFieldsService.loadById(optionalFieldsId);
@@ -52,6 +71,7 @@ public class FieldService {
 		return storedField;
 	}
 
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
 	public Field modifyField(Long fieldId, Field field) throws ResourceNotFoundException {
 		Field storedField = fieldRepository.findById(fieldId)
 				.orElseThrow(() -> new ResourceNotFoundException("Field " + fieldId, "Field not found."));
@@ -79,10 +99,12 @@ public class FieldService {
 		return fieldRepository.save(storedField);
 	}
 
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
 	public void removeField(Long fieldId) {
 		fieldRepository.deleteById(fieldId);
 	}
 
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
 	public Field loadById(Long fieldId) throws ResourceNotFoundException {
 		return fieldRepository.findById(fieldId)
 				.orElseThrow(() -> new ResourceNotFoundException("Field " + fieldId, "Field not found."));

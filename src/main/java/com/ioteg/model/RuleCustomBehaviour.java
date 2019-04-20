@@ -1,8 +1,6 @@
 package com.ioteg.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,9 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @Entity
-public class RuleCustomBehaviour {
-	@Id
-	private Long id;
+public class RuleCustomBehaviour extends OwnedEntity{
+
 	private Double weight;
 	private String value;
 	private String min;

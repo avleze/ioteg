@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
@@ -21,10 +18,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @Entity
-public class OptionalFields {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+public class OptionalFields extends OwnedEntity{
+
+	
 	private Boolean mandatory;
 	@Valid
 	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)

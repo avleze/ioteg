@@ -1,6 +1,6 @@
 package com.ioteg.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.ioteg.model.ChannelType;
@@ -10,16 +10,28 @@ import com.ioteg.repositories.ConfigurableEventTypeRepository;
 @Service
 public class ConfigurableEventTypeService {
 
-	@Autowired
 	private ChannelTypeService channelTypeService;
-
-	@Autowired
 	private ConfigurableEventTypeRepository configurableEventTypeRepository;
+	private UserService userService;
+	
+	/**
+	 * @param channelTypeService
+	 * @param configurableEventTypeRepository
+	 * @param userService
+	 */
+	public ConfigurableEventTypeService(ChannelTypeService channelTypeService,
+			ConfigurableEventTypeRepository configurableEventTypeRepository, UserService userService) {
+		super();
+		this.channelTypeService = channelTypeService;
+		this.configurableEventTypeRepository = configurableEventTypeRepository;
+		this.userService = userService;
+	}
 
+	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER')")
 	public ConfigurableEventType createConfigurableEventType(Long channelId,
 			ConfigurableEventType configurableEventType) throws ResourceNotFoundException {
 		
-		
+		configurableEventType.setOwner(userService.loadLoggedUser());
 		ConfigurableEventType storedConfigurableEventType = configurableEventTypeRepository.save(configurableEventType);
 
 		ChannelType channelType = channelTypeService.loadById(channelId);
@@ -29,6 +41,7 @@ public class ConfigurableEventTypeService {
 		return storedConfigurableEventType;
 	}
 
+	@PreAuthorize("hasPermission(#configurableEventTypeId, 'ConfigurableEventType', 'OWNER')")
 	public ConfigurableEventType modifyConfigurableEventType(Long configurableEventTypeId, ConfigurableEventType configurableEventType) throws ResourceNotFoundException {
 		ConfigurableEventType storedConfigurableEventType = configurableEventTypeRepository.findById(configurableEventTypeId).orElseThrow(() -> new ResourceNotFoundException("configurableEventType " + configurableEventTypeId, "ConfigurableEventType not found."));
 		
@@ -40,10 +53,12 @@ public class ConfigurableEventTypeService {
 		return configurableEventTypeRepository.save(storedConfigurableEventType);
 	}
 
+	@PreAuthorize("hasPermission(#configurableEventTypeId, 'ConfigurableEventType', 'OWNER')")
 	public void removeConfigurableEventType(Long configurableEventTypeId) {
 		configurableEventTypeRepository.deleteById(configurableEventTypeId);
 	}
 	
+	@PreAuthorize("hasPermission(#configurableEventTypeId, 'ConfigurableEventType', 'OWNER')")
 	public ConfigurableEventType loadById(Long configurableEventTypeId) throws ResourceNotFoundException {
 		return configurableEventTypeRepository.findById(configurableEventTypeId).orElseThrow(() -> new ResourceNotFoundException("configurableEventType " + configurableEventTypeId, "ConfigurableEventType not found"));
 	}

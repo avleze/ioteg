@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
@@ -25,10 +22,7 @@ import com.ioteg.users.User;
  */
 
 @Entity
-public class EventType{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+public class EventType extends OwnedEntity{
 
 	@NotEmpty
 	@NotNull

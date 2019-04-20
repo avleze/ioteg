@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -23,10 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @Entity
-public class Block {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+public class Block extends OwnedEntity{
 
 	@NotEmpty
 	@NotNull
