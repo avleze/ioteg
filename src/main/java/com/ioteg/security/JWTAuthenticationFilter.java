@@ -1,6 +1,10 @@
 package com.ioteg.security;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static com.ioteg.security.SecurityConstants.EXPIRATION_TIME;
+import static com.ioteg.security.SecurityConstants.HEADER_STRING;
+import static com.ioteg.security.SecurityConstants.SECRET;
+import static com.ioteg.security.SecurityConstants.TOKEN_PREFIX;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,12 +20,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ioteg.users.User;
-import com.ioteg.users.UserDTO;
-
-import static com.ioteg.security.SecurityConstants.*;
 
 public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     
@@ -58,12 +60,15 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
+    	User user = (User) userDetailsService.loadUserByUsername(((User)auth.getPrincipal()).getUsername());
+    	
     	String token = JWT.create()
                 .withSubject(((User) auth.getPrincipal()).getUsername())
+                .withClaim("id", user.getId())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
         
-        new ObjectMapper().writeValue(res.getOutputStream(), new UserDTO((User) userDetailsService.loadUserByUsername(((User)auth.getPrincipal()).getUsername())));
+        new ObjectMapper().writeValue(res.getOutputStream(), user);
     }
 }

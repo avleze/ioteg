@@ -1,11 +1,11 @@
 package com.ioteg.model;
 
 import java.util.List;
-import java.util.UUID;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -27,14 +27,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ChannelType {
 
 	@Id
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Long id;
 
 	@NotNull
 	@NotEmpty
 	private String channelName;
 
 	@Valid
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<ConfigurableEventType> configurableEventTypes;
 
 	@SuppressWarnings("unused")
@@ -46,11 +47,9 @@ public class ChannelType {
 	 * @param channel
 	 * @param configurableEventTypes
 	 */
-	public ChannelType(@JsonProperty("id") UUID id, @NotNull @NotEmpty @JsonProperty("channelName") String channelName,
+	public ChannelType(@JsonProperty("id") Long id, @NotNull @NotEmpty @JsonProperty("channelName") String channelName,
 			@Valid @JsonProperty("configurableEventTypes") List<ConfigurableEventType> configurableEventTypes) {
 		super();
-		if(id == null)
-			id = UUID.randomUUID();
 		this.id = id;
 		this.channelName = channelName;
 		this.configurableEventTypes = configurableEventTypes;
@@ -59,14 +58,14 @@ public class ChannelType {
 	/**
 	 * @return the id
 	 */
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

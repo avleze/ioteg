@@ -3,8 +3,6 @@ package com.ioteg.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -34,14 +32,15 @@ public class Field extends Attribute {
 	private String dependence;
 	private Boolean injectable;
 	@Valid
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Field> fields;
 	@Valid
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Attribute> attributes;
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private CustomBehaviour customBehaviour;
 
+	
 	@SuppressWarnings("unused")
 	private Field() {
 
@@ -112,7 +111,7 @@ public class Field extends Attribute {
 	 */
 
 	@JsonCreator
-	public Field(@JsonProperty("id") UUID id, @NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
+	public Field(@JsonProperty("id") Long id, @NotEmpty @NotNull @JsonProperty("type") String type, @JsonProperty("value") String value,
 			@JsonProperty("min") Double min, @JsonProperty("step") String step, @JsonProperty("unit") String unit,
 			@JsonProperty("max") Double max, @JsonProperty("precision") Integer precision,
 			@JsonProperty("length") Integer length, @JsonProperty("strCase") String strCase,
@@ -363,5 +362,4 @@ public class Field extends Attribute {
 		this.customBehaviour = customBehaviour;
 	}
 	
-
 }

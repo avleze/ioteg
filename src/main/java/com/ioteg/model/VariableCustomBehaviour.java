@@ -1,8 +1,8 @@
 package com.ioteg.model;
 
-import java.util.UUID;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,7 +19,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class VariableCustomBehaviour {
 	@Id
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Long id;
 	private String name;
 	private String min;
 	private String max;
@@ -41,11 +42,9 @@ public class VariableCustomBehaviour {
 	 * @param max   a {@link java.lang.String} object.
 	 * @param value a {@link java.lang.String} object.
 	 */
-	public VariableCustomBehaviour(@JsonProperty("id") UUID id, @JsonProperty("name") String name,
+	public VariableCustomBehaviour(@JsonProperty("id") Long id, @JsonProperty("name") String name,
 			@JsonProperty("min") String min, @JsonProperty("max") String max, @JsonProperty("value") String value) {
 		super();
-		if(id == null)
-			id = UUID.randomUUID();
 		this.id = id;
 		this.name = name;
 		this.min = min;

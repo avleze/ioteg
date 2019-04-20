@@ -1,8 +1,8 @@
 package com.ioteg.model;
 
-import java.util.UUID;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -19,7 +19,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class InjectedField {
 	@Id
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Long id;
 	private String name;
 
 	@SuppressWarnings("unused")
@@ -35,10 +36,8 @@ public class InjectedField {
 	 * @param name a {@link java.lang.String} object.
 	 */
 	@JsonCreator
-	public InjectedField(@JsonProperty("id") UUID id, @JsonProperty("name") String name) {
+	public InjectedField(@JsonProperty("id") Long id, @JsonProperty("name") String name) {
 		super();
-		if(id == null)
-			id = UUID.randomUUID();
 		this.id = id;
 		this.name = name;
 	}
@@ -46,14 +45,14 @@ public class InjectedField {
 	/**
 	 * @return the id
 	 */
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

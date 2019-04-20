@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ScheduledFuture;
@@ -42,8 +41,8 @@ public class PeriodicEventGenerationService {
 	@Autowired
 	private MqttService mqttService;
 
-	private Map<UUID, ScheduledFuture<?>> futureTasks;
-	private Map<UUID, PeriodicEventGenerator> periodicEventGeneratorTasks;
+	private Map<Long, ScheduledFuture<?>> futureTasks;
+	private Map<Long, PeriodicEventGenerator> periodicEventGeneratorTasks;
 
 	/**
 	 * <p>
@@ -75,11 +74,11 @@ public class PeriodicEventGenerationService {
 		return topicsCreated;
 	}
 
-	public boolean stopConfigurableEventType(UUID id) {
+	public boolean stopConfigurableEventType(Long id) {
 		return futureTasks.get(id).cancel(false);
 	}
 
-	public void resumeConfigurableEventType(UUID id) {
+	public void resumeConfigurableEventType(Long id) {
 		PeriodicEventGenerator periodicEventGenerator = periodicEventGeneratorTasks.get(id);
 		scheduleTask(periodicEventGenerator);
 	}
@@ -100,7 +99,7 @@ public class PeriodicEventGenerationService {
 		periodicEventGeneratorTasks = new HashMap<>();
 	}
 
-	private String formatTopic(UUID channelId, String eventName, String apiKey) {
+	private String formatTopic(Long channelId, String eventName, String apiKey) {
 		return String.format("/channel/%s/%s/%s", channelId, eventName, apiKey);
 	}
 }

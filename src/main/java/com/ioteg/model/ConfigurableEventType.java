@@ -1,11 +1,12 @@
 package com.ioteg.model;
 
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
@@ -26,11 +27,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class ConfigurableEventType {
 	@Id
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Long id;
 
 	@NotNull
 	@Valid
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private EventType eventType;
 	@PositiveOrZero
 	private Integer delay;
@@ -39,6 +41,7 @@ public class ConfigurableEventType {
 	private Integer period;
 	private TimeUnit unit;
 
+	
 	@SuppressWarnings("unused")
 	private ConfigurableEventType() {
 
@@ -55,7 +58,7 @@ public class ConfigurableEventType {
 	 * @param period    a {@link java.lang.Integer} object.
 	 * @param unit      a {@link java.util.concurrent.TimeUnit} object.
 	 */
-	public ConfigurableEventType(@JsonProperty("id") UUID id, @NotNull @JsonProperty("eventtype") EventType eventType,
+	public ConfigurableEventType(@JsonProperty("id") Long id, @NotNull @JsonProperty("eventtype") EventType eventType,
 			@JsonProperty("delay") @PositiveOrZero Integer delay,
 			@NotNull @Positive @JsonProperty("period") Integer period, @JsonProperty("unit") TimeUnit unit) {
 		super();
@@ -63,8 +66,6 @@ public class ConfigurableEventType {
 			unit = TimeUnit.SECONDS;
 		if (delay == null)
 			delay = 0;
-		if(id == null)
-			id = UUID.randomUUID();
 		
 		this.id = id;
 		this.eventType = eventType;
@@ -76,14 +77,14 @@ public class ConfigurableEventType {
 	/**
 	 * @return the id
 	 */
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -174,5 +175,6 @@ public class ConfigurableEventType {
 	public void setUnit(TimeUnit unit) {
 		this.unit = unit;
 	}
+	
 
 }

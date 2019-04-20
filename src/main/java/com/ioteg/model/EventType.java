@@ -2,18 +2,20 @@ package com.ioteg.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ioteg.users.User;
 
 /**
  * This class represents an event type.
@@ -23,18 +25,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @Entity
-public class EventType {
+public class EventType{
 	@Id
-	private UUID id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Long id;
 
 	@NotEmpty
 	@NotNull
 	private String name;
 
 	@Valid
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Block> blocks;
 
+	@OneToOne
+	private User owner;
+	
 	@SuppressWarnings("unused")
 	private EventType() {
 
@@ -46,11 +52,9 @@ public class EventType {
 	 * @param blocks
 	 */
 	@JsonCreator
-	public EventType(@JsonProperty("id") UUID id, @JsonProperty("name") @NotEmpty @NotNull String name,
+	public EventType(@JsonProperty("id") Long id, @JsonProperty("name") @NotEmpty @NotNull String name,
 			@JsonProperty("blocks") @Valid List<Block> blocks) {
 		super();
-		if(id == null)
-			id = UUID.randomUUID();
 		if (blocks == null)
 			blocks = new ArrayList<>();
 
@@ -62,14 +66,14 @@ public class EventType {
 	/**
 	 * @return the id
 	 */
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -116,5 +120,7 @@ public class EventType {
 	public void setBlocks(List<Block> blocks) {
 		this.blocks = blocks;
 	}
+
+
 
 }

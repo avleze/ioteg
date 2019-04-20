@@ -1,29 +1,23 @@
 package com.ioteg.controllers;
 
-import java.security.Principal;
 import java.text.ParseException;
-import java.util.Optional;
-import java.util.UUID;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generation.EventTypeGenerator;
+import com.ioteg.generation.GenerationContext;
+import com.ioteg.generation.GeneratorsFactory;
 import com.ioteg.generation.NotExistingGeneratorException;
-import com.ioteg.model.ChannelType;
+import com.ioteg.model.EventType;
+import com.ioteg.repositories.UserRepository;
+import com.ioteg.resultmodel.ResultEvent;
 import com.ioteg.services.periodicgeneration.PeriodicEventGenerationService;
-import com.ioteg.users.User;
-import com.ioteg.users.UserRepository;
 
 /**
  * <p>
@@ -34,8 +28,8 @@ import com.ioteg.users.UserRepository;
  * @version $Id: $Id
  */
 @RestController
-@RequestMapping("/api/events/")
-public class EventGenerationController {
+@RequestMapping("/api/generation/")
+public class GenerationController {
 
 	@Autowired(required = false)
 	private PeriodicEventGenerationService periodicEventGenerationService;
@@ -43,38 +37,19 @@ public class EventGenerationController {
 	@Autowired
 	private UserRepository userRepository;
 
-	/**
-	 * <p>
-	 * generateConfigurableEvents.
-	 * </p>
-	 *
-	 * @param channels a {@link com.ioteg.model.ChannelType} object.
-	 * @throws com.ioteg.generation.NotExistingGeneratorException     if any.
-	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
-	 * @throws java.text.ParseException                               if any.
-	 */
-	@PostMapping(path = "/addChannel", consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	@ResponseBody
-	@CrossOrigin(origins = "*")
-	public ResponseEntity<ChannelType> generateConfigurableEvents(@RequestBody @Valid ChannelType channel,
-			Principal user) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		ResponseEntity<ChannelType> response = ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-		if (user != null) {
-			Optional<User> loggedUser = userRepository.findByUsernameWithChannels(user.getName());
-			if (loggedUser.isPresent()) {
-				loggedUser.get().getChannels().add(channel);
-				userRepository.save(loggedUser.get());
-				response = ResponseEntity.ok().body(channel);
-			}
-		}
-
-		return response;
+	@PostMapping("event")
+	@PreAuthorize("hasPermission(#event, 'OWNER')")
+	public ResponseEntity<ResultEvent> generate(@RequestBody EventType event) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+		
+		EventTypeGenerator eventTypeGenerator = GeneratorsFactory.makeEventTypeGenerator(event, new GenerationContext());
+		
+		
+		return ResponseEntity.ok().body(eventTypeGenerator.generate(1).get(0));
 	}
-
+	
+	/*
 	@PostMapping("/stopEventGeneration")
-	public ResponseEntity<Boolean> stopAsyncGeneration(@RequestParam("id") UUID id, Principal principal) {
+	public ResponseEntity<Boolean> stopAsyncGeneration(@RequestParam("id") Long id, Principal principal) {
 		ResponseEntity<Boolean> response = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
 		Optional<User> owner = userRepository.findUserWithConfigurableEvent(id);
 
@@ -93,7 +68,7 @@ public class EventGenerationController {
 	}
 
 	@PostMapping("/resumeEventGeneration")
-	public ResponseEntity<Boolean> resumeAsyncGeneration(@RequestParam("id") UUID id, Principal principal) {
+	public ResponseEntity<Boolean> resumeAsyncGeneration(@RequestParam("id") Long id, Principal principal) {
 		ResponseEntity<Boolean> response = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
 		Optional<User> owner = userRepository.findUserWithConfigurableEvent(id);
 
@@ -109,6 +84,6 @@ public class EventGenerationController {
 		}
 
 		return response;
-	}
+	}*/
 
 }

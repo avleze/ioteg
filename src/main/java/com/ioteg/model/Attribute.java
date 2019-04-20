@@ -1,16 +1,18 @@
 package com.ioteg.model;
 
-import java.util.UUID;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ioteg.users.User;
 
 /**
  * This class represents an attribute inside a complex field in the data model.
@@ -24,7 +26,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Attribute {
 
 	@Id
-	protected UUID id;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	protected Long id;
 	@NotEmpty
 	@NotNull
 	protected String type;
@@ -42,6 +45,9 @@ public class Attribute {
 	protected String format;
 	protected Boolean isNumeric;
 
+	@OneToOne
+	private User owner;
+	
 	protected Attribute() {
 
 	}
@@ -68,15 +74,13 @@ public class Attribute {
 	 * @param isNumeric    a {@link java.lang.Boolean} object.
 	 */
 	@JsonCreator
-	public Attribute(@JsonProperty("id") UUID id, @NotEmpty @NotNull @JsonProperty("type") String type,
+	public Attribute(@JsonProperty("id") Long id, @NotEmpty @NotNull @JsonProperty("type") String type,
 			@JsonProperty("value") String value, @JsonProperty("min") Double min, @JsonProperty("step") String step,
 			@JsonProperty("unit") String unit, @JsonProperty("max") Double max,
 			@JsonProperty("precision") Integer precision, @JsonProperty("length") Integer length,
 			@JsonProperty("case") String strCase, @JsonProperty("begin") String begin, @JsonProperty("end") String end,
 			@JsonProperty("endcharacter") String endcharacter, @JsonProperty("format") String format,
 			@JsonProperty("isnumeric") Boolean isNumeric) {
-		if (id == null)
-			id = UUID.randomUUID();
 		if (isNumeric == null)
 			isNumeric = false;			
 		if (min == null)
@@ -141,14 +145,14 @@ public class Attribute {
 	/**
 	 * @return the id
 	 */
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -459,5 +463,6 @@ public class Attribute {
 	public void setIsNumeric(Boolean isNumeric) {
 		this.isNumeric = isNumeric;
 	}
+
 
 }

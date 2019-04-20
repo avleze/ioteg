@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TestEventGenerationController {
 
 	@Autowired
-	private EventGenerationController controller;
+	private GenerationController controller;
 
 	@Test
 	public void testGenerateEvents() throws Exception {
