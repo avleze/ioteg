@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -30,13 +31,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-				.antMatchers("*", "/h2-console/**").permitAll().anyRequest().authenticated().and()
-				.addFilterBefore(new JWTAuthenticationFilter("/api/users/signin", authenticationManager(), userDetailsService), UsernamePasswordAuthenticationFilter.class)
-				.addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService)).sessionManagement()
+		http
+		.cors().and()
+		.csrf()
+			.disable().authorizeRequests()
+		.antMatchers(HttpMethod.POST, SIGN_UP_URL)
+			.permitAll()
+		.antMatchers("*", "/h2-console/**")
+			.permitAll()
+		.antMatchers("*", "/api/**")
+			.permitAll()
+		.anyRequest()
+	   		.permitAll().and()
+		.addFilterBefore(new JWTAuthenticationFilter("/api/users/signin", authenticationManager(), userDetailsService),
+						UsernamePasswordAuthenticationFilter.class)
+		.addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService))
+			.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		http.headers().frameOptions().disable();
+	}
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
+				"/swagger-ui.html", "/webjars/**");
 	}
 
 	@Override
@@ -48,12 +67,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	CorsConfigurationSource corsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration corsConf = new CorsConfiguration().applyPermitDefaultValues();
-	    corsConf.addExposedHeader("Authorization");
+		corsConf.addExposedHeader("Authorization");
 
 		source.registerCorsConfiguration("/**", corsConf);
 
 		return source;
 	}
-
 
 }

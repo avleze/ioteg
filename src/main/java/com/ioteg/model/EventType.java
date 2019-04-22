@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
@@ -12,7 +13,6 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ioteg.users.User;
 
 /**
  * This class represents an event type.
@@ -29,10 +29,10 @@ public class EventType extends OwnedEntity{
 	private String name;
 
 	@Valid
-	@OneToMany(cascade = CascadeType.REMOVE)
+	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Block> blocks;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private User owner;
 	
 	@SuppressWarnings("unused")

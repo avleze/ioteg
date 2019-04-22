@@ -1,4 +1,4 @@
-package com.ioteg.users;
+package com.ioteg.model.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

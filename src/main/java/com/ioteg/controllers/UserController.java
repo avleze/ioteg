@@ -3,7 +3,6 @@ package com.ioteg.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -14,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ioteg.controllers.dto.PasswordChangeRequest;
+import com.ioteg.controllers.dto.UserDataChangeRequest;
+import com.ioteg.controllers.dto.UserResponse;
+import com.ioteg.controllers.dto.mappers.UserMapper;
+import com.ioteg.model.User;
+import com.ioteg.services.PasswordNotMatchException;
 import com.ioteg.services.UserService;
-import com.ioteg.users.PasswordDTO;
-import com.ioteg.users.PasswordNotMatchException;
-import com.ioteg.users.User;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/users")
@@ -26,46 +31,31 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private UserMapper userMapper;
+	
 	@PostMapping
-	public ResponseEntity<User> signUp(@RequestBody @Valid User user) {
-		ResponseEntity<User> response = ResponseEntity.ok().build();
-
-		try {
-			userService.signup(user);
-		} catch (Exception e) {
-			response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
-
-		return response;
+	public ResponseEntity<UserResponse> signUp(@RequestBody @Valid User user) {
+		return ResponseEntity.ok().body(userMapper.userToUserResponse(userService.signup(user)));
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
-		ResponseEntity<User> response = ResponseEntity.ok().build();
+	public ResponseEntity<UserResponse> getUser(@PathVariable("id") Long id) {
 		User user = userService.loadUserById(id);
-		
-		response = ResponseEntity.ok().body(user);
-
-		return response;
+		return ResponseEntity.ok().body(userMapper.userToUserResponse(user));
 	}
 
 	@PatchMapping("/{id}/password")
-	public ResponseEntity<Object> changePassword(@PathVariable("id") Long id, @RequestBody @Valid PasswordDTO passwordDTO) {
-		ResponseEntity<Object> response = ResponseEntity.ok().build();
-		
-		try {
-			userService.changePassword(id, passwordDTO);
-		} catch (PasswordNotMatchException passwordNotMatchException) {
-			response = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(passwordNotMatchException.getMessage());
-		}
-	
-		return response;
+	public ResponseEntity<Object> changePassword(@PathVariable("id") Long id,
+			@RequestBody @Valid PasswordChangeRequest passwordChangeRequest) throws PasswordNotMatchException {
+		userService.changePassword(id, passwordChangeRequest.getOldPassword(), passwordChangeRequest.getNewPassword());
+		return ResponseEntity.ok().build();
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<User> modifyUser(@PathVariable("id") Long id, @RequestBody @Valid User user) {
-		userService.modifyUserData(id, user);
-		return ResponseEntity.ok().build();
+	public ResponseEntity<UserResponse> modifyUser(@PathVariable("id") Long id, @RequestBody @Valid UserDataChangeRequest userData) {
+		User user = userService.modifyUserData(id, userData.getUsername(), userData.getEmail());
+		return ResponseEntity.ok().body(userMapper.userToUserResponse(user));
 	}
 
 }

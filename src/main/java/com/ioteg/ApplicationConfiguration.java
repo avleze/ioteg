@@ -1,6 +1,8 @@
 package com.ioteg;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -27,48 +29,88 @@ import com.ioteg.serializers.xml.XMLResultEventSerializer;
 import com.ioteg.serializers.xml.XMLResultSimpleFieldSerializer;
 import com.ioteg.serializers.xml.XMLSerializerMapper;
 
-@Configuration
-public class ApplicationConfiguration implements WebMvcConfigurer{
-     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(new XMLHttpMessageConverter(xmlSerializerMapper()));
-        converters.add(new CSVResultEventHttpMessageConverter());
-    }
-     
-     @Bean
- 	public Module module() {
- 	    return new Hibernate5Module();
- 	}
- 	/**
- 	 * <p>
- 	 * additionalConverters.
- 	 * </p>
- 	 *
- 	 * @return a
- 	 *         {@link org.springframework.boot.autoconfigure.http.HttpMessageConverters}
- 	 *         object.
- 	 */
- 	
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.SecurityReference;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
- 	@Bean
- 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
- 		return new PropertySourcesPlaceholderConfigurer();
- 	}
- 	
- 	@Bean
- 	public XMLSerializerMapper xmlSerializerMapper() {
- 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
- 		xmlSerializerMapper.registerCustomSerializer(ResultEvent.class, new XMLResultEventSerializer());
- 		xmlSerializerMapper.registerCustomSerializer(ArrayResultBlock.class, new XMLArrayResultBlockSerializer());
- 		xmlSerializerMapper.registerCustomSerializer(ResultBlock.class, new XMLResultBlockSerializer());
- 		xmlSerializerMapper.registerCustomSerializer(ResultSimpleField.class, new XMLResultSimpleFieldSerializer());
- 		xmlSerializerMapper.registerCustomSerializer(ResultComplexField.class, new XMLResultComplexFieldSerializer());
- 		xmlSerializerMapper.registerCustomSerializer(ArrayList.class , new XMLResultEventListSerializer());
- 		return xmlSerializerMapper;
- 	}
- 	
- 	@Bean
- 	public BCryptPasswordEncoder passwordEncoder() {
- 		return new BCryptPasswordEncoder();
- 	}
+@Configuration
+@EnableSwagger2
+public class ApplicationConfiguration implements WebMvcConfigurer {
+	@Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+		converters.add(new XMLHttpMessageConverter(xmlSerializerMapper()));
+		converters.add(new CSVResultEventHttpMessageConverter());
+	}
+
+	@Bean
+	public Module module() {
+		return new Hibernate5Module();
+	}
+
+	@Bean
+	public Docket swagger() {
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.ioteg"))
+				.paths(PathSelectors.any()).build().apiInfo(apiInfo()).securitySchemes(Arrays.asList(apiKey())).securityContexts(Arrays.asList(securityContext()));
+	}
+
+	private ApiInfo apiInfo() {
+		return new ApiInfo("IoT-TEG Rest API", null, null, null, null, null, null, Collections.emptyList());
+	}
+
+	private ApiKey apiKey() {
+		return new ApiKey("apiKey", "Authorization", "header");
+	}
+
+	private SecurityContext securityContext() {
+		return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.regex("/api/.*"))
+				.build();
+	}
+
+	List<SecurityReference> defaultAuth() {
+		AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+		AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+		authorizationScopes[0] = authorizationScope;
+		
+		
+		return Arrays.asList(new SecurityReference("apiKey", authorizationScopes));
+	}
+
+	/**
+	 * <p>
+	 * additionalConverters.
+	 * </p>
+	 *
+	 * @return a
+	 *         {@link org.springframework.boot.autoconfigure.http.HttpMessageConverters}
+	 *         object.
+	 */
+
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+
+	@Bean
+	public XMLSerializerMapper xmlSerializerMapper() {
+		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
+		xmlSerializerMapper.registerCustomSerializer(ResultEvent.class, new XMLResultEventSerializer());
+		xmlSerializerMapper.registerCustomSerializer(ArrayResultBlock.class, new XMLArrayResultBlockSerializer());
+		xmlSerializerMapper.registerCustomSerializer(ResultBlock.class, new XMLResultBlockSerializer());
+		xmlSerializerMapper.registerCustomSerializer(ResultSimpleField.class, new XMLResultSimpleFieldSerializer());
+		xmlSerializerMapper.registerCustomSerializer(ResultComplexField.class, new XMLResultComplexFieldSerializer());
+		xmlSerializerMapper.registerCustomSerializer(ArrayList.class, new XMLResultEventListSerializer());
+		return xmlSerializerMapper;
+	}
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

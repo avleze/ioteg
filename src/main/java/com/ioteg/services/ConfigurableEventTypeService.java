@@ -29,7 +29,7 @@ public class ConfigurableEventTypeService {
 
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER')")
 	public ConfigurableEventType createConfigurableEventType(Long channelId,
-			ConfigurableEventType configurableEventType) throws ResourceNotFoundException {
+			ConfigurableEventType configurableEventType) throws EntityNotFoundException {
 		
 		configurableEventType.setOwner(userService.loadLoggedUser());
 		ConfigurableEventType storedConfigurableEventType = configurableEventTypeRepository.save(configurableEventType);
@@ -59,8 +59,8 @@ public class ConfigurableEventTypeService {
 	}
 	
 	@PreAuthorize("hasPermission(#configurableEventTypeId, 'ConfigurableEventType', 'OWNER')")
-	public ConfigurableEventType loadById(Long configurableEventTypeId) throws ResourceNotFoundException {
-		return configurableEventTypeRepository.findById(configurableEventTypeId).orElseThrow(() -> new ResourceNotFoundException("configurableEventType " + configurableEventTypeId, "ConfigurableEventType not found"));
+	public ConfigurableEventType loadById(Long configurableEventTypeId) throws EntityNotFoundException {
+		return configurableEventTypeRepository.findById(configurableEventTypeId).orElseThrow(() -> new EntityNotFoundException(ConfigurableEventType.class, "id", configurableEventTypeId.toString()));
 	}
 	
 	public ConfigurableEventType save(ConfigurableEventType channel) {

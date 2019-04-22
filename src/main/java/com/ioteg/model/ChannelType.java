@@ -38,8 +38,7 @@ public class ChannelType {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<ConfigurableEventType> configurableEventTypes;
 
-	@SuppressWarnings("unused")
-	private ChannelType() {
+	public ChannelType() {
 
 	}
 

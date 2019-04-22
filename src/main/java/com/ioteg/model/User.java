@@ -1,19 +1,15 @@
-package com.ioteg.users;
+package com.ioteg.model;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-
+import java.util.stream.Stream;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -23,9 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ioteg.model.ChannelType;
+import com.ioteg.model.validation.UniqueUsername;
 
 @Entity
 public class User implements UserDetails {
@@ -49,53 +43,21 @@ public class User implements UserDetails {
 
 	@NotNull
 	@NotEmpty
-	@JsonIgnore
 	private String password;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<Role> roles;
+	private String role;
 
 	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<ChannelType> channels;
 
 	private String mqttApiKey;
 
-	@SuppressWarnings("unused")
-	private User() {
-
-	}
-
-	/**
-	 * @param id
-	 * @param username
-	 * @param password
-	 * @param isAccountNonExpired
-	 * @param isAccountNonLocked
-	 * @param isCredentialsNonExpired
-	 * @param isEnabled
-	 * @param roles
-	 */
-	public User(@JsonProperty("id") Long id, @NotNull @NotEmpty @JsonProperty("username") String username,
-			@JsonProperty("email") String email, @NotNull @NotEmpty @JsonProperty("password") String password,
-			@JsonProperty("roles") Set<Role> roles) {
-		super();
-		if (roles == null)
-			roles = new HashSet<>();
-
-		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.roles = roles;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return roles.stream().map(rol -> new SimpleGrantedAuthority(rol.getName())).collect(Collectors.toSet());
+		return Stream.of(new SimpleGrantedAuthority(role)).collect(Collectors.toSet());
 	}
 
 	@Override
-	@JsonIgnore
 	public String getPassword() {
 		return this.password;
 	}
@@ -153,18 +115,19 @@ public class User implements UserDetails {
 		this.channels = channels;
 	}
 
+
 	/**
-	 * @return the roles
+	 * @return the role
 	 */
-	public Set<Role> getRoles() {
-		return roles;
+	public String getRole() {
+		return role;
 	}
 
 	/**
-	 * @param roles the roles to set
+	 * @param role the role to set
 	 */
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	/**

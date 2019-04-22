@@ -1,15 +1,16 @@
-package com.ioteg.users;
+package com.ioteg.controllers.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class PasswordDTO {
+public class PasswordChangeRequest {
 
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "The old password can not be null.")
+	@NotEmpty(message = "The old password can not be empty.")
 	private String oldPassword;
-	@NotNull
-	@NotEmpty
+
+	@NotNull(message = "The new password can not be null.")
+	@NotEmpty(message = "The new password can not be empty.")
 	private String newPassword;
 
 	/**

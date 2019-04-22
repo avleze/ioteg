@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ioteg.model.ChannelType;
-import com.ioteg.users.User;
+import com.ioteg.model.User;
 
 @Repository
 public interface ChannelTypeRepository extends CrudRepository<ChannelType, Long>{

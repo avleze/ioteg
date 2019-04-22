@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import com.ioteg.model.OwnedResource;
+import com.ioteg.model.User;
 import com.ioteg.repositories.AttributeRepository;
 import com.ioteg.repositories.BlockRepository;
 import com.ioteg.repositories.ConfigurableEventTypeRepository;
@@ -21,7 +22,6 @@ import com.ioteg.repositories.OptionalFieldsRepository;
 import com.ioteg.repositories.RuleCustomBehaviourRepository;
 import com.ioteg.repositories.UserRepository;
 import com.ioteg.repositories.VariableCustomBehaviourRepository;
-import com.ioteg.users.User;
 
 @Component
 public class CustomPermissionEvaluator implements PermissionEvaluator {
@@ -98,7 +98,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		logger.info("targetId: {}, targetType: {}", targetId, targetType);
 
 		Long id = (Long) targetId;
-		Optional<User> owner = null;
+		Optional<User> owner = Optional.empty();
 		switch (targetType) {
 		case "ConfigurableEventType":
 			owner = configurableEventTypeRepository.findOwner(id);

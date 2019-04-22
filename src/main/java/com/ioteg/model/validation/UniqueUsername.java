@@ -1,4 +1,4 @@
-package com.ioteg.users;
+package com.ioteg.model.validation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

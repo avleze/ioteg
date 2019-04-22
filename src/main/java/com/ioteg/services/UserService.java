@@ -2,8 +2,8 @@ package com.ioteg.services;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Optional;
-
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,10 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ioteg.model.ChannelType;
+import com.ioteg.model.User;
 import com.ioteg.repositories.UserRepository;
-import com.ioteg.users.PasswordDTO;
-import com.ioteg.users.PasswordNotMatchException;
-import com.ioteg.users.User;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -49,7 +48,7 @@ public class UserService implements UserDetailsService {
 		return user.get();
 	}
 
-	@PreAuthorize("hasPermission(#id, 'User', 'OWNER')")
+	@PreAuthorize("hasPermission(#id, 'User', 'OWNER') or hasRole('ADMIN')")
 	public User loadUserById(Long id) throws UsernameNotFoundException {
 		Optional<User> user = userRepository.findById(id);
 		if (!user.isPresent())
@@ -67,7 +66,7 @@ public class UserService implements UserDetailsService {
 		return user.get();
 	}
 
-	@PreAuthorize("hasPermission(#id, 'User', 'OWNER')")
+	@PreAuthorize("hasPermission(#id, 'User', 'OWNER') or hasRole('ADMIN')")
 	public User loadUserByIdWithChannels(Long id) throws UsernameNotFoundException {
 		Optional<User> user = userRepository.findUserByIdWithChannels(id);
 		if (!user.isPresent())
@@ -77,31 +76,35 @@ public class UserService implements UserDetailsService {
 	}
 
 	public User signup(User user) {
-
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setMqttApiKey(generateMQTTApiKey());
-
+		user.setRole("ROLE_USER");
 		return userRepository.save(user);
 	}
 
-	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER')")
-	public void modifyUserData(Long userId, User newUserData) {
+	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN')")
+	public User modifyUserData(Long userId, String username, String email) {
 		User user = loadUserById(userId);
 
-		user.setUsername(newUserData.getUsername());
-		user.setEmail(newUserData.getEmail());
-		userRepository.save(user);
+		user.setUsername(username);
+		user.setEmail(email);
+		return userRepository.save(user);
 	}
 
-	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER')")
-	public void changePassword(Long userId, PasswordDTO passwordDTO) throws PasswordNotMatchException {
+	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN')")
+	public void changePassword(Long userId, String oldPassword, String newPassword) throws PasswordNotMatchException {
 		User user = loadUserById(userId);
 
-		if (bCryptPasswordEncoder.matches(passwordDTO.getOldPassword(), user.getPassword())) {
-			user.setPassword(bCryptPasswordEncoder.encode(passwordDTO.getNewPassword()));
+		if (bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
+			user.setPassword(bCryptPasswordEncoder.encode(newPassword));
 			userRepository.save(user);
 		} else
 			throw new PasswordNotMatchException();
+	}
+	
+	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN')")
+	public List<ChannelType> getAllChannels(Long userId) throws UsernameNotFoundException {
+		return this.loadUserByIdWithChannels(userId).getChannels();
 	}
 
 	public User save(User user) {

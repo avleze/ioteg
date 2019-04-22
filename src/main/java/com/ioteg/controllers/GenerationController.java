@@ -19,6 +19,9 @@ import com.ioteg.repositories.UserRepository;
 import com.ioteg.resultmodel.ResultEvent;
 import com.ioteg.services.periodicgeneration.PeriodicEventGenerationService;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 /**
  * <p>
  * EventGenerationController class.
@@ -39,6 +42,7 @@ public class GenerationController {
 
 	@PostMapping("event")
 	@PreAuthorize("hasPermission(#event, 'OWNER')")
+	@ApiResponses(@ApiResponse(response = void.class, code = 200, message = "OK"))
 	public ResponseEntity<ResultEvent> generate(@RequestBody EventType event) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		
 		EventTypeGenerator eventTypeGenerator = GeneratorsFactory.makeEventTypeGenerator(event, new GenerationContext());

@@ -3,8 +3,6 @@ package com.ioteg.security;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +54,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 			try {
 				UserDetails appUser = userDetailsService.loadUserByUsername(user);
 				if (appUser != null) {
-					return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+					return new UsernamePasswordAuthenticationToken(user, null, appUser.getAuthorities());
 				}
 			} catch (UsernameNotFoundException e) {
 				return null;

@@ -1,4 +1,4 @@
-package com.ioteg.users;
+package com.ioteg.services;
 
 public class PasswordNotMatchException extends Exception {
 
