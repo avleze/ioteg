@@ -43,7 +43,7 @@ public class CustomBehaviourService {
 		return storedCustomBehaviour;
 	}
 
-	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER')")
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
 	public CustomBehaviour modifyCustomBehaviour(Long customBehaviourId, CustomBehaviour customBehaviour) throws EntityNotFoundException {
 		CustomBehaviour storedCustomBehaviour = this.loadById(customBehaviourId);
 		
@@ -53,12 +53,12 @@ public class CustomBehaviourService {
 		return customBehaviourRepository.save(storedCustomBehaviour);
 	}
 
-	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER')")
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
 	public void removeCustomBehaviour(Long customBehaviourId) {
 		customBehaviourRepository.deleteById(customBehaviourId);
 	}
 	
-	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER')")
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
 	public CustomBehaviour loadById(Long customBehaviourId) throws EntityNotFoundException {
 		return customBehaviourRepository.findById(customBehaviourId).orElseThrow(() -> new EntityNotFoundException(CustomBehaviour.class, "id", customBehaviourId.toString()));
 	}

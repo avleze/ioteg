@@ -30,7 +30,7 @@ public class BlockService {
 		this.userService = userService;
 	}
 
-	@PreAuthorize("hasPermission(#eventTypeId, 'EventType', 'OWNER')")
+	@PreAuthorize("hasPermission(#eventTypeId, 'EventType', 'OWNER') or hasRole('ADMIN')")
 	public Block createBlock(Long eventTypeId, Block block) throws EntityNotFoundException {
 
 		block.setOwner(userService.loadLoggedUser());
@@ -43,7 +43,7 @@ public class BlockService {
 		return storedBlock;
 	}
 
-	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public Block modifyBlock(Long blockId, Block block) throws EntityNotFoundException {
 		Block storedBlock = this.loadById(blockId);
 
@@ -54,12 +54,12 @@ public class BlockService {
 		return blockRepository.save(storedBlock);
 	}
 
-	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public void removeBlock(Long blockId) {
 		blockRepository.deleteById(blockId);
 	}
 
-	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public Block loadById(Long blockId) throws EntityNotFoundException {
 		return blockRepository.findById(blockId)
 				.orElseThrow(() -> new EntityNotFoundException(Block.class, "id", blockId.toString()));

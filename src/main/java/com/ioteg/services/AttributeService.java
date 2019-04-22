@@ -30,7 +30,7 @@ public class AttributeService {
 	}
 
 
-	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public Attribute createAttribute(Long fieldId, Attribute attribute) throws EntityNotFoundException {
 		attribute.setOwner(userService.loadLoggedUser());
 		Attribute storedAttribute = attributeRepository.save(attribute);
@@ -43,7 +43,7 @@ public class AttributeService {
 	}
 
 
-	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER')")
+	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER') or hasRole('ADMIN')")
 	public Attribute modifyAttribute(Long attributeId, Field field) throws EntityNotFoundException {
 		Attribute storedAttribute = this.loadById(attributeId);
 
@@ -65,12 +65,12 @@ public class AttributeService {
 		return attributeRepository.save(storedAttribute);
 	}
 
-	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER')")
+	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER') or hasRole('ADMIN')")
 	public void removeAttribute(Long attributeId) {
 		attributeRepository.deleteById(attributeId);
 	}
 
-	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER')")
+	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER') or hasRole('ADMIN')")
 	public Attribute loadById(Long attributeId) throws EntityNotFoundException {
 		return attributeRepository.findById(attributeId)
 				.orElseThrow(() -> new EntityNotFoundException(Attribute.class, "id", attributeId.toString()));

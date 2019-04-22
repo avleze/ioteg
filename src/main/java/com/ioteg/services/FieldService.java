@@ -33,7 +33,7 @@ public class FieldService {
 		this.userService = userService;
 	}
 
-	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public Field createField(Long blockId, Field field) throws EntityNotFoundException {
 
 		field.setOwner(userService.loadLoggedUser());
@@ -45,7 +45,7 @@ public class FieldService {
 		return storedField;
 	}
 
-	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public Field createSubField(Long fieldId, Field field) throws EntityNotFoundException {
 
 		field.setOwner(userService.loadLoggedUser());
@@ -58,7 +58,7 @@ public class FieldService {
 		return storedField;
 	}
 	
-	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
+	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
 	public Field createFieldInOptionalFields(Long optionalFieldsId, Field field) throws EntityNotFoundException {
 
 		field.setOwner(userService.loadLoggedUser());
@@ -71,7 +71,7 @@ public class FieldService {
 		return storedField;
 	}
 
-	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public Field modifyField(Long fieldId, Field field) throws EntityNotFoundException {
 		Field storedField = this.loadById(fieldId);
 
@@ -98,12 +98,12 @@ public class FieldService {
 		return fieldRepository.save(storedField);
 	}
 
-	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public void removeField(Long fieldId) {
 		fieldRepository.deleteById(fieldId);
 	}
 
-	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public Field loadById(Long fieldId) throws EntityNotFoundException {
 		return fieldRepository.findById(fieldId)
 				.orElseThrow(() -> new EntityNotFoundException(Field.class, "id", fieldId.toString()));

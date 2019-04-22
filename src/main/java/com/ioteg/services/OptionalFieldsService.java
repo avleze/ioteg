@@ -29,7 +29,7 @@ public class OptionalFieldsService {
 		this.userService = userService;
 	}
 
-	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public OptionalFields createOptionalFields(Long blockId, OptionalFields optionalFields) throws EntityNotFoundException {
 		
 		optionalFields.setOwner(userService.loadLoggedUser());
@@ -42,7 +42,7 @@ public class OptionalFieldsService {
 		return storedOptionalFields;
 	}
 
-	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
+	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
 	public OptionalFields modifyOptionalFields(Long optionalFieldsId, OptionalFields optionalFields) throws EntityNotFoundException {
 		OptionalFields storedOptionalFields = this.loadById(optionalFieldsId);
 
@@ -51,12 +51,12 @@ public class OptionalFieldsService {
 		return optionalFieldsRepository.save(storedOptionalFields);
 	}
 
-	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
+	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
 	public void removeOptionalFields(Long optionalFieldsId) {
 		optionalFieldsRepository.deleteById(optionalFieldsId);
 	}
 
-	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
+	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
 	public OptionalFields loadById(Long optionalFieldsId) throws EntityNotFoundException {
 		return optionalFieldsRepository.findById(optionalFieldsId)
 				.orElseThrow(() -> new EntityNotFoundException(OptionalFields.class, "id", optionalFieldsId.toString()));
