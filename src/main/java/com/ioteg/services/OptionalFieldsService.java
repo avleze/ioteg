@@ -12,20 +12,20 @@ import com.ioteg.repositories.OptionalFieldsRepository;
 public class OptionalFieldsService {
 
 	private BlockService blockService;
-	private OptionalFieldsRepository optionalFieldsService;
+	private OptionalFieldsRepository optionalFieldsRepository;
 	private UserService userService;
 	
 	/**
 	 * @param blockService
-	 * @param optionalFieldsService
+	 * @param optionalFieldsRepository
 	 * @param userService
 	 */
 	@Autowired
-	public OptionalFieldsService(BlockService blockService, OptionalFieldsRepository optionalFieldsService,
+	public OptionalFieldsService(BlockService blockService, OptionalFieldsRepository optionalFieldsRepository,
 			UserService userService) {
 		super();
 		this.blockService = blockService;
-		this.optionalFieldsService = optionalFieldsService;
+		this.optionalFieldsRepository = optionalFieldsRepository;
 		this.userService = userService;
 	}
 
@@ -33,7 +33,7 @@ public class OptionalFieldsService {
 	public OptionalFields createOptionalFields(Long blockId, OptionalFields optionalFields) throws ResourceNotFoundException {
 		
 		optionalFields.setOwner(userService.loadLoggedUser());
-		OptionalFields storedOptionalFields = optionalFieldsService.save(optionalFields);
+		OptionalFields storedOptionalFields = optionalFieldsRepository.save(optionalFields);
 		
 		Block block = blockService.loadById(blockId);
 		block.getOptionalFields().add(storedOptionalFields);
@@ -44,26 +44,26 @@ public class OptionalFieldsService {
 
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
 	public OptionalFields modifyOptionalFields(Long optionalFieldsId, OptionalFields optionalFields) throws ResourceNotFoundException {
-		OptionalFields storedOptionalFields = optionalFieldsService.findById(optionalFieldsId)
+		OptionalFields storedOptionalFields = optionalFieldsRepository.findById(optionalFieldsId)
 				.orElseThrow(() -> new ResourceNotFoundException("OptionalFields " + optionalFieldsId, "OptionalFields not found."));
 
 		storedOptionalFields.setMandatory(optionalFields.getMandatory());
 		
-		return optionalFieldsService.save(storedOptionalFields);
+		return optionalFieldsRepository.save(storedOptionalFields);
 	}
 
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
 	public void removeOptionalFields(Long optionalFieldsId) {
-		optionalFieldsService.deleteById(optionalFieldsId);
+		optionalFieldsRepository.deleteById(optionalFieldsId);
 	}
 
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
 	public OptionalFields loadById(Long optionalFieldsId) throws ResourceNotFoundException {
-		return optionalFieldsService.findById(optionalFieldsId)
+		return optionalFieldsRepository.findById(optionalFieldsId)
 				.orElseThrow(() -> new ResourceNotFoundException("OptionalFields " + optionalFieldsId, "OptionalFields not found."));
 	}
 
 	public OptionalFields save(OptionalFields optionalFields) {
-		return optionalFieldsService.save(optionalFields);
+		return optionalFieldsRepository.save(optionalFields);
 	}
 }

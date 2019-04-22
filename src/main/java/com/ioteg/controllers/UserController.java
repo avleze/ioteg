@@ -21,9 +21,6 @@ import com.ioteg.model.User;
 import com.ioteg.services.PasswordNotMatchException;
 import com.ioteg.services.UserService;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiOperation;
-
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

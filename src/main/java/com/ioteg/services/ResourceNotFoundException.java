@@ -4,8 +4,8 @@ public class ResourceNotFoundException extends Exception{
 
 	private static final long serialVersionUID = 1724184743499558012L;
 	
-	private String resourceName;
-	private String message;
+	private final String resourceName;
+	private final String message;
 	
 	/**
 	 * @param resourceName
