@@ -1,10 +1,13 @@
 package com.ioteg.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.ioteg.model.Block;
+import com.ioteg.model.Field;
 import com.ioteg.model.OptionalFields;
 import com.ioteg.repositories.OptionalFieldsRepository;
 
@@ -40,6 +43,11 @@ public class OptionalFieldsService {
 		blockService.save(block);
 
 		return storedOptionalFields;
+	}
+	
+	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
+	public List<Field> getAllFields(Long optionalFieldsId) {
+		return optionalFieldsRepository.findAllFieldsOf(optionalFieldsId);
 	}
 
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")

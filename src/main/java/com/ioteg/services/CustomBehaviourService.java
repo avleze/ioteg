@@ -1,11 +1,15 @@
 package com.ioteg.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.ioteg.model.CustomBehaviour;
 import com.ioteg.model.Field;
+import com.ioteg.model.RuleCustomBehaviour;
+import com.ioteg.model.VariableCustomBehaviour;
 import com.ioteg.repositories.CustomBehaviourRepository;
 
 @Service
@@ -52,7 +56,17 @@ public class CustomBehaviourService {
 		
 		return customBehaviourRepository.save(storedCustomBehaviour);
 	}
-
+	
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
+	public List<VariableCustomBehaviour> getAllVariables(Long customBehaviourId) {
+		return customBehaviourRepository.findAllVariablesOf(customBehaviourId);
+	}
+	
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
+	public List<RuleCustomBehaviour> getAllRules(Long customBehaviourId) {
+		return customBehaviourRepository.findAllRulesOf(customBehaviourId);
+	}
+	
 	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
 	public void removeCustomBehaviour(Long customBehaviourId) {
 		customBehaviourRepository.deleteById(customBehaviourId);
