@@ -31,7 +31,7 @@ public class CustomBehaviourService {
 
 	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
 	public CustomBehaviour createCustomBehaviour(Long fieldId,
-			CustomBehaviour customBehaviour) throws ResourceNotFoundException {
+			CustomBehaviour customBehaviour) throws EntityNotFoundException {
 	
 		customBehaviour.setOwner(userService.loadLoggedUser());
 		CustomBehaviour storedCustomBehaviour = customBehaviourRepository.save(customBehaviour);
@@ -44,8 +44,8 @@ public class CustomBehaviourService {
 	}
 
 	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER')")
-	public CustomBehaviour modifyCustomBehaviour(Long customBehaviourId, CustomBehaviour customBehaviour) throws ResourceNotFoundException {
-		CustomBehaviour storedCustomBehaviour = customBehaviourRepository.findById(customBehaviourId).orElseThrow(() -> new ResourceNotFoundException("CustomBehaviour " + customBehaviourId, "CustomBehaviour not found."));
+	public CustomBehaviour modifyCustomBehaviour(Long customBehaviourId, CustomBehaviour customBehaviour) throws EntityNotFoundException {
+		CustomBehaviour storedCustomBehaviour = this.loadById(customBehaviourId);
 		
 		storedCustomBehaviour.setExternalFilePath(customBehaviour.getExternalFilePath());
 		storedCustomBehaviour.setSimulations(customBehaviour.getSimulations());
@@ -59,8 +59,8 @@ public class CustomBehaviourService {
 	}
 	
 	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER')")
-	public CustomBehaviour loadById(Long customBehaviourId) throws ResourceNotFoundException {
-		return customBehaviourRepository.findById(customBehaviourId).orElseThrow(() -> new ResourceNotFoundException("CustomBehaviour " + customBehaviourId, "CustomBehaviour not found."));
+	public CustomBehaviour loadById(Long customBehaviourId) throws EntityNotFoundException {
+		return customBehaviourRepository.findById(customBehaviourId).orElseThrow(() -> new EntityNotFoundException(CustomBehaviour.class, "id", customBehaviourId.toString()));
 	}
 	
 	public CustomBehaviour save(CustomBehaviour customBehaviour) {

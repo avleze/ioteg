@@ -30,7 +30,7 @@ public class OptionalFieldsService {
 	}
 
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
-	public OptionalFields createOptionalFields(Long blockId, OptionalFields optionalFields) throws ResourceNotFoundException {
+	public OptionalFields createOptionalFields(Long blockId, OptionalFields optionalFields) throws EntityNotFoundException {
 		
 		optionalFields.setOwner(userService.loadLoggedUser());
 		OptionalFields storedOptionalFields = optionalFieldsRepository.save(optionalFields);
@@ -43,9 +43,8 @@ public class OptionalFieldsService {
 	}
 
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
-	public OptionalFields modifyOptionalFields(Long optionalFieldsId, OptionalFields optionalFields) throws ResourceNotFoundException {
-		OptionalFields storedOptionalFields = optionalFieldsRepository.findById(optionalFieldsId)
-				.orElseThrow(() -> new ResourceNotFoundException("OptionalFields " + optionalFieldsId, "OptionalFields not found."));
+	public OptionalFields modifyOptionalFields(Long optionalFieldsId, OptionalFields optionalFields) throws EntityNotFoundException {
+		OptionalFields storedOptionalFields = this.loadById(optionalFieldsId);
 
 		storedOptionalFields.setMandatory(optionalFields.getMandatory());
 		
@@ -58,9 +57,9 @@ public class OptionalFieldsService {
 	}
 
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
-	public OptionalFields loadById(Long optionalFieldsId) throws ResourceNotFoundException {
+	public OptionalFields loadById(Long optionalFieldsId) throws EntityNotFoundException {
 		return optionalFieldsRepository.findById(optionalFieldsId)
-				.orElseThrow(() -> new ResourceNotFoundException("OptionalFields " + optionalFieldsId, "OptionalFields not found."));
+				.orElseThrow(() -> new EntityNotFoundException(OptionalFields.class, "id", optionalFieldsId.toString()));
 	}
 
 	public OptionalFields save(OptionalFields optionalFields) {

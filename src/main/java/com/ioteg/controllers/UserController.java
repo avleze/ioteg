@@ -18,6 +18,7 @@ import com.ioteg.controllers.dto.UserDataChangeRequest;
 import com.ioteg.controllers.dto.UserResponse;
 import com.ioteg.controllers.dto.mappers.UserMapper;
 import com.ioteg.model.User;
+import com.ioteg.services.EntityNotFoundException;
 import com.ioteg.services.PasswordNotMatchException;
 import com.ioteg.services.UserService;
 
@@ -37,20 +38,20 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<UserResponse> getUser(@PathVariable("id") Long id) {
+	public ResponseEntity<UserResponse> getUser(@PathVariable("id") Long id) throws EntityNotFoundException {
 		User user = userService.loadUserById(id);
 		return ResponseEntity.ok().body(userMapper.userToUserResponse(user));
 	}
 
 	@PatchMapping("/{id}/password")
 	public ResponseEntity<Object> changePassword(@PathVariable("id") Long id,
-			@RequestBody @Valid PasswordChangeRequest passwordChangeRequest) throws PasswordNotMatchException {
+			@RequestBody @Valid PasswordChangeRequest passwordChangeRequest) throws PasswordNotMatchException, EntityNotFoundException {
 		userService.changePassword(id, passwordChangeRequest.getOldPassword(), passwordChangeRequest.getNewPassword());
 		return ResponseEntity.ok().build();
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<UserResponse> modifyUser(@PathVariable("id") Long id, @RequestBody @Valid UserDataChangeRequest userData) {
+	public ResponseEntity<UserResponse> modifyUser(@PathVariable("id") Long id, @RequestBody @Valid UserDataChangeRequest userData) throws EntityNotFoundException {
 		User user = userService.modifyUserData(id, userData.getUsername(), userData.getEmail());
 		return ResponseEntity.ok().body(userMapper.userToUserResponse(user));
 	}

@@ -31,7 +31,7 @@ public class AttributeService {
 
 
 	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
-	public Attribute createAttribute(Long fieldId, Attribute attribute) throws ResourceNotFoundException {
+	public Attribute createAttribute(Long fieldId, Attribute attribute) throws EntityNotFoundException {
 		attribute.setOwner(userService.loadLoggedUser());
 		Attribute storedAttribute = attributeRepository.save(attribute);
 	
@@ -44,9 +44,8 @@ public class AttributeService {
 
 
 	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER')")
-	public Attribute modifyAttribute(Long attributeId, Field field) throws ResourceNotFoundException {
-		Attribute storedAttribute = attributeRepository.findById(attributeId)
-				.orElseThrow(() -> new ResourceNotFoundException("Attribute " + attributeId, "Attribute not found."));
+	public Attribute modifyAttribute(Long attributeId, Field field) throws EntityNotFoundException {
+		Attribute storedAttribute = this.loadById(attributeId);
 
 		storedAttribute.setBegin(field.getBegin());
 		storedAttribute.setCase(field.getCase());
@@ -72,9 +71,9 @@ public class AttributeService {
 	}
 
 	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER')")
-	public Attribute loadById(Long attributeId) throws ResourceNotFoundException {
+	public Attribute loadById(Long attributeId) throws EntityNotFoundException {
 		return attributeRepository.findById(attributeId)
-				.orElseThrow(() -> new ResourceNotFoundException("Attribute " + attributeId, "Attribute not found."));
+				.orElseThrow(() -> new EntityNotFoundException(Attribute.class, "id", attributeId.toString()));
 	}
 
 	public Attribute save(Attribute attribute) {

@@ -31,12 +31,12 @@ public class BlockService {
 	}
 
 	@PreAuthorize("hasPermission(#eventTypeId, 'EventType', 'OWNER')")
-	public Block createBlock(Long eventTypeId, Block block) throws ResourceNotFoundException {
+	public Block createBlock(Long eventTypeId, Block block) throws EntityNotFoundException {
 
 		block.setOwner(userService.loadLoggedUser());
 		Block storedBlock = blockRepository.save(block);
 		EventType eventType = eventTypeRepository.findById(eventTypeId)
-				.orElseThrow(() -> new ResourceNotFoundException("EventType " + eventTypeId, "EventType not found."));
+				.orElseThrow(() -> new EntityNotFoundException(EventType.class, "id", eventTypeId.toString()));
 		eventType.getBlocks().add(storedBlock);
 		eventTypeRepository.save(eventType);
 
@@ -44,9 +44,8 @@ public class BlockService {
 	}
 
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
-	public Block modifyBlock(Long blockId, Block block) throws ResourceNotFoundException {
-		Block storedBlock = blockRepository.findById(blockId)
-				.orElseThrow(() -> new ResourceNotFoundException("Block " + blockId, "Block not found."));
+	public Block modifyBlock(Long blockId, Block block) throws EntityNotFoundException {
+		Block storedBlock = this.loadById(blockId);
 
 		storedBlock.setName(block.getName());
 		storedBlock.setRepetition(block.getRepetition());
@@ -61,9 +60,9 @@ public class BlockService {
 	}
 
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
-	public Block loadById(Long blockId) throws ResourceNotFoundException {
+	public Block loadById(Long blockId) throws EntityNotFoundException {
 		return blockRepository.findById(blockId)
-				.orElseThrow(() -> new ResourceNotFoundException("Block  " + blockId, "Block not found"));
+				.orElseThrow(() -> new EntityNotFoundException(Block.class, "id", blockId.toString()));
 	}
 
 	public Block save(Block block) {

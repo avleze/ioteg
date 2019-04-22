@@ -18,7 +18,6 @@ import com.ioteg.controllers.dto.mappers.ChannelTypeMapper;
 import com.ioteg.model.ChannelType;
 import com.ioteg.services.ChannelTypeService;
 import com.ioteg.services.EntityNotFoundException;
-import com.ioteg.services.ResourceNotFoundException;
 import com.ioteg.services.UserService;
 
 import io.swagger.annotations.Api;
@@ -51,7 +50,7 @@ public class ChannelRestController {
 
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = ChannelTypeResponse.class)
-	public ResponseEntity<List<ChannelTypeResponse>> getAll(@PathVariable("userId") Long userId) {
+	public ResponseEntity<List<ChannelTypeResponse>> getAll(@PathVariable("userId") Long userId) throws EntityNotFoundException {
 		List<ChannelTypeResponse> channelTypeResponse = userService.getAllChannels(userId).stream().map((channelType) -> {
 			return channelTypeMapper.channelTypeToChannelTypeResponse(channelType);
 		}).collect(Collectors.toList());
@@ -68,7 +67,7 @@ public class ChannelRestController {
 
 	@PostMapping
 	public ResponseEntity<ChannelTypeResponse> saveOne(@PathVariable("userId") Long userId,
-			@RequestBody @Valid ChannelTypeRequest channelRequest) {
+			@RequestBody @Valid ChannelTypeRequest channelRequest) throws EntityNotFoundException {
 		ChannelType channelType = channelTypeMapper.channelTypeRequestToChannelType(channelRequest);
 		return ResponseEntity.ok().body(channelTypeMapper.channelTypeToChannelTypeResponse(channelTypeService.createChannel(userId, channelType)));
 	}
@@ -83,7 +82,7 @@ public class ChannelRestController {
 
 	@DeleteMapping("/{channelId}")
 	public ResponseEntity<Void> deleteOne(@PathVariable("userId") Long userId,
-			@PathVariable("channelId") Long channelId) throws ResourceNotFoundException {
+			@PathVariable("channelId") Long channelId) {
 		channelTypeService.removeChannel(channelId);
 		return ResponseEntity.ok().build();
 	}

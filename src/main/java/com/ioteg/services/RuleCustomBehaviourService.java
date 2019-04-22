@@ -14,7 +14,7 @@ public class RuleCustomBehaviourService {
 	private CustomBehaviourService customBehaviourService;
 	private RuleCustomBehaviourRepository ruleCustomBehaviourRepository;
 	private UserService userService;
-	
+
 	/**
 	 * @param customBehaviourService
 	 * @param ruleCustomBehaviourRepository
@@ -31,24 +31,24 @@ public class RuleCustomBehaviourService {
 
 	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER')")
 	public RuleCustomBehaviour createRuleCustomBehaviour(Long customBehaviourId,
-			RuleCustomBehaviour ruleCustomBehaviour) throws ResourceNotFoundException {
-	
+			RuleCustomBehaviour ruleCustomBehaviour) throws EntityNotFoundException {
+
 		ruleCustomBehaviour.setOwner(userService.loadLoggedUser());
 		RuleCustomBehaviour storedRuleCustomBehaviour = ruleCustomBehaviourRepository.save(ruleCustomBehaviour);
-		
+
 		CustomBehaviour customBehaviour = customBehaviourService.loadById(customBehaviourId);
 		customBehaviour.getRules().add(storedRuleCustomBehaviour);
 		customBehaviourService.save(customBehaviour);
 
 		return storedRuleCustomBehaviour;
 	}
-	
+
 	@PreAuthorize("hasPermission(#ruleCustomBehaviourId, 'RuleCustomBehaviour', 'OWNER')")
 	public RuleCustomBehaviour modifyRuleCustomBehaviour(Long ruleCustomBehaviourId,
-			RuleCustomBehaviour ruleCustomBehaviour) throws ResourceNotFoundException {
-	
-		RuleCustomBehaviour storedRuleCustomBehaviour =  ruleCustomBehaviourRepository.findById(ruleCustomBehaviourId).orElseThrow(() -> new ResourceNotFoundException("RuleCustomBehaviour " + ruleCustomBehaviourId, "RuleCustomBehaviour not found."));
-		
+			RuleCustomBehaviour ruleCustomBehaviour) throws EntityNotFoundException {
+
+		RuleCustomBehaviour storedRuleCustomBehaviour = this.loadById(ruleCustomBehaviourId);
+
 		storedRuleCustomBehaviour.setMax(ruleCustomBehaviour.getMax());
 		storedRuleCustomBehaviour.setMin(ruleCustomBehaviour.getMin());
 		storedRuleCustomBehaviour.setSequence(ruleCustomBehaviour.getSequence());
@@ -57,16 +57,16 @@ public class RuleCustomBehaviourService {
 
 		return ruleCustomBehaviourRepository.save(storedRuleCustomBehaviour);
 	}
-	
+
 	@PreAuthorize("hasPermission(#ruleCustomBehaviourId, 'RuleCustomBehaviour', 'OWNER')")
 	public void removeRuleCustomBehaviour(Long ruleCustomBehaviourId) {
 		ruleCustomBehaviourRepository.deleteById(ruleCustomBehaviourId);
 	}
 
 	@PreAuthorize("hasPermission(#ruleCustomBehaviourId, 'RuleCustomBehaviour', 'OWNER')")
-	public RuleCustomBehaviour loadById(Long ruleCustomBehaviourId) throws ResourceNotFoundException {
+	public RuleCustomBehaviour loadById(Long ruleCustomBehaviourId) throws EntityNotFoundException {
 		return ruleCustomBehaviourRepository.findById(ruleCustomBehaviourId)
-				.orElseThrow(() -> new ResourceNotFoundException("RuleCustomBehaviour " + ruleCustomBehaviourId, "RuleCustomBehaviour not found."));
+				.orElseThrow(() -> new EntityNotFoundException(RuleCustomBehaviour.class, "id", ruleCustomBehaviourId.toString()));
 	}
 
 	public RuleCustomBehaviour save(RuleCustomBehaviour ruleCustomBehaviour) {

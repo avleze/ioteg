@@ -31,7 +31,7 @@ public class VariableCustomBehaviourService {
 
 	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER')")
 	public VariableCustomBehaviour createVariableCustomBehaviourRepository(Long customBehaviourId,
-			VariableCustomBehaviour variableCustomBehaviour) throws ResourceNotFoundException {
+			VariableCustomBehaviour variableCustomBehaviour) throws EntityNotFoundException {
 	
 		variableCustomBehaviour.setOwner(userService.loadLoggedUser());
 		VariableCustomBehaviour storedVariableCustomBehaviour = variableCustomBehaviourRepository.save(variableCustomBehaviour);
@@ -45,7 +45,7 @@ public class VariableCustomBehaviourService {
 	
 	@PreAuthorize("hasPermission(#variableCustomBehaviourId, 'VariableCustomBehaviour', 'OWNER')")
 	public VariableCustomBehaviour modifyVariableCustomBehaviour(Long variableCustomBehaviourId,
-			VariableCustomBehaviour variableCustomBehaviour) throws ResourceNotFoundException {
+			VariableCustomBehaviour variableCustomBehaviour) throws EntityNotFoundException  {
 	
 		VariableCustomBehaviour storedVariableCustomBehaviour =  this.loadById(variableCustomBehaviourId);
 		
@@ -63,9 +63,9 @@ public class VariableCustomBehaviourService {
 	}
 
 	@PreAuthorize("hasPermission(#variableCustomBehaviourId, 'VariableCustomBehaviour', 'OWNER')")
-	public VariableCustomBehaviour loadById(Long variableCustomBehaviourId) throws ResourceNotFoundException {
+	public VariableCustomBehaviour loadById(Long variableCustomBehaviourId) throws EntityNotFoundException {
 		return variableCustomBehaviourRepository.findById(variableCustomBehaviourId)
-				.orElseThrow(() -> new ResourceNotFoundException("VariableCustomBehaviour " + variableCustomBehaviourId, "VariableCustomBehaviour not found."));
+				.orElseThrow(() -> new EntityNotFoundException(VariableCustomBehaviour.class, "id", variableCustomBehaviourId.toString()));
 	}
 
 	public VariableCustomBehaviour save(VariableCustomBehaviour variableCustomBehaviour) {

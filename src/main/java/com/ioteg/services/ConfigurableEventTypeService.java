@@ -42,8 +42,8 @@ public class ConfigurableEventTypeService {
 	}
 
 	@PreAuthorize("hasPermission(#configurableEventTypeId, 'ConfigurableEventType', 'OWNER')")
-	public ConfigurableEventType modifyConfigurableEventType(Long configurableEventTypeId, ConfigurableEventType configurableEventType) throws ResourceNotFoundException {
-		ConfigurableEventType storedConfigurableEventType = configurableEventTypeRepository.findById(configurableEventTypeId).orElseThrow(() -> new ResourceNotFoundException("configurableEventType " + configurableEventTypeId, "ConfigurableEventType not found."));
+	public ConfigurableEventType modifyConfigurableEventType(Long configurableEventTypeId, ConfigurableEventType configurableEventType) throws EntityNotFoundException {
+		ConfigurableEventType storedConfigurableEventType = this.loadById(configurableEventTypeId);
 		
 		storedConfigurableEventType.getEventType().setName(configurableEventType.getEventType().getName());
 		storedConfigurableEventType.setDelay(configurableEventType.getDelay());

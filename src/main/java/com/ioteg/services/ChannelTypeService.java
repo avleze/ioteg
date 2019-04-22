@@ -27,7 +27,7 @@ public class ChannelTypeService {
 	}
 
 	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN')")
-	public ChannelType createChannel(Long userId, ChannelType channel) {
+	public ChannelType createChannel(Long userId, ChannelType channel) throws EntityNotFoundException {
 		ChannelType storedChannel = channelTypeRepository.save(channel);
 
 		User user = userService.loadUserByIdWithChannels(userId);

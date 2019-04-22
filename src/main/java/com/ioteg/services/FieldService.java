@@ -34,7 +34,7 @@ public class FieldService {
 	}
 
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER')")
-	public Field createField(Long blockId, Field field) throws ResourceNotFoundException {
+	public Field createField(Long blockId, Field field) throws EntityNotFoundException {
 
 		field.setOwner(userService.loadLoggedUser());
 		Field storedField = fieldRepository.save(field);
@@ -46,7 +46,7 @@ public class FieldService {
 	}
 
 	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
-	public Field createSubField(Long fieldId, Field field) throws ResourceNotFoundException {
+	public Field createSubField(Long fieldId, Field field) throws EntityNotFoundException {
 
 		field.setOwner(userService.loadLoggedUser());
 		Field storedField = fieldRepository.save(field);
@@ -59,7 +59,7 @@ public class FieldService {
 	}
 	
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER')")
-	public Field createFieldInOptionalFields(Long optionalFieldsId, Field field) throws ResourceNotFoundException {
+	public Field createFieldInOptionalFields(Long optionalFieldsId, Field field) throws EntityNotFoundException {
 
 		field.setOwner(userService.loadLoggedUser());
 		Field storedField = fieldRepository.save(field);
@@ -72,9 +72,8 @@ public class FieldService {
 	}
 
 	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
-	public Field modifyField(Long fieldId, Field field) throws ResourceNotFoundException {
-		Field storedField = fieldRepository.findById(fieldId)
-				.orElseThrow(() -> new ResourceNotFoundException("Field " + fieldId, "Field not found."));
+	public Field modifyField(Long fieldId, Field field) throws EntityNotFoundException {
+		Field storedField = this.loadById(fieldId);
 
 		storedField.setBegin(field.getBegin());
 		storedField.setCase(field.getCase());
@@ -105,9 +104,9 @@ public class FieldService {
 	}
 
 	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER')")
-	public Field loadById(Long fieldId) throws ResourceNotFoundException {
+	public Field loadById(Long fieldId) throws EntityNotFoundException {
 		return fieldRepository.findById(fieldId)
-				.orElseThrow(() -> new ResourceNotFoundException("Field " + fieldId, "Field not found."));
+				.orElseThrow(() -> new EntityNotFoundException(Field.class, "id", fieldId.toString()));
 	}
 
 	public Field save(Field block) {
