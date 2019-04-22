@@ -35,8 +35,7 @@ public class EventType extends OwnedEntity{
 	@OneToOne(fetch = FetchType.LAZY)
 	private User owner;
 	
-	@SuppressWarnings("unused")
-	private EventType() {
+	public EventType() {
 
 	}
 

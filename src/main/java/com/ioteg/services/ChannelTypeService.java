@@ -1,11 +1,14 @@
 package com.ioteg.services;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.ioteg.model.ChannelType;
+import com.ioteg.model.ConfigurableEventType;
 import com.ioteg.model.User;
 import com.ioteg.repositories.ChannelTypeRepository;
 
@@ -36,11 +39,17 @@ public class ChannelTypeService {
 
 		return storedChannel;
 	}
+	
 
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")
 	public ChannelType modifyChannel(Long channelId, ChannelType channel) throws EntityNotFoundException {
 		ChannelType storedChannel = this.loadById(channelId);
 		return storedChannel;
+	}
+	
+	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")
+	public List<ConfigurableEventType> getAllConfigurableEventTypes(Long channelId) throws EntityNotFoundException {
+		return channelTypeRepository.findAllConfigurableEventsOf(channelId);
 	}
 
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")

@@ -35,9 +35,7 @@ public class ConfigurableEventType extends OwnedEntity{
 	private Integer period;
 	private TimeUnit unit;
 
-	
-	@SuppressWarnings("unused")
-	private ConfigurableEventType() {
+	public ConfigurableEventType() {
 
 	}
 

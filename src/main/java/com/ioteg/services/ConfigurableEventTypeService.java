@@ -13,7 +13,7 @@ public class ConfigurableEventTypeService {
 	private ChannelTypeService channelTypeService;
 	private ConfigurableEventTypeRepository configurableEventTypeRepository;
 	private UserService userService;
-	
+
 	/**
 	 * @param channelTypeService
 	 * @param configurableEventTypeRepository
@@ -27,10 +27,10 @@ public class ConfigurableEventTypeService {
 		this.userService = userService;
 	}
 
-	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER')")
+	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")
 	public ConfigurableEventType createConfigurableEventType(Long channelId,
 			ConfigurableEventType configurableEventType) throws EntityNotFoundException {
-		
+
 		configurableEventType.setOwner(userService.loadLoggedUser());
 		ConfigurableEventType storedConfigurableEventType = configurableEventTypeRepository.save(configurableEventType);
 
@@ -42,14 +42,15 @@ public class ConfigurableEventTypeService {
 	}
 
 	@PreAuthorize("hasPermission(#configurableEventTypeId, 'ConfigurableEventType', 'OWNER') or hasRole('ADMIN')")
-	public ConfigurableEventType modifyConfigurableEventType(Long configurableEventTypeId, ConfigurableEventType configurableEventType) throws EntityNotFoundException {
+	public ConfigurableEventType modifyConfigurableEventType(Long configurableEventTypeId,
+			ConfigurableEventType configurableEventType) throws EntityNotFoundException {
 		ConfigurableEventType storedConfigurableEventType = this.loadById(configurableEventTypeId);
-		
+
 		storedConfigurableEventType.getEventType().setName(configurableEventType.getEventType().getName());
 		storedConfigurableEventType.setDelay(configurableEventType.getDelay());
 		storedConfigurableEventType.setPeriod(configurableEventType.getPeriod());
 		storedConfigurableEventType.setUnit(configurableEventType.getUnit());
-		
+
 		return configurableEventTypeRepository.save(storedConfigurableEventType);
 	}
 
@@ -57,12 +58,14 @@ public class ConfigurableEventTypeService {
 	public void removeConfigurableEventType(Long configurableEventTypeId) {
 		configurableEventTypeRepository.deleteById(configurableEventTypeId);
 	}
-	
+
 	@PreAuthorize("hasPermission(#configurableEventTypeId, 'ConfigurableEventType', 'OWNER') or hasRole('ADMIN')")
 	public ConfigurableEventType loadById(Long configurableEventTypeId) throws EntityNotFoundException {
-		return configurableEventTypeRepository.findById(configurableEventTypeId).orElseThrow(() -> new EntityNotFoundException(ConfigurableEventType.class, "id", configurableEventTypeId.toString()));
+		return configurableEventTypeRepository.findById(configurableEventTypeId)
+				.orElseThrow(() -> new EntityNotFoundException(ConfigurableEventType.class, "id",
+						configurableEventTypeId.toString()));
 	}
-	
+
 	public ConfigurableEventType save(ConfigurableEventType channel) {
 		return configurableEventTypeRepository.save(channel);
 	}
