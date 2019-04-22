@@ -30,19 +30,19 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "The username can not be null.")
+	@NotEmpty(message = "The username can not be empty.")
 	@UniqueUsername
 	@Column(unique = true)
 	private String username;
 
-	@NotNull
-	@NotEmpty
-	@Email
+	@NotNull(message = "The username can not be null.")
+	@NotEmpty(message = "The username can not be empty.")
+	@Email(message = "The email is not valid.")
 	private String email;
 
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "The password can not be null.")
+	@NotEmpty(message = "The password can not be empty.")
 	private String password;
 
 	private String role;

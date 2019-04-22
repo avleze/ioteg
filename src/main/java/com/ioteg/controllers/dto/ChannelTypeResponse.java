@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 public class ChannelTypeResponse {
 	@NotNull
 	private Long id;
-	
+
 	@NotNull
 	@NotEmpty
 	private String channelName;
