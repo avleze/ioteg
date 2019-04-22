@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ioteg.controllers.dto.PasswordChangeRequest;
 import com.ioteg.controllers.dto.UserDataChangeRequest;
+import com.ioteg.controllers.dto.UserRegistrationRequest;
 import com.ioteg.controllers.dto.UserResponse;
 import com.ioteg.controllers.dto.mappers.UserMapper;
 import com.ioteg.model.User;
@@ -33,8 +34,8 @@ public class UserController {
 	private UserMapper userMapper;
 	
 	@PostMapping
-	public ResponseEntity<UserResponse> signUp(@RequestBody @Valid User user) {
-		return ResponseEntity.ok().body(userMapper.userToUserResponse(userService.signup(user)));
+	public ResponseEntity<UserResponse> signUp(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest) {
+		return ResponseEntity.ok().body(userMapper.userToUserResponse(userService.signup(userMapper.userRegistrationRequestToUser(userRegistrationRequest))));
 	}
 
 	@GetMapping("/{id}")

@@ -66,11 +66,9 @@ public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFil
 			Authentication auth) throws IOException, ServletException {
 		User user = (User) userDetailsService.loadUserByUsername(((User) auth.getPrincipal()).getUsername());
 
-		String token = JWT.create().withSubject(((User) auth.getPrincipal()).getUsername())
+		String token = JWT.create().withSubject(user.getId().toString())
 				.withClaim("id", user.getId()).withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
 				.sign(HMAC512(SECRET.getBytes()));
 		res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
-
-		new ObjectMapper().writeValue(res.getOutputStream(), user);
 	}
 }

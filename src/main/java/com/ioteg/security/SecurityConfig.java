@@ -9,23 +9,24 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.ioteg.services.UserService;
+
 import static com.ioteg.security.SecurityConstants.*;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	private UserDetailsService userDetailsService;
+	private UserService userService;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public SecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-		this.userDetailsService = userDetailsService;
+	public SecurityConfig(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.userService = userService;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 
@@ -43,9 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll()
 		.anyRequest()
 	   		.permitAll().and()
-		.addFilterBefore(new JWTAuthenticationFilter("/api/users/signin", authenticationManager(), userDetailsService),
+		.addFilterBefore(new JWTAuthenticationFilter("/api/users/signin", authenticationManager(), userService),
 						UsernamePasswordAuthenticationFilter.class)
-		.addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService))
+		.addFilter(new JWTAuthorizationFilter(authenticationManager(), userService))
 			.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -60,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+		auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
 	}
 
 	@Bean

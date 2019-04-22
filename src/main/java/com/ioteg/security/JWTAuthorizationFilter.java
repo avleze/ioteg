@@ -1,7 +1,5 @@
 package com.ioteg.security;
 
-
-
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -11,22 +9,23 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.ioteg.model.User;
+import com.ioteg.services.EntityNotFoundException;
+import com.ioteg.services.UserService;
+
 import static com.ioteg.security.SecurityConstants.*;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-	private UserDetailsService userDetailsService;
+	private UserService userService;
 
-	public JWTAuthorizationFilter(AuthenticationManager authManager, UserDetailsService userDetailsService) {
+	public JWTAuthorizationFilter(AuthenticationManager authManager, UserService userService) {
 		super(authManager);
-		this.userDetailsService = userDetailsService;
+		this.userService = userService;
 	}
 
 	@Override
@@ -49,14 +48,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 		String token = request.getHeader(HEADER_STRING);
 		if (token != null) {
 			// parse the token.
-			String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes())).build()
+			String userId = JWT.require(Algorithm.HMAC512(SECRET.getBytes())).build()
 					.verify(token.replace(TOKEN_PREFIX, "")).getSubject();
 			try {
-				UserDetails appUser = userDetailsService.loadUserByUsername(user);
+				User appUser = userService.loadUserById(Long.valueOf(userId));
 				if (appUser != null) {
-					return new UsernamePasswordAuthenticationToken(user, null, appUser.getAuthorities());
+					return new UsernamePasswordAuthenticationToken(appUser, null, appUser.getAuthorities());
 				}
-			} catch (UsernameNotFoundException e) {
+			} catch (EntityNotFoundException e) {
 				return null;
 			}
 		}
