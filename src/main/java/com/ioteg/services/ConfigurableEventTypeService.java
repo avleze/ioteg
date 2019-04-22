@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.ioteg.model.ChannelType;
 import com.ioteg.model.ConfigurableEventType;
+import com.ioteg.model.User;
 import com.ioteg.repositories.ConfigurableEventTypeRepository;
 
 @Service
@@ -30,8 +31,9 @@ public class ConfigurableEventTypeService {
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")
 	public ConfigurableEventType createConfigurableEventType(Long channelId,
 			ConfigurableEventType configurableEventType) throws EntityNotFoundException {
-
-		configurableEventType.setOwner(userService.loadLoggedUser());
+		User owner = userService.loadLoggedUser();
+		configurableEventType.setOwner(owner);
+		configurableEventType.getEventType().setOwner(owner);
 		ConfigurableEventType storedConfigurableEventType = configurableEventTypeRepository.save(configurableEventType);
 
 		ChannelType channelType = channelTypeService.loadById(channelId);

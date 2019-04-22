@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ioteg.controllers.dto.ChannelTypeResponse;
 import com.ioteg.controllers.dto.ConfigurableEventTypeRequest;
 import com.ioteg.controllers.dto.ConfigurableEventTypeResponse;
 import com.ioteg.controllers.dto.mappers.ConfigurableEventTypeMapper;
@@ -53,13 +52,13 @@ public class ConfigurableEventTypeRestController {
 	}
 
 	@GetMapping
-	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = ChannelTypeResponse.class)
+	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = ConfigurableEventTypeResponse.class)
 	public ResponseEntity<List<ConfigurableEventTypeResponse>> getAll(@PathVariable("channelId") Long channelId) throws EntityNotFoundException {
-		List<ConfigurableEventTypeResponse> channelTypeResponse = channelTypeService.getAllConfigurableEventTypes(channelId).stream().map((configurableEvent) -> {
+		List<ConfigurableEventTypeResponse> response = channelTypeService.getAllConfigurableEventTypes(channelId).stream().map((configurableEvent) -> {
 			return configurableEventTypeMapper.configurableEventTypeToConfigurableEventTypeResponse(configurableEvent);
 		}).collect(Collectors.toList());
 		
-		return ResponseEntity.ok().body(channelTypeResponse);
+		return ResponseEntity.ok().body(response);
 	}
 	
 	@GetMapping("/{configurableEventTypeId}")

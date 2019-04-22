@@ -37,8 +37,7 @@ public class Block extends OwnedEntity{
 	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<OptionalFields> optionalFields;
 	
-	@SuppressWarnings("unused")
-	private Block() {
+	public Block() {
 
 	}
 
