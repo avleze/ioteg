@@ -49,8 +49,8 @@ public class UserService implements UserDetailsService {
 	}
 
 	public User loadLoggedUser() throws EntityNotFoundException {
-		String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return userRepository.findByUsername(username).orElseThrow(() -> new EntityNotFoundException(User.class, "username", username));
+		String id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return userRepository.findById(Long.valueOf(id)).orElseThrow(() -> new EntityNotFoundException(User.class, "id", id));
 	}
 
 	@PreAuthorize("hasPermission(#id, 'User', 'OWNER') or hasRole('ADMIN')")
