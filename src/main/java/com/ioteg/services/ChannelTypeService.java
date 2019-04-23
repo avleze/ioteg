@@ -60,7 +60,7 @@ public class ChannelTypeService {
 	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN')")
 	public void removeChannelFromUser(Long userId, Long channelId) throws EntityNotFoundException {
 		User user = userService.loadUserByIdWithChannels(userId);
-		user.getChannels().remove(this.loadById(channelId))
+		user.getChannels().remove(this.loadById(channelId));
 		userService.save(user);
 	}
 
