@@ -35,7 +35,7 @@ public class ChannelType {
 	private String channelName;
 
 	@Valid
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<ConfigurableEventType> configurableEventTypes;
 
 	public ChannelType() {

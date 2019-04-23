@@ -49,7 +49,7 @@ public class User implements UserDetails {
 
 	private String role;
 
-	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<ChannelType> channels;
 
 	private String mqttApiKey;

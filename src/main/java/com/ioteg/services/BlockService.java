@@ -61,6 +61,7 @@ public class BlockService {
 	public void removeBlockFromEventType(Long eventTypeId, Long blockId) throws EntityNotFoundException {
 		eventTypeService.loadByIdWithBlocks(eventTypeId)
 				.getBlocks().remove(this.loadById(blockId));
+		this.removeBlock(blockId);
 	}
 
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")

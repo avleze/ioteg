@@ -119,16 +119,19 @@ public class FieldService {
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
 	public void removeFieldFromOptionalFields(Long optionalFieldsId, Long fieldId) throws EntityNotFoundException {
 		optionalFieldsService.loadByIdWithFields(optionalFieldsId).getFields().remove(this.loadById(fieldId));
+		this.removeField(fieldId);
 	}
 	
 	@PreAuthorize("hasPermission(#fieldId1, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public void removeFieldFromField(Long fieldId1, Long fieldId2) throws EntityNotFoundException {
 		this.loadById(fieldId1).getFields().remove(this.loadById(fieldId2));
+		this.removeField(fieldId2);
 	}
 	
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public void removeFieldFromBlock(Long blockId, Long fieldId) throws EntityNotFoundException {
 		blockService.loadByIdWithFields(blockId).getFields().remove(this.loadById(fieldId));
+		this.removeField(fieldId);
 	}
 
 	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")

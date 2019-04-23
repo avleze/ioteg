@@ -23,7 +23,7 @@ public class OptionalFields extends OwnedEntity{
 	
 	private Boolean mandatory;
 	@Valid
-	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Field> fields;
 
 	@SuppressWarnings("unused")

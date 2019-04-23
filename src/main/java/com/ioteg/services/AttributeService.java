@@ -73,6 +73,7 @@ public class AttributeService {
 	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public void removeAttributeFromField(Long fieldId, Long attributeId) throws EntityNotFoundException {
 		fieldService.loadByIdWithAttributes(fieldId).getAttributes().remove(this.loadById(attributeId));
+		this.removeAttribute(attributeId);
 	}
 
 	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER') or hasRole('ADMIN')")

@@ -62,6 +62,7 @@ public class ChannelTypeService {
 		User user = userService.loadUserByIdWithChannels(userId);
 		user.getChannels().remove(this.loadById(channelId));
 		userService.save(user);
+		this.removeChannel(channelId);
 	}
 
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")

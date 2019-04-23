@@ -32,12 +32,12 @@ public class Field extends Attribute {
 	private String dependence;
 	private Boolean injectable;
 	@Valid
-	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Field> fields;
 	@Valid
-	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Attribute> attributes;
-	@OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.REMOVE)
 	private CustomBehaviour customBehaviour;
 
 	public Field() {
