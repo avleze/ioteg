@@ -63,10 +63,21 @@ public class OptionalFieldsService {
 	public void removeOptionalFields(Long optionalFieldsId) {
 		optionalFieldsRepository.deleteById(optionalFieldsId);
 	}
+	
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
+	public void removeOptionalFieldsFromBlock(Long blockId, Long optionalFieldsId) throws EntityNotFoundException {
+		blockService.loadByIdWithOptionalFields(blockId).getOptionalFields().remove(this.loadById(optionalFieldsId));
+	}
 
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
 	public OptionalFields loadById(Long optionalFieldsId) throws EntityNotFoundException {
 		return optionalFieldsRepository.findById(optionalFieldsId)
+				.orElseThrow(() -> new EntityNotFoundException(OptionalFields.class, "id", optionalFieldsId.toString()));
+	}
+	
+	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
+	public OptionalFields loadByIdWithFields(Long optionalFieldsId) throws EntityNotFoundException {
+		return optionalFieldsRepository.findByIdWithFields(optionalFieldsId)
 				.orElseThrow(() -> new EntityNotFoundException(OptionalFields.class, "id", optionalFieldsId.toString()));
 	}
 

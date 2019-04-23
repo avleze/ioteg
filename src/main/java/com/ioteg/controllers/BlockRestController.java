@@ -86,8 +86,8 @@ public class BlockRestController {
 
 	@DeleteMapping("/{blockId}")
 	public ResponseEntity<Void> deleteOne(@PathVariable("eventTypeId") Long eventTypeId,
-			@PathVariable("blockId") Long blockId) {
-		blockService.removeBlock(blockId);
+			@PathVariable("blockId") Long blockId) throws EntityNotFoundException {
+		blockService.removeBlockFromEventType(eventTypeId, blockId);
 		return ResponseEntity.ok().build();
 	}
 }

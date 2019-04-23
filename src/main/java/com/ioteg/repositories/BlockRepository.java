@@ -14,4 +14,13 @@ import com.ioteg.model.User;
 public interface BlockRepository extends CrudRepository<Block, Long>{
 	@Query("SELECT b.owner FROM Block b WHERE b.id = :id")
 	public Optional<User> findOwner(@Param("id") Long id);
+	
+	@Query("SELECT b FROM Block b LEFT JOIN FETCH b.fields WHERE b.id = :id")
+	public Optional<Block> findByIdWithFields(@Param("id") Long id);
+	
+	@Query("SELECT b FROM Block b LEFT JOIN FETCH b.optionalFields WHERE b.id = :id")
+	public Optional<Block> findByIdWithOptionalFields(@Param("id") Long id);
+	
+	@Query("SELECT b FROM Block b LEFT JOIN FETCH b.injectedFields WHERE b.id = :id")
+	public Optional<Block> findByIdWithInjectedFields(@Param("id") Long id);
 }

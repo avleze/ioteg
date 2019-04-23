@@ -23,4 +23,10 @@ public interface CustomBehaviourRepository extends CrudRepository<CustomBehaviou
 	
 	@Query("SELECT c.rules FROM CustomBehaviour c WHERE c.id = :id")
 	public List<RuleCustomBehaviour> findAllRulesOf(@Param("id") Long id);
+	
+	@Query("SELECT c FROM CustomBehaviour c LEFT JOIN FETCH c.rules WHERE c.id = :id")
+	public Optional<CustomBehaviour> findByIdWithRules(@Param("id") Long id);
+	
+	@Query("SELECT c FROM CustomBehaviour c LEFT JOIN FETCH c.variables WHERE c.id = :id")
+	public Optional<CustomBehaviour> findByIdWithVariables(@Param("id") Long id);
 }

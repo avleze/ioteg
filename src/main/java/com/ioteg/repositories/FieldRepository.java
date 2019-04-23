@@ -22,4 +22,10 @@ public interface FieldRepository extends CrudRepository<Field, Long>{
 	
 	@Query("SELECT f.attributes FROM Field f WHERE f.id = :id")
 	public List<Attribute> findAllAttributesOf(@Param("id") Long id);
+	
+	@Query("SELECT f FROM Field f LEFT JOIN FETCH f.attributes WHERE f.id = :id")
+	public Optional<Field> findByIdWithAttributes(@Param("id") Long id);
+	
+	@Query("SELECT f FROM Field f LEFT JOIN FETCH f.fields WHERE f.id = :id")
+	public Optional<Field> findByIdWithFields(@Param("id") Long id);
 }

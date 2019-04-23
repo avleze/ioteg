@@ -40,9 +40,7 @@ public class Field extends Attribute {
 	@OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private CustomBehaviour customBehaviour;
 
-	
-	@SuppressWarnings("unused")
-	private Field() {
+	public Field() {
 
 	}
 	

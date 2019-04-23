@@ -19,4 +19,7 @@ public interface OptionalFieldsRepository extends CrudRepository<OptionalFields,
 	
 	@Query("SELECT o.fields FROM OptionalFields o WHERE o.id = :id")
 	public List<Field> findAllFieldsOf(@Param("id") Long id);
+	
+	@Query("SELECT o FROM OptionalFields o LEFT JOIN FETCH o.fields WHERE o.id = :id")
+	public Optional<OptionalFields> findByIdWithFields(@Param("id") Long id);
 }

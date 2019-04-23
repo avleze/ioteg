@@ -115,6 +115,21 @@ public class FieldService {
 	public void removeField(Long fieldId) {
 		fieldRepository.deleteById(fieldId);
 	}
+	
+	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
+	public void removeFieldFromOptionalFields(Long optionalFieldsId, Long fieldId) throws EntityNotFoundException {
+		optionalFieldsService.loadByIdWithFields(optionalFieldsId).getFields().remove(this.loadById(fieldId));
+	}
+	
+	@PreAuthorize("hasPermission(#fieldId1, 'Field', 'OWNER') or hasRole('ADMIN')")
+	public void removeFieldFromField(Long fieldId1, Long fieldId2) throws EntityNotFoundException {
+		this.loadById(fieldId1).getFields().remove(this.loadById(fieldId2));
+	}
+	
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
+	public void removeFieldFromBlock(Long blockId, Long fieldId) throws EntityNotFoundException {
+		blockService.loadByIdWithFields(blockId).getFields().remove(this.loadById(fieldId));
+	}
 
 	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public Field loadById(Long fieldId) throws EntityNotFoundException {
@@ -122,6 +137,18 @@ public class FieldService {
 				.orElseThrow(() -> new EntityNotFoundException(Field.class, "id", fieldId.toString()));
 	}
 
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
+	public Field loadByIdWithAttributes(Long fieldId) throws EntityNotFoundException {
+		return fieldRepository.findByIdWithAttributes(fieldId)
+				.orElseThrow(() -> new EntityNotFoundException(Field.class, "id", fieldId.toString()));
+	}
+	
+	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
+	public Field loadByIdWithFields(Long fieldId) throws EntityNotFoundException {
+		return fieldRepository.findByIdWithFields(fieldId)
+				.orElseThrow(() -> new EntityNotFoundException(Field.class, "id", fieldId.toString()));
+	}
+	
 	public Field save(Field block) {
 		return fieldRepository.save(block);
 	}

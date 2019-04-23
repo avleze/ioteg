@@ -85,8 +85,8 @@ public class ConfigurableEventTypeRestController {
 
 	@DeleteMapping("/{configurableEventTypeId}")
 	public ResponseEntity<Void> deleteOne(@PathVariable("channelId") Long channelId,
-			@PathVariable("configurableEventTypeId") Long configurableEventTypeId) {
-		configurableEventTypeService.removeConfigurableEventType(configurableEventTypeId);
+			@PathVariable("configurableEventTypeId") Long configurableEventTypeId) throws EntityNotFoundException {
+		configurableEventTypeService.removeConfigurableEventTypeFromChannel(channelId, configurableEventTypeId);
 		return ResponseEntity.ok().build();
 	}
 

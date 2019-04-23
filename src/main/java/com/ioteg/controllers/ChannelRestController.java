@@ -82,8 +82,8 @@ public class ChannelRestController {
 
 	@DeleteMapping("/{channelId}")
 	public ResponseEntity<Void> deleteOne(@PathVariable("userId") Long userId,
-			@PathVariable("channelId") Long channelId) {
-		channelTypeService.removeChannel(channelId);
+			@PathVariable("channelId") Long channelId) throws EntityNotFoundException {
+		channelTypeService.removeChannelFromUser(userId, channelId);
 		return ResponseEntity.ok().build();
 	}
 

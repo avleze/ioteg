@@ -19,4 +19,7 @@ public interface ChannelTypeRepository extends CrudRepository<ChannelType, Long>
 	
 	@Query("SELECT c.configurableEventTypes FROM ChannelType c WHERE c.id = :id")
 	public List<ConfigurableEventType> findAllConfigurableEventsOf(@Param("id") Long id);
+	
+	@Query("SELECT c FROM ChannelType c LEFT JOIN FETCH c.configurableEventTypes WHERE c.id = :id")
+	public Optional<ChannelType> findByIdWithConfigurableEvents(@Param("id") Long id);
 }

@@ -14,5 +14,4 @@ import com.ioteg.model.User;
 public interface ConfigurableEventTypeRepository extends CrudRepository<ConfigurableEventType, Long> {
 	@Query("SELECT c.owner FROM ConfigurableEventType c WHERE c.id = :id")
 	public Optional<User> findOwner(@Param("id") Long id);
-
 }

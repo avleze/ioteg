@@ -56,10 +56,21 @@ public class ChannelTypeService {
 	public void removeChannel(Long channelId) {
 		channelTypeRepository.deleteById(channelId);
 	}
+	
+	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN')")
+	public void removeChannelFromUser(Long userId, Long channelId) throws EntityNotFoundException {
+		userService.loadUserByIdWithChannels(channelId).getChannels().remove(this.loadById(channelId));
+	}
 
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")
 	public ChannelType loadById(Long channelId) throws EntityNotFoundException {
 		return channelTypeRepository.findById(channelId)
+				.orElseThrow(() -> new EntityNotFoundException(ChannelType.class, "id", channelId.toString()));
+	}
+	
+	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")
+	public ChannelType loadByIdWithConfigurableEvents(Long channelId) throws EntityNotFoundException {
+		return channelTypeRepository.findByIdWithConfigurableEvents(channelId)
 				.orElseThrow(() -> new EntityNotFoundException(ChannelType.class, "id", channelId.toString()));
 	}
 

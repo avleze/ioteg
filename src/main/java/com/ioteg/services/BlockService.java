@@ -7,12 +7,11 @@ import org.springframework.stereotype.Service;
 import com.ioteg.model.Block;
 import com.ioteg.model.EventType;
 import com.ioteg.repositories.BlockRepository;
-import com.ioteg.repositories.EventTypeRepository;
 
 @Service
 public class BlockService {
 
-	private EventTypeRepository eventTypeRepository;
+	private EventTypeService eventTypeService;
 	private BlockRepository blockRepository;
 	private UserService userService;
 
@@ -22,10 +21,10 @@ public class BlockService {
 	 * @param userService
 	 */
 	@Autowired
-	public BlockService(EventTypeRepository eventTypeRepository, BlockRepository blockRepository,
+	public BlockService(EventTypeService eventTypeRepository, BlockRepository blockRepository,
 			UserService userService) {
 		super();
-		this.eventTypeRepository = eventTypeRepository;
+		this.eventTypeService = eventTypeRepository;
 		this.blockRepository = blockRepository;
 		this.userService = userService;
 	}
@@ -35,10 +34,9 @@ public class BlockService {
 
 		block.setOwner(userService.loadLoggedUser());
 		Block storedBlock = blockRepository.save(block);
-		EventType eventType = eventTypeRepository.findById(eventTypeId)
-				.orElseThrow(() -> new EntityNotFoundException(EventType.class, "id", eventTypeId.toString()));
+		EventType eventType = eventTypeService.loadById(eventTypeId);
 		eventType.getBlocks().add(storedBlock);
-		eventTypeRepository.save(eventType);
+		eventTypeService.save(eventType);
 
 		return storedBlock;
 	}
@@ -59,9 +57,33 @@ public class BlockService {
 		blockRepository.deleteById(blockId);
 	}
 
+	@PreAuthorize("hasPermission(#eventTypeId, 'EventType', 'OWNER') or hasRole('ADMIN')")
+	public void removeBlockFromEventType(Long eventTypeId, Long blockId) throws EntityNotFoundException {
+		eventTypeService.loadByIdWithBlocks(eventTypeId)
+				.getBlocks().remove(this.loadById(blockId));
+	}
+
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public Block loadById(Long blockId) throws EntityNotFoundException {
 		return blockRepository.findById(blockId)
+				.orElseThrow(() -> new EntityNotFoundException(Block.class, "id", blockId.toString()));
+	}
+	
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
+	public Block loadByIdWithOptionalFields(Long blockId) throws EntityNotFoundException {
+		return blockRepository.findByIdWithOptionalFields(blockId)
+				.orElseThrow(() -> new EntityNotFoundException(Block.class, "id", blockId.toString()));
+	}
+	
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
+	public Block loadByIdWithFields(Long blockId) throws EntityNotFoundException {
+		return blockRepository.findByIdWithFields(blockId)
+				.orElseThrow(() -> new EntityNotFoundException(Block.class, "id", blockId.toString()));
+	}
+	
+	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
+	public Block loadByIdWithInjectedFields(Long blockId) throws EntityNotFoundException {
+		return blockRepository.findByIdWithInjectedFields(blockId)
 				.orElseThrow(() -> new EntityNotFoundException(Block.class, "id", blockId.toString()));
 	}
 
