@@ -19,6 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.ioteg.model.validation.UniqueEmail;
 import com.ioteg.model.validation.UniqueUsername;
 
 @Entity
@@ -39,6 +40,7 @@ public class User implements UserDetails {
 	@NotNull(message = "The username can not be null.")
 	@NotEmpty(message = "The username can not be empty.")
 	@Email(message = "The email is not valid.")
+	@UniqueEmail
 	private String email;
 
 	@NotNull(message = "The password can not be null.")

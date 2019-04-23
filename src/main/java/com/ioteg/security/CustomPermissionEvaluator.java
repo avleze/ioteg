@@ -136,7 +136,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		}
 
 		if (owner.isPresent())
-			return owner.get().getUsername().equals(authentication.getPrincipal());
+			return owner.get().getId().equals(((User)authentication.getPrincipal()).getId());
 		else
 			return false;
 	}

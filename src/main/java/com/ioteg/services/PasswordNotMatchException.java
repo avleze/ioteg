@@ -6,7 +6,7 @@ public class PasswordNotMatchException extends Exception {
 
 	@Override
 	public String getMessage() {
-		return "Passwords do not match.";
+		return "Incorrect password.";
 	}
 	
 }

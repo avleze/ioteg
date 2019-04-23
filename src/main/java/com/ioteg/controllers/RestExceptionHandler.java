@@ -1,11 +1,14 @@
 package com.ioteg.controllers;
 
+import java.util.Arrays;
+
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,6 +17,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.ioteg.services.EntityNotFoundException;
+import com.ioteg.services.PasswordNotMatchException;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
@@ -27,7 +31,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	 */
 	@ExceptionHandler(AccessDeniedException.class)
 	protected ResponseEntity<Object> handleEntityNotFound(AccessDeniedException ex) {
-		ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED);
+		ApiError apiError = new ApiError(HttpStatus.FORBIDDEN);
 		apiError.setMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
 	}
@@ -65,6 +69,21 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         apiError.setMessage("Validation error");
         apiError.addValidationErrors(ex.getBindingResult().getFieldErrors());
         apiError.addValidationError(ex.getBindingResult().getGlobalErrors());
+        return buildResponseEntity(apiError);
+    }
+    
+    /**
+     * Handle handlePasswordsNotMatchException. Triggered when an object fails @Valid validation.
+     *
+     * @param ex      the PasswordNotMatchException that is thrown when @Valid validation fails
+     * @return the ApiError object
+     */
+	@ExceptionHandler(PasswordNotMatchException.class)
+    protected ResponseEntity<Object> handlePasswordNotMatchException(
+            PasswordNotMatchException ex) {
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
+        apiError.setMessage("Validation error");
+        apiError.addValidationErrors(Arrays.asList(new FieldError("PasswordChangeRequest", "oldPassword", ex.getMessage())));
         return buildResponseEntity(apiError);
     }
 

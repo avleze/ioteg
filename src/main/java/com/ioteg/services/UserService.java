@@ -43,6 +43,10 @@ public class UserService implements UserDetailsService {
 		return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 	}
 
+	public User internalLoadUserById(Long id) throws EntityNotFoundException {
+		return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));
+	}
+	
 	@PreAuthorize("hasPermission(#id, 'User', 'OWNER') or hasRole('ADMIN')")
 	public User loadUserById(Long id) throws EntityNotFoundException {
 		return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));

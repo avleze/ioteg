@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +25,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
 	private UserService userService;
 
+	Logger logger = LoggerFactory.getLogger(JWTAuthenticationFilter.class);
+	
 	public JWTAuthorizationFilter(AuthenticationManager authManager, UserService userService) {
 		super(authManager);
 		this.userService = userService;
@@ -51,7 +55,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 			String userId = JWT.require(Algorithm.HMAC512(SECRET.getBytes())).build()
 					.verify(token.replace(TOKEN_PREFIX, "")).getSubject();
 			try {
-				User appUser = userService.loadUserById(Long.valueOf(userId));
+				logger.info(userId);
+				User appUser = userService.internalLoadUserById(Long.valueOf(userId));
 				if (appUser != null) {
 					return new UsernamePasswordAuthenticationToken(appUser, null, appUser.getAuthorities());
 				}
