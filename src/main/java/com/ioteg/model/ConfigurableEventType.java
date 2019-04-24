@@ -26,7 +26,7 @@ public class ConfigurableEventType extends OwnedEntity{
 
 	@NotNull
 	@Valid
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private EventType eventType;
 	@PositiveOrZero
 	private Integer delay;

@@ -29,10 +29,10 @@ public class ChannelTypeService {
 		this.channelTypeRepository = channelTypeRepository;
 	}
 
-	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN') or hasRole('ADMIN')")
+	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN')")
 	public ChannelType createChannel(Long userId, ChannelType channel) throws EntityNotFoundException {
+		
 		ChannelType storedChannel = channelTypeRepository.save(channel);
-
 		User user = userService.loadUserByIdWithChannels(userId);
 		user.getChannels().add(channel);
 		userService.save(user);
@@ -44,7 +44,10 @@ public class ChannelTypeService {
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")
 	public ChannelType modifyChannel(Long channelId, ChannelType channel) throws EntityNotFoundException {
 		ChannelType storedChannel = this.loadById(channelId);
-		return storedChannel;
+		
+		storedChannel.setChannelName(channel.getChannelName());
+		
+		return this.save(storedChannel);
 	}
 	
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")

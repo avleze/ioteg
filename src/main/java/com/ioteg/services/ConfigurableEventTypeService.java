@@ -36,7 +36,7 @@ public class ConfigurableEventTypeService {
 		configurableEventType.getEventType().setOwner(owner);
 		ConfigurableEventType storedConfigurableEventType = configurableEventTypeRepository.save(configurableEventType);
 
-		ChannelType channelType = channelTypeService.loadById(channelId);
+		ChannelType channelType = channelTypeService.loadByIdWithConfigurableEvents(channelId);
 		channelType.getConfigurableEventTypes().add(storedConfigurableEventType);
 		channelTypeService.save(channelType);
 

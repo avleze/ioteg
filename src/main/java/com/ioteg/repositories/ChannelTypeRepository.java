@@ -14,7 +14,7 @@ import com.ioteg.model.User;
 
 @Repository
 public interface ChannelTypeRepository extends CrudRepository<ChannelType, Long>{
-	@Query("SELECT u FROM User u WHERE :id IN u.channels")
+	@Query("SELECT u FROM User u LEFT JOIN FETCH u.channels c WHERE :id = c.id")
 	public Optional<User> findOwner(@Param("id") Long id);
 	
 	@Query("SELECT c.configurableEventTypes FROM ChannelType c WHERE c.id = :id")

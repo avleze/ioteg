@@ -14,6 +14,7 @@ import com.ioteg.model.OwnedResource;
 import com.ioteg.model.User;
 import com.ioteg.repositories.AttributeRepository;
 import com.ioteg.repositories.BlockRepository;
+import com.ioteg.repositories.ChannelTypeRepository;
 import com.ioteg.repositories.ConfigurableEventTypeRepository;
 import com.ioteg.repositories.CustomBehaviourRepository;
 import com.ioteg.repositories.EventTypeRepository;
@@ -38,10 +39,10 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	private RuleCustomBehaviourRepository ruleCustomBehaviourRepository;
 	private VariableCustomBehaviourRepository variableCustomBehaviourRepository;
 	private UserRepository userRepository;
-
-	
+	private ChannelTypeRepository channelTypeRepository;
 	
 	/**
+	 * @param logger
 	 * @param configurableEventTypeRepository
 	 * @param eventTypeRepository
 	 * @param blockRepository
@@ -52,6 +53,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 	 * @param ruleCustomBehaviourRepository
 	 * @param variableCustomBehaviourRepository
 	 * @param userRepository
+	 * @param channelTypeRepository
 	 */
 	@Autowired
 	public CustomPermissionEvaluator(ConfigurableEventTypeRepository configurableEventTypeRepository,
@@ -59,7 +61,8 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 			AttributeRepository attributeRepository, OptionalFieldsRepository optionalFieldsRepository,
 			CustomBehaviourRepository customBehaviourRepository,
 			RuleCustomBehaviourRepository ruleCustomBehaviourRepository,
-			VariableCustomBehaviourRepository variableCustomBehaviourRepository, UserRepository userRepository) {
+			VariableCustomBehaviourRepository variableCustomBehaviourRepository, UserRepository userRepository,
+			ChannelTypeRepository channelTypeRepository) {
 		super();
 		this.configurableEventTypeRepository = configurableEventTypeRepository;
 		this.eventTypeRepository = eventTypeRepository;
@@ -71,6 +74,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		this.ruleCustomBehaviourRepository = ruleCustomBehaviourRepository;
 		this.variableCustomBehaviourRepository = variableCustomBehaviourRepository;
 		this.userRepository = userRepository;
+		this.channelTypeRepository = channelTypeRepository;
 	}
 
 	@Override
@@ -129,6 +133,9 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 			break;
 		case "User":
 			owner = userRepository.findById(id);
+			break;
+		case "ChannelType":
+			owner = channelTypeRepository.findOwner(id);
 			break;
 		default:
 			owner = Optional.empty();
