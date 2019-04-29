@@ -44,23 +44,23 @@ public class AttributeService {
 
 
 	@PreAuthorize("hasPermission(#attributeId, 'Attribute', 'OWNER') or hasRole('ADMIN')")
-	public Attribute modifyAttribute(Long attributeId, Field field) throws EntityNotFoundException {
+	public Attribute modifyAttribute(Long attributeId, Attribute attribute) throws EntityNotFoundException {
 		Attribute storedAttribute = this.loadById(attributeId);
 
-		storedAttribute.setBegin(field.getBegin());
-		storedAttribute.setCase(field.getCase());
-		storedAttribute.setEnd(field.getEnd());
-		storedAttribute.setEndcharacter(field.getEndcharacter());
-		storedAttribute.setFormat(field.getFormat());
-		storedAttribute.setIsNumeric(field.getIsNumeric());
-		storedAttribute.setLength(field.getLength());
-		storedAttribute.setMax(field.getMax());
-		storedAttribute.setMin(field.getMin());
-		storedAttribute.setPrecision(field.getPrecision());
-		storedAttribute.setStep(field.getStep());
-		storedAttribute.setType(field.getType());
-		storedAttribute.setUnit(field.getUnit());
-		storedAttribute.setValue(field.getValue());
+		storedAttribute.setBegin(attribute.getBegin());
+		storedAttribute.setCase(attribute.getCase());
+		storedAttribute.setEnd(attribute.getEnd());
+		storedAttribute.setEndcharacter(attribute.getEndcharacter());
+		storedAttribute.setFormat(attribute.getFormat());
+		storedAttribute.setIsNumeric(attribute.getIsNumeric());
+		storedAttribute.setLength(attribute.getLength());
+		storedAttribute.setMax(attribute.getMax());
+		storedAttribute.setMin(attribute.getMin());
+		storedAttribute.setPrecision(attribute.getPrecision());
+		storedAttribute.setStep(attribute.getStep());
+		storedAttribute.setType(attribute.getType());
+		storedAttribute.setUnit(attribute.getUnit());
+		storedAttribute.setValue(attribute.getValue());
 
 		return attributeRepository.save(storedAttribute);
 	}
@@ -72,7 +72,9 @@ public class AttributeService {
 	
 	@PreAuthorize("hasPermission(#fieldId, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public void removeAttributeFromField(Long fieldId, Long attributeId) throws EntityNotFoundException {
-		fieldService.loadByIdWithAttributes(fieldId).getAttributes().remove(this.loadById(attributeId));
+		Field field = fieldService.loadByIdWithAttributes(fieldId);
+		field.getAttributes().remove(this.loadById(attributeId));
+		fieldService.save(field);
 		this.removeAttribute(attributeId);
 	}
 

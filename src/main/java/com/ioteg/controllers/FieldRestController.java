@@ -58,7 +58,7 @@ public class FieldRestController {
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = FieldResponse.class)
 	public ResponseEntity<List<FieldResponse>> getAllFieldsInBlock(@PathVariable("blockId") Long blockId)
 			throws EntityNotFoundException {
-		List<FieldResponse> response = blockService.loadByIdWithFields(blockId).getFields().stream().map((field) -> {
+		List<FieldResponse> response = blockService.loadByIdWithFields(blockId).getFields().stream().map(field -> {
 			return fieldMapper.fieldToFieldResponse(field);
 		}).collect(Collectors.toList());
 
@@ -70,7 +70,7 @@ public class FieldRestController {
 	public ResponseEntity<List<FieldResponse>> getAllFieldsInOptionalFields(
 			@PathVariable("optionalFieldsId") Long optionalFieldsId) throws EntityNotFoundException {
 		List<FieldResponse> response = optionalFieldsService.loadByIdWithFields(optionalFieldsId).getFields().stream()
-				.map((field) -> {
+				.map(field -> {
 					return fieldMapper.fieldToFieldResponse(field);
 				}).collect(Collectors.toList());
 
@@ -81,7 +81,7 @@ public class FieldRestController {
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = FieldResponse.class)
 	public ResponseEntity<List<FieldResponse>> getAllFieldsInFields(@PathVariable("fieldId") Long fieldId)
 			throws EntityNotFoundException {
-		List<FieldResponse> response = fieldService.loadByIdWithFields(fieldId).getFields().stream().map((field) -> {
+		List<FieldResponse> response = fieldService.loadByIdWithFields(fieldId).getFields().stream().map(field -> {
 			return fieldMapper.fieldToFieldResponse(field);
 		}).collect(Collectors.toList());
 

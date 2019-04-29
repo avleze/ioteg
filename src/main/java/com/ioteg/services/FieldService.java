@@ -161,7 +161,7 @@ public class FieldService {
 				.orElseThrow(() -> new EntityNotFoundException(Field.class, "id", fieldId.toString()));
 	}
 	
-	public Field save(Field block) {
-		return fieldRepository.save(block);
+	public Field save(Field field) {
+		return fieldRepository.save(field);
 	}
 }

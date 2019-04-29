@@ -51,7 +51,7 @@ public class ChannelTypeService {
 	}
 	
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")
-	public List<ConfigurableEventType> getAllConfigurableEventTypes(Long channelId) throws EntityNotFoundException {
+	public List<ConfigurableEventType> getAllConfigurableEventTypes(Long channelId) {
 		return channelTypeRepository.findAllConfigurableEventsOf(channelId);
 	}
 

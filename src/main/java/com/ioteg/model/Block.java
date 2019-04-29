@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ public class Block extends OwnedEntity{
 	private Integer repetition;
 	@Valid
 	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OrderColumn
 	private List<Field> fields;
 	@Valid
 	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)

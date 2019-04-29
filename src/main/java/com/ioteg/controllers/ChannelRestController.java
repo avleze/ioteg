@@ -51,7 +51,7 @@ public class ChannelRestController {
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = ChannelTypeResponse.class)
 	public ResponseEntity<List<ChannelTypeResponse>> getAll(@PathVariable("userId") Long userId) throws EntityNotFoundException {
-		List<ChannelTypeResponse> channelTypeResponse = userService.getAllChannels(userId).stream().map((channelType) -> {
+		List<ChannelTypeResponse> channelTypeResponse = userService.getAllChannels(userId).stream().map(channelType -> {
 			return channelTypeMapper.channelTypeToChannelTypeResponse(channelType);
 		}).collect(Collectors.toList());
 		

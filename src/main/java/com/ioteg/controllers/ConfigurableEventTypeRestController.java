@@ -53,8 +53,8 @@ public class ConfigurableEventTypeRestController {
 
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = ConfigurableEventTypeResponse.class)
-	public ResponseEntity<List<ConfigurableEventTypeResponse>> getAll(@PathVariable("channelId") Long channelId) throws EntityNotFoundException {
-		List<ConfigurableEventTypeResponse> response = channelTypeService.getAllConfigurableEventTypes(channelId).stream().map((configurableEvent) -> {
+	public ResponseEntity<List<ConfigurableEventTypeResponse>> getAll(@PathVariable("channelId") Long channelId) {
+		List<ConfigurableEventTypeResponse> response = channelTypeService.getAllConfigurableEventTypes(channelId).stream().map(configurableEvent -> {
 			return configurableEventTypeMapper.configurableEventTypeToConfigurableEventTypeResponse(configurableEvent);
 		}).collect(Collectors.toList());
 		

@@ -35,7 +35,7 @@ public class Attribute extends OwnedEntity{
 	protected Boolean isNumeric;
 	protected String generationType;
 	
-	protected Attribute() {
+	public Attribute() {
 
 	}
 
