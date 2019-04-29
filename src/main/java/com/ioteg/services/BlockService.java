@@ -34,7 +34,7 @@ public class BlockService {
 
 		block.setOwner(userService.loadLoggedUser());
 		Block storedBlock = blockRepository.save(block);
-		EventType eventType = eventTypeService.loadById(eventTypeId);
+		EventType eventType = eventTypeService.loadByIdWithBlocks(eventTypeId);
 		eventType.getBlocks().add(storedBlock);
 		eventTypeService.save(eventType);
 
@@ -59,8 +59,10 @@ public class BlockService {
 
 	@PreAuthorize("hasPermission(#eventTypeId, 'EventType', 'OWNER') or hasRole('ADMIN')")
 	public void removeBlockFromEventType(Long eventTypeId, Long blockId) throws EntityNotFoundException {
-		eventTypeService.loadByIdWithBlocks(eventTypeId)
-				.getBlocks().remove(this.loadById(blockId));
+		
+		EventType eventType = eventTypeService.loadByIdWithBlocks(eventTypeId);
+		eventType.getBlocks().remove(this.loadById(blockId));
+		eventTypeService.save(eventType);
 		this.removeBlock(blockId);
 	}
 

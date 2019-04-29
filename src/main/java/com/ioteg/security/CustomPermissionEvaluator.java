@@ -141,7 +141,10 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 			owner = Optional.empty();
 			break;
 		}
-
+		
+		if(authentication.getAuthorities().isEmpty())
+			return false;
+		
 		if (owner.isPresent())
 			return owner.get().getId().equals(((User)authentication.getPrincipal()).getId());
 		else

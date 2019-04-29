@@ -28,7 +28,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 
 @RestController
-@RequestMapping("/api/events/{eventId}/blocks")
+@RequestMapping("/api/events/{eventTypeId}/blocks")
 @Api(tags = "Blocks", value = "This is the REST interface to manipulate the Blocks")
 public class BlockRestController {
 

@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 public class FieldResponse {
 	private Long id;
-	
+
 	@NotEmpty(message = "The field name can't be empty.")
 	@NotNull(message = "The field name can't be null.")
 	private String name;
@@ -13,20 +13,24 @@ public class FieldResponse {
 	private Boolean chooseone = false;
 	private String dependence = "false";
 	private Boolean injectable = false;
+
 	@NotEmpty
 	@NotNull
-	protected String type;	
+	protected String type;
+	protected String value;
+	protected Double min;
 	protected String step;
 	protected String unit;
+	protected Double max;
 	protected Integer precision;
-	protected Integer length = 10;
+	protected Integer length;
 	protected String strCase;
 	protected String begin;
 	protected String end;
 	protected String endcharacter;
 	protected String format;
-	protected Boolean isNumeric = false;
-	
+	protected Boolean isNumeric;
+	protected String generationType;
 	/**
 	 * @return the id
 	 */
@@ -112,6 +116,30 @@ public class FieldResponse {
 		this.type = type;
 	}
 	/**
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(String value) {
+		this.value = value;
+	}
+	/**
+	 * @return the min
+	 */
+	public Double getMin() {
+		return min;
+	}
+	/**
+	 * @param min the min to set
+	 */
+	public void setMin(Double min) {
+		this.min = min;
+	}
+	/**
 	 * @return the step
 	 */
 	public String getStep() {
@@ -134,6 +162,18 @@ public class FieldResponse {
 	 */
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+	/**
+	 * @return the max
+	 */
+	public Double getMax() {
+		return max;
+	}
+	/**
+	 * @param max the max to set
+	 */
+	public void setMax(Double max) {
+		this.max = max;
 	}
 	/**
 	 * @return the precision
@@ -230,5 +270,17 @@ public class FieldResponse {
 	 */
 	public void setIsNumeric(Boolean isNumeric) {
 		this.isNumeric = isNumeric;
+	}
+	/**
+	 * @return the generationType
+	 */
+	public String getGenerationType() {
+		return generationType;
+	}
+	/**
+	 * @param generationType the generationType to set
+	 */
+	public void setGenerationType(String generationType) {
+		this.generationType = generationType;
 	}
 }

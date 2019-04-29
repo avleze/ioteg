@@ -2,6 +2,7 @@ package com.ioteg.controllers.dto;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -9,6 +10,7 @@ import javax.validation.constraints.PositiveOrZero;
 public class ConfigurableEventTypeRequest {
 
 	@NotNull(message = "The eventType can not be null.")
+	@Valid
 	private EventTypeRequest eventType;
 	@PositiveOrZero(message = "The delay must be positive or zero.")
 	private Integer delay;

@@ -41,7 +41,7 @@ public class FieldService {
 
 		field.setOwner(userService.loadLoggedUser());
 		Field storedField = fieldRepository.save(field);
-		Block block = blockService.loadById(blockId);
+		Block block = blockService.loadByIdWithFields(blockId);
 		block.getFields().add(storedField);
 		blockService.save(block);
 
@@ -64,7 +64,7 @@ public class FieldService {
 		field.setOwner(userService.loadLoggedUser());
 		Field storedField = fieldRepository.save(field);
 
-		Field parentField = this.loadById(fieldId);
+		Field parentField = this.loadByIdWithFields(fieldId);
 		parentField.getFields().add(storedField);
 		this.save(parentField);
 
@@ -77,7 +77,7 @@ public class FieldService {
 		field.setOwner(userService.loadLoggedUser());
 		Field storedField = fieldRepository.save(field);
 
-		OptionalFields parentOptionalFields = optionalFieldsService.loadById(optionalFieldsId);
+		OptionalFields parentOptionalFields = optionalFieldsService.loadByIdWithFields(optionalFieldsId);
 		parentOptionalFields.getFields().add(storedField);
 		optionalFieldsService.save(parentOptionalFields);
 
@@ -107,6 +107,7 @@ public class FieldService {
 		storedField.setType(field.getType());
 		storedField.setUnit(field.getUnit());
 		storedField.setValue(field.getValue());
+		storedField.setGenerationType(field.getGenerationType());
 
 		return fieldRepository.save(storedField);
 	}
@@ -118,19 +119,27 @@ public class FieldService {
 	
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
 	public void removeFieldFromOptionalFields(Long optionalFieldsId, Long fieldId) throws EntityNotFoundException {
-		optionalFieldsService.loadByIdWithFields(optionalFieldsId).getFields().remove(this.loadById(fieldId));
+		OptionalFields optionalFields = optionalFieldsService.loadByIdWithFields(optionalFieldsId);	
+		optionalFields.getFields().remove(this.loadById(fieldId));
+		optionalFieldsService.save(optionalFields);
+		
 		this.removeField(fieldId);
 	}
 	
 	@PreAuthorize("hasPermission(#fieldId1, 'Field', 'OWNER') or hasRole('ADMIN')")
 	public void removeFieldFromField(Long fieldId1, Long fieldId2) throws EntityNotFoundException {
-		this.loadById(fieldId1).getFields().remove(this.loadById(fieldId2));
+		Field field = this.loadByIdWithFields(fieldId1);
+		field.getFields().remove(this.loadById(fieldId2));
+		fieldRepository.save(field);
+		
 		this.removeField(fieldId2);
 	}
 	
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public void removeFieldFromBlock(Long blockId, Long fieldId) throws EntityNotFoundException {
-		blockService.loadByIdWithFields(blockId).getFields().remove(this.loadById(fieldId));
+		Block block = blockService.loadByIdWithFields(blockId);
+		block.getFields().remove(this.loadById(fieldId));
+		blockService.save(block);
 		this.removeField(fieldId);
 	}
 

@@ -13,9 +13,12 @@ public class FieldRequest {
 	private Boolean injectable = false;
 	@NotEmpty
 	@NotNull
-	protected String type;	
+	protected String type;
+	protected String value;
+	protected Double min = 0.0;
 	protected String step;
 	protected String unit;
+	protected Double max = 10.0;
 	protected Integer precision;
 	protected Integer length = 10;
 	protected String strCase;
@@ -24,7 +27,7 @@ public class FieldRequest {
 	protected String endcharacter;
 	protected String format;
 	protected Boolean isNumeric = false;
-	
+	protected String generationType;
 	/**
 	 * @return the name
 	 */
@@ -98,6 +101,30 @@ public class FieldRequest {
 		this.type = type;
 	}
 	/**
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(String value) {
+		this.value = value;
+	}
+	/**
+	 * @return the min
+	 */
+	public Double getMin() {
+		return min;
+	}
+	/**
+	 * @param min the min to set
+	 */
+	public void setMin(Double min) {
+		this.min = min;
+	}
+	/**
 	 * @return the step
 	 */
 	public String getStep() {
@@ -120,6 +147,18 @@ public class FieldRequest {
 	 */
 	public void setUnit(String unit) {
 		this.unit = unit;
+	}
+	/**
+	 * @return the max
+	 */
+	public Double getMax() {
+		return max;
+	}
+	/**
+	 * @param max the max to set
+	 */
+	public void setMax(Double max) {
+		this.max = max;
 	}
 	/**
 	 * @return the precision
@@ -217,4 +256,18 @@ public class FieldRequest {
 	public void setIsNumeric(Boolean isNumeric) {
 		this.isNumeric = isNumeric;
 	}
+	/**
+	 * @return the generationType
+	 */
+	public String getGenerationType() {
+		return generationType;
+	}
+	/**
+	 * @param generationType the generationType to set
+	 */
+	public void setGenerationType(String generationType) {
+		this.generationType = generationType;
+	}
+
+	
 }

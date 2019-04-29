@@ -63,8 +63,13 @@ public class ConfigurableEventTypeService {
 
 	@PreAuthorize("hasPermission(#channelId, 'ChannelType', 'OWNER') or hasRole('ADMIN')")
 	public void removeConfigurableEventTypeFromChannel(Long channelId, Long configurableEventTypeId) throws EntityNotFoundException {
-		channelTypeService.loadByIdWithConfigurableEvents(channelId).getConfigurableEventTypes()
+		ChannelType channelType = channelTypeService.loadByIdWithConfigurableEvents(channelId);
+		
+		channelType.getConfigurableEventTypes()
 				.remove(this.loadById(configurableEventTypeId));
+		
+		channelTypeService.save(channelType);
+		
 		this.removeConfigurableEventType(configurableEventTypeId);
 	}
 

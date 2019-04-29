@@ -1,7 +1,6 @@
 package com.ioteg.model;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -34,9 +33,7 @@ public class Attribute extends OwnedEntity{
 	protected String endcharacter;
 	protected String format;
 	protected Boolean isNumeric;
-
-	@OneToOne
-	private User owner;
+	protected String generationType;
 	
 	protected Attribute() {
 
@@ -454,5 +451,31 @@ public class Attribute extends OwnedEntity{
 		this.isNumeric = isNumeric;
 	}
 
+	/**
+	 * @return the strCase
+	 */
+	public String getStrCase() {
+		return strCase;
+	}
 
+	/**
+	 * @param strCase the strCase to set
+	 */
+	public void setStrCase(String strCase) {
+		this.strCase = strCase;
+	}
+
+	/**
+	 * @return the generationType
+	 */
+	public String getGenerationType() {
+		return generationType;
+	}
+
+	/**
+	 * @param generationType the generationType to set
+	 */
+	public void setGenerationType(String generationType) {
+		this.generationType = generationType;
+	}
 }

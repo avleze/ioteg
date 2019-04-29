@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -31,9 +30,6 @@ public class EventType extends OwnedEntity{
 	@Valid
 	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Block> blocks;
-
-	@OneToOne(fetch = FetchType.LAZY)
-	private User owner;
 	
 	public EventType() {
 
