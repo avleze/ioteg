@@ -26,8 +26,7 @@ public class OptionalFields extends OwnedEntity{
 	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Field> fields;
 
-	@SuppressWarnings("unused")
-	private OptionalFields() {
+	public OptionalFields() {
 		
 	}
 

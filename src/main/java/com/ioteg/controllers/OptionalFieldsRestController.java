@@ -3,15 +3,23 @@ package com.ioteg.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ioteg.controllers.dto.OptionalFieldsRequest;
 import com.ioteg.controllers.dto.OptionalFieldsResponse;
 import com.ioteg.controllers.dto.mappers.OptionalFieldsMapper;
+import com.ioteg.model.OptionalFields;
 import com.ioteg.services.BlockService;
 import com.ioteg.services.EntityNotFoundException;
 import com.ioteg.services.OptionalFieldsService;
@@ -51,6 +59,37 @@ public class OptionalFieldsRestController {
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(response);
+	}
+	
+	@GetMapping("/{optionalFieldsId}")
+	public ResponseEntity<OptionalFieldsResponse> getOne(@PathVariable("blockId") Long blockId,
+			@PathVariable("optionalFieldsId") Long optionalFieldsId) throws EntityNotFoundException {
+		return ResponseEntity.ok().body(optionalFieldsMapper.optionalFieldsToOptionalFieldsResponse(optionalFieldsService.loadByIdWithFields(optionalFieldsId)));
+	}
+	
+	@PostMapping
+	public ResponseEntity<OptionalFieldsResponse> saveOne(@PathVariable("blockId") Long blockId,
+			@RequestBody @Valid OptionalFieldsRequest optionalFieldsRequest)
+			throws EntityNotFoundException {
+		OptionalFields optionalFields = optionalFieldsMapper.optionalFieldsRequestToOptionalFields(optionalFieldsRequest);
+		return ResponseEntity.ok()
+				.body(optionalFieldsMapper.optionalFieldsToOptionalFieldsResponse(optionalFieldsService.createOptionalFields(blockId, optionalFields)));
+	}
+
+	@PutMapping("/{optionalFieldsId}")
+	public ResponseEntity<OptionalFieldsResponse> modifyOne(@PathVariable("optionalFieldsId") Long optionalFieldsId,
+			@RequestBody @Valid OptionalFieldsRequest optionalFieldsRequest)
+			throws EntityNotFoundException {
+		OptionalFields optionalFields = optionalFieldsMapper.optionalFieldsRequestToOptionalFields(optionalFieldsRequest);
+		return ResponseEntity.ok()
+				.body(optionalFieldsMapper.optionalFieldsToOptionalFieldsResponse(optionalFieldsService.modifyOptionalFields(optionalFieldsId, optionalFields)));
+	}
+
+	@DeleteMapping("/{optionalFieldsId}")
+	public ResponseEntity<Void> deleteOne(@PathVariable("blockId") Long blockId,
+			@PathVariable("optionalFieldsId") Long optionalFieldsId) throws EntityNotFoundException {
+		optionalFieldsService.removeOptionalFieldsFromBlock(blockId, optionalFieldsId);
+		return ResponseEntity.ok().build();
 	}
 
 }

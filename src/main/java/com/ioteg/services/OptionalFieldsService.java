@@ -52,7 +52,7 @@ public class OptionalFieldsService {
 
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
 	public OptionalFields modifyOptionalFields(Long optionalFieldsId, OptionalFields optionalFields) throws EntityNotFoundException {
-		OptionalFields storedOptionalFields = this.loadById(optionalFieldsId);
+		OptionalFields storedOptionalFields = this.loadByIdWithFields(optionalFieldsId);
 
 		storedOptionalFields.setMandatory(optionalFields.getMandatory());
 		
