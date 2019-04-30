@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.ioteg.model.Block;
 import com.ioteg.model.EventType;
 import com.ioteg.repositories.BlockRepository;
+import com.ioteg.repositories.OptionalFieldsRepository;
 
 @Service
 public class BlockService {
@@ -14,19 +15,22 @@ public class BlockService {
 	private EventTypeService eventTypeService;
 	private BlockRepository blockRepository;
 	private UserService userService;
+	private OptionalFieldsRepository optionalFieldsRepository;
 
 	/**
-	 * @param eventTypeRepository
+	 * @param eventTypeService
 	 * @param blockRepository
 	 * @param userService
+	 * @param optionalFieldsService
 	 */
 	@Autowired
-	public BlockService(EventTypeService eventTypeRepository, BlockRepository blockRepository,
-			UserService userService) {
+	public BlockService(EventTypeService eventTypeService, BlockRepository blockRepository, UserService userService,
+			OptionalFieldsRepository optionalFieldsRepository) {
 		super();
-		this.eventTypeService = eventTypeRepository;
+		this.eventTypeService = eventTypeService;
 		this.blockRepository = blockRepository;
 		this.userService = userService;
+		this.optionalFieldsRepository = optionalFieldsRepository;
 	}
 
 	@PreAuthorize("hasPermission(#eventTypeId, 'EventType', 'OWNER') or hasRole('ADMIN')")
@@ -74,8 +78,14 @@ public class BlockService {
 	
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public Block loadByIdWithOptionalFields(Long blockId) throws EntityNotFoundException {
-		return blockRepository.findByIdWithOptionalFields(blockId)
+		Block block = blockRepository.findByIdWithOptionalFields(blockId)
 				.orElseThrow(() -> new EntityNotFoundException(Block.class, "id", blockId.toString()));
+		
+		block.getOptionalFields().stream().forEach(optionalFields -> {
+			optionalFields.setFields(optionalFieldsRepository.findAllFieldsOf(optionalFields.getId()));
+		});
+		
+		return block;
 	}
 	
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")

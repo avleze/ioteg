@@ -64,7 +64,7 @@ public class FieldRestController {
 		return ResponseEntity.ok().body(response);
 	}
 
-	@GetMapping("/optionalfields/{optionalFieldsId}/fields")
+	@GetMapping("/optionalFields/{optionalFieldsId}/fields")
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = FieldResponse.class)
 	public ResponseEntity<List<FieldResponse>> getAllFieldsInOptionalFields(
 			@PathVariable("optionalFieldsId") Long optionalFieldsId) throws EntityNotFoundException {
@@ -90,7 +90,7 @@ public class FieldRestController {
 		return ResponseEntity.ok().body(fieldMapper.fieldToFieldResponse(fieldService.loadById(fieldId)));
 	}
 
-	@GetMapping("/optionalfields/{optionalFieldsId}/fields/{fieldId}")
+	@GetMapping("/optionalFields/{optionalFieldsId}/fields/{fieldId}")
 	public ResponseEntity<FieldResponse> getOneFieldFromOptionalFields(
 			@PathVariable("optionalFieldsId") Long optionalFieldsId, @PathVariable("fieldId") Long fieldId)
 			throws EntityNotFoundException {
@@ -110,7 +110,7 @@ public class FieldRestController {
 		return ResponseEntity.ok().body(fieldMapper.fieldToFieldResponse(fieldService.createField(blockId, field)));
 	}
 
-	@PostMapping("/optionalfields/{optionalFieldsId}/fields")
+	@PostMapping("/optionalFields/{optionalFieldsId}/fields")
 	public ResponseEntity<FieldResponse> saveOneInOptionalFields(
 			@PathVariable("optionalFieldsId") Long optionalFieldsId, @RequestBody @Valid FieldRequest fieldRequest)
 			throws EntityNotFoundException {
@@ -134,7 +134,7 @@ public class FieldRestController {
 		return ResponseEntity.ok().body(fieldMapper.fieldToFieldResponse(fieldService.modifyField(fieldId, field)));
 	}
 
-	@PutMapping("/optionalfields/{optionalFieldsId}/fields/{fieldId}")
+	@PutMapping("/optionalFields/{optionalFieldsId}/fields/{fieldId}")
 	public ResponseEntity<FieldResponse> modifyOneInOptionalField(
 			@PathVariable("optionalFieldsId") Long optionalFieldsId, @PathVariable("fieldId") Long fieldId,
 			@RequestBody @Valid FieldRequest fieldRequest) throws EntityNotFoundException {
@@ -157,7 +157,7 @@ public class FieldRestController {
 		return ResponseEntity.ok().build();
 	}
 
-	@DeleteMapping("/optionalfields/{optionalFieldsId}/fields/{fieldId}")
+	@DeleteMapping("/optionalFields/{optionalFieldsId}/fields/{fieldId}")
 	public ResponseEntity<Void> deleteOneInOptionalFields(@PathVariable("optionalFieldsId") Long optionalFieldsId,
 			@PathVariable("fieldId") Long fieldId) throws EntityNotFoundException {
 		fieldService.removeFieldFromOptionalFields(optionalFieldsId, fieldId);

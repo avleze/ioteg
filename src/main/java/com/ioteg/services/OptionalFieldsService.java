@@ -38,11 +38,11 @@ public class OptionalFieldsService {
 		optionalFields.setOwner(userService.loadLoggedUser());
 		OptionalFields storedOptionalFields = optionalFieldsRepository.save(optionalFields);
 		
-		Block block = blockService.loadById(blockId);
+		Block block = blockService.loadByIdWithOptionalFields(blockId);
 		block.getOptionalFields().add(storedOptionalFields);
 		blockService.save(block);
 
-		return storedOptionalFields;
+		return this.loadByIdWithFields(storedOptionalFields.getId());
 	}
 	
 	@PreAuthorize("hasPermission(#optionalFieldsId, 'OptionalFields', 'OWNER') or hasRole('ADMIN')")
