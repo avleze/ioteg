@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users/{userId}/channels")
-@Api(tags="Channel Types", value = "This is the REST interface to manipulate Channel Types")
+@Api(tags = "Channel Types", value = "This is the REST interface to manipulate Channel Types")
 public class ChannelRestController {
 
 	private UserService userService;
@@ -50,11 +50,12 @@ public class ChannelRestController {
 
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = ChannelTypeResponse.class)
-	public ResponseEntity<List<ChannelTypeResponse>> getAll(@PathVariable("userId") Long userId) throws EntityNotFoundException {
-		List<ChannelTypeResponse> channelTypeResponse = userService.getAllChannels(userId).stream().map(channelType -> {
-			return channelTypeMapper.channelTypeToChannelTypeResponse(channelType);
-		}).collect(Collectors.toList());
-		
+	public ResponseEntity<List<ChannelTypeResponse>> getAll(@PathVariable("userId") Long userId)
+			throws EntityNotFoundException {
+		List<ChannelTypeResponse> channelTypeResponse = userService.getAllChannels(userId).stream()
+				.map(channelType -> channelTypeMapper.channelTypeToChannelTypeResponse(channelType))
+				.collect(Collectors.toList());
+
 		return ResponseEntity.ok().body(channelTypeResponse);
 	}
 
@@ -69,15 +70,17 @@ public class ChannelRestController {
 	public ResponseEntity<ChannelTypeResponse> saveOne(@PathVariable("userId") Long userId,
 			@RequestBody @Valid ChannelTypeRequest channelRequest) throws EntityNotFoundException {
 		ChannelType channelType = channelTypeMapper.channelTypeRequestToChannelType(channelRequest);
-		return ResponseEntity.ok().body(channelTypeMapper.channelTypeToChannelTypeResponse(channelTypeService.createChannel(userId, channelType)));
+		return ResponseEntity.ok().body(channelTypeMapper
+				.channelTypeToChannelTypeResponse(channelTypeService.createChannel(userId, channelType)));
 	}
 
 	@PutMapping("/{channelId}")
 	public ResponseEntity<ChannelTypeResponse> modifyOne(@PathVariable("userId") Long userId,
-			@PathVariable("channelId") Long channelId, @RequestBody @Valid ChannelTypeRequest channelRequest) throws EntityNotFoundException
-			 {
+			@PathVariable("channelId") Long channelId, @RequestBody @Valid ChannelTypeRequest channelRequest)
+			throws EntityNotFoundException {
 		ChannelType channelType = channelTypeMapper.channelTypeRequestToChannelType(channelRequest);
-		return ResponseEntity.ok().body(channelTypeMapper.channelTypeToChannelTypeResponse(channelTypeService.modifyChannel(channelId, channelType)));
+		return ResponseEntity.ok().body(channelTypeMapper
+				.channelTypeToChannelTypeResponse(channelTypeService.modifyChannel(channelId, channelType)));
 	}
 
 	@DeleteMapping("/{channelId}")

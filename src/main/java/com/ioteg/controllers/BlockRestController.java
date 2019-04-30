@@ -53,9 +53,8 @@ public class BlockRestController {
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = BlockResponse.class)
 	public ResponseEntity<List<BlockResponse>> getAll(@PathVariable("eventTypeId") Long eventTypeId)
 			throws EntityNotFoundException {
-		List<BlockResponse> response = eventTypeService.getAllBlocks(eventTypeId).stream().map(eventType -> {
-			return blockMapper.blockToBlockResponse(eventType);
-		}).collect(Collectors.toList());
+		List<BlockResponse> response = eventTypeService.getAllBlocks(eventTypeId).stream()
+				.map(eventType -> blockMapper.blockToBlockResponse(eventType)).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(response);
 	}
@@ -68,20 +67,16 @@ public class BlockRestController {
 
 	@PostMapping
 	public ResponseEntity<BlockResponse> saveOne(@PathVariable("eventTypeId") Long eventTypeId,
-			@RequestBody @Valid BlockRequest blockRequest)
-			throws EntityNotFoundException {
+			@RequestBody @Valid BlockRequest blockRequest) throws EntityNotFoundException {
 		Block block = blockMapper.blockRequestToBlock(blockRequest);
-		return ResponseEntity.ok()
-				.body(blockMapper.blockToBlockResponse(blockService.createBlock(eventTypeId, block)));
+		return ResponseEntity.ok().body(blockMapper.blockToBlockResponse(blockService.createBlock(eventTypeId, block)));
 	}
 
 	@PutMapping("/{blockId}")
 	public ResponseEntity<BlockResponse> modifyOne(@PathVariable("blockId") Long blockId,
-			@RequestBody @Valid BlockRequest blockRequest)
-			throws EntityNotFoundException {
+			@RequestBody @Valid BlockRequest blockRequest) throws EntityNotFoundException {
 		Block block = blockMapper.blockRequestToBlock(blockRequest);
-		return ResponseEntity.ok()
-				.body(blockMapper.blockToBlockResponse(blockService.modifyBlock(blockId, block)));
+		return ResponseEntity.ok().body(blockMapper.blockToBlockResponse(blockService.modifyBlock(blockId, block)));
 	}
 
 	@DeleteMapping("/{blockId}")

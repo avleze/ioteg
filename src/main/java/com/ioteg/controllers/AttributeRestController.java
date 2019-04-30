@@ -35,6 +35,7 @@ public class AttributeRestController {
 	private FieldService fieldService;
 	private AttributeService attributeService;
 	private AttributeMapper attributeMapper;
+
 	/**
 	 * @param fieldService
 	 * @param attributeService
@@ -48,40 +49,38 @@ public class AttributeRestController {
 		this.attributeService = attributeService;
 		this.attributeMapper = attributeMapper;
 	}
-	
+
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = AttributeResponse.class)
 	public ResponseEntity<List<AttributeResponse>> getAll(@PathVariable("fieldId") Long fieldId)
 			throws EntityNotFoundException {
-		List<AttributeResponse> response = fieldService.getAllAttributes(fieldId).stream().map(attribute -> {
-			return attributeMapper.attributeToAttributeResponse(attribute);
-		}).collect(Collectors.toList());
+		List<AttributeResponse> response = fieldService.getAllAttributes(fieldId).stream()
+				.map(attribute -> attributeMapper.attributeToAttributeResponse(attribute)).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(response);
 	}
-	
+
 	@GetMapping("/{attributeId}")
 	public ResponseEntity<AttributeResponse> getOne(@PathVariable("fieldId") Long fieldId,
 			@PathVariable("attributeId") Long attributeId) throws EntityNotFoundException {
-		return ResponseEntity.ok().body(attributeMapper.attributeToAttributeResponse(attributeService.loadById(attributeId)));
+		return ResponseEntity.ok()
+				.body(attributeMapper.attributeToAttributeResponse(attributeService.loadById(attributeId)));
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<AttributeResponse> saveOne(@PathVariable("fieldId") Long fieldId,
-			@RequestBody @Valid AttributeRequest attributeRequest)
-			throws EntityNotFoundException {
+			@RequestBody @Valid AttributeRequest attributeRequest) throws EntityNotFoundException {
 		Attribute attribute = attributeMapper.attributeRequestToAttribute(attributeRequest);
-		return ResponseEntity.ok()
-				.body(attributeMapper.attributeToAttributeResponse(attributeService.createAttribute(fieldId, attribute)));
+		return ResponseEntity.ok().body(
+				attributeMapper.attributeToAttributeResponse(attributeService.createAttribute(fieldId, attribute)));
 	}
 
 	@PutMapping("/{attributeId}")
 	public ResponseEntity<AttributeResponse> modifyOne(@PathVariable("attributeId") Long attributeId,
-			@RequestBody @Valid AttributeRequest attributeRequest)
-			throws EntityNotFoundException {
+			@RequestBody @Valid AttributeRequest attributeRequest) throws EntityNotFoundException {
 		Attribute attribute = attributeMapper.attributeRequestToAttribute(attributeRequest);
-		return ResponseEntity.ok()
-				.body(attributeMapper.attributeToAttributeResponse(attributeService.modifyAttribute(attributeId, attribute)));
+		return ResponseEntity.ok().body(
+				attributeMapper.attributeToAttributeResponse(attributeService.modifyAttribute(attributeId, attribute)));
 	}
 
 	@DeleteMapping("/{attributeId}")

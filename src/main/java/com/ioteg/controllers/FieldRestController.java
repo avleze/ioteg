@@ -58,9 +58,8 @@ public class FieldRestController {
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = FieldResponse.class)
 	public ResponseEntity<List<FieldResponse>> getAllFieldsInBlock(@PathVariable("blockId") Long blockId)
 			throws EntityNotFoundException {
-		List<FieldResponse> response = blockService.loadByIdWithFields(blockId).getFields().stream().map(field -> {
-			return fieldMapper.fieldToFieldResponse(field);
-		}).collect(Collectors.toList());
+		List<FieldResponse> response = blockService.loadByIdWithFields(blockId).getFields().stream()
+				.map(field -> fieldMapper.fieldToFieldResponse(field)).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(response);
 	}
@@ -70,9 +69,7 @@ public class FieldRestController {
 	public ResponseEntity<List<FieldResponse>> getAllFieldsInOptionalFields(
 			@PathVariable("optionalFieldsId") Long optionalFieldsId) throws EntityNotFoundException {
 		List<FieldResponse> response = optionalFieldsService.loadByIdWithFields(optionalFieldsId).getFields().stream()
-				.map(field -> {
-					return fieldMapper.fieldToFieldResponse(field);
-				}).collect(Collectors.toList());
+				.map(field -> fieldMapper.fieldToFieldResponse(field)).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(response);
 	}
@@ -81,9 +78,8 @@ public class FieldRestController {
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = FieldResponse.class)
 	public ResponseEntity<List<FieldResponse>> getAllFieldsInFields(@PathVariable("fieldId") Long fieldId)
 			throws EntityNotFoundException {
-		List<FieldResponse> response = fieldService.loadByIdWithFields(fieldId).getFields().stream().map(field -> {
-			return fieldMapper.fieldToFieldResponse(field);
-		}).collect(Collectors.toList());
+		List<FieldResponse> response = fieldService.loadByIdWithFields(fieldId).getFields().stream()
+				.map(field -> fieldMapper.fieldToFieldResponse(field)).collect(Collectors.toList());
 
 		return ResponseEntity.ok().body(response);
 	}
@@ -153,21 +149,21 @@ public class FieldRestController {
 		Field field = fieldMapper.fieldRequestToField(fieldRequest);
 		return ResponseEntity.ok().body(fieldMapper.fieldToFieldResponse(fieldService.modifyField(fieldId2, field)));
 	}
-	
+
 	@DeleteMapping("/blocks/{blockId}/fields/{fieldId}")
 	public ResponseEntity<Void> deleteOneInBlock(@PathVariable("blockId") Long blockId,
 			@PathVariable("fieldId") Long fieldId) throws EntityNotFoundException {
 		fieldService.removeFieldFromBlock(blockId, fieldId);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@DeleteMapping("/optionalfields/{optionalFieldsId}/fields/{fieldId}")
 	public ResponseEntity<Void> deleteOneInOptionalFields(@PathVariable("optionalFieldsId") Long optionalFieldsId,
 			@PathVariable("fieldId") Long fieldId) throws EntityNotFoundException {
 		fieldService.removeFieldFromOptionalFields(optionalFieldsId, fieldId);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@DeleteMapping("/fields/{fieldId1}/fields/{fieldId2}")
 	public ResponseEntity<Void> deleteOneInField(@PathVariable("fieldId1") Long fieldId1,
 			@PathVariable("fieldId2") Long fieldId2) throws EntityNotFoundException {

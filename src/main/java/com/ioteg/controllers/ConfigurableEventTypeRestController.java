@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiResponse;
 
 @RestController
 @RequestMapping("/api/channels/{channelId}/configurableEventTypes")
-@Api(tags="Configurable Event Types", value = "This is the REST interface to manipulate the Configurable Event Types")
+@Api(tags = "Configurable Event Types", value = "This is the REST interface to manipulate the Configurable Event Types")
 public class ConfigurableEventTypeRestController {
 
 	private ChannelTypeService channelTypeService;
@@ -54,33 +54,43 @@ public class ConfigurableEventTypeRestController {
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = ConfigurableEventTypeResponse.class)
 	public ResponseEntity<List<ConfigurableEventTypeResponse>> getAll(@PathVariable("channelId") Long channelId) {
-		List<ConfigurableEventTypeResponse> response = channelTypeService.getAllConfigurableEventTypes(channelId).stream().map(configurableEvent -> {
-			return configurableEventTypeMapper.configurableEventTypeToConfigurableEventTypeResponse(configurableEvent);
-		}).collect(Collectors.toList());
+		List<ConfigurableEventTypeResponse> response = channelTypeService.getAllConfigurableEventTypes(channelId).stream().map(configurableEvent -> 
+			configurableEventTypeMapper.configurableEventTypeToConfigurableEventTypeResponse(configurableEvent)
+		).collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(response);
 	}
-	
+
 	@GetMapping("/{configurableEventTypeId}")
 	public ResponseEntity<ConfigurableEventTypeResponse> getOne(@PathVariable("channelId") Long channelId,
 			@PathVariable("configurableEventTypeId") Long configurableEventTypeId) throws EntityNotFoundException {
 		return ResponseEntity.ok()
-				.body(configurableEventTypeMapper.configurableEventTypeToConfigurableEventTypeResponse(configurableEventTypeService.loadById(configurableEventTypeId)));
+				.body(configurableEventTypeMapper.configurableEventTypeToConfigurableEventTypeResponse(
+						configurableEventTypeService.loadById(configurableEventTypeId)));
 	}
 
 	@PostMapping
 	public ResponseEntity<ConfigurableEventTypeResponse> saveOne(@PathVariable("channelId") Long channelId,
-			@RequestBody @Valid ConfigurableEventTypeRequest configurableEventTypeRequest) throws EntityNotFoundException {
-		ConfigurableEventType configurableEventType = configurableEventTypeMapper.configurableEventTypeRequestToConfigurableEventType(configurableEventTypeRequest);
-		return ResponseEntity.ok().body(configurableEventTypeMapper.configurableEventTypeToConfigurableEventTypeResponse(configurableEventTypeService.createConfigurableEventType(channelId, configurableEventType)));
+			@RequestBody @Valid ConfigurableEventTypeRequest configurableEventTypeRequest)
+			throws EntityNotFoundException {
+		ConfigurableEventType configurableEventType = configurableEventTypeMapper
+				.configurableEventTypeRequestToConfigurableEventType(configurableEventTypeRequest);
+		return ResponseEntity.ok()
+				.body(configurableEventTypeMapper.configurableEventTypeToConfigurableEventTypeResponse(
+						configurableEventTypeService.createConfigurableEventType(channelId, configurableEventType)));
 	}
 
 	@PutMapping("/{configurableEventTypeId}")
 	public ResponseEntity<ConfigurableEventTypeResponse> modifyOne(@PathVariable("channelId") Long channelId,
-			@PathVariable("configurableEventTypeId") Long configurableEventTypeId, @RequestBody @Valid ConfigurableEventTypeRequest configurableEventTypeRequest) throws EntityNotFoundException
-			 {
-		ConfigurableEventType configurableEventType = configurableEventTypeMapper.configurableEventTypeRequestToConfigurableEventType(configurableEventTypeRequest);
-		return ResponseEntity.ok().body(configurableEventTypeMapper.configurableEventTypeToConfigurableEventTypeResponse(configurableEventTypeService.modifyConfigurableEventType(configurableEventTypeId, configurableEventType)));
+			@PathVariable("configurableEventTypeId") Long configurableEventTypeId,
+			@RequestBody @Valid ConfigurableEventTypeRequest configurableEventTypeRequest)
+			throws EntityNotFoundException {
+		ConfigurableEventType configurableEventType = configurableEventTypeMapper
+				.configurableEventTypeRequestToConfigurableEventType(configurableEventTypeRequest);
+		return ResponseEntity.ok()
+				.body(configurableEventTypeMapper
+						.configurableEventTypeToConfigurableEventTypeResponse(configurableEventTypeService
+								.modifyConfigurableEventType(configurableEventTypeId, configurableEventType)));
 	}
 
 	@DeleteMapping("/{configurableEventTypeId}")
