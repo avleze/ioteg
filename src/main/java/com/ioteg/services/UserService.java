@@ -40,26 +40,31 @@ public class UserService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {
-		return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+		return userRepository.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 	}
 
 	public User internalLoadUserById(Long id) throws EntityNotFoundException {
-		return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));
+		return userRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));
 	}
-	
+
 	@PreAuthorize("hasPermission(#id, 'User', 'OWNER') or hasRole('ADMIN')")
 	public User loadUserById(Long id) throws EntityNotFoundException {
-		return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));
+		return userRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));
 	}
 
 	public User loadLoggedUser() throws EntityNotFoundException {
-		Long id = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-		return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));
+		Long id = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+		return userRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));
 	}
 
 	@PreAuthorize("hasPermission(#id, 'User', 'OWNER') or hasRole('ADMIN')")
 	public User loadUserByIdWithChannels(Long id) throws EntityNotFoundException {
-		return userRepository.findUserByIdWithChannels(id).orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));
+		return userRepository.findUserByIdWithChannels(id)
+				.orElseThrow(() -> new EntityNotFoundException(User.class, "id", id.toString()));
 	}
 
 	public User signup(User user) {
@@ -79,16 +84,18 @@ public class UserService implements UserDetailsService {
 	}
 
 	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN')")
-	public void changePassword(Long userId, String oldPassword, String newPassword) throws EntityNotFoundException, PasswordNotMatchException {
+	public void changePassword(Long userId, String oldPassword, String newPassword)
+			throws EntityNotFoundException, PasswordNotMatchException {
 		User user = loadUserById(userId);
 
 		if (bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
 			user.setPassword(bCryptPasswordEncoder.encode(newPassword));
 			userRepository.save(user);
-		} else
+		} else {
 			throw new PasswordNotMatchException();
+		}
 	}
-	
+
 	@PreAuthorize("hasPermission(#userId, 'User', 'OWNER') or hasRole('ADMIN')")
 	public List<ChannelType> getAllChannels(Long userId) throws EntityNotFoundException {
 		return this.loadUserByIdWithChannels(userId).getChannels();
