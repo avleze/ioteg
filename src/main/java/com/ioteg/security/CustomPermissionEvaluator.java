@@ -102,7 +102,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		logger.info("targetId: {}, targetType: {}", targetId, targetType);
 
 		Long id = (Long) targetId;
-		Optional<User> owner = Optional.empty();
+		Optional<User> owner;
 		switch (targetType) {
 		case "ConfigurableEventType":
 			owner = configurableEventTypeRepository.findOwner(id);
