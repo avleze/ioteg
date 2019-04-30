@@ -50,8 +50,7 @@ public class RuleCustomBehaviourRestController {
 
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = RuleResponse.class)
-	public ResponseEntity<List<RuleResponse>> getAll(@PathVariable("customBehaviourId") Long customBehaviourId)
-			throws EntityNotFoundException {
+	public ResponseEntity<List<RuleResponse>> getAll(@PathVariable("customBehaviourId") Long customBehaviourId) {
 		List<RuleResponse> response = customBehaviourService.getAllRules(customBehaviourId).stream()
 				.map(rule -> ruleMapper.ruleToRuleResponse(rule)).collect(Collectors.toList());
 

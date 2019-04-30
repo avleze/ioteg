@@ -51,8 +51,7 @@ public class VariableCustomBehaviourRestController {
 
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = VariableResponse.class)
-	public ResponseEntity<List<VariableResponse>> getAll(@PathVariable("customBehaviourId") Long customBehaviourId)
-			throws EntityNotFoundException {
+	public ResponseEntity<List<VariableResponse>> getAll(@PathVariable("customBehaviourId") Long customBehaviourId) {
 		List<VariableResponse> response = customBehaviourService.getAllVariables(customBehaviourId).stream()
 				.map(variable -> variableMapper.variableToVariableResponse(variable)).collect(Collectors.toList());
 
