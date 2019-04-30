@@ -52,8 +52,7 @@ public class AttributeRestController {
 
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = AttributeResponse.class)
-	public ResponseEntity<List<AttributeResponse>> getAll(@PathVariable("fieldId") Long fieldId)
-			throws EntityNotFoundException {
+	public ResponseEntity<List<AttributeResponse>> getAll(@PathVariable("fieldId") Long fieldId) {
 		List<AttributeResponse> response = fieldService.getAllAttributes(fieldId).stream()
 				.map(attribute -> attributeMapper.attributeToAttributeResponse(attribute)).collect(Collectors.toList());
 

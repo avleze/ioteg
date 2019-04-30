@@ -51,8 +51,7 @@ public class BlockRestController {
 
 	@GetMapping
 	@ApiResponse(code = 200, message = "OK", responseContainer = "List", response = BlockResponse.class)
-	public ResponseEntity<List<BlockResponse>> getAll(@PathVariable("eventTypeId") Long eventTypeId)
-			throws EntityNotFoundException {
+	public ResponseEntity<List<BlockResponse>> getAll(@PathVariable("eventTypeId") Long eventTypeId) {
 		List<BlockResponse> response = eventTypeService.getAllBlocks(eventTypeId).stream()
 				.map(eventType -> blockMapper.blockToBlockResponse(eventType)).collect(Collectors.toList());
 
