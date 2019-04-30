@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 import com.ioteg.controllers.dto.OptionalFieldsRequest;
 import com.ioteg.controllers.dto.OptionalFieldsResponse;
+import com.ioteg.model.Field;
 import com.ioteg.model.OptionalFields;
 
 @Mapper(componentModel = "spring")
@@ -15,10 +16,11 @@ public interface OptionalFieldsMapper {
 	default OptionalFieldsResponse optionalFieldsToOptionalFieldsResponse(OptionalFields optionalFields) {
 		OptionalFieldsResponse optionalFieldsResponse = new OptionalFieldsResponse();
 		optionalFieldsResponse.setFields(
-				optionalFields.getFields().stream().map(field -> field.getName()).collect(Collectors.toList()));
+				optionalFields.getFields().stream().map(Field::getName).collect(Collectors.toList()));
 
 		optionalFieldsResponse.setId(optionalFields.getId());
 		optionalFieldsResponse.setMandatory(optionalFields.getMandatory());
 		return optionalFieldsResponse;
 	}
+	
 }
