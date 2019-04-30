@@ -20,8 +20,7 @@ public class VariableCustomBehaviour extends OwnedEntity{
 	private String max;
 	private String value;
 
-	@SuppressWarnings("unused")
-	private VariableCustomBehaviour() {
+	public VariableCustomBehaviour() {
 		
 	}
 	

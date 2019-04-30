@@ -52,4 +52,20 @@ public class OwnedEntity implements OwnedResource{
 			return false;
 		return true;
 	}
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 }

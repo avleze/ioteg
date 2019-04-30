@@ -77,6 +77,16 @@ public class CustomBehaviourService {
 		return customBehaviourRepository.findById(customBehaviourId).orElseThrow(() -> new EntityNotFoundException(CustomBehaviour.class, "id", customBehaviourId.toString()));
 	}
 	
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
+	public CustomBehaviour loadByIdWithVariables(Long customBehaviourId) throws EntityNotFoundException {
+		return customBehaviourRepository.findByIdWithVariables(customBehaviourId).orElseThrow(() -> new EntityNotFoundException(CustomBehaviour.class, "id", customBehaviourId.toString()));
+	}
+	
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
+	public CustomBehaviour loadByIdWithRules(Long customBehaviourId) throws EntityNotFoundException {
+		return customBehaviourRepository.findByIdWithRules(customBehaviourId).orElseThrow(() -> new EntityNotFoundException(CustomBehaviour.class, "id", customBehaviourId.toString()));
+	}
+	
 	public CustomBehaviour save(CustomBehaviour customBehaviour) {
 		return customBehaviourRepository.save(customBehaviour);
 	}

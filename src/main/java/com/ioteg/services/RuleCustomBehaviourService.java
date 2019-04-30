@@ -36,7 +36,7 @@ public class RuleCustomBehaviourService {
 		ruleCustomBehaviour.setOwner(userService.loadLoggedUser());
 		RuleCustomBehaviour storedRuleCustomBehaviour = ruleCustomBehaviourRepository.save(ruleCustomBehaviour);
 
-		CustomBehaviour customBehaviour = customBehaviourService.loadById(customBehaviourId);
+		CustomBehaviour customBehaviour = customBehaviourService.loadByIdWithRules(customBehaviourId);
 		customBehaviour.getRules().add(storedRuleCustomBehaviour);
 		customBehaviourService.save(customBehaviour);
 
@@ -63,6 +63,14 @@ public class RuleCustomBehaviourService {
 		ruleCustomBehaviourRepository.deleteById(ruleCustomBehaviourId);
 	}
 
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
+	public void removeRuleFromCustomBehaviour(Long customBehaviourId, Long ruleCustomBehaviourId) throws EntityNotFoundException {
+		CustomBehaviour customBehaviour = customBehaviourService.loadByIdWithRules(customBehaviourId);
+		customBehaviour.getRules().remove(this.loadById(ruleCustomBehaviourId));
+		customBehaviourService.save(customBehaviour);
+		ruleCustomBehaviourRepository.deleteById(ruleCustomBehaviourId);
+	}
+	
 	@PreAuthorize("hasPermission(#ruleCustomBehaviourId, 'RuleCustomBehaviour', 'OWNER') or hasRole('ADMIN')")
 	public RuleCustomBehaviour loadById(Long ruleCustomBehaviourId) throws EntityNotFoundException {
 		return ruleCustomBehaviourRepository.findById(ruleCustomBehaviourId)

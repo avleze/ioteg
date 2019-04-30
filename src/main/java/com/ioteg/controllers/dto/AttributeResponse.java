@@ -3,17 +3,10 @@ package com.ioteg.controllers.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class FieldResponse {
+public class AttributeResponse {
+	@NotNull
 	private Long id;
-
-	@NotEmpty(message = "The field name can't be empty.")
-	@NotNull(message = "The field name can't be null.")
-	private String name;
-	private Boolean quotes = false;
-	private Boolean chooseone = false;
-	private String dependence = "false";
-	private Boolean injectable = false;
-
+	
 	@NotEmpty
 	@NotNull
 	protected String type;
@@ -32,8 +25,6 @@ public class FieldResponse {
 	protected Boolean isNumeric;
 	protected String generationType;
 	
-	private CustomBehaviourResponse customBehaviour;
-	
 	/**
 	 * @return the id
 	 */
@@ -45,66 +36,6 @@ public class FieldResponse {
 	 */
 	public void setId(Long id) {
 		this.id = id;
-	}
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	/**
-	 * @return the quotes
-	 */
-	public Boolean getQuotes() {
-		return quotes;
-	}
-	/**
-	 * @param quotes the quotes to set
-	 */
-	public void setQuotes(Boolean quotes) {
-		this.quotes = quotes;
-	}
-	/**
-	 * @return the chooseone
-	 */
-	public Boolean getChooseone() {
-		return chooseone;
-	}
-	/**
-	 * @param chooseone the chooseone to set
-	 */
-	public void setChooseone(Boolean chooseone) {
-		this.chooseone = chooseone;
-	}
-	/**
-	 * @return the dependence
-	 */
-	public String getDependence() {
-		return dependence;
-	}
-	/**
-	 * @param dependence the dependence to set
-	 */
-	public void setDependence(String dependence) {
-		this.dependence = dependence;
-	}
-	/**
-	 * @return the injectable
-	 */
-	public Boolean getInjectable() {
-		return injectable;
-	}
-	/**
-	 * @param injectable the injectable to set
-	 */
-	public void setInjectable(Boolean injectable) {
-		this.injectable = injectable;
 	}
 	/**
 	 * @return the type
@@ -285,17 +216,5 @@ public class FieldResponse {
 	 */
 	public void setGenerationType(String generationType) {
 		this.generationType = generationType;
-	}
-	/**
-	 * @return the customBehaviour
-	 */
-	public CustomBehaviourResponse getCustomBehaviour() {
-		return customBehaviour;
-	}
-	/**
-	 * @param customBehaviour the customBehaviour to set
-	 */
-	public void setCustomBehaviour(CustomBehaviourResponse customBehaviour) {
-		this.customBehaviour = customBehaviour;
 	}
 }

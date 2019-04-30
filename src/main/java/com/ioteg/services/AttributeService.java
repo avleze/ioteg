@@ -35,7 +35,7 @@ public class AttributeService {
 		attribute.setOwner(userService.loadLoggedUser());
 		Attribute storedAttribute = attributeRepository.save(attribute);
 	
-		Field field = fieldService.loadById(fieldId);
+		Field field = fieldService.loadByIdWithAttributes(fieldId);
 		field.getAttributes().add(storedAttribute);
 		fieldService.save(field);
 
@@ -61,7 +61,8 @@ public class AttributeService {
 		storedAttribute.setType(attribute.getType());
 		storedAttribute.setUnit(attribute.getUnit());
 		storedAttribute.setValue(attribute.getValue());
-
+		storedAttribute.setGenerationType(attribute.getGenerationType());
+		
 		return attributeRepository.save(storedAttribute);
 	}
 

@@ -22,8 +22,7 @@ public class RuleCustomBehaviour extends OwnedEntity{
 	private String max;
 	private String sequence;
 
-	@SuppressWarnings("unused")
-	private RuleCustomBehaviour() {
+	public RuleCustomBehaviour() {
 
 	}
 

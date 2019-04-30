@@ -37,7 +37,7 @@ public class Field extends Attribute {
 	@Valid
 	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Attribute> attributes;
-	@OneToOne(cascade = CascadeType.REMOVE)
+	@OneToOne(cascade = CascadeType.ALL)
 	private CustomBehaviour customBehaviour;
 
 	public Field() {

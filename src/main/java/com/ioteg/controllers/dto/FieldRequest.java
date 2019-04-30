@@ -28,6 +28,9 @@ public class FieldRequest {
 	protected String format;
 	protected Boolean isNumeric = false;
 	protected String generationType;
+	
+	protected CustomBehaviourRequest customBehaviour;
+	
 	/**
 	 * @return the name
 	 */
@@ -268,6 +271,16 @@ public class FieldRequest {
 	public void setGenerationType(String generationType) {
 		this.generationType = generationType;
 	}
-
-	
+	/**
+	 * @return the customBehaviour
+	 */
+	public CustomBehaviourRequest getCustomBehaviour() {
+		return customBehaviour;
+	}
+	/**
+	 * @param customBehaviour the customBehaviour to set
+	 */
+	public void setCustomBehaviour(CustomBehaviourRequest customBehaviour) {
+		this.customBehaviour = customBehaviour;
+	}
 }

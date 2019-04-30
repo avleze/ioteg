@@ -30,13 +30,13 @@ public class VariableCustomBehaviourService {
 	}
 
 	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
-	public VariableCustomBehaviour createVariableCustomBehaviourRepository(Long customBehaviourId,
+	public VariableCustomBehaviour createVariableCustomBehaviour(Long customBehaviourId,
 			VariableCustomBehaviour variableCustomBehaviour) throws EntityNotFoundException {
 	
 		variableCustomBehaviour.setOwner(userService.loadLoggedUser());
 		VariableCustomBehaviour storedVariableCustomBehaviour = variableCustomBehaviourRepository.save(variableCustomBehaviour);
 		
-		CustomBehaviour customBehaviour = customBehaviourService.loadById(customBehaviourId);
+		CustomBehaviour customBehaviour = customBehaviourService.loadByIdWithVariables(customBehaviourId);
 		customBehaviour.getVariables().add(storedVariableCustomBehaviour);
 		customBehaviourService.save(customBehaviour);
 
@@ -59,6 +59,14 @@ public class VariableCustomBehaviourService {
 	
 	@PreAuthorize("hasPermission(#variableCustomBehaviourId, 'VariableCustomBehaviour', 'OWNER') or hasRole('ADMIN')")
 	public void removeVariableCustomBehaviour(Long variableCustomBehaviourId) {
+		variableCustomBehaviourRepository.deleteById(variableCustomBehaviourId);
+	}
+	
+	@PreAuthorize("hasPermission(#customBehaviourId, 'CustomBehaviour', 'OWNER') or hasRole('ADMIN')")
+	public void removeVariableFromCustomBehaviour(Long customBehaviourId, Long variableCustomBehaviourId) throws EntityNotFoundException {
+		CustomBehaviour customBehaviour = customBehaviourService.loadByIdWithVariables(customBehaviourId);
+		customBehaviour.getVariables().remove(this.loadById(variableCustomBehaviourId));
+		customBehaviourService.save(customBehaviour);
 		variableCustomBehaviourRepository.deleteById(variableCustomBehaviourId);
 	}
 

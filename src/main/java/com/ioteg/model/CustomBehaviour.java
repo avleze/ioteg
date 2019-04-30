@@ -28,9 +28,7 @@ public class CustomBehaviour extends OwnedEntity{
 	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<RuleCustomBehaviour> rules;
 
-
-	@SuppressWarnings("unused")
-	private CustomBehaviour() {
+	public CustomBehaviour() {
 		
 	}
 
