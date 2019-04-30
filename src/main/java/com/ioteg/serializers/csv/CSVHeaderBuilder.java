@@ -51,10 +51,10 @@ public class CSVHeaderBuilder {
 	public static List<String> getComplexFieldCSVHeader(Field complexField) {
 		List<String> result = new ArrayList<>();
 		for (Field field : complexField.getFields())
-			if (field.getFields() == null || field.getFields().isEmpty())
+			//if (field.getFields() == null || field.getFields().isEmpty())
 				result.add(complexField.getName() + "." + field.getName());
-			else
-				result.addAll(getComplexFieldCSVHeader(field));
+			/*else
+				result.addAll(getComplexFieldCSVHeader(field));*/
 		return result;
 	}
 }

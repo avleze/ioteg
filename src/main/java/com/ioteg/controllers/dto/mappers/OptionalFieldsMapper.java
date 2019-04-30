@@ -1,7 +1,5 @@
 package com.ioteg.controllers.dto.mappers;
 
-import java.util.stream.Collectors;
-
 import org.mapstruct.Mapper;
 
 import com.ioteg.controllers.dto.OptionalFieldsRequest;
@@ -15,9 +13,17 @@ public interface OptionalFieldsMapper {
 
 	default OptionalFieldsResponse optionalFieldsToOptionalFieldsResponse(OptionalFields optionalFields) {
 		OptionalFieldsResponse optionalFieldsResponse = new OptionalFieldsResponse();
-		optionalFieldsResponse.setFields(
-				optionalFields.getFields().stream().map(Field::getName).collect(Collectors.toList()));
-
+		StringBuilder sB = new StringBuilder();
+		for(Field field : optionalFields.getFields())
+		{
+			sB.append(field.getName());
+			sB.append(", ");
+		}
+		
+		if(!optionalFields.getFields().isEmpty())
+			sB.setLength(sB.length() - 2);
+		
+		optionalFieldsResponse.setFields(sB.toString());
 		optionalFieldsResponse.setId(optionalFields.getId());
 		optionalFieldsResponse.setMandatory(optionalFields.getMandatory());
 		return optionalFieldsResponse;

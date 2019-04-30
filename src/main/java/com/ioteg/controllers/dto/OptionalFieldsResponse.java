@@ -1,12 +1,10 @@
 package com.ioteg.controllers.dto;
 
-import java.util.List;
-
 public class OptionalFieldsResponse {
 	
 	private Long id;
 	private Boolean mandatory;
-	private List<String> fields;
+	private String fields;
 	
 	/**
 	 * @return the id
@@ -35,13 +33,13 @@ public class OptionalFieldsResponse {
 	/**
 	 * @return the fields
 	 */
-	public List<String> getFields() {
+	public String getFields() {
 		return fields;
 	}
 	/**
 	 * @param fields the fields to set
 	 */
-	public void setFields(List<String> fields) {
+	public void setFields(String fields) {
 		this.fields = fields;
 	}
 }
