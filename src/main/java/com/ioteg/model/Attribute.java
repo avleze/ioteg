@@ -1,5 +1,6 @@
 package com.ioteg.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ public class Attribute extends OwnedEntity{
 	protected String step;
 	protected String unit;
 	protected Double max;
+	@Column(name = "PRECISION_PROP")
 	protected Integer precision;
 	protected Integer length;
 	protected String strCase;
