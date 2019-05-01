@@ -21,15 +21,15 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 
 	private static final String INC_VALUE = "inc";
 	private static final String DEC_VALUE = "dec";
-	protected Integer numOfEventsToGenerate;
-	protected Integer totalGeneratedEvents;
+	protected Integer totalGeneratedInRule;
 	protected ExprParser parser;
 	protected Map<String, Double> variables;
 	protected List<RuleCustomBehaviour> rules;
 	protected Double generatedValue;
-	protected Integer generatedEventsInCurrentRule;
 	protected Integer eventsPerSimulation;
-
+	protected Integer totalGenerated;
+	private int currentRule;
+	
 	/**
 	 * <p>Constructor for CustomiseBehaviourGenerationAlgorithm.</p>
 	 *
@@ -38,16 +38,16 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 	 * @param generationContext a {@link com.ioteg.generation.GenerationContext} object.
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
 	 */
-	public CustomiseBehaviourGenerationAlgorithm(Field field, Integer numOfEventsToGenerate, GenerationContext generationContext) throws ExprLangParsingException {
+	public CustomiseBehaviourGenerationAlgorithm(Field field, GenerationContext generationContext) throws ExprLangParsingException {
 		super(field, generationContext);
-		this.numOfEventsToGenerate = numOfEventsToGenerate;
-		this.totalGeneratedEvents = 0;
+		this.totalGeneratedInRule = 0;
+		this.totalGenerated = 0;
+		this.currentRule = 0;
 		this.parser = new ExprParser();
 		this.variables = getVariablesFromField(field);
 		this.rules = field.getCustomBehaviour().getRules();
 		this.generatedValue = null;
-		this.generatedEventsInCurrentRule = 0;
-		this.eventsPerSimulation = numOfEventsToGenerate / field.getCustomBehaviour().getSimulations();
+		this.eventsPerSimulation = field.getCustomBehaviour().getSimulations();
 	}
 
 	/**
@@ -141,28 +141,34 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 
 	}
 
+	private void updateIndex() throws ExprLangParsingException {
+		final double ruleWeight = rules.get(currentRule).getWeight();
+		
+		if(ruleWeight == 0 && totalGenerated == eventsPerSimulation)
+		{
+			currentRule = 0;
+			totalGeneratedInRule = 0;
+			totalGenerated = 0;
+			variables = getVariablesFromField(field);
+		}
+		
+		if(ruleWeight != 0 && (eventsPerSimulation * ruleWeight) <= totalGeneratedInRule)
+		{
+			currentRule = (currentRule + 1) % rules.size();
+			totalGeneratedInRule = 0;
+		}
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public Float generate() throws ExprLangParsingException {
-		RuleCustomBehaviour rule = rules.get(0);
+		updateIndex();
+		RuleCustomBehaviour rule = rules.get(currentRule);
 
 		generateValue(rule);
-
-		generatedEventsInCurrentRule++;
-		totalGeneratedEvents++;
-
-		if (totalGeneratedEvents.equals(numOfEventsToGenerate))
-			rules.clear();
-
-		if (0 < rule.getWeight() && rule.getWeight() < 1) {
-			Double eventsPerRule = rule.getWeight() * eventsPerSimulation;
-
-			if (eventsPerRule.intValue() == generatedEventsInCurrentRule) {
-				rules.remove(rule);
-				generatedEventsInCurrentRule = 0;
-			}
-		}
-
+		totalGeneratedInRule++;
+		totalGenerated++;
+		
 		return generatedValue.floatValue();
 	}
 

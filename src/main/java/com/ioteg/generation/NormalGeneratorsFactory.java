@@ -109,7 +109,7 @@ public class NormalGeneratorsFactory {
 		if (floatField.getValue() != null)
 			floatGenerator = new FloatGenerator(new FixedFloatGenerationAlgorithm(floatField, generationContext), floatField, generationContext);
 		else if (floatField.getCustomBehaviour() != null) {
-			floatGenerator = new FloatGenerator(new CustomiseBehaviourGenerationAlgorithm(floatField, totalNumOfEvents, generationContext),
+			floatGenerator = new FloatGenerator(new CustomiseBehaviourGenerationAlgorithm(floatField, generationContext),
 					floatField, generationContext);
 		} else if (floatField.getBegin() != null && floatField.getEnd() != null && floatField.getStep() != null) {
 			floatGenerator = new FloatGenerator(new SequentialFloatGenerationAlgorithm(floatField, generationContext), floatField, generationContext);
