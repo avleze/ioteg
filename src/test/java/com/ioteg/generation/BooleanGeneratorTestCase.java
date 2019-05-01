@@ -24,7 +24,7 @@ public class BooleanGeneratorTestCase {
 		Field field = new Field("boolean", false, "Boolean");
 		field.setIsNumeric(true);
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		/** The loops are necessary in order to cover all the code **/
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
@@ -47,7 +47,7 @@ public class BooleanGeneratorTestCase {
 		Field field = new Field("boolean", false, "Boolean");
 		field.setIsNumeric(false);
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
@@ -60,7 +60,7 @@ public class BooleanGeneratorTestCase {
 		field.setValue("true");
 		field.setIsNumeric(DEFAULT_IS_NUMERIC);
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 

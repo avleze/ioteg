@@ -23,7 +23,7 @@ public class StringGeneratorTestCase {
 
 		/* <field name="test" type="String"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 		assertThat(strResult, matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{10}"));
@@ -36,7 +36,7 @@ public class StringGeneratorTestCase {
 
 		/* <field name="test" type="String" length="24"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 		assertThat(strResult, matchesPattern("[ABCDEFGHIJKLMNOPQRSTUVWXYZ]{24}"));
@@ -50,7 +50,7 @@ public class StringGeneratorTestCase {
 
 		/* <field name="test" type="String" case="low" length="24"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 		assertThat(strResult, matchesPattern("[abcdefghijklmnopqrstuvwxyz]{24}"));
@@ -65,7 +65,7 @@ public class StringGeneratorTestCase {
 
 		/* <field name="test" type="String" case="low"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 		assertThat(strResult, matchesPattern("[abcdefghijklmnopqrstuvwxyz]{10}"));
@@ -81,7 +81,7 @@ public class StringGeneratorTestCase {
 
 		/* <field name="test" type="String" case="low" endcharacter="G"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 		assertThat(strResult, matchesPattern("[abcdefg]*"));
@@ -100,7 +100,7 @@ public class StringGeneratorTestCase {
 		 * length="24"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 		assertThat(strResult, matchesPattern("[abcdefg]{24}"));
@@ -114,7 +114,7 @@ public class StringGeneratorTestCase {
 
 		/* <field name="test" type="String" value="ABC"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
 		assertThat(strResult, equalTo("ABC"));
@@ -129,7 +129,7 @@ public class StringGeneratorTestCase {
 
 		/* <field name="test" type="String" begin="Z" step="2" end="AE"></field> */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		List<ResultField> results = generator.generate(4);
 
 		ResultSimpleField rSF = (ResultSimpleField) results.get(0);
@@ -151,7 +151,7 @@ public class StringGeneratorTestCase {
 		/* <field name="test" type="String" begin="AE" step="-2" end="Z"></field> */
 
 
-		generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		results = generator.generate(4);
 
 		rSF = (ResultSimpleField) results.get(0);

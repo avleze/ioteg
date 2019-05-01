@@ -44,7 +44,7 @@ public class FloatCustomBehaviourTestCase {
 
 		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		Double result = null;
 		for (int events = 0; events < 10; ++events) {
@@ -76,7 +76,7 @@ public class FloatCustomBehaviourTestCase {
 		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		Double result = null;
 		for (int events = 0; events < 10; ++events) {
@@ -106,7 +106,7 @@ public class FloatCustomBehaviourTestCase {
 
 		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		Double result = null;
 		for (int events = 0; events < 10; ++events) {
@@ -139,7 +139,7 @@ public class FloatCustomBehaviourTestCase {
 		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		for (int i = 0; i < 100; ++i) {
 			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
@@ -165,7 +165,7 @@ public class FloatCustomBehaviourTestCase {
 
 		field.setCustomBehaviour(new CustomBehaviour(null, 10, variables, rules));
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		for (int i = 0; i < 100; ++i) {
 			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
@@ -193,7 +193,7 @@ public class FloatCustomBehaviourTestCase {
 
 		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		for (int i = 0; i < 100; ++i) {
 			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
@@ -222,7 +222,7 @@ public class FloatCustomBehaviourTestCase {
 
 		field.setCustomBehaviour(new CustomBehaviour(null, 100, variables, rules));
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		for (int i = 0; i < 50; ++i) {
 			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
@@ -255,7 +255,7 @@ public class FloatCustomBehaviourTestCase {
 
 		field.setCustomBehaviour(new CustomBehaviour(null, 100, variables, rules));
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		for (int i = 0; i < 50; ++i) {
 			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
@@ -288,7 +288,7 @@ public class FloatCustomBehaviourTestCase {
 
 		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		for (int i = 0; i < 100; ++i) {
 			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
@@ -310,7 +310,7 @@ public class FloatCustomBehaviourTestCase {
 
 		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		for (int i = 0; i < 10; ++i) {
 			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
@@ -334,7 +334,7 @@ public class FloatCustomBehaviourTestCase {
 
 		field.setCustomBehaviour(new CustomBehaviour(null, 1, variables, rules));
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, 100, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		for (int i = 0; i < 100; ++i) {
 			ResultSimpleField rF = (ResultSimpleField) generator.generate(1).get(0);
 			Double result = Double.parseDouble(rF.getValue());

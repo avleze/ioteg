@@ -26,15 +26,14 @@ public class GeneratorsFactory {
 	 * <p>makeGenerator.</p>
 	 *
 	 * @param field a {@link com.ioteg.model.Field} object.
-	 * @param totalNumEvent a {@link java.lang.Integer} object.
 	 * @param generationContext a {@link com.ioteg.generation.GenerationContext} object.
 	 * @return a {@link com.ioteg.generation.Generable} object.
 	 * @throws com.ioteg.generation.NotExistingGeneratorException if any.
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
 	 * @throws java.text.ParseException if any.
 	 */
-	public static Generable makeGenerator(Field field, Integer totalNumEvent, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
-		return NormalGeneratorsFactory.makeGenerator(field, totalNumEvent, generationContext);
+	public static Generable makeGenerator(Field field, GenerationContext generationContext) throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+		return NormalGeneratorsFactory.makeGenerator(field, generationContext);
 	}
 	
 	/**

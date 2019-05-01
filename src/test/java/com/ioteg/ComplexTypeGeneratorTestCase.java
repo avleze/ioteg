@@ -110,7 +110,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, new GenerationContext());
 
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
@@ -138,7 +138,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, new GenerationContext());
 
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
@@ -165,7 +165,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, new GenerationContext());
 
 		SimpleModule module = new SimpleModule();
 		ObjectMapper jsonSerializer = new ObjectMapper();
@@ -192,7 +192,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(36);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, new GenerationContext());
 
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
 
@@ -222,7 +222,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(37);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, new GenerationContext());
 
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
 
@@ -253,7 +253,7 @@ public class ComplexTypeGeneratorTestCase {
 		Element field = fields.get(38);
 		FieldBuilder fB = new FieldBuilder();
 		Field modelField = fB.build(field);
-		Generable generator = GeneratorsFactory.makeGenerator(modelField, 1, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(modelField, new GenerationContext());
 
 		XMLSerializerMapper xmlSerializerMapper = new XMLSerializerMapper();
 

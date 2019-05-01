@@ -33,7 +33,7 @@ public class LongGeneratorTestCase {
 		 * max="0"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 
@@ -52,7 +52,7 @@ public class LongGeneratorTestCase {
 		 * 	<field name="testDefaultRange" quotes="true" type="Long"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		List<ResultField> results = generator.generate(100);
 
 		for (ResultField rF : results) {
@@ -72,7 +72,7 @@ public class LongGeneratorTestCase {
 
 		/*<field name="testDefaultValue" quotes="false" type="Long" value="9223372036854775807"></field>*/
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		Long result = Long.parseLong(strResult);
 		assertThat(result, equalTo(9223372036854775807L));

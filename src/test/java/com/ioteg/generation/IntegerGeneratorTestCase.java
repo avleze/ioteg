@@ -37,7 +37,7 @@ public class IntegerGeneratorTestCase {
 		 * max="999999"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		Integer result = Integer.parseInt(strResult);
@@ -57,7 +57,7 @@ public class IntegerGeneratorTestCase {
 		 * <field name="testDefaultRange" quotes="true" type="Integer"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		List<ResultField> results = generator.generate(100);
 
 		for (ResultField rF : results) {
@@ -78,7 +78,7 @@ public class IntegerGeneratorTestCase {
 		field.setMax(DEFAULT_MAX);
 		field.setValue("104");
 		
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		Integer result = Integer.parseInt(strResult);
@@ -97,7 +97,7 @@ public class IntegerGeneratorTestCase {
 		 * end="20"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		List<ResultField> results = generator.generate(5);
 
 		for (int i = 0; i < results.size(); ++i) {
@@ -122,7 +122,7 @@ public class IntegerGeneratorTestCase {
 		 * end="2"></field>
 		 */
 
-		generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 		results = generator.generate(5);
 
 		for (int i = 0; i < results.size(); ++i) {

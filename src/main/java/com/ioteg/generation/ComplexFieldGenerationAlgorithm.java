@@ -44,12 +44,12 @@ public class ComplexFieldGenerationAlgorithm extends GenerationAlgorithm<ResultF
 		this.type = field.getType();
 		if (!field.getFields().isEmpty())
 			for (Field fld : field.getFields())
-				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(fld, null, generationContext));
+				this.fieldGenerators.add(GeneratorsFactory.makeGenerator(fld, generationContext));
 		else {
 			this.isFormedWithAttributes = true;
 			for (Attribute attr : field.getAttributes())
 				this.fieldGenerators
-						.add(GeneratorsFactory.makeGenerator(new Field(null, false, attr), null, generationContext));
+						.add(GeneratorsFactory.makeGenerator(new Field(null, false, attr), generationContext));
 		}
 	}
 
@@ -66,7 +66,7 @@ public class ComplexFieldGenerationAlgorithm extends GenerationAlgorithm<ResultF
 
 			this.type = field.getFields().get(selected).getType();
 			this.fieldGenerators
-					.add(GeneratorsFactory.makeGenerator(field.getFields().get(selected), null, generationContext));
+					.add(GeneratorsFactory.makeGenerator(field.getFields().get(selected), generationContext));
 		}
 
 		else {
@@ -76,7 +76,7 @@ public class ComplexFieldGenerationAlgorithm extends GenerationAlgorithm<ResultF
 				selected = generationContext.getDependenceIndex(field.getDependence());
 			this.type = field.getAttributes().get(selected).getType();
 			this.fieldGenerators.add(GeneratorsFactory.makeGenerator(
-					new Field(null, false, field.getAttributes().get(selected)), null, generationContext));
+					new Field(null, false, field.getAttributes().get(selected)), generationContext));
 		}
 
 		if (needsToGenerateIndex(dependence))

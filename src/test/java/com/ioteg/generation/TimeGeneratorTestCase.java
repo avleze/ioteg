@@ -25,7 +25,7 @@ public class TimeGeneratorTestCase {
 		Field field = new Field("testRandom", true, "Time");
 		field.setFormat("hh:mm");
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		List<ResultField> results = generator.generate(100);
 
@@ -50,7 +50,7 @@ public class TimeGeneratorTestCase {
 		 * format="HH:mm"></field>
 		 */
 
-		Generable generator = GeneratorsFactory.makeGenerator(field, null, new GenerationContext());
+		Generable generator = GeneratorsFactory.makeGenerator(field, new GenerationContext());
 
 		String strResult = ((ResultSimpleField) generator.generate(1).get(0)).getValue();
 		assertThat(strResult, equalTo("14:24"));

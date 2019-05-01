@@ -48,7 +48,7 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		this.generators = new ArrayList<>();
 		
 		for (Field field : block.getFields()) 
-			generators.add(GeneratorsFactory.makeGenerator(field, block.getRepetition(), generationContext));
+			generators.add(GeneratorsFactory.makeGenerator(field, generationContext));
 	}
 	
 	private void makeOptionalGenerators() throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
@@ -58,7 +58,7 @@ public class BlockGenerationAlgorithm extends AbstractGenerationAlgorithm<Result
 		{
 			optionalGenerators.add(new ArrayList<>());
 			for(Field field : optionalFields.getFields())
-				optionalGenerators.get(index).add(GeneratorsFactory.makeGenerator(field, block.getRepetition(), generationContext));
+				optionalGenerators.get(index).add(GeneratorsFactory.makeGenerator(field, generationContext));
 			++index;
 		}
 			

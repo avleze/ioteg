@@ -32,7 +32,7 @@ public class NormalGeneratorsFactory {
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
 	 * @throws java.text.ParseException if any.
 	 */
-	public static Generable makeGenerator(Field field, Integer totalNumberOfEvents, GenerationContext generationContext)
+	public static Generable makeGenerator(Field field, GenerationContext generationContext)
 			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
 		Generable generable = null;
 
@@ -43,7 +43,7 @@ public class NormalGeneratorsFactory {
 		else if (field.getType().equals("Alphanumeric"))
 			generable = makeAlphanumericGenerator(field, generationContext);
 		else if (field.getType().equals("Float"))
-			generable = makeFloatGenerator(field, totalNumberOfEvents, generationContext);
+			generable = makeFloatGenerator(field, generationContext);
 		else if (field.getType().equals("Boolean"))
 			generable = makeBooleanGenerator(field, generationContext);
 		else if (field.getType().equals("Date"))
@@ -102,7 +102,7 @@ public class NormalGeneratorsFactory {
 	 * @return a {@link com.ioteg.generation.FieldGenerator} object.
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
 	 */
-	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, Integer totalNumOfEvents, GenerationContext generationContext)
+	public static FieldGenerator<Float> makeFloatGenerator(Field floatField, GenerationContext generationContext)
 			throws ExprLangParsingException {
 		FieldGenerator<Float> floatGenerator = null;
 
