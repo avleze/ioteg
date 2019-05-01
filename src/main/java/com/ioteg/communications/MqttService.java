@@ -16,20 +16,31 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ioteg.serializers.csv.CSVUtil;
 import com.ioteg.serializers.xml.XMLSerializerMapper;
+import com.ioteg.services.EntityNotFoundException;
 
 @Service
 @Profile({ "production", "development", "default" })
 public class MqttService {
 	private Logger logger = LoggerFactory.getLogger(MqttService.class);
 
-	@Autowired
 	private MqttClient mqttClient;
-
-	@Autowired
 	private ObjectMapper objectMapper;
-
-	@Autowired
 	private XMLSerializerMapper xmlSerializerMapper;
+
+	/**
+	 * @param mqttClient
+	 * @param objectMapper
+	 * @param userService
+	 * @param xmlSerializerMapper
+	 */
+	@Autowired
+	public MqttService(MqttClient mqttClient, ObjectMapper objectMapper,
+			XMLSerializerMapper xmlSerializerMapper) {
+		super();
+		this.mqttClient = mqttClient;
+		this.objectMapper = objectMapper;
+		this.xmlSerializerMapper = xmlSerializerMapper;
+	}
 
 	public void sendMessage(String topic, MqttResultEvent message) throws MqttException, IOException {
 		String serializedMessage = "";
@@ -37,24 +48,29 @@ public class MqttService {
 		try {
 			serializedMessage = CSVUtil.serializeResultEvent(message.getMessage().getModel(),
 					message.getMessage());
-			mqttClient.publish(String.format("%s/%s", topic, "csv"), new MqttMessage(serializedMessage.getBytes()));
+			mqttClient.publish(getCompleteTopic(topic, "csv", message.getApiKey()), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e.fillInStackTrace().toString());
+			e.printStackTrace();
 		}
 
 		try {
 			serializedMessage = xmlSerializerMapper.writeValueAsString(message.getMessage());
-			mqttClient.publish(String.format("%s/%s", topic, "xml"), new MqttMessage(serializedMessage.getBytes()));
+			mqttClient.publish(getCompleteTopic(topic, "xml", message.getApiKey()), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 		
 		try {
 			serializedMessage = objectMapper.writeValueAsString(message.getMessage());
-			mqttClient.publish(String.format("%s/%s", topic, "json"), new MqttMessage(serializedMessage.getBytes()));
+			mqttClient.publish(getCompleteTopic(topic, "json", message.getApiKey()), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+	}
+	
+	private String getCompleteTopic(String parcialTopic, String format, String apiKey) throws EntityNotFoundException {
+		return String.format("%s/%s/%s", parcialTopic, format, apiKey);
 	}
 
 	@PreDestroy

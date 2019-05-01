@@ -4,41 +4,43 @@ import com.ioteg.resultmodel.ResultEvent;
 
 public class MqttResultEvent {
 	private ResultEvent message;
-	private String type;
+	private String apiKey;
 	
 	/**
 	 * @param message
-	 * @param type
+	 * @param apiKey
 	 */
-	public MqttResultEvent(ResultEvent message, String type) {
+	public MqttResultEvent(ResultEvent message, String apiKey) {
 		super();
 		this.message = message;
-		this.type = type;
+		this.apiKey = apiKey;
 	}
-	
+
 	/**
 	 * @return the message
 	 */
 	public ResultEvent getMessage() {
 		return message;
 	}
+
 	/**
 	 * @param message the message to set
 	 */
 	public void setMessage(ResultEvent message) {
 		this.message = message;
 	}
+
 	/**
-	 * @return the type
+	 * @return the apiKey
 	 */
-	public String getType() {
-		return type;
+	public String getApiKey() {
+		return apiKey;
 	}
+
 	/**
-	 * @param type the type to set
+	 * @param apiKey the apiKey to set
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
 	}
-	
 }

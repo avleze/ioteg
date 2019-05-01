@@ -1,16 +1,12 @@
 package com.ioteg.services.periodicgeneration;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -18,11 +14,16 @@ import org.springframework.stereotype.Service;
 
 import com.ioteg.communications.MqttService;
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
+import com.ioteg.generation.EventTypeGenerator;
 import com.ioteg.generation.GenerationContext;
+import com.ioteg.generation.GeneratorsFactory;
 import com.ioteg.generation.NotExistingGeneratorException;
-import com.ioteg.model.ChannelType;
 import com.ioteg.model.ConfigurableEventType;
+import com.ioteg.model.EventType;
 import com.ioteg.resultmodel.ResultField;
+import com.ioteg.services.EntityNotFoundException;
+import com.ioteg.services.GenerationService;
+import com.ioteg.services.UserService;
 
 /**
  * <p>
@@ -38,68 +39,68 @@ public class PeriodicEventGenerationService {
 
 	private ScheduledThreadPoolExecutor scheduledPool = new ScheduledThreadPoolExecutor(4);
 
-	@Autowired
 	private MqttService mqttService;
-
-	private Map<Long, ScheduledFuture<?>> futureTasks;
-	private Map<Long, PeriodicEventGenerator> periodicEventGeneratorTasks;
-
+	private GenerationService generationService;
+	private UserService userService;
+	
 	/**
-	 * <p>
-	 * executeConfigurableEventTypes.
-	 * </p>
-	 * 
-	 * @param userApiKey
-	 *
-	 * @param configurableEventTypes a {@link java.util.List} object.
-	 * @throws com.ioteg.generation.NotExistingGeneratorException     if any.
-	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
-	 * @throws java.text.ParseException                               if any.
+	 * @param mqttService
+	 * @param generationService
+	 * @param userService
 	 */
-	public List<String> executeAsyncChannel(ChannelType channelType, String userApiKey)
-			throws NotExistingGeneratorException, ExprLangParsingException, ParseException {
+	@Autowired
+	public PeriodicEventGenerationService(MqttService mqttService, GenerationService generationService,
+			UserService userService) {
+		super();
+		this.mqttService = mqttService;
+		this.generationService = generationService;
+		this.userService = userService;
+		this.tasksByConfigurableEventTypeId = new HashMap<>();
+		this.generationContextByChannelId = new HashMap<>();
+	}
 
-		List<String> topicsCreated = new ArrayList<>();
-		ConcurrentMap<String, ResultField> sharedResults = new ConcurrentHashMap<>();
+	private Map<Long, ScheduledFuture<?>> tasksByConfigurableEventTypeId;
+	private Map<Long, ConcurrentMap<String, ResultField>> generationContextByChannelId;
 
-		for (ConfigurableEventType configurableEventType : channelType.getConfigurableEventTypes()) {
-			String topic = formatTopic(channelType.getId(), configurableEventType.getEventType().getName(), userApiKey);
+	public void executeAsyncEvent(Long channelId, Long configurableEventTypeId)
+			throws EntityNotFoundException, NotExistingGeneratorException, ExprLangParsingException, ParseException {
+		ConfigurableEventType cEventType = generationService.loadConfigurableEventTypeDeeply(configurableEventTypeId);
 
-			PeriodicEventGenerator periodicEventGenerator = new PeriodicEventGenerator(topic, configurableEventType,
-					new GenerationContext(sharedResults), mqttService);
-			scheduleTask(periodicEventGenerator);
-			topicsCreated.add(topic);
+		EventType eventType = cEventType.getEventType();
+
+		EventTypeGenerator eTG = GeneratorsFactory.makeEventTypeGenerator(eventType, getGenerationContext(channelId));
+
+		PeriodicEventGenerator pEG = new PeriodicEventGenerator(eTG, mqttService,
+				getTopic(channelId, configurableEventTypeId), userService.loadLoggedUser().getMqttApiKey());
+
+		ScheduledFuture<?> task = scheduledPool.scheduleAtFixedRate(pEG, cEventType.getDelay(), cEventType.getPeriod(),
+				cEventType.getUnit());
+		
+		ScheduledFuture<?> possiblePreviousTask = tasksByConfigurableEventTypeId.get(configurableEventTypeId);
+		if(possiblePreviousTask != null)
+			possiblePreviousTask.cancel(true);
+
+		tasksByConfigurableEventTypeId.put(cEventType.getId(), task);
+	}
+	
+	public void stopAsyncEvent(Long channelId, Long configurableEventTypeId) {
+		ScheduledFuture<?> task = tasksByConfigurableEventTypeId.get(configurableEventTypeId);
+		if(task != null)
+		{
+			task.cancel(false);
+			tasksByConfigurableEventTypeId.remove(configurableEventTypeId);
 		}
-
-		return topicsCreated;
 	}
 
-	public boolean stopConfigurableEventType(Long id) {
-		return futureTasks.get(id).cancel(false);
+	private GenerationContext getGenerationContext(Long channelId) {
+		ConcurrentMap<String, ResultField> sharedMap = generationContextByChannelId.get(channelId);
+		if (sharedMap == null)
+			sharedMap = new ConcurrentHashMap<>();
+		return new GenerationContext(sharedMap);
 	}
 
-	public void resumeConfigurableEventType(Long id) {
-		PeriodicEventGenerator periodicEventGenerator = periodicEventGeneratorTasks.get(id);
-		scheduleTask(periodicEventGenerator);
+	private String getTopic(Long channelId, Long configurableEventTypeId) {
+		return String.format("/channel/%s/event/%s", channelId, configurableEventTypeId);
 	}
 
-	private ScheduledFuture<?> scheduleTask(PeriodicEventGenerator task) {
-		ConfigurableEventType configurableEventType = task.getConfigurableEventType();
-		ScheduledFuture<?> futureTask = scheduledPool.scheduleAtFixedRate(task, configurableEventType.getDelay(),
-				configurableEventType.getPeriod(), configurableEventType.getUnit());
-		periodicEventGeneratorTasks.put(configurableEventType.getId(), task);
-		futureTasks.put(configurableEventType.getId(), futureTask);
-
-		return futureTask;
-	}
-
-	@PostConstruct
-	public void initialize() {
-		futureTasks = new HashMap<>();
-		periodicEventGeneratorTasks = new HashMap<>();
-	}
-
-	private String formatTopic(Long channelId, String eventName, String apiKey) {
-		return String.format("/channel/%s/%s/%s", channelId, eventName, apiKey);
-	}
 }

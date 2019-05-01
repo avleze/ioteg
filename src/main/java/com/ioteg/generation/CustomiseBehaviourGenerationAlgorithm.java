@@ -150,6 +150,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 			totalGeneratedInRule = 0;
 			totalGenerated = 0;
 			variables = getVariablesFromField(field);
+			generatedValue = null;
 		}
 		
 		if(ruleWeight != 0 && (eventsPerSimulation * ruleWeight) <= totalGeneratedInRule)
