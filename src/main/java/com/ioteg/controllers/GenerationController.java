@@ -43,7 +43,7 @@ public class GenerationController {
 	 * @param generationService
 	 * @param periodicGenerationService
 	 */
-	@Autowired
+	@Autowired(required = false)
 	public GenerationController(GenerationService generationService,
 			PeriodicEventGenerationService periodicGenerationService) {
 		super();
