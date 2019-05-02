@@ -95,7 +95,10 @@ public class PeriodicEventGenerationService {
 	private GenerationContext getGenerationContext(Long channelId) {
 		ConcurrentMap<String, ResultField> sharedMap = generationContextByChannelId.get(channelId);
 		if (sharedMap == null)
+		{
 			sharedMap = new ConcurrentHashMap<>();
+			generationContextByChannelId.put(channelId, sharedMap);
+		}
 		return new GenerationContext(sharedMap);
 	}
 

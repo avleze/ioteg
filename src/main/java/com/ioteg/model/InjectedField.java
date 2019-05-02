@@ -17,8 +17,7 @@ public class InjectedField extends OwnedEntity{
 
 	private String name;
 
-	@SuppressWarnings("unused")
-	private InjectedField() {
+	public InjectedField() {
 		
 	}
 
