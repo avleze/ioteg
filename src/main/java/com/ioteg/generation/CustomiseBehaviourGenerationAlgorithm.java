@@ -144,7 +144,7 @@ public class CustomiseBehaviourGenerationAlgorithm extends GenerationAlgorithm<F
 	private void updateIndex() throws ExprLangParsingException {
 		final double ruleWeight = rules.get(currentRule).getWeight();
 		
-		if(ruleWeight == 0 && totalGenerated == eventsPerSimulation)
+		if(ruleWeight == 0 && totalGenerated.equals(eventsPerSimulation))
 		{
 			currentRule = 0;
 			totalGeneratedInRule = 0;
