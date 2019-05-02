@@ -26,7 +26,7 @@ public class RandomLongGenerationAlgorithm extends GenerationAlgorithm<Long> {
 		Long min = field.getMin().longValue();
 		Long max = field.getMax().longValue();
 
-		return r.longs(min, max).findFirst().getAsLong();
+		return r.longs(min, max + 1).findFirst().getAsLong();
 	}
 
 }

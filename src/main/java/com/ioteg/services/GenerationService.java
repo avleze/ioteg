@@ -63,6 +63,14 @@ public class GenerationService {
 					field.getCustomBehaviour().setRules(customBehaviourRepository.findAllRulesOf(customBehaviourId));
 					field.getCustomBehaviour().setVariables(customBehaviourRepository.findAllVariablesOf(customBehaviourId));
 				}
+				
+				field.getFields().forEach(subField -> {
+					if(subField.getCustomBehaviour() != null) {
+						Long customBehaviourId = subField.getCustomBehaviour().getId();
+						subField.getCustomBehaviour().setRules(customBehaviourRepository.findAllRulesOf(customBehaviourId));
+						subField.getCustomBehaviour().setVariables(customBehaviourRepository.findAllVariablesOf(customBehaviourId));
+					}
+				});
 			});
 
 			block.getOptionalFields().stream().forEach(optionalFields -> {
@@ -79,6 +87,14 @@ public class GenerationService {
 						field.getCustomBehaviour().setRules(customBehaviourRepository.findAllRulesOf(customBehaviourId));
 						field.getCustomBehaviour().setVariables(customBehaviourRepository.findAllVariablesOf(customBehaviourId));
 					}
+					
+					field.getFields().forEach(subField -> {
+						if(subField.getCustomBehaviour() != null) {
+							Long customBehaviourId = subField.getCustomBehaviour().getId();
+							subField.getCustomBehaviour().setRules(customBehaviourRepository.findAllRulesOf(customBehaviourId));
+							subField.getCustomBehaviour().setVariables(customBehaviourRepository.findAllVariablesOf(customBehaviourId));
+						}
+					});
 				});
 			});
 		});

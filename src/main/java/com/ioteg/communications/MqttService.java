@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.ioteg.serializers.csv.CSVUtil;
 import com.ioteg.serializers.xml.XMLSerializerMapper;
 import com.ioteg.services.EntityNotFoundException;
@@ -39,6 +40,7 @@ public class MqttService {
 		super();
 		this.mqttClient = mqttClient;
 		this.objectMapper = objectMapper;
+		this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 		this.xmlSerializerMapper = xmlSerializerMapper;
 	}
 
@@ -50,8 +52,7 @@ public class MqttService {
 					message.getMessage());
 			mqttClient.publish(getCompleteTopic(topic, "csv", message.getApiKey()), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
-			logger.error(e.fillInStackTrace().toString());
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 
 		try {
