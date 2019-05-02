@@ -43,9 +43,9 @@ public class GenerationController {
 	 * @param generationService
 	 * @param periodicGenerationService
 	 */
-	@Autowired(required = false)
-	public GenerationController(GenerationService generationService,
-			PeriodicEventGenerationService periodicGenerationService) {
+	
+	public GenerationController(@Autowired GenerationService generationService,
+			 @Autowired(required = false) PeriodicEventGenerationService periodicGenerationService) {
 		super();
 		this.generationService = generationService;
 		this.periodicGenerationService = periodicGenerationService;
