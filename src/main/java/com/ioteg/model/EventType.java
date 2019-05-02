@@ -27,6 +27,9 @@ public class EventType extends OwnedEntity{
 	@NotNull
 	private String name;
 
+	@NotNull
+	private Boolean isPublic;
+	
 	@Valid
 	@OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Block> blocks;
@@ -96,6 +99,17 @@ public class EventType extends OwnedEntity{
 		this.blocks = blocks;
 	}
 
+	/**
+	 * @return the isPublic
+	 */
+	public Boolean getIsPublic() {
+		return isPublic;
+	}
 
-
+	/**
+	 * @param isPublic the isPublic to set
+	 */
+	public void setIsPublic(Boolean isPublic) {
+		this.isPublic = isPublic;
+	}
 }

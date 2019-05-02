@@ -22,4 +22,5 @@ public interface EventTypeRepository extends CrudRepository<EventType, Long>{
 	
 	@Query("SELECT e FROM EventType e LEFT JOIN FETCH e.blocks WHERE e.id = :id")
 	public Optional<EventType> findByIdWithBlocks(@Param("id") Long id);
+
 }

@@ -49,10 +49,11 @@ public class ConfigurableEventTypeService {
 		ConfigurableEventType storedConfigurableEventType = this.loadById(configurableEventTypeId);
 
 		storedConfigurableEventType.getEventType().setName(configurableEventType.getEventType().getName());
+		storedConfigurableEventType.getEventType().setIsPublic(configurableEventType.getEventType().getIsPublic());
+
 		storedConfigurableEventType.setDelay(configurableEventType.getDelay());
 		storedConfigurableEventType.setPeriod(configurableEventType.getPeriod());
 		storedConfigurableEventType.setUnit(configurableEventType.getUnit());
-
 		return configurableEventTypeRepository.save(storedConfigurableEventType);
 	}
 
