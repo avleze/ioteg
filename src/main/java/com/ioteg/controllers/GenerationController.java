@@ -59,8 +59,6 @@ public class GenerationController {
 		EventType eventType = generationService.loadConfigurableEventTypeDeeply(configurableEventTypeId).getEventType();
 		EventTypeGenerator eventTypeGenerator = GeneratorsFactory.makeEventTypeGenerator(eventType,
 				new GenerationContext());
-		response.addHeader("content-disposition", "attachment; filename=" + eventType.getName());
-		response.addHeader("Content-Type", response.getContentType());
 		return ResponseEntity.ok().body(eventTypeGenerator.generate(1).get(0));
 	}
 

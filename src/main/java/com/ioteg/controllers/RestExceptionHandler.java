@@ -16,6 +16,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.ioteg.services.EntityNotFoundException;
 import com.ioteg.services.PasswordNotMatchException;
 
@@ -100,6 +101,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND);
         apiError.setMessage(String.format("The parameter '%s' of value '%s' could not be converted to type '%s'", ex.getName(), ex.getValue(), ex.getRequiredType().getSimpleName()));
         apiError.setDebugMessage(ex.getMessage());
+        return buildResponseEntity(apiError);
+    }
+    
+    /**
+     * Handle TokenExpiredException
+     *
+     * @param ex the Exception
+     * @return the ApiError object
+     */
+    @ExceptionHandler(TokenExpiredException.class)
+    protected ResponseEntity<Object> handleTokenExpiredException(TokenExpiredException ex,
+                                                                      WebRequest request) {
+        ApiError apiError = new ApiError(HttpStatus.UNAUTHORIZED);
+        apiError.setMessage(ex.getMessage());
         return buildResponseEntity(apiError);
     }
     

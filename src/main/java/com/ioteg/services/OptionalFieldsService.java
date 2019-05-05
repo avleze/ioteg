@@ -66,7 +66,11 @@ public class OptionalFieldsService {
 	
 	@PreAuthorize("hasPermission(#blockId, 'Block', 'OWNER') or hasRole('ADMIN')")
 	public void removeOptionalFieldsFromBlock(Long blockId, Long optionalFieldsId) throws EntityNotFoundException {
-		blockService.loadByIdWithOptionalFields(blockId).getOptionalFields().remove(this.loadById(optionalFieldsId));
+		
+		Block block = blockService.loadByIdWithOptionalFields(blockId);
+		block.getOptionalFields().remove(this.loadById(optionalFieldsId));
+		blockService.save(block);
+		
 		this.removeOptionalFields(optionalFieldsId);
 	}
 
