@@ -1,7 +1,5 @@
 package com.ioteg.generation;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.text.ParseException;
 import java.util.Random;
 
@@ -9,9 +7,10 @@ import org.apache.log4j.Logger;
 
 import com.ioteg.exprlang.ExprParser.ExprLangParsingException;
 
-
 /**
- * <p>Abstract AbstractGenerationAlgorithm class.</p>
+ * <p>
+ * Abstract AbstractGenerationAlgorithm class.
+ * </p>
  *
  * @author antonio
  * @version $Id: $Id
@@ -24,20 +23,18 @@ public abstract class AbstractGenerationAlgorithm<T> {
 
 	static {
 		logger = Logger.getRootLogger();
-		try {
-			r = SecureRandom.getInstanceStrong();
-		} catch (NoSuchAlgorithmException e) {
-			logger.error(e);
-		}
+		r = new Random();
 	}
-	
+
 	/**
-	 * <p>generate.</p>
+	 * <p>
+	 * generate.
+	 * </p>
 	 *
 	 * @return a T object.
-	 * @throws com.ioteg.generation.NotExistingGeneratorException if any.
+	 * @throws com.ioteg.generation.NotExistingGeneratorException     if any.
 	 * @throws com.ioteg.exprlang.ExprParser.ExprLangParsingException if any.
-	 * @throws java.text.ParseException if any.
+	 * @throws java.text.ParseException                               if any.
 	 */
 	public abstract T generate() throws NotExistingGeneratorException, ExprLangParsingException, ParseException;
 }

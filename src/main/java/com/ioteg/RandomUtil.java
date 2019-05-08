@@ -30,11 +30,7 @@ public class RandomUtil {
 
 	static {
 		logger = Logger.getRootLogger();
-		try {
-			r = SecureRandom.getInstanceStrong();
-		} catch (NoSuchAlgorithmException e) {
-			logger.error(e);
-		}
+		r = new Random();
 	}
 
 

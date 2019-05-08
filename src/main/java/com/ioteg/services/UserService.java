@@ -1,8 +1,9 @@
 package com.ioteg.services;
 
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.List;
+import java.util.Random;
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,7 +22,7 @@ import com.ioteg.repositories.UserRepository;
 public class UserService implements UserDetailsService {
 
 	private UserRepository userRepository;
-	private SecureRandom secureRandom;
+	private Random secureRandom;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	/**
@@ -34,7 +35,7 @@ public class UserService implements UserDetailsService {
 			throws NoSuchAlgorithmException {
 		super();
 		this.userRepository = userRepository;
-		this.secureRandom = SecureRandom.getInstanceStrong();
+		this.secureRandom = new Random();
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 
