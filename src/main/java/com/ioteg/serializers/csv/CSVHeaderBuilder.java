@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ioteg.model.Block;
 import com.ioteg.model.Field;
+import com.ioteg.model.InjectedField;
 import com.ioteg.model.OptionalFields;
 
 /**
@@ -38,6 +39,9 @@ public class CSVHeaderBuilder {
 					result.add(field.getName());
 				else
 					result.addAll(getComplexFieldCSVHeader(field));
+		
+		for (InjectedField injectedField : block.getInjectedFields())
+			result.add(injectedField.getName());
 		
 		return result;
 	}
