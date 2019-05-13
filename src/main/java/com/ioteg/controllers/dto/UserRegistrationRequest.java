@@ -14,8 +14,8 @@ public class UserRegistrationRequest {
 	@UniqueUsername
 	private String username;
 
-	@NotNull(message = "The username can not be null.")
-	@NotEmpty(message = "The username can not be empty.")
+	@NotNull(message = "The email can not be null.")
+	@NotEmpty(message = "The email can not be empty.")
 	@Email(message = "The email is not valid.")
 	@UniqueEmail
 	private String email;

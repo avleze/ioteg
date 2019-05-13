@@ -52,21 +52,21 @@ public class MqttService {
 					message.getMessage());
 			mqttClient.publish(getCompleteTopic(topic, "csv", message.getApiKey()), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error("An error ocurred in MqttService when serializing in CSV", e);
 		}
 
 		try {
 			serializedMessage = xmlSerializerMapper.writeValueAsString(message.getMessage());
 			mqttClient.publish(getCompleteTopic(topic, "xml", message.getApiKey()), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error("An error ocurred in MqttService  when serializing in XML", e);
 		}
 		
 		try {
 			serializedMessage = objectMapper.writeValueAsString(message.getMessage());
 			mqttClient.publish(getCompleteTopic(topic, "json", message.getApiKey()), new MqttMessage(serializedMessage.getBytes()));
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error("An error ocurred in MqttService when serializing in JSON", e);
 		}
 	}
 	
