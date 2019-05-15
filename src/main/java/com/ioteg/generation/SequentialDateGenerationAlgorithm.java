@@ -63,9 +63,13 @@ public class SequentialDateGenerationAlgorithm extends GenerationAlgorithm<Date>
 	@Override
 	public Date generate() {
 		Date timeToReturn = this.calendar.getTime();
-		if(step > 0 && this.calendar.compareTo(end) < 0)
+		Calendar aux = Calendar.getInstance();
+		aux.setTime(timeToReturn);
+		aux.add(unit, step);
+				
+		if(step > 0 && aux.compareTo(end) <= 0)
 			this.calendar.add(unit, step);
-		else if(step < 0 && this.calendar.compareTo(end) > 0)
+		else if(step < 0 && aux.compareTo(end) >= 0)
 			this.calendar.add(unit, step);
 		else
 			this.calendar.setTime(begin.getTime());
