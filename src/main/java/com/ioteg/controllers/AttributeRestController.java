@@ -7,8 +7,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ioteg.controllers.dto.AttributeRequest;
 import com.ioteg.controllers.dto.AttributeResponse;
 import com.ioteg.controllers.dto.mappers.AttributeMapper;
+import com.ioteg.controllers.dto.validation.AttributeRequestValidator;
 import com.ioteg.model.Attribute;
 import com.ioteg.services.AttributeService;
 import com.ioteg.services.EntityNotFoundException;
@@ -48,6 +51,11 @@ public class AttributeRestController {
 		this.fieldService = fieldService;
 		this.attributeService = attributeService;
 		this.attributeMapper = attributeMapper;
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+	    binder.addValidators(new AttributeRequestValidator());
 	}
 
 	@GetMapping

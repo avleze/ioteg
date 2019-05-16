@@ -7,8 +7,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ioteg.controllers.dto.FieldRequest;
 import com.ioteg.controllers.dto.FieldResponse;
 import com.ioteg.controllers.dto.mappers.FieldMapper;
+import com.ioteg.controllers.dto.validation.FieldRequestValidator;
 import com.ioteg.model.Field;
 import com.ioteg.services.BlockService;
 import com.ioteg.services.EntityNotFoundException;
@@ -37,6 +40,11 @@ public class FieldRestController {
 	private OptionalFieldsService optionalFieldsService;
 	private FieldService fieldService;
 	private FieldMapper fieldMapper;
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+	    binder.addValidators(new FieldRequestValidator());
+	}
 
 	/**
 	 * @param blockService
