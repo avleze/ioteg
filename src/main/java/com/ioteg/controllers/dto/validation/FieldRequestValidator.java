@@ -108,7 +108,7 @@ public class FieldRequestValidator implements Validator {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "min", "field.required", "The minimum is required.");
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "max", "field.required", "The maximum is required.");
 
-			if (req.getMin() > req.getMax()) {
+			if(req.getMin() != null && req.getMax() != null && req.getMin() > req.getMax()) {
 				errors.rejectValue("min", "field.notvalid", "Minimum has to be smaller than maximum");
 				errors.rejectValue("max", "field.notvalid", "Maximum has to be greater than minimum");
 			}
